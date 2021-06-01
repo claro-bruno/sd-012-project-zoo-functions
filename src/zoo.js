@@ -71,6 +71,14 @@ function countAnimals(specie) {
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const visitors = [entrants.Adult, entrants.Senior, entrants.Child];
+  const values = [prices.Adult, prices.Senior, prices.Child];
+  return visitors.reduce((totalValue, visitor = 0, index) => {
+    let valorTotal = totalValue;
+    valorTotal += visitor * values[index];
+    return valorTotal;
+  }, 0);
 }
 
 function getAnimalMap(options) {
