@@ -84,7 +84,7 @@ Você só deve alterar os arquivos indicados nos requisitos. **Os arquivos que n
 ### ANTES DE COMEÇAR A DESENVOLVER
 
 1. Clone o repositório
-  * `git clone https://github.com/tryber/sd-012-project-zoo-functions-rubric.git`.
+  * `git clone git@github.com:tryber/sd-012-project-zoo-functions.git`.
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd sd-012-project-zoo-functions-rubric`
 
