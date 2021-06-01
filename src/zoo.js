@@ -16,10 +16,10 @@ function getSpeciesByIds(...ids) {
   const retorno = ids.length === 0 ? [] : ids.map((id) => species.find((specie) => specie.id === id));
   return retorno;
 }
-console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const animalName = species.find((specie) => specie.name === animal);
+  return animalName.residents.every((animalAge) => animalAge.age > age);
 }
 
 function getEmployeeByName(employeeName) {
