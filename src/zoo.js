@@ -9,58 +9,59 @@ eslint no-unused-vars: [
 ]
 */
 
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  
+function getSpeciesByIds(...ids) {
+  return species.filter((specie, index) => specie.id === ids[index]);
 }
 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+function getAnimalsOlderThan() {
+  // animal, age
 }
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
+function getEmployeeByName() {
+  // employeeName
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee() {
+  // personalInfo, associatedWith
 }
 
-function isManager(id) {
-  // seu código aqui
+function isManager() {
+  // id
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee() {
+  // id, firstName, lastName, managers, responsibleFor
 }
 
-function countAnimals(species) {
-  // seu código aqui
+function countAnimals() {
+  // species
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry() {
+  // entrants
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function getAnimalMap() {
+  // options
 }
 
-function getSchedule(dayName) {
-  // seu código aqui
+function getSchedule() {
+  // dayName
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies() {
+  // id
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+function increasePrices() {
+  // percentage
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getEmployeeCoverage() {
+  // idOrName
 }
 
 module.exports = {
