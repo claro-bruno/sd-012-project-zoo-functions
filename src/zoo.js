@@ -68,13 +68,27 @@ function calculateEntry(entrants) {
   return Object.keys(entrants).reduce(((acc, value) => acc + (entrants[value] * prices[value])), 0);
 }
 
-function getAnimalMap(options) {
+function getAnimalMap() {
   // seu código aqui
 }
 
+const openingHours = {
+  Tuesday: 'Open from 8am until 6pm',
+  Wednesday: 'Open from 8am until 6pm',
+  Thursday: 'Open from 10am until 8pm',
+  Friday: 'Open from 10am until 8pm',
+  Saturday: 'Open from 8am until 10pm',
+  Sunday: 'Open from 8am until 8pm',
+  Monday: 'CLOSED',
+};
 function getSchedule(dayName) {
-  // seu código aqui
+  if (dayName === undefined) {
+    return openingHours;
+  }
+  const openingDay = Object.keys(openingHours).find((day) => day === dayName);
+  return { [openingDay]: openingHours[openingDay] };
 }
+// console.log(getSchedule('Friday'));
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
