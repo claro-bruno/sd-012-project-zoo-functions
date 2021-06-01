@@ -11,9 +11,12 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+function getSpeciesByIds(...ids) {
+  const search = ids.map(element => (data.species.find(key => key.id === element)));
+  return search;
 }
+// Consegui retornar mais de uma chave com a ajuda do colega Rodrigo Facury que sugeriu o uso do map.
+console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
