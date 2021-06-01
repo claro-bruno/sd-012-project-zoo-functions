@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const data = require('./data');
 const { species, employees } = require('./data');
 
 // function getSpeciesByIds(...ids) {
@@ -48,15 +49,25 @@ const { species, employees } = require('./data');
 //   return manager;
 // }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const objeto = { id, firstName, lastName, managers, responsibleFor };
-  employees.push(objeto);
-}
+// function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+//   const objeto = { id, firstName, lastName, managers, responsibleFor };
+//   employees.push(objeto);
+// }
 // seu código aqui
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(species) {
+  // seu código aqui
+  const obj = {};
+  if (arguments.length === 0) {
+    data.species.forEach((specie) => {
+      obj[specie.name] = specie.residents.length
+    })
+    return obj;
+  }
+  const okArguments = data.species.find((specie) => specie.name === species).residents.length;
+  return okArguments;
+}
+console.log(countAnimals());
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -85,12 +96,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   // getSpeciesByIds,
   // getEmployeeByName,
   // getEmployeeCoverage,
-  addEmployee,
+  // addEmployee,
   // isManager,
   // getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
