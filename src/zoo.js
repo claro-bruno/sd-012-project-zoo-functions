@@ -44,7 +44,12 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  // seu código aqui
+  const findEmployee = data.employees.find((employee) =>
+    employee.id === id);
+  const managements = data.employees.filter((employee) =>
+    employee.managers.includes(findEmployee.id));
+  if (managements.length > 0) return true;
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
