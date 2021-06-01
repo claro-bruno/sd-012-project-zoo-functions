@@ -62,7 +62,6 @@ function isManager(id) {
     return true;
   }
   return false;
-  
 }
 
 /*
