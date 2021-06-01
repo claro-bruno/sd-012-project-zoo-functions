@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+const { species, employees } = require('./data');
 
 // function getSpeciesByIds(...ids) {
 //   // seu código aqui
@@ -20,16 +20,24 @@ const { species } = require('./data');
 //   return arraySpecie;
 // }
 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
-  const minimumAge = species.find((specie) => specie.name === animal)
-    .residents.every((resident) => resident.age >= age);
-  return minimumAge;
-}
-
-// function getEmployeeByName(employeeName) {
+// function getAnimalsOlderThan(animal, age) {
 //   // seu código aqui
+//   const minimumAge = species.find((specie) => specie.name === animal)
+//     .residents.every((resident) => resident.age >= age);
+//   return minimumAge;
 // }
+
+function getEmployeeByName(employeeName) {
+  // seu código aqui
+  if (arguments.length === 0) {
+    return {};
+  }
+
+  const name = employeeName;
+
+  const employeeObject = employees.find((e) => e.firstName === name || e.lastName === name);
+  return employeeObject;
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -77,11 +85,11 @@ module.exports = {
   // countAnimals,
   // getAnimalMap,
   // getSpeciesByIds,
-  // getEmployeeByName,
+  getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
-  getAnimalsOlderThan,
+  // getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
