@@ -81,8 +81,61 @@ function calculateEntry(entrants) {
   }, 0);
 }
 
+const locations = ['NE', 'NW', 'SE', 'SW'];
+
+function speciesLocation() {
+  const animalsLocation = {};
+  locations.forEach((location) => {
+    const speciesInTheLocation = species.filter((specie) =>
+      specie.location === location);
+    animalsLocation[location] = speciesInTheLocation.map((specie) => specie.name);
+  });
+  return animalsLocation;
+}
+
+function speciesLocationWithNames() {
+  const animalsLocation = {};
+  locations.forEach((location) => {
+    const speciesInTheLocation = species.filter((specie) =>
+      specie.location === location);
+    const eachAnimal = speciesInTheLocation.map((specie) => specie.name);
+    animalsLocation[location] = eachAnimal.map((animal) => {
+      const nomes = speciesInTheLocation
+        .filter((specie) => specie.name === animal)[0].residents
+        .map((resident) => resident.name);
+      return {
+        [animal]: nomes,
+      };
+    });
+  });
+  return animalsLocation;
+}
+
+function speciesLocationWithNamesSorted() {
+  const animalsLocation = {};
+  locations.forEach((location) => {
+    const speciesInTheLocation = species.filter((specie) =>
+      specie.location === location);
+    const eachAnimal = speciesInTheLocation.map((specie) => specie.name);
+    animalsLocation[location] = eachAnimal.map((animal) => {
+      const nomes = speciesInTheLocation
+        .filter((specie) => specie.name === animal)[0].residents
+        .map((resident) => resident.name);
+      return {
+        [animal]: nomes.sort(),
+      };
+    });
+  });
+  return animalsLocation;
+}
+
 function getAnimalMap(options) {
   // seu código aqui
+  if (!options) return speciesLocation();
+  if (options.includeNames === true) {
+    if (options.sorted === true) return speciesLocationWithNamesSorted();
+    return speciesLocationWithNames();
+  }
 }
 
 function generateScheduleForEveryDay() {
