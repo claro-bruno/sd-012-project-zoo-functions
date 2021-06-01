@@ -24,10 +24,17 @@ function getSpeciesByIds(...ids) {
   return saida;
 }
 
-/* function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+function getAnimalsOlderThan(animal, age) {
+  let saida;
+  species.forEach((animais) => {
+    if (animais.name === animal) {
+      saida = animais.residents.every((idade) => idade.age >= age);
+    }
+  });
+  return saida;
 }
 
+/*
 function getEmployeeByName(employeeName) {
   // seu código aqui
 }
@@ -78,11 +85,13 @@ module.exports = {
   countAnimals,
   getAnimalMap, */
   getSpeciesByIds,
-/*   getEmployeeByName,
+  /*   getEmployeeByName,
   getEmployeeCoverage,
   addEmployee,
   isManager,
+  */
   getAnimalsOlderThan,
+  /*
   getOldestFromFirstSpecies,
   increasePrices,
   createEmployee, */
