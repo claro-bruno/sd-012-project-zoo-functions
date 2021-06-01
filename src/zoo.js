@@ -18,13 +18,13 @@ function getSpeciesByIds(...ids) {
   }
 
   if (ids.length === 1) {
-    const achar1 = ids.map((idComparar) => species.find((especie) => especie.id === idComparar ? especie : 0));
-    return achar1;
+    const ac1 = ids.map((id) => species.find((especie) => especie.id === id));
+    return ac1;
   }
 
   if (ids.length > 1) {
-    const achar2 = ids.map((idComparar) => data.species.find((especie) => especie.id === idComparar ? especie : 0));
-    return achar2;
+    const ac = ids.map((id) => data.species.find((especie) => especie.id === id));
+    return ac;
   }
 }
 
