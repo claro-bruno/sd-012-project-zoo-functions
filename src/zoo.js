@@ -13,62 +13,62 @@ const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  if(ids === null) {
+  if (ids === null) {
     return [];
   }
   let residents = [];
   species.forEach((specie) => {
-    specie.id == ids ? residents.push(specie) : residents = residents;
-  })
+    const test = specie.id === ids ? residents.push(specie) : residents = residents;
+  });
   return residents;
-};
-
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
 }
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
+function getAnimalsOlderThan() {
+  // seu código aqui animal, age
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function getEmployeeByName() {
+  // seu código aqui employeeName
 }
 
-function isManager(id) {
-  // seu código aqui
+function createEmployee() {
+  // seu código aqui personalInfo, associatedWith
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function isManager() {
+  // seu código aqui id
 }
 
-function countAnimals(species) {
-  // seu código aqui
+function addEmployee() {
+  // seu código aqui id, firstName, lastName, managers, responsibleFor
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function countAnimals() {
+  // seu código aqui species
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function calculateEntry() {
+  // seu código aqui entrants
 }
 
-function getSchedule(dayName) {
-  // seu código aqui
+function getAnimalMap() {
+  // seu código aqui options
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getSchedule() {
+  // seu código aqui dayName
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+function getOldestFromFirstSpecies() {
+  // seu código aqui id
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function increasePrices() {
+  // seu código aqui percentage
+}
+
+function getEmployeeCoverage() {
+  // seu código aqui idOrName
 }
 
 module.exports = {
