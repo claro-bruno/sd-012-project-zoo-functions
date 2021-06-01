@@ -58,7 +58,7 @@ const addEmployee = (
 };
 
 const countAnimals = (animal) => {
-  const count;
+  const count
   if (!animal) {
     count = species.reduce((acc, specie) => ({...acc, [specie.name]: specie.residents.length}), {});
   } else 
