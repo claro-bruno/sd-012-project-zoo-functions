@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { species } = require('./data');
+const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -56,9 +57,12 @@ function createEmployee() {
   // personalInfo, associatedWith
 }
 
-function isManager() {
+function isManager(id) {
   // seu código aqui
-  // id
+  // Método .flat visto no link https://stackoverflow.com/questions/10865025/merge-flatten-an-array-of-arrays;
+  const getManagers = (data.employees.map((employee) => employee.managers)).flat();
+  const checkManagers = getManagers.some((manager) => manager === id);
+  return checkManagers;
 }
 
 function addEmployee() {
