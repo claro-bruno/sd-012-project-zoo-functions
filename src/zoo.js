@@ -8,7 +8,20 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { species, lionId, ottersId, elephantsId, snakesId, frogsId, bearsId, tigersId, stephanieId, olaId, burlId, employees } = require('./data');
+const {
+  species,
+  lionId,
+  ottersId,
+  elephantsId,
+  snakesId,
+  frogsId,
+  bearsId,
+  tigersId,
+  stephanieId,
+  olaId,
+  burlId,
+  employees,
+} = require('./data');
 const data = require('./data');
 
 const getSpeciesByIds = (ids) => species.filter((specie) => specie.id === ids);
@@ -19,10 +32,13 @@ const getAnimalsOlderThan = (animal, age) => {
 };
 
 const getEmployeeByName = (employeeName) => {
-  if (employeeName === undefined) return {}
-  else return employees.find((employee) => 
-      employee.firstName === employeeName 
-        || employee.lastName === employeeName)
+  if (employeeName === undefined) return {};
+  else
+    return employees.find(
+      (employee) =>
+        employee.firstName === employeeName ||
+        employee.lastName === employeeName
+    );
 };
 
 const createEmployee = (personalInfo, associatedWith) => {
@@ -31,27 +47,42 @@ const createEmployee = (personalInfo, associatedWith) => {
     firstName: personalInfo.firstName,
     lastName: personalInfo.lastName,
     managers: associatedWith.managers,
-    responsibleFor: associatedWith.responsibleFor
-  }
+    responsibleFor: associatedWith.responsibleFor,
+  };
   return newEmployee;
-}
+};
 
-const isManager = (id) => employees.some((employee) => employee.managers.includes(id))
+const isManager = (id) =>
+  employees.some((employee) => employee.managers.includes(id));
 
-const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
+const addEmployee = (
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = []
+) => {
   const newEmployee = {
     id,
     firstName,
     lastName,
     managers,
-    responsibleFor
-  }
+    responsibleFor,
+  };
   employees.push(newEmployee);
-}
+};
 
-function countAnimals(species) {
-  // seu código aqui
-}
+const countAnimals = (animal) => {
+  if (!animal) {
+    return species.reduce((acc, specie) => ({...acc, [specie.name]: specie.residents.length}), {});
+  } else 
+  {
+    const animalSelected = species.find((specie) => specie.name === animal);
+    return animalSelected.residents.length;
+  }
+};
+
+console.log(countAnimals());
 
 function calculateEntry(entrants) {
   // seu código aqui
