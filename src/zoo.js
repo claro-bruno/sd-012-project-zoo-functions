@@ -62,7 +62,7 @@ const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
 };
 
 const countAnimals = (animal) => {
-  if (specie === undefined) {
+  if (animal === undefined) {
     const obj = {};
     species.forEach((specie) => {
       obj[`${specie.name}`] = specie.residents.length;
