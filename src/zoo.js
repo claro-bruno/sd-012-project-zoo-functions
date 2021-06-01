@@ -13,8 +13,8 @@ const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  const retorno = ids.length === 0 ? [] : 
-  ids.map((id) => species.find((specie) => specie.id === id));
+  const retorno = ids.length === 0 ? []
+  : ids.map((id) => species.find((specie) => specie.id === id));
   return retorno;
 }
 
@@ -24,8 +24,9 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  const retorno = employeeName === undefined ? {} : data.employees.find((pessoa) => pessoa.firstName === employeeName)
-  return retorno
+  const retorno = employeeName === undefined ? {} 
+  : data.employees.find((pessoa) => pessoa.firstName === employeeName);
+  return retorno;
 }
 
 // function createEmployee(personalInfo, associatedWith) {
@@ -69,17 +70,17 @@ function getEmployeeByName(employeeName) {
 // }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
+  // getEmployeeCoverage,
+  // addEmployee,
+  // isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
 };
