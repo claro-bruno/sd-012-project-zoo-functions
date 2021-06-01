@@ -53,7 +53,7 @@ function countAnimals(specie) {
     : species.find((elem2) => elem2.name === specie).residents.length;
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(entrants = 0) {
   let soma = 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   soma += prices.Adult * Adult;
