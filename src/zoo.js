@@ -39,7 +39,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const verifyById = (employeeId) => employeeId === id;
+  const checkManagers = ({ managers }) => managers.some(verifyById);
+  const resultOfCheck = data.employees.some(checkManagers);
+  return resultOfCheck;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
