@@ -19,11 +19,12 @@ function getSpeciesByIds(...ids) {
     return []
   };
   return species.filter((specie, index) =>
-  specie.id === ids[index]);  
+  specie.id === ids[index]);
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const animals = species.filter((specie) => specie.name === animal); 
+  return animals[0].residents.every((animal2) => animal2.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
