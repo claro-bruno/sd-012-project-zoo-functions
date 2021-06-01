@@ -39,13 +39,18 @@ const getEmployeeByName = (employeeName) => {
   return result;
 };
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+const createEmployee = (personalInfo, associatedWith) => {
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor };
+};
 
-function isManager(id) {
-  // seu código aqui
-}
+const isManager = (id) => {
+  const managerIds = [];
+  data.employees.forEach(({ managers }) => managerIds.push(...managers));
+  const result = managerIds.some((managerId) => managerId === id);
+  return result;
+};
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
