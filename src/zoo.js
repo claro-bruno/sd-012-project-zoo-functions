@@ -29,7 +29,10 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personal, associated) {
-  return { ...personal, ...associated };
+  return {
+    ...personal,
+    ...associated,
+  };
 }
 
 function isManager(id) {
@@ -38,7 +41,13 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
   data.employees.push(newEmployee);
 }
 
@@ -46,11 +55,21 @@ function countAnimals(species) {
   if (species) {
     return data.species.find((item) => item.name === species).residents.length;
   }
-  return data.species.reduce((acc, item) => ({ ...acc, [item.name]: item.residents.length }), {});
+  return data.species.reduce((acc, item) => ({
+    ...acc,
+    [item.name]: item.residents.length,
+  }), {});
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const allKeys = Object.keys(entrants);
+  return allKeys.reduce((acc, item) => {
+    const total = acc + entrants[item] * data.prices[item];
+    return total;
+  }, 0);
 }
 
 function getAnimalMap(options) {
