@@ -10,63 +10,63 @@ eslint no-unused-vars: [
 */
 
 const { species } = require('./data');
-const data = require('./data');
+//const data = require('./data');
 
 const getSpeciesByIds = (...ids) => {
-  let array = [];
+  const array = [];
   species.forEach((specie) => {
-    ids.find((id) => id === specie.id ? console.log(specie) : null);
+    array.push(ids.find((id) => id === specie.id));
   });
   return array;
+};
+
+const getAnimalsOlderThan = (animal, age) => {
+  return species.every(specie)
 }
 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
-}
+// function getEmployeeByName(employeeName) {
+//   // seu código aqui
+// }
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
-}
+// function createEmployee(personalInfo, associatedWith) {
+//   // seu código aqui
+// }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+// function isManager(id) {
+//   // seu código aqui
+// }
 
-function isManager(id) {
-  // seu código aqui
-}
+// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+//   // seu código aqui
+// }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+// function countAnimals(species) {
+//   // seu código aqui
+// }
 
-function countAnimals(species) {
-  // seu código aqui
-}
+// function calculateEntry(entrants) {
+//   // seu código aqui
+// }
 
-function calculateEntry(entrants) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getSchedule(dayName) {
+//   // seu código aqui
+// }
 
-function getSchedule(dayName) {
-  // seu código aqui
-}
+// function getOldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
-
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   calculateEntry,
