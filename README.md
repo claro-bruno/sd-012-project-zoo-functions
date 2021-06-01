@@ -270,7 +270,7 @@ Antes de começar, analise o arquivo `src/data.js`, para ver os dados que serão
 
 ### 9. IMPLEMENTE A FUNÇÃO getAnimalMap
 
-  A função é responsável pelo mapeamento geográfico das espécies e seus animais, podendo ainda filtrá-los por ordem alfabética e gênero, por exemplo
+  A função é responsável pelo mapeamento geográfico das espécies e seus animais, podendo ainda filtrá-los por ordem alfabética e g ênero, por exemplo
 
   **Observações técnicas**
 

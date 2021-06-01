@@ -73,13 +73,47 @@ function calculateEntry(entries) {
   return 0;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+// Requisito 9 - Não consegui fazer ainda
+
+const animalLocation = {
+  NE: [],
+  NW: [],
+  SE: [],
+  SW: [],
+};
+
+function getAnimalMap({ includeNames = false, sorted = false, sex }) {
+  if (includeNames === false) {
+    data.species.map(({ name, location }) => animalLocation[location].push(name));
+  } else {
+    data.species.map(({ name, location, residents }) => {
+      const animalsName = residents.map((resident) => resident.name);
+      // eslint-disable-next-line no-unused-expressions
+      sorted === true ? animalsName.sort() : animalsName;
+      console.log(animalsName);
+      const obj = { [name]: animalsName };
+      return animalLocation[location].push(obj);
+    });
+  }
+  return animalLocation;
 }
+
+// console.log(getAnimalMap({ includeNames: true, sorted: true }));
 
 function getSchedule(dayName) {
   // seu código aqui
+  const daysOfWeek = Object.keys(data.hours);
+  const objHours = daysOfWeek.reduce((acc, curr) => {
+    const objHrs = data.hours;
+    // eslint-disable-next-line no-return-assign
+    acc[curr] = `Open from ${objHrs[curr].open}am until ${objHrs[curr].close - 12}pm`;
+    if (curr === 'Monday') { acc[curr] = 'CLOSED'; }
+    return acc;
+  }, {});
+  return dayName === undefined ? objHours : { [dayName]: objHours[dayName] };
 }
+
+console.log(getSchedule('Monday'));
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
