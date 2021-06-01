@@ -182,12 +182,36 @@ function increasePrices(percentage) {
     Adult,
     Senior,
     Child,
-  }
+  };
+}
+
+function employeeAndAnimals() {
+  const animalsAndEmployee = {};
+  employees.forEach((employee) => {
+    const selectedEmployeeAnimalsId = employee.responsibleFor;
+    const animalsNames = selectedEmployeeAnimalsId.map((id) =>
+      species.find((specie) => specie.id === id).name);
+    const { firstName, lastName } = employee;
+    animalsAndEmployee[`${firstName} ${lastName}`] = animalsNames;
+  });
+  return animalsAndEmployee;
 }
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-  let teste = idOrName;
+  if (!idOrName) return employeeAndAnimals();
+  const animalsAndEmployee = {};
+  const selectedEmployee = employees.find((employee) =>
+    employee.firstName === idOrName
+    || employee.lastName === idOrName
+    || employee.id === idOrName);
+  const selectedEmployeeAnimalsId = selectedEmployee.responsibleFor;
+  const animalsNames = selectedEmployeeAnimalsId.map((id) =>
+    species.find((specie) => specie.id === id).name);
+  const { firstName, lastName } = selectedEmployee;
+  console.log(animalsNames);
+  animalsAndEmployee[`${firstName} ${lastName}`] = animalsNames;
+  return animalsAndEmployee;
 }
 
 module.exports = {
