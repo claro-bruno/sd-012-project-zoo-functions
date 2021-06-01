@@ -75,8 +75,33 @@ function calculateEntry(entrants) {
   return totalPrice;
 }
 
+const locations = ['NE', 'NW', 'SE', 'SW'];
+const getNamesByLocation = (namesOrNot, sortOrNot, sexOfAnimal) => {
+  const reduceAnimal = (animal) => {
+    let getResidents = data.species.find((specie) => specie.name === animal).residents;
+    if (sexOfAnimal) getResidents = getResidents.filter((resident) => resident.sex === sexOfAnimal);
+    const animalsAndResidents = getResidents.reduce((acc, resident) => {
+      acc.push(resident.name);
+      return acc;
+    }, []);
+    if (sortOrNot === true) animalsAndResidents.sort();
+    return { [animal]: animalsAndResidents };
+  };
+  const reduceToNamesByLocation = (accumulator, location) => {
+    const animalsByLocation = data.species.filter((specie) => specie.location === location);
+    const animalsNames = animalsByLocation.map((animal) => animal.name);
+    accumulator[location] = animalsNames;
+    if (namesOrNot === true) accumulator[location] = animalsNames.map(reduceAnimal);
+    return accumulator;
+  };
+  return locations.reduce(reduceToNamesByLocation, {});
+};
+
 function getAnimalMap(options) {
-  // seu código aqui
+  let { includeNames, sorted, sex } = {};
+  if (options) ({ includeNames, sorted, sex } = options);
+  if (includeNames === true) return getNamesByLocation(includeNames, sorted, sex);
+  return getNamesByLocation();
 }
 
 function getSchedule(dayName) {
