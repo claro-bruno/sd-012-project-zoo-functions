@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 const { species } = data;
 
 function getSpeciesByIds(...ids) {
