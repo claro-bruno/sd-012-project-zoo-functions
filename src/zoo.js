@@ -63,8 +63,14 @@ function isManager(id) {
   });
 }
 
-function addEmployee() {
-  // seu código aqui id, firstName, lastName, managers, responsibleFor
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const objetoAdicionar = { id: null };
+  objetoAdicionar.id = id;
+  objetoAdicionar.firstName = firstName;
+  objetoAdicionar.lastName = lastName;
+  objetoAdicionar.managers = managers;
+  objetoAdicionar.responsibleFor = responsibleFor;
+  return employees.push(objetoAdicionar);
 }
 
 function countAnimals() {
