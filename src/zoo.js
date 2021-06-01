@@ -9,61 +9,58 @@ eslint no-unused-vars: [
 ]
 */
 //
-const { species } = require('./data');
+
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-
-return species.filter((specie, index) => specie.id === ids[index])    
+  return data.species.filter((specie, index) => specie.id === ids[index]);
 }
 
-  
- 
-function getAnimalsOlderThan(animal, age) {
+function getAnimalsOlderThan() {
+  //
+}
+
+function getEmployeeByName() {
   // seu código aqui
 }
 
-function getEmployeeByName(employeeName) {
+function createEmployee() {
   // seu código aqui
 }
 
-function createEmployee(personalInfo, associatedWith) {
+function isManager() {
   // seu código aqui
 }
 
-function isManager(id) {
+function addEmployee() {
   // seu código aqui
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function countAnimals() {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function calculateEntry() {
   // seu código aqui
 }
 
-function calculateEntry(entrants) {
+function getAnimalMap() {
   // seu código aqui
 }
 
-function getAnimalMap(options) {
+function getSchedule() {
   // seu código aqui
 }
 
-function getSchedule(dayName) {
+function getOldestFromFirstSpecies() {
   // seu código aqui
 }
 
-function getOldestFromFirstSpecies(id) {
+function increasePrices() {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
-
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
   // seu código aqui
 }
 
