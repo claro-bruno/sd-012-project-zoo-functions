@@ -12,14 +12,14 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  const search = ids.map(element => (data.species.find(key => key.id === element)));
+  const search = ids.map((element) => (data.species.find((key) => key.id === element)));
   return search;
 }
 // Consegui retornar mais de uma chave com a ajuda do colega Rodrigo Facury que sugeriu o uso do map.
 
 function getAnimalsOlderThan(animal, age) {
-  const getAnimal = data.species.find(name => name.name === animal);
-  const every = getAnimal.residents.every(key => key.age > age);
+  const getAnimal = data.species.find((name) => name.name === animal);
+  const every = getAnimal.residents.every((key) => key.age > age);
   return every;
 }
 // Fiz o encadeamento do every com o find baseada no código do colega Rodrigo Facury;
@@ -27,8 +27,14 @@ function getAnimalsOlderThan(animal, age) {
 // console.log(getAnimalsOlderThan('lions', 20));
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  const getEmployee = data.employees.find((key) => key.firstName === employeeName || key.lastName === employeeName);
+  if (getEmployee === undefined) {
+    return {};
+  };
+  return getEmployee;
 }
+
+console.log(getEmployeeByName());
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
