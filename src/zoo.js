@@ -37,8 +37,8 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const {id, firstName, lastName,} = personalInfo;;
-  const {managers, responsibleFor,} = associatedWith;
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
   return {
     id,
     firstName,
@@ -50,6 +50,9 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  const getManagers = [];
+  employees.forEach((employee) => getManagers.push(...employee.managers));
+  return getManagers.some((managerId) => managerId === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
