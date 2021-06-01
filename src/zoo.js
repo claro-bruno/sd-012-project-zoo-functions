@@ -48,11 +48,13 @@ function countAnimals(species) {
     .residents.length : data.species.reduce((acc, { name, residents }) =>
     ({ ...acc, [name]: residents.length }), {}));
 }
-/*
-function calculateEntry(entrants) {
-  // seu código aqui
-}
 
+function calculateEntry(entrants) {
+  if (!entrants || entrants === 0) return 0;
+  const priceTotal = Object.keys(entrants);
+  return priceTotal.reduce((accumulator, currentValue) => accumulator + (entrants[accumulator] * data.prices[currentValue]), 0);
+}
+/*
 function getAnimalMap(options) {
   // seu código aqui
 }
@@ -74,7 +76,7 @@ function getEmployeeCoverage(idOrName) {
 }
 */
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
