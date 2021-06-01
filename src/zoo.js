@@ -46,9 +46,10 @@ function getEmployeeByName(employeeName) {
   });
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -90,7 +91,7 @@ module.exports = {
   getSpeciesByIds,
   getAnimalsOlderThan,
   getEmployeeByName,
-  // createEmployee,
+  createEmployee,
   // isManager,
   // addEmployee,
   // countAnimals,
