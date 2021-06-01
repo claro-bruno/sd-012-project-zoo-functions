@@ -75,9 +75,17 @@ function addEmployee(
   data.employees.push(newEmploye);
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(species = '') {
+  // seu código aqui
+  const animals = {};
+  data.species.forEach((animal) => {
+    animals[animal.name] = animal.residents.length;
+  });
+  if (species === '') {
+    return animals;
+  }
+  return animals[species];
+}
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -106,7 +114,7 @@ function addEmployee(
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
