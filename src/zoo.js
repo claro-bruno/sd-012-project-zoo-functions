@@ -24,9 +24,7 @@ const getEmployeeByName = (employeeName) => (employeeName ? employees.find((e) =
 
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
-function isManager(id) {
-  // seu código aqui
-}
+const isManager = (id) => employees.find((e) => e.id === id).managers.length < 2;
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
