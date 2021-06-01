@@ -16,7 +16,7 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const specificAnimal = data.species.find((value) => value.name === animal);
+  const specificAnimal = data.species.find((value) => value.name === animal).residents;
   return specificAnimal.every((value) => value.age >= age);
 }
 
@@ -37,8 +37,8 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
-function isManager() {
-  // seu código aqui id
+function isManager(id) {
+  return data.employees.some((role) => role.managers.includes(id));
 }
 
 function addEmployee() {
