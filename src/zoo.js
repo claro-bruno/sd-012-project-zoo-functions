@@ -50,8 +50,10 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 // console.log(addEmployee('2323232', 'Lucifer', 'Morningstar', ['burlId', 'olaId'], ['lionId', 'tigersId']));
 
-function countAnimals(species) {
-  // seu código aqui
+function countAnimals(specie) {
+  if (specie === undefined) {
+    return {};
+  }
 }
 
 function calculateEntry(entrants) {
