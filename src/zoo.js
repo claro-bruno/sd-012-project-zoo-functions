@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -21,10 +21,12 @@ function getAnimalsOlderThan(animal, age) {
   return species.find((specie) => specie.name === animal).residents.every((res) => res.age >= age);
 }
 
-function getEmployeeByName(employeeName) {
+function getEmployeeByName(empName) {
   // seu código aqui
-  if (!employeeName) return {};
-  return employees.find((emp) => emp.firstName === employeeName || emp.lastName === employeeName);
+  // if (!employeeName) return {};
+  // melhoria na função de Lucas Chamas Nahas :)
+
+  return employees.find((emp) => emp.firstName === empName || emp.lastName === empName) || {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -67,7 +69,15 @@ function getAnimalMap(options) {
 function getSchedule(dayName) {
   // seu código aqui
   if (dayName === 'Monday') return { Monday: 'CLOSED' };
+  const { open, close } = hours[dayName];
+  if (!dayName) {
+    Object.keys(hours).forEach((day) => {
+      return ({ [day]: `Open from ${open}am until ${close % 12}pm` });
+    });
+  }
+  return { [dayName]: `Open from ${open}am until ${close % 12}pm` };
 }
+console.log(getSchedule('Monday'));
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
