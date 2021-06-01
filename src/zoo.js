@@ -1,13 +1,11 @@
-/*
-eslint no-unused-vars: [
+/* eslint no-unused-vars: [
   "error",
   {
     "args": "none",
     "vars": "local",
     "varsIgnorePattern": "data"
   }
-]
-*/
+] */
 
 const { species, employees } = require('./data');
 /* const data = require('./data'); */
@@ -64,11 +62,18 @@ function isManager(id) {
   return false;
 }
 
-/*
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(ids, firstNames, lastNames, managerss, responsibleFors) {
+  const saida = {
+    id: ids,
+    firstName: firstNames,
+    lastName: lastNames,
+    managers: ((managerss === undefined) ? [] : managerss),
+    responsibleFor: ((responsibleFors === undefined) ? [] : responsibleFors),
+  };
+  return employees.push(saida);
 }
 
+/*
 function countAnimals(species) {
   // seu código aqui
 }
@@ -106,8 +111,8 @@ module.exports = {
   getEmployeeByName,
   /*
   getEmployeeCoverage,
-  addEmployee,
   */
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   /*
