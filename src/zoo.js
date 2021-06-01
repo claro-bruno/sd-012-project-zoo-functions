@@ -13,7 +13,7 @@ const data = require('./data');
 
 function getSpeciesByIds(ids) {
   const animalId = [];
-  return animalId;
+  if (ids === undefined) return animalId;
 }
 console.log(getSpeciesByIds());
 
