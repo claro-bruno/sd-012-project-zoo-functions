@@ -42,9 +42,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(newEmployee);
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(species) {
+  if (!species) {
+    return data.species.reduce((acc, currentValue) => ({ ...acc,
+      [currentValue.name]: currentValue.residents.length }), {});
+  }
+  return data.species.find((specie) => specie.name === species).residents.length;
+}
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -73,7 +77,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
