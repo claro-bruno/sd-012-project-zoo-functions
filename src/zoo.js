@@ -8,14 +8,14 @@ eslint no-unused-vars: [
   }
 ]
 */
-const {species,lionId,ottersId,elephantsId,snakesId,frogsId,bearsId,tigersId,stephanieId,olaId,burlId} = require('./data');
+const { species, lionId, ottersId, elephantsId, snakesId, frogsId, bearsId, tigersId, stephanieId, olaId, burlId } = require('./data');
 const data = require('./data');
 
-const getSpeciesByIds = (ids) => species.filter((specie) => specie.id === ids); //corrigir
+const getSpeciesByIds = (ids) => species.filter((specie) => specie.id === ids);
 
 const getAnimalsOlderThan = (animal, age) => {
   const animais = species.find((specie) => specie.name === animal).residents;
-  return animais.every((animal) => animal.age >= age);
+  return animais.every((animalAge) => animalAge.age >= age);
 };
 
 function getEmployeeByName(employeeName) {
