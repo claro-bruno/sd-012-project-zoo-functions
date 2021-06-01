@@ -8,15 +8,17 @@ eslint no-unused-vars: [
   }
 ]
 */
-
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  
+function getSpeciesByIds(...ids) {
+  const selectedSpicie = [];
+  ids.forEach((id) => selectedSpicie.push(data.species.find((spicie) => spicie.id === id)));
+  return selectedSpicie;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const selecteSpicie = data.species.find((specie) => specie.name === animal);
+  return selecteSpicie.residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
