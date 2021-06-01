@@ -14,7 +14,7 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const retorno = ids.length === 0 ? []
-  : ids.map((id) => species.find((specie) => specie.id === id));
+    : ids.map((id) => species.find((specie) => specie.id === id));
   return retorno;
 }
 
@@ -24,8 +24,8 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  const retorno = employeeName === undefined ? {} 
-  : data.employees.find((pessoa) => pessoa.firstName === employeeName);
+  const retorno = employeeName === undefined ? {}
+    : data.employees.find((pessoa) => pessoa.firstName === employeeName);
   return retorno;
 }
 
