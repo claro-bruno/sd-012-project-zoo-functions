@@ -21,24 +21,29 @@ function getAnimalsOlderThan(animal, age) {
 } // ok
 
 function getEmployeeByName(employeeName) {
-  if (employeeName === undefined){
-    return {};
-  }
   return employees
-    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName)
+    || {};
 } // ok
 
 function createEmployee(personalInfo, associatedWith) {
-  return {...personalInfo, ...associatedWith}
-} 
-
-function isManager(id) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  return employees.some(({ managers }) => managers.includes(id));
+} // ok
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const obj = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(obj);
+} // ok
 
 // function countAnimals(species) {
 //   // seu código aqui
@@ -76,7 +81,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
