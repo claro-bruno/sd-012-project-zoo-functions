@@ -129,7 +129,7 @@ const calculateEntry = (entrants) => {
 //   return result;
 // };
 
-const getAnimalMap = (options) => {
+const getAnimalMap = () => {
   // let result = {};
   // if (options === undefined) return getLocation();
   // const { includeNames = false, sorted = false, sex = '' } = options;
