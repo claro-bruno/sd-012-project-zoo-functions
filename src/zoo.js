@@ -52,8 +52,15 @@ function createEmployee(personalInfo, associatedWith) {
   return objetoResposta;
 }
 
-function isManager() {
-  // seu código aqui id
+function isManager(id) {
+  return employees.some((elemento) => {
+    for (let index = 0; index <= elemento.managers.length; index += 1) {
+      if (elemento.managers[index] === id) {
+        return true;
+      }
+    }
+    return false;
+  });
 }
 
 function addEmployee() {
