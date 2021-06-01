@@ -14,7 +14,7 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  console.log(data)
+  console.log(data);
   return species.filter((speci, index) => speci.id === ids[index]);
 }
 
