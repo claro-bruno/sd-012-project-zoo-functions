@@ -16,9 +16,7 @@ function getSpeciesByIds(...ids) {
   // seu código aqui
   const newArr = [];
   for (let index = 0; index < ids.length; index += 1) {
-    const filtra = species.filter((specie) => {
-    return specie.id === ids[index];
-    });
+    const filtra = species.find((specie) => specie.id === ids[index]);
     newArr.push(filtra);
   }
   return newArr;
