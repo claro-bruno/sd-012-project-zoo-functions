@@ -70,7 +70,7 @@ module.exports = {
   countAnimals,
   getAnimalMap, */
   getSpeciesByIds,
- /*  getEmployeeByName,
+  /*  getEmployeeByName,
   getEmployeeCoverage,
   addEmployee,
   isManager,
