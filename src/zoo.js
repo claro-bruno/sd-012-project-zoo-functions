@@ -52,8 +52,11 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  return employees.some((person) => person.managers.includes(id));
 }
 
+const { species, employees } = require('./data');
+const data = require('./data');
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
