@@ -9,16 +9,16 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+// const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
 // Questao 1
-const getSpecies = ids.map((id) => data.species.find((specie) => specie.id === id));
-return getSpecies;
+  const getSpecies = ids.map((id) => data.species.find((specie) => specie.id === id));
+  return getSpecies;
 }
 
-function getAnimalsOlderThan(animal, age) {
+/* function getAnimalsOlderThan(animal, age) {
 // Questao 2
   const filterSpecie = (arr) => arr.filter(
     ({ animal, age }) =>
@@ -27,17 +27,19 @@ function getAnimalsOlderThan(animal, age) {
     );
     const getAnimalsOlderThan = getAnimalsOlderThan(species);
 }
-
+*/
+/*
 function getEmployeeByName(employeeName) {
 // Questao 3
 }
-
+*/
 function createEmployee(personalInfo, associatedWith) {
 // Questao 4
-  const information = {...personalInfo, ...associatedWith};
+  const information = { ...personalInfo, ...associatedWith };
   return information;
 }
 
+/*
 function isManager(id) {
 // Questao 5
 }
@@ -55,7 +57,7 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-// Questao 9 
+// Questao 9
 }
 
 function getSchedule(dayName) {
@@ -73,19 +75,20 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
 // Questao 13
 }
+*/
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+//  calculateEntry,
+//  getSchedule,
+//  countAnimals,
+//  getAnimalMap,
   getSpeciesByIds,
-  getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
-  getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  //  getEmployeeByName,
+  //  getEmployeeCoverage,
+  //  addEmployee,
+  //  isManager,
+  //  getAnimalsOlderThan,
+  //  getOldestFromFirstSpecies,
+  //  increasePrices,
   createEmployee,
 };
