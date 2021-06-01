@@ -8,6 +8,9 @@ eslint no-unused-vars: [
   }
 ]
 */
+// const { species } = require('./data');
+const { employees } = require('./data');
+
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -22,61 +25,73 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (typeof (employeeName) !== 'undefined') {
+    return employees.find((empl) => {
+      const findEmpregado = empl.firstName === employeeName || empl.lastName === employeeName;
+      return findEmpregado;
+    });
+  } return {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const novoEmpregado = {
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  };
+  return novoEmpregado;
 }
 
-function isManager(id) {
-  // seu código aqui
-}
+// function isManager(id) {
+//   // seu código aqui
+// }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+//   // seu código aqui
+// }
 
-function countAnimals(species) {
-  // seu código aqui
-}
+// function countAnimals(species) {
+//   // seu código aqui
+// }
 
-function calculateEntry(entrants) {
-  // seu código aqui
-}
+// function calculateEntry(entrants) {
+//   // seu código aqui
+// }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
-function getSchedule(dayName) {
-  // seu código aqui
-}
+// function getSchedule(dayName) {
+//   // seu código aqui
+// }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function getOldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
+  // getEmployeeCoverage,
+  // addEmployee,
+  // isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
