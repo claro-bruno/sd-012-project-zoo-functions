@@ -87,9 +87,34 @@ function calculateEntry(entrants) {
   return (Child * childPrice + Senior * seniorPrice + Adult * adultPrice);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+//FUNCTIONS TO SOLVE getAnimalMap()
+
+const onlyOneSex = (residents, sex) => residents.filter((resident) => resident.sex === sex).map((resident) => resident.name);
+
+const getSpeciesByLocation = (location, { includeNames = false, sorted = false, sex = 'both' }) => {
+  const speciesFiltered = species.filter((specie) => specie.location === location).reduce((acc, specie) => {
+    const { name, residents } = specie;
+    if (includeNames){
+      const residentsName = sex === 'both' ? residents.map((resident) => resident.name) : onlyOneSex(residents, sex);
+      return sorted ? [...acc, { [name]: residentsName.sort() }] : [...acc, { [name]: residentsName }];
+    }
+      return [...acc, name];
+  }, []);
+  return speciesFiltered;
 }
+
+function getAnimalMap(options = {}) {
+  const animalsByLocation = {
+    NE: getSpeciesByLocation('NE', options),
+    SW: getSpeciesByLocation('SW', options),
+    SE: getSpeciesByLocation('SE', options),
+    NW: getSpeciesByLocation('NW', options),
+  };
+
+  return animalsByLocation;
+}
+
+//END OF getAnimalMap()
 
 function getSchedule(dayName) {
   // seu código aqui
