@@ -81,7 +81,6 @@ function countAnimals(specieName) {
   species.forEach((specie) => { retorno[specie.name] = specie.residents.length; });
   return retorno;
 }
-console.log(countAnimals());
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   // seu código aqui
@@ -115,17 +114,14 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-//   const increasePercentage = percentage / 100;
-//   const pricesArray = Object.keys(prices);
-//   for (let index = 0; index < pricesArray.length; index += 1) {
-//     prices[pricesArray[index]] = parseFloat(
-//       prices[pricesArray[index]] * increasePercentage
-//         + prices[pricesArray[index]],
-//     ).toFixed(2);
-//   }
-// }
+function increasePrices(percentage) {
+  // seu código aqui
+  const pricesArray = Object.keys(prices);
+
+  return pricesArray.forEach((eachPrice) => {
+    prices[eachPrice] = Math.round(prices[eachPrice] * (1 + percentage / 100) * 100) / 100;
+  });
+}
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
@@ -143,6 +139,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
