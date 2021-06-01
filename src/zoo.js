@@ -48,10 +48,14 @@ const isManager = (id) => employees.some((employee) =>
   employee.managers.some((manager) => manager === id));
 
 const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
-  const man = managers;
-  const res = responsibleFor;
-  if (managers === undefined) man = [];
-  if (responsibleFor === undefined) res = []; 
+  let man = managers;
+  let res = responsibleFor;
+  if (managers === undefined) {
+    man = [];
+  }
+  if (responsibleFor === undefined) {
+    res = []; 
+  }
   employees.push({
     id,
     firstName,
