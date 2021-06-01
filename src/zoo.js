@@ -76,7 +76,15 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  return entrants;
+  if (entrants === null || entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const entries = Object.entries(entrants);
+  const sum = entries.reduce((acc, currentValue) => {
+    const sumAcc = acc + currentValue[1] * data.prices[currentValue[0]];
+    return sumAcc;
+  }, 0);
+  return sum;
 }
 
 function getAnimalMap(options) {
