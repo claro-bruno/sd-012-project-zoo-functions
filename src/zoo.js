@@ -64,18 +64,18 @@ function getEmployeeCoverage(idOrName) {
   // seu código aqui
 } */
 
-/* module.exports = {
-  calculateEntry,
+module.exports = {
+  /* calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  getAnimalMap, */
   getSpeciesByIds,
-  getEmployeeByName,
+ /*  getEmployeeByName,
   getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
   increasePrices,
-  createEmployee,
-}; */
+  createEmployee, */
+};
