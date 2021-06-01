@@ -90,16 +90,16 @@ function getSchedule(dayName) {
 }
 // console.log(getSchedule('Friday'));
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies() {
+// seu código aqui
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+function increasePrices() {
+// seu código aqui
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getEmployeeCoverage() {
+// seu código aqui
 }
 
 module.exports = {
