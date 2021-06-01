@@ -14,9 +14,11 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  if (!ids.length) {
-    return [];
-  }
+  if (!ids.length) return [];
+  const getSpeciesById = (id, index) => {
+    if (data.species[index].id === id) return data.species[index];
+  };
+  return ids.map(getSpeciesById);
 }
 
 const actual = getSpeciesByIds();
@@ -37,6 +39,31 @@ const expected2 = [{
   ],
 }];
 assert.deepStrictEqual(actual2, expected2);
+
+const actual3 = getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46');
+const expected3 = [{
+  id: '0938aa23-f153-4937-9f88-4858b24d6bce',
+  name: 'lions',
+  popularity: 4,
+  location: 'NE',
+  residents: [
+    { name: 'Zena', sex: 'female', age: 12 },
+    { name: 'Maxwell', sex: 'male', age: 15 },
+    { name: 'Faustino', sex: 'male', age: 7 },
+    { name: 'Dee', sex: 'female', age: 14 }
+  ]
+},
+{
+  id: 'e8481c1d-42ea-4610-8e11-1752cfc05a46',
+  name: 'tigers',
+  popularity: 5,
+  location: 'NW',
+  residents: [
+    { name: 'Shu', sex: 'female', age: 19 },
+    { name: 'Esther', sex: 'female', age: 17 }
+  ]
+}];
+assert.deepStrictEqual(actual3, expected3);
 
 // function getAnimalsOlderThan(animal, age) {
 //   // seu código aqui
