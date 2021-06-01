@@ -21,15 +21,19 @@ function getSpeciesByIds(...ids) {
 };
 
 function getAnimalsOlderThan(animal, age) {
-  
+ return data.species.some((specie) => {
+  const ag = specie.residents.every((speciee) => speciee.age >= age); 
+ return specie.name === animal && ag
+});
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {};
+  return data.employees.find((employe) => employe.firstName === employeeName || employe.lastName === employeeName );
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return personalInfo.map((personal) => personal.employees)
 }
 
 function isManager(id) {
