@@ -58,12 +58,11 @@ const addEmployee = (
 };
 
 const countAnimals = (animal) => {
-  const count
   if (!animal) {
-    count = species.reduce((acc, specie) => ({...acc, [specie.name]: specie.residents.length}), {});
+    const count = species.reduce((acc, specie) => ({...acc, [specie.name]: specie.residents.length}), {});
   } else 
   { const animalSelected = species.find((specie) => specie.name === animal);
-    count = animalSelected.residents.length; 
+    const count = animalSelected.residents.length; 
   }
     return count;
   };
