@@ -63,7 +63,7 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-} */ 
+} */
 
 module.exports = {
   // calculateEntry,
@@ -74,9 +74,9 @@ module.exports = {
   // getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager, 
-  getAnimalsOlderThan, 
+  // isManager,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee, 
+  // createEmployee,
 };
