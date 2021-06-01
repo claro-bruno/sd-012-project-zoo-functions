@@ -16,10 +16,15 @@ function getSpeciesByIds(...ids) {
   return data.species.filter((specie, index) => specie.id === ids[index]);
 }
 
-/* function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+function getAnimalsOlderThan(animal, age) {
+  const animalSpecie = data.species.filter((specie) => specie.name === animal)[0];
+  const getResidents = animalSpecie.residents;
+  const getAge = getResidents.every((resident) => (resident.age >= age));
+  return getAge;
 }
+console.log(getAnimalsOlderThan('otters', 7));
 
+/*
 function getEmployeeByName(employeeName) {
   // seu código aqui
 }
@@ -74,7 +79,7 @@ module.exports = {
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
-  // getAnimalsOlderThan,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
