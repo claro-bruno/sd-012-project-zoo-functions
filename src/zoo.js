@@ -35,14 +35,17 @@ function getEmployeeByName(employeeName) {
 }
 getEmployeeByName('Emery');
 
-function createEmployee() {
-  // personalInfo, associatedWith
-  // seu código aqui
+function createEmployee(personalInfo, associatedWith) {
+  const resultado = { ...personalInfo, ...associatedWith };
+  return resultado;
 }
 
-function isManager() {
-  // id
-  // seu código aqui
+function isManager(id) {
+  const resultado = data.employees.find((emp) => emp.managers.find((manager) => manager === id));
+  if (resultado === undefined) {
+    return false;
+  }
+  return true;
 }
 
 function addEmployee() {
