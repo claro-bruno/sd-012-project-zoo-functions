@@ -27,11 +27,12 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
-  // seu código aqui
+  const getManegers = employees.map((employee) => employee.managers);
+  return getManegers.some((managers) => managers.some((maneger) => maneger === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
