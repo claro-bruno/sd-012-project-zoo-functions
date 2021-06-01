@@ -25,9 +25,15 @@ function getSpeciesByIds(...ids) {
   }
 }
 
-function getAnimalsOlderThan() {
-  // seu código aqui animal, age
-
+function getAnimalsOlderThan(animal, age) {
+  const animals = species.map((element) => {
+    let acc;
+    if (element.name === animal) {
+      acc = element.residents.every((idade) => idade.age > age);
+    }
+    return acc;
+  });
+  return animals.some((verify) => verify === true);
 }
 
 function getEmployeeByName() {
