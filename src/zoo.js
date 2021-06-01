@@ -9,10 +9,29 @@ eslint no-unused-vars: [
 ]
 */
 
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  
+function getSpeciesByIds(...ids) {
+  if (ids.length === 0) { return [] }
+
+  if (ids.length === 1) {
+    let result = [];
+    result.push(species.find((specie) => specie.id === ids[0]));
+    return result;
+  }
+
+  let result = [];
+
+  species.forEach(element => {
+    ids.forEach(id => {
+      if (id === element.id) {
+        result.push(element);
+      }
+    });
+  });
+
+  return result;
 }
 
 function getAnimalsOlderThan(animal, age) {
