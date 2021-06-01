@@ -27,9 +27,14 @@ function getAnimalsOlderThan(animal, age) {
 }
 // console.log(getAnimalsOlderThan('otters', 7));
 
-// function getEmployeeByName() {
-//   // seu código aqui employeeName
-// }
+function getEmployeeByName(employeeName) {
+  // seu código aqui
+  if (!employeeName) return {};
+  const findEmployee = (employee) =>
+    employee.lastName === employeeName || employee.firstName === employeeName;
+  return data.employees.find(findEmployee);
+}
+console.log(getEmployeeByName('Emery'));
 
 // function createEmployee() {
 //   // seu código aqui personalInfo, associatedWith
@@ -77,7 +82,7 @@ module.exports = {
   // countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
-  // getEmployeeByName,
+  getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
