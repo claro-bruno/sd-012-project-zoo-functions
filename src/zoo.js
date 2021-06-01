@@ -27,18 +27,22 @@ function getAnimalsOlderThan(animal, age) {
 // console.log(getAnimalsOlderThan('lions', 20));
 
 function getEmployeeByName(employeeName) {
-  const getEmployee = data.employees.find((key) => key.firstName === employeeName || key.lastName === employeeName);
+  const getEmployee = data.employees.find((key) => key.firstName === employeeName || key.lastName
+  === employeeName);
   if (getEmployee === undefined) {
     return {};
-  };
+  }
   return getEmployee;
 }
 
-console.log(getEmployeeByName());
+// console.log(getEmployeeByName());
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
+
+console.log(createEmployee({id: 'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1', firstName: 'Nigel', lastName: 'Nelson',}, {managers: ['burlId', 'olaId'],
+  responsibleFor: ['lionId', 'tigersId']}));
 
 function isManager(id) {
   // seu código aqui
