@@ -27,21 +27,20 @@ const { species, employees } = require('./data');
 //   return minimumAge;
 // }
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
-  if (arguments.length === 0) {
-    return {};
-  }
-
-  const name = employeeName;
-
-  const employeeObject = employees.find((e) => e.firstName === name || e.lastName === name);
-  return employeeObject;
-}
-
-// function createEmployee(personalInfo, associatedWith) {
+// function getEmployeeByName(employeeName) {
 //   // seu código aqui
+//   if (arguments.length === 0) {
+//     return {};
+//   }
+
+//   const name = employeeName;
+
+//   const employeeObject = employees.find((e) => e.firstName === name || e.lastName === name);
+//   return employeeObject;
 // }
+
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
+  // seu código aqui
 
 // function isManager(id) {
 //   // seu código aqui
@@ -85,12 +84,12 @@ module.exports = {
   // countAnimals,
   // getAnimalMap,
   // getSpeciesByIds,
-  getEmployeeByName,
+  // getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
   // getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
