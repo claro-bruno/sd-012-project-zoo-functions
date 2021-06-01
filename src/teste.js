@@ -1,8 +1,10 @@
 const data = require('./data');
 
-const ids = data.species.map((id) => id.id).filter((id) => id.species.id)
+function getSpeciesByIds(ids = []) {
+  return ids.species.filter((id) => id.id);
+}
 
-console.log(ids)
+console.log(getSpeciesByIds(data))
 
 
 
