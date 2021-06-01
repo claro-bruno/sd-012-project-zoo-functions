@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const { species } = require('./data');
 const data = require('./data');
-/*
+
 function getSpeciesByIds(ids) {
 // Questao 1
 }
@@ -29,13 +29,13 @@ function getAnimalsOlderThan(animal, age) {
 function getEmployeeByName(employeeName) {
 // Questao 3
 }
-*/
+
 function createEmployee(personalInfo, associatedWith) {
 // Questao 4
-  const information = { ...personalInfo, ...associatedWith };
+  const information = {...personalInfo, ...associatedWith};
   return information;
 }
-/*
+
 function isManager(id) {
 // Questao 5
 }
@@ -53,7 +53,7 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-// Questao 9
+// Questao 9 
 }
 
 function getSchedule(dayName) {
@@ -71,19 +71,19 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
 // Questao 13
 }
-*/
+
 module.exports = {
-//calculateEntry,
-//getSchedule,
-//countAnimals,
-//getAnimalMap,
-//getSpeciesByIds,
-//getEmployeeByName,
-//getEmployeeCoverage,
-//addEmployee,
-//isManager,
-//getAnimalsOlderThan,
-//getOldestFromFirstSpecies,
-//increasePrices,
+  calculateEntry,
+  getSchedule,
+  countAnimals,
+  getAnimalMap,
+  getSpeciesByIds,
+  getEmployeeByName,
+  getEmployeeCoverage,
+  addEmployee,
+  isManager,
+  getAnimalsOlderThan,
+  getOldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
