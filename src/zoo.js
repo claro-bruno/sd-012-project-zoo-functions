@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+// const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -19,18 +19,18 @@ function getSpeciesByIds(...ids) {
     return ids;
   }
   if (ids.length === 1) {
-    especies.push(species.find((specie) => specie.id === ids[0]));
+    especies.push(data.species.find((specie) => specie.id === ids[0]));
     return especies;
   }
   for (let index = 0; index < ids.length; index += 1) {
-    especies.push(species.find((specie) => specie.id === ids[index]));
+    especies.push(data.species.find((specie) => specie.id === ids[index]));
   }
   return especies;
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  const especieAnimal = species.find((specie) => specie.name === animal);
+  const especieAnimal = data.species.find((specie) => specie.name === animal);
   const verifyAge = Object.values(especieAnimal.residents).every((resident) => resident.age >= age);
   return verifyAge;
 }
