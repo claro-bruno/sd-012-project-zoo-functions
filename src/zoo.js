@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /*
 eslint no-unused-vars: [
   "error",
@@ -17,7 +18,7 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  return data.species.find((animals) => animals.name === animal).residents.every((resAge) => resAge.age > age);
 }
 
 function getEmployeeByName(employeeName) {
