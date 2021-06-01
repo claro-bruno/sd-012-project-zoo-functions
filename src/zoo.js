@@ -39,7 +39,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return emp = { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
