@@ -13,7 +13,10 @@ const data = require('./data');
 
 function getSpeciesByIds(ids) {
   // seu código aqui
-
+  const arr = [];
+  if (ids === undefined) {
+    return arr;
+  }
 }
 
 function getAnimalsOlderThan(animal, age) {
