@@ -21,48 +21,49 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  return employeeName ? employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName) : {};
+  return employeeName ? employees.find((employee) =>
+    employee.firstName === employeeName || employee.lastName === employeeName) : {};
 }
 
-// function createEmployee(personalInfo, associatedWith) {
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
+}
 
-// }
+function isManager(id) {
 
-// function isManager(id) {
-//   seu código aqui
-// }
+}
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
-// function countAnimals(species) {
-//   seu código aqui
-// }
+}
 
-// function calculateEntry(entrants) {
-//   seu código aqui
-// }
+function countAnimals(species) {
 
-// function getAnimalMap(options) {
-//   seu código aqui
-// }
+}
 
-// function getSchedule(dayName) {
-//   seu código aqui
-// }
+function calculateEntry(entrants) {
 
-// function getOldestFromFirstSpecies(id) {
-//   seu código aqui
-// }
+}
 
-// function increasePrices(percentage) {
-//   seu código aqui
-// }
+function getAnimalMap(options) {
 
-// function getEmployeeCoverage(idOrName) {
-//   seu código aqui
-// }
+}
+
+function getSchedule(dayName) {
+
+}
+
+function getOldestFromFirstSpecies(id) {
+
+}
+
+function increasePrices(percentage) {
+
+}
+
+function getEmployeeCoverage(idOrName) {
+
+}
 
 module.exports = {
   calculateEntry,
