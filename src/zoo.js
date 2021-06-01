@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { species } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const speciesArray = [];
@@ -23,7 +23,7 @@ function getSpeciesByIds(...ids) {
   return speciesArray;
 }
 
-function getAnimalsOlderThan(animal, age) {
+/* function getAnimalsOlderThan(animal, age) {
   // seu código aqui
 }
 
@@ -69,7 +69,7 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-}
+} */
 
 module.exports = {
   calculateEntry,
