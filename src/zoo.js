@@ -63,7 +63,8 @@ function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
 
-module.exports = {
+module.exports = [
+  {
   calculateEntry,
   getSchedule,
   countAnimals,
@@ -77,4 +78,5 @@ module.exports = {
   getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
-};
+},
+];
