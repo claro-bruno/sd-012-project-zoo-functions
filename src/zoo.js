@@ -65,9 +65,9 @@ function calculateEntry(entrants) {
   return (adulto * Adult) + (idosos * Senior) + (criança * Child);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
 function getSchedule(dayName) {
   const cronograma = {};
@@ -108,18 +108,18 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
