@@ -25,9 +25,10 @@ const data = require("./data");
 
 const getSpeciesByIds = (ids) => species.filter((specie) => specie.id === ids); //corrigir
 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
-}
+const getAnimalsOlderThan = (animal, age) => {
+  const animais = species.find((specie) => specie.name === animal).residents;
+  return animais.every((animal) => animal.age >= age);
+};
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
