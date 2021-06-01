@@ -9,21 +9,33 @@ eslint no-unused-vars: [
 ]
 */
 
+const { species } = require('./data');
 const data = require('./data');
+
 const especime = data.species;
+const employees = data.employees;
 
 function getSpeciesByIds(...args) {
-  const especimeEscolhido = [];
-  especimeEscolhido.push(especime.filter((animal) => args.includes(animal.id)));
-  return especimeEscolhido;
+  return especime.filter((animal) => args.includes(animal.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const chosenAnimal = especime.find(anim => anim.name === animal);
+  return chosenAnimal.residents.every(item => item.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  const checkFirstName = employees.find(person => person.firstName === employeeName);
+  const checkLastName = employees.find(person => person.lastName === employeeName);
+  if (checkFirstName !== undefined) {
+    return checkFirstName;
+  }
+  if (checkLastName !== undefined) {
+    return checkLastName;
+  }
+  else {
+    return emp = {};
+  }
 }
 
 function createEmployee(personalInfo, associatedWith) {
