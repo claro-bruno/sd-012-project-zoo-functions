@@ -16,10 +16,17 @@ function getSpeciesByIds(...ids) {
   return resultado;
 }
 
-function getAnimalsOlderThan() {
-  // animal, age
-  // seu código aqui
+function getAnimalsOlderThan(animal, age) {
+  let resultado = true;
+  const targetSpecie = data.species.find((specie) => specie.name === animal);
+  const youngResidents = targetSpecie.residents.filter((resident) => resident.age < age);
+  console.log(youngResidents);
+  if (youngResidents.length !== 0) {
+    resultado = false;
+  }
+  return resultado;
 }
+// getAnimalsOlderThan('otters', 7);
 
 function getEmployeeByName() {
   // employeeName
