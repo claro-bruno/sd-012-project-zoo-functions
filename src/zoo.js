@@ -17,66 +17,68 @@ function getSpeciesByIds(...ids) {
   return speciesArray;
 }
 
-/* function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+function getAnimalsOlderThan(animal, age) {
+  const findAnimal = species.find((specie) => specie.name === animal);
+  const minAge = findAnimal.residents.every((resident) => resident.age >= age);
+  return minAge;
 }
 
-function getEmployeeByName(employeeName) {
+/* function getEmployeeByName(employeeName) {
   // seu código aqui
-}
+} */
 
-function createEmployee(personalInfo, associatedWith) {
+/* function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-}
+} */
 
-function isManager(id) {
+/* function isManager(id) {
   // seu código aqui
-}
+} */
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
-}
+} */
 
-function countAnimals(species) {
+/* function countAnimals(species) {
   // seu código aqui
-}
+} */
 
-function calculateEntry(entrants) {
+/* function calculateEntry(entrants) {
   // seu código aqui
-}
+} */
 
-function getAnimalMap(options) {
+/* function getAnimalMap(options) {
   // seu código aqui
-}
+} */
 
-function getSchedule(dayName) {
+/* function getSchedule(dayName) {
   // seu código aqui
-}
+} */
 
-function getOldestFromFirstSpecies(id) {
+/* function getOldestFromFirstSpecies(id) {
   // seu código aqui
-}
+} */
 
-function increasePrices(percentage) {
+/* function increasePrices(percentage) {
   // seu código aqui
-}
+} */
 
-function getEmployeeCoverage(idOrName) {
+/* function getEmployeeCoverage(idOrName) {
   // seu código aqui
 } */
 
 module.exports = {
-/*   calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap, */
+/*   calculateEntry, */
+/*   getSchedule, */
+/*   countAnimals, */
+/*   getAnimalMap, */
   getSpeciesByIds,
-/*   getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
+  /*   getEmployeeByName, */
+  /*   getEmployeeCoverage, */
+  /*   addEmployee, */
+  /*   isManager, */
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee, */
+/*   getOldestFromFirstSpecies, */
+/*   increasePrices, */
+/*   createEmployee, */
 };
