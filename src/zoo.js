@@ -14,11 +14,17 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  if (!ids.length) return [];
-  const getSpeciesById = (id, index) => {
-    if (data.species[index].id === id) return data.species[index];
-  };
-  return ids.map(getSpeciesById);
+  // if (!ids.length) return [];
+  // const getSpeciesById = (id, index) => {
+  //   if (data.species[index].id === id) return data.species[index];
+  // };
+  // return ids.map(getSpeciesById);
+  return ids.reduce((acc, id, index) => {
+    if (data.species[index].id === id) {
+      acc.push(data.species[index]);
+    }
+    return acc;
+  }, []);
 }
 
 const actual = getSpeciesByIds();
@@ -51,7 +57,7 @@ const expected3 = [{
     { name: 'Maxwell', sex: 'male', age: 15 },
     { name: 'Faustino', sex: 'male', age: 7 },
     { name: 'Dee', sex: 'female', age: 14 }
-  ]
+  ],
 },
 {
   id: 'e8481c1d-42ea-4610-8e11-1752cfc05a46',
@@ -61,13 +67,24 @@ const expected3 = [{
   residents: [
     { name: 'Shu', sex: 'female', age: 19 },
     { name: 'Esther', sex: 'female', age: 17 }
-  ]
+  ],
 }];
 assert.deepStrictEqual(actual3, expected3);
 
-// function getAnimalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function getAnimalsOlderThan(animal, age) {
+  // seu código aqui
+  return data.species
+    .find((specie) => specie.name === animal).residents
+    .every((resident) => resident.age > age);
+}
+
+let actual4 = getAnimalsOlderThan('otters', 7);
+let expected4 = true;
+assert.deepStrictEqual(actual4, expected4);
+
+actual4 = getAnimalsOlderThan('penguins', 10);
+expected4 = false;
+assert.deepStrictEqual(actual4, expected4);
 
 // function getEmployeeByName(employeeName) {
 //   // seu código aqui
