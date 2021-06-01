@@ -16,6 +16,7 @@ function getSpeciesByIds(...ids) {
   // seu código aqui
   if (!ids.length) return [];
   return species.filter((specie, index) => specie.id === ids[index]);
+  // dica de usar o index dentro do filter na monitoria.
 }
 
 
