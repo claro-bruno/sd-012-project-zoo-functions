@@ -47,7 +47,8 @@ const createEmployee = (personalInfo, associatedWith) => ({
 const isManager = (id) => employees.some((employee) =>
   employee.managers.some((manager) => manager === id));
 
-const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
+const addEmployee = (...employee) => {
+  let [id, firstName, lastName, managers, responsibleFor] = employee;
   if (managers === undefined) managers = [];
   if (responsibleFor === undefined) responsibleFor = [];
   employees.push({
