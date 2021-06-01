@@ -19,66 +19,70 @@ function getSpeciesByIds(...ids) {
   // dica de usar o index dentro do filter na monitoria.
 }
 
-function getAnimalsOlderThan() {
+function getAnimalsOlderThan(animal, age) {
   // seu código aqui animal, age
+  // const name = species[0].name;
+  const findindSpecie = species.find((specie) => specie.name === animal);
+  return findindSpecie.residents.every((resident) => age < resident.age);
 }
+// console.log(getAnimalsOlderThan('otters', 7));
 
-function getEmployeeByName() {
-  // seu código aqui employeeName
-}
+// function getEmployeeByName() {
+//   // seu código aqui employeeName
+// }
 
-function createEmployee() {
-  // seu código aqui personalInfo, associatedWith
-}
+// function createEmployee() {
+//   // seu código aqui personalInfo, associatedWith
+// }
 
-function isManager() {
-  // seu código aqui id
-}
+// function isManager() {
+//   // seu código aqui id
+// }
 
-function addEmployee() {
-  // seu código aqui id, firstName, lastName, managers, responsibleFor
-}
+// function addEmployee() {
+//   // seu código aqui id, firstName, lastName, managers, responsibleFor
+// }
 
-function countAnimals() {
-  // seu código aqui species
-}
+// function countAnimals() {
+//   // seu código aqui species
+// }
 
-function calculateEntry() {
-  // seu código aqui entrants
-}
+// function calculateEntry() {
+//   // seu código aqui entrants
+// }
 
-function getAnimalMap() {
-  // seu código aqui options
-}
+// function getAnimalMap() {
+//   // seu código aqui options
+// }
 
-function getSchedule() {
-  // seu código aqui dayName
-}
+// function getSchedule() {
+//   // seu código aqui dayName
+// }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui id
-}
+// function getOldestFromFirstSpecies() {
+//   // seu código aqui id
+// }
 
-function increasePrices() {
-  // seu código aqui percentage
-}
+// function increasePrices() {
+//   // seu código aqui percentage
+// }
 
-function getEmployeeCoverage() {
-  // seu código aqui idOrName
-}
+// function getEmployeeCoverage() {
+//   // seu código aqui idOrName
+// }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
-  getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
+  // getEmployeeByName,
+  // getEmployeeCoverage,
+  // addEmployee,
+  // isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
 };
