@@ -66,17 +66,17 @@ function getEmployeeCoverage(idOrName) {
 } */ 
 
 module.exports = {
-  //calculateEntry,
-  //getSchedule,
-  //countAnimals,
-  //getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
-  //getEmployeeByName,
-  //getEmployeeCoverage,
-  //addEmployee,
-  //isManager, 
+  // getEmployeeByName,
+  // getEmployeeCoverage,
+  // addEmployee,
+  // isManager, 
   getAnimalsOlderThan, 
-  //getOldestFromFirstSpecies,
-  //increasePrices,
-  //createEmployee, 
+  // getOldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee, 
 };
