@@ -28,8 +28,8 @@ function getEmployeeByName(employeeName) {
   });
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee(personal, associated) {
+  return { ...personal, ...associated };
 }
 
 function isManager(id) {
