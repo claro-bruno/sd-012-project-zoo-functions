@@ -83,7 +83,8 @@ function getOldestFromFirstSpecies(id) {
   const firstSpecie = searchId.responsibleFor[0];
   const searchSpecie = data.species.find((animal) =>
     animal.id === firstSpecie);
-  const sortAnimalsAge = searchSpecie.residents.sort((animal1, animal2) => animal2.age - animal1.age);
+  const sortAnimalsAge = searchSpecie.residents
+    .sort((animal1, animal2) => animal2.age - animal1.age);
   const oldestAnimal = [sortAnimalsAge[0].name, sortAnimalsAge[0].sex, sortAnimalsAge[0].age];
   return oldestAnimal;
 }
