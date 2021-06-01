@@ -10,9 +10,9 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-
-function getSpeciesByIds(ids) {
+function getSpeciesByIds(...ids) {
   // seu código aqui
+  return ids.map((id) => data.species.filter((specie) => specie.id === id)[0])
 }
 
 function getAnimalsOlderThan(animal, age) {
