@@ -17,10 +17,11 @@ function getSpeciesByIds(...ids) {
   const animalsIds = (animals) => ids.find((animalId) => animals.id === animalId);
   return species.filter(animalsIds);
 }
-console.log(getSpeciesByIds());
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const findAnimalName = (specie) => (specie.name === animal);
+  const checkAnimalsAge = (specieAge) => (specieAge.age >= age);
+  return species.find(findAnimalName).residents.every(checkAnimalsAge);
 }
 
 function getEmployeeByName(employeeName) {
@@ -39,7 +40,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(species1) {
   // seu código aqui
 }
 
