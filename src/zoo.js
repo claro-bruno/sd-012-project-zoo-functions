@@ -14,18 +14,19 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
+  console.log(data)
   return species.filter((speci, index) => speci.id === ids[index]);
 }
 
-function getAnimalsOlderThan(animal, age) {
+function getAnimalsOlderThan() {
   // seu código aqui
 }
 
-function getEmployeeByName(employeeName) {
+function getEmployeeByName() {
   // seu código aqui
 }
 
-function createEmployee(personalInfo, associatedWith) {
+function createEmployee() {
   // seu código aqui
 }
 
@@ -33,35 +34,35 @@ function isManager(id) {
   // seu código aqui
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee() {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals() {
   // seu código aqui
 }
 
-function calculateEntry(entrants) {
+function calculateEntry() {
   // seu código aqui
 }
 
-function getAnimalMap(options) {
+function getAnimalMap() {
   // seu código aqui
 }
 
-function getSchedule(dayName) {
+function getSchedule() {
   // seu código aqui
 }
 
-function getOldestFromFirstSpecies(id) {
+function getOldestFromFirstSpecies() {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
+function increasePrices() {
   // seu código aqui
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
   // seu código aqui
 }
 
