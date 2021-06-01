@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { species, employees } = data; // adicionei o employee para buscar o data.employees.
+const { species, employees, prices } = data; // adicionei o employee e prices para buscar o data.employees e data.prices.
 
 function getSpeciesByIds(...ids) {
   // ...ids retorna um array de argumentos, caso não seja passado nenhum argumento, ids será um array vazio.
@@ -76,7 +76,13 @@ function countAnimals(specie) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  // confere se o argumento não foi passado e se o objeto está vazio.
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  // estabelece valores default para as keys do obj de entrada.
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 function getAnimalMap(options) {
