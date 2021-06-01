@@ -34,11 +34,11 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-/* function isManager(id) {
-  // seu código aqui
+function isManager(id) {
+  return data.employees.some(({ managers }) => managers.some((managerId) => managerId === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
@@ -68,7 +68,7 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-} */
+} */ 
 
 module.exports = {
   // calculateEntry,
@@ -79,7 +79,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
