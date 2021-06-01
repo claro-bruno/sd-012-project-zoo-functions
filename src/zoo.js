@@ -11,56 +11,68 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
+const { species } = data;
+
+const getSpeciesByIds = (...ids) => ids.map((id) => species.find((specie) => specie.id === id));
+
+function getAnimalsOlderThan() {
   // seu código aqui
+  // animal, age
 }
 
-function getAnimalsOlderThan(animal, age) {
+function getEmployeeByName() {
   // seu código aqui
+  // employeeName
 }
 
-function getEmployeeByName(employeeName) {
+function createEmployee() {
   // seu código aqui
+  // personalInfo, associatedWith
 }
 
-function createEmployee(personalInfo, associatedWith) {
+function isManager() {
   // seu código aqui
+  // id
 }
 
-function isManager(id) {
+function addEmployee() {
   // seu código aqui
+  // id, firstName, lastName, managers, responsibleFor
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function countAnimals() {
   // seu código aqui
+  // especies
 }
 
-function countAnimals(species) {
+function calculateEntry() {
   // seu código aqui
+  // entrants
 }
 
-function calculateEntry(entrants) {
+function getAnimalMap() {
   // seu código aqui
+  // options
 }
 
-function getAnimalMap(options) {
+function getSchedule() {
   // seu código aqui
-}
-
-function getSchedule(dayName) {
-  // seu código aqui
+  // dayName
 }
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  // id
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  // percentage
 }
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  // idOrName
 }
 
 module.exports = {
