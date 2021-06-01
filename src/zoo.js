@@ -19,12 +19,11 @@ const getAnimalsOlderThan = (animal, age) => {
 
 const getEmployeeByName = (employeeName) => {
   if (employeeName === undefined) return {};
-  else
-    return employees.find(
-      (employee) =>
-        employee.firstName === employeeName ||
-        employee.lastName === employeeName
-    );
+  else {
+    return employees.find((employee) =>
+        employee.firstName === employeeName 
+        ||employee.lastName === employeeName
+    )};
 };
 
 const createEmployee = (personalInfo, associatedWith) => {
@@ -62,11 +61,9 @@ const countAnimals = (animal) => {
   if (!animal) {
     return species.reduce((acc, specie) => ({...acc, [specie.name]: specie.residents.length}), {});
   } else 
-  {
-    const animalSelected = species.find((specie) => specie.name === animal);
-    return animalSelected.residents.length;
-  }
-};
+  { const animalSelected = species.find((specie) => specie.name === animal);
+    return animalSelected.residents.length; 
+  }};
 
 console.log(countAnimals());
 
