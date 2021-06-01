@@ -49,11 +49,11 @@ const isManager = (id) => employees.some((employee) =>
 
 const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
   employees.push({
-    ...id,
-    ...firstName,
-    ...lastName,
-    ...managers,
-    ...responsibleFor,
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
   });
 };
 
