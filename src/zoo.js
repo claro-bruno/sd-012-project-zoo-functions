@@ -15,14 +15,12 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   // seu código aqui
   if (!ids.length) return [];
-  return species.filter((specie, index) => specie.id === ids[index]);
+  return data.species.filter((specie, index) => specie.id === ids[index]);
   // dica de usar o index dentro do filter na monitoria.
 }
 
-
 function getAnimalsOlderThan() {
   // seu código aqui animal, age
-  
 }
 
 function getEmployeeByName() {
@@ -57,7 +55,7 @@ function getSchedule() {
   // seu código aqui dayName
 }
 
-function getOldestFromFirstSpecies(id) {
+function getOldestFromFirstSpecies() {
   // seu código aqui id
 }
 
