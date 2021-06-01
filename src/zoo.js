@@ -182,11 +182,12 @@ function increasePrices(percentage) {
     Adult,
     Senior,
     Child,
-  };
+  }
 }
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  let teste = idOrName;
 }
 
 module.exports = {
