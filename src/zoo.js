@@ -12,33 +12,13 @@ eslint no-unused-vars: [
 const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds() {
+function getSpeciesByIds(...ids) {
   // seu código aqui
-  
+  return data.species.filter((animal) => ids.find((animalId) => animalId === animal.id));
 }
-
-console.log(getSpeciesByIds('0e7b460e-acf4-4e17-bcb3-ee472265db83'))
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  const animalInfo = animal.find((animal) => animal.name === animal);
-  return animalInfo.resdents.filter((age) => resdents.age)
-
-
-
-
-
-
-
-
-  const reportStatus = (name, students) => {
-    const studentInfo = students.find((student) => student.nome === name);
-    return studentInfo.materias.map((materia) => (
-      `${materia.name} ${(materia.nota >= 60) ? 'Aprovado' : 'Reprovado'}`
-    ));
-  };
-  
-  console.log(reportStatus('Natalia', estudantes));
 }
 
 function getEmployeeByName(employeeName) {
