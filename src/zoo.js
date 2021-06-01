@@ -40,9 +40,11 @@ function getEmployeeByName(employeeName) {
   return filteredEmployeesByName;
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  const employee = Object.assign(personalInfo, associatedWith);
+
+  return employee;
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -93,5 +95,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
