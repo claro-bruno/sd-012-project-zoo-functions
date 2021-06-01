@@ -32,8 +32,8 @@ function isManager(id) {
   return data.employees.some(({ managers: m }) => m.find((manID) => manID === id));
 }
 
-function addEmployee() {
-  // seu código aqui (id, firstName, lastName, managers, responsibleFor)
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals() {
