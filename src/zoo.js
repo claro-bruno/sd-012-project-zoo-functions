@@ -31,7 +31,7 @@ const getAnimalsOlderThan = (animal, age) => {
 };
 
 const getEmployeeByName = (employeeName) => {
-  const {obj} = employees.find((employee) => employee.firstName === employeeName
+  const { obj } = employees.find((employee) => employee.firstName === employeeName
   || employee.lastName === employeeName);
   if (obj === undefined) {
     return {};
