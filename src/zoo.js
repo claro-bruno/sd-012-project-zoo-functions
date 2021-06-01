@@ -61,9 +61,16 @@ function isManager(id) {
   }));
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // seu código aqui
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+}
 
 // function countAnimals(speciesList) {
 //   // seu código aqui
@@ -99,7 +106,7 @@ module.exports = {
   getEmployeeByName,
   createEmployee,
   isManager,
-  // addEmployee,
+  addEmployee,
   // countAnimals,
   // calculateEntry,
   // getAnimalMap,
