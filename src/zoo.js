@@ -24,8 +24,8 @@ function getEmployeeByName(employeeName) {
       firstName === employeeName || lastName === employeeName);
 }
 
-function createEmployee() {
-  // seu código aqui (personalInfo, associatedWith)
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager() {
