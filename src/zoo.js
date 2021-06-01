@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { species } = data;
+const { species, employees } = data; // adicionei o employee para buscar o data.employees.
 
 function getSpeciesByIds(...ids) {
   // ...ids retorna um array de argumentos, caso não seja passado nenhum argumento, ids será um array vazio.
@@ -27,12 +27,17 @@ function getAnimalsOlderThan(animal, age) {
   return animalName.residents.every((element) => element.age >= age); // o valor da key residents, do objeto correspondente ao animal, é uma array, utilizando o método every() eu verifico se todos os elementos dentro do array retornam true na condicional passada, se sim, every() retorna true, se não, retorna false.
 }
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
+function getEmployeeByName(employe) {
+  // verifica se foi passado algum argumento para o parâmetro
+  if (employe === undefined) {
+    return {};
+  }
+  return employees.find((element) => employe === element.firstName || employe === element.lastName); // utiliza o find() para encontrar o objeto que satisfaça a condição.
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  // adiciona os conteúdos dos objetos personalInfo e associateWith dentro um novo objeto, utilizando o spread.
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
