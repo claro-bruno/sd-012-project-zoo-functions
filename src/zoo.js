@@ -39,12 +39,10 @@ const getEmployeeByName = (employeeName) => {
   return obj;
 };
 
-const createEmployee = (personalInfo, associatedWith) => {
-  return {
-    ...personalInfo,
-    ...associatedWith,
-  }
-}
+const createEmployee = (personalInfo, associatedWith) => ({
+  ...personalInfo,
+  ...associatedWith,
+});
 
 // function isManager(id) {
 //   // seu código aqui
