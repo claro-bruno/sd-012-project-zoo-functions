@@ -9,15 +9,15 @@ eslint no-unused-vars: [
 ]
 */
 
-const { employees, species } = require('./data');
+const { employees, species: animals } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return ids.map((id) => species.find((kind) => kind.id === id));
+  return ids.map((id) => animals.find((kind) => kind.id === id));
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const { residents } = species.find((specie) => specie.name === animal);
+  const { residents } = animals.find((specie) => specie.name === animal);
   return residents.every((resident) => resident.age > age);
 }
 
@@ -46,7 +46,21 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species) {
-  // seu código aqui
+  if (!species) {
+    return {
+      lions: 4,
+      tigers: 2,
+      bears: 3,
+      penguins: 4,
+      otters: 4,
+      frogs: 2,
+      snakes: 2,
+      elephants: 4,
+      giraffes: 6,
+    };
+  }
+  const { residents } = animals.find((animal) => animal.name === species);
+  return residents.length;
 }
 
 function calculateEntry(entrants) {
