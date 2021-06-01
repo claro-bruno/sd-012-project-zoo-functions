@@ -15,9 +15,9 @@ const data = require('./data');
 // console.log(test);
 
 function getSpeciesByIds(...ids) {
-  const selectedSpicie = [];
-  ids.forEach((id) => selectedSpicie.push(data.species.find((spicie) => spicie.id === id)));
-  return selectedSpicie;
+  const selectedSpecie = [];
+  ids.forEach((id) => selectedSpecie.push(data.species.find((spicie) => spicie.id === id)));
+  return selectedSpecie;
 }
 
 // console.log(getSpeciesByIds());
@@ -25,8 +25,12 @@ function getSpeciesByIds(...ids) {
 // console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const selectedSpecie = data.species.find((specie) => specie.name === animal);
+  return selectedSpecie.residents.every((resident) => resident.age >= age);
 }
+
+// console.log(getAnimalsOlderThan('otters', 7));
+// console.log(getAnimalsOlderThan('penguins', 10));
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
