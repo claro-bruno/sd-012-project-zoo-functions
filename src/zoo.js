@@ -30,8 +30,8 @@ function getEmployeeByName(employeeName) {
   return returnEmployee;
 }
 
-  /* function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
