@@ -11,16 +11,22 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  //xablau
+const { species, employees, hours, prices } = data;
+
+function getSpeciesByIds(...ids) {
+  return ids ? ids.map((wantedId) => species.find(({ id }) => id === wantedId)) : [];
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const { residents } = species.find(({ name }) => name === animal);
+  return residents.every((resident) => resident.age >= age);
 }
 
+const findEmployee = ({ firstName, lastName }, employeeName) =>
+  firstName === employeeName || lastName === employeeName;
+
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  return employeeName ? employees.find((employee) => findEmployee(employee, employeeName)) : {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
