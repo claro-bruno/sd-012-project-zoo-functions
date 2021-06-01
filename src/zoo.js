@@ -48,9 +48,14 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmploye;
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  // seu código aqui
+  let managerList = [];
+  data.employees.forEach((employe) => {
+    managerList = [...managerList, ...employe.managers];
+  });
+  return managerList.some((manager) => manager === id);
+}
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -93,7 +98,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
