@@ -24,5 +24,8 @@
     "eslint": "6.8.0",
     "eslint-config-trybe-fundamentals": "1.1.0",
     "jest": "25.2.3"
+  },
+  "dependencies": {
+    "cypress": "^7.4.0"
   }
 }

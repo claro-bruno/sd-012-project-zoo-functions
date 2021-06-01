@@ -9,11 +9,15 @@ eslint no-unused-vars: [
 ]
 */
 
+// const { get } = require('cypress/types/lodash');
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+function getSpeciesByIds(...ids) {
+  const animalsIds = (animals) => ids.find((animalId) => animals.id === animalId);
+  return species.filter(animalsIds);
 }
+console.log(getSpeciesByIds());
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
