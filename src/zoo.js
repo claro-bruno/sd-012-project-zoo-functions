@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { employees, species } = require('./data');
+const { employees, species, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -59,10 +59,13 @@ function countAnimals(specie) {
   }
   return species.find((specieToFind) => specieToFind.name === specie).residents.length;
 }
-console.log(countAnimals('lionId'));
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  }
+  // Tive ajuda do Rodrigo Merlone pra desenvolver a lógica de programação na parte que segue:
+  return Object.keys(entrants).reduce(((acc, value) => acc + (entrants[value] * prices[value])), 0);
 }
 
 function getAnimalMap(options) {
