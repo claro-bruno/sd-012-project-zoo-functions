@@ -14,19 +14,32 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  let newArr = [];
-  for (let index = 0; index < ids.length; index += 1){
-   const filtra = species.filter((specie) => {
-   return specie.id == ids[index];
-  })
-  newArr.push(filtra)
-}
-   return newArr;
+  const newArr = [];
+  for (let index = 0; index < ids.length; index += 1) {
+    const filtra = species.filter((specie) => {
+    return specie.id === ids[index];
+    });
+    newArr.push(filtra);
+  }
+  return newArr;
 }
 
+const lionId = '0938aa23-f153-4937-9f88-4858b24d6bce';
+console.log(getSpeciesByIds(lionId))
+
+
+const { species } = require('./data');
+const data = require('./data');
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const newAnimal = species.filter((specie) => specie.name === animal );
+  const allAnimals = newAnimal[0].residents;
+  return allAnimals.every((animal) => animal.age <= age)
 }
+const assert = require('assert');
+    actual = getAnimalsOlderThan('penguins', 10);
+    expected = false;
+    assert.deepStrictEqual(actual, expected);
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
