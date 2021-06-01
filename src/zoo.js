@@ -55,7 +55,7 @@ const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
     ...managers,
     ...responsibleFor,
   });
-}
+};
 
 // function countAnimals(species) {
 //   // seu código aqui
