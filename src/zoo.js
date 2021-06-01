@@ -49,39 +49,39 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return id;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  return `${id}, ${firstName}, ${lastName}, ${managers}, ${responsibleFor}`;
 }
 
 function countAnimals(species) {
-  // seu código aqui
+  return species;
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  return entrants;
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  return options;
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  return dayName;
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  return id;
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return percentage;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  return idOrName;
 }
 
 module.exports = {
