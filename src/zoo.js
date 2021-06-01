@@ -236,9 +236,38 @@ assert.deepStrictEqual(lastEmployee.responsibleFor, [
 
 assert.strictEqual(data.employees.length, 10);
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(species) {
+  // seu código aqui
+  if (!species) {
+    return data.species.reduce((acc, { name, residents }, index) => {
+      acc[name] = residents.length;
+      return acc;
+    }, {});
+  }
+  return data.species.find(({ name }) => name === species).residents.length;
+}
+
+const expected10 = {
+  'lions': 4,
+  'tigers': 2,
+  'bears': 3,
+  'penguins': 4,
+  'otters': 4,
+  'frogs': 2,
+  'snakes': 2,
+  'elephants': 4,
+  'giraffes': 6
+};
+const actual10 = countAnimals();
+assert.deepStrictEqual(actual10, expected10);
+
+let actual11 = countAnimals('lions');
+let expected11 = 4;
+assert.deepStrictEqual(actual11, expected11);
+
+actual11 = countAnimals('snakes');
+expected11 = 2;
+assert.deepStrictEqual(actual11, expected11);
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -267,7 +296,7 @@ assert.strictEqual(data.employees.length, 10);
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
