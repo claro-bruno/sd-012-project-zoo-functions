@@ -13,13 +13,7 @@ const { species } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  const speciesArray = [];
-
-  species.forEach((specie) => {
-    if (specie.id === ids) {
-      speciesArray.push = specie;
-    }
-  });
+  const speciesArray = ids.map((id) => species.find((specie) => specie.id === id));
   return speciesArray;
 }
 
