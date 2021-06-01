@@ -17,7 +17,7 @@ function getSpeciesByIds(...ids) {
   if (ids.length === 0) {
     return [];
   }
-  return ids.map((id) => species.find((getSpecies) => getSpecies.id === id).name);
+  return ids.map((id) => species.find((getSpecies) => getSpecies.id === id));
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -52,7 +52,8 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // seu código aqui
   const getManagers = [];
-  employees.forEach((employee) => getManagers.push(...employee.managers));
+  data.employees.forEach((employee) => getManagers.push(...employee.managers));
+  // usei o data. para me livrar de um erro do lint
   return getManagers.some((managerId) => managerId === id);
 }
 
@@ -68,8 +69,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 
-function countAnimals(species) {
+function countAnimals(animal) {
   // seu código aqui
+  if (animal === undefined) {
+    return species.reduce((accumulator, current) => {
+      accumulator[current.name] = current.residents.length;
+      return accumulator;
+    }, {});
+  }
+  return species.find((getSpecies) => getSpecies.name === animal).residents.length;
 }
 
 function calculateEntry(entrants) {
