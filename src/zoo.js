@@ -47,8 +47,9 @@ function getEmployeeByName(employeeName) {
   return cola;
 }
 
-function createEmployee() {
-  // seu código aqui personalInfo, associatedWith
+function createEmployee(personalInfo, associatedWith) {
+  const objetoResposta = Object.assign(personalInfo, associatedWith);
+  return objetoResposta;
 }
 
 function isManager() {
