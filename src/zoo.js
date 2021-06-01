@@ -1,6 +1,6 @@
 /*
 eslint no-unused-vars: [
-  "error",
+  "error", xablauzitos da sorte
   {
     "args": "none",
     "vars": "local",
