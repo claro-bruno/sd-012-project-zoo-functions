@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 // bora começar | let's start
 
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
 const getSpeciesByIds = (...ids) => (ids ? species.filter((e) => ids.includes(e.id)) : []);
@@ -19,9 +19,8 @@ const getSpeciesByIds = (...ids) => (ids ? species.filter((e) => ids.includes(e.
 const getAnimalsOlderThan = (animal, age) => species.find((e) => e.name === animal).residents
   .every((e) => e.age >= age);
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
-}
+const getEmployeeByName = (employeeName) => (employeeName ? employees.find((e) => e
+  .firstName === employeeName || e.lastName === employeeName) : {});
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
