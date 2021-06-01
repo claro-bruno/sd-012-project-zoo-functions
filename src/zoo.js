@@ -33,8 +33,17 @@ function getAnimalsOlderThan(animal, age) {
 // console.log(getAnimalsOlderThan('penguins', 10));
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (typeof (employeeName) !== 'undefined') {
+    return data.employees.find((employee) => {
+      const findEmloyee = employee.firstName === employeeName || employee.lastName === employeeName;
+      return findEmloyee;
+    });
+  } return {};
 }
+
+// console.log(getEmployeeByName());
+// console.log(getEmployeeByName('Emery'));
+// console.log(getEmployeeByName('Wishart'));
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
