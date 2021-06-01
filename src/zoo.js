@@ -44,11 +44,18 @@ function getEmployeeByName(employeeName) {
   return saida;
 }
 
-/*
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const novoColaborador = {
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  };
+  return novoColaborador;
 }
 
+/*
 function isManager(id) {
   // seu código aqui
 }
@@ -101,5 +108,6 @@ module.exports = {
   /*
   getOldestFromFirstSpecies,
   increasePrices,
-  createEmployee, */
+  */
+  createEmployee,
 };
