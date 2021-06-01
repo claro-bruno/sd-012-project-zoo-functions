@@ -175,9 +175,18 @@ const associatedWith = {
 };
 assert.deepStrictEqual(createEmployee(personalInfo, associatedWith), expected8);
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  // seu código aqui;
+  return data.employees.some((employee) => employee.managers.includes(id));
+}
+
+let actual9 = isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
+let expected9 = false;
+assert.deepStrictEqual(actual9, expected9);
+
+actual9 = isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83');
+expected9 = true;
+assert.deepStrictEqual(actual9, expected9);
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -220,7 +229,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
