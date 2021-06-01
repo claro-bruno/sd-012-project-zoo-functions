@@ -10,24 +10,28 @@ eslint no-unused-vars: [
 */
 
 // const { get } = require('cypress/types/lodash');
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
+// Referência: Natalia Souza - turma 11.
 function getSpeciesByIds(...ids) {
   const animalsIds = (animals) => ids.find((animalId) => animals.id === animalId);
   return data.species.filter(animalsIds);
 }
 
+// Referência: Natalia Souza - turma 11.
 function getAnimalsOlderThan(animal, age) {
   const findAnimalName = (specie) => (specie.name === animal);
   const checkAnimalsAge = (specieAge) => (specieAge.age >= age);
   return species.find(findAnimalName).residents.every(checkAnimalsAge);
 }
 
-// function getEmployeeByName(employeeName) {
-//   // seu código aqui
-// }
-
+function getEmployeeByName(employeeName) {
+  if (employeeName === undefined) return {};
+  const employeeFider = (name) => name.firstName === employeeName || name.lastName === employeeName;
+  return employees.find(employeeFider);
+}
+console.log(getEmployeeByName());
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
 // }
@@ -74,7 +78,7 @@ module.exports = {
   // countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
-  // getEmployeeByName,
+  getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
