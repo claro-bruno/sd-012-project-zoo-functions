@@ -63,8 +63,14 @@ function countAnimals(species) {
   return data.species.find((specie) => specie.name === species).residents.length;
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(entries) {
   // seu código aqui
+  if (entries !== undefined) {
+    const { Adult = 0, Child = 0, Senior = 0 } = entries;
+    const { prices } = data;
+    return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+  }
+  return 0;
 }
 
 function getAnimalMap(options) {
