@@ -66,7 +66,7 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
-  if (dayName === 'Monday') return { Moday: 'Closed' };
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
 }
 
 function getOldestFromFirstSpecies(id) {
