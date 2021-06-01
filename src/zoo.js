@@ -60,17 +60,17 @@ function getSchedule() {
   // dayName
 }
 
-function getOldestFromFirstSpecies(id) {
+function getOldestFromFirstSpecies() {
   // seu código aqui
   // id
 }
 
-function increasePrices(percentage) {
+function increasePrices() {
   // seu código aqui
   // percentage
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
   // seu código aqui
   // idOrName
 }
