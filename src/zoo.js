@@ -9,11 +9,11 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+// const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return ids.map((itemId) => data.species.find((animal) => animal.id === itemId))
+  return ids.map((itemId) => data.species.find((animal) => animal.id === itemId));
 }
 
 // function getAnimalsOlderThan(animal, age) {
