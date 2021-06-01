@@ -23,6 +23,8 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const animalName = species.find((element) => element.name === animal); // encontra dentro do array species o objeto que possui o valor da key name === o argumento animal.
+  return animalName.residents.every((element) => element.age >= age); // o valor da key residents, do objeto correspondente ao animal, é uma array, utilizando o método every() eu verifico se todos os elementos dentro do array retornam true na condicional passada, se sim, every() retorna true, se não, retorna false.
 }
 
 function getEmployeeByName(employeeName) {
