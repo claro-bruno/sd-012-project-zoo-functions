@@ -31,10 +31,10 @@ function getEmployeeByName(employeeName) {
   const employeeFider = (name) => name.firstName === employeeName || name.lastName === employeeName;
   return employees.find(employeeFider);
 }
-console.log(getEmployeeByName());
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -85,5 +85,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
