@@ -80,63 +80,63 @@ const calculateEntry = (entrants) => {
   return result;
 };
 
-const locations = ['NE', 'NW', 'SE', 'SW'];
+// const locations = ['NE', 'NW', 'SE', 'SW'];
 
-const getLocation = () => {
-  const result = {};
-  locations.forEach((loc) => {
-    const animals = data.species
-      .filter(({ location }) => location === loc)
-      .map(({ name }) => name);
-    result[loc] = animals;
-  });
-  return result;
-};
+// const getLocation = () => {
+//   const result = {};
+//   locations.forEach((loc) => {
+//     const animals = data.species
+//       .filter(({ location }) => location === loc)
+//       .map(({ name }) => name);
+//     result[loc] = animals;
+//   });
+//   return result;
+// };
 
-const getLocationName = () => {
-  const result = {};
-  locations.forEach((loc) => {
-    const locationAnimals = [];
-    data.species
-      .filter(({ location }) => location === loc)
-      .forEach(({ name: speciesName, residents }) => {
-        locationAnimals.push({ [speciesName]: residents.map(({ name }) => name) });
-      });
-    result[loc] = locationAnimals;
-  });
-  return result;
-};
+// const getLocationName = () => {
+//   const result = {};
+//   locations.forEach((loc) => {
+//     const locationAnimals = [];
+//     data.species
+//       .filter(({ location }) => location === loc)
+//       .forEach(({ name: speciesName, residents }) => {
+//         locationAnimals.push({ [speciesName]: residents.map(({ name }) => name) });
+//       });
+//     result[loc] = locationAnimals;
+//   });
+//   return result;
+// };
 
-const getLocationSort = (object) => {
-  const { NE, NW, SE, SW } = object;
-  NE.forEach((specie) => {
-    console.log(Object.values(specie).sort());
-    console.log(specie);
-  });
-};
+// const getLocationSort = (object) => {
+//   const { NE, NW, SE, SW } = object;
+//   NE.forEach((specie) => {
+//     console.log(Object.values(specie).sort());
+//     console.log(specie);
+//   });
+// };
 
-const getLocationSex = (option) => {
-  data.species.forEach(({ residents }, index) => {
-    const filteredResidents = residents.filter(({ sex }) => sex === option);
-    data.species[index].residents = filteredResidents;
-  });
-};
+// const getLocationSex = (option) => {
+//   data.species.forEach(({ residents }, index) => {
+//     const filteredResidents = residents.filter(({ sex }) => sex === option);
+//     data.species[index].residents = filteredResidents;
+//   });
+// };
 
-const getLocationWithParameter = (sorted, sex) => {
-  const result = getLocationName();
-  if (sorted) getLocationSort(result);
-  if (sex !== '') getLocationSex(sex);
-  return result;
-};
+// const getLocationWithParameter = (sorted, sex) => {
+//   const result = getLocationName();
+//   if (sorted) getLocationSort(result);
+//   if (sex !== '') getLocationSex(sex);
+//   return result;
+// };
 
 const getAnimalMap = (options) => {
-  let result = {};
-  if (options === undefined) return getLocation();
-  const { includeNames = false, sorted = false, sex = '' } = options;
-  if (includeNames) {
-    result = getLocationWithParameter(sorted, sex);
-  }
-  return result;
+  // let result = {};
+  // if (options === undefined) return getLocation();
+  // const { includeNames = false, sorted = false, sex = '' } = options;
+  // if (includeNames) {
+  //   result = getLocationWithParameter(sorted, sex);
+  // }
+  // return result;
 };
 
 // console.log(getAnimalMap());
@@ -167,13 +167,36 @@ const getOldestFromFirstSpecies = (id) => {
   return [name, sex, age];
 };
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const increasePrices = (percentage) => {
+  const { prices } = data;
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+  Object.keys(prices).forEach((key) => {
+    const newPrice = (prices[key] * (1 + (percentage / 100))) + 0.005;
+    prices[key] = Number(newPrice.toPrecision(4));
+  });
+};
+
+const getAllEmployeeCoverage = () => {
+  const result = {};
+  data.employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    result[`${firstName} ${lastName}`] = responsibleFor.map((specieId) =>
+      data.species.find(({ id }) => id === specieId).name);
+  });
+  return result;
+};
+
+const getEmployeeCoverage = (idOrName) => {
+  if (idOrName === undefined) return getAllEmployeeCoverage();
+  const employee = data.employees
+    .find(({ id, firstName, lastName }) =>
+      idOrName === id || idOrName === firstName || idOrName === lastName);
+
+  const { firstName, lastName, responsibleFor } = employee;
+  const animals = responsibleFor.map((specieId) =>
+    data.species.find(({ id }) => id === specieId).name);
+
+  return { [`${firstName} ${lastName}`]: animals };
+};
 
 module.exports = {
   calculateEntry,
