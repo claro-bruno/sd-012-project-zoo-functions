@@ -66,18 +66,24 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+const returnString = (day) => `Open from ${hours[day].open}am until ${hours[day].close % 12}pm`;
+
 function getSchedule(dayName) {
   // seu código aqui
-  if (dayName === 'Monday') return { Monday: 'CLOSED' };
-  const { open, close } = hours[dayName];
+  const schedule = {
+    Monday: 'CLOSED',
+    Tuesday: returnString('Tuesday'),
+    Wednesday: returnString('Wednesday'),
+    Thursday: returnString('Thursday'),
+    Friday: returnString('Friday'),
+    Saturday: returnString('Saturday'),
+    Sunday: returnString('Sunday'),
+  };
   if (!dayName) {
-    Object.keys(hours).forEach((day) => {
-      return ({ [day]: `Open from ${open}am until ${close % 12}pm` });
-    });
+    return schedule;
   }
-  return { [dayName]: `Open from ${open}am until ${close % 12}pm` };
+  return { [dayName]: schedule[dayName] };
 }
-console.log(getSchedule('Monday'));
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
