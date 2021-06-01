@@ -90,15 +90,15 @@ function getSchedule(dayName) {
 }
 // console.log(getSchedule('Friday'));
 
-function getOldestFromFirstSpecies() {
+function getOldestFromFirstSpecies(id) {
 // seu código aqui
 }
 
-function increasePrices() {
+function increasePrices(percentage) {
 // seu código aqui
 }
 
-function getEmployeeCoverage() {
+function getEmployeeCoverage(idOrName) {
 // seu código aqui
 }
 
