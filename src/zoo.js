@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+const { species, hours } = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
 // const { hours } = require('./data');
@@ -33,6 +33,9 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  if (!employeeName) {
+    return {};
+  }
   return employees.find(
     (fun) => fun.firstName === employeeName || fun.lastName === employeeName,
   );
@@ -53,9 +56,10 @@ function createEmployee(
   return newEmployee;
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  // seu código aqui
+  return employees.some((employee) => employee.managers.includes(id));
+}
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
@@ -70,9 +74,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(newEmployee);
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(specieName) {
+  // seu código aqui
+  const selectedSpecies = species.find((specie) => specie.name === specieName);
+  if (specieName) {
+    return selectedSpecies.residents.length;
+  }
+  const retorno = {};
+  species.forEach((specie) => { retorno[specie.name] = specie.residents.length; });
+  return retorno;
+}
+console.log(countAnimals());
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   // seu código aqui
@@ -99,6 +111,7 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
 //       ({ [day]: `Open from ${hours[day].open} until ${hours[day].open % 12}` }));
 //   }
 // }
+
 // console.log(getSchedule());
 
 // function getOldestFromFirstSpecies(id) {
@@ -124,13 +137,13 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
 module.exports = {
   calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
   addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
