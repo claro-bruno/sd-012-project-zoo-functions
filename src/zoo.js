@@ -52,8 +52,8 @@ const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
     id,
     firstName,
     lastName,
-    managers,
-    responsibleFor,
+    ...managers,
+    ...responsibleFor,
   });
 };
 
