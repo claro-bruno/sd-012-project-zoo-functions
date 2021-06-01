@@ -51,7 +51,7 @@ const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
   let man = managers;
   let res = responsibleFor;
   if (man === undefined) man = [];
-  if (res === undefined) res = []; 
+  if (res === undefined) res = [];
   employees.push({
     id,
     firstName,
