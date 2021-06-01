@@ -71,7 +71,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     responsibleFor,
   };
 
-  if (!managers) { newEmployee.managers = [];}
+  if (!managers) { newEmployee.managers = []; }
   if (!responsibleFor) { newEmployee.responsibleFor = []; }
 
   data.employees.push(newEmployee);
