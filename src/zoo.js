@@ -52,13 +52,23 @@ const isManager = (id) => {
   return result;
 };
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) =>
+  data.employees
+    .push({ id, firstName, lastName, managers, responsibleFor });
 
-function countAnimals(species) {
-  // seu código aqui
-}
+const countAnimals = (species) => {
+  if (species === undefined) {
+    const result = {};
+    data.species.forEach(({ name, residents }) => {
+      result[name] = residents.length;
+    });
+    return result;
+  }
+  const result = data.species
+    .find(({ name }) => name === species)
+    .residents.length;
+  return result;
+};
 
 function calculateEntry(entrants) {
   // seu código aqui
