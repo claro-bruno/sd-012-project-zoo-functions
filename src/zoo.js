@@ -73,11 +73,32 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  const perRegion = data.species.reduce((acc, item) => ({
+    ...acc,
+    [item.location]: data.species.filter((item2) => item2.location === item.location),
+  }), {});
+  const obj = {
+    NE: perRegion.NE.map((item) => item.name),
+    NW: perRegion.NW.map((item) => item.name),
+    SE: perRegion.SE.map((item) => item.name),
+    SW: perRegion.SW.map((item) => item.name),
+  };
+  return obj;
 }
 
+// console.log(getAnimalMap());
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const allKeys = Object.keys(data.hours);
+  const allWeek = allKeys.reduce((acc, item) => ({
+    ...acc,
+    [item]: `Open from ${data.hours[item].open}am until ${data.hours[item].close - 12}pm`,
+  }), {});
+  allWeek.Monday = 'CLOSED';
+  if (!dayName) {
+    return allWeek;
+  }
+  return { [dayName]: allWeek[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
