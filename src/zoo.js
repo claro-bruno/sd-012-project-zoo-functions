@@ -14,12 +14,18 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  return data.species.filter((animal) => ids.find((animalId) => animalId === animal.id));
+  // return data.species.filter((animal) => ids.find((animalId) => animalId === animal.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  return species
+    .find((animals) => animals.name === animal)
+    .residents
+    .every((animals) => animals.age >= age);
 }
+
+console.log(getAnimalsOlderThan('penguins', 10));
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
