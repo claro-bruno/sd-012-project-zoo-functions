@@ -43,27 +43,29 @@ function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     return objetoVazio;
   }
-  const getEmployee = employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
-  return getEmployee;
+
+  const n = employeeName;
+
+  const getEmp = employees.find((employee) => employee.firstName === n || employee.lastName === n);
+  return getEmp;
 }
 
 // console.log(getEmployeeByName('Emery'));
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const newEmployee = {...personalInfo, ...associatedWith};
+  const newEmployee = { ...personalInfo, ...associatedWith };
   return newEmployee;
 }
 
 // console.log(createEmployee(personalInfo, associatedWith));
 
 function isManager(id) {
-
   const getManager = employees.some((employee) => employee.managers.some((item) => item === id));
   return getManager;
 }
 
-console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
@@ -96,6 +98,7 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
+
 
 module.exports = {
   calculateEntry,
