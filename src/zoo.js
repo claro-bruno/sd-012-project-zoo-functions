@@ -7,14 +7,24 @@ eslint no-unused-vars: [
     "varsIgnorePattern": "data"
   }
 ]
-#VQV
 */
 
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+function getSpeciesByIds(...ids) {
+  if (ids === undefined) {
+    const arrayVazio = [];
+    return arrayVazio;
+  }
+  const [firstSpecie, secondSpecie] = ids;
+  const specie1 = species.filter((specie) => specie.id === firstSpecie);
+  const specie2 = species.filter((specie) => specie.id === secondSpecie);
+  const allSpecies = [...specie1, ...specie2];
+  return allSpecies;
 }
+
+console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
