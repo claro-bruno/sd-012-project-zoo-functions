@@ -16,7 +16,7 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const selectedSpecie = [];
-  ids.forEach((id) => selectedSpecie.push(data.species.find((spicie) => spicie.id === id)));
+  ids.forEach((id) => selectedSpecie.push(data.species.find((specie) => specie.id === id)));
   return selectedSpecie;
 }
 
@@ -78,53 +78,60 @@ const associatedWith = {
 // console.log(createEmployee(personalInfo, associatedWith));
 
 function isManager(id) {
-  // seu código aqui
+  let checkManager = false;
+  data.employees.forEach((employee) => {
+    if (employee.managers.some((manager) => manager === id)) checkManager = true;
+  });
+  return checkManager;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
-function countAnimals(species) {
+/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
-}
+} */
 
-function calculateEntry(entrants) {
+/* function countAnimals(species) {
   // seu código aqui
-}
+} */
 
-function getAnimalMap(options) {
+/* function calculateEntry(entrants) {
   // seu código aqui
-}
+} */
 
-function getSchedule(dayName) {
+/* function getAnimalMap(options) {
   // seu código aqui
-}
+} */
 
-function getOldestFromFirstSpecies(id) {
+/* function getSchedule(dayName) {
   // seu código aqui
-}
+} */
 
-function increasePrices(percentage) {
+/* function getOldestFromFirstSpecies(id) {
   // seu código aqui
-}
+} */
 
-function getEmployeeCoverage(idOrName) {
+/* function increasePrices(percentage) {
   // seu código aqui
-}
+} */
+
+/* function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+} */
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
+  // getEmployeeCoverage,
+  // addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
