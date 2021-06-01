@@ -35,48 +35,59 @@ function getAnimalsOlderThan(animal, age) {
   return verifyAge;
 }
 
-function getEmployeeByName(employeeName) {
+function getEmployeeByName() {
   // seu código aqui
+  // employeeName
 }
 
-function createEmployee(personalInfo, associatedWith) {
+function createEmployee() {
   // seu código aqui
+  // personalInfo, associatedWith
 }
 
-function isManager(id) {
+function isManager() {
   // seu código aqui
+  // id
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee() {
   // seu código aqui
+  // id, firstName, lastName, managers, responsibleFor
 }
 
-function countAnimals(species) {
+function countAnimals() {
   // seu código aqui
+  // species
 }
 
-function calculateEntry(entrants) {
+function calculateEntry() {
   // seu código aqui
+  // entrants
 }
 
-function getAnimalMap(options) {
+function getAnimalMap() {
   // seu código aqui
+  // options
 }
 
-function getSchedule(dayName) {
+function getSchedule() {
   // seu código aqui
+  // dayName
 }
 
-function getOldestFromFirstSpecies(id) {
+function getOldestFromFirstSpecies() {
   // seu código aqui
+  // id
 }
 
-function increasePrices(percentage) {
+function increasePrices() {
   // seu código aqui
+  // percentage
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
   // seu código aqui
+  // idOrName
 }
 
 module.exports = {
