@@ -95,9 +95,34 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return totalPrice;
 }
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+function getAnimalMap() {
+  // seu código aqui
+  const animalMap = {
+   NE: [],
+   NW: [],
+   SE: [],
+   SW: [],
+  }
+  data.species.forEach((animal) => {
+   switch (animal.location) {
+     case 'NE':
+       animalMap.NE = [...animalMap.NE, animal.name];
+       break;
+     case 'NW':
+       animalMap.NW = [...animalMap.NW, animal.name];
+       break;
+     case 'SE':
+       animalMap.SE = [...animalMap.SE, animal.name];
+       break;
+     case 'SW':
+       animalMap.SW = [...animalMap.SW, animal.name];
+       break;
+     default:
+       console.log('deu ruim');
+   }
+  })
+  return animalMap
+}
 
 // function getSchedule(dayName) {
 //   // seu código aqui
@@ -119,7 +144,7 @@ module.exports = {
   calculateEntry,
   // getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
