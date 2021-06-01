@@ -33,7 +33,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const managersIds = employees.reduce(((acc, employee) => [...acc, ...employee.managers]), []);
+  const isManagerBool = managersIds.some((managerId) => managerId === id);
+  return isManagerBool;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
