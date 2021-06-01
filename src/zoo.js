@@ -134,7 +134,18 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Child, Senior } = data.prices;
+  /** Consultei o Stack Overflow para resolver essa parte do arredondamento de um determinado número de casas decimais.
+  https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary */
+  const adultPrice = Math.round((Adult * (1 + (percentage / 100)) * 100)) / 100;
+  const childPrice = Math.round((Child * (1 + (percentage / 100)) * 100)) / 100;
+  const seniorPrice = Math.round((Senior * (1 + (percentage / 100)) * 100)) / 100;
+  data.prices = {
+    Adult: adultPrice,
+    Child: childPrice,
+    Senior: seniorPrice,
+  };
+  return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
