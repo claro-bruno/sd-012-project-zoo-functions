@@ -1,13 +1,11 @@
-/*
-eslint no-unused-vars: [
+/* eslint no-unused-vars: [
   "error",
   {
     "args": "none",
     "vars": "local",
-    "varsIgnorePattern": "data"
+    "varsIgnorePattern": "data",
   }
-]
-*/
+] */
 
 const data = require('./data');
 
@@ -88,9 +86,23 @@ function isManager(id) {
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 // console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-} */
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  // data.employees.push(newEmployee);
+  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+}
+
+/* console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe'));
+console.log(addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
+  [
+    '546fe3d4-2d81-4bb4-83a7-92d5b7048d17',
+    'a67a36ee-3765-4c74-8e0f-13f881f6588a',
+  ],
+  [
+    'ee6139bf-b526-4653-9e1e-1ca128d0ad2e',
+    '210fcd23-aa7b-4975-91b7-0230ebb27b99',
+  ])); */
+// console.log(data.employees);
 
 /* function countAnimals(species) {
   // seu código aqui
@@ -128,7 +140,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
