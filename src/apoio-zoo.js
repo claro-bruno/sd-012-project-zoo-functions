@@ -15,4 +15,4 @@ const data = require('./data');
 
 const animal = data.species.filter((element) => element.name === 'penguins');
 console.log(animal);
-console.log(animal.map(element => element.residents));
+console.log(animal.map((element) => element.residents));
