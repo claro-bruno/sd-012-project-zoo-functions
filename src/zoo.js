@@ -43,8 +43,8 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
-function isManager() {
-  // id
+function isManager(id) {
+  return employees.some((person, index) => person.managers[index] === id);
 }
 
 function addEmployee() {
