@@ -16,11 +16,15 @@ function getSpeciesByIds(...ids) {
   return search;
 }
 // Consegui retornar mais de uma chave com a ajuda do colega Rodrigo Facury que sugeriu o uso do map.
-console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const getAnimal = data.species.find(name => name.name === animal);
+  const every = getAnimal.residents.every(key => key.age > age);
+  return every;
 }
+// Fiz o encadeamento do every com o find baseada no código do colega Rodrigo Facury;
+
+// console.log(getAnimalsOlderThan('lions', 20));
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
