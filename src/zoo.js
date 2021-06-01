@@ -38,11 +38,11 @@ function isManager(id) {
   return data.employees.some(({ managers }) => managers.some((managerId) => managerId === id));
 }
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(species) {
+/* function countAnimals(species) {
   // seu código aqui
 }
 
@@ -68,7 +68,7 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-} */
+} */ 
 
 module.exports = {
   // calculateEntry,
@@ -78,7 +78,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
