@@ -10,18 +10,16 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-
-// function getSpeciesByIds(...ids) {
-//   return ids.map((id) => data.species.find((specie) => specie.id === id));
-// }
+const { species } = data;
 
 function getSpeciesByIds(...ids) {
   return data.species.filter((specie, index) => specie.id === ids[index]);
 }
 
-// function getAnimalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function getAnimalsOlderThan(animal, age) {
+  const findAnimal = species.find((specie) => specie.name === animal);
+  return findAnimal.residents.every((resident) => resident.age >= age);
+}
 
 // function getEmployeeByName(employeeName) {
 //   // seu código aqui
@@ -77,7 +75,7 @@ module.exports = {
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
-  // getAnimalsOlderThan,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
