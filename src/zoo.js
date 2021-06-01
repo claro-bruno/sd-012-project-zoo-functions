@@ -41,15 +41,38 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  // verifica se ao realizar a verificação em algum dos elementos de employees, retorna true.
+  return employees.some((element) => {
+    const { managers } = element;
+    // retorna true se algum elemento da lista passar na verificação.
+    return managers.some((elementList) => elementList === id);
+  });
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // cria onjeto employee
+  const employee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(employee);
 }
 
-function countAnimals(species) {
-  // seu código aqui
+function countAnimals(specie) {
+  // verifica se foi dado algum parâmetro
+  if (specie === undefined) {
+    const animals = {};
+    // adiciona chave a valor ao obj animals animals[key] = value.
+    species.forEach((element) => {
+      animals[element.name] = element.residents.length;
+    });
+    return animals;
+  }
+  // retorna comprimento do array residents
+  return species.find((element) => element.name === specie).residents.length;
 }
 
 function calculateEntry(entrants) {
