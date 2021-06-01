@@ -58,14 +58,15 @@ const addEmployee = (
 };
 
 const countAnimals = (animal) => {
+  const count;
   if (!animal) {
-    return species.reduce((acc, specie) => ({...acc, [specie.name]: specie.residents.length}), {});
+    count = species.reduce((acc, specie) => ({...acc, [specie.name]: specie.residents.length}), {});
   } else 
   { const animalSelected = species.find((specie) => specie.name === animal);
-    return animalSelected.residents.length; 
-  }};
-
-console.log(countAnimals());
+    count = animalSelected.residents.length; 
+  }
+    return count;
+  };
 
 function calculateEntry(entrants) {
   // seu código aqui
