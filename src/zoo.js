@@ -8,6 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
+'Olá, mundo! vqv'
 
 const data = require('./data');
 
