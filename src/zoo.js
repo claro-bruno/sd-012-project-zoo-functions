@@ -29,7 +29,7 @@ function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   const newAnimal = species.filter((specie) => specie.name === animal );
   const allAnimals = newAnimal[0].residents;
-  return allAnimals.every((animal) => animal.age <= age)
+  return allAnimals.every((animal) => animal.age >= age)
 }
 
 function getEmployeeByName(employeeName) {
