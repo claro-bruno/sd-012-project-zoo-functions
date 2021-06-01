@@ -29,9 +29,9 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const { id, firstName, lastName } = personalInfo;
-  const { managers, responsibleFor } = associatedWith;
-  return { id, firstName, lastName, managers, responsibleFor };
+  // const { id, firstName, lastName } = personalInfo;
+  // const { managers, responsibleFor } = associatedWith;
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -66,6 +66,7 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  if (dayName === 'Monday') return { Moday: 'Closed' };
 }
 
 function getOldestFromFirstSpecies(id) {
