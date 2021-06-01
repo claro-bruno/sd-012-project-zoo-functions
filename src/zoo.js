@@ -14,9 +14,12 @@ const { species, employees } = require('./data');
 
 const getSpeciesByIds = (...ids) => {
   const array = [];
-  species.forEach((specie) => {
-    if ((ids.find((id) => id === specie.id) !== undefined)) {
-      array.push(ids.find((id) => id === specie.id));
+  ids.forEach((id) => {
+    array.push(species.find((specie) => specie.id === id));
+  });
+  array.forEach((index) => {
+    if (index === undefined) {
+      return [];
     }
   });
   return array;
