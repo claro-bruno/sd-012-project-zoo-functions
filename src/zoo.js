@@ -42,15 +42,17 @@ const { species, employees } = require('./data');
 // const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 // seu código aqui
 
-function isManager(id) {
-  // seu código aqui
-  const manager = employees.some((employee) => employee.managers.includes(id));
-  return manager;
-}
-
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+// function isManager(id) {
 //   // seu código aqui
+//   const manager = employees.some((employee) => employee.managers.includes(id));
+//   return manager;
 // }
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const objeto = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(objeto);
+}
+// seu código aqui
 
 // function countAnimals(species) {
 //   // seu código aqui
@@ -88,8 +90,8 @@ module.exports = {
   // getSpeciesByIds,
   // getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
-  isManager,
+  addEmployee,
+  // isManager,
   // getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
