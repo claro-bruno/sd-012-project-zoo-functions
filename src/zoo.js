@@ -149,9 +149,22 @@ function getSchedule(dayName) {
   return { [dayName]: `Open from ${hoursDay.open}am until ${hoursDay.close - 12}pm` };
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  const firsSpecie = employees.reduce((acc, employee) => {
+    if (id === employee.id) {
+      acc.push(...employee.responsibleFor);
+    }
+    return acc;
+  }, [])[0];
+  return species.reduce((acc, specie) => {
+    const sortResidents = specie.residents.sort((a, b) => b.age - a.age);
+    if (firsSpecie === specie.id) {
+      acc.push(...Object.values(sortResidents[0]));
+    }
+    return acc;
+  }, []);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -172,7 +185,7 @@ module.exports = {
   calculateEntry,
   // getAnimalMap,
   getSchedule,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   // getEmployeeCoverage,
 };
