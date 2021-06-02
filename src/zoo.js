@@ -44,16 +44,32 @@ function getEmployeeByName(employeeName) {
   return name;
 }
 
-function createEmployee() {
-  // seu código aqui personalInfo, associatedWith
+function createEmployee(personalInfo, associatedWith) {
+  const obj = Object.assign(personalInfo, associatedWith);
+  return obj;
 }
 
-function isManager() {
-  // seu código aqui id
+function isManager(id) {
+  return employees.some((element) => {
+    for (let index = 0; index <= element.managers.length; index += 1) {
+      if (element.managers[index] === id) {
+        return true;
+      }
+    }
+    return false;
+  });
 }
 
-function addEmployee() {
-  // seu código aqui id, firstName, lastName, managers, responsibleFor
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const aa = employees;
+  aa.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+  return aa;
 }
 
 function countAnimals() {
