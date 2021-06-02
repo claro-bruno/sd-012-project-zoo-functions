@@ -82,17 +82,55 @@ const emptyParameter = (NE, NW, SE, SW) => {
   return AllRaces;
 };
 
-const nameIncluded = (NE, NW, SE, SW, sorted) => {
+const isSorted = (NENames, NWNames, SENames, SWNames) => {
+  NENames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
+  NWNames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
+  SENames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
+  SWNames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
+};
+
+const genderIncluded = (NE, NW, SE, SW, gender, sorted) => {
+  const NEGender = NE.map((item) => ({ [item.name]: item.residents
+    .filter((item2) => item2.sex === gender).map((item3) => item3.name) }));
+  const NWGender = NW.map((item) => ({ [item.name]: item.residents
+    .filter((item2) => item2.sex === gender).map((item3) => item3.name) }));
+  const SEGender = SE.map((item) => ({ [item.name]: item.residents
+    .filter((item2) => item2.sex === gender).map((item3) => item3.name) }));
+  const SWGender = SW.map((item) => ({ [item.name]: item.residents
+    .filter((item2) => item2.sex === gender).map((item3) => item3.name) }));
+  if (sorted) {
+    isSorted(NEGender, NWGender, SEGender, SWGender);
+  }
+  return {
+    NE: NEGender,
+    NW: NWGender,
+    SE: SEGender,
+    SW: SWGender,
+  };
+};
+
+const notGenderIncluded = (NE, NW, SE, SW, sorted) => {
   const NENames = NE.map((item) => ({ [item.name]: item.residents.map((item2) => item2.name) }));
   const NWNames = NW.map((item) => ({ [item.name]: item.residents.map((item2) => item2.name) }));
   const SENames = SE.map((item) => ({ [item.name]: item.residents.map((item2) => item2.name) }));
   const SWNames = SW.map((item) => ({ [item.name]: item.residents.map((item2) => item2.name) }));
-  const allNames = { NE: NENames, NW: NWNames, SE: SENames, SW: SWNames };
   if (sorted) {
-    NENames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
-    NWNames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
-    SENames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
-    SWNames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
+    isSorted(NENames, NWNames, SENames, SWNames);
+  }
+  return {
+    NE: NENames,
+    NW: NWNames,
+    SE: SENames,
+    SW: SWNames,
+  };
+};
+
+const nameIncluded = (NE, NW, SE, SW, sorted, sex) => {
+  let allNames;
+  if (sex) {
+    allNames = genderIncluded(NE, NW, SE, SW, sex, sorted);
+  } else {
+    allNames = notGenderIncluded(NE, NW, SE, SW, sorted);
   }
   return allNames;
 };
@@ -102,15 +140,13 @@ function getAnimalMap(options) {
   const NW = data.species.filter((item) => item.location === 'NW');
   const SE = data.species.filter((item) => item.location === 'SE');
   const SW = data.species.filter((item) => item.location === 'SW');
-  if (!options) {
+  if (!options || !options.includeNames) {
     return emptyParameter(NE, NW, SE, SW);
   }
   if (options.includeNames) {
-    return nameIncluded(NE, NW, SE, SW, options.sorted);
+    return nameIncluded(NE, NW, SE, SW, options.sorted, options.sex);
   }
 }
-
-// console.log(getAnimalMap({ includeNames: 1, sorted: true }));
 
 function getSchedule(dayName) {
   const allKeys = Object.keys(data.hours);
