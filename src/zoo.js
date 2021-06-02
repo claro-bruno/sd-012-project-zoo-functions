@@ -97,9 +97,18 @@ const calculateEntry = (entrants) => {
 //   // seu código aqui
 // }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+const getOldestFromFirstSpecies = (id) => {
+  const emp = employees.find((employee) => employee.id === id);
+  const animalId = emp.responsibleFor[0];
+  const animal = species.find((specie) => specie.id = animalId);
+  let oldest = animal.residents[0];
+  animal.residents.forEach((resident) => {
+    if (resident.age > oldest) {
+      oldest = resident.age;
+    }
+  });
+  return oldest;
+};
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -120,7 +129,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
