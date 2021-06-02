@@ -133,27 +133,20 @@ const imput = (emp) => {
 
 const getEmployeeCoverage = (idOrName) => {
   let obj = {};
+  const array = [];
   if (idOrName === undefined) {
+    employees.sort((a, b) => (a.firstName > b.firstName)
+    ? 1 : ((b.firstName > a.firstName) ? -1 : 0));
     employees.forEach((employee) => {
-      const array = [];
-      employee.responsibleFor.forEach((animalId) => {
-        species.forEach((specie) => {
-          if (animalId === specie.id) {
-            array.push(specie.name);
-          }
-        });
-      });
-      obj[`${employee.firstName} ${employee.lastName}`] = array;
+      array.push(imput(employee));
     });
-    return obj;
+    return array;
   }
   const emp = employees.find((employee) => employee.firstName === idOrName
   || employee.lastName === idOrName || employee.id === idOrName);
   obj = imput(emp);
   return obj;
 };
-
-console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
