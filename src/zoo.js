@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+const { species, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -84,18 +84,36 @@ function countAnimals(species1) {
   return quant.residents.length;
 }
 
-// function calculateEntry(entrants) {
-//   if (entrants === undefined || typeof entrants === (Object.values === 0)) { return 0 }
-//   else {
-//   const prices = data.prices;
-//   let resultado = 0;
-//   }
-// }
-// console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
+function calculateEntry(entrants) {
+  if (!entrants || Object.keys(entrants).length === 0) { return 0 };
+  const result = [ prices.Adult * entrants.Adult, prices.Child * entrants.Child,
+  prices.Senior * entrants.Senior ];
+  result.forEach((num, pos) => {
+    if(Number.isNaN(num) === true) delete result[pos]})
+  return result.reduce((acc, cur) => acc + cur);
+}
 
 // function getAnimalMap(options) {
-//   // seu código aqui
+//   let expected = {};
+//   if (options === undefined) {
+//     const NE = data.species.filter((specie) => specie.location === 'NE');
+//     const NW = data.species.filter((specie) => specie.location === 'NW');
+//     const SE = data.species.filter((specie) => specie.location === 'SE');
+//     const SW = data.species.filter((specie) => specie.location === 'SW');
+//     expected = {
+//       NE: NE.map((ne) => ne.name),
+//       NW: NW.map((nw) => nw.name),
+//       SE: SE.map((se) => se.name),
+//       SW: SW.map((sw) => sw.name)
+//     };
+//     return expected;
+//   } if (options === {includesNames: true}){
+//     expected += {
+//       NE
+//     }
+//   }
 // }
+// console.log(getAnimalexpectedMap());
 
 // function getSchedule(dayName) {
 //   // seu código aqui
