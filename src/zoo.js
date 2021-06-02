@@ -48,11 +48,13 @@ function createEmployee(personalInfo, associatedWith) {
 
 // utiliza o metodo spread para adicionar os valores passados como parametro da função iterando um novo objeto
 
-/*  function isManager(id) {
-  // seu código aqui
+function isManager(id) {
+  return employees.some((employee) => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+// realiza o teste do parametro para verificar se é true ou false através do metodo some, nesse caso, verifica se o employee possui id de gerente. Isso ocorre através do metódo includes, onde é verificado se no array employees, a chave managers contem ID de gerente;
+
+/*  function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
@@ -93,7 +95,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
