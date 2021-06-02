@@ -107,26 +107,6 @@ function calculateEntry(entrants = []) {
   return soma;
 }
 
-const regioes = {
-  NE: [
-    { lions: [] },
-    { giraffes: [] },
-  ],
-  NW: [
-    { tigers: [] },
-    { bears: [] },
-    { elephants: [] },
-  ],
-  SE: [
-    { penguins: [] },
-    { otters: [] },
-  ],
-  SW: [
-    { frogs: [] },
-    { snakes: [] },
-  ],
-};
-
 function generateAnimalsLocation(arrayCoord) {
   return arrayCoord.reduce((object, coord) => {
     const objectCoord = object;
