@@ -333,3 +333,13 @@ module.exports = {
   },
 };
 
+// const data = require('./data');
+// const speciesArray = data.species;
+
+// function getAnimalsOlderThan(animal, age) {
+//   const oldBixo = speciesArray.find((value) => value.name === animal);
+//   const teste = oldBixo.residents.every((valuage) => valuage.age > age);
+//   // console.log(teste);
+// }
+
+// // console.log(getAnimalsOlderThan('otters', 7));

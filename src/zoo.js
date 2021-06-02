@@ -17,11 +17,19 @@ function getSpeciesByIds(...ids) {
   return speciesArray.filter((value, i) => value.id === ids[i]);
 };
 
+// Quero retornar o residents do "Animal ex: pinguim"
+// COmparar a "age idade" com a age do paremetro.
 
 function getAnimalsOlderThan(animal, age) {
-  
+  const oldBixo = speciesArray.find((value) => value.name === animal);
+  const bixoVelho = oldBixo.residents.every((valuage) => valuage.age >= age);
+  return bixoVelho;
+  // console.log(teste);
 }
+// getAnimalsOlderThan('penguins');
 
+
+console.log(speciesArray[0].residents.age);
 function getEmployeeByName(employeeName) {
   // seu código aqui
 }
