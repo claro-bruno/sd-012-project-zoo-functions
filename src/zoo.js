@@ -44,12 +44,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const manager = employees.find((employer) => employer.id === id && employer.managers !== []);
+  const manager = employees.some((employer) => employer.id === id && employer.managers !== []);
   return manager;
 }
 
 /* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  
 } */
 
 /* function countAnimals(species) {
