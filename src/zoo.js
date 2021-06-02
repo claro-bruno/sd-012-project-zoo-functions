@@ -95,22 +95,32 @@ function getSchedule(dayName) {
     [item]: `Open from ${data.hours[item].open}am until ${data.hours[item].close - 12}pm`,
   }), {});
   allWeek.Monday = 'CLOSED';
-  if (!dayName) {
-    return allWeek;
-  }
-  return { [dayName]: allWeek[dayName] };
+  if (!dayName) return allWeek;
+  return {
+    [dayName]: allWeek[dayName],
+  };
 }
 
 function getOldestFromFirstSpecies(id) {
   const animalCare = data.employees.find((item) => item.id === id).responsibleFor[0];
   const animalInfo = data.species.find((item) => item.id === animalCare).residents;
   animalInfo.sort((a, b) => b.age - a.age);
-  const { name, sex, age } = animalInfo[0];
+  const {
+    name,
+    sex,
+    age,
+  } = animalInfo[0];
   return [name, sex, age];
 }
 
 function increasePrices(percentage) {
-  const { Adult, Senior, Child } = data.prices;
+  // Essa função eu não conseguir fazer com o toFixed(2) pq ele estava arredondando de forma diferente.
+  // Ao que era solicitado, ficava sempre 1 centavo de diferença, essa foi a Alternativa.
+  const {
+    Adult,
+    Senior,
+    Child,
+  } = data.prices;
   data.prices = {
     Adult: Math.round((Adult * (1 + (percentage / 100)) * 100)) / 100,
     Child: Math.round((Child * (1 + (percentage / 100)) * 100)) / 100,
@@ -120,7 +130,20 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const createObj = (users) => {
+    const a = users.reduce((acc, item) => ({
+      ...acc,
+      [`${item.firstName} ${item.lastName}`]: item.responsibleFor
+        .map((item2) => data.species.find((item3) => item3.id === item2).name),
+    }), {});
+    return a;
+  };
+  if (idOrName) {
+    const user = data.employees.find((item) => idOrName === item.firstName
+      || idOrName === item.lastName || idOrName === item.id);
+    return createObj([user]);
+  }
+  return createObj(data.employees);
 }
 
 module.exports = {
