@@ -46,13 +46,13 @@ function createEmployee(personalInfo, associatedWith) {
 // }
 
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
-    id: `${id}`,
-    firstName: `${firstName}`,
-    lastName: `${lastName}`,
-    managers: `${managers}`,
-    responsibleFor: responsibleFor,
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
   }
   return data.employees.push(newEmployee);
 }
@@ -93,7 +93,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   // isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
