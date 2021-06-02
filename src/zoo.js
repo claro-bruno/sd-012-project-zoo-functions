@@ -11,10 +11,8 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const getSpeciesByIds = (...ids) => {
-  if (!ids.length) return [];
-  return data.species.filter((specie) => ids.includes(specie.id));
-};
+const { species } = data;
+const getSpeciesByIds = (...ids) => species.filter((specie) => ids.includes(specie.id));
 
 // function getAnimalsOlderThan(animal, age) {
 //   // seu código aqui
@@ -64,12 +62,12 @@ const getSpeciesByIds = (...ids) => {
 //   // seu código aqui
 // }
 
-// module.exports = {
+module.exports = {
 //   calculateEntry,
 //   getSchedule,
 //   countAnimals,
 //   getAnimalMap,
-//   getSpeciesByIds,
+  getSpeciesByIds,
 //   getEmployeeByName,
 //   getEmployeeCoverage,
 //   addEmployee,
@@ -78,4 +76,4 @@ const getSpeciesByIds = (...ids) => {
 //   getOldestFromFirstSpecies,
 //   increasePrices,
 //   createEmployee,
-// };
+};
