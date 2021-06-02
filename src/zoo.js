@@ -34,7 +34,7 @@ function createEmployee() {
   // seu código aqui
 }
 
-function isManager(id) {
+function isManager() {
   // seu código aqui
 }
 
