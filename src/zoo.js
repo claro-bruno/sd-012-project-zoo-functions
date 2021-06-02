@@ -51,9 +51,17 @@ function isManager(id) {
   return managerIds.some((managerId) => managerId === id);
 }
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
-} */
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+  return employees;
+}
 
 function countAnimals(animals) {
   // seu código aqui
@@ -101,8 +109,8 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  /* getEmployeeCoverage,
-  addEmployee, */
+  // getEmployeeCoverage,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   /* getOldestFromFirstSpecies,
