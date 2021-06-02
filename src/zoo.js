@@ -99,7 +99,10 @@ function getOldestFromFirstSpecies(id) {
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
-// seu código aqui
+  Object.entries(prices).forEach((value) => {
+    // O arredondamento tive auxílio de 2 colegas (Lucas Chamma Nahas e Rodrigo Merlone) que estavam com o mesmo problema e resolveram fazendo a multiplicação por 100 e depois dividindo por 100, pois o Math.round não estava arredondando de forma que passasse no teste do assert.
+    prices[value[0]] = Math.round((value[1] * (1 + percentage / 100)) * 100) / 100;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
