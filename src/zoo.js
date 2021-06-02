@@ -22,13 +22,13 @@ function getAnimalsOlderThan(animal, age) {
   const getAge = getResidents.every((resident) => (resident.age >= age));
   return getAge;
 }
-console.log(getAnimalsOlderThan('otters', 7));
+
+function getEmployeeByName(employeeName) {
+  if (employeeName === undefined) return {};
+}
+console.log(getEmployeeByName());
 
 /*
-function getEmployeeByName(employeeName) {
-  // seu código aqui
-}
-
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
