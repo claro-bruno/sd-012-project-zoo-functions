@@ -98,26 +98,8 @@ function getAnimalMap(/* options */) {
   // seu código aqui
 }
 
-function getSchedule(dayName) {
-  // seu código aqui
-  const days = Object.keys(data.hours);
-  const daysValues = Object.values(data.hours);
-  if (dayName === undefined) {
-    const week = {};
-    days.forEach((day, index) => {
-      if (daysValues[index].open === 0) {
-        week[day] = `CLOSED`;
-      } else {
-        week[day] = `Open from ${daysValues[index].open}am until ${daysValues[index].close - 12}pm`;
-      }
-    });
-    return week;
-  }
-  return getScheduleAux(days, daysValues, dayName);
-}
-
-const getScheduleAux = (days, daysValues, dayName) => {
-  const dayObject = {};
+const getScheduleAux = (days, values, dayName) => {
+  const obj = {};
   let dayIndex = 0;
   const dayGeted = days.find((day, index) => {
     if (day === dayName) {
@@ -125,12 +107,30 @@ const getScheduleAux = (days, daysValues, dayName) => {
       return day;
     }
   });
-  if (daysValues[dayIndex].open === 0) {
-    dayObject[dayGeted] = `CLOSED`;
+  if (values[dayIndex].open === 0) {
+    obj[dayGeted] = 'CLOSED';
   } else {
-    dayObject[dayGeted] = `Open from ${daysValues[dayIndex].open}am until ${daysValues[dayIndex].close - 12}pm`;
+    obj[dayGeted] = `Open from ${values[dayIndex].open}am until ${values[dayIndex].close - 12}pm`;
   }
-  return dayObject;
+  return obj;
+}
+
+function getSchedule(dayName) {
+  // seu código aqui
+  const days = Object.keys(data.hours);
+  const values = Object.values(data.hours);
+  if (dayName === undefined) {
+    const week = {};
+    days.forEach((day, index) => {
+      if (values[index].open === 0) {
+        week[day] = 'CLOSED';
+      } else {
+        week[day] = `Open from ${values[index].open}am until ${values[index].close - 12}pm`;
+      }
+    });
+    return week;
+  }
+  return getScheduleAux(days, values, dayName);
 }
 
 function getOldestFromFirstSpecies(/* id */) {
