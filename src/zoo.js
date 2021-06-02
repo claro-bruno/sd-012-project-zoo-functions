@@ -90,8 +90,7 @@ function countAnimals(species1) {
 //   if (entrants === undefined || typeof entrants === (Object.values === 0)) { return 0 }
 //   else {
 //   const prices = data.prices;
-//   let resultado = 0;
-  
+//   let resultado = 0; 
 //   }
 // }
 // console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
