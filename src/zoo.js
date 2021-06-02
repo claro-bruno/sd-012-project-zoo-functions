@@ -90,8 +90,16 @@ function getOldestFromFirstSpecies(id) {
   // seu código aqui
   const employee = employees.find((emp) => id.includes(emp.id));
   const firstResp = employee.responsibleFor[0];
-  
+  const animals = species.find((spec) => spec.id === firstResp).residents;
+  const orderedByAge = animals.sort((a, b) => {
+    if (a.age < b.age) return 1;
+    if (a.age > b.age) return -1;
+    return 0;
+  });
+  const { name, sex, age } = orderedByAge[0];
+  return [name, sex, age];
 }
+
 console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 function increasePrices(percentage) {
