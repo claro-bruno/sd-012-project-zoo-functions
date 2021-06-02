@@ -140,13 +140,8 @@ function getOldestFromFirstSpecies(id) {
   const firstSpecie = funcionario[0].responsibleFor[0];
   const speciesObj = (data.species.filter((specie) => specie.id === firstSpecie));
   const { residents } = speciesObj[0];
-  const verifyOlder = residents.reduce((older, animal) => {
-    if (animal.age > older.age) {
-      return animal;
-    }
-    return older;
-  });
-  const { age, sex, name } = verifyOlder;
+  const olderAnim = residents.reduce((older, animal) => (animal.age > older.age ? animal : older));
+  const { age, sex, name } = olderAnim;
   const olderAnimalArray = [name, sex, age];
   return olderAnimalArray;
 }
