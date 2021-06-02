@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { employees, species: animals, prices, hours } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   return ids.map((id) => animals.find((kind) => kind.id === id));
@@ -70,9 +70,9 @@ function calculateEntry(entrants = 0) {
   return total;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
 const schedule = {
   Tuesday: 'Open from 8am until 6pm',
@@ -130,8 +130,9 @@ const employeesCoverage = {
 
 function getEmployeeCoverage(idOrName) {
   if (!idOrName) { return employeesCoverage; }
-  const { firstName, lastName, responsibleFor } = employees.find((person) => {
-    return person.firstName === idOrName || person.id === idOrName || person.lastName === idOrName;
+  const { firstName, lastName, responsibleFor } = employees.find((em) => {
+    const result = em.firstName === idOrName || em.id === idOrName || em.lastName === idOrName;
+    return result;
   });
   const species = responsibleFor.map((id) => animals.find((animal) => animal.id === id));
   const speciesNames = species.map((animal) => animal.name);
@@ -144,7 +145,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
