@@ -11,8 +11,10 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const { species } = data;
+const { employees } = data;
+
 function getSpeciesByIds(...ids) {
-  const { species } = data;
   const selectedSpecies = [];
   const findId = (id) => species.find((specie) => specie.id === id);
   ids.forEach((id) => selectedSpecies.push(findId(id)));
@@ -25,7 +27,6 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  const { employees } = data;
   const gotEmployee = employees.find(
     (employee) =>
       employee.firstName === employeeName || employee.lastName === employeeName,
@@ -42,7 +43,6 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const { employees } = data;
   return employees.some((employee) =>
     employee.managers.some((elem) => elem === id));
 }
@@ -56,10 +56,10 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   data.employees.push(createEmployee(personalInfo, associatedWith));
 }
 
-function countAnimals(species) {
+function countAnimals(speciesInput) {
   const { species: specieData } = data;
-  if (species) {
-    return specieData.find((elem) => elem.name === species).residents.length;
+  if (speciesInput) {
+    return specieData.find((elem) => elem.name === speciesInput).residents.length;
   }
   return specieData.reduce((acc, curr) => {
     acc[curr.name] = curr.residents.length;
@@ -102,9 +102,21 @@ function getSchedule(dayName) {
   }, {});
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  const firstAnimalId = employees.find((employee) => employee.id === id)
+    .responsibleFor[0];
+  const firstAnimal = species.find((specie) => specie.id === firstAnimalId);
+  const oldestAnimal = firstAnimal.residents.find(
+    (elem) =>
+      elem.age
+      === firstAnimal.residents.reduce(
+        (acc, curr) => (curr.age > acc ? curr.age : acc),
+        0,
+      ),
+  );
+
+  return [...Object.values(oldestAnimal)];
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -125,7 +137,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
