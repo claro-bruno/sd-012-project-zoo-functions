@@ -59,18 +59,23 @@ const yesParameter = (animal) => {
   return wantedSpecie.residents.length;
 };
 
-function countAnimals(species) {
-  return species ? yesParameter(species) : noParameter();
+function countAnimals(animals) {
+  return animals ? yesParameter(animals) : noParameter();
 }
 
-console.log(countAnimals());
+const sum = (arrayEntrants) => {
+  const value = arrayEntrants.reduce((acc, crr) =>
+    acc + (crr[1] * prices[crr[0]]), 0);
+  return parseFloat(value.toFixed(2));
+};
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants = 0) {
+  const arrayEntrants = Object.entries(entrants);
+  return arrayEntrants.length === 0 ? 0 : sum(arrayEntrants);
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  
 }
 
 function getSchedule(dayName) {
