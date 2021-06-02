@@ -87,10 +87,10 @@ function countAnimals(species1) {
 function calculateEntry(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) { return 0; }
   const result = [prices.Adult * entrants.Adult, prices.Child * entrants.Child,
-    prices.Senior * entrants.Senior ];
+    prices.Senior * entrants.Senior];
   result.forEach((num, pos) => {
     if (Number.isNaN(num) === true) delete result[pos];
-    });
+  });
   return result.reduce((acc, cur) => acc + cur);
 }
 
