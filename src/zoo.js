@@ -40,23 +40,27 @@ function createEmployee(personalInfo, associatedWith) {
   const personalInfoAndAssociateWith = { ...personalInfo, ...associatedWith };
   return personalInfoAndAssociateWith;
 }
-console.log(createEmployee({
-  id: '19p01s87',
-  firstName: 'Patricia',
-  lastName: 'Silvestre',
-  managers: [
-    'p5b83cb3',
-    '9e7d4524',
-  ],
-  responsibleFor: [
-    '0938aa23',
-    '89be95b3',
-  ],
-}));
+// console.log(createEmployee({
+//  id: '19p01s87',
+//  firstName: 'Patricia',
+//  lastName: 'Silvestre',
+//  managers: [
+//    'p5b83cb3',
+//    '9e7d4524',
+//  ],
+//  responsibleFor: [
+//    '0938aa23',
+//    '89be95b3',
+//  ],
+// }));
 
-// function isManager(id) {
-// // seu código aqui
-// }
+function isManager(id) {
+  const findManager = data.employees.some((employeeId, index) => employeeId.managers[index] === id);
+  return findManager;
+}
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(isManager('stephanieId'));
+console.log(isManager('burlId'));
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 // // seu código aqui
@@ -99,7 +103,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
