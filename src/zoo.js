@@ -33,20 +33,21 @@ function getEmployeeByName(employeeName) {
   };
   
   const worker = employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
-
-  // console.log(employees, "teste");
-
-  return worker
-  
-  
+  return worker   
 } 
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newEmployee = {
+    ...personalInfo,
+    ... associatedWith,
+  }
+  return newEmployee;
 }
 
 function isManager(id) {
-  // seu código aqui
+  const worker = employees.filter((employee) => employee.managers === []);
+  console.log(worker, 'teste');
+  return worker.some((employee2) => employee2.id === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
