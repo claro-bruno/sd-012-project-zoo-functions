@@ -90,7 +90,7 @@ function calculateEntry(entrants) {
   let result = 0;
   age.forEach((key, index) => {
     result += data.prices[key] * people[index];
-  })
+  });
   return result;
 }
 
