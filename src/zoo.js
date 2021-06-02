@@ -110,9 +110,11 @@ const getOldestFromFirstSpecies = (id) => {
   return [oldest.name, oldest.sex, oldest.age];
 };
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+const increasePrices = (percentage) => {
+  prices.Adult += prices.Adult * percentage / 100;
+  prices.Child += prices.Child * percentage / 100;
+  prices.Senior += prices.Senior * percentage / 100;
+}
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
@@ -130,6 +132,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
