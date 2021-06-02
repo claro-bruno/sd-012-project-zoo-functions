@@ -28,8 +28,8 @@ function getEmployeeByName(employeeName) {
     employeeName === employee.firstName || employeeName === employee.lastName);
 }
 
-function createEmployee() {
-  // seu código aqui
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager() {
