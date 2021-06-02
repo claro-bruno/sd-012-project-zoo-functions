@@ -52,9 +52,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-  const bool = data.employees.some((employee) => {
-    return employee.managers.some((manager) => manager === id)}
-  );
+  const bool = data.employees.some((employee) => employee.managers.some((manID) => manID === id));
   return bool;
 }
 
