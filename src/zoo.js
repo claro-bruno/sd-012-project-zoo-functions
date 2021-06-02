@@ -86,11 +86,11 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   return totalCharge;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-  // 1º - O que fazer pra colocar no lugar de options caso seja uma ou outra opção?
-  // 2º - Como passar essas várias condicionais pro código?
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+//   // 1º - O que fazer pra colocar no lugar de options caso seja uma ou outra opção?
+//   // 2º - Como passar essas várias condicionais pro código?
+// }
 
 function getSchedule(dayName) {
   const newObj = {};
