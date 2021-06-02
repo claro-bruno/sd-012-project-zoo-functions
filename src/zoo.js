@@ -42,9 +42,10 @@ function createEmployee(personalInfo, associatedWith) {
     ...associatedWith,
   };
 }
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  const checkManeger = employees.some((cargo) => cargo.managers.some((manager) => manager === id));
+  return checkManeger;
+}
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -87,7 +88,7 @@ module.exports = {
   getEmployeeByName,
   //   getEmployeeCoverage,
   //   addEmployee,
-  //   isManager,
+  isManager,
   getAnimalsOlderThan,
   //   getOldestFromFirstSpecies,
   //   increasePrices,
