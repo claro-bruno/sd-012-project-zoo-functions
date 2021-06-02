@@ -43,9 +43,10 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmployer;
 }
 
-/* function isManager(id) {
-  // seu código aqui
-} */
+function isManager(id) {
+  const manager = employees.find((employer) => employer.id === id && employer.managers !== []);
+  return manager;
+}
 
 /* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
@@ -88,7 +89,7 @@ module.exports = {
   getEmployeeByName,
   /*   getEmployeeCoverage, */
   /*   addEmployee, */
-  /*   isManager, */
+  isManager,
   getAnimalsOlderThan,
 
   /*   getOldestFromFirstSpecies, */
