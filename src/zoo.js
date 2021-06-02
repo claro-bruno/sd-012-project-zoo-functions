@@ -69,9 +69,15 @@ function countAnimals(speciess) {
   return obj(...numberOf);
 }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants) {
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  }
+  const { Adult: a = 0, Child: c = 0, Senior: s = 0 } = entrants;
+  const { Adult, Senior, Child } = data.prices;
+  const result = (a * Adult) + (c * Child) + (s * Senior);
+  return result;
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -94,7 +100,7 @@ function countAnimals(speciess) {
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
