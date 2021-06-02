@@ -49,7 +49,7 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-  return employees.push ({
+  employees.push({
     id,
     firstName,
     lastName,
@@ -57,10 +57,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   });
 }
+function countAnimals(specie) {
+  // seu código aqui
+  if (specie === undefined) {
+    return data.species.reduce((acc, curr) => {
+      acc[curr.name] = curr.residents.length;
+      return acc;
+    }, {});
+  }
+  return data.species.find((animal) => animal.name === species).residents.length;
+}
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+console.log(countAnimals());
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -89,7 +97,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
