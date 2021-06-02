@@ -70,24 +70,45 @@ function countAnimals(species) {
 return data.species.find((spec) => spec.name === species).residents.length;
 }
 function calculateEntry(entrants) {
+if (entrants = {} || entrants === undefined) return 0;
+  const total = Object.keys(entrants);
+  return total
 }
-
-function getAnimalMap(options) {
+  function getAnimalMap(options) {
   // seu código aqui
 }
+
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const week = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED'
+  };
+  if (dayName === undefined) return week;
+  return data.hours.find((hour) => hour.hours === dayName);
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Child, Senior } = data.prices;
+  const adultPrice = Math.round((Adult * (1 + (percentage / 100)) * 100)) / 100;
+  const childPrice = Math.round((Child * (1 + (percentage / 100)) * 100)) / 100;
+  const seniorPrice = Math.round((Senior * (1 + (percentage / 100)) * 100)) / 100;
+  data.prices = {
+    Adult: adultPrice,
+    Child: childPrice,
+    Senior: seniorPrice,
+  };
+  return data.prices;
 }
-
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
