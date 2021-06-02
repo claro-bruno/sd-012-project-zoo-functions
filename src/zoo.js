@@ -31,7 +31,8 @@ function getEmployeeByName(employeeName) {
 /*
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-} */
+}
+*/
 
 function isManager(id) {
   const map = data.employees.map((employee) => {
@@ -41,17 +42,37 @@ function isManager(id) {
   const some = map.some((item) => item === true);
   return some;
 }
-console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 /*
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
+*/
 
 function countAnimals(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const result = {};
+    data.species.forEach(({ name, residents }) => {
+      result[name] = residents.length;
+    });
+    return result;
+  }
+  return data.species.find((specie) => specie.name === species).residents.length;
 }
+console.log(countAnimals());
+console.log(countAnimals('lions'));
+console.log(countAnimals('snakes'));
 
+
+// const map = findSpecie.map((specie) => specie.residents);
+  // const reduce = map.reduce((acc, curr) => `${acc}, ${curr}`);
+  // return `${reduce}.`;
+  
+  // const reduceSpecie = findSpecie.reduce((acc, curr) => {
+  //   acc += curr.residents.length;
+  // }, 0);
+
+/*
 function calculateEntry(entrants) {
   // seu código aqui
 }
@@ -79,7 +100,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
