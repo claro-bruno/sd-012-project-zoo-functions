@@ -73,25 +73,22 @@ const entireMap = () => ({
 });
 
 const mapWithNames = (...loc) => {
-  const arr = [];
-  let name;
+  let returnObj = {};
   loc.forEach((item) => {
+    const arr = [];
     mapping(item).forEach((nome) => {
-      name = nome;
-      arr.push(species.find((spec) => spec.name === nome).residents.map((each) => each.name));
+      const name = nome;
+      arr.push({ [name]: species.find((spec) => spec.name === nome).residents.map((each) => each.name) });
     });
+    Object.assign(returnObj, { [item]: arr });
   });
-  const ret = {
-    [name]: arr,
-  };
-  return ret;
+  return returnObj;
 };
-
-console.log(mapWithNames('NE'));
 
 function getAnimalMap(options) {
   // seu código aqui
   if (!options) return entireMap();
+  
 }
 
 // TENTAR REFAZER ESTE DE UM JEITO MELHOR
