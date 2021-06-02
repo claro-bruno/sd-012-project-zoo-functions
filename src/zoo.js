@@ -44,13 +44,19 @@ function createEmployee(personalInfo, associatedWith) {
   return novoEmpregado;
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  let verificaManager = false;
+  data.employees.forEach((employee) => {
+    if (employee.managers.some((manager) => manager === id)) {
+      verificaManager = true;
+    }
+  });
+  return verificaManager;
+}
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+}
 
 // function countAnimals(species) {
 //   // seu código aqui
@@ -88,8 +94,8 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
-  // isManager,
+  addEmployee,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
