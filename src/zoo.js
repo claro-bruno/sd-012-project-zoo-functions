@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { species, employees } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return ids;
@@ -28,7 +28,7 @@ function getEmployeeByName(employeeName) {
     return {};
   }
   const employee = employees.find(
-    (emp) => emp.firstName === employeeName || emp.lastName === employeeName,
+    ({ firstName, lastName }) => firstName === employeeName || lastName === employeeName,
   );
   return employee;
 }
@@ -51,20 +51,15 @@ function isManager(id) {
   return manager;
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-//   const obj = {
-//     ids: id,
-//     firstNameEmployee: firstName,
-//     lastNameEmployee: lastName,
-//     managersEmployee: managers,
-//     responsibleForEmployee: responsibleFor,
-//   };
-//   return obj;
-// }
-// console.log(
-//   addEmployee(465, 'Artur', 'Álvaro', [], []),
-// );
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+}
 
 function countAnimals(specie) {
   const animal = species.map((animals) => animals.name);
@@ -113,7 +108,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
