@@ -21,6 +21,18 @@ const sortAnimals = (sorted, animalsArray) => {
   return animalsArray;
 };
 
+const sexFilter = (sex, animal) => {
+  let animalResidentsMap;
+  if (sex !== '') {
+    animalResidentsMap = animal.residents
+      .filter((resident) => resident.sex === sex)
+      .map((resident) => resident.name);
+  } else {
+    animalResidentsMap = animal.residents.map((resident) => resident.name);
+  }
+  return animalResidentsMap;
+};
+
 function getSpeciesByIds(...ids) {
   // seu código aqui
   let speciesFiltred = [];
@@ -114,16 +126,7 @@ function getAnimalMap({ includeNames = false, sex = '', sorted = false } = '') {
     if (includeNames) {
       animalMap[location] = animalsByLocation.map((animal) => {
         const animalResidents = {};
-        let animalResidentsMap;
-        if (sex !== '') {
-          animalResidentsMap = animal.residents
-            .filter((resident) => resident.sex === sex)
-            .map((resident) => resident.name);
-        } else {
-          animalResidentsMap = animal.residents.map(
-            (resident) => resident.name,
-          );
-        }
+        const animalResidentsMap = sexFilter(sex, animal);
         animalResidents[animal.name] = sortAnimals(sorted, animalResidentsMap);
         return animalResidents;
       });
@@ -133,8 +136,6 @@ function getAnimalMap({ includeNames = false, sex = '', sorted = false } = '') {
   });
   return animalMap;
 }
-const options = { includeNames: true, sorted: false };
-console.log(getAnimalMap(options));
 
 function getSchedule(dayName = '') {
   // seu código aqui
