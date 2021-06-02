@@ -98,10 +98,37 @@ function getAnimalMap(/* options */) {
   // seu código aqui
 }
 
-function getSchedule(/* dayName */) {
+function getSchedule(dayName) {
   // seu código aqui
+  const days = Object.keys(data.hours);
+  const daysValues = Object.values(data.hours);
+  if (dayName === undefined) {
+    const week = {};        
+    days.forEach((day, index) => {
+      if (daysValues[index].open === 0) {
+        week[day] = `CLOSED`;
+      } else {
+        week[day] = `Open from ${daysValues[index].open}am until ${daysValues[index].close - 12}pm`;
+      }
+    });
+    return week;
+  }
+  const dayObject = {};
+  let dayIndex = 0;
+  const dayGeted = days.find((day, index) => {
+    if (day === dayName) {
+      dayIndex = index;
+      return day;
+    }
+  });
+  if (daysValues[dayIndex].open === 0) {
+    dayObject[dayGeted] = `CLOSED`;
+  } else {
+    dayObject[dayGeted] = `Open from ${daysValues[dayIndex].open}am until ${daysValues[dayIndex].close - 12}pm`;
+  }
+  return dayObject;
 }
-
+console.log(getSchedule('Tuesday'));
 function getOldestFromFirstSpecies(/* id */) {
   // seu código aqui
 }
