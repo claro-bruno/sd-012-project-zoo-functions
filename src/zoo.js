@@ -14,10 +14,13 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   return ids.map((id) => data.species.find((animalsId) => animalsId.id === id));
 } // consultei o repositório da Camila Malvess e do kevin Oliveira para ajudar no meu raciocínio
+console.log(getSpeciesByIds());
 
-// function getAnimalsOlderThan(animal, age) {
-// // seu código aqui
-// }
+function getAnimalsOlderThan(animal, age) {
+  return data.species.find((animalName) => animalName.name === animal)
+    .residents.every((resident) => resident.age > age);
+}
+console.log((getAnimalsOlderThan('lions', 3)));
 
 // function getEmployeeByName(employeeName) {
 // // seu código aqui
@@ -73,7 +76,7 @@ module.exports = {
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
-  // getAnimalsOlderThan,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
