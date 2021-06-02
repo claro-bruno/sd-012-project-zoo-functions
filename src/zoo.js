@@ -93,30 +93,34 @@ function calculateEntry(entrants) {
 function getAnimalMap(options) {
   // seu código aqui
   const regions = ['NE', 'NW', 'SE', 'SW'];
-  const getAnimals = () => regions.reduce((accumulator, current) => {
-    accumulator[current] = species.filter((getSpecies) =>
-      getSpecies.location === current).map((getNames) => getNames.name);
-    return accumulator;
-  }, {});
-  if (options === undefined) {
-    return getAnimals();
+  if (options === undefined || options.includeNames === undefined) {
+    return regions.reduce((accumulator, current) => {
+      accumulator[current] = species.filter((getSpecies) =>
+        getSpecies.location === current).map((getNames) => getNames.name);
+      return accumulator;
+    }, {});
   }
   const { includeNames = false, sorted = false, sex = '' } = options;
   if (includeNames === true) {
-    const getAnimalsWNames = () => regions.reduce((accumulator, current) => {
+    return regions.reduce((accumulator, current) => {
       accumulator[current] = species.filter((getSpecies) =>
         getSpecies.location === current).map((getNames) => {
         const object = {};
-        object[getNames.name] = getNames.residents.map((getSpecimen) => getSpecimen.name);
+        if (sex.length !== 0) {
+          object[getNames.name] = getNames.residents.filter((specimen) =>
+            specimen.sex === sex).map((getSpecimen) => getSpecimen.name);
+        } else {
+          object[getNames.name] = getNames.residents.map((getSpecimen) => getSpecimen.name);
+        }
+        if (sorted === true) { object[getNames.name].sort(); }
         return object;
       });
       return accumulator;
     }, {});
-    return getAnimalsWNames();
   }
 }
 
-console.log(getAnimalMap({ includeNames: true }));
+console.log(getAnimalMap({ includeNames: true, sorted: true }).NE);
 
 function getSchedule(dayName) {
   // seu código aqui
