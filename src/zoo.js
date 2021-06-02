@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { get } = require('cypress/types/lodash');
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 // Referência: Natalia Souza - turma 11.
@@ -49,16 +49,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species1) {
   if (!species1) {
-    const obj = {};
-    species.forEach((animal) => { obj[animal.name] = animal.residents.length; });
-    return obj;
+    return species.reduce((acc, animal) => {
+      acc[animal.name] = animal.residents.length;
+      return acc;
+    }, {});
   }
   return species.find((animal) => animal.name === species1).residents.length;
 }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants) {
+  if (!entrants || entrants === {}) return 0;
+  const callback = (acc, entrant) => acc + entrants[entrant] * prices[entrant];
+  return Object.keys(entrants).reduce(callback, 0);
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -81,7 +84,7 @@ function countAnimals(species1) {
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
