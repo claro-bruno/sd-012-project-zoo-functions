@@ -94,10 +94,41 @@ function calculateEntry(entrants) {
   return result;
 }
 
-function getAnimalMap(/* options */) {
+function getAnimalMap(options) {
   // seu código aqui
+  if (options === undefined) {
+    const directons = ['NE', 'NW', 'SE', 'SW'];
+    const animalsLocals = {};
+    directons.forEach((direction) => {
+      const animals = data.species.filter((specie) => specie.location === direction);
+      const names = [];
+      animals.forEach((animal) => {
+        names.push(animal.name);
+        animalsLocals[direction] = names;
+      });
+    });
+    return animalsLocals;
+  }
+  if (options.includeNames === true) {
+    const directons = ['NE', 'NW', 'SE', 'SW'];
+    const animalsLocals = {};
+    directons.forEach((direction) => {
+      const animals = data.species.filter((specie) => specie.location === direction);
+      const directionArray = [];
+      animals.forEach((animal) => {
+        const animalObject = {};
+        const animalResidents = animal.residents;
+        const animalResidentsNames = animalResidents.map((resident) => resident.name);
+        animalObject[animal.name] = animalResidentsNames;
+        directionArray.push(animalObject);
+      });
+      animalsLocals[direction] = directionArray;
+    });
+    console.log(animalsLocals);
+    return animalsLocals;
+  }
 }
-
+getAnimalMap({ includeNames: true });
 function getSchedule(/* dayName */) {
   // seu código aqui
 }
