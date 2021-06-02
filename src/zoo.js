@@ -124,9 +124,23 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
 //   return animalMap;
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName = '') {
+  // seu código aqui
+  const { hours } = data;
+  const schedule = Object.fromEntries(
+    Object.entries(hours).map(([key, val]) => [
+      key,
+      `Open from ${val.open}am until ${val.close - 12}pm`,
+    ]),
+  );
+  schedule.Monday = 'CLOSED';
+  if (dayName === '') {
+    return schedule;
+  }
+  const daySchedule = {};
+  daySchedule[dayName] = schedule[dayName];
+  return daySchedule;
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -142,7 +156,7 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
