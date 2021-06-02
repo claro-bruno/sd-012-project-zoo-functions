@@ -11,8 +11,10 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+function getSpeciesByIds(...ids) {
+  console.log(ids);
+  // entender o motivo de se usar .map antes de prosseguir
+  return ids.map((id) => data.species.find((animals) => id === animals.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
