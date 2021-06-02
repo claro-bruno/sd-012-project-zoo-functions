@@ -38,12 +38,14 @@ function createEmployee(personalInfo, associatedWith) {
 
 // Referência: Natalia Souza - turma 11.
 function isManager(id) {
-  return employees.some((manager) => manager.managers.includes(id));
+  const managerFinder = (manager) => manager.managers.includes(id);
+  return employees.some(managerFinder);
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEnployee = { id, firstName, lastName, managers, responsibleFor };
+  return employees.push(newEnployee);
+}
 
 // function countAnimals(species1) {
 //   // seu código aqui
@@ -81,7 +83,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
