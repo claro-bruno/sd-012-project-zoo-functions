@@ -62,7 +62,9 @@ function calculateEntry(entrants) {
   return Object.keys(entrants).reduce(((sum, price) => sum + prices[price] * entrants[price]), 0);
 }
 
-const mapping = (loc) => species.filter((spec) => spec.location === loc)
+const locations = ['NE', 'NW', 'SE', 'SW'];
+
+const mapping = (location) => species.filter((spec) => spec.location === location)
   .map((animal) => animal.name);
 
 const entireMap = () => ({
@@ -78,20 +80,34 @@ const mapWithNames = (...loc) => {
     const arr = [];
     mapping(item).forEach((nome) => {
       const name = nome;
-      arr.push({ [name]: species.find((spec) => spec.name === nome).residents.map((each) => each.name) });
+      const animals = species.find((spec) => spec.name === nome).residents.map((each) => each.name);
+      arr.push({ [name]: animals });
     });
     Object.assign(returnObj, { [item]: arr });
   });
   return returnObj;
 };
 
-const locations = ['NE', 'NW', 'SE', 'SW'];
+const orderNames = () => {
+  const map = mapWithNames(...locations);
+  Object.values(map).forEach((value) => {
+    value.forEach((obj) => {
+      Object.keys(obj).forEach((key) => {
+        obj[key] = obj[key].sort();
+      })
+    })
+  });
+  return map;
+}
+
 function getAnimalMap(options) {
   // seu código aqui
   if (!options) return entireMap();
-  if (options.includeNames) return mapWithNames(...locations);
+  if (options.includeNames) {
+    if (options.sorted) return orderNames();
+    return mapWithNames(...locations);
+  } 
 }
-console.log(getAnimalMap({includeNames:true}));
 
 // TENTAR REFAZER ESTE DE UM JEITO MELHOR
 const returnString = (day) => `Open from ${hours[day].open}am until ${hours[day].close % 12}pm`;
