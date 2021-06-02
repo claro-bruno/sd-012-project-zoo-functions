@@ -42,18 +42,17 @@ function getEmployeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   data.employees.push({
-    id: personalInfo.id,
-    firstName: personalInfo.firstName,
-    lastName: personalInfo.lastName,
-    managers: associatedWith.managers,
-    responsibleFor: associatedWith.responsibleFor,
+    ...personalInfo, 
+    ...associatedWith,
   });
   return data.employees[data.employees.length - 1];
 }
-// function isManager(id) {
-//   // seu código aqui
-// }
 
+function isManager(id) {
+  // seu código aqui
+  return data.employees.some((func) => func.managers
+    .includes(id));
+}
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
 // }
@@ -95,7 +94,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
