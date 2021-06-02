@@ -67,8 +67,51 @@ function calculateEntry(entrants) {
   return Object.keys(entrants).reduce((acc, cur) => acc + entrants[cur] * data.prices[cur], 0);
 }
 
-function getAnimalMap(options) {
+const { species } = require('./data');
+
+const fil = (local) => species.filter(({ location }) => location === local);
+
+const animalLocation = () => {
+  const loc = species.map((a) => a.location);
+  const set = new Set(loc);
+  return [...set];
+};
+
+const animalObject = () => {
+  const result = {};
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  locations.forEach((local) => {
+    result[local] = [];
+    fil(local).map(({ name }) => result[local].push(name));
+  });
+  return result;
+};
+
+function AnimalMap(locations, sorted, sex) {
   // seu código aqui
+  const result = {};
+  locations.forEach((local) => {
+    result[local] = [];
+    fil(local).map((a) => {
+      const nomeAnimal = a.name;
+      let animalRe = a.residents.map(({ name }) => name);
+      if (sex) {
+        animalRe = a.residents.filter((ani) => ani.sex === sex).map(({ name }) => name);
+      }
+
+      if (sorted) animalRe = animalRe.sort();
+      result[local].push({ [nomeAnimal]: animalRe });
+      return 1;
+    });
+  });
+  return result;
+}
+
+function getAnimalMap(options) {
+  const { includeNames = false, sex, sorted = false } = options || {};
+  const loc = animalLocation();
+  if (includeNames) return AnimalMap(loc, sorted, sex);
+  return animalObject();
 }
 
 function getSchedule(dayName) {
