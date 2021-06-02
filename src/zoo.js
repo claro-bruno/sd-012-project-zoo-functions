@@ -87,8 +87,25 @@ function countAnimals(speciesP) {
   return resposta;
 }
 
-function calculateEntry() {
-  // seu código aqui entrants
+function calculateEntry(entrants) {
+  let total = 0;
+  const arrayDoParametro = [entrants];
+  if (entrants === undefined || arrayDoParametro === [{}]) return total;
+  Object.entries(entrants).forEach((tipoEntrada) => {
+    switch (tipoEntrada[0]) {
+    case 'Adult':
+      total += entrants.Adult * 49.99;
+      break;
+    case 'Child':
+      total += entrants.Child * 20.99;
+      break;
+    case 'Senior':
+      total += entrants.Senior * 24.99;
+      break;
+    default:
+      break;
+    }
+  }); return total;
 }
 
 function getAnimalMap() {
