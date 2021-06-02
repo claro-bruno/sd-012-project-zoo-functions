@@ -89,33 +89,40 @@ function calculateEntry(entrants) {
   return Adult * priceAdult + Child * priceChild + Senior * priceSenior;
 }
 
+const regions = ['NE', 'NW', 'SE', 'SW'];
+const getAllByRegion = () => regions.reduce((accumulator, current) => {
+  accumulator[current] = species.filter((getSpecies) =>
+    getSpecies.location === current).map((getNames) => getNames.name);
+  return accumulator;
+}, {});
+
+const getAllByRegionWNames = (sex, sorted) => regions.reduce((accumulator, current) => {
+  accumulator[current] = species.filter((getSpecies) =>
+    getSpecies.location === current).map((getNames) => {
+    const object = {};
+    object[getNames.name] = getNames.residents.map((getSpecimen) => getSpecimen.name);
+    if (sorted === true) { object[getNames.name].sort(); }
+    if (sex.length !== 0) {
+      object[getNames.name] = object[getNames.name].filter((animal) =>
+        getNames.residents.find((resident) => resident.name === animal).sex === sex);
+    }
+    return object;
+  });
+  return accumulator;
+}, {});
+
 function getAnimalMap(options) {
   // seu código aqui
-  const regions = ['NE', 'NW', 'SE', 'SW'];
-  if (options === undefined || options.includeNames === undefined) {
-    return regions.reduce((accumulator, current) => {
-      accumulator[current] = species.filter((getSpecies) =>
-        getSpecies.location === current).map((getNames) => getNames.name);
-      return accumulator;
-    }, {});
+  if (options === undefined) {
+    return getAllByRegion();
   }
   const { includeNames = false, sorted = false, sex = '' } = options;
+  if (includeNames === false) {
+    return getAllByRegion();
+  }
   if (includeNames === true) {
-    return regions.reduce((accumulator, current) => {
-      accumulator[current] = species.filter((getSpecies) =>
-        getSpecies.location === current).map((getNames) => {
-        const object = {};
-        if (sex.length !== 0) {
-          object[getNames.name] = getNames.residents.filter((specimen) =>
-            specimen.sex === sex).map((getSpecimen) => getSpecimen.name);
-        } else {
-          object[getNames.name] = getNames.residents.map((getSpecimen) => getSpecimen.name);
-        }
-        if (sorted === true) { object[getNames.name].sort(); }
-        return object;
-      });
-      return accumulator;
-    }, {});
+    const map = getAllByRegionWNames(sex, sorted);
+    return map;
   }
 }
 
@@ -181,7 +188,6 @@ function getEmployeeCoverage(idOrName) {
     getSpecies.id === animalId).name);
   return { [`${getEmployee.firstName} ${getEmployee.lastName}`]: animals };
 }
-console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
