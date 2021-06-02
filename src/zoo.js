@@ -11,12 +11,18 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const {species, employees, hours, prices} = data
+const {species, employees, hours, prices} = data;
 
-function getSpeciesByIds(ids) {
-  if(ids.length === 0){
-  return [];
+function getSpeciesByIds(...ids) {
+  if (ids.length === 0) {
+    return [];
+  }
+  return species.filter(specie => ids.includes(specie.id));
 }
+
+// getSpeciesByIds - primeiro usando Spread Operator para utilizar como argumento da função um novo array formado por todos os ids das especies;
+// conforme a dica do Jensen na explicação, caso nao receba nenhum parametro, nesse caso, o tamanho do array formado pelo spread seja igual a zero, retorna um array vazio;
+// Enquanto desenvolvia os demais testes, localizei o metodo .includes (https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes), assim, a partir do spread, utilizei o metodo filter para retornar um array com todos os elementos que satisfaçam a condição passada, que, no caso, verifica a existencia de alguma especie como parametro, retornando um array com as éspecies correspondente.
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
