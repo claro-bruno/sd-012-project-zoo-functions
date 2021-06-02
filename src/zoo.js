@@ -72,6 +72,16 @@ const entireMap = () => ({
   SW: mapping('SW'),
 });
 
+const mapWithNames = (loc) => {
+  const arr = [];
+  mapping(loc).forEach((nome) => {
+    arr.push(species.find((spec) => spec.name === nome).residents.map((each) => each.name));
+  });
+  return arr;
+};
+
+console.log(mapWithNames('NW'));
+
 function getAnimalMap(options) {
   // seu código aqui
   if (!options) return entireMap();
