@@ -51,10 +51,19 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  if(managers === undefined) {
-    managers = [];
-  } else if(responsibleFor === undefined) {
-    responsibleFor = [];
+  if (managers === undefined || responsibleFor === undefined) {
+    let managerAux = managers;
+    managerAux = [];
+    responsibleForAux = responsibleFor;
+    responsibleForAux = [];
+    const newEmployee2 = {
+      id,
+      firstName,
+      lastName,
+      managerAux,
+      responsibleForAux,
+    };
+    data.employees.push(newEmployee2);
   }
   const newEmployee = {
     id,
@@ -67,19 +76,20 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function countAnimals(species) {
-  if(species === undefined) {
+  if (species === undefined) {
     const name = data.species.map((specie) => specie.name);
     const quantidade = data.species.map((specie) => specie.residents.length);
-    let result = {...quantidade};
+    const result = {...quantidade};
     Object.keys(name).forEach((key, posicao) => {
       let newKey = name[key];
       result[newKey] = result[key];
       delete result[key];
-    })
+    });
     return result;
   }
+  const quant =  data.species.find((specie) => specie.name === species);
+  return quant.residents.length;
 }
-console.log(countAnimals());
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
