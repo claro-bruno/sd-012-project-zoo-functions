@@ -1,4 +1,4 @@
-const assert = require('assert');
+ const assert = require('assert');
 const zoo = require('../src/zoo');
 
 describe('Implemente a função getAnimalsOlderThan', () => {
