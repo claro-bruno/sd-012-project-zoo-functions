@@ -57,11 +57,21 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   });
 }
-
-function countAnimals() {
-  // species
-  // seu código aqui
+// const data = require('./data');
+function countAnimals(species) {
+  let resultado;
+  if (species === undefined) {
+    resultado = {};
+    data.species.forEach((specie) => {
+      resultado[specie.name] = specie.residents.length;
+    });
+  } else {
+    const targetSpecie = data.species.find((specie) => specie.name === species);
+    resultado = targetSpecie.residents.length;
+  }
+  return resultado;
 }
+// console.log(countAnimals())
 
 function calculateEntry() {
   // entrants
