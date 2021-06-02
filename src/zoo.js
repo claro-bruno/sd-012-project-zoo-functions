@@ -84,13 +84,22 @@ const schedule = {
   Monday: 'CLOSED',
 };
 
-function getSchedule(dayName) {
-  if (!dayName) { return schedule; }
+const scheduleGenerate = (date) => {
   const week = Object.entries(hours);
-  const day = week.find((dayDate) => dayDate[0] === dayName);
-  // return day;
-  if (day[1].open === 0 && day[1].close === 0) { return { [day[0]]: 'CLOSED' }; }
-  return { [day[0]]: `Open from ${day[1].open}am until ${day[1].close - 12}pm` };
+  const day = week.find((dayDate) => dayDate[0] === date);
+  const daySchedule = day[1];
+  const dayName = day[0];
+  if (daySchedule.open === 0 && daySchedule.close === 0) { return { [dayName]: 'CLOSED' }; }
+  return { [dayName]: `Open from ${daySchedule.open}am until ${daySchedule.close - 12}pm` };
+};
+
+function getSchedule(dayName) {
+  // const week = Object.keys(hours);
+  if (!dayName) {
+    // return week.map((day) => scheduleGenerate(day));
+    return schedule;
+  }
+  return scheduleGenerate(dayName);
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -108,8 +117,27 @@ function increasePrices(percentage) {
   return prices;
 }
 
+const employeesCoverage = {
+  'Nigel Nelson': ['lions', 'tigers'],
+  'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+  'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+  'Wilburn Wishart': ['snakes', 'elephants'],
+  'Stephanie Strauss': ['giraffes', 'otters'],
+  'Sharonda Spry': ['otters', 'frogs'],
+  'Ardith Azevado': ['tigers', 'bears'],
+  'Emery Elser': ['elephants', 'bears', 'lions'],
+};
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) { return employeesCoverage; }
+  const { firstName, lastName, responsibleFor } = employees.find((person) => {
+    return person.firstName === idOrName || person.id === idOrName || person.lastName === idOrName;
+  });
+  const species = responsibleFor.map((id) => animals.find((animal) => animal.id === id));
+  const speciesNames = species.map((animal) => animal.name);
+  return {
+    [`${firstName} ${lastName}`]: speciesNames,
+  };
 }
 
 module.exports = {
