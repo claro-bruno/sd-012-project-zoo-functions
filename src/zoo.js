@@ -95,30 +95,41 @@ function calculateEntry(entrants) {
 }
 
 // function getAnimalMap(options) {
-//   let expected = {};
-//   if (options === undefined) {
-//     const NE = data.species.filter((specie) => specie.location === 'NE');
-//     const NW = data.species.filter((specie) => specie.location === 'NW');
-//     const SE = data.species.filter((specie) => specie.location === 'SE');
-//     const SW = data.species.filter((specie) => specie.location === 'SW');
-//     expected = {
-//       NE: NE.map((ne) => ne.name),
-//       NW: NW.map((nw) => nw.name),
-//       SE: SE.map((se) => se.name),
-//       SW: SW.map((sw) => sw.name)
-//     };
-//     return expected;
-//   } if (options === {includesNames: true}){
-//     expected += {
-//       NE
-//     }
+//   if (!options) {
+//     return Auxiliar();
+//   } 
+//   if (options === {includesNames: true}){
+//     let array = Auxiliar();
+//     array.NE.map((animal) => animal)
 //   }
 // }
-// console.log(getAnimalexpectedMap());
 
-// function getSchedule(dayName) {
-//   // seu código aqui
+// function Auxiliar () {
+//   const NE = data.species.filter((specie) => specie.location === 'NE');
+//   const NW = data.species.filter((specie) => specie.location === 'NW');
+//   const SE = data.species.filter((specie) => specie.location === 'SE');
+//   const SW = data.species.filter((specie) => specie.location === 'SW');
+//   let expected = {
+//     NE: NE.map((ne) => ne.name),
+//     NW: NW.map((nw) => nw.name),
+//     SE: SE.map((se) => se.name),
+//     SW: SW.map((sw) => sw.name)
+//   };
+//   return expected;
 // }
+// console.log(getAnimalMap());
+
+function getSchedule(dayName) {
+  if (!dayName) { 
+    const aux = (param) => {
+      return `Open from ${param[0]}am until ${param[1]-12}pm`
+    }
+    const days = [data.hours];
+    days.forEach((day, position) => console.log(days.push(aux(day))));
+    return days;
+  }
+}
+console.log(getSchedule());
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -134,7 +145,7 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
