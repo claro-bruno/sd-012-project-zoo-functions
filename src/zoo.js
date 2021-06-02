@@ -7,7 +7,7 @@
   }
 ] */
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 /* const data = require('./data'); */
 
 function getSpeciesByIds(...ids) {
@@ -84,11 +84,28 @@ function countAnimals(speciess) {
   return saida;
 }
 
-/*
 function calculateEntry(entrants) {
-  // seu código aqui
+  let valorFinal = 0;
+  if (entrants !== undefined) {
+    Object.entries(entrants).forEach((entrada) => {
+      switch (entrada[0]) {
+      case 'Adult':
+        valorFinal += entrants.Adult * prices.Adult;
+        break;
+      case 'Child':
+        valorFinal += entrants.Child * prices.Child;
+        break;
+      case 'Senior':
+        valorFinal += entrants.Senior * prices.Senior;
+        break;
+      default:
+        valorFinal += 0;
+      }
+    });
+  } return valorFinal;
 }
 
+/*
 function getAnimalMap(options) {
   // seu código aqui
 }
@@ -110,7 +127,8 @@ function getEmployeeCoverage(idOrName) {
 } */
 
 module.exports = {
-/*   calculateEntry,
+  calculateEntry,
+  /*
   getSchedule,
   getAnimalMap, */
   countAnimals,
