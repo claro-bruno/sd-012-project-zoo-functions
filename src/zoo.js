@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -55,18 +55,47 @@ function isManager(id) {
   return employees.some((person) => person.managers.includes(id));
 }
 
-const { species, employees } = require('./data');
-const data = require('./data');
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
+  const newEmployee = {
+     id,
+     firstName,
+     lastName,
+     managers,
+     responsibleFor
+  };
+  employees.push(newEmployee);
 }
 
-function countAnimals(species) {
+function countAnimals(especie) {
   // seu código aqui
+  if (especie === undefined || especie === null) {
+     const newObj = {};
+     species.forEach((item) => {
+      newObj[item.name] = item.residents.length
+   });
+   return newObj;
+  }
+  const newAnimal = species.find((item) => item.name === especie);
+  return newAnimal.residents.length;
 }
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (entrants === null || entrants === undefined || entrants === {}) {
+     return 0;
+  };
+  if (entrants.Adult === undefined) {
+     entrants.Adult = 0;
+  };
+  if (entrants.Senior === undefined) {
+   entrants.Senior = 0;
+   };
+   if (entrants.Child === undefined) {
+      entrants.Child = 0;
+   };
+  const totalPrice = entrants.Adult * prices.Adult + entrants.Senior * prices.Senior + entrants.Child * prices.Child;
+  return totalPrice;
 }
 
 function getAnimalMap(options) {
