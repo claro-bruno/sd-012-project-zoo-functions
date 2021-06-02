@@ -50,7 +50,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // cria onjeto employee
+  // cria objeto employee
   const employee = {
     id,
     firstName,
@@ -90,22 +90,23 @@ function getAnimalMap() {
 }
 
 function getSchedule(dayName) {
-  const objHours = {};
-  const keys = Object.keys(hours);
+  // objHours será construido.
+  const objHours = {};// array com as keys do hours(as keys serão strings).
+  const keys = Object.keys(hours);// constroi o objHours com base no array keys.
   keys.forEach((element) => {
+    // confere se o nome do dia é 'Monday', caso for, é atribuido para a key element um valor diferente do padrão.
     if (element === 'Monday') {
       objHours[element] = 'CLOSED';
     } else {
       objHours[element] = `Open from ${hours[element].open}am until ${hours[element].close - 12}pm`;
     }
-  });
-  // verifica se não tem parâmetro.
+  });// verifica se não tem parâmetro.
   if (dayName === undefined) {
     return objHours;
-  }
+  }// retorna um objeto criado com o valor especial para o dayName === 'Monday'.
   if (dayName === 'Monday') {
     return { [dayName]: 'CLOSED' };
-  }
+  }// retorna um objeto criado de acordo com o dayName.
   return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
 
