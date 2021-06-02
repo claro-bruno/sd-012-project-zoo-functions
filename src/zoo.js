@@ -85,31 +85,8 @@ function calculateEntry(entrants) {
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
-function getAnimalMap(options = { includeNames: false, sex: 'all', sorted: false }) {
-  const { includeNames, sex, sorted } = options;
-
-  const objDefault = {};
-  objDefault.NE = species.filter((element) => element.location === 'NE').map((element) => element.name);
-  objDefault.NW = species.filter((element) => element.location === 'NW').map((element) => element.name);
-  objDefault.SE = species.filter((element) => element.location === 'SE').map((element) => element.name);
-  objDefault.SW = species.filter((element) => element.location === 'SW').map((element) => element.name);
-  // verifica se o argumento não foi dado ou includeNames = false.
-  if (includeNames === false) {
-    return objDefault;
-  }
-
-  const neAnimal = species.filter((element) => element.location === 'NE');
-  const nwAnimal = species.filter((element) => element.location === 'NW');
-  const seAnimal = species.filter((element) => element.location === 'SE');
-  const swAnimal = species.filter((element) => element.location === 'SW');
-
-  if (includeNames === true) {
-    objDefault.NE = neAnimal.map((element) => element.residents.map((resident) => resident.name));
-    objDefault.NW = nwAnimal.map((element) => element.residents.map((resident) => resident.name));
-    objDefault.SE = seAnimal.map((element) => element.residents.map((resident) => resident.name));
-    objDefault.SW = swAnimal.map((element) => element.residents.map((resident) => resident.name));
-  }
-  return objDefault;
+function getAnimalMap() {
+  // options = { includeNames: false, sex: 'all', sorted: false }
 }
 
 function getSchedule(dayName) {
@@ -131,17 +108,17 @@ function getSchedule(dayName) {
   }
   return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
-console.log(getSchedule('Tuesday'));
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+
+function getOldestFromFirstSpecies() {
+  // seu código aqui id
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+function increasePrices() {
+  // seu código aqui percentage
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getEmployeeCoverage() {
+  // seu código aqui idOrName
 }
 
 module.exports = {
