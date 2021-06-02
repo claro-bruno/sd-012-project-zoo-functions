@@ -14,7 +14,8 @@ const data = require('./data');
 const {species, employees, hours, prices} = data
 
 function getSpeciesByIds(ids) {
-  // seu código aqui
+  if(ids.length === 0){
+  return [];
 }
 
 function getAnimalsOlderThan(animal, age) {
