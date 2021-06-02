@@ -61,12 +61,11 @@ function countAnimals(animals) {
 
 function calculateEntry(entrants) {
   // seu código aqui
-  let entrantsArray = [entrants.Adult, entrants.Child, entrants.Senior];
-  entrantsArray = entrantsArray.map((entrant) => ((entrant === undefined) ? 0 : entrant));
   if (!entrants || JSON.stringify(entrants) === '{}') {
     return 0;
   }
-
+  let entrantsArray = [entrants.Adult, entrants.Child, entrants.Senior];
+  entrantsArray = entrantsArray.map((entrant) => ((entrant === undefined) ? 0 : entrant));
   return (prices.Adult * entrantsArray[0]) + (prices.Child * entrantsArray[1])
    + (prices.Senior * entrantsArray[2]);
 }
