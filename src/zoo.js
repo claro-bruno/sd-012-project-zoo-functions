@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const { species, employees } = require('./data');
 const data = require('./data');
 
-// console.log(data);
+console.log(data);
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -31,7 +31,7 @@ function getEmployeeByName(employeeName) {
   // seu código aqui
   // Primeiro eu verifico se o parametro é indefinido.
   if (typeof employeeName !== 'undefined') {
-    const employeesFirstName = employees.find((employe) => employe.firstName === employeeName);
+    const employeesFirstName = data.employees.find((employe) => employe.firstName === employeeName);
     const employeesLastName = employees.find((employe) => employe.lastName === employeeName);
     // Depois verifico se  nós temos o primeiro nome.
     if (typeof employeesFirstName === 'undefined') {
