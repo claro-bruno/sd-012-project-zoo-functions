@@ -77,17 +77,20 @@ const getSchedule = (dayName, key = Object.keys(hours)) =>
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
+// Código para increasePrices
 function modPrices(e, percentage) {
   (prices[e] = Math.round(prices[e] * (1 + percentage / 100) * 100) / 100);
 }
 
-// Código para increasePrices
 const increasePrices = (percentage, key = Object.keys(prices)) => key.forEach((e) =>
   modPrices(e, percentage));
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+const getEmployeeCoverage = (idOrName) =>
+  employees.filter((e) => e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName
+  || idOrName === undefined)
+    .reduce((ac, el, i, o, fN = el.firstName, lN = el.lastName, eRf = el.responsibleFor) =>
+      ({ ...ac, [`${fN} ${lN}`]: eRf.reduce((a, e) => [...a, getSpeciesByIds(e)[0].name], []) }),
+    {});
 
 module.exports = {
   calculateEntry,
