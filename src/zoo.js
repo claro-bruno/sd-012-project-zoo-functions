@@ -54,6 +54,18 @@ function isManager(id) {
 
 function calculateEntry(entrants = 0) {
   if (!entrants) return entrants;
+  let total = 0;
+  const keysEntries = Object.keys(entrants); // cria array com as chaves do objeto
+  keysEntries.forEach((key) => {
+    if (key === 'Adult') {
+      total += entrants[key] * data.prices.Adult;
+    } else if (key === 'Child') {
+      total += entrants[key] * data.prices.Child;
+    } else {
+      total += entrants[key] * data.prices.Senior;
+    }
+  });
+  return total;
 }
 
 // function getAnimalMap(options) {
