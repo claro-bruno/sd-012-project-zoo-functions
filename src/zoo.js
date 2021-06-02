@@ -8,12 +8,11 @@ eslint no-unused-vars: [
   }
 ]
 */
-
+const { species } = require('./data');
 const data = require('./data')
 
 function getSpeciesByIds(...ids) {
-    const searcher = ids.map((id) => data.species.find((specie) => specie.id === id )),
-    return searcher;
+    return data.species.filter((animal) => ids.find((animalId) => animalId === animal.id)); 
   }
 
 
