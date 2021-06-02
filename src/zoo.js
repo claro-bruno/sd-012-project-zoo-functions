@@ -131,12 +131,16 @@ const imput = (emp) => {
   return obj;
 };
 
+const sortObj = (obj) => {
+  return obj.sort((a, b) => (a.firstName > b.firstName)
+? 1 : ((b.firstName > a.firstName) ? -1 : 0));
+}
+
 const getEmployeeCoverage = (idOrName) => {
   let obj = {};
   const array = [];
   if (idOrName === undefined) {
-    employees.sort((a, b) => (a.firstName > b.firstName)
-    ? 1 : ((b.firstName > a.firstName) ? -1 : 0));
+    employees = sortObj(employees);
     employees.forEach((employee) => {
       array.push(imput(employee));
     });
