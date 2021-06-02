@@ -82,8 +82,6 @@ const calculateEntry = (entrants) => {
   return adult + child + senior;
 };
 
-console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
-
 // function getAnimalMap(options) {
 //   // seu código aqui
 // }
