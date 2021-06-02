@@ -25,16 +25,9 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) return {};
-  // eslint-disable-next-line array-callback-return
-  return data.employees.find((employee) => {
-    if (employee.firstName === employeeName || employee.lastName === employeeName) {
-      return employee;
-    }
-  });
+  return data.employees.find(({ firstName, lastName }) => (firstName === employeeName
+     || lastName === employeeName));
 }
-console.log(getEmployeeByName());
-console.log(getEmployeeByName('Emery'));
-console.log(getEmployeeByName('Wishart'));
 
 /*
 function createEmployee(personalInfo, associatedWith) {
