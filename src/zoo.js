@@ -34,6 +34,8 @@ console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce')); */
 
 function getAnimalsOlderThan(animal, minAge) {
   // seu código aqui
+  const findAnimls = data.species.find((specie) => specie.name === animal);
+  return findAnimls.residents.every((resident) => resident.age >= minAge);
 }
 
 // function getEmployeeByName(employeeName) {
