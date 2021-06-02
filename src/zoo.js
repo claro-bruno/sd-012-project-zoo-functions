@@ -53,14 +53,12 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   //  seu código aqui
-  const manager = managers || [];
-  const responsibleFore = responsibleFor || [];
   employees.push({
     id,
     firstName,
     lastName,
-    manager,
-    responsibleFore,
+    managers: managers || [],
+    responsibleFor: responsibleFor || [],
   });
   return employees;
 }
