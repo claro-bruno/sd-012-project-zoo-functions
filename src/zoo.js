@@ -95,7 +95,7 @@ const getLocation = () => {
 
 const getBySex = (speciesName, residents, sexType) => ({ [speciesName]: residents
   .filter(({ sex }) => sex === sexType)
-  .map(({ name, sex }) => name) });
+  .map(({ name }) => name) });
 
 const getByName = (sexType, sorted) => {
   const result = {};
