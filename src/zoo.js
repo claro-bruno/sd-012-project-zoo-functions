@@ -42,16 +42,14 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
-/* function isManager(id) {
+function isManager(id) {
   // seu código aqui
-  const stephanieId = '9e7d4524-363c-416a-8759-8aa7e50c0992';
-  const olaId = 'fdb2543b-5662-46a7-badc-93d960fdc0a8';
-  const burlId = '0e7b460e-acf4-4e17-bcb3-ee472265db83';
+  const managerIds = ['9e7d4524-363c-416a-8759-8aa7e50c0992',
+    'fdb2543b-5662-46a7-badc-93d960fdc0a8',
+    '0e7b460e-acf4-4e17-bcb3-ee472265db83'];
 
-  const employeeObj = employees.filter((employee) => employee.id === id)[0];
-  return employeeObj.every((anemal) => anemal.age > age)
+  return managerIds.some((managerId) => managerId === id);
 }
-console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992')) */
 
 /* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
@@ -104,8 +102,8 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   /* getEmployeeCoverage,
-  addEmployee,
-  isManager, */
+  addEmployee, */
+  isManager,
   getAnimalsOlderThan,
   /* getOldestFromFirstSpecies,
   increasePrices, */
