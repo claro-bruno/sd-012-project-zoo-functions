@@ -15,9 +15,7 @@ function getSpeciesByIds(...ids) {
   // seu código aqui
   const { species } = data;
 
-  const specieList = species.filter((item) => ids.find((item2) => item.id === item2));
-
-  return specieList;
+  return species.filter((item) => ids.find((item2) => item.id === item2));
 }
 
 /* function getAnimalsOlderThan(animal, age) {
