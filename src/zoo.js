@@ -36,9 +36,15 @@ const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
   };
 };
 
-function countAnimals(species) {
-  // seu código aqui
-}
+const countAnimals = (spcName) => (spcName ? species.find((e) => e.name === spcName).residents
+  .length : species.reduce((e, a) => ({ ...e, [a.name]: a.residents.length }), {}));
+
+// obj = {names:'nome',residents:[1,2,3,4]}
+
+// const tryer = (e) => {
+//   return {[e.names] : e.residents.length}
+// }
+// console.log(tryer(obj));
 
 function calculateEntry(entrants) {
   // seu código aqui
