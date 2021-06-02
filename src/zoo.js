@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { species, employees, prices } = data; // adicionei o employee e prices para buscar o data.employees e data.prices.
+const { species, employees, prices, hours } = data; // adicionei o employee e prices para buscar o data.employees e data.prices. hours para data.hours.
 
 function getSpeciesByIds(...ids) {
   // ...ids retorna um array de argumentos, caso não seja passado nenhum argumento, ids será um array vazio.
@@ -85,14 +85,53 @@ function calculateEntry(entrants) {
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function getAnimalMap(options = { includeNames: false, sex: 'all', sorted: false }) {
+  const { includeNames, sex, sorted } = options;
+
+  const objDefault = {};
+  objDefault.NE = species.filter((element) => element.location === 'NE').map((element) => element.name);
+  objDefault.NW = species.filter((element) => element.location === 'NW').map((element) => element.name);
+  objDefault.SE = species.filter((element) => element.location === 'SE').map((element) => element.name);
+  objDefault.SW = species.filter((element) => element.location === 'SW').map((element) => element.name);
+  // verifica se o argumento não foi dado ou includeNames = false.
+  if (includeNames === false) {
+    return objDefault;
+  }
+
+  const neAnimal = species.filter((element) => element.location === 'NE');
+  const nwAnimal = species.filter((element) => element.location === 'NW');
+  const seAnimal = species.filter((element) => element.location === 'SE');
+  const swAnimal = species.filter((element) => element.location === 'SW');
+
+  if (includeNames === true) {
+    objDefault.NE = neAnimal.map((element) => element.residents.map((resident) => resident.name));
+    objDefault.NW = nwAnimal.map((element) => element.residents.map((resident) => resident.name));
+    objDefault.SE = seAnimal.map((element) => element.residents.map((resident) => resident.name));
+    objDefault.SW = swAnimal.map((element) => element.residents.map((resident) => resident.name));
+  }
+  return objDefault;
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const objHours = {};
+  const keys = Object.keys(hours);
+  keys.forEach((element) => {
+    if (element === 'Monday') {
+      objHours[element] = 'CLOSED';
+    } else {
+      objHours[element] = `Open from ${hours[element].open}am until ${hours[element].close - 12}pm`;
+    }
+  });
+  // verifica se não tem parâmetro.
+  if (dayName === undefined) {
+    return objHours;
+  }
+  if (dayName === 'Monday') {
+    return { [dayName]: 'CLOSED' };
+  }
+  return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
-
+console.log(getSchedule('Tuesday'));
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
