@@ -34,11 +34,12 @@ function getEmployeeByName(employeeName) {
     employee.lastName === employeeName || employee.firstName === employeeName;
   return data.employees.find(findEmployee);
 }
-console.log(getEmployeeByName('Emery'));
+// console.log(getEmployeeByName('Emery'));
 
-// function createEmployee() {
-//   // seu código aqui personalInfo, associatedWith
-// }
+function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
+}
 
 // function isManager() {
 //   // seu código aqui id
@@ -89,5 +90,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
