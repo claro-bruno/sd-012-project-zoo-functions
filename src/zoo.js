@@ -41,12 +41,16 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-console.log(createEmployee({id: 'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1', firstName: 'Nigel', lastName: 'Nelson',}, {managers: ['burlId', 'olaId'],
-  responsibleFor: ['lionId', 'tigersId']}));
+// console.log(createEmployee({id: 'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1', firstName: 'Nigel', lastName: 'Nelson',}, {managers: ['burlId', 'olaId'],
+//   responsibleFor: ['lionId', 'tigersId']}));
 
 function isManager(id) {
-  // seu código aqui
+  const manager = data.employees.map((key) => key.managers.some((value) => value === id));
+  const ismanager = manager.some((verify) => verify === true);
+  return ismanager;
 }
+
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db834'));
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
