@@ -59,11 +59,12 @@ function countAnimals(specie) {
   return species.find((item) => item.name === specie).residents.length;
 }
 
-/*
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
 }
+console.log(calculateEntry());
 
+/*
 function getAnimalMap(options) {
   // seu código aqui
 }
@@ -101,7 +102,7 @@ function getEmployeeCoverage(idOrName) {
 } */
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   getSchedule,
   countAnimals,
   // getAnimalMap,
