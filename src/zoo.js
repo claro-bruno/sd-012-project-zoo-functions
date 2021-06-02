@@ -9,11 +9,11 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+const data = require('./data');
 
 const getSpeciesByIds = (...ids) => {
   if (!ids) return [];
-  const filtFunction = species.filter((specie) => ids.includes(specie.id));
+  const filtFunction = data.species.filter((specie) => ids.includes(specie.id));
   return filtFunction;
 };
 console.log(getSpeciesByIds());
