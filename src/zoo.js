@@ -50,8 +50,16 @@ function isManager(id) {
     .some((manager) => manager === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+// prettier-ignore
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) {
+  const obj = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(obj);
 }
 
 function countAnimals(species) {
