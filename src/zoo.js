@@ -28,47 +28,47 @@ function getEmployeeByName(employeeName) {
   if (employeeName == null) {
     return {};
   }
-  return data.employees.find((employee) => 
-  employee.firstName === employeeName || employee.lastName === employeeName);
+  return data.employees.find((employee) =>
+    employee.firstName === employeeName || employee.lastName === employeeName);
 }
-
-function createEmployee(personalInfo, associatedWith) {
+// personalInfo, associatedWith
+function createEmployee() {
   // seu código aqui
 }
-
-function isManager(id) {
+// id
+function isManager() {
   // seu código aqui
 }
-
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+// id, firstName, lastName, managers, responsibleFor
+function addEmployee() {
   // seu código aqui
 }
-
-function countAnimals(species) {
+// species
+function countAnimals() {
   // seu código aqui
 }
-
-function calculateEntry(entrants) {
+// entrants
+function calculateEntry() {
   // seu código aqui
 }
-
-function getAnimalMap(options) {
+// options
+function getAnimalMap() {
   // seu código aqui
 }
-
-function getSchedule(dayName) {
+// dayName
+function getSchedule() {
   // seu código aqui
 }
-
-function getOldestFromFirstSpecies(id) {
+// id
+function getOldestFromFirstSpecies() {
   // seu código aqui
 }
-
-function increasePrices(percentage) {
+// percentage
+function increasePrices() {
   // seu código aqui
 }
-
-function getEmployeeCoverage(idOrName) {
+// idOrName
+function getEmployeeCoverage() {
   // seu código aqui
 }
 
