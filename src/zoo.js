@@ -144,9 +144,33 @@ function getAnimalMap(options) {
   return animalMapNoParameter(regions);
 }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+// Requisito 10
+
+const getDaySchedule = (day) => {
+  let { open, close } = day;
+  if (open === close) return 'CLOSED';
+  if (open > 12) open -= 12;
+  if (close > 12) close -= 12;
+  return `Open from ${open}am until ${close}pm`;
+};
+
+function getSchedule(dayName) {
+  const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Monday } = data.hours;
+  if (!dayName) {
+    return {
+      Tuesday: getDaySchedule(Tuesday),
+      Wednesday: getDaySchedule(Wednesday),
+      Thursday: getDaySchedule(Thursday),
+      Friday: getDaySchedule(Friday),
+      Saturday: getDaySchedule(Saturday),
+      Sunday: getDaySchedule(Sunday),
+      Monday: getDaySchedule(Monday),
+    };
+  }
+  const dayKey = dayName;
+  const { [dayName]: dayObj } = data.hours;
+  return { [dayKey]: getDaySchedule(dayObj) };
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -162,7 +186,7 @@ function getAnimalMap(options) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   getAnimalMap,
   getSpeciesByIds,
