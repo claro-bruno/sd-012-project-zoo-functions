@@ -34,9 +34,11 @@ function getEmployeeByName(employeeName) {
   return employeeFName || employeeLName;
 }
 
-function createEmployee() {
-// seu código aqui personalInfo, associatedWith
-
+function createEmployee(personalInfo, associatedWith) {
+// seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 
 function isManager() {
