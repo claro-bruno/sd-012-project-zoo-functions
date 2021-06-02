@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -82,11 +82,41 @@ function countAnimals(animal) {
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (entrants === undefined) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const { Adult: priceAdult, Senior: priceSenior, Child: priceChild } = prices;
+  return Adult * priceAdult + Child * priceChild + Senior * priceSenior;
 }
 
 function getAnimalMap(options) {
   // seu código aqui
+  const regions = ['NE', 'NW', 'SE', 'SW'];
+  const getAnimals = () => regions.reduce((accumulator, current) => {
+    accumulator[current] = species.filter((getSpecies) =>
+      getSpecies.location === current).map((getNames) => getNames.name);
+    return accumulator;
+  }, {});
+  if (options === undefined) {
+    return getAnimals();
+  }
+  const { includeNames = false, sorted = false, sex = '' } = options;
+  if (includeNames === true) {
+    const getAnimalsWNames = () => regions.reduce((accumulator, current) => {
+      accumulator[current] = species.filter((getSpecies) =>
+        getSpecies.location === current).map((getNames) => {
+        const object = {};
+        object[getNames.name] = getNames.residents.map((getSpecimen) => getSpecimen.name);
+        return object;
+      });
+      return accumulator;
+    }, {});
+    return getAnimalsWNames();
+  }
 }
+
+console.log(getAnimalMap({ includeNames: true }));
 
 function getSchedule(dayName) {
   // seu código aqui
