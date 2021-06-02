@@ -94,33 +94,72 @@ function calculateEntry(entrants) {
   return value;
 }
 
-// Retorna animais categorizados por localização;
-// const locationAnimalMap = () => species.reduce((acc, specie) => {
-//   const specieNames = species.reduce((arrNames, specieMap) => {
-//     if (specieMap.location === specie.location)arrNames.push(specieMap.name);
-//     return arrNames;
-//   }, []);
-//   acc[specie.location] = specieNames;
-//   return acc;
-// }, {});
+// Retorna animais categorizados por localização
+const locationAnimalMap = () => species.reduce((acc, specie) => {
+  const specieNames = species.reduce((arrNames, specie2) => {
+    if (specie2.location === specie.location)arrNames.push(specie2.name);
+    return arrNames;
+  }, []);
+  acc[specie.location] = specieNames;
+  return acc;
+}, {});
 
-// // Nomes dos animais por localização
-// const nameForLocation = () => species.reduce((acc, specie) => {
-//   const arrSpecies = [];
+// Nomes dos animais por localização em ordem alfabética;
+const animalLocation = locationAnimalMap();
+const localKey = Object.keys(locationAnimalMap());
+const sortLocation = (options) => localKey.reduce((acc, key) => {
+  acc[key] = animalLocation[key].map((specieName) => {
+    const findSpecie = species.find((specie) => specie.name === specieName);
+    let obj;
+    if (options.sorted === true) {
+      obj = { [specieName]: findSpecie.residents.map((resident) => resident.name).sort() };
+    } else {
+      obj = { [specieName]: findSpecie.residents.map((resident) => resident.name) };
+    }
+    return obj;
+  });
+  return acc;
+}, {});
 
-//   acc[specie.location] = arrSpecies;
-//   return acc;
-// }, {});
+// Retorna nomes dos animais por sexo e localização
+const maleOrFemale = (options, specieName) => {
+  const findSpecie = species.find((specie) => specie.name === specieName);
+  const male = findSpecie.residents.filter((resident) => (resident.sex === 'male'));
+  const female = findSpecie.residents.filter((resident) => (resident.sex === 'female'));
+  if (options.sex === 'male') {
+    return { [specieName]: male.map((resident) => resident.name) };
+  }
+  return { [specieName]: female.map((resident) => resident.name) };
+};
+// Retorna nomes dos animais em ordem alfabética por sexo e localização
+const maleOrFemaleSort = (options, specieName) => {
+  const findSpecie = species.find((specie) => specie.name === specieName);
+  const male = findSpecie.residents.filter((resident) => (resident.sex === 'male'));
+  const female = findSpecie.residents.filter((resident) => (resident.sex === 'female'));
+  if (options.sex === 'male') {
+    return { [specieName]: male.map((resident) => resident.name).sort() };
+  }
+  return { [specieName]: female.map((resident) => resident.name).sort() };
+};
+// Executa as funções maleOrFemale
+const forSex = (options) => localKey.reduce((acc, key) => {
+  acc[key] = animalLocation[key].map((specieName) => {
+    if (options.sorted === true) {
+      return maleOrFemaleSort(options, specieName);
+    }
+    return maleOrFemale(options, specieName);
+  });
+  return acc;
+}, {});
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-//   if (options === undefined) {
-//     return locationAnimalMap();
-//   }
-//   if (options.includeNames === true) {
-//     return nameForLocation();
-//   }
-// }
+// Retorna lista de nomes dos animais seguindo requisitos estabelecidos
+function getAnimalMap(options) {
+  // seu código aqui
+  if (!options) return locationAnimalMap();
+  if (options.includeNames === true && options.sex) return forSex(options);
+  if (options.includeNames === true) return sortLocation(options);
+  return locationAnimalMap();
+}
 
 // Retorna todos os dias e horários de funcionamento
 const returnHours = () => {
@@ -218,7 +257,7 @@ module.exports = {
   addEmployee,
   countAnimals,
   calculateEntry,
-  // getAnimalMap,
+  getAnimalMap,
   getSchedule,
   getOldestFromFirstSpecies,
   increasePrices,
