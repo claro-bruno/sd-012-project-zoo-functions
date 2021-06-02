@@ -61,13 +61,70 @@ function calculateEntry(entrants) {
   return sumEntry(Object.entries(entrants));
 }
 
+/* const getSpeciesByLocation = (species, location) => {
+  const specieByLocation = species.filter((specie) => specie.location === location);
+  return specieByLocation.map((specie) => specie.name);
+}; */
+
+/* const getSpeciesWithName = (species, location) => {
+  const specieWithName = species.filter((specie) => specie.location === location).map((specie) => {
+    const objectSpecie = { [specie.name]: (specie.residents.map((resident) => resident.name)) };
+    return objectSpecie;
+  });
+  return specieWithName;
+}; */
+
+/* const getSpeciesWithNameSorted = (species, location) => {
+  const specieSorted = species.filter((specie) => specie.location === location).map((specie) => {
+    const objectSpecieSorted = { [specie.name]: (specie.residents).sort((a, b) => {
+      if (b.name > a.name) return -1;
+      return 0;
+    }).map((resident) => resident.name) };
+    return objectSpecieSorted;
+  });
+  return specieSorted;
+}; */
+
+/* const callAnimalMapFunction = (animalMapFunction) => ({
+  NE: animalMapFunction(data.species, 'NE'),
+  NW: animalMapFunction(data.species, 'NW'),
+  SE: animalMapFunction(data.species, 'SE'),
+  SW: animalMapFunction(data.species, 'SW'),
+}); */
+
 /* function getAnimalMap(options) {
-  // seu código aqui
+  const optionDefault = (typeof (options) === 'undefined');
+  if (optionDefault) {
+    return callAnimalMapFunction(getSpeciesByLocation);
+  }
+  const optionNames = (options.includeNames === true && Object.entries(options).length === 1);
+  if (optionNames) {
+    return callAnimalMapFunction(getSpeciesWithName);
+  }
+  const optionSorted = (options.includeNames === true && options.sorted === true);
+  if (optionSorted) {
+    return callAnimalMapFunction(getSpeciesWithNameSorted);
+  }
+  // const optionSex = ();
+  // const optionSexSorted = ();
 } */
 
-/* function getSchedule(dayName) {
-  // seu código aqui
-} */
+const formatSchedule = (hour) => {
+  if (hour[0] === 'Monday') return ({ [hour[0]]: 'CLOSED' });
+  const open = parseInt(hour[1].open, 10);
+  const close = parseInt(hour[1].close, 10) - 12;
+  return ({ [hour[0]]: `Open from ${open}am until ${close}pm` });
+};
+
+const formatScheduleDefault = (hours) => {
+  const format = hours.map((hour) => formatSchedule(hour));
+  return format.reduce((prevValue, currValue) => Object.assign(prevValue, currValue), {});
+};
+
+function getSchedule(dayName) {
+  if (typeof (dayName) === 'undefined') return formatScheduleDefault(Object.entries(data.hours));
+  return formatSchedule(Object.entries(data.hours).find((hour) => hour[0] === dayName));
+}
 
 /* function getOldestFromFirstSpecies(id) {
   // seu código aqui
@@ -83,7 +140,7 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
