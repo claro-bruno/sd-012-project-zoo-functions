@@ -82,16 +82,54 @@ function calculateEntry(entrants) {
   return (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
 }
 
-// function getAnimalMap(options) {
-//   if (!options) {
-//     return species.map((specie) => {
-//       const { name, location } = specie;
-//       return { [location]: name };
-//     });
-//   }
-// }
+const locations = species.map((specie) => specie.location);
 
-// console.log(getAnimalMap());
+const getSpeciesByLocation = () => {
+  const obj = {};
+  locations.forEach((loc) => {
+    const getSpeciesLocstion = species
+      .filter(({ location }) => location === loc).map(({ name }) => name);
+    obj[loc] = getSpeciesLocstion;
+  });
+  return obj;
+};
+
+const filteredSpecies = (specieName, residents, sexType, sorted) => {
+  let newArr = [];
+
+  if (sexType !== '') {
+    newArr = { [specieName]:
+      residents.filter(({ sex }) => sex === sexType)
+        .map(({ name }) => name),
+    };
+  } else {
+    newArr = { [specieName]: residents.map(({ name }) => name) };
+  }
+  if (sorted) newArr[specieName].sort();
+  return newArr;
+};
+
+const getSpeciesByName = (sexType, sorted) => {
+  const obj = {};
+  locations.forEach((loc) => {
+    const speciesLocation = [];
+    species
+      .filter(({ location }) => location === loc)
+      .forEach(({ name: specieName, residents }) => {
+        speciesLocation
+          .push(filteredSpecies(specieName, residents, sexType, sorted));
+      });
+    obj[loc] = speciesLocation;
+  });
+  return obj;
+};
+
+function getAnimalMap(options) {
+  if (!options) return getSpeciesByLocation();
+  const { includeNames = false, sorted = false, sex = '' } = options;
+  if (includeNames) return getSpeciesByName(sex, sorted);
+  return getSpeciesByLocation();
+}
 
 function getSchedule(dayName) {
   const availableHours = {
@@ -150,13 +188,11 @@ function getEmployeeCoverage(idOrName) {
   return obj;
 }
 
-console.log(getEmployeeCoverage());
-
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
