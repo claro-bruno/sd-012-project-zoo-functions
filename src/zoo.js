@@ -39,10 +39,17 @@ function getEmployeeByName(employeeName) {
     .find((func) => func.firstName === employeeName || func.lastName === employeeName);
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
-
+function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui
+  data.employees.push({
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  });
+  return data.employees[data.employees.length - 1];
+}
 // function isManager(id) {
 //   // seu código aqui
 // }
@@ -92,5 +99,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
