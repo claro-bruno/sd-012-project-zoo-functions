@@ -11,6 +11,16 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const locations = ['NE', 'NW', 'SE', 'SW'];
+const animalMap = {};
+
+const sortAnimals = (sorted, animalsArray) => {
+  if (sorted) {
+    return animalsArray.sort();
+  }
+  return animalsArray;
+};
+
 function getSpeciesByIds(...ids) {
   // seu código aqui
   let speciesFiltred = [];
@@ -95,34 +105,36 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return totalPrice;
 }
 
-// function getAnimalMap() {
-//   // seu código aqui
-//   const animalMap = {
-//     NE: [],
-//     NW: [],
-//     SE: [],
-//     SW: [],
-//   };
-//   data.species.forEach((animal) => {
-//     switch (animal.location) {
-//       case 'NE':
-//         animalMap.NE = [...animalMap.NE, animal.name];
-//         break;
-//       case 'NW':
-//         animalMap.NW = [...animalMap.NW, animal.name];
-//         break;
-//       case 'SE':
-//         animalMap.SE = [...animalMap.SE, animal.name];
-//         break;
-//       case 'SW':
-//         animalMap.SW = [...animalMap.SW, animal.name];
-//         break;
-//       default:
-//         console.log('deu ruim');
-//     }
-//   });
-//   return animalMap;
-// }
+function getAnimalMap({ includeNames = false, sex = '', sorted = false } = '') {
+  // seu código aqui
+  locations.forEach((location) => {
+    const animalsByLocation = data.species.filter(
+      (animal) => animal.location === location,
+    );
+    if (includeNames) {
+      animalMap[location] = animalsByLocation.map((animal) => {
+        const animalResidents = {};
+        let animalResidentsMap;
+        if (sex !== '') {
+          animalResidentsMap = animal.residents
+            .filter((resident) => resident.sex === sex)
+            .map((resident) => resident.name);
+        } else {
+          animalResidentsMap = animal.residents.map(
+            (resident) => resident.name,
+          );
+        }
+        animalResidents[animal.name] = sortAnimals(sorted, animalResidentsMap);
+        return animalResidents;
+      });
+    } else {
+      animalMap[location] = animalsByLocation.map((animal) => animal.name);
+    }
+  });
+  return animalMap;
+}
+const options = { includeNames: true, sorted: false };
+console.log(getAnimalMap(options));
 
 function getSchedule(dayName = '') {
   // seu código aqui
@@ -169,7 +181,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
