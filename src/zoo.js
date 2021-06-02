@@ -114,8 +114,27 @@ function getAnimalMap(options) {
   return animalObject();
 }
 
+const { hours } = require('./data');
+
+const days = () => {
+  const obj = {};
+  const horas = Object.entries((hours));
+  horas.forEach((hour) => {
+    if (hour[1].close === 0) obj[hour[0]] = 'CLOSED';
+    else obj[hour[0]] = `Open from ${hour[1].open}am until ${hour[1].close - 12}pm`;
+  });
+  return obj;
+};
+
 function getSchedule(dayName) {
   // seu código aqui
+  if (!dayName) {
+    return days();
+  }
+  const obj = days();
+  const array = Object.entries(obj);
+  const resultF = array.find((a) => a[0] === dayName);
+  return { [resultF[0]]: resultF[1] };
 }
 
 function getOldestFromFirstSpecies(id) {
