@@ -93,9 +93,18 @@ const getLocation = () => {
   return result;
 };
 
-const getBySex = (speciesName, residents, sexType) => ({ [speciesName]: residents
-  .filter(({ sex }) => sex === sexType)
-  .map(({ name }) => name) });
+const createResult = (speciesName, residents, sexType, sorted) => {
+  let result = [];
+  if (sexType !== '') {
+    result = { [speciesName]: residents
+      .filter(({ sex }) => sex === sexType)
+      .map(({ name }) => name) };
+  } else {
+    result = { [speciesName]: residents.map(({ name }) => name) };
+  }
+  if (sorted) result[speciesName].sort();
+  return result;
+};
 
 const getByName = (sexType, sorted) => {
   const result = {};
@@ -104,14 +113,7 @@ const getByName = (sexType, sorted) => {
     data.species
       .filter(({ location }) => location === loc)
       .forEach(({ name: speciesName, residents }) => {
-        let teste = [];
-        if (sexType !== '') {
-          teste = getBySex(speciesName, residents, sexType);
-        } else {
-          teste = { [speciesName]: residents.map(({ name }) => name) };
-        }
-        if (sorted) teste[speciesName].sort();
-        locationAnimals.push(teste);
+        locationAnimals.push(createResult(speciesName, residents, sexType, sorted));
       });
     result[loc] = locationAnimals;
   });
