@@ -131,17 +131,17 @@ const imput = (emp) => {
   return obj;
 };
 
-const sortObj = (obj) => {
-  return obj.sort((a, b) => (a.firstName > b.firstName)
-? 1 : ((b.firstName > a.firstName) ? -1 : 0));
-}
+const sortObj = (obj) => obj.sort((a, b) => {
+  if (a.firstName > b.firstName) return 1;
+  if (b.firstName > a.firstName) return -1;
+  return 0;
+});
 
 const getEmployeeCoverage = (idOrName) => {
   let obj = {};
   const array = [];
   if (idOrName === undefined) {
-    employees = sortObj(employees);
-    employees.forEach((employee) => {
+    sortObj(employees).forEach((employee) => {
       array.push(imput(employee));
     });
     return array;
