@@ -24,8 +24,11 @@ function getSpeciesByIds(...ids) {
   return species;
 }
 
-function getAnimalsOlderThan(/* animal, age */) {
+function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const getAnimal = data.species.find((specie) => specie.name === animal);
+  const minimalAge = getAnimal.residents.every((resident) => resident.age >= age);
+  return minimalAge;
 }
 
 function getEmployeeByName(/* employeeName */) {
