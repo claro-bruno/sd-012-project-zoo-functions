@@ -84,6 +84,7 @@ function calculateEntry(entrants) {
 // }
 
 function getSchedule(dayName) {
+  // refatorar essa funçao assim que possivel;
   const programation = {
     Tuesday: 'Open from 8am until 6pm',
     Wednesday: 'Open from 8am until 6pm',
@@ -93,6 +94,7 @@ function getSchedule(dayName) {
     Sunday: 'Open from 8am until 8pm',
     Monday: 'CLOSED',
   };
+
   if (dayName === undefined) {
     return programation;
   }
@@ -100,9 +102,12 @@ function getSchedule(dayName) {
   return { [dayName]: programation[dayName] };
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  const firstResponsible = data.employees.find((element) => element.id === id).responsibleFor[0];
+  const searchAnimal = (id2) => data.species.find((element) => element.id === id2).residents;
+  const oldResident = searchAnimal(firstResponsible).sort((a, b) => b.age - a.age)[0];
+  return Object.values(oldResident);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -123,7 +128,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
