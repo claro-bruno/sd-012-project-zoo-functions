@@ -37,17 +37,17 @@ function getEmployeeByName(employeeName) {
 }
 // console.log(getEmployeeByName('Wishart'))
 
-function createEmployee(personalInfo, associatedWith) {
+// function createEmployee(personalInfo, associatedWith) {
   // const { id, firstName, lastName } = personalInfo;
   // console.log(personalInfo)
   // const { managers, responsibleFor } = associatedWith;
   // console.log(associatedWith)
   // const newEmployee = {personalInfo, associatedWith};
   // return newEmployee;
-}
+// }
 
 function isManager(id) {
-  const checkId = employees.some((employee, index) => employee.managers[index] === id)
+  const checkId = employees.some((employee, index) => employee.managers[index] === id);
   return checkId;
 }
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'))
@@ -59,51 +59,53 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  })
+  });
   employees.push(newEmployee);
   return newEmployee;
 }
 
-function countAnimals(species) {
-  // seu código aqui
-}
+// function countAnimals(specie) {
+//   ///
+// }
 
 function calculateEntry(entrants) {
-  // seu código aqui
-}
+  const { Adult, Child, Senior } = entrants
+  if (!entrants) return 0;
+  entrants.reduce((acc, act) => {})
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
 
-function getSchedule(dayName) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function getSchedule(dayName) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function getOldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
+
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+//   calculateEntry,
+//   getSchedule,
+//   countAnimals,
+//   getAnimalMap,
   getSpeciesByIds,
-  getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeByName,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
