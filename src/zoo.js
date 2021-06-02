@@ -42,12 +42,35 @@ const countAnimals = (spcName) => (spcName ? species.find((e) => e.name === spcN
 const calculateEntry = (entrants) => (entrants ? Object.values(entrants)
   .reduce((acc, cv, i) => acc + cv * prices[Object.keys(entrants)[i]], 0) : 0);
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// Funções para atender ao requisito 9 getAnimalMap
+const getN = (e) => e.name;
+
+const getS = (sex) => (e) => ((sex) ? (e.sex === sex) : e);
+
+const getAnimalMapSort = (sex) => species.reduce((a, e, i, o, loc = e.location) => (a[loc]
+  ? { ...a, [loc]: [...a[loc], { [e.name]: [...e.residents.filter(getS(sex)).map(getN).sort()] }] }
+  : ({ ...a, [loc]: ([{ [e.name]: [...e.residents.filter(getS(sex)).map(getN).sort()] }]) })), {});
+
+const getAnimalMapNamed = (sex) => species.reduce((a, e, i, o, loc = e.location) => (a[loc]
+  ? { ...a, [loc]: [...a[loc], { [e.name]: [...e.residents.filter(getS(sex)).map(getN)] }] }
+  : ({ ...a, [loc]: ([{ [e.name]: [...e.residents.filter(getS(sex)).map(getN)] }]) })), {});
+
+const getAnimalMapBasic = () => species.reduce((a, e, i, o, loc = e.location) => (a[loc]
+  ? { ...a, [loc]: [...a[loc], e.name] } : ({ ...a, [loc]: [(e.name)] })), {});
+
+const checkSex = (options) => (options && options.sex ? options.sex : !1);
+
+const getAnimalMap = (options) => {
+  const sex = checkSex(options);
+  if (options && options.includeNames) {
+    if (options.sorted) { return getAnimalMapSort(sex); }
+    return getAnimalMapNamed(sex);
+  }
+  return getAnimalMapBasic();
+};
 
 function getSchedule(dayName) {
-  // seu código aqui
+  hours.reduce((a,e))
 }
 
 function getOldestFromFirstSpecies(id) {
