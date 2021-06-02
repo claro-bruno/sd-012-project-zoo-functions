@@ -28,7 +28,7 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  if (employeeName === undefined) return {};
+  if (!employeeName) return {};
   return data.employees.find((employee) =>
     employee.firstName === employeeName || employee.lastName === employeeName);
 }
@@ -65,7 +65,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species) {
-  if (species === undefined) {
+  if (!species) {
     const animalsObj = {};
     data.species.forEach((specie) => {
       animalsObj[specie.name] = specie.residents.length;
@@ -76,7 +76,7 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants = 0) {
-  if (entrants === undefined) return entrants;
+  if (!entrants) return entrants;
   const entrantsKeys = Object.keys(entrants);
   let totalValue = 0;
   entrantsKeys.forEach((key) => {
@@ -174,8 +174,8 @@ const createNamesMap = (sorted, sex) => {
 };
 
 function getAnimalMap(options) {
-  if (options === undefined) { return defaultMap; }
-  const { includeNames = false, sorted = false, sex = undefined } = options;
+  if (!options) { return defaultMap; }
+  const { includeNames = false, sorted = false, sex } = options;
   if (includeNames) {
     return createNamesMap(sorted, sex);
   } if (!includeNames) { return defaultMap; }
@@ -192,7 +192,7 @@ function getSchedule(dayName) {
       schedule[day] = 'CLOSED';
     }
   });
-  if (dayName === undefined) { return schedule; }
+  if (!dayName) { return schedule; }
   if (dayName !== 'Monday') {
     const getHour = data.hours[dayName];
     return {
@@ -244,9 +244,7 @@ const findAndSetEmployeeCoverage = (idOrName) => {
   const fullName = setFullName(employee);
   const animals = employee.responsibleFor.map((animalsId) =>
     (data.species.find(({ id }) => id === animalsId)).name);
-  return {
-    [fullName]: animals,
-  };
+  return { [fullName]: animals };
 };
 
 function getEmployeeCoverage(idOrName) {
