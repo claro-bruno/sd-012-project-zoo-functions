@@ -24,13 +24,14 @@ function getAnimalsOlderThan(nomes, idade) {
 }
 
 function getEmployeeByName(nome) {
-  if (nome === 'undefined') {
-    return [];
+  if (nome === undefined) {
+    return {};
   }
   const ml = data.employees;
   const retorno = ml.find((employee) => employee.firstName === nome || employee.lastName === nome);
   return retorno;
 }
+console.log(getEmployeeByName());
 
 function createEmployee() {
   // seu código aqui
