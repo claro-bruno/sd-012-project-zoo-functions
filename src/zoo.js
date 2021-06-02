@@ -12,7 +12,8 @@ eslint no-unused-vars: [
 // bora começar | let's start
 
 const { species, employees, prices, hours } = require('./data');
-const data = require('./data');
+// Linha abaixo retira pois aparentemente não acrescenta ao código
+// const data = require('./data');
 
 const getSpeciesByIds = (...ids) => (ids ? species.filter((e) => ids.includes(e.id)) : []);
 
@@ -74,10 +75,11 @@ const getSchedule = (dayName, key = Object.keys(hours)) =>
     .reduce((a, e) => (e === 'Monday' ? ({ ...a, [e]: 'CLOSED' })
       : ({ ...a, [e]: `Open from ${hours[e].open}am until ${hours[e].close % 12}pm` })), {}) });
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
-// Código para increasePrices
+const getOldestFromFirstSpecies = (id) => getSpeciesByIds(employees.find((e) => e.id === id)
+  .responsibleFor[0])[0].residents.reduce((a, e) => (e.age > a[2]
+  ? [e.name, e.sex, e.age] : a), [0, 0, 0]);
+
+// Códigos para o Requisito 12
 function modPrices(e, percentage) {
   (prices[e] = Math.round(prices[e] * (1 + percentage / 100) * 100) / 100);
 }
@@ -85,6 +87,7 @@ function modPrices(e, percentage) {
 const increasePrices = (percentage, key = Object.keys(prices)) => key.forEach((e) =>
   modPrices(e, percentage));
 
+// Código para o Requisito 13
 const getEmployeeCoverage = (idOrName) =>
   employees.filter((e) => e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName
   || idOrName === undefined)
