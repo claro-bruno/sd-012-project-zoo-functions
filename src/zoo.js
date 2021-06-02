@@ -71,21 +71,32 @@ function getAnimalMap() {
 
 function getSchedule(dayName) {
   const days = {
+    Monday: 'CLOSED',
     Tuesday: 'Open from 8am until 6pm',
     Wednesday: 'Open from 8am until 6pm',
     Thursday: 'Open from 10am until 8pm',
     Friday: 'Open from 10am until 8pm',
     Saturday: 'Open from 8am until 10pm',
     Sunday: 'Open from 8am until 8pm',
-    Monday: 'CLOSED',
   };
   if (dayName !== undefined) {
     return { [dayName]: days[dayName] };
   } return days;
 }
-// id
-function getOldestFromFirstSpecies() {
-  // seu código aqui
+
+function getOldestFromFirstSpecies(id) {
+  const selectedEmployee = data.employees.find((employee) => employee.id === id);
+  const selectedSpecie = data.species.find((specie) =>
+    specie.id === selectedEmployee.responsibleFor[0]);
+  let age = 0;
+  let oldest = [];
+  selectedSpecie.residents.forEach((animal) => {
+    if (animal.age > age) {
+      age = animal.age;
+      oldest = [animal.name, animal.sex, animal.age];
+    }
+  });
+  return oldest;
 }
 // percentage
 function increasePrices() {
