@@ -76,10 +76,17 @@ const calculateEntry = (entrants) => {
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
   }
-  const adult = entrants.Adult * prices.Adult;
-  const child = entrants.Child * prices.Child;
-  const senior = entrants.Senior * prices.Senior;
-  return adult + child + senior;
+  const array = [];
+  array.push(entrants.Adult * prices.Adult);
+  array.push(entrants.Child * prices.Child);
+  array.push(entrants.Senior * prices.Senior);
+  let price = 0;
+  array.forEach((index) => {
+    if (index !== NaN) {
+      price += index;
+    }
+  });
+  return price;
 };
 
 // function getAnimalMap(options) {
