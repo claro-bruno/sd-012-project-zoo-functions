@@ -110,11 +110,15 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  // encontra o id da primeira espécie gerenciada pelo id do gerente.
   const firstSpeciesId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  // retorna um array com os residentes da specie com o id encontrado pelo firstSpeciesId
   const specieResidents = species.find((specie) => specie.id === firstSpeciesId).residents;
+  // retorna um array contendo as idades organizadas de forma decrescente dos residentes de specieResidents.
   const specieAgeSorted = specieResidents.map((resident) => resident.age).sort((a, b) => b - a);
+  // retorna o objeto do residente de maior idade de acordo com a ordenação de specieAgeSorted.
   const oldestData = specieResidents.find((resident) => resident.age === specieAgeSorted[0]);
+  // a função retorna os valores do objeto oldestData.
   return Object.values(oldestData);
 }
 
