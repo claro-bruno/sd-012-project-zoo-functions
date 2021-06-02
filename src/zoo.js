@@ -117,6 +117,20 @@ const increasePrices = (percentage) => {
   prices.Senior = Math.round(prices.Senior * unitPercentage * 100) / 100;
 };
 
+const imput = (emp) => {
+  const obj = {};
+  const array = [];
+  emp.responsibleFor.forEach((animalId) => {
+    species.forEach((specie) => {
+      if (animalId === specie.id) {
+        array.push(specie.name);
+      }
+    });
+  });
+  obj[`${emp.firstName} ${emp.lastName}`] = array;
+  return obj;
+};
+
 const getEmployeeCoverage = (idOrName) => {
   let obj = {};
   if (idOrName === undefined) {
@@ -130,20 +144,6 @@ const getEmployeeCoverage = (idOrName) => {
   obj = imput(emp);
   return obj;
 };
-
-const imput = (emp) => {
-  const obj = {};
-  const array = [];
-  emp.responsibleFor.forEach((animalId) => {
-    species.forEach((specie) => {
-      if (animalId === specie.id) {
-        array.push(specie.name);
-      }
-    });
-  });
-  obj[`${emp.firstName} ${emp.lastName}`] = array;
-  return obj;
-}
 
 module.exports = {
   calculateEntry,
