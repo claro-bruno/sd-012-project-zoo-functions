@@ -106,6 +106,7 @@ const getScheduleAux = (days, values, dayName) => {
       dayIndex = index;
       return day;
     }
+    return null;
   });
   if (values[dayIndex].open === 0) {
     obj[dayGeted] = 'CLOSED';
@@ -113,7 +114,7 @@ const getScheduleAux = (days, values, dayName) => {
     obj[dayGeted] = `Open from ${values[dayIndex].open}am until ${values[dayIndex].close - 12}pm`;
   }
   return obj;
-}
+};
 
 function getSchedule(dayName) {
   // seu código aqui
