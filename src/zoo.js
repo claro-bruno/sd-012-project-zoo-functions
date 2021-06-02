@@ -13,7 +13,7 @@ const data = require('./data');
 
 // const { species, employees, hours, prices } = data;
 
-const { species } = data;
+const { species, employees } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) {
@@ -35,11 +35,14 @@ function getAnimalsOlderThan(animal, age) {
 // Após encontrar o objeto referente ao primeiro parametro, é realizada verificação se o animal possui a idade igual ou maior ao parametro passado (representada pelo maior ou igual), nesse ponto, é utilizado o metodo every, que verifica se os elementos passam em todas as condições.
 // Tive dúvida em relação a construção da função, especificamente com o metodo every, que nao estava sendo utilizado, e consultei o repositório do meu amigo Ryan (https://github.com/tryber/sd-012-project-zoo-functions/pull/66/files).
 
-/*  function getEmployeeByName(employeeName) {
-  // seu código aqui
+function getEmployeeByName(employeeName) {
+  if (!employeeName) return {};
+  return employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
+// Resolve primeiro o caso de retornar um objeto vazio (chaves vazias) quando não houver parametro, sendo utilizada a ideia de diferença para retornar um objeto vazio. Após, utiliza o metodo find para encontrar o primeiro elemento que satisfaça a condição, no caso, ele retornará true quando encontrar o nome passado como parametro, e assim executa a arrow fuction, que pega o elemento dentro de employees e retorna  o objeto do funcionário tanto quando o parametro é referente ao primeiro nome quanto ao ultimo.
+
+/*  function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
@@ -85,7 +88,7 @@ module.exports = {
   // countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
-  // getEmployeeByName,
+  getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
