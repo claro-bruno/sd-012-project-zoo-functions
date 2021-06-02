@@ -22,7 +22,7 @@ function getAnimalsOlderThan(animal, age) {
   const animalObj = species.find((specie) => specie.name === animal);
   return animalObj.residents.every((anemal) => anemal.age > age);
 }
-console.log(getAnimalsOlderThan('lions', 4))
+
 function getEmployeeByName(employeeName) {
   // seu código aqui
   if (!employeeName) {
@@ -32,12 +32,12 @@ function getEmployeeByName(employeeName) {
    || employee.lastName === employeeName;
   return employees.find(trabalhador);
 }
-console.log(getEmployeeByName(''))
+
 /* function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-}*/
+}* /
 
-/*function isManager(id) {
+/* function isManager(id) {
   // seu código aqui
   const stephanieId = '9e7d4524-363c-416a-8759-8aa7e50c0992';
   const olaId = 'fdb2543b-5662-46a7-badc-93d960fdc0a8';
@@ -46,9 +46,9 @@ console.log(getEmployeeByName(''))
   const employeeObj = employees.filter((employee) => employee.id === id)[0];
   return employeeObj.every((anemal) => anemal.age > age)
 }
-console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992'))*/
+console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992')) */
 
-/*function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
