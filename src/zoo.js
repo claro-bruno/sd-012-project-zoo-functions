@@ -87,11 +87,28 @@ function countAnimals(species) {
   }
   return data.species.find((specie) => specie.name === species).residents.length;
 }
-/**
-function calculateEntry(entrants) {
-  // seu código aqui
+
+function sumEntry(entrants) {
+  let sum = 0;
+
+  if (entrants.Adult) {
+    sum += entrants.Adult * data.prices.Adult;
+  }
+  if (entrants.Senior) {
+    sum += entrants.Senior * data.prices.Senior;
+  }
+  if (entrants.Child) {
+    sum += entrants.Child * data.prices.Child;
+  }
+  return sum;
 }
 
+function calculateEntry(entrants) {
+  if (!entrants || Object.entries(entrants).length === 0) { return 0; }
+  return sumEntry(entrants);
+}
+
+/*
 function getAnimalMap(options) {
   // seu código aqui
 }
@@ -104,6 +121,7 @@ function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 */
+
 function increasePrices(percentage) {
   data.prices.Adult += data.prices.Adult * (percentage / 100);
   data.prices.Adult = Math.round(data.prices.Adult * 100) / 100;
@@ -118,8 +136,8 @@ function getEmployeeCoverage(idOrName) {
 }
 */
 module.exports = {
-//  calculateEntry,
-//  getSchedule,
+  calculateEntry,
+  //  getSchedule,
   countAnimals,
   //  getAnimalMap,
   getSpeciesByIds,
