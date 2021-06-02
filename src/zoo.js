@@ -169,11 +169,17 @@ console.log(increasePrices(30));
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
   if (idOrName === undefined) {
-    return employees.reduce((accumulator, current) => {
-      accumulator[`${current.firstName} ${current.lastName}`] = current.responsibleFor.map((animalId) => species.find((getSpecies) => getSpecies.id === animalId).name);
-      return accumulator;
+    return employees.reduce((acc, curr) => {
+      acc[`${curr.firstName} ${curr.lastName}`] = curr.responsibleFor.map((animalId) =>
+        species.find((getSpecies) => getSpecies.id === animalId).name);
+      return acc;
     }, {});
   }
+  const getEmployee = employees.find((employee) =>
+    employee.firstName === idOrName || employee.lastName === idOrName || employee.id === idOrName);
+  const animals = getEmployee.responsibleFor.map((animalId) => species.find((getSpecies) =>
+    getSpecies.id === animalId).name);
+  return { [`${getEmployee.firstName} ${getEmployee.lastName}`]: animals };
 }
 console.log(getEmployeeCoverage());
 
