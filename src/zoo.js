@@ -98,14 +98,14 @@ const filterAnimalsSex = (residents, sex) => {
   if (sex === 'female') {
     return residents.filter((resident) => resident.sex === 'female');
   }
-  if (sex !== 'male' && sex !== 'female') { return residents; }
+  return residents;
 };
 
 const sortArray = (array, sort) => {
   if (sort === true) {
     return array.sort();
   }
-  if (sort !== true) { return array; }
+  return array;
 };
 
 // Essa parte foi em partes baseada no código do colega Eric Reis, turma 12
@@ -124,7 +124,7 @@ function getAnimalMap(options) {
     console.log(customMap);
     return customMap;
   }
-  if (!includeNames) { return defaultMap(); }
+  return defaultMap();
 }
 
 function getSchedule(dayName) {
