@@ -34,6 +34,7 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({ id, firstName, lastName, managers, responsibleFor });
+<<<<<<< HEAD
 }
 
 function countAnimals(speciess) {
@@ -75,6 +76,69 @@ function generateAnimalsLocation(arrayCoord) {
   }, {});
 }
 
+=======
+}
+
+function countAnimals(speciess) {
+  const todos = {};
+  species.forEach(({ name, residents }) => {
+    todos[name] = residents.length;
+  });
+  return !speciess ? todos : species.find((animal) => animal.name === speciess).residents.length;
+}
+
+function calculateEntry(entrants = []) {
+  let soma = 0;
+  Object.entries(entrants).forEach((element) => {
+    switch (element[0]) {
+    case 'Child':
+      soma += element[1] * 20.99;
+      return;
+    case 'Adult':
+      soma += element[1] * 49.99;
+      return;
+    case 'Senior':
+      soma += element[1] * 24.99;
+      return;
+    default:
+      return soma;
+    }
+  });
+  return soma;
+}
+
+const regioes = {
+  NE: [
+    { lions: [] },
+    { giraffes: [] },
+  ],
+  NW: [
+    { tigers: [] },
+    { bears: [] },
+    { elephants: [] },
+  ],
+  SE: [
+    { penguins: [] },
+    { otters: [] },
+  ],
+  SW: [
+    { frogs: [] },
+    { snakes: [] },
+  ],
+};
+
+function generateAnimalsLocation(arrayCoord) {
+  return arrayCoord.reduce((object, coord) => {
+    const objectCoord = object;
+    const arraySpecies = species
+      .filter(({ location }) => location === coord)
+      .map((specie) => specie.name);
+    objectCoord[coord] = arraySpecies;
+    return objectCoord;
+  }, {});
+}
+
+>>>>>>> ec9f0ea... CABEI BUCETA
 function generateSpeciesName(arrayAnimal, options) {
   return arrayAnimal.reduce((array, specieName) => {
     const object = {};
