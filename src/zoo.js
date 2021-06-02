@@ -117,15 +117,21 @@ function getSchedule(dayName) {
   // seu código aqui
   if (!dayName) {
     return {
-      Tuesday: `Open from ${data.hours.Tuesday.open}am until ${data.hours.Tuesday.close}pm`,
-      Wednesday: `Open from ${data.hours.Wednesday.open}am until ${data.hours.Wednesday.close}pm`,
-      Thursday: `Open from ${data.hours.Thursday.open}am until ${data.hours.Thursday.close}pm`,
-      Friday: `Open from ${data.hours.Friday.open}am until ${data.hours.Friday.close}pm`,
-      Saturday: `Open from ${data.hours.Saturday.open}am until ${data.hours.Saturday.close}pm`,
-      Sunday: `Open from ${data.hours.Sunday.open}am until ${data.hours.Sunday.close}pm`,
+      Tuesday: `Open from ${data.hours.Tuesday.open}am until ${(data.hours.Tuesday.close) - 12}pm`,
+      Wednesday: `Open from ${data.hours.Wednesday.open}am until ${data.hours.Wednesday.close - 12}pm`,
+      Thursday: `Open from ${data.hours.Thursday.open}am until ${data.hours.Thursday.close - 12}pm`,
+      Friday: `Open from ${data.hours.Friday.open}am until ${data.hours.Friday.close - 12}pm`,
+      Saturday: `Open from ${data.hours.Saturday.open}am until ${data.hours.Saturday.close - 12}pm`,
+      Sunday: `Open from ${data.hours.Sunday.open}am until ${data.hours.Sunday.close - 12}pm`,
       Monday: 'CLOSED',
     };
   }
+  if (dayName === 'Monday') {
+    return { [dayName]: 'CLOSED' };
+  }
+  return { 
+    [dayName]: `Open from ${data.hours[dayName].open}am until ${(data.hours[dayName].close) - 12}pm`,
+  };
 }
 
 function getOldestFromFirstSpecies() {
