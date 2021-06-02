@@ -74,31 +74,57 @@ function calculateEntry(entries) {
 }
 
 // Requisito 9 - Não consegui fazer ainda
-
-const animalLocation = {
+const animalsMap = {
   NE: [],
   NW: [],
   SE: [],
   SW: [],
 };
 
-function getAnimalMap({ includeNames = false, sorted = false, sex }) {
-  if (includeNames === false) {
-    data.species.map(({ name, location }) => animalLocation[location].push(name));
-  } else {
-    data.species.map(({ name, location, residents }) => {
-      const animalsName = residents.map((resident) => resident.name);
-      // eslint-disable-next-line no-unused-expressions
-      sorted === true ? animalsName.sort() : animalsName;
-      console.log(animalsName);
-      const obj = { [name]: animalsName };
-      return animalLocation[location].push(obj);
-    });
-  }
-  return animalLocation;
-}
+const defaultMap = () => {
+  const defaultMapResult = animalsMap;
+  data.species.map((specie) => {
+    defaultMapResult[specie.location].push(specie.name);
+    return defaultMapResult;
+  });
+  return defaultMapResult;
+};
 
-// console.log(getAnimalMap({ includeNames: true, sorted: true }));
+const filterAnimalsSex = (residents, sex) => {
+  if (sex === 'male') {
+    return residents.filter((resident) => resident.sex === 'male');
+  }
+  if (sex === 'female') {
+    return residents.filter((resident) => resident.sex === 'female');
+  }
+  if (sex !== 'male' && sex !== 'female') { return residents; }
+};
+
+const sortArray = (array, sort) => {
+  if (sort === true) {
+    return array.sort();
+  }
+  if (sort !== true) { return array; }
+};
+
+// Essa parte foi em partes baseada no código do colega Eric
+function getAnimalMap(options) {
+  if (!options) { return defaultMap(); }
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    const customMap = animalsMap;
+    data.species.map(({ name, location, residents }) => {
+      const arrayResidents = filterAnimalsSex(residents, sex);
+      const arrayOfNames = arrayResidents.map((resident) => resident.name);
+      const obj = {};
+      obj[name] = sortArray(arrayOfNames, sorted);
+      return customMap[location].push(obj);
+    });
+    console.log(customMap);
+    return customMap;
+  }
+  if (!includeNames) { return defaultMap(); }
+}
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -113,10 +139,13 @@ function getSchedule(dayName) {
   return dayName === undefined ? objHours : { [dayName]: objHours[dayName] };
 }
 
-console.log(getSchedule('Monday'));
-
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const specieId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const specieObj = data.species.find((specie) => specie.id === specieId);
+  const oldestResident = specieObj.residents.sort((a, b) => b.age - a.age)[0];
+  const { name, sex, age } = oldestResident;
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
