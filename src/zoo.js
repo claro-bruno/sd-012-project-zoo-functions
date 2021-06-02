@@ -76,6 +76,7 @@ function getName(key, options) {
   return key.reduce((array, sName) => {
     const obj = {};
     let arrayNames = species.find((elem) => elem.name === sName).residents;
+    // console.log(arrayNames)
     if (options.sex) arrayNames = arrayNames.filter((animal) => animal.sex === options.sex);
     arrayNames = arrayNames.map((animal) => animal.name);
     if (options.sorted) arrayNames.sort();
@@ -95,6 +96,7 @@ function getAnimalMap(options) {
   });
   return nameLocation;
 }
+// console.log(getAnimalMap({ includeNames: true }));
 
 function getSchedule(dayName) {
   const open = hours;
@@ -134,9 +136,20 @@ function increasePrices(percentage) {
   return prices;
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName, list = {}) {
+  const employeeName = employees.map((employee) => employee.firstName);
+  if (!idOrName) {
+    return employeeName.reduce((empList, name) => getEmployeeCoverage(name, empList), {});
+  }
+  const { firstName, lastName, responsibleFor } = employees.find((employee) => {
+    const { firstName: name, lastName: lname, id } = employee;
+    return (name === idOrName || lname === idOrName || id === idOrName);
+  });
+  const copy = list;
+  const fullName = `${firstName} ${lastName}`;
+  copy[fullName] = responsibleFor.map((animalId) => species.find(({ id }) => id === animalId).name);
+  return list;
+}
 
 module.exports = {
   calculateEntry,
@@ -145,7 +158,7 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
