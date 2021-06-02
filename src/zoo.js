@@ -154,12 +154,25 @@ function getSchedule(dayName) {
   return hoursObj;
 }
 
-function getOldestFromFirstSpecies() {
-  // id
+function getOldestFromFirstSpecies(id) {
+  const employeeId = employees.find((employee) => employee.id === id);
+  const animalsEmployee = employeeId.responsibleFor;
+  // const animals = species.filter((specie, index) => specie.id === animalsEmployee[index]);
+  let animals = [];
+  animalsEmployee.forEach((animal) => {
+    animals = species.filter((specie) => specie.id === animal);
+  });
+  return animals;
 }
 
-function increasePrices() {
-  // percentage
+function increasePrices(percentage) {
+  let { Adult, Child, Senior } = prices;
+  Adult += (Adult * (percentage / 100));
+  Child += (Child * (percentage / 100));
+  Senior += (Senior * (percentage / 100));
+  prices.Adult = Math.round((Adult + Number.EPSILON) * 100) / 100;
+  prices.Child = Math.round((Child + Number.EPSILON) * 100) / 100;
+  prices.Senior = Math.round((Senior + Number.EPSILON) * 100) / 100;
 }
 
 function getEmployeeCoverage() {
