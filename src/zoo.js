@@ -62,7 +62,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // console.log(data.employees);
 
 function countAnimals(species) {
-  const object = {};
+  const object = {}; // Criei a variável objeto com a dica do Rodrigo Facury para que a função retornasse um objeto.
   data.species.map((element) => {
     object[element.name] = element.residents.length;
     const acc = object;
