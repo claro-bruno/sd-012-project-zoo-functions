@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 const data = require('./data');
 
@@ -38,19 +38,12 @@ function getEmployeeByName(employeeName) {
   );
 }
 
-function createEmployee(
-  { id, firstName, lastName },
-  { managers, responsibleFor },
-) {
+function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const newEmployee = {
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
+  return {
+    ...personalInfo,
+    ...associatedWith,
   };
-  return newEmployee;
 }
 
 function isManager(id) {
@@ -97,22 +90,35 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-//   // genial way i found to convert 24h to 12h clock time:
-//   // https://www.codegrepper.com/code-examples/javascript/convert+24+hours+to+12+hours+javascript
-//   if (dayName === 'Monday') return { Monday: 'CLOSED' };
-//   if (!dayName) {
-//     Object.keys(hours).forEach((day) =>
-//       ({ [day]: `Open from ${hours[day].open} until ${hours[day].open % 12}` }));
-//   }
-// }
+function getSchedule(dayName) {
+  // seu código aqui
+  // in case the dayName = Monday \/
+  if (dayName === 'Monday') {
+    return { Monday: 'CLOSED' };
+  }
+  if (!dayName) {
+    return Object.keys(hours).forEach((key) => ({
+      [key]: `Open from ${hours[key].open} until ${hours[key].close}` }));
+  }
 
-// console.log(getSchedule());
+  // genial way i found to convert 24h to 12h clock time:
+  // https://www.codegrepper.com/code-examples/javascript/convert+24+hours+to+12+hours+javascript
+  // const chosenDay = Object.keys(hours);
+  // in case is a specific dayName \/
+  const { open, close } = hours[dayName];
+  return {
+    [dayName]: `Open from ${open} until ${close % 12}`,
+  };
+}
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  const specieId = employees.find((person) => person.id === id).responsibleFor[0];
+  const findSpecie = species.find(animal => animal.id === specieId).residents;
+  const oldestAnimal = findSpecie.sort((a, b) => b.age - a.age)[0];
+  return [`${oldestAnimal.name}`, `${oldestAnimal.sex}`, `${oldestAnimal.age}`];
+}
+console.log(getOldestFromFirstSpecies("9e7d4524-363c-416a-8759-8aa7e50c0992"));
 
 function increasePrices(percentage) {
   // seu código aqui
@@ -129,7 +135,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
@@ -138,7 +144,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
