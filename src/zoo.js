@@ -54,7 +54,7 @@ console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992')) */
 function countAnimals(animals) {
   // seu código aqui
   if (!animals) {
-    return 'a0';
+    return species.map((specie) =>  (`{ ${specie.name}: ${specie.residents.length} }`))
   } return species.find((specie) => specie.name === animals).residents.length;
 }
 console.log(countAnimals());
@@ -84,10 +84,10 @@ function getEmployeeCoverage(idOrName) {
 
 module.exports = {
   /* calculateEntry,
-  getSchedule,
+  getSchedule, */
   countAnimals,
-  getAnimalMap, */
-  // getSpeciesByIds,
+  /* getAnimalMap, 
+  // getSpeciesByIds, */
   getEmployeeByName,
   /* getEmployeeCoverage,
   addEmployee,
