@@ -109,8 +109,13 @@ function getSchedule(dayName) {
   return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui id
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  const firstSpeciesId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const specieResidents = species.find((specie) => specie.id === firstSpeciesId).residents;
+  const specieAgeSorted = specieResidents.map((resident) => resident.age).sort((a, b) => b - a);
+  const oldestData = specieResidents.find((resident) => resident.age === specieAgeSorted[0]);
+  return Object.values(oldestData);
 }
 
 function increasePrices() {
