@@ -28,8 +28,7 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) {
     return {};
   }
-  const trabalhador = (employee) => employee.firstName === employeeName
-   || employee.lastName === employeeName;
+  const trabalhador = (e) => e.firstName === employeeName || e.lastName === employeeName;
   return employees.find(trabalhador);
 }
 
@@ -50,13 +49,16 @@ console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992')) */
 
 /* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
-}
+} */
 
-function countAnimals(species) {
+function countAnimals(animals) {
   // seu código aqui
+  if (!animals) {
+    return 'a0';
+  } return species.find((specie) => specie.name === animals).residents.length;
 }
-
-function calculateEntry(entrants) {
+console.log(countAnimals());
+/* function calculateEntry(entrants) {
   // seu código aqui
 }
 
