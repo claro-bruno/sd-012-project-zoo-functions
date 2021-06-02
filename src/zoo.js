@@ -23,7 +23,8 @@ function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   // achar o nome da especie dentro do array (find e every)
   const specieName = species.find((specie) => specie.name === animal);
-  return specieName.residents.every((specie) => specie.age > age);
+  const residentsAge = specieName.residents.every((specie) => specie.age > age);
+  return residentsAge;
 }
 
 function getEmployeeByName() {
