@@ -105,7 +105,7 @@ function increasePrices(percentage) {
   });
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
 // seu código aqui
 }
 
