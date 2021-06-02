@@ -10,20 +10,18 @@ eslint no-unused-vars: [
 */
 
 const { species, employees } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 // function getSpeciesByIds(ids) {
 //   // seu código aqui
 // }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
   const animalName = species.find((animals) => animals.name === animal);
   return animalName.residents.every((animalAge) => animalAge.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
   if (typeof employeeName === 'undefined') {
     return {};
   }
@@ -34,7 +32,6 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   const obj = {
     id: personalInfo.id,
     firstName: personalInfo.firstName,
@@ -46,7 +43,6 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
   const manager = employees.some(
     (manage) => manage.id === id && manage.managers.length === 1,
   );
@@ -55,11 +51,33 @@ function isManager(id) {
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
+//   const obj = {
+//     ids: id,
+//     firstNameEmployee: firstName,
+//     lastNameEmployee: lastName,
+//     managersEmployee: managers,
+//     responsibleForEmployee: responsibleFor,
+//   };
+//   return obj;
 // }
+// console.log(
+//   addEmployee(465, 'Artur', 'Álvaro', [], []),
+// );
 
-// function countAnimals(specie) {
-//   // seu código aqui
-// }
+function countAnimals(specie) {
+  const animal = species.map((animals) => animals.name);
+  const animalQtd = species.map((animals) => animals.residents.length);
+  if (!specie) {
+    const obj = {};
+    animal.forEach((element, index) => {
+      obj[element] = animalQtd[index];
+    });
+    return obj;
+  }
+  const animalValue = species.find((animalName) => animalName.name === specie);
+  const animalCount = animalValue.residents.length;
+  return animalCount;
+}
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -88,7 +106,7 @@ function isManager(id) {
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   // getSpeciesByIds,
   getEmployeeByName,
