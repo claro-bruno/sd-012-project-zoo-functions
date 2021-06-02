@@ -8,10 +8,9 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { species, employees, lionId, ottersId } = require('./data');
+const { species, employees, prices } = require('./data');
 
 const getSpeciesByIds = (...ids) => species.filter((specie) => ids.some((id) => specie.id === id));
-console.log(getSpeciesByIds(lionId, ottersId));
 
 const getAnimalsOlderThan = (animal, age) => {
   const animais = species.find((specie) => specie.name === animal).residents;
@@ -64,21 +63,28 @@ const countAnimals = (animal) => {
   return count.residents.length;
 };
 
-function calculateEntry() {
-  // seu código aqui
-}
+const calculateEntry = (entrants) => {
+  if (entrants !== {} || !entrants) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
+};
 
-function getAnimalMap() {
-  // seu código aqui
-}
+const getAnimalMap = () => {};
 
-function getSchedule() {
-  // seu código aqui
-}
+const getSchedule = () => {};
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui
-}
+const getOldestFromFirstSpecies = (id) => {
+  const employeeFoundById = employees.find((employee) => employee.id === id);
+  const firstSpecieId = employeeFoundById.responsibleFor[0];
+  const specieResidents = species.find((specie) => specie.id === firstSpecieId).residents;
+  let oldestAnimal = specieResidents[0];
+  specieResidents.forEach((resident) => {
+    if (resident.age > oldestAnimal.age) {
+      oldestAnimal = resident;
+    }
+  });
+  return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
+};
 
 function increasePrices() {
   // seu código aqui
