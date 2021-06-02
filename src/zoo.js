@@ -12,13 +12,22 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return data.species.filter((specie, index) => specie.id === ids[index]);
+  return data.species.filter((specie) => ids.includes(specie.id));
 }// se o filter não receber nenhum item ele retorna array vazio
-console.log(getSpeciesByIds('89be95b3-47e4-4c5b-b687-1fabf2afa274'));
+// console.log(getSpeciesByIds('baa6e93a-f295-44e7-8f70-2bcdc6f6948d'));
+
+function getAnimalsOlderThan(animal, age) {
+  const animalList = data.species.find((animalName) => animalName.name === animal);
+  return animalList.residents.every((specie) => specie.age > age);
+}
+console.log(getAnimalsOlderThan('otters', 7));
 
 // function getAnimalsOlderThan(animal, age) {
-//   // seu código aqui
+//   return data.species
+//   .some(({name}, {popularity}) => name === animal && popularity > age)
 // }
+// console.log(getAnimalsOlderThan('lions', 4))
+// ==========================================================
 
 // function getEmployeeByName(employeeName) {
 //   // seu código aqui
@@ -66,6 +75,7 @@ console.log(getSpeciesByIds('89be95b3-47e4-4c5b-b687-1fabf2afa274'));
 
 module.exports = {
   getSpeciesByIds,
+  getAnimalsOlderThan,
 };
 
 // module.exports = {
