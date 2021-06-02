@@ -62,9 +62,20 @@ function calculateEntry(entrants) {
   return Object.keys(entrants).reduce(((sum, price) => sum + prices[price] * entrants[price]), 0);
 }
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+const mapping = (loc) => species.filter((spec) => spec.location === loc)
+  .map((animal) => animal.name);
+
+const entireMap = () => ({
+  NE: mapping('NE'),
+  NW: mapping('NW'),
+  SE: mapping('SE'),
+  SW: mapping('SW'),
+});
+
+function getAnimalMap(options) {
+  // seu código aqui
+  if (!options) return entireMap();
+}
 
 // TENTAR REFAZER ESTE DE UM JEITO MELHOR
 const returnString = (day) => `Open from ${hours[day].open}am until ${hours[day].close % 12}pm`;
@@ -97,8 +108,6 @@ function getOldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
 function increasePrices(percentage) {
   // seu código aqui
   const priceKeys = Object.keys(prices);
@@ -115,7 +124,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
