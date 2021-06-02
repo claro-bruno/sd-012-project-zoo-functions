@@ -60,9 +60,9 @@ function calculateEntry(entrants) {
   return ((Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child));
 }
 
-function getAnimalMap(options) {
+// function getAnimalMap(options) {
 
-}
+// }
 
 function getSchedule(dayName) {
   const horas = hours;
@@ -91,21 +91,26 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-
+  const multiplicacao = (percentage / 100) + 1;
+  const pricesKeys = Object.keys(prices);
+  pricesKeys.forEach((priceKey) => {
+    const resultado = prices[priceKey] * multiplicacao;
+    prices[priceKey] = Math.round(resultado * 100) / 100;
+  });
 }
 
-function getEmployeeCoverage(idOrName) {
+// function getEmployeeCoverage(idOrName) {
 
-}
+// }
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
