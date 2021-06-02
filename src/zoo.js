@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 
 // function getSpeciesByIds(...ids) {
 //   // seu código aqui
@@ -55,23 +55,34 @@ const { species, employees } = require('./data');
 // }
 // seu código aqui
 
-function countAnimals(species) {
-  // seu código aqui
-  const obj = {};
-  if (arguments.length === 0) {
-    data.species.forEach((specie) => {
-      obj[specie.name] = specie.residents.length
-    })
-    return obj;
-  }
-  const okArguments = data.species.find((specie) => specie.name === species).residents.length;
-  return okArguments;
-}
-console.log(countAnimals());
-
-// function calculateEntry(entrants) {
+// function countAnimals(species) {
 //   // seu código aqui
+//   const obj = {};
+//   if (arguments.length === 0) {
+//     data.species.forEach((specie) => {
+//       obj[specie.name] = specie.residents.length;
+//     });
+//     return obj;
+//   }
+//   const okArguments = data.species.find((specie) => specie.name === species).residents.length;
+//   return okArguments;
 // }
+
+function calculateEntry(entrants) {
+  // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const { Adult: adultPrices, Senior: seniorPrices, Child: childPrices} = prices;
+
+  let total = (Adult * adultPrices) + (Senior * seniorPrices) + (Child * childPrices);
+
+  return total;
+}
+
+console.log(calculateEntry({ 'Adult': 1 }));
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -94,9 +105,9 @@ console.log(countAnimals());
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
-  countAnimals,
+  // countAnimals,
   // getAnimalMap,
   // getSpeciesByIds,
   // getEmployeeByName,
