@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+const data = require("./data");
 
 function getSpeciesByIds(...ids) {
   const { species } = data;
@@ -28,7 +28,7 @@ function getEmployeeByName(employeeName) {
   const { employees } = data;
   const gotEmployee = employees.find(
     (employee) =>
-      employee.firstName === employeeName || employee.lastName === employeeName,
+      employee.firstName === employeeName || employee.lastName === employeeName
   );
   if (gotEmployee) return gotEmployee;
   return {};
@@ -44,7 +44,8 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   const { employees } = data;
   return employees.some((employee) =>
-    employee.managers.some((elem) => elem === id));
+    employee.managers.some((elem) => elem === id)
+  );
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -72,7 +73,7 @@ function calculateEntry(entrants) {
   const { prices } = data;
   return Object.entries(entrants).reduce(
     (acc, curr) => prices[curr[0]] * curr[1] + acc,
-    0,
+    0
   );
 }
 
@@ -80,9 +81,32 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+const { hours } = data;
+
+function dayInfo(day) {
+  if (hours[day].open === 0 && hours[day].close === 0)
+    return { [day]: "CLOSED" };
+  return {
+    [day]: `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`,
+  };
+}
+console.log(dayInfo('Friday'))
+
+function getSchedule(dayName) {
+  if (dayName) return hours;
+
+  return Object.entries(hours).reduce((acc, curr) => {
+    if (curr[0] !== "Monday") {
+      acc[curr[0]] = `Open from ${hours[curr[0]].open}am until ${
+        hours[curr[0]].close
+      }pm`;
+      return acc;
+    }
+    acc[curr[0]] = "CLOSED";
+    return acc;
+  }, {});
+}
+// console.log(getSchedule());
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -98,7 +122,7 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
