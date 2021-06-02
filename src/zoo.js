@@ -15,12 +15,12 @@ function getSpeciesByIds(ids) {
   return ids.species.filter((id) => ids.id);
 }
 
-function getAnimalsOlderThan() {
-  let index = data.species
+function getAnimalsOlderThan(nomes, idade) {
+  const index = data.species
     .find((nome) => nome.name === nomes).residents
-    .filter((idade) => idade.age)
+    .filter((idades) => idades.age)
     .every((age) => age.age >= idade);
-    return index
+  return index;
 }
 
 function getEmployeeByName() {
