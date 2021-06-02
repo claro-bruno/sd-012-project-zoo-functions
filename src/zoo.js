@@ -103,11 +103,11 @@ const getOldestFromFirstSpecies = (id) => {
   const animal = species.find((specie) => specie.id === animalId);
   let oldest = animal.residents[0];
   animal.residents.forEach((resident) => {
-    if (resident.age > oldest) {
-      oldest = resident.age;
+    if (resident.age > oldest.age) {
+      oldest = resident;
     }
   });
-  return oldest;
+  return [oldest.name, oldest.sex, oldest.age];
 };
 
 // function increasePrices(percentage) {
