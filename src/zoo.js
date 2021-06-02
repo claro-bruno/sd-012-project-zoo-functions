@@ -122,8 +122,15 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(oldestData);
 }
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  const multiply = (percentage / 100) + 1;
+  // array com o nome das keys de prices.
+  const pricesKeys = Object.keys(prices);
+  // acessa as chaves do objeto prices de acordo com o nome das keys do array pricesKeys e altera o valor de cada uma.
+  pricesKeys.forEach((priceKey) => {
+    const value = prices[priceKey] * multiply;
+    prices[priceKey] = Math.round(value * 100) / 100;
+  });
 }
 
 function getEmployeeCoverage() {
