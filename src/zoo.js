@@ -16,14 +16,14 @@ function getSpeciesByIds(...ids) {
 } // consultei o repositório da Camila Malvess e do kevin Oliveira para ajudar no meu raciocínio
 // console.log(getSpeciesByIds());
 // console.log((getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce')));
-console.log(getSpeciesByIds('baa6e93a-f295-44e7-8f70-2bcdc6f6948d',
-  'e8481c1d-42ea-4610-8e11-1752cfc05a46', '01422318-ca2d-46b8-b66c-3e9e188244ed'));
+// console.log(getSpeciesByIds('baa6e93a-f295-44e7-8f70-2bcdc6f6948d',
+// 'e8481c1d-42ea-4610-8e11-1752cfc05a46', '01422318-ca2d-46b8-b66c-3e9e188244ed'));
 
 function getAnimalsOlderThan(animal, age) {
   return data.species.find((animalName) => animalName.name === animal)
     .residents.every((resident) => resident.age > age);
 }
-console.log((getAnimalsOlderThan('lions', 3)));
+// console.log((getAnimalsOlderThan('lions', 3)));
 
 function getEmployeeByName(employeeName) {
   const findEmployee = data.employees.find((firstAndLastName) => firstAndLastName.firstName
@@ -34,11 +34,25 @@ function getEmployeeByName(employeeName) {
   return findEmployee;
 }
 // console.log((getEmployeeByName('Nigel')));
-console.log((getEmployeeByName()));
+// console.log((getEmployeeByName()));
 
-// function createEmployee(personalInfo, associatedWith) {
-// // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  const personalInfoAndAssociateWith = { ...personalInfo, ...associatedWith };
+  return personalInfoAndAssociateWith;
+}
+console.log(createEmployee({
+  id: '19p01s87',
+  firstName: 'Patricia',
+  lastName: 'Silvestre',
+  managers: [
+    'p5b83cb3',
+    '9e7d4524',
+  ],
+  responsibleFor: [
+    '0938aa23',
+    '89be95b3',
+  ],
+}));
 
 // function isManager(id) {
 // // seu código aqui
@@ -89,5 +103,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
