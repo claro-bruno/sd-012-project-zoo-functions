@@ -107,11 +107,20 @@ function getAnimalMap() {
 }
 
 function getSchedule() {
-  // seu código aqui dayname
+  //  dayname
 }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui id
+function getOldestFromFirstSpecies(id) {
+  const funcionario = employees.find((element) => element.id === id);
+  const findAnimal = funcionario.responsibleFor[0];
+  const animal = species.find((element) => element.id === findAnimal);
+  const oldAnimal = animal.residents.sort((a, b) => b.age - a.age)[0];
+  const names = Object.keys(oldAnimal);
+  const arr = [];
+  names.forEach((elements) => {
+    arr.push(oldAnimal[elements]);
+  });
+  return arr;
 }
 
 function increasePrices(percentage) {
