@@ -41,10 +41,18 @@ function addEmployee() {
   // id, firstName, lastName, managers, responsibleFor
 }
 
-function countAnimals() {
-  // seu código aqui
-  // especies
-}
+const countAnimals = (especies) => {
+  if (especies === undefined) {
+    const names = species.map((specie) => specie.name);
+    const quantidades = species.map((specie) => specie.residents.length);
+    const nameQuantidade = {};
+    names.forEach((key, index) => {
+      nameQuantidade[key] = quantidades[index];
+    }); /* referência: https://stackoverflow.com/questions/39127989/creating-a-javascript-object-from-two-arrays */
+    return nameQuantidade;
+  }
+  return species.find((specie) => specie.name === especies).residents.length;
+};
 
 function calculateEntry() {
   // seu código aqui
