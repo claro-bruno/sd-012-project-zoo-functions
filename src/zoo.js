@@ -51,12 +51,10 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  if (managers === undefined && responsibleFor === undefined) {
-    let managerAux = managers;
-    managerAux = [];
-    let responsibleForAux = responsibleFor;
-    responsibleForAux = [];
-    const newEmployee2 = { id, firstName, lastName, managerAux, responsibleForAux };
+  if (managers === undefined || responsibleFor === undefined) {
+    mAux = [];
+    rAux = [];
+    const newEmployee2 = { id, firstName, lastName, managers: mAux, responsibleFor: rAux };
     data.employees.push(newEmployee2);
   } else {
     const newEmployee = {
@@ -69,6 +67,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     data.employees.push(newEmployee);
   }
 }
+addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe');
+console.log(data.employees[8].responsibleFor);
+
 
 function countAnimals(species1) {
   if (species1 === undefined) {
