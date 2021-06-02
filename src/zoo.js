@@ -26,11 +26,16 @@ function getSpeciesByIds(...ids) {
 // conforme a dica do Jensen na explicação, caso nao receba nenhum parametro, nesse caso, o tamanho do array formado pelo spread seja igual a zero, retorna um array vazio;
 // Enquanto desenvolvia os demais testes, localizei o metodo .includes (https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes), assim, a partir do spread, utilizei o metodo filter para retornar um array com todos os elementos que satisfaçam a condição passada, que, no caso, verifica a existencia de alguma especie como parametro, retornando um array com as éspecies correspondente.
 
-/*  function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+function getAnimalsOlderThan(animal, age) {
+  const name = species.find((element) => element.name === animal);
+  return name.residents.every((element) => element.age >= age);
 }
 
-function getEmployeeByName(employeeName) {
+// utiliza o find. para encontrar o primeiro elemento do array species, através do nome do animal, que seja igual ao parametro passado na função;
+// Após encontrar o objeto referente ao primeiro parametro, é realizada verificação se o animal possui a idade igual ou maior ao parametro passado (representada pelo maior ou igual), nesse ponto, é utilizado o metodo every, que verifica se os elementos passam em todas as condições.
+// Tive dúvida em relação a construção da função, especificamente com o metodo every, que nao estava sendo utilizado, e consultei o repositório do meu amigo Ryan (https://github.com/tryber/sd-012-project-zoo-functions/pull/66/files).
+
+/*  function getEmployeeByName(employeeName) {
   // seu código aqui
 }
 
@@ -84,7 +89,7 @@ module.exports = {
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
-  // getAnimalsOlderThan,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
