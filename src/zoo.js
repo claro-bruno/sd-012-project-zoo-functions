@@ -13,16 +13,18 @@ const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  if (ids.length === 0){
+  if (ids.length === 0) {
     return [];
   }
-  const findSpecie = ids.map((id) => data.species.find((specie) => specie.id === id));
+  const findSpecie = ids.map((index) => species.find((specie) => specie.id === index));
   return findSpecie;
-} 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
 }
 
+function getAnimalsOlderThan(animal, age) {
+  const findSpecie = data.species.find((specie) => animal === specie.name);
+  return findSpecie.residents.every((resident) => resident.age > age);
+}
+/*
 function getEmployeeByName(employeeName) {
   // seu código aqui
 }
@@ -66,19 +68,19 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
-
+ */
 module.exports = {
-  calculateEntry,
+  getSpeciesByIds,
+  getAnimalsOlderThan,
+/*   calculateEntry,
   getSchedule,
   countAnimals,
   getAnimalMap,
-  getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
   addEmployee,
   isManager,
-  getAnimalsOlderThan,
   getOldestFromFirstSpecies,
   increasePrices,
-  createEmployee,
+  createEmployee, */
 };
