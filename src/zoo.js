@@ -36,11 +36,11 @@ function createEmployee(personalInfo, associatedWith) {
   return CreateNewEmployee;
 }
 
-function isManager(id) {
-  const findIdManager = employees.filter((collaborator) => collaborator.id === id)
-  const verifyManager = findIdManager.some((person) => person.managers.includes === id);
-  return findIdManager;
-}
+// function isManager(id) {
+//   const findIdManager = employees.filter((collaborator) => collaborator.id === id)
+//   const verifyManager = findIdManager.some((person) => person.managers.includes === id);
+//   return findIdManager;
+// }
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -83,7 +83,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  isManager,
+  // isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
