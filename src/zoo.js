@@ -1,3 +1,4 @@
+/* eslint-disable editorconfig/editorconfig */
 /*
 eslint no-unused-vars: [
   "error",
@@ -11,9 +12,11 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
-  
+function getSpeciesByIds(...ids) {
+  if (ids === null) {
+    return [];
+  }
+  return data.species.filter((specie, index) => specie.id === ids[index]);
 }
 
 function getAnimalsOlderThan(animal, age) {
