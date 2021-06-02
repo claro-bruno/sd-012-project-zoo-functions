@@ -21,8 +21,9 @@ function getAnimalsOlderThan(animal, age) {
   return animals.residents.every((indexAge) => indexAge.age >= age);
 }
 
-function getEmployeeByName(employeeName) {
-  return data.employees.find((indexName) => indexName.firstName === employeeName || indexName.lastName === employeeName);
+function getEmployeeByName(employeeN) {
+  if (!employeeN) return {};
+  return employees.find((index) => index.firstName === employeeN || index.lastName === employeeN);
 }
 
 function createEmployee(personalInfo, associatedWith) {
