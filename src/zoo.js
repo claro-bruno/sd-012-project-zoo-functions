@@ -75,7 +75,7 @@ function calculateEntry(entrants = 0) {
   const enterKeys = Object.keys(entrants);
   enterKeys.forEach((key) => {
     if (key === 'Adult') {
-      total = total + (entrants[key] * data.prices.Adult);
+      total += (entrants[key] * data.prices.Adult);
     } else if (key === 'Child') {
       total += (entrants[key] * data.prices.Child);
     } else {
