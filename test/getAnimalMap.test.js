@@ -18,7 +18,7 @@ describe('Implemente a função getAnimalMap', () => {
     const actual = zoo.getAnimalMap(options);
     const expected = {
       NE: [
-        { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] },
+        { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] }, 
         { giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'] }
       ],
       NW: [

@@ -81,8 +81,41 @@ function calculateEntry(entrants) {
   const resultado = Adult * adultPrice + Child * childPrice + Senior * seniorPrice;
   return resultado;
 }
-function getAnimalMap() {
-  // options
+
+const regions = ['NE', 'NW', 'SE', 'SW'];
+const getAllByRegion = () => regions.reduce((accumulator, current) => {
+  accumulator[current] = data.species.filter((specie) =>
+    specie.location === current).map((getNames) => getNames.name);
+  return accumulator;
+}, {});
+
+const getAllByRegionWNames = (sex, sorted) => regions.reduce((accumulator, current) => {
+  accumulator[current] = data.species.filter((getSpecies) =>
+    getSpecies.location === current).map((getNames) => {
+    const object = {};
+    object[getNames.name] = getNames.residents.map((getSpecimen) => getSpecimen.name);
+    if (sorted === true) { object[getNames.name].sort(); }
+    if (sex.length !== 0) {
+      object[getNames.name] = object[getNames.name].filter((animal) =>
+        getNames.residents.find((resident) => resident.name === animal).sex === sex);
+    }
+    return object;
+  });
+  return accumulator;
+}, {});
+
+function getAnimalMap(options) {
+  if (options === undefined) {
+    return getAllByRegion();
+  }
+  const { includeNames = false, sorted = false, sex = '' } = options;
+  if (includeNames === false) {
+    return getAllByRegion();
+  }
+  if (includeNames === true) {
+    const map = getAllByRegionWNames(sex, sorted);
+    return map;
+  }
 }
 
 function getSchedule(dayName) {
