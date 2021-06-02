@@ -31,9 +31,10 @@ function getEmployeeByName(employeeName) {
   return data.employees.find((employee) =>
     employee.firstName === employeeName || employee.lastName === employeeName);
 }
-// personalInfo, associatedWith
-function createEmployee() {
-  // seu código aqui
+ 
+function createEmployee(personalInfo, associatedWith) {
+  const obj = {};
+  return Object.assign(obj, personalInfo, associatedWith);
 }
 // id
 function isManager() {
