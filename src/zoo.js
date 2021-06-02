@@ -54,7 +54,7 @@ const calculateEntry = (entrants) => {
   const { Adult, Senior, Child } = data.prices;
   const result = adults * Adult + childs * Child + seniors * Senior;
   return result;
-}
+};
 
 /* function getAnimalMap(options) {
   // seu código aqui
@@ -74,7 +74,7 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-} 
+}
  */
 module.exports = {
   calculateEntry,
