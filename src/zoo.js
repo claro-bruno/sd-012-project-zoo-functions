@@ -53,9 +53,9 @@ function countAnimals(species) {
       acc[crv.name] = crv.residents.length;
       return acc;
     }, {});
-}
-const speciePopulation = data.species.find((specie) => specie.name === species);
-return speciePopulation.residents.length;
+  }
+  const speciePopulation = data.species.find((specie) => specie.name === species);
+  return speciePopulation.residents.length;
 }
 
 // entrants
