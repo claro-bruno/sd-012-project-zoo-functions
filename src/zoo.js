@@ -77,10 +77,13 @@ const getSchedule = (dayName, key = Object.keys(hours)) =>
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
-
-function increasePrices(percentage) {
-  // seu código aqui
+function modPrices(e, percentage) {
+  (prices[e] = Math.round(prices[e] * (1 + percentage / 100) * 100) / 100);
 }
+
+// Código para increasePrices
+const increasePrices = (percentage, key = Object.keys(prices)) => key.forEach((e) =>
+  modPrices(e, percentage));
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
