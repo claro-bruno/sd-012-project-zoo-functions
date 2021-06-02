@@ -83,19 +83,12 @@ const msgReturn = (acc, day) => {
 function getSchedule(dayName) {
   const days = Object.keys(data.hours);
   if (typeof dayName === 'undefined') {
-    return days.reduce((accumulator, day) => {
-      const { open, close } = data.hours[day];
-      const msg = `Open from ${open}am until ${close - 12}pm`;
-      accumulator[day] = (open > 0 && close > 0) ? msg : 'CLOSED';
-      return accumulator;
-    }, {});
+    return days.reduce((accumulator, day) => msgReturn(accumulator, day), {});
   }
 
   const obj = {};
   return msgReturn(obj, dayName);
 }
-
-console.log(getSchedule());
 
 function getOldestFromFirstSpecies() {
   // seu código aqui id
