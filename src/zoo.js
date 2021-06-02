@@ -48,9 +48,22 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 
+const noParameter = () => species.reduce((acc, crr) => {
+  const newObj = {};
+  newObj[crr.name] = crr.residents.length;
+  return Object.assign(acc, newObj);
+}, {});
+
+const yesParameter = (animal) => {
+  const wantedSpecie = species.find(({ name }) => name === animal);
+  return wantedSpecie.residents.length;
+};
+
 function countAnimals(species) {
-  // seu código aqui
+  return species ? yesParameter(species) : noParameter();
 }
+
+console.log(countAnimals());
 
 function calculateEntry(entrants) {
   // seu código aqui
