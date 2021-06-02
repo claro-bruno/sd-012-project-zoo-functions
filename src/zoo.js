@@ -70,9 +70,8 @@ function countAnimals(species) {
 return data.species.find((spec) => spec.name === species).residents.length;
 }
 function calculateEntry(entrants) {
-if (entrants = {} || entrants === undefined) return 0;
-  const total = Object.keys(entrants);
-  return total
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  
 }
   function getAnimalMap(options) {
   // seu código aqui
@@ -94,7 +93,13 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-
+  const employer = data.employees.find((employe) => employe.id === id)
+  const animalID = employer.responsibleFor[0];
+  const animal = data.species.find((specie) => specie.id === animalID)
+  const old = animal.residents.sort((a, b) => b.age - a.age)[0];
+  const {name, sex, age} = old
+  const array = [name, sex, age];
+  return array;
 }
 
 function increasePrices(percentage) {
