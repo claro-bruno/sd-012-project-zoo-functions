@@ -33,7 +33,6 @@ function getEmployeeByName(employeeName) {
   }
   return r;
 }
-getEmployeeByName('Emery');
 
 function createEmployee(personalInfo, associatedWith) {
   const resultado = { ...personalInfo, ...associatedWith };
@@ -70,7 +69,7 @@ function countAnimals(species) {
   }
   return resultado;
 }
-// const data = require('./data');
+
 function calculateEntry(entrants) {
   if (entrants === undefined || Object.values(entrants).length === 0) {
     return 0;
@@ -82,11 +81,8 @@ function calculateEntry(entrants) {
   const resultado = Adult * adultPrice + Child * childPrice + Senior * seniorPrice;
   return resultado;
 }
-// console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }))
-
 function getAnimalMap() {
   // options
-  // seu código aqui
 }
 
 function getSchedule() {
@@ -94,9 +90,12 @@ function getSchedule() {
   // seu código aqui
 }
 
-function getOldestFromFirstSpecies() {
-  // id
-  // seu código aqui
+function getOldestFromFirstSpecies(id) {
+  const targetEmployee = data.employees.find((employee) => employee.id === id);
+  const animal = data.species.find((specie) => specie.id === targetEmployee.responsibleFor[0]);
+  const oldestAnimal = animal.residents.sort((a, b) => b.age - a.age)[0];
+  const { name, sex, age } = oldestAnimal;
+  return [name, sex, age];
 }
 
 function increasePrices() {

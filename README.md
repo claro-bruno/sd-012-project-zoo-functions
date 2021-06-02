@@ -304,8 +304,7 @@ Antes de começar, analise o arquivo `src/data.js`, para ver os dados que serão
 
   **O que será avaliado**
 
-  - Passado o id de um funcionário, encontra a primeira espécie de animal
-  gerenciado pelo funcionário, e retorna um array com nome, sexo e idade do
+  - Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário, e retorna um array com nome, sexo e idade do
   animal mais velho dessa espécie
 
 ### 12. IMPLEMENTE A FUNÇÃO increasePrices
