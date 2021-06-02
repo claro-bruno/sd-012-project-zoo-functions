@@ -179,8 +179,8 @@ function increasePrices(percentage) {
   prices.Senior = Math.round((Senior + Number.EPSILON) * 100) / 100;
 }
 
-function getEmployeeCoverage(idOrName) {
-  //
+function getEmployeeCoverage() {
+  // idOrName
 }
 
 module.exports = {
