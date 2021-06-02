@@ -66,13 +66,27 @@ function countAnimals(species) {
     data.species.forEach((animal) => allAnimals[animal.name] = animal.residents.length);
     return allAnimals;
   }
-  return data.species.find((animal) => animal.name === species).residents.length;   
-} 
+  return data.species.find((animal) => animal.name === species).residents.length;
+}
 
+function calculateEntry(...entrants) {
+  if (entrants.length === 0) {
+    return 0;
+  }
 
+  if(Object.keys(...entrants).length === 0) {
+    return 0;
+  }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+  const [people] = entrants;
+
+  const {Adult:adultNum = 0, Child:childrenNum = 0, Senior:seniorNum = 0} = people;
+
+  const prices = (data.prices);
+
+  const {Adult:adultPrice, Senior:seniorPrice, Child:childPrice} = prices;
+
+  return adultNum * adultPrice + childrenNum * childPrice + seniorNum * seniorPrice;   
 }
 
 function getAnimalMap(options) {
