@@ -38,7 +38,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 // Referência: Natalia Souza - turma 11.
 function isManager(id) {
-  const managerFinder = (manager) => manager.managers.includes(id);
+  const managerFinder = (employee) => employee.managers.includes(id);
   return employees.some(managerFinder);
 }
 
@@ -47,9 +47,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(newEnployee);
 }
 
-// function countAnimals(species1) {
-//   // seu código aqui
-// }
+function countAnimals(species1) {
+  if (!species1) {
+    const obj = {};
+    species.forEach((animal) => { obj[animal.name] = animal.residents.length; });
+    return obj;
+  }
+  return species.find((animal) => animal.name === species1).residents.length;
+}
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -78,7 +83,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
