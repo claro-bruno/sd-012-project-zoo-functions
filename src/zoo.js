@@ -158,8 +158,30 @@ function increasePrices(percentage) {
   });
 }
 
+const defaultCoverage = () => {
+  const defaultCoverageList = {};
+  data.employees.forEach((employee) => {
+    const fullName = `${employee.firstName} ${employee.lastName}`;
+    const animalsCoverage = employee.responsibleFor
+      .map((animalID) => data.species.find((specie) => specie.id === animalID).name);
+    defaultCoverageList[fullName] = animalsCoverage;
+  });
+  return defaultCoverageList;
+};
+
+const findEmployeeCoverage = (info) => {
+  const employeeCoverage = {};
+  const employeeObj = data.employees
+    .find(({ id, firstName, lastName }) => id === info || firstName === info || lastName === info);
+  const fullName = `${employeeObj.firstName} ${employeeObj.lastName}`;
+  const animalsCoverage = employeeObj.responsibleFor
+    .map((animalID) => data.species.find((specie) => specie.id === animalID).name);
+  employeeCoverage[fullName] = animalsCoverage;
+  return employeeCoverage;
+};
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  return idOrName === undefined ? defaultCoverage() : findEmployeeCoverage(idOrName);
 }
 
 module.exports = {
