@@ -38,9 +38,15 @@ function getAnimalsOlderThan(animal, minAge) {
   return findAnimls.residents.every((resident) => resident.age >= minAge);
 }
 
-// function getEmployeeByName(employeeName) {
-//   // seu código aqui
-// }
+function getEmployeeByName(employeeName) {
+  // seu código aqui
+  if (typeof employeeName === 'undefined') {
+    return {};
+  }
+
+  return data.employees
+    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -83,17 +89,17 @@ function getAnimalsOlderThan(animal, minAge) {
 // }
 
 module.exports = {
-//   calculateEntry,
-//   getSchedule,
-//   countAnimals,
-//   getAnimalMap,
-//   getSpeciesByIds,
-//   getEmployeeByName,
-//   getEmployeeCoverage,
-//   addEmployee,
-//   isManager,
+  //   calculateEntry,
+  //   getSchedule,
+  //   countAnimals,
+  //   getAnimalMap,
+  //   getSpeciesByIds,
+  getEmployeeByName,
+  //   getEmployeeCoverage,
+  //   addEmployee,
+  //   isManager,
   getAnimalsOlderThan,
-//   getOldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
+  //   getOldestFromFirstSpecies,
+  //   increasePrices,
+  //   createEmployee,
 };
