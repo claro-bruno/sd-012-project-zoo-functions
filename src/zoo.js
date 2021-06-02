@@ -101,11 +101,18 @@ function getSchedule(dayName) {
   }
   return schedule;
 }
-console.log(getSchedule('Monday'));
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  const speciesId = data.employees.find((employee) => employee.id === id).responsibleFor;
+  const animals = getSpeciesByIds(...speciesId);
+  const residents = animals.reduce((acc, curr) => {
+    acc.push(...curr.residents);
+    return acc;
+  }, []);
+  const getOldest = residents.reduce((acc, curr) => ((curr.age > acc.age) ? curr : acc));
+  return Object.values(getOldest);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -126,7 +133,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  //   getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   //   increasePrices,
   createEmployee,
 };
