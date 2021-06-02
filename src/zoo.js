@@ -50,8 +50,10 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmplyee;
 }
 
-function isManager(/* id */) {
+function isManager(id) {
   // seu código aqui
+  let manager = data.employees.some((employee) => employee.managers.some((manager) => manager === id));
+  return manager;
 }
 
 function addEmployee(/* id, firstName, lastName, managers, responsibleFor */) {
