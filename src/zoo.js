@@ -172,7 +172,8 @@ function increasePrices(percentage) {
   const increment = percentage / 100;
   entriesType.forEach((type) => {
     const calc = (prices[type] + (prices[type] * increment));
-    prices[type] = Math.round(calc * 100) / 100;
+    prices[type] = Math.round((calc + Number.EPSILON) * 100) / 100; /* Utilizada referencia de https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+    Optei por usar essa opção para evitar alguns possíveis erros */
   });
 }
 
