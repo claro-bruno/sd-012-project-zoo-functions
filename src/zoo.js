@@ -29,12 +29,19 @@ function getAnimalsOlderThan(animal, age) {
   return specie.residents.every((resident) => resident.age >= age);
 }
 
-function getEmployeeByName() {
-  // seu código aqui  : employeeName
+function getEmployeeByName(employee) {
+  if (employee === undefined) {
+    return {};
+  }
+  return data.employees.find((employees) =>
+    (employees.firstName === employee) || (employees.lastName === employee));
 }
 
-function createEmployee() {
+function createEmployee(personalInfo, associatedWith) {
   // seu código aqui   : personalInfo, associatedWith
+  data.employees.id = personalInfo.id;
+  data.employees.firstName = personalInfo.firstName;
+  data.employees.lastName = personalInfo.lastName;
 }
 
 function isManager() {
