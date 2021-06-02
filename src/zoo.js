@@ -41,10 +41,7 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personal, ...associated };
 }
 
-// function isManager(id) {
-  
-// }
-
+// function isManager(id) {}
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
@@ -53,7 +50,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  }
+  };
   return data.employees.push(newEmployee);
 }
 
