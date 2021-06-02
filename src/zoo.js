@@ -13,16 +13,10 @@ const data = require('./data');
 const arraysOfData = data.species; // recolhe o objeto "species" da variavel data
 
 function getSpeciesByIds(ids) { 
-  let idGathered = [];
-  
-  arraysOfData.forEach((element) => { // Compara o parametro com a data e retorna seu resultado
-    if(element.id === ids){
-      idGathered = element;
-    }
-  });
- console.log(idGathered) //return idGathered;
-}
-getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce');
+  let idGathered = arraysOfData.filter((element) => element.id === ids); // Compara o parametro com a data e retorna seu resultado
+  return idGathered;//console.log(idGathered) 
+};
+//getSpeciesByIds('baa6e93a-f295-44e7-8f70-2bcdc6f6948d');
 
 
 function getAnimalsOlderThan(animal, age) {
