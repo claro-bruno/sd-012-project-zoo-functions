@@ -86,30 +86,25 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   return totalCharge;
 }
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+function getAnimalMap(options) {
+  // seu código aqui
+  // 1º - O que fazer pra colocar no lugar de options caso seja uma ou outra opção?
+  // 2º - Como passar essas várias condicionais pro código?
+}
 
 function getSchedule(dayName) {
-  // seu código aqui
-  // in case the dayName = Monday \/
-  if (dayName === 'Monday') {
-    return { Monday: 'CLOSED' };
-  }
-  if (!dayName) {
-    return Object.keys(hours).forEach((key) => ({
-      [key]: `Open from ${hours[key].open} until ${hours[key].close}` }));
-  }
+  const newObj = {};
+  Object.keys(hours).forEach((key) => {
+    newObj[key] = `Open from ${hours[key].open}am until ${hours[key].close % 12}pm`;
+    if (key === 'Monday') newObj[key] = 'CLOSED';
+  });
 
-  // genial way i found to convert 24h to 12h clock time:
-  // https://www.codegrepper.com/code-examples/javascript/convert+24+hours+to+12+hours+javascript
-  // const chosenDay = Object.keys(hours);
-  // in case is a specific dayName \/
-  const { open, close } = hours[dayName];
-  return {
-    [dayName]: `Open from ${open} until ${close % 12}`,
-  };
+  if (dayName) {
+    return { [dayName]: newObj[dayName] };
+  }
+  return newObj;
 }
+console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
@@ -128,18 +123,27 @@ function increasePrices(percentage) {
   });
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+  if (!idOrName) {
+    return employees.reduce((reader, person) => {
+      const firstAnimal = species.find((animal) => animal.id === person.responsibleFor[0]);
+      const secondAnimal = species.find((animal) => animal.id === person.responsibleFor[1]);
+      // nao consigo atribuir nome e sobrenome
+      reader[person.firstName] = [secondAnimal.name, firstAnimal.name];
+      return reader;
+    }, {});
+  }
+}
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
