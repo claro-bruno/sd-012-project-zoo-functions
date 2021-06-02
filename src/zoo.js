@@ -91,9 +91,98 @@ function calculateEntry(entrants = 0) {
   return totalValue;
 }
 
-function getAnimalMap(options) {
+const createDefaultMap = (siglas) => {
+  const defaultMap = {};
+  siglas.forEach((sigla) => {
+    const locations = data.species.filter((specie) => specie.location === sigla);
+    defaultMap[sigla] = locations.map((specie) => specie.name);
+  });
+  return defaultMap;
+};
 
+const siglas = ['NE', 'NW', 'SE', 'SW'];
+const defaultMap = createDefaultMap(siglas);
+
+const sortNames = (obj) => {
+  siglas.forEach((sigla) => {
+    obj[sigla].forEach((elemento) =>
+      Object.values(elemento)[0].sort());
+  });
+  return obj;
+};
+
+const speciesNamesSex = (sex) => {
+  const species = data.species.reduce((acc, specie) => {
+    acc.push(specie.residents.filter((resident) =>
+      resident.sex === sex).map((resident) => resident.name));
+    return acc;
+  }, []);
+  const nameSexRelatory = {};
+  data.species.forEach((element, index) => {
+    nameSexRelatory[element.name] = species[index];
+  });
+  return nameSexRelatory;
+};
+
+const maleSex = (obj, sorted) => {
+  const maleNames = speciesNamesSex('male');
+  const newObj = {};
+  siglas.forEach((sigla) => {
+    obj[sigla].forEach(() => {
+      const speciesNames = data.species.filter((specie) =>
+        specie.location === sigla).map((specie) =>
+        specie.name);
+      newObj[sigla] = speciesNames.map((specie) =>
+        ({ [specie]: maleNames[specie] }));
+    });
+  });
+  if (sorted) { sortNames(newObj); }
+  return newObj;
+};
+
+const femaleSex = (obj, sorted) => {
+  const femaleNames = speciesNamesSex('female');
+  const newObj = {};
+  siglas.forEach((sigla) => {
+    obj[sigla].forEach(() => {
+      const speciesNames = data.species.filter((specie) =>
+        specie.location === sigla).map((specie) =>
+        specie.name);
+      newObj[sigla] = speciesNames.map((specie) =>
+        ({ [specie]: femaleNames[specie] }));
+    });
+  });
+  if (sorted) { sortNames(newObj); }
+  return newObj;
+};
+
+const createNamesMap = (sorted, sex) => {
+  const namesMap = {};
+  siglas.forEach((sigla) => {
+    const speciesNames = data.species.filter((specie) =>
+      specie.location === sigla).map((specie) =>
+      specie.name);
+    const residents = data.species.filter((specie) =>
+      specie.location === sigla);
+    namesMap[sigla] = speciesNames.map((specie) => ({ [specie]: residents.find((animal) =>
+      animal.name === specie).residents.map((resident) => resident.name) }));
+  });
+  if (sex === 'male') { return maleSex(namesMap, sorted); }
+  if (sex === 'female') { return femaleSex(namesMap, sorted); }
+  if (sorted) { return sortNames(namesMap); }
+  return namesMap;
+};
+
+function getAnimalMap(options) {
+  if (options === undefined) { return defaultMap; }
+  const { includeNames = false, sorted = false, sex = undefined } = options;
+  if (includeNames) {
+    return createNamesMap(sorted, sex);
+  } if (!includeNames) { return defaultMap; }
 }
+
+const options = { includeNames: true, sex: 'female' };
+console.log(getAnimalMap(options));
 
 function getSchedule(dayName) {
   // seu código aqui
