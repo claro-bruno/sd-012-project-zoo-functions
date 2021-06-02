@@ -11,11 +11,12 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // pequena mudança pro commit
+function getSpeciesByIds(...ids) {
+  const filterID = data.species.filter((specie) => ids.some((id) => specie.id === id));
+  return filterID;
 }
 
-function getAnimalsOlderThan(animal, age) {
+/* function getAnimalsOlderThan(animal, age) {
   // seu código aqui
 }
 
@@ -61,20 +62,20 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-}
+} */
 
 module.exports = {
-  calculateEntry,
+  /* calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  getAnimalMap, */
   getSpeciesByIds,
-  getEmployeeByName,
+  /* getEmployeeByName,
   getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
   increasePrices,
-  createEmployee,
+  createEmployee, */
 };
