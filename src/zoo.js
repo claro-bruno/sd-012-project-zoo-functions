@@ -27,7 +27,7 @@ function getSpeciesByIds(...ids) {
     );
     const getAnimalsOlderThan = getAnimalsOlderThan(species);
 }
-*/
+
 /*
 function getEmployeeByName(employeeName) {
 // Questao 3
@@ -39,11 +39,13 @@ function createEmployee(personalInfo, associatedWith) {
   return information;
 }
 
-/*
 function isManager(id) {
 // Questao 5
+  const getEmployee = data.employees.some((employee, index) => employee.managers[index] === id);
+  return getEmployee;
 }
 
+/*
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 // Questao 6
 }
@@ -86,7 +88,7 @@ module.exports = {
   //  getEmployeeByName,
   //  getEmployeeCoverage,
   //  addEmployee,
-  //  isManager,
+  isManager,
   //  getAnimalsOlderThan,
   //  getOldestFromFirstSpecies,
   //  increasePrices,
