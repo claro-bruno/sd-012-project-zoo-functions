@@ -74,15 +74,16 @@ function calculateEntry(entries) {
 }
 
 // Requisito 9 - Não consegui fazer ainda
-const animalsMap = {
+
+const blankMap = () => ({
   NE: [],
   NW: [],
   SE: [],
   SW: [],
-};
+});
 
 const defaultMap = () => {
-  const defaultMapResult = animalsMap;
+  const defaultMapResult = blankMap();
   data.species.map((specie) => {
     defaultMapResult[specie.location].push(specie.name);
     return defaultMapResult;
@@ -107,12 +108,12 @@ const sortArray = (array, sort) => {
   if (sort !== true) { return array; }
 };
 
-// Essa parte foi em partes baseada no código do colega Eric
+// Essa parte foi em partes baseada no código do colega Eric Reis, turma 12
 function getAnimalMap(options) {
-  if (!options) { return defaultMap(); }
+  if (options === undefined) { return defaultMap(); }
   const { includeNames = false, sorted = false, sex } = options;
   if (includeNames) {
-    const customMap = animalsMap;
+    const customMap = blankMap();
     data.species.map(({ name, location, residents }) => {
       const arrayResidents = filterAnimalsSex(residents, sex);
       const arrayOfNames = arrayResidents.map((resident) => resident.name);
@@ -148,7 +149,7 @@ function getOldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
-// Essa parte foi em partes baseada no código do colega Eric
+// Essa parte foi em partes baseada no código do colega Eric Reis, turma 12
 function increasePrices(percentage) {
   // seu código aqui
   const pricesKey = Object.keys(data.prices);
