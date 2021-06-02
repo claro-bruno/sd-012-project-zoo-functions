@@ -41,7 +41,7 @@ function isManager(id) {
   const collaborator = employees.filter((employee) => employee.managers.includes(findIdManager.id));
   if (collaborator.length > 1) {
     return true;
-  };
+  }
   return false;
 }
 
