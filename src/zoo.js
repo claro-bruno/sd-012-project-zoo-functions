@@ -118,9 +118,31 @@ function increasePrices(percentage) {
   });
 }
 
-function getEmployeeCoverage() {
-  // idOrName
-  // seu código aqui
+const getAllAnimalsEmployeeCoverage = (respFor) => {
+  const animals = respFor.map((specieId) => data.species.find(({ id }) => id === specieId).name);
+  return animals;
+};
+
+const getAllEmployeeCoverage = () => {
+  const result = {};
+  data.employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    result[`${firstName} ${lastName}`] = getAllAnimalsEmployeeCoverage(responsibleFor);
+  });
+  return result;
+};
+
+function getEmployeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    return getAllEmployeeCoverage();
+  }
+  const employee = data.employees
+    .find(({ id, firstName, lastName }) =>
+      idOrName === id || idOrName === firstName || idOrName === lastName);
+
+  const { firstName, lastName, responsibleFor } = employee;
+  const animals = getAllAnimalsEmployeeCoverage(responsibleFor);
+
+  return { [`${firstName} ${lastName}`]: animals };
 }
 
 module.exports = {
