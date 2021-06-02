@@ -41,7 +41,10 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personal, ...associated };
 }
 
-// function isManager(id) {
+function isManager(id) {
+  const managerList = data.employees.map((empl) => empl.managers).flat();
+  return managerList.some((item) => item === id);
+}
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
@@ -99,7 +102,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
