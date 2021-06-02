@@ -32,6 +32,7 @@ function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   const getSpecie = species.filter((specie) => specie.name === animal);
   const getResidents = getSpecie.map((resident) => resident.residents);
+  // testar REDUCE posteriormente
   // console.log(getResidents);
   return getResidents.every((specie) => age < specie[0].age);
 }
@@ -67,10 +68,19 @@ function isManager(id) {
 
 // console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = () => ({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+  data.employees.push(newEmployee());
+  return employees;
 }
 
+/*
 function countAnimals(species) {
   // seu código aqui
 }
@@ -98,20 +108,20 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
-
+*/
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
