@@ -21,8 +21,11 @@
   },
   "homepage": "https://github.com/betrybe/sd-03-block9-project-zoo-functions#readme",
   "devDependencies": {
-    "eslint": "6.8.0",
+    "eslint": "^6.8.0",
     "eslint-config-trybe-fundamentals": "1.1.0",
     "jest": "25.2.3"
+  },
+  "dependencies": {
+    "lint": "^0.7.0"
   }
 }
