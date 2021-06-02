@@ -32,9 +32,16 @@ function getEmployeeByName(employeeName) {
   return employerName;
 }
 
-/* function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-} */
+function createEmployee(personalInfo, associatedWith) {
+  const newEmployer = {
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  };
+  return newEmployer;
+}
 
 /* function isManager(id) {
   // seu código aqui
@@ -83,7 +90,8 @@ module.exports = {
   /*   addEmployee, */
   /*   isManager, */
   getAnimalsOlderThan,
-/*   getOldestFromFirstSpecies, */
-/*   increasePrices, */
-/*   createEmployee, */
+
+  /*   getOldestFromFirstSpecies, */
+  /*   increasePrices, */
+  createEmployee,
 };
