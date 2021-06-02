@@ -51,7 +51,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  if (managers === undefined || responsibleFor === undefined) {
+  if (managers === undefined && responsibleFor === undefined) {
     let managerAux = managers;
     managerAux = [];
     let responsibleForAux = responsibleFor;
