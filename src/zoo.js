@@ -22,9 +22,6 @@ function getSpeciesByIds(...ids) {
   return newArr;
 }
 
-const lionId = '0938aa23-f153-4937-9f88-4858b24d6bce';
-console.log(getSpeciesByIds(lionId))
-
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   const newAnimal = species.filter((specie) => specie.name === animal );
@@ -82,20 +79,13 @@ function countAnimals(especie) {
 
 function calculateEntry(entrants) {
   // seu código aqui
-  if (entrants === null || entrants === undefined || entrants === {}) {
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
      return 0;
   };
-  if (entrants.Adult === undefined) {
-     entrants.Adult = 0;
+  const totalPrice = (Adult = 0, Senior = 0, Child = 0) => {
+   return Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
   };
-  if (entrants.Senior === undefined) {
-   entrants.Senior = 0;
-   };
-   if (entrants.Child === undefined) {
-      entrants.Child = 0;
-   };
-  const totalPrice = entrants.Adult * prices.Adult + entrants.Senior * prices.Senior + entrants.Child * prices.Child;
-  return totalPrice;
+  return totalPrice(entrants.Adult, entrants.Senior, entrants.Child);
 }
 
 function getAnimalMap(options) {
@@ -147,10 +137,22 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const newArr = [];
+  const employeeFind = employees.find((employee) => employee.id === id);
+  const animalFind = species.find((animal) => employeeFind.responsibleFor[0] === animal.id);
+  const resp = animalFind.residents.sort((a, b) => b.age - a.age)[0];
+  newArr[0] = resp.name;
+  newArr[1] = resp.sex;
+  newArr[2] = resp.age;
+  return newArr;
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  const keys = Object.keys(prices);
+  const percentage1 = percentage + 100;
+  
+  keys.forEach((price) => prices[price] = parseFloat((prices[price] * percentage1 / 100 + 0.005).toFixed(2)));
 }
 
 function getEmployeeCoverage(idOrName) {
