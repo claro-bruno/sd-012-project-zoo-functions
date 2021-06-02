@@ -47,9 +47,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  }
+  };
   employees.push(newEmployee);
-};
+}
 
 // function countAnimals(species) {
 //   // seu código aqui
