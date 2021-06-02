@@ -83,8 +83,14 @@ function getSchedule(dayName) {
     : { [dayName]: operationTime()[dayName] };
 }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui (id)
+const getFunc = (id) => data.employees.find((func) => func.id === id);
+const getFirstAnimalFrom = (id) => [...getFunc(id).responsibleFor].shift();
+const getSpecieOlder = (id) => (Object.values(data.species
+  .find((spec) => spec.id === id).residents
+  .sort((a, b) => b.age - a.age)[0]));
+
+function getOldestFromFirstSpecies(id) {
+  return getSpecieOlder(getFirstAnimalFrom(id));
 }
 
 function increasePrices() {
