@@ -85,11 +85,13 @@ const mapWithNames = (...loc) => {
   return returnObj;
 };
 
+const locations = ['NE', 'NW', 'SE', 'SW'];
 function getAnimalMap(options) {
   // seu código aqui
   if (!options) return entireMap();
-  
+  if (options.includeNames) return mapWithNames(...locations);
 }
+console.log(getAnimalMap({includeNames:true}));
 
 // TENTAR REFAZER ESTE DE UM JEITO MELHOR
 const returnString = (day) => `Open from ${hours[day].open}am until ${hours[day].close % 12}pm`;
