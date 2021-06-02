@@ -54,15 +54,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   if (managers === undefined || responsibleFor === undefined) {
     let managerAux = managers;
     managerAux = [];
-    responsibleForAux = responsibleFor;
+    let responsibleForAux = responsibleFor;
     responsibleForAux = [];
-    const newEmployee2 = {
-      id,
-      firstName,
-      lastName,
-      managerAux,
-      responsibleForAux,
-    };
+    const newEmployee2 = { id, firstName, lastName, managerAux, responsibleForAux, };
     data.employees.push(newEmployee2);
   }
   const newEmployee = {
@@ -75,19 +69,19 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   data.employees.push(newEmployee);
 }
 
-function countAnimals(species) {
-  if (species === undefined) {
+function countAnimals(species1) {
+  if (species1 === undefined) {
     const name = data.species.map((specie) => specie.name);
     const quantidade = data.species.map((specie) => specie.residents.length);
-    const result = {...quantidade};
-    Object.keys(name).forEach((key, posicao) => {
-      let newKey = name[key];
+    const result = { ...quantidade };
+    Object.keys(name).forEach((key) => {
+      const newKey = name[key];
       result[newKey] = result[key];
       delete result[key];
     });
     return result;
   }
-  const quant =  data.species.find((specie) => specie.name === species);
+  const quant = data.species.find((specie) => specie.name === species1);
   return quant.residents.length;
 }
 
