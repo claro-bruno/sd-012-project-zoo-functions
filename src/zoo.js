@@ -24,7 +24,7 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName = {}) {
   const findFirstName = employees.find(({ firstName, lastName }) =>
-  firstName === employeeName || lastName === employeeName);
+    firstName === employeeName || lastName === employeeName);
   return findFirstName || employeeName;
 }
 
@@ -69,17 +69,17 @@ function getEmployeeByName(employeeName = {}) {
 // }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
+  // getEmployeeCoverage,
+  // addEmployee,
+  // isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
 };
