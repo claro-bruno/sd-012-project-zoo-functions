@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+const data = require("./data");
 
 const { species } = data;
 const { employees } = data;
@@ -28,7 +28,7 @@ function getAnimalsOlderThan(animal, age) {
 function getEmployeeByName(employeeName) {
   const gotEmployee = employees.find(
     (employee) =>
-      employee.firstName === employeeName || employee.lastName === employeeName,
+      employee.firstName === employeeName || employee.lastName === employeeName
   );
   if (gotEmployee) return gotEmployee;
   return {};
@@ -43,7 +43,8 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   return employees.some((employee) =>
-    employee.managers.some((elem) => elem === id));
+    employee.managers.some((elem) => elem === id)
+  );
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -71,7 +72,7 @@ function calculateEntry(entrants) {
   if (!entrants || Object.entries(entrants).length === 0) return 0;
   return Object.entries(entrants).reduce(
     (acc, curr) => prices[curr[0]] * curr[1] + acc,
-    0,
+    0
   );
 }
 
@@ -82,7 +83,7 @@ function calculateEntry(entrants) {
 const { hours } = data;
 
 function dayInfo(day) {
-  if (hours[day].open === 0 && hours[day].close === 0) return 'CLOSED';
+  if (hours[day].open === 0 && hours[day].close === 0) return "CLOSED";
   return `Open from ${
     hours[day].open < 12 ? `${hours[day].open}am` : `${hours[day].open - 12}pm`
   } until ${
@@ -106,11 +107,11 @@ function getOldestFromFirstSpecies(id) {
   const firstAnimal = species.find((specie) => specie.id === firstAnimalId);
   const oldestAnimal = firstAnimal.residents.find(
     (elem) =>
-      elem.age
-      === firstAnimal.residents.reduce(
+      elem.age ===
+      firstAnimal.residents.reduce(
         (acc, curr) => (curr.age > acc ? curr.age : acc),
-        0,
-      ),
+        0
+      )
   );
   return [...Object.values(oldestAnimal)];
 }
@@ -122,9 +123,31 @@ function increasePrices(percentage) {
   });
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName) {
+  const responsibleSpecies = (responsibleFor) =>
+    responsibleFor
+      .map((id) => species.find((specie) => specie.id === id))
+      .map((elem) => elem.name);
+
+  if (idOrName) {
+    const employee = employees.find(
+      (employee) =>
+        employee.id === idOrName ||
+        employee.firstName === idOrName ||
+        employee.lastName === idOrName
+    );
+    return employee;
+  }
+
+  const employeesResponsibilities = employees.reduce((acc, curr) => {
+    acc[`${curr.firstName} ${curr.lastName}`] = responsibleSpecies(
+      curr.responsibleFor
+    );
+    return acc;
+  }, {});
+  return employeesResponsibilities;
+}
+console.log(getEmployeeCoverage("Stephanie"));
 
 module.exports = {
   calculateEntry,
@@ -133,7 +156,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
