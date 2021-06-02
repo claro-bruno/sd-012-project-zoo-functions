@@ -76,11 +76,21 @@ function countAnimals(species) {
   return count.length;
 }
 
-console.log(countAnimals());
+// console.log(countAnimals());
 
 function calculateEntry(entrants) {
-  return entrants;
+  if (entrants === undefined || entrants === null) {
+    return 0;
+  }
+  const entradas = Object.entries(entrants);
+  const total = entradas.reduce((acc, current) => {
+    const count = acc + current[1] * data.prices[current[0]];
+    return count;
+  }, 0);
+  return total;
 }
+// Resolvido com o auxílio do Rodrigo Facury;
+// console.log(calculateEntry({ Child: 2, Senior: 1 }));
 
 function getAnimalMap(options) {
   return options;
