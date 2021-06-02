@@ -54,11 +54,14 @@ function isManager(id) {
 
 // realiza o teste do parametro para verificar se é true ou false através do metodo some, nesse caso, verifica se o employee possui id de gerente. Isso ocorre através do metódo includes, onde é verificado se no array employees, a chave managers contem ID de gerente;
 
-/*  function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(newEmployee);
 }
 
-function countAnimals(species) {
+// De acordo com o teste e o arquivo data, os elementos managers e responsibleFor são arrays, assim, houve necessidade de acrescenter no parametro da função. Após, declarada uma constante com a estrutura do novo employee e assim, através do push, o newEmployee é acrescentado ao final do array employees
+
+/* function countAnimals(species) {
   // seu código aqui
 }
 
@@ -94,7 +97,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
