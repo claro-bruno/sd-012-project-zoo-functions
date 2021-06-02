@@ -73,7 +73,7 @@ const countAnimals = (animal) => {
 };
 
 const calculateEntry = (entrants) => {
-  if (entrants !== undefined || Object.keys(entrants).length === 0) {
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
   }
   const adult = entrants.Adult * prices.Adult;
@@ -81,6 +81,8 @@ const calculateEntry = (entrants) => {
   const senior = entrants.Senior * prices.Senior;
   return adult + child + senior;
 };
+
+console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 // function getAnimalMap(options) {
 //   // seu código aqui
