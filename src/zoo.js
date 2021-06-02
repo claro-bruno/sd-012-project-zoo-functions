@@ -41,14 +41,17 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-function isManager(id) {
+// function isManager(id) {
+//   // seu código aqui
+//   const checkId = (id) => id === data.employee.id;
+//   const checkManageer = (manager) => !manager;
+//   data.employees.find(checkId); 
+// }
+
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
   
 }
-
-// function addEmployee() {
-//   // seu código aqui id, firstName, lastName, managers, responsibleFor
-// }
 
 // function countAnimals() {
 //   // seu código aqui species
@@ -86,8 +89,8 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
-  isManager,
+  addEmployee,
+  // isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
