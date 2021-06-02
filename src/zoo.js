@@ -69,17 +69,18 @@ function countAnimals(specie) {
 }
 
 function calculateEntry(entrants) {
-  const { Adult, Child, Senior } = entrants
-  if (!entrants) return 0;
-  entrants.reduce((acc, act) => {})
-
+  if (entrants === undefined || Object.keys(entrants).length === 0) {return 0};
+  const {Adult = 0, Child = 0, Senior = 0} = entrants
+  return  Adult * data.prices.Adult + Child * data.prices.Child + Senior * data.prices.Senior
+}
+// console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }))
 
 function getAnimalMap(options) {
   // seu código aqui
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  
 }
 
 function getOldestFromFirstSpecies(id) {
