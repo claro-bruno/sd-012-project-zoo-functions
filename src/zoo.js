@@ -75,9 +75,36 @@ function calculateEntry(entrants = {}) {
   return total;
 }
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+function getAnimalMap(options) {
+  const map = {};
+  const corners = ['NE', 'NW', 'SE', 'SW'];
+  corners.forEach((corner) => {
+    const thisCorner = data.species.filter((specie) => specie.location === corner);
+    map[corner] = [];
+    if (options && options.includeNames === true) {
+      thisCorner.forEach((animal) => {
+        let namesList = [];
+        const allAnimals = animal.residents;
+        allAnimals.forEach((resident) => namesList.push(resident.name));
+        if (options.sex === 'male') {
+          namesList = [];
+          const maleAnimals = allAnimals.filter((thisAnimal) => thisAnimal.sex === 'male');
+          maleAnimals.forEach((resident) => namesList.push(resident.name));
+        }
+        if (options.sex === 'female') {
+          namesList = [];
+          const femaleAnimals = allAnimals.filter((thisAnimal) => thisAnimal.sex === 'female');
+          femaleAnimals.forEach((resident) => namesList.push(resident.name));
+        }
+        if (options.sorted === true) namesList.sort();
+        map[corner].push({ [animal.name]: namesList });
+      });
+      return map;
+    }
+    thisCorner.forEach((animal) => map[corner].push(animal.name));
+  });
+  return map;
+}
 
 // function getSchedule(dayName) {
 //   // seu código aqui
@@ -99,7 +126,7 @@ module.exports = {
   calculateEntry,
   //   getSchedule,
   countAnimals,
-  //   getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   //   getEmployeeCoverage,
