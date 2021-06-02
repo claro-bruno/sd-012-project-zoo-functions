@@ -40,21 +40,21 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
   };
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  return data.employees.some((employee) => employee.managers.includes(id));
+}
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
+  
 // }
 
 // function countAnimals(species) {
 //   // seu código aqui
 // }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants = 0) {
+  if (!entrants || entrants === {} ) return entrants;
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -77,7 +77,7 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   // countAnimals,
   // getAnimalMap,
@@ -85,7 +85,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
