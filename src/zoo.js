@@ -10,14 +10,15 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { species, employees, hours, prices } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
-  return data.species.filter((specie, index) => specie.id === ids[index]);
+  return species.filter((specie, index) => specie.id === ids[index]);
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const animalSpecie = data.species.filter((specie) => specie.name === animal)[0];
+  const animalSpecie = species.filter((specie) => specie.name === animal)[0];
   const getResidents = animalSpecie.residents;
   const getAge = getResidents.every((resident) => (resident.age >= age));
   return getAge;
@@ -25,9 +26,10 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) return {};
-  return data.employees.find(({ firstName, lastName }) => (firstName === employeeName
+  return employees.find(({ firstName, lastName }) => (firstName === employeeName
      || lastName === employeeName));
 }
+
 /*
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
@@ -35,7 +37,7 @@ function createEmployee(personalInfo, associatedWith) {
 */
 
 function isManager(id) {
-  const map = data.employees.map((employee) => {
+  const map = employees.map((employee) => {
     if (employee.managers.includes(id)) return true;
     return false;
   });
@@ -49,15 +51,15 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 */
 
-function countAnimals(species) {
-  if (species === undefined) {
+function countAnimals(specie) {
+  if (specie === undefined) {
     const result = {};
-    data.species.forEach(({ name, residents }) => {
+    species.forEach(({ name, residents }) => {
       result[name] = residents.length;
     });
     return result;
   }
-  return data.species.find((specie) => specie.name === species).residents.length;
+  return species.find((item) => item.name === specie).residents.length;
 }
 
 /*
@@ -68,11 +70,15 @@ function calculateEntry(entrants) {
 function getAnimalMap(options) {
   // seu código aqui
 }
+*/
 
+// eslint-disable-next-line max-lines-per-function
 function getSchedule(dayName) {
-  // seu código aqui
+  //
 }
+console.log(getSchedule());
 
+/*
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -87,7 +93,7 @@ function getEmployeeCoverage(idOrName) {
 
 module.exports = {
   // calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
