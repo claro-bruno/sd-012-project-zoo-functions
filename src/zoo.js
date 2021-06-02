@@ -9,7 +9,8 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+const { species, employees } = require('./data');
+// dica colega Caio para colocar as arrays de objetos aqui p chamar com amsi facilidades nas funçòes.
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -32,7 +33,7 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
   const findEmployee = (employee) =>
     employee.lastName === employeeName || employee.firstName === employeeName;
-  return data.employees.find(findEmployee);
+  return employees.find(findEmployee);
 }
 // console.log(getEmployeeByName('Emery'));
 
@@ -45,12 +46,16 @@ function isManager(id) {
   // seu código aqui
   return data.employees.some((employee) =>
     employee.managers.some((value) => value === id));
+  // ajuda do colega Luis Fernando
 }
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // seu código aqui
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(newEmployee);
+  // ajuda colega Caio
+}
 
 // function countAnimals() {
 //   // seu código aqui species
@@ -88,7 +93,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
