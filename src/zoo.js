@@ -57,7 +57,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   });
 }
-// const data = require('./data');
 function countAnimals(species) {
   let resultado;
   if (species === undefined) {
@@ -71,12 +70,19 @@ function countAnimals(species) {
   }
   return resultado;
 }
-// console.log(countAnimals())
-
-function calculateEntry() {
-  // entrants
-  // seu código aqui
+// const data = require('./data');
+function calculateEntry(entrants) {
+  if (entrants === undefined || Object.values(entrants).length === 0) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultPrice = data.prices.Adult;
+  const childPrice = data.prices.Child;
+  const seniorPrice = data.prices.Senior;
+  const resultado = Adult * adultPrice + Child * childPrice + Senior * seniorPrice;
+  return resultado;
 }
+// console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }))
 
 function getAnimalMap() {
   // options
