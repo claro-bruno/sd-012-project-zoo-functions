@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 // bora começar | let's start
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 const getSpeciesByIds = (...ids) => (ids ? species.filter((e) => ids.includes(e.id)) : []);
@@ -39,16 +39,8 @@ const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
 const countAnimals = (spcName) => (spcName ? species.find((e) => e.name === spcName).residents
   .length : species.reduce((e, a) => ({ ...e, [a.name]: a.residents.length }), {}));
 
-// obj = {names:'nome',residents:[1,2,3,4]}
-
-// const tryer = (e) => {
-//   return {[e.names] : e.residents.length}
-// }
-// console.log(tryer(obj));
-
-function calculateEntry(entrants) {
-  // seu código aqui
-}
+const calculateEntry = (entrants) => (entrants ? Object.values(entrants)
+  .reduce((acc, cv, i) => acc + cv * prices[Object.keys(entrants)[i]], 0) : 0);
 
 function getAnimalMap(options) {
   // seu código aqui
