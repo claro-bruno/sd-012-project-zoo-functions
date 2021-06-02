@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { species } = require('./data');
+// const { species } = require('./data');
 const data = require('./data');
 
 // console.log(data.species[0].id)
@@ -17,13 +17,13 @@ function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
   const arraySpecies = ids.map((specieId) => data.species.find((specie) => specie.id === specieId));
   return arraySpecies;
-}  
+};
 // tentei usar o filter mas ele retorna uma array então fica [[{ ... }]]
 
 function getAnimalsOlderThan(animal, age) {
   const findSpecie = data.species.find((specie) => specie.name === animal);
-  const animalOlderThan = findSpecie.residents.every((resident) => resident.age > age)
-  return animalOlderThan
+  const animalOlderThan = findSpecie.residents.every((resident) => resident.age > age);
+  return animalOlderThan;
 }
 
 function getEmployeeByName(employeeName) {
@@ -35,15 +35,21 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return {...personalInfo, ...associatedWith}
+  return {...personalInfo, ...associatedWith};
 }
 
 function isManager(id) {
-  // seu código aqui
+  // const { managers } = data.employees;
+  // return managers;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+// const { managers } = data.employees
+// console.log(data.employees.managers);
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployees = data.employees.push( { id, firstName, lastName, managers, responsibleFor } )
+  return newEmployees;
 }
 
 function countAnimals(species) {
