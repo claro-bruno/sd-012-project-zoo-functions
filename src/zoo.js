@@ -62,18 +62,39 @@ function calculateEntry(entrants = 0) {
   return soma;
 }
 
-function getAnimalMap(options) {
-  // const regioes = {
-  //   NE: [],
-  //   NW: [],
-  //   SE: [],
-  //   SW: [],
-  // };
-  // species.map((elem) => regioes[elem.location].push(elem.name));
-  // species.forEach((animal) => regioes[animal.location] = species.map((elem) =>))
-  // return regioes;
+function getLocation(regioes) {
+  return regioes.reduce((obj, regiao) => {
+    const objLocation = obj;
+    const arraySpecies = species.filter(({ location }) => location === regiao)
+      .map((specie) => specie.name);
+    objLocation[regiao] = arraySpecies;
+    return objLocation;
+  }, {});
 }
-// console.log(getAnimalMap());
+
+function getName(key, options) {
+  return key.reduce((array, sName) => {
+    const obj = {};
+    let arrayNames = species.find((elem) => elem.name === sName).residents;
+    if (options.sex) arrayNames = arrayNames.filter((animal) => animal.sex === options.sex);
+    arrayNames = arrayNames.map((animal) => animal.name);
+    if (options.sorted) arrayNames.sort();
+    obj[sName] = arrayNames;
+    array.push(obj);
+    return array;
+  }, []);
+}
+
+function getAnimalMap(options) {
+  const regioes = ['NE', 'NW', 'SE', 'SW'];
+  const animalLocation = getLocation(regioes);
+  const nameLocation = {};
+  if (!options || !options.includeNames) return animalLocation;
+  regioes.forEach((key) => {
+    nameLocation[key] = getName(animalLocation[key], options);
+  });
+  return nameLocation;
+}
 
 function getSchedule(dayName) {
   const schedule = {
@@ -85,21 +106,20 @@ function getSchedule(dayName) {
     Sunday: 'Open from 8am until 8pm',
     Monday: 'CLOSED',
   };
-
   return dayName === undefined ? schedule : { [dayName]: schedule[dayName] };
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function getOldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   calculateEntry,
@@ -108,11 +128,11 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
