@@ -10,22 +10,19 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const arraysOfData = data.species;
+const arraysOfData = data.species; // recolhe o objeto "species" da variavel data
 
-
-function getSpeciesByIds(...ids) { // 0938aa23-f153-4937-9f88-4858b24d6bce id de teste
-  let item = [];
-  const argument = ids;
-  arraysOfData.forEach((element, index) => {
-    if(element.id === argument){
-      item = element;
+function getSpeciesByIds(ids) { // 0938aa23-f153-4937-9f88-4858b24d6bce id de teste
+  let idGathered = [];
+  
+  arraysOfData.forEach((element) => { // Compara o parametro com a data e retorna seu resultado
+    if(element.id === ids){
+      idGathered = element;
     }
-    return item;
-  })
-  console.log(argument)
-  console.log(item)
+  });
+ console.log(id) //return idGathered;
 }
-getSpeciesByIds('e8481c1d-42ea-4610-8e11-1752cfc05a46', 'e8481c1d-42ea-4610-8e11-1752cfc05a46');
+getSpeciesByIds();
 
 
 function getAnimalsOlderThan(animal, age) {
