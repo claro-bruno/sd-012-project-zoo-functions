@@ -111,15 +111,10 @@ const getOldestFromFirstSpecies = (id) => {
 };
 
 const increasePrices = (percentage) => {
-  prices.Adult += (prices.Adult * percentage) / 100;
-  prices.Child += (prices.Child * percentage) / 100;
-  prices.Senior += (prices.Senior * percentage) / 100;
-  prices.Adult = prices.Adult.toFixed(2) + 0.01;
-  prices.Child = prices.Child.toFixed(2) + 0.01;
-  prices.Senior = prices.Senior.toFixed(2) + 0.01;
-  prices.Adult = parseFloat(prices.Adult);
-  prices.Child = parseFloat(prices.Child);
-  prices.Senior = parseFloat(prices.Senior);
+  const unitPercentage = 1 + percentage / 100;
+  prices.Adult = Math.round(prices.Adult * unitPercentage * 100) / 100;
+  prices.Child = Math.round(prices.Child * unitPercentage * 100) / 100;
+  prices.Senior = Math.round(prices.Senior * unitPercentage * 100) / 100;
 };
 
 // function getEmployeeCoverage(idOrName) {
