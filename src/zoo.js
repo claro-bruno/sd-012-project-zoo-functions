@@ -80,8 +80,18 @@ function countAnimals(species) {
   return animal.residents.length;
 }
 
-function calculateEntry(/* entrants */) {
+function calculateEntry(entrants) {
   // seu código aqui
+  if (entrants === undefined || Object.entries(entrants).length === 0) {
+    return 0;
+  }
+  const age = Object.keys(entrants);
+  const people = Object.values(entrants);
+  let result = 0;
+  age.forEach((key, index) => {
+    result += data.prices[key] * people[index];
+  })
+  return result;
 }
 
 function getAnimalMap(/* options */) {
