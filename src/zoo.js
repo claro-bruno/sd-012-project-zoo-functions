@@ -13,6 +13,7 @@ const { species } = require('./data');
 const data = require('./data');
 
 const { employees } = data;
+// console.log(employees);
 
 function getSpeciesByIds(...ids) {
   const mySpecies = [];
@@ -34,15 +35,30 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const myEmployee = { ...personalInfo, ...associatedWith };
+  return myEmployee;
 }
 
 function isManager(id) {
-  // seu código aqui
+  const manager = employees.reduce((acc, current) => {
+    if (!acc.includes(...current.managers)) {
+      acc.push(...current.managers);
+    }
+    return acc;
+  }, []);
+
+  const checkManager = manager.includes(id);
+  return checkManager;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newPerson = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor };
+  data.employees.push(newPerson);
 }
 
 function countAnimals(species) {
