@@ -42,11 +42,13 @@ function getEmployeeByName(employeeName) {
 
 // Resolve primeiro o caso de retornar um objeto vazio (chaves vazias) quando não houver parametro, sendo utilizada a ideia de diferença para retornar um objeto vazio. Após, utiliza o metodo find para encontrar o primeiro elemento que satisfaça a condição, no caso, ele retornará true quando encontrar o nome passado como parametro, e assim executa a arrow fuction, que pega o elemento dentro de employees e retorna  o objeto do funcionário tanto quando o parametro é referente ao primeiro nome quanto ao ultimo.
 
-/*  function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
 }
 
-function isManager(id) {
+// utiliza o metodo spread para adicionar os valores passados como parametro da função iterando um novo objeto
+
+/*  function isManager(id) {
   // seu código aqui
 }
 
@@ -95,5 +97,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
