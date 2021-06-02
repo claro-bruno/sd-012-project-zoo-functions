@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -52,8 +52,7 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // seu código aqui
   const getManagers = [];
-  data.employees.forEach((employee) => getManagers.push(...employee.managers));
-  // usei o data. para me livrar de um erro do lint
+  employees.forEach((employee) => getManagers.push(...employee.managers));
   return getManagers.some((managerId) => managerId === id);
 }
 
@@ -120,10 +119,23 @@ function getAnimalMap(options) {
   }
 }
 
-console.log(getAnimalMap({ includeNames: true, sorted: true }).NE);
-
 function getSchedule(dayName) {
   // seu código aqui
+  const keys = Object.keys(data.hours);
+  const schedule = keys.reduce((acc, curr) => {
+    if (hours[curr].open === hours[curr].close) {
+      acc[curr] = 'CLOSED';
+    } else {
+      acc[curr] = `Open from ${hours[curr].open}am until ${hours[curr].close - 12}pm`;
+    }
+    return acc;
+  }, {});
+  if (dayName === undefined) {
+    return schedule;
+  }
+  const daySchedule = {};
+  daySchedule[dayName] = schedule[dayName];
+  return daySchedule;
 }
 
 function getOldestFromFirstSpecies(id) {
