@@ -135,7 +135,15 @@ const getEmployeeCoverage = (idOrName) => {
   let obj = {};
   if (idOrName === undefined) {
     employees.forEach((employee) => {
-      obj = imput(employee);
+      const array = [];
+      employee.responsibleFor.forEach((animalId) => {
+        species.forEach((specie) => {
+          if (animalId === specie.id) {
+            array.push(specie.name);
+          }
+        });
+      });
+      obj[`${employee.firstName} ${employee.lastName}`] = array;
     });
     return obj;
   }
@@ -144,6 +152,8 @@ const getEmployeeCoverage = (idOrName) => {
   obj = imput(emp);
   return obj;
 };
+
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
