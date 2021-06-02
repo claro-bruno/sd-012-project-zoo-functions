@@ -133,8 +133,24 @@ function increasePrices(percentage) {
   });
 }
 
-function getEmployeeCoverage() {
-  // seu código aqui idOrName
+function getEmployeeCoverage(idOrName) {
+  // objeto padrão à ser construido.
+  const objectDefault = {};// função que constroi objectDefault, que servirá de callback para o forEach() de employees.
+  const forEachCb = (element) => {
+    const animalObj = (animalId) => species.find((specie) => specie.id === animalId).name;// função que servira de callback para o map de element(objeto de employees), que retorna o nome do animal que possui o mesmo id que o animal verificado em element.responsibleFor.
+    const animals = element.responsibleFor.map(animalObj);// utiliza o metodo map() chamando a função forEachCb() na lista correspondente ao element.responssibleFor(element é um objeto em employees), este map() retorna uma lista dos nomes dos animais de element.responsibleFor.
+    objectDefault[`${element.firstName} ${element.lastName}`] = animals;// aqui é adicionado a key e o valor ao objDefault.
+  };
+  employees.forEach(forEachCb);// executa o forEach() em employees, chamando a função forEachCb(), construindo assim o objDefault.
+  if (idOrName === undefined) {
+    return objectDefault;
+  }// confere se foi passado algum argumento para o parâmetro, se não, retorna objDefault;
+  const returnName = employees.find((obj) =>
+    obj.firstName === idOrName
+    || obj.lastName === idOrName
+    || obj.id === idOrName);// returnName é o objeto que contem o id, firstName ou lastName igual ao argumento passado ao parâmetro idOrname.
+  const fullName = `${returnName.firstName} ${returnName.lastName}`;// fullName é a string que contem o firstName seguido do lastName, e será usado como key para o objeto de retorno.
+  return { [fullName]: objectDefault[fullName] };// retorna um onjeto criado contendo {fullName: valor da key fullName em objDefault}.
 }
 
 module.exports = {
