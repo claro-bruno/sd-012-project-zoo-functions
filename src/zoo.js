@@ -148,8 +148,14 @@ function getOldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
+// Essa parte foi em partes baseada no código do colega Eric
 function increasePrices(percentage) {
   // seu código aqui
+  const pricesKey = Object.keys(data.prices);
+  pricesKey.forEach((key) => {
+    const newPrice = (data.prices[key] * (1 + (percentage / 100))) + 0.001;
+    data.prices[key] = parseFloat(newPrice.toFixed(2));
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
