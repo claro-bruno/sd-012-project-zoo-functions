@@ -74,43 +74,79 @@ function calculateEntry(entrants = 0) {
   return arrayEntrants.length === 0 ? 0 : sum(arrayEntrants);
 }
 
-// const getSpeciesRegion = (region) => {
-//   const objSpeciesRegion = {};
-//   const speciesRegion = species.filter(({ location }) => location === region);
-//   const namesSpeciesRegion = speciesRegion.map(({ name }) => name);
-//   objSpeciesRegion[region] = namesSpeciesRegion;
-//   return objSpeciesRegion;
-// };
+// ********************************************* REQUISITO 9 ********************************
 
-// const noParameterMap = () => {
-//   const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getSpeciesRegion(region));
-//   return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
-// };
+// sem parametro ------------------------------------------------------------------------------
+const getSpeciesRegion = (region) => {
+  const objSpeciesRegion = {};
+  const speciesRegion = species.filter(({ location }) => location === region);
+  const namesSpeciesRegion = speciesRegion.map(({ name }) => name);
+  objSpeciesRegion[region] = namesSpeciesRegion;
+  return objSpeciesRegion;
+};
 
-// const getAnimalsRegion = (region) => {
-//   const objAnimalsRegion = {};
-//   const objAnimalsResidents = {};
-//   const animalsRegion = species.filter(({ location }) => location === region);
-//   const namesAnimalsRegion = animalsRegion.map(({ name, residents }) => {
-//     objAnimalsResidents[name] = residents.map(({ name }) => name);
-//     objAnimalsRegion[region] = objAnimalsResidents;
-//     return objAnimalsRegion;
-//   });
-// };
+const noParameterMap = () => {
+  const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getSpeciesRegion(region));
+  return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
+};
 
-// const parameterIncludeName = () => {
-//   return ['NE', 'NW', 'SE', 'SW'].map((region) => getAnimalsRegion(region));
-// };
+// com parametro: includeNames = true -----------------------------------------------------------
 
-// function getAnimalMap(options) {
-//   return parameterIncludeName();
-// }
+const getAnimalsRegion = (region) => {
+  const objRegions = {};
+  let arrayAnimals = [];
+  const animalsRegion = species.filter(({ location }) => location === region);
+  const objAnimalsRegion = animalsRegion.map(({ name, residents }) => {
+    const objAnimal = {};
+    objAnimal[name] = residents.map(({ name }) => name);
+    return objAnimal;
+  });
+  arrayAnimals = [...objAnimalsRegion];
+  objRegions[region] = arrayAnimals;
+  return objRegions;
+};
 
-// console.log(getAnimalMap({ includeNames: true }));
+const parameterIncludeName = () => {
+  const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getAnimalsRegion(region));
+  return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
+};
 
+// com parametro: includeNames = true , sorted = true ---------------------------------------------
+const getAnimalsRegionSorted = (region) => {
+  const objRegions = {};
+  let arrayAnimals = [];
+  const animalsRegion = species.filter(({ location }) => location === region);
+  const objAnimalsRegion = animalsRegion.map(({ name, residents }) => {
+    const objAnimal = {};
+    //const orderedResidents = (residents.name).sort((a, b) => a - b);
+    objAnimal[name] = orderedResidents.map(({ name }) => name);
+    console.log(objAnimal);
+    return objAnimal;
+  });
+  arrayAnimals = [...objAnimalsRegion];
+  objRegions[region] = arrayAnimals;
+  return objRegions;
+};
+
+const parameterIncludeNameSorted = () => {
+  const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getAnimalsRegionSorted(region));
+  return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
+};
+// ------------------------------------------------------------------------------------------------
 function getAnimalMap(options) {
-  // affs
+  if (!options) {
+    return noParameterMap();
+  } else if (options.includeNames === true && options.sorted === true) {
+     return parameterIncludeNameSorted()
+  } else if (options.includeNames === true) {
+    return parameterIncludeName();
+  };
 }
+
+console.log(getAnimalMap({ includeNames: true, sorted: true }));
+
+
+// ------------------------------------- ---------- ----------------------------
 
 const getWeekSchedule = () => {
   const weekDays = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
