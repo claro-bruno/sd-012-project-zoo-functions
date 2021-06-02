@@ -22,11 +22,19 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  
+  const animalData = species.find((specie) => specie.name === animal);
+  const animalOlderThan = animalData.residents.every((resident) => resident.age >= age);
+  return animalOlderThan; 
 }
 
 function getEmployeeByName(employeeName) {
-  
+  if(!employeeName) {
+    const emptyObject = {};
+    return emptyObject;
+  }
+
+  const employeeFinder = employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  return employeeFinder;
 }
 
 function createEmployee(personalInfo, associatedWith) {
