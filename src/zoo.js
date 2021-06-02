@@ -10,10 +10,23 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const arraysOfData = data.species;
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+
+function getSpeciesByIds(...ids) { // 0938aa23-f153-4937-9f88-4858b24d6bce id de teste
+  let item = [];
+  const argument = ids;
+  arraysOfData.forEach((element, index) => {
+    if(element.id === argument){
+      item = element;
+    }
+    return item;
+  })
+  console.log(argument)
+  console.log(item)
 }
+getSpeciesByIds('e8481c1d-42ea-4610-8e11-1752cfc05a46', 'e8481c1d-42ea-4610-8e11-1752cfc05a46');
+
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
