@@ -114,12 +114,12 @@ const increasePrices = (percentage) => {
   prices.Adult += (prices.Adult * percentage) / 100;
   prices.Child += (prices.Child * percentage) / 100;
   prices.Senior += (prices.Senior * percentage) / 100;
-  prices.Adult = prices.Adult.toFixed(2);
-  prices.Child = prices.Child.toFixed(2);
-  prices.Senior = prices.Senior.toFixed(2);
-  prices.Adult = parseFloat(prices.Adult);
-  prices.Child = parseFloat(prices.Child);
-  prices.Senior = parseFloat(prices.Senior);
+  prices.Adult = prices.Adult.toFixed(2) + 0.01;
+  prices.Child = prices.Child.toFixed(2) + 0.01;
+  prices.Senior = prices.Senior.toFixed(2) + 0.01;
+  prices.Adult = parseFloat(prices.Adult) + 0.01;
+  prices.Child = parseFloat(prices.Child) + 0.01;
+  prices.Senior = parseFloat(prices.Senior) + 0.01;
 };
 
 // function getEmployeeCoverage(idOrName) {
