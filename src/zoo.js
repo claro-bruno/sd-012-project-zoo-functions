@@ -73,24 +73,29 @@ function getAnimalMap() {
   // return animalsBySex('female');
 }
 
-function getSchedule(dayName) {
+const msgReturn = (acc, day) => {
+  const { open, close } = data.hours[day];
+  const msg = `Open from ${open}am until ${close - 12}pm`;
+  acc[day] = (open > 0 && close > 0) ? msg : 'CLOSED';
+  return acc;
+};
 
+function getSchedule(dayName) {
   const days = Object.keys(data.hours);
   if (typeof dayName === 'undefined') {
-    return days.reduce((acc, day) => {
+    return days.reduce((accumulator, day) => {
       const { open, close } = data.hours[day];
       const msg = `Open from ${open}am until ${close - 12}pm`;
-      acc[day] = (open > 0 && close > 0) ? msg : 'CLOSED';
-      return acc;
+      accumulator[day] = (open > 0 && close > 0) ? msg : 'CLOSED';
+      return accumulator;
     }, {});
   }
 
-  const { open, close } = data.hours[dayName];
-  const msg = `Open from ${open}am until ${close - 12}pm`;
   const obj = {};
-  obj[dayName] = (open > 0 && close > 0) ? msg : 'CLOSED';
-  return obj;
+  return msgReturn(obj, dayName);
 }
+
+console.log(getSchedule());
 
 function getOldestFromFirstSpecies() {
   // seu código aqui id
