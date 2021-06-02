@@ -27,10 +27,10 @@ function getEmployeeByName(employeeName) {
   || employee.lastName === employeeName);
   return emp;
 }
-console.log(getEmployeeByName('Emery'));
+// console.log(getEmployeeByName('Emery'));
 
-function createEmployee() {
-  // seu código aqui personalInfo, associatedWith
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager() {
