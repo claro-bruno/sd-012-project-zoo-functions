@@ -17,8 +17,9 @@ function getSpeciesByIds(...ids) {
 // console.log(getSpeciesByIds('baa6e93a-f295-44e7-8f70-2bcdc6f6948d'));
 
 function getAnimalsOlderThan(animal, age) {
-  const animalList = data.species.find((animalName) => animalName.name === animal);
-  return animalList.residents.every((specie) => specie.age > age);
+  return data.species
+    .find((animalName) => animalName.name === animal)
+    .residents.every((specie) => specie.age > age);
 }
 console.log(getAnimalsOlderThan('otters', 7));
 
