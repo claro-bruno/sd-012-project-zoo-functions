@@ -114,6 +114,9 @@ const increasePrices = (percentage) => {
   prices.Adult += (prices.Adult * percentage) / 100;
   prices.Child += (prices.Child * percentage) / 100;
   prices.Senior += (prices.Senior * percentage) / 100;
+  prices.Adult.toFixed(2);
+  prices.Child.toFixed(2);
+  prices.Senior.toFixed(2);
 };
 
 // function getEmployeeCoverage(idOrName) {
