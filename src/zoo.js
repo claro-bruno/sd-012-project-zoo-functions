@@ -54,8 +54,8 @@ console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992')) */
 function countAnimals(animals) {
   // seu código aqui
   if (!animals) {
-    const speciesString = species.map((specie) => (` ${specie.name}: ${specie.residents.length}`));
-    return `{${speciesString.join(',')}}`;
+    const speciesArray = species.map((s) => `"${s.name}": ${s.residents.length}`).sort();
+    return JSON.parse(`{${speciesArray.join(', ')}}`);
   } return species.find((specie) => specie.name === animals).residents.length;
 }
 console.log(countAnimals());
