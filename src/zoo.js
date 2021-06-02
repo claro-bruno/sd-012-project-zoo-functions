@@ -13,6 +13,7 @@ const data = require('./data');
 
 const { species } = data;
 const { employees } = data;
+const { prices } = data;
 
 function getSpeciesByIds(...ids) {
   const selectedSpecies = [];
@@ -59,7 +60,8 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 function countAnimals(speciesInput) {
   const { species: specieData } = data;
   if (speciesInput) {
-    return specieData.find((elem) => elem.name === speciesInput).residents.length;
+    return specieData.find((elem) => elem.name === speciesInput).residents
+      .length;
   }
   return specieData.reduce((acc, curr) => {
     acc[curr.name] = curr.residents.length;
@@ -69,7 +71,6 @@ function countAnimals(speciesInput) {
 
 function calculateEntry(entrants) {
   if (!entrants || Object.entries(entrants).length === 0) return 0;
-  const { prices } = data;
   return Object.entries(entrants).reduce(
     (acc, curr) => prices[curr[0]] * curr[1] + acc,
     0,
@@ -118,9 +119,12 @@ function getOldestFromFirstSpecies(id) {
   return [...Object.values(oldestAnimal)];
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  Object.keys(data.prices).forEach((elem) => {
+    const increase = data.prices[elem] + data.prices[elem] * (percentage / 100);
+    data.prices[elem] = Number.parseFloat((increase + 0.001).toPrecision(4));
+  });
+}
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
@@ -138,6 +142,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
