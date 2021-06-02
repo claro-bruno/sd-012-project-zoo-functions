@@ -44,8 +44,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species) {
   return !species
-  ? data.species.reduce((acc, { name: n, residents: r }) => ({ ...acc, [n]: r.length }), '')
-  : data.species.find((spe) => spe.name === species).residents.length;
+    ? data.species.reduce((acc, { name: n, residents: r }) => ({ ...acc, [n]: r.length }), '')
+    : data.species.find((spe) => spe.name === species).residents.length;
 }
 
 /* function calculateEntry(entrants) {
