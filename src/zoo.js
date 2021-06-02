@@ -34,8 +34,8 @@ function getEmployeeByName(employeeName) {
   return employeeFName || employeeLName;
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee() {
+// seu código aqui personalInfo, associatedWith
 
 }
 
