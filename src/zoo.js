@@ -31,11 +31,9 @@ function getEmployeeByName(employeeName) {
      || lastName === employeeName));
 }
 
-/*
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
-*/
 
 function isManager(id) {
   const map = employees.map((employee) => {
@@ -117,5 +115,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
