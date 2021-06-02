@@ -110,9 +110,12 @@ function getOldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
-function increasePrices() {
-  // percentage
-  // seu código aqui
+function increasePrices(percentage) {
+  const { prices } = data;
+  Object.keys(prices).forEach((key) => {
+    const newPrice = (prices[key] * (1 + (percentage / 100))) + 0.001;
+    prices[key] = Number(newPrice.toPrecision(4));
+  });
 }
 
 function getEmployeeCoverage() {
