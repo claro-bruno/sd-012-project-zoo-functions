@@ -48,12 +48,39 @@ function calculateEntry(entrants) {
     : Object.keys(entrants).reduce((acc, type) => acc + (entrants[type] * data.prices[type]), 0);
 }
 
+// function getAnimalLocation (location) {
+//   return data.species
+//     .filter(({ location: l }) => ( l === location ))
+//     .map(({name}) => name);
+// }
+
 function getAnimalMap() {
-  // seu código aqui (options)
+  // return { (options)
+  // NE: getAnimalLocation('NE'),
+  // NW: getAnimalLocation('NW'),
+  // SE: getAnimalLocation('SE'),
+  // SW: getAnimalLocation('SW'),
+  // }
 }
 
-function getSchedule() {
-  // seu código aqui (dayName)
+const getDays = () => Object.keys(data.hours);
+
+const operationTime = () => {
+  const resul = getDays().reduce((acc, day) => {
+    if (day === 'Monday') {
+      acc[day] = 'CLOSED';
+      return acc;
+    }
+    acc[day] = `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+    return acc;
+  }, {});
+  return resul;
+};
+
+function getSchedule(dayName) {
+  return !dayName
+    ? operationTime()
+    : { [dayName]: operationTime()[dayName] };
 }
 
 function getOldestFromFirstSpecies() {
