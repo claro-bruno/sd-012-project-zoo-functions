@@ -117,9 +117,37 @@ const increasePrices = (percentage) => {
   prices.Senior = Math.round(prices.Senior * unitPercentage * 100) / 100;
 };
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+const getEmployeeCoverage = (idOrName) => {
+  const obj = {};
+  if (idOrName === undefined) {
+    employees.forEach((employee) => {
+      const array = [];
+      employee.responsibleFor.forEach((animalId) => {
+        species.forEach((specie) => {
+          if (animalId === specie.id) {
+            array.push(specie.name);
+          }
+        });
+      });
+      obj[`${employee.firstName} ${employee.lastName}`] = array;
+    });
+    return obj;
+  }
+  const emp = employees.find((employee) => employee.firstName === idOrName
+  || employee.lastName === idOrName || employee.id === idOrName);
+  const array = [];
+  emp.responsibleFor.forEach((animalId) => {
+    species.forEach((specie) => {
+      if (animalId === specie.id) {
+        array.push(specie.name);
+      }
+    });
+    obj[`${emp.firstName} ${emp.lastName}`] = array;
+  });
+  return obj;
+};
+
+console.log(getEmployeeCoverage('Azevado'));
 
 module.exports = {
   calculateEntry,
@@ -128,7 +156,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
