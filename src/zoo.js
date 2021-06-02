@@ -53,7 +53,7 @@ function isManager(id) {
 // }
 
 function calculateEntry(entrants = 0) {
-  if (!entrants || entrants === {} ) return entrants;
+  if (!entrants) return entrants;
 }
 
 // function getAnimalMap(options) {
