@@ -22,7 +22,7 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
-  return employees.find((emp) => emp.firstName === employeeName || emp.lastName === employeeName);
+  return employees.find((em) => em.firstName === employeeName || em.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -58,16 +58,22 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
 function getSchedule(dayName) {
   const schedule = {};
   Object.keys(hours).forEach((day) => {
-    schedule[day] = `Open from ${hours[day].open}am until ${hours[day].close}pm`;
+    schedule[day] = `Open from ${hours[day].open}am until ${hours[day].close % 12}pm`;
     if (day === 'Monday') schedule[day] = 'CLOSED';
   });
   if (dayName) return { [dayName]: schedule[dayName] };
   return schedule;
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function responsible(id) {
+  return employees.find((employee) => employee.id === id).responsibleFor[0];
+}
+function getOldestFromFirstSpecies(id) {
+  const { name, sex, age } = species.find((specie) =>
+    specie.id === responsible(id)).residents.reduce((acc, animal) =>
+    (animal.age > acc.age ? animal : acc));
+  return [name, sex, age];
+}
 
 function increasePrices(percentage) {
   Object.keys(prices).forEach((price) => {
@@ -75,9 +81,28 @@ function increasePrices(percentage) {
   });
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+const animalId = (id) => species.find((animal) => animal.id === id);
+const arrayId = (animals) => animals.map((animal) => animalId(animal).name);
+
+function emp(id) {
+  return employees.find((employee) => employee.id === id)
+  || employees.find((employee) => employee.firstName === id)
+  || employees.find((employee) => employee.lastName === id);
+}
+
+function getEmployeeCoverage(idOrName) {
+  const object = {};
+  employees.forEach((employee) => {
+    const key = `${employee.firstName} ${employee.lastName}`;
+    object[key] = arrayId(employee.responsibleFor);
+  });
+  if (idOrName) {
+    const newKey = `${emp(idOrName).firstName} ${emp(idOrName).lastName}`;
+    return { [newKey]: object[newKey] };
+  }
+  return object;
+}
+console.log(getEmployeeCoverage('Nigel'));
 
 module.exports = {
   calculateEntry,
@@ -86,11 +111,11 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
