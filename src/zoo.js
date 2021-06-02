@@ -58,15 +58,17 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     responsibleForAux = [];
     const newEmployee2 = { id, firstName, lastName, managerAux, responsibleForAux };
     data.employees.push(newEmployee2);
+  } 
+  else {
+    const newEmployee = {
+      id,
+      firstName,
+      lastName,
+      managers,
+      responsibleFor,
+    };
+    data.employees.push(newEmployee);
   }
-  const newEmployee = {
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
-  };
-  data.employees.push(newEmployee);
 }
 
 function countAnimals(species1) {
@@ -85,9 +87,15 @@ function countAnimals(species1) {
   return quant.residents.length;
 }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants) {
+  if (entrants === undefined || typeof entrants === (Object.values === 0)) { return 0 }
+  else {
+  const prices = data.prices;
+  let resultado = 0;
+  
+  }
+}
+console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -110,7 +118,7 @@ function countAnimals(species1) {
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
