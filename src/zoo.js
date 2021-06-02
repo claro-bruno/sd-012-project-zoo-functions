@@ -17,7 +17,7 @@ function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
   const arraySpecies = ids.map((specieId) => data.species.find((specie) => specie.id === specieId));
   return arraySpecies;
-};
+}
 // tentei usar o filter mas ele retorna uma array então fica [[{ ... }]]
 
 function getAnimalsOlderThan(animal, age) {
@@ -35,12 +35,12 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return {...personalInfo, ...associatedWith};
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
   // { [ {} {} {} {} {} ] }
-  const employeesManagers = data.employees.find((employee) => employee.managers.includes(id))
+  const employeesManagers = data.employees.find((employee) => employee.managers.includes(id));
   if (employeesManagers) return true;
   return false;
 }
@@ -48,42 +48,36 @@ function isManager(id) {
 console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newEmployees = data.employees.push( { id, firstName, lastName, managers, responsibleFor } )
+  const newEmployees = data.employees.push({ id, firstName, lastName, managers, responsibleFor });
   return newEmployees;
 }
 
 function countAnimals(species) {
-  // if (species.length === 0) {
-  //   const speciesCount = data.species.reduce((acc, curr) => {
-      
-  //     return acc + curr
-  //   }, {})
-  // }
-  // return 
+  return species;
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  return entrants;
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  return options;
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  return dayName;
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  return id;
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return percentage;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  return idOrName;
 }
 
 module.exports = {
