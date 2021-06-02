@@ -28,3 +28,5 @@
 // }
 
 // console.log(data.employees.some((element, index) => element.managers[index] === '0e7b460e-acf4-4e17-bcb3-ee472265db8'));
+
+// console.log(data.employees.length);
