@@ -75,9 +75,11 @@ function countAnimals(species) {
   return animalList;
 }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry({ Adult = 0, Senior = 0, Child = 0 } = { Adult: 0, Senior: 0, Child: 0 }) {
+  // seu código aqui
+  const value = [Adult * 49.99, Senior * 24.99, Child * 20.99];
+  return value.reduce((acc, valor) => acc + valor);
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -107,7 +109,7 @@ module.exports = {
   isManager,
   addEmployee,
   countAnimals,
-  // calculateEntry,
+  calculateEntry,
   // getAnimalMap,
   // getSchedule,
   // getOldestFromFirstSpecies,
