@@ -140,9 +140,9 @@ const sortObj = (obj) => obj.sort((a, b) => {
 const imputObj = (array) => {
   const obj = {};
   array.forEach((index) => {
-    const keys = Object.keys(index);
-    const values = Object.values(index);
-    obj[`${keys[0]}`] = values[0];
+    const keys = Object.keys(index)[0];
+    const values = Object.values(index)[0];
+    obj[`${keys}`] = values;
   });
   return obj;
 };
