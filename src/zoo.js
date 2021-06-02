@@ -62,7 +62,7 @@ function isManager(id) {
 // console.log(isManager('stephanieId'));
 console.log(isManager('burlId'));
 
-function addEmployee(id, firstName, lastName, managers= [], responsibleFor = []) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
     id,
     firstName,
@@ -72,6 +72,7 @@ function addEmployee(id, firstName, lastName, managers= [], responsibleFor = [])
   };
   return data.employees.push(newEmployee);
 } // para colocar a questão do [] no managers e responsibleFor, tive que consultar o respositório de alguns colegas, como o da Camila Malves, pois não sabia.
+
 // function countAnimals(species) {
 // // seu código aqui
 // }
