@@ -22,10 +22,13 @@ function getSpeciesByIds(...ids) {
   return ids.map(callBack);
 }
 
-// function getAnimalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
-
+function getAnimalsOlderThan(animal, age) {
+  // seu código aqui
+  return data.species
+    .find(({ name }) => name === animal)
+    .residents.every((individuo) => individuo.age >= age);
+  // every retirado de https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+}
 // function getEmployeeByName(employeeName) {
 //   // seu código aqui
 // }
@@ -80,7 +83,7 @@ module.exports = {
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
-  // getAnimalsOlderThan,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
