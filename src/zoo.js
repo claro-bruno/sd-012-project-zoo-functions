@@ -8,11 +8,11 @@ eslint no-unused-vars: [
   }
 ]
 */
-
+// 0938aa23-f153-4937-9f88-4858b24d6bce id de teste
 const data = require('./data');
 const arraysOfData = data.species; // recolhe o objeto "species" da variavel data
 
-function getSpeciesByIds(ids) { // 0938aa23-f153-4937-9f88-4858b24d6bce id de teste
+function getSpeciesByIds(ids) { 
   let idGathered = [];
   
   arraysOfData.forEach((element) => { // Compara o parametro com a data e retorna seu resultado
@@ -20,9 +20,9 @@ function getSpeciesByIds(ids) { // 0938aa23-f153-4937-9f88-4858b24d6bce id de te
       idGathered = element;
     }
   });
- console.log(id) //return idGathered;
+ console.log(idGathered) //return idGathered;
 }
-getSpeciesByIds();
+getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce');
 
 
 function getAnimalsOlderThan(animal, age) {
