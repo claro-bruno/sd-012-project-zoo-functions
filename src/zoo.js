@@ -8,9 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-
-const { species, employees, prices } = require('./data');
-// const data = require('./data');
+const { species, employees, hours, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -36,7 +34,7 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
-  if (employeeName === undefined) return {};
+  if (!employeeName) return {};
   return employees.find((employee) => {
     if (employee.firstName === employeeName || employee.lastName === employeeName) {
       return true;
@@ -74,7 +72,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(specieName) {
   // seu código aqui
-  if (specieName === undefined) {
+  if (!specieName) {
     return species.reduce((acc, specie) => {
       acc[specie.name] = specie.residents.length;
       return acc;
@@ -85,7 +83,7 @@ function countAnimals(specieName) {
 
 function calculateEntry(entrants) {
   // seu código aqui
-  if (entrants === undefined || entrants === {}) {
+  if (!entrants || entrants === {}) {
     return 0;
   }
   const typeEntries = Object.keys(entrants);
@@ -96,13 +94,60 @@ function calculateEntry(entrants) {
   return value;
 }
 
+// Retorna animais categorizados por localização;
+// const locationAnimalMap = () => species.reduce((acc, specie) => {
+//   const specieNames = species.reduce((arrNames, specieMap) => {
+//     if (specieMap.location === specie.location)arrNames.push(specieMap.name);
+//     return arrNames;
+//   }, []);
+//   acc[specie.location] = specieNames;
+//   return acc;
+// }, {});
+
+// // Nomes dos animais por localização
+// const nameForLocation = () => species.reduce((acc, specie) => {
+//   const arrSpecies = [];
+
+//   acc[specie.location] = arrSpecies;
+//   return acc;
+// }, {});
+
 // function getAnimalMap(options) {
 //   // seu código aqui
+//   if (options === undefined) {
+//     return locationAnimalMap();
+//   }
+//   if (options.includeNames === true) {
+//     return nameForLocation();
+//   }
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+// Retorna todos os dias e horários de funcionamento
+const returnHours = () => {
+  const weekDaysValues = Object.values(hours);
+  const weekDays = Object.keys(hours);
+  return weekDaysValues.reduce((acc, curr, index) => {
+    if (weekDays[index] === 'Monday') {
+      acc[weekDays[index]] = 'CLOSED';
+    } else {
+      acc[weekDays[index]] = `Open from ${curr.open}am until ${curr.close - 12}pm`;
+    }
+    return acc;
+  }, {});
+};
+
+// Retorna horário de funcionamento de acordo com o dia passado como parâmetro
+function getSchedule(dayName) {
+  // seu código aqui
+  if (!dayName) {
+    return returnHours();
+  }
+  const hoursDay = hours[dayName];
+  if (hoursDay.open === 0) {
+    return { [dayName]: 'CLOSED' };
+  }
+  return { [dayName]: `Open from ${hoursDay.open}am until ${hoursDay.close - 12}pm` };
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -126,7 +171,7 @@ module.exports = {
   countAnimals,
   calculateEntry,
   // getAnimalMap,
-  // getSchedule,
+  getSchedule,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // getEmployeeCoverage,
