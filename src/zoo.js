@@ -103,7 +103,7 @@ function getSchedule(dayName) {
   const days = Object.keys(data.hours);
   const daysValues = Object.values(data.hours);
   if (dayName === undefined) {
-    const week = {};        
+    const week = {};
     days.forEach((day, index) => {
       if (daysValues[index].open === 0) {
         week[day] = `CLOSED`;
@@ -113,6 +113,10 @@ function getSchedule(dayName) {
     });
     return week;
   }
+  return getScheduleAux(days, daysValues, dayName);
+}
+
+const getScheduleAux = (days, daysValues, dayName) => {
   const dayObject = {};
   let dayIndex = 0;
   const dayGeted = days.find((day, index) => {
@@ -128,7 +132,7 @@ function getSchedule(dayName) {
   }
   return dayObject;
 }
-console.log(getSchedule('Tuesday'));
+
 function getOldestFromFirstSpecies(/* id */) {
   // seu código aqui
 }
