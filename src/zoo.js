@@ -140,6 +140,15 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const idAnimal = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animal = species.find((getSpecies) => getSpecies.id === idAnimal);
+  const oldest = animal.residents.reduce((accumulator, current, index) => {
+    if (index === 0 || current.age > accumulator.age) {
+      Object.assign(accumulator, current);
+    }
+    return accumulator;
+  }, {});
+  return Object.values(oldest);
 }
 
 function increasePrices(percentage) {
