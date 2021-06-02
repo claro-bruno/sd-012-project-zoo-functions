@@ -142,9 +142,29 @@ function increasePrices(percentage) {
   data.prices.Senior = Math.round(data.prices.Senior * unitPercentage * 100) / 100;
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getAnimalsByIds(...ids) {
+  const speciesList = [];
+  ids.forEach((id) => {
+    const animal = data.species.find((specie) => specie.id === id);
+    speciesList.push(animal.name);
+  });
+  return speciesList;
+}
+
+function getEmployeeCoverage(idOrName) {
+  const empArray = data.employees;
+  const coverage = {};
+  if (idOrName) {
+    const selEmp = empArray.find((emp) => emp.id === idOrName
+     || emp.firstName === idOrName || emp.lastName === idOrName);
+    coverage[`${selEmp.firstName} ${selEmp.lastName}`] = getAnimalsByIds(...selEmp.responsibleFor);
+    return coverage;
+  }
+  empArray.forEach((emp) => {
+    coverage[`${emp.firstName} ${emp.lastName}`] = getAnimalsByIds(...emp.responsibleFor);
+  });
+  return coverage;
+}
 
 module.exports = {
   calculateEntry,
@@ -153,7 +173,7 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  //   getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
