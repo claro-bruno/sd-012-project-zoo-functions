@@ -29,6 +29,7 @@ function getEmployeeByName(nome) {
   }
   const ml = data.employees;
   const retorno = ml.find((employee) => employee.firstName === nome || employee.lastName === nome);
+  return retorno;
 }
 
 function createEmployee() {
