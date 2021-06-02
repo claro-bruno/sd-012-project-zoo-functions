@@ -139,6 +139,7 @@ function increasePrices(percentage) {
   data.prices.Child += (data.prices.Child * (percentage / 100));
   data.prices.Child = parseFloat((Math.round(data.prices.Child * 100) / 100).toFixed(2));
 }
+// Para o arrendodamento usando (Math.round(data.prices.Child * 100) / 100) utilizei a fonte: https://stackoverflow.com/questions/10015027/javascript-tofixed-not-rounding
 
 function getEmployeeCoverage(idOrName) {
   return idOrName;
