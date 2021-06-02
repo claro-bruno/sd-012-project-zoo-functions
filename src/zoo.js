@@ -31,14 +31,14 @@ function getEmployeeByName(employeeName) {
   return data.employees.find((employee) =>
     employee.firstName === employeeName || employee.lastName === employeeName);
 }
- 
+
 function createEmployee(personalInfo, associatedWith) {
   const obj = {};
   return Object.assign(obj, personalInfo, associatedWith);
 }
-// id
-function isManager() {
-  // seu código aqui
+
+function isManager(id) {
+  return data.employees.some((employee) => employee.managers.includes(id));
 }
 // id, firstName, lastName, managers, responsibleFor
 function addEmployee() {
