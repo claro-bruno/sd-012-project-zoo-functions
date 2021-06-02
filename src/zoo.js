@@ -62,8 +62,14 @@ function addEmployee(
   employees.push(obj);
 }
 
-function countAnimals(species) {
-  // seu código aqui
+function countAnimals(specie) {
+  if (!specie) {
+    return species.reduce((acc, curr) => {
+      acc[curr.name] = curr.residents.length;
+      return acc;
+    }, {});
+  }
+  return species.find((animal) => animal.name === specie).residents.length;
 }
 
 function calculateEntry(entrants) {
