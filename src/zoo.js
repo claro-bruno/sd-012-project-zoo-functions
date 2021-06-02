@@ -137,6 +137,16 @@ const sortObj = (obj) => obj.sort((a, b) => {
   return 0;
 });
 
+const imputObj = (array) => {
+  const obj = {};
+  array.forEach((index) => {
+    const keys = Object.keys(index);
+    const values = Object.values(index);
+    obj[`${keys[0]}`] = values[0];
+  });
+  return obj;
+};
+
 const getEmployeeCoverage = (idOrName) => {
   let obj = {};
   const array = [];
@@ -144,13 +154,15 @@ const getEmployeeCoverage = (idOrName) => {
     sortObj(employees).forEach((employee) => {
       array.push(imput(employee));
     });
-    return array;
+    return imputObj(array);
   }
   const emp = employees.find((employee) => employee.firstName === idOrName
   || employee.lastName === idOrName || employee.id === idOrName);
   obj = imput(emp);
   return obj;
 };
+
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
