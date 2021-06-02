@@ -107,15 +107,22 @@ function getAnimalMap() {
 }
 
 function getSchedule() {
-  // seu código aqui dayName
+  // seu código aqui dayname
 }
 
 function getOldestFromFirstSpecies() {
   // seu código aqui id
 }
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  const decimal = percentage / 100;
+  prices.Adult += (prices.Adult * decimal);
+  prices.Child += (prices.Child * decimal);
+  prices.Senior += (prices.Senior * decimal);
+  prices.Adult = Math.round(prices.Adult * 100) / 100;
+  prices.Child = Math.round(prices.Child * 100) / 100;
+  prices.Senior = Math.round(prices.Senior * 100) / 100;
+  return prices;
 }
 
 function getEmployeeCoverage() {
