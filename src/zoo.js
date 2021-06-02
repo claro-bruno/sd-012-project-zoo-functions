@@ -155,15 +155,16 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   const createObj = (users) => {
-    return users.reduce((acc, item) => ({
+    const objReady = users.reduce((acc, item) => ({
       ...acc,
       [`${item.firstName} ${item.lastName}`]: item.responsibleFor
         .map((item2) => data.species.find((item3) => item3.id === item2).name),
     }), {});
+    return objReady;
   };
   if (idOrName) {
-    const user = data.employees.find((item) => idOrName === item.firstName ||
-      idOrName === item.lastName || idOrName === item.id);
+    const user = data.employees.find((item) => idOrName === item.firstName
+      || idOrName === item.lastName || idOrName === item.id);
     return createObj([user]);
   }
   return createObj(data.employees);
