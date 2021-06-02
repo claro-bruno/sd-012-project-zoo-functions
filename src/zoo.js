@@ -61,11 +61,16 @@ return data.employees.push(newEmploye);
 }
 
 function countAnimals(species) {
-  // seu código aqui
+  if (species === undefined) {
+  const key = {};
+  data.species.map((specie) => {
+    key[specie.name] = specie.residents.length;
+  });
+  return key  
 }
-
+return data.species.find((spec) => spec.name === species).residents.length;
+}
 function calculateEntry(entrants) {
-  // seu código aqui
 }
 
 function getAnimalMap(options) {
