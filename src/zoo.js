@@ -92,38 +92,20 @@ function speciesLocation() {
   });
   return animalsLocation;
 }
-
-function speciesLocationWithNames() {
+// ideia de fazer algumas verificacoes nessa funcao em vez da outra retirada do codigo do Roberval https://github.com/tryber/sd-012-project-zoo-functions/pull/41
+function speciesLocationWithParameters(sex, sorted) {
   const animalsLocation = {};
   locations.forEach((location) => {
     const speciesInTheLocation = species.filter((specie) =>
       specie.location === location);
     const eachAnimal = speciesInTheLocation.map((specie) => specie.name);
     animalsLocation[location] = eachAnimal.map((animal) => {
-      const nomes = speciesInTheLocation
-        .filter((specie) => specie.name === animal)[0].residents
-        .map((resident) => resident.name);
-      return {
-        [animal]: nomes,
-      };
-    });
-  });
-  return animalsLocation;
-}
-
-function speciesLocationWithNamesSorted() {
-  const animalsLocation = {};
-  locations.forEach((location) => {
-    const speciesInTheLocation = species.filter((specie) =>
-      specie.location === location);
-    const eachAnimal = speciesInTheLocation.map((specie) => specie.name);
-    animalsLocation[location] = eachAnimal.map((animal) => {
-      const nomes = speciesInTheLocation
-        .filter((specie) => specie.name === animal)[0].residents
-        .map((resident) => resident.name);
-      return {
-        [animal]: nomes.sort(),
-      };
+      let nomes = speciesInTheLocation.find((specie) => specie.name === animal).residents;
+      if (sex) {
+        nomes = nomes.filter((element) => element.sex === sex)
+          .map((resident) => resident.name);
+      } else nomes = nomes.map((resident) => resident.name);
+      return sorted ? { [animal]: nomes.sort() } : { [animal]: nomes };
     });
   });
   return animalsLocation;
@@ -132,10 +114,11 @@ function speciesLocationWithNamesSorted() {
 function getAnimalMap(options) {
   // seu código aqui
   if (!options) return speciesLocation();
-  if (options.includeNames === true) {
-    if (options.sorted === true) return speciesLocationWithNamesSorted();
-    return speciesLocationWithNames();
+  const { includeNames, sex, sorted } = options;
+  if (includeNames) {
+    return speciesLocationWithParameters(sex, sorted);
   }
+  return speciesLocation();
 }
 
 function generateScheduleForEveryDay() {
