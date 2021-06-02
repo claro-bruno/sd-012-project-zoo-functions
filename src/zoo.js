@@ -41,9 +41,10 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-// function isManager() {
-//   // seu código aqui id
-// }
+function isManager(id) {
+  // seu código aqui
+  
+}
 
 // function addEmployee() {
 //   // seu código aqui id, firstName, lastName, managers, responsibleFor
@@ -86,7 +87,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
