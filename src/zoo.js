@@ -72,15 +72,22 @@ const entireMap = () => ({
   SW: mapping('SW'),
 });
 
-const mapWithNames = (loc) => {
+const mapWithNames = (...loc) => {
   const arr = [];
-  mapping(loc).forEach((nome) => {
-    arr.push(species.find((spec) => spec.name === nome).residents.map((each) => each.name));
+  let name;
+  loc.forEach((item) => {
+    mapping(item).forEach((nome) => {
+      name = nome;
+      arr.push(species.find((spec) => spec.name === nome).residents.map((each) => each.name));
+    });
   });
-  return arr;
+  const ret = {
+    [name]: arr,
+  };
+  return ret;
 };
 
-console.log(mapWithNames('NW'));
+console.log(mapWithNames('NE'));
 
 function getAnimalMap(options) {
   // seu código aqui
