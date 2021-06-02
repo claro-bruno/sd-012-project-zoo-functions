@@ -18,38 +18,31 @@ const getAnimalsOlderThan = (animal, age) => {
 };
 
 const getEmployeeByName = (employeeName) => {
-  if (employeeName === undefined) {
-    const employeeFound = {};
-  }
-  else {
-    const employeeFound = employees.find((employee) =>
-        employee.firstName === employeeName 
-        ||employee.lastName === employeeName
-        )
-        return employeeFound;
-      };
+  if (employeeName === undefined) return {};
+  return employees.find((employee) =>
+    employee.firstName === employeeName
+    || employee.lastName === employeeName);
 };
 
 const createEmployee = (personalInfo, associatedWith) => {
-  newEmployee = {
+  const employeeCreated = {
     id: personalInfo.id,
     firstName: personalInfo.firstName,
     lastName: personalInfo.lastName,
     managers: associatedWith.managers,
     responsibleFor: associatedWith.responsibleFor,
   };
-  return newEmployee;
+  return employeeCreated;
 };
 
-const isManager = (id) =>
-  employees.some((employee) => employee.managers.includes(id));
+const isManager = (id) => employees.some((employee) => employee.managers.includes(id));
 
 const addEmployee = (
   id,
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) => {
   const newEmployee = {
     id,
@@ -63,36 +56,34 @@ const addEmployee = (
 
 const countAnimals = (animal) => {
   if (!animal) {
-    const count = species.reduce((acc, specie) => 
-      ({...acc, [specie.name]: specie.residents.length}), {});
-  } else 
-  { const animalSelected = species.find((specie) => specie.name === animal);
-    const count = animalSelected.residents.length; 
+    return species.reduce((acc, specie) => (
+      { ...acc, [specie.name]: specie.residents.length }), {});
   }
-    return count;
-  };
+  const count = species.find((specie) => specie.name === animal);
+  return count.residents.length;
+};
 
-function calculateEntry(entrants) {
+function calculateEntry() {
   // seu código aqui
 }
 
-function getAnimalMap(options) {
+function getAnimalMap() {
   // seu código aqui
 }
 
-function getSchedule(dayName) {
+function getSchedule() {
   // seu código aqui
 }
 
-function getOldestFromFirstSpecies(id) {
+function getOldestFromFirstSpecies() {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
+function increasePrices() {
   // seu código aqui
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
   // seu código aqui
 }
 
