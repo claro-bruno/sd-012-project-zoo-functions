@@ -90,12 +90,10 @@ function getOldestFromFirstSpecies(id) {
   // seu código aqui
   const employee = employees.find((emp) => id.includes(emp.id));
   const firstRespId = employee.responsibleFor[0];
-  const orderedAnimals = species.find((spec) => spec.id === firstRespId).residents.sort((a, b) => {
-    if (a.age < b.age) return 1;
-    if (a.age > b.age) return -1;
-    return 0;
-  });
-  const { name, sex, age } = orderedAnimals[0];
+  const oldest = species
+    .find((spec) => spec.id === firstRespId).residents
+    .sort((a, b) => b.age - a.age)[0];
+  const { name, sex, age } = oldest;
   return [name, sex, age];
 }
 
