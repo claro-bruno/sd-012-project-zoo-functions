@@ -285,12 +285,41 @@ function countAnimals(species) {
 
 function calculateEntry(entrants) {
   // seu código aqui
-  return entrants;
+  if (!entrants || entrants === {}) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return (
+    (Adult * data.prices.Adult)
+    + (Child * data.prices.Child)
+    + (Senior * data.prices.Senior)
+  );
 }
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+// assert.strictEqual(calculateEntry(), 0);
+// assert.strictEqual(calculateEntry({}), 0);
+// let entrants = { Adult: 2, Child: 3, Senior: 1 };
+// let actual11 = calculateEntry(entrants);
+// assert.strictEqual(actual11, 187.94);
+
+// entrants = { Adult: 1 };
+// actual11 = calculateEntry(entrants);
+// assert.strictEqual(actual11, 49.99);
+
+// entrants = { Senior: 1 };
+// actual11 = calculateEntry(entrants);
+// assert.strictEqual(actual11, 24.99);
+
+// entrants = { Child: 1 };
+// actual11 = calculateEntry(entrants);
+// assert.strictEqual(actual11, 20.99);
+
+// entrants = { Child: 1, Senior: 1 };
+// actual11 = calculateEntry(entrants);
+// assert.strictEqual(actual11, 45.98);
+
+function getAnimalMap(options) {
+  // seu código aqui
+  return options;
+}
 
 // function getSchedule(dayName) {
 //   // seu código aqui
@@ -312,7 +341,7 @@ module.exports = {
   calculateEntry,
   // getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
