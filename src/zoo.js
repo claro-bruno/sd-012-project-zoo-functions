@@ -42,7 +42,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({id, firstName, lastName, managers, responsibleFor});
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals(species0) {
@@ -54,7 +54,6 @@ function countAnimals(species0) {
   }
   return data.species.find((specie) => specie.name === species0).residents.length;
 }
-
 
 function calculateEntry() {
   // seu código aqui entrants
