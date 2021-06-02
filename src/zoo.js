@@ -75,6 +75,27 @@ function calculateEntry(entrants = {}) {
   return total;
 }
 
+function generateNamesList(thisCorner, options, map, corner) {
+  thisCorner.forEach((animal) => {
+    let namesList = [];
+    const allAnimals = animal.residents;
+    allAnimals.forEach((resident) => namesList.push(resident.name));
+    if (options.sex === 'male') {
+      namesList = [];
+      const maleAnimals = allAnimals.filter((thisAnimal) => thisAnimal.sex === 'male');
+      maleAnimals.forEach((resident) => namesList.push(resident.name));
+    }
+    if (options.sex === 'female') {
+      namesList = [];
+      const femaleAnimals = allAnimals.filter((thisAnimal) => thisAnimal.sex === 'female');
+      femaleAnimals.forEach((resident) => namesList.push(resident.name));
+    }
+    if (options.sorted === true) namesList.sort();
+    map[corner].push({ [animal.name]: namesList });
+  });
+  return map;
+}
+
 function getAnimalMap(options) {
   const map = {};
   const corners = ['NE', 'NW', 'SE', 'SW'];
@@ -82,24 +103,7 @@ function getAnimalMap(options) {
     const thisCorner = data.species.filter((specie) => specie.location === corner);
     map[corner] = [];
     if (options && options.includeNames === true) {
-      thisCorner.forEach((animal) => {
-        let namesList = [];
-        const allAnimals = animal.residents;
-        allAnimals.forEach((resident) => namesList.push(resident.name));
-        if (options.sex === 'male') {
-          namesList = [];
-          const maleAnimals = allAnimals.filter((thisAnimal) => thisAnimal.sex === 'male');
-          maleAnimals.forEach((resident) => namesList.push(resident.name));
-        }
-        if (options.sex === 'female') {
-          namesList = [];
-          const femaleAnimals = allAnimals.filter((thisAnimal) => thisAnimal.sex === 'female');
-          femaleAnimals.forEach((resident) => namesList.push(resident.name));
-        }
-        if (options.sorted === true) namesList.sort();
-        map[corner].push({ [animal.name]: namesList });
-      });
-      return map;
+      return generateNamesList(thisCorner, options, map, corner);
     }
     thisCorner.forEach((animal) => map[corner].push(animal.name));
   });
