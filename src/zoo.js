@@ -90,10 +90,15 @@ function getOldestFromFirstSpecies() {
   // id
 }
 
-function increasePrices() {
-  // seu código aqui
-  // percentage
-}
+const increasePrices = (percentage) => {
+  const keys = Object.keys(prices);
+  const values = Object.values(prices).map((value) =>
+    Math.round((value + (value * percentage) / 100) * 100) / 100); /* https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary */
+  keys.forEach((key, index) => {
+    prices[key] = values[index];
+  });
+  return prices;
+};
 
 function getEmployeeCoverage() {
   // seu código aqui
