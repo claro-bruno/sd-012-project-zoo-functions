@@ -80,68 +80,50 @@ const calculateEntry = (entrants) => {
   return result;
 };
 
-// const locations = ['NE', 'NW', 'SE', 'SW'];
+const locations = ['NE', 'NW', 'SE', 'SW'];
 
-// const getLocation = () => {
-//   const result = {};
-//   locations.forEach((loc) => {
-//     const animals = data.species
-//       .filter(({ location }) => location === loc)
-//       .map(({ name }) => name);
-//     result[loc] = animals;
-//   });
-//   return result;
-// };
-
-// const getLocationName = () => {
-//   const result = {};
-//   locations.forEach((loc) => {
-//     const locationAnimals = [];
-//     data.species
-//       .filter(({ location }) => location === loc)
-//       .forEach(({ name: speciesName, residents }) => {
-//         locationAnimals.push({ [speciesName]: residents.map(({ name }) => name) });
-//       });
-//     result[loc] = locationAnimals;
-//   });
-//   return result;
-// };
-
-// const getLocationSort = (object) => {
-//   const { NE, NW, SE, SW } = object;
-//   NE.forEach((specie) => {
-//     console.log(Object.values(specie).sort());
-//     console.log(specie);
-//   });
-// };
-
-// const getLocationSex = (option) => {
-//   data.species.forEach(({ residents }, index) => {
-//     const filteredResidents = residents.filter(({ sex }) => sex === option);
-//     data.species[index].residents = filteredResidents;
-//   });
-// };
-
-// const getLocationWithParameter = (sorted, sex) => {
-//   const result = getLocationName();
-//   if (sorted) getLocationSort(result);
-//   if (sex !== '') getLocationSex(sex);
-//   return result;
-// };
-
-const getAnimalMap = () => {
-  // let result = {};
-  // if (options === undefined) return getLocation();
-  // const { includeNames = false, sorted = false, sex = '' } = options;
-  // if (includeNames) {
-  //   result = getLocationWithParameter(sorted, sex);
-  // }
-  // return result;
+const getLocation = () => {
+  const result = {};
+  locations.forEach((loc) => {
+    const animals = data.species
+      .filter(({ location }) => location === loc)
+      .map(({ name }) => name);
+    result[loc] = animals;
+  });
+  return result;
 };
 
-// console.log(getAnimalMap());
-// console.log(getAnimalMap({ includeNames: true }).NE);
-// console.log(getAnimalMap({ includeNames: true, sorted: true }));
+const getBySex = (speciesName, residents, sexType) => ({ [speciesName]: residents
+  .filter(({ sex }) => sex === sexType)
+  .map(({ name, sex }) => name) });
+
+const getByName = (sexType, sorted) => {
+  const result = {};
+  locations.forEach((loc) => {
+    const locationAnimals = [];
+    data.species
+      .filter(({ location }) => location === loc)
+      .forEach(({ name: speciesName, residents }) => {
+        let teste = [];
+        if (sexType !== '') {
+          teste = getBySex(speciesName, residents, sexType);
+        } else {
+          teste = { [speciesName]: residents.map(({ name }) => name) };
+        }
+        if (sorted) teste[speciesName].sort();
+        locationAnimals.push(teste);
+      });
+    result[loc] = locationAnimals;
+  });
+  return result;
+};
+
+const getAnimalMap = (options) => {
+  if (options === undefined) return getLocation();
+  const { includeNames = false, sorted = false, sex = '' } = options;
+  if (includeNames) return getByName(sex, sorted);
+  return getLocation();
+};
 
 const getSchedule = (dayName) => {
   const schedule = {};
