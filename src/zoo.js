@@ -51,12 +51,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 
-function countAnimals(species) {
-  if (species === undefined) return data.species.reduce((object, specie) => {
-    object[specie.name] = specie.residents.length;
-    return object;
-  }, {});
-  return data.species.find((specie) => specie.name === species).residents.length;
+function countAnimals(animal) {
+  if (animal === undefined) { return data.species.reduce((object, specie) => {
+    const objectQty = object;
+    objectQty[specie.name] = specie.residents.length;
+    return objectQty;
+  }, {})};
+  return data.species.find((specie) => specie.name === animal).residents.length;
 }
 
 // function calculateEntry(entrants) {
