@@ -35,16 +35,22 @@ function getEmployeeByName(employeeName) {
   const achaFunc = employees.find((func) => func.firstName === employeeName || func.lastName === employeeName);
   return achaFunc;
 }
-console.log(getEmployeeByName('Wishart'))
-
+// console.log(getEmployeeByName('Wishart'))
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  // const { id, firstName, lastName } = personalInfo;
+  // console.log(personalInfo)
+  // const { managers, responsibleFor } = associatedWith;
+  // console.log(associatedWith)
+  // const newEmployee = {personalInfo, associatedWith};
+  // return newEmployee;
 }
 
 function isManager(id) {
-  // seu código aqui
+  const checkId = employees.some((employee, index) => employee.managers[index] === id)
+  return checkId;
 }
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'))
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
