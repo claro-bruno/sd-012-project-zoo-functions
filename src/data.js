@@ -333,13 +333,25 @@ module.exports = {
   },
 };
 
-// const data = require('./data');
-// const speciesArray = data.species;
+const data = require('./data');
+const speciesArray = data.species;
+const emplys = data.employees;
+
+  // - Sem parâmetros, retorna um objeto vazio
+  // - Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
+  // - Quando provido o último nome do funcionário, retorna o objeto do funcionário
+
+function getEmployeeByName(employeeName) {
+  const resultado = emplys.find((nameOrLast) => nameOrLast.firstName === employeeName || nameOrLast.lastName === employeeName ? nameOrLast : false)
+  return resultado;
+}
+
+// console.log(getEmployeeByName('Elser'));
 
 // function getAnimalsOlderThan(animal, age) {
 //   const oldBixo = speciesArray.find((value) => value.name === animal);
 //   const teste = oldBixo.residents.every((valuage) => valuage.age > age);
-//   // console.log(teste);
+//   console.log(teste);
 // }
 
 // // console.log(getAnimalsOlderThan('otters', 7));
