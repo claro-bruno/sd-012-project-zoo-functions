@@ -65,13 +65,14 @@ function countAnimals(specie) {
       return acc;
     }, {});
   }
-  return data.species.find((animal) => animal.name === species).residents.length;
+  return data.species.find(({ name }) => name === specie).residents.length;
 }
 
-console.log(countAnimals());
+console.log(countAnimals('lions'));
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
+
 // }
 
 // function getAnimalMap(options) {
