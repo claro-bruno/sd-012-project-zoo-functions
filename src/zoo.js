@@ -132,7 +132,12 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  return percentage;
+  data.prices.Adult += (data.prices.Adult * (percentage / 100));
+  data.prices.Adult = parseFloat((Math.round(data.prices.Adult * 100) / 100).toFixed(2));
+  data.prices.Senior += (data.prices.Senior * (percentage / 100));
+  data.prices.Senior = parseFloat((Math.round(data.prices.Senior * 100) / 100).toFixed(2));
+  data.prices.Child += (data.prices.Child * (percentage / 100));
+  data.prices.Child = parseFloat((Math.round(data.prices.Child * 100) / 100).toFixed(2));
 }
 
 function getEmployeeCoverage(idOrName) {
