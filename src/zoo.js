@@ -52,9 +52,14 @@ function isManager(id) {
 
 // console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db834'));
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const create = data.employees.push(createEmployee({ id, firstName, lastName }, { managers,
+    responsibleFor }));
+  return create;
 }
+
+// console.log(addEmployee('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1', 'Nigel', 'Nelson', ['burlId', 'olaId'], ['lionId', 'tigersId']));
+// console.log(data.employees);
 
 function countAnimals(species) {
   // seu código aqui
