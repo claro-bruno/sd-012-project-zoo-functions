@@ -72,21 +72,45 @@ function calculateEntry(entrants) {
   }, 0);
 }
 
-function getAnimalMap(options) {
-  const perRegion = data.species.reduce((acc, item) => ({
-    ...acc,
-    [item.location]: data.species.filter((item2) => item2.location === item.location),
-  }), {});
-  const obj = {
-    NE: perRegion.NE.map((item) => item.name),
-    NW: perRegion.NW.map((item) => item.name),
-    SE: perRegion.SE.map((item) => item.name),
-    SW: perRegion.SW.map((item) => item.name),
+const emptyParameter = (NE, NW, SE, SW) => {
+  const AllRaces = {
+    NE: NE.map((item) => item.name),
+    NW: NW.map((item) => item.name),
+    SE: SE.map((item) => item.name),
+    SW: SW.map((item) => item.name),
   };
-  return obj;
+  return AllRaces;
+};
+
+const nameIncluded = (NE, NW, SE, SW, sorted) => {
+  const NENames = NE.map((item) => ({ [item.name]: item.residents.map((item2) => item2.name) }));
+  const NWNames = NW.map((item) => ({ [item.name]: item.residents.map((item2) => item2.name) }));
+  const SENames = SE.map((item) => ({ [item.name]: item.residents.map((item2) => item2.name) }));
+  const SWNames = SW.map((item) => ({ [item.name]: item.residents.map((item2) => item2.name) }));
+  const allNames = { NE: NENames, NW: NWNames, SE: SENames, SW: SWNames };
+  if (sorted) {
+    NENames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
+    NWNames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
+    SENames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
+    SWNames.forEach((item) => Object.keys(item).forEach((item2) => item[item2].sort()));
+  }
+  return allNames;
+};
+
+function getAnimalMap(options) {
+  const NE = data.species.filter((item) => item.location === 'NE');
+  const NW = data.species.filter((item) => item.location === 'NW');
+  const SE = data.species.filter((item) => item.location === 'SE');
+  const SW = data.species.filter((item) => item.location === 'SW');
+  if (!options) {
+    return emptyParameter(NE, NW, SE, SW);
+  }
+  if (options.includeNames) {
+    return nameIncluded(NE, NW, SE, SW, options.sorted);
+  }
 }
 
-// console.log(getAnimalMap());
+// console.log(getAnimalMap({ includeNames: 1, sorted: true }));
 
 function getSchedule(dayName) {
   const allKeys = Object.keys(data.hours);
@@ -131,16 +155,15 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   const createObj = (users) => {
-    const a = users.reduce((acc, item) => ({
+    return users.reduce((acc, item) => ({
       ...acc,
       [`${item.firstName} ${item.lastName}`]: item.responsibleFor
         .map((item2) => data.species.find((item3) => item3.id === item2).name),
     }), {});
-    return a;
   };
   if (idOrName) {
-    const user = data.employees.find((item) => idOrName === item.firstName
-      || idOrName === item.lastName || idOrName === item.id);
+    const user = data.employees.find((item) => idOrName === item.firstName ||
+      idOrName === item.lastName || idOrName === item.id);
     return createObj([user]);
   }
   return createObj(data.employees);
