@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -100,10 +100,49 @@ function calculateEntry(entrants) {
 
 function getAnimalMap(options) {
   // seu código aqui
+  const NElocate = species.filter((item) => item.location === 'NE');
+  const NWlocate = species.filter((item) => item.location === 'NW');
+  const SElocate = species.filter((item) => item.location === 'SE');
+  const SWlocate = species.filter((item) => item.location === 'SW');
+  const newObj = {};
+  if (options === undefined) {
+     newObj.NE = [NElocate[0].name, NElocate[1].name];
+     newObj.NW = [NWlocate[0].name, NWlocate[1].name, NWlocate[2].name];
+     newObj.SE = [SElocate[0].name, SElocate[1].name];
+     newObj.SW = [SWlocate[0].name, SWlocate[1].name];
+     return newObj;
+  }
+  if (options.includeNames === true) {
+   NElocate.forEach((item) => {
+      
+   })
+  }
 }
 
 function getSchedule(dayName) {
   // seu código aqui
+  const keys = Object.keys(hours);
+  const newObj = {};
+
+  keys.forEach((day) => {
+      if (day === dayName) {
+         newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+         if (day === 'Monday') {
+            newObj[day] = `CLOSED`;
+         };
+      }
+   })
+
+   if (dayName === undefined) { 
+   keys.forEach((day) => {
+      newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+      if (day === 'Monday') {
+         newObj[day] = `CLOSED`;
+      };
+      });
+   };
+
+   return newObj;
 }
 
 function getOldestFromFirstSpecies(id) {
