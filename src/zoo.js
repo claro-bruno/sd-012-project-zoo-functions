@@ -110,9 +110,19 @@ function getAnimalMap(options) {
   return map;
 }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  const schedule = data.hours;
+  const outputSchedule = {};
+  Object.keys(schedule).forEach((key) => {
+    if (schedule[key].close === 0) {
+      outputSchedule[key] = 'CLOSED';
+    } else {
+      outputSchedule[key] = `Open from ${schedule[key].open}am until ${schedule[key].close - 12}pm`;
+    }
+  });
+  if (dayName) return { [dayName]: outputSchedule[dayName] };
+  return outputSchedule;
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -128,7 +138,7 @@ function getAnimalMap(options) {
 
 module.exports = {
   calculateEntry,
-  //   getSchedule,
+  getSchedule,
   countAnimals,
   getAnimalMap,
   getSpeciesByIds,
