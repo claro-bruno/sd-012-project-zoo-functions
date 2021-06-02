@@ -59,18 +59,6 @@ function countAnimals(species) {
   }
   return data.species.find((specie) => specie.name === species).residents.length;
 }
-console.log(countAnimals());
-console.log(countAnimals('lions'));
-console.log(countAnimals('snakes'));
-
-
-// const map = findSpecie.map((specie) => specie.residents);
-  // const reduce = map.reduce((acc, curr) => `${acc}, ${curr}`);
-  // return `${reduce}.`;
-  
-  // const reduceSpecie = findSpecie.reduce((acc, curr) => {
-  //   acc += curr.residents.length;
-  // }, 0);
 
 /*
 function calculateEntry(entrants) {
