@@ -104,8 +104,14 @@ function getOldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  const arrayKeys = Object.keys(data.prices);
+
+  return arrayKeys.forEach((element) => {
+    const base100 = data.prices[element] * 100;
+    const newValue = Math.round(base100 + (base100 * (percentage / 100))) / 100;
+    data.prices[element] = parseFloat(newValue.toFixed(2));
+  });
 }
 
 function getEmployeeCoverage() {
