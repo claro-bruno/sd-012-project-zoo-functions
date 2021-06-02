@@ -118,23 +118,21 @@ const increasePrices = (percentage) => {
 };
 
 const getEmployeeCoverage = (idOrName) => {
-  const obj = {};
+  let obj = {};
   if (idOrName === undefined) {
     employees.forEach((employee) => {
-      const array = [];
-      employee.responsibleFor.forEach((animalId) => {
-        species.forEach((specie) => {
-          if (animalId === specie.id) {
-            array.push(specie.name);
-          }
-        });
-      });
-      obj[`${employee.firstName} ${employee.lastName}`] = array;
+      obj = imput(employee);
     });
     return obj;
   }
   const emp = employees.find((employee) => employee.firstName === idOrName
   || employee.lastName === idOrName || employee.id === idOrName);
+  obj = imput(emp);
+  return obj;
+};
+
+const imput = (emp) => {
+  const obj = {};
   const array = [];
   emp.responsibleFor.forEach((animalId) => {
     species.forEach((specie) => {
@@ -142,12 +140,10 @@ const getEmployeeCoverage = (idOrName) => {
         array.push(specie.name);
       }
     });
-    obj[`${emp.firstName} ${emp.lastName}`] = array;
   });
+  obj[`${emp.firstName} ${emp.lastName}`] = array;
   return obj;
-};
-
-console.log(getEmployeeCoverage('Azevado'));
+}
 
 module.exports = {
   calculateEntry,
