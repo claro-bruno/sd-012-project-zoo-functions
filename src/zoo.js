@@ -16,10 +16,8 @@ const { employees } = data;
 const { prices } = data;
 
 function getSpeciesByIds(...ids) {
-  const selectedSpecies = [];
   const findId = (id) => species.find((specie) => specie.id === id);
-  ids.forEach((id) => selectedSpecies.push(findId(id)));
-  return selectedSpecies;
+  return ids.map(findId);
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -93,7 +91,6 @@ function dayInfo(day) {
       : `${hours[day].close - 12}pm`
   }`;
 }
-// console.log(dayInfo('Tuesday'));
 
 function getSchedule(dayName) {
   if (dayName) return { [dayName]: dayInfo(dayName) };
@@ -115,7 +112,6 @@ function getOldestFromFirstSpecies(id) {
         0,
       ),
   );
-
   return [...Object.values(oldestAnimal)];
 }
 
