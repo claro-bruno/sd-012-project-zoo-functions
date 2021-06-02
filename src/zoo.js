@@ -7,7 +7,7 @@
   }
 ] */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 /* const data = require('./data'); */
 
 function getSpeciesByIds(...ids) {
@@ -109,11 +109,23 @@ function calculateEntry(entrants) {
 function getAnimalMap(options) {
   // seu código aqui
 }
-
+*/
 function getSchedule(dayName) {
-  // seu código aqui
+  const calendario = Object.entries(hours);
+  const saida = {};
+  if(dayName===undefined){
+    calendario.forEach((dia)=>{ (dia[0] === 'Monday') ? saida[dia[0]] = 'CLOSED' : saida[dia[0]] = `Open from ${dia[1].open}am until ${dia[1].close-12}pm`
+    });
+  }
+  else if (dayName === 'Monday'){
+    saida[dayName] = `CLOSED`;
+  } else {
+    saida[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close-12}pm`;
+  }
+   return saida;
 }
-
+console.log(getSchedule('Friday'))
+/*
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
