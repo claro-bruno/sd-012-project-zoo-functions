@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 // const { species } = require('./data');
 // const { employees } = require('./data');
+const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -117,21 +118,20 @@ function getSchedule(dayName) {
   // seu código aqui
   if (!dayName) {
     return {
-      Tuesday: `Open from ${data.hours.Tuesday.open}am until ${(data.hours.Tuesday.close) - 12}pm`,
-      Wednesday: `Open from ${data.hours.Wednesday.open}am until ${data.hours.Wednesday.close - 12}pm`,
-      Thursday: `Open from ${data.hours.Thursday.open}am until ${data.hours.Thursday.close - 12}pm`,
-      Friday: `Open from ${data.hours.Friday.open}am until ${data.hours.Friday.close - 12}pm`,
-      Saturday: `Open from ${data.hours.Saturday.open}am until ${data.hours.Saturday.close - 12}pm`,
-      Sunday: `Open from ${data.hours.Sunday.open}am until ${data.hours.Sunday.close - 12}pm`,
+      Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+      Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+      Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+      Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+      Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+      Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
       Monday: 'CLOSED',
     };
   }
   if (dayName === 'Monday') {
     return { [dayName]: 'CLOSED' };
   }
-  return { 
-    [dayName]: `Open from ${data.hours[dayName].open}am until ${(data.hours[dayName].close) - 12}pm`,
-  };
+  const info = `Open from ${hours[dayName].open}am until ${(hours[dayName].close) - 12}pm`;
+  return { [dayName]: info };
 }
 
 function getOldestFromFirstSpecies() {
