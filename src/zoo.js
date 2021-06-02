@@ -58,11 +58,38 @@ function calculateEntry(entrants = {}) {
 }
 
 function getAnimalMap() {
-  // seu código aqui options
+  // options
+  // const animals = data.species;
+
+  // const locations = animals.reduce((acc, current) => {
+  //   acc[current.location] = [];
+  //   return acc;
+  // }, {});
+
+  // const animalsBySex = (sex) => {
+  //   return animals.filter((element) => element.residents).filter((animal) => animal.sex === 'sex');
+  // };
+
+  // return animalsBySex('female');
 }
 
-function getSchedule() {
-  // seu código aqui dayName
+function getSchedule(dayName) {
+
+  const days = Object.keys(data.hours);
+  if (typeof dayName === 'undefined') {
+    return days.reduce((acc, day) => {
+      const { open, close } = data.hours[day];
+      const msg = `Open from ${open}am until ${close - 12}pm`;
+      acc[day] = (open > 0 && close > 0) ? msg : 'CLOSED';
+      return acc;
+    }, {});
+  }
+
+  const { open, close } = data.hours[dayName];
+  const msg = `Open from ${open}am until ${close - 12}pm`;
+  const obj = {};
+  obj[dayName] = (open > 0 && close > 0) ? msg : 'CLOSED';
+  return obj;
 }
 
 function getOldestFromFirstSpecies() {
