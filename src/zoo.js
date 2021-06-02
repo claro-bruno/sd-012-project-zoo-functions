@@ -10,7 +10,8 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { species, employees, hours, prices } = data;
+
+const { species, employees, hours /* prices */ } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
@@ -74,9 +75,21 @@ function getAnimalMap(options) {
 
 // eslint-disable-next-line max-lines-per-function
 function getSchedule(dayName) {
-  //
+  if (!dayName) {
+    const arraySchedule = Object.entries(hours);
+    const schedule = arraySchedule.reduce((acc, entries) => {
+      const { open, close } = entries[1];
+      acc[entries[0]] = `Open from ${open}am until ${close - 12}pm`;
+      if (entries[0] === 'Monday') acc[entries[0]] = 'CLOSED';
+      return acc;
+    }, {});
+    return schedule;
+  }
+  const { open, close } = hours[dayName];
+  const day = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
+  if (dayName === 'Monday') day[dayName] = 'CLOSED';
+  return day;
 }
-console.log(getSchedule());
 
 /*
 function getOldestFromFirstSpecies(id) {
