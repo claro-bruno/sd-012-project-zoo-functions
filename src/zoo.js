@@ -101,22 +101,32 @@ function increasePrices(percentage) {
   });
 }
 
-function getEmployeeCoverage(idOrName) {  
-  const obj = {};
-  employees.forEach((employee) => );
+function anfi(idArr) {
+  const namesArr = idArr.map((id) => (
+    species.find((specie) => specie.id === id).name
+  ));
+  return namesArr;
+}
 
-
+function getEmployeeCoverage(idOrName) {
+  if (idOrName === undefined || Object.keys(idOrName).length === 0) {
+    const obj = {};
+    employees.forEach((employee) => {
+      obj[`${employee.firstName} ${employee.lastName}`] = anfi(employee.responsibleFor);
+    });
+    return obj;
+  }
   const resEmp = employees.find((employee) => (
     idOrName === employee.id
     || idOrName === employee.firstName
     || idOrName === employee.lastName
   ));
   const resFor = resEmp.responsibleFor;
-  const animalsArr = resFor.map((specieId) => species.find((specie) => specie.id === specieId).name);
-  const name = resEmp.firstName + ' ' + resEmp.lastName;
-  
+  const animalsArr = resFor.map((specieId) => (
+    species.find((specie) => specie.id === specieId).name));
+  const name = `${resEmp.firstName} ${resEmp.lastName}`;
   return { [name]: animalsArr };
-} console.log(getEmployeeCoverage('Nigel'));
+}
 
 module.exports = {
   calculateEntry,
