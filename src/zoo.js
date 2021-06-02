@@ -38,11 +38,18 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-
+  const newEmployee = {
+    ...personalInfo,
+    ...associatedWith,
+  };
+  return newEmployee;
 }
 
 function isManager(id) {
-  
+  const managerScan = employees.reduce(((result, employee) => [...result, ...employee.managers]), []);
+  const managerFind = managerScan.some((managerId) => managerId === id);
+
+  return managerFind;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
