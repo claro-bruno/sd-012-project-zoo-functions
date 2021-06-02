@@ -77,10 +77,9 @@ const animalLocation = () => {
   return [...set];
 };
 
-const animalObject = () => {
+const animalObject = (loc) => {
   const result = {};
-  const locations = ['NE', 'NW', 'SE', 'SW'];
-  locations.forEach((local) => {
+  loc.forEach((local) => {
     result[local] = [];
     fil(local).map(({ name }) => result[local].push(name));
   });
@@ -111,7 +110,7 @@ function getAnimalMap(options) {
   const { includeNames = false, sex, sorted = false } = options || {};
   const loc = animalLocation();
   if (includeNames) return AnimalMap(loc, sorted, sex);
-  return animalObject();
+  return animalObject(loc);
 }
 
 const { hours } = require('./data');
