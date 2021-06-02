@@ -74,14 +74,68 @@ function calculateEntry(entrants = 0) {
   return arrayEntrants.length === 0 ? 0 : sum(arrayEntrants);
 }
 
+// const getSpeciesRegion = (region) => {
+//   const objSpeciesRegion = {};
+//   const speciesRegion = species.filter(({ location }) => location === region);
+//   const namesSpeciesRegion = speciesRegion.map(({ name }) => name);
+//   objSpeciesRegion[region] = namesSpeciesRegion;
+//   return objSpeciesRegion;
+// };
+
+// const noParameterMap = () => {
+//   const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getSpeciesRegion(region));
+//   return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
+// };
+
+// const getAnimalsRegion = (region) => {
+//   const objAnimalsRegion = {};
+//   const objAnimalsResidents = {};
+//   const animalsRegion = species.filter(({ location }) => location === region);
+//   const namesAnimalsRegion = animalsRegion.map(({ name, residents }) => {
+//     objAnimalsResidents[name] = residents.map(({ name }) => name);
+//     objAnimalsRegion[region] = objAnimalsResidents;
+//     return objAnimalsRegion;
+//   });
+// };
+
+// const parameterIncludeName = () => {
+//   return ['NE', 'NW', 'SE', 'SW'].map((region) => getAnimalsRegion(region));
+// };
+
+// function getAnimalMap(options) {
+//   return parameterIncludeName();
+// }
+
+// console.log(getAnimalMap({ includeNames: true }));
+
 function getAnimalMap(options) {
-  
+  // affs
 }
+
+const getWeekSchedule = () => {
+  const weekDays = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const week = {};
+  weekDays.forEach((day) => {
+    const closeHour = hours[day].close - 12;
+    const scheduleDay = `Open from ${hours[day].open}am until ${closeHour}pm`;
+    week[day] = scheduleDay;
+  });
+  week.Monday = 'CLOSED';
+  return week;
+};
+
+const getDaySchedule = (dayName) => {
+  const day = {};
+  const closeHour = hours[dayName].close - 12;
+  const scheduleDay = `Open from ${hours[dayName].open}am until ${closeHour}pm`;
+  day[dayName] = scheduleDay;
+  return dayName === 'Monday' ? { Monday: 'CLOSED' } : day;
+};
 
 function getSchedule(dayName) {
-  // seu código aqui
+  return dayName ? getDaySchedule(dayName) : getWeekSchedule();
 }
-
+    
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
