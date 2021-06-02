@@ -10,6 +10,8 @@ eslint no-unused-vars: [
 ]
 */
 
+// eslint-disable-next-line no-unused-vars
+const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -40,9 +42,9 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   return data.employees.some((employee) => employee.managers.includes(id));
 }
-// id, firstName, lastName, managers, responsibleFor
-function addEmployee() {
-  // seu código aqui
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 // species
 function countAnimals() {
