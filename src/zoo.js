@@ -131,11 +131,21 @@ function getSchedule(dayName) {
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
+*/
 
 function increasePrices(percentage) {
-  // seu código aqui
+  prices.Adult = parseFloat(
+    ((prices.Adult + prices.Adult * (percentage / 100)) + 0.005).toFixed(2),
+  );
+  prices.Child = parseFloat(
+    ((prices.Child + prices.Child * (percentage / 100)) + 0.005).toFixed(2),
+  );
+  prices.Senior = parseFloat(
+    ((prices.Senior + prices.Senior * (percentage / 100)) + 0.005).toFixed(2),
+  );
 }
 
+/*
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 } */
@@ -156,7 +166,7 @@ module.exports = {
   getAnimalsOlderThan,
   /*
   getOldestFromFirstSpecies,
-  increasePrices,
   */
+  increasePrices,
   createEmployee,
 };
