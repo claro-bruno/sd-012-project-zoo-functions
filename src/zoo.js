@@ -85,7 +85,7 @@ function calculateEntry(entrants) {
     return 0;
   }
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  const { Adult: priceAdult, Senior: priceSenior, Child: priceChild } = prices;
+  const { Adult: priceAdult, Senior: priceSenior, Child: priceChild } = data.prices;
   return Adult * priceAdult + Child * priceChild + Senior * priceSenior;
 }
 
@@ -160,7 +160,7 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
-  const { Adult, Senior, Child } = data.prices;
+  const { Adult, Senior, Child } = prices;
   const newPrices = {
     Adult: Math.round((Adult * (1 + percentage / 100)) * 100) / 100,
     Senior: Math.round((Senior * (1 + percentage / 100)) * 100) / 100,
@@ -169,9 +169,6 @@ function increasePrices(percentage) {
   Object.assign(data.prices, newPrices);
   return data.prices;
 }
-
-console.log(increasePrices(50));
-console.log(increasePrices(30));
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
