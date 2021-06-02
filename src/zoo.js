@@ -155,14 +155,18 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const employeeId = employees.find((employee) => employee.id === id);
-  const animalsEmployee = employeeId.responsibleFor;
-  // const animals = species.filter((specie, index) => specie.id === animalsEmployee[index]);
-  let animals = [];
-  animalsEmployee.forEach((animal) => {
-    animals = species.filter((specie) => specie.id === animal);
+  const employeeById = employees.find((employee) => employee.id === id);
+  const animalId = employeeById.responsibleFor[0];
+  const animalObj = species.find((specie) => specie.id === animalId);
+  const oldestAnimal = animalObj.residents.reduce((oldest, resident) => {
+    if (resident.age > oldest.age) {
+      return resident;
+    }
+    return oldest;
   });
-  return animals;
+  const { name, sex, age } = oldestAnimal;
+  const oldestAnimalArr = [name, sex, age];
+  return oldestAnimalArr;
 }
 
 function increasePrices(percentage) {
@@ -175,8 +179,8 @@ function increasePrices(percentage) {
   prices.Senior = Math.round((Senior + Number.EPSILON) * 100) / 100;
 }
 
-function getEmployeeCoverage() {
-  // idOrName
+function getEmployeeCoverage(idOrName) {
+  //
 }
 
 module.exports = {
