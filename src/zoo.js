@@ -45,9 +45,8 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const worker = employees.filter((employee) => employee.managers === []);
-  console.log(worker, 'teste');
-  return worker.some((employee2) => employee2.id === id);
+  const manager = employees.some((employee, index) => employee.managers[index] === id);
+  return manager;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
