@@ -33,6 +33,22 @@ const sexFilter = (sex, animal) => {
   return animalResidentsMap;
 };
 
+const getEmployee = (idOrName) => {
+  const employeeCoverage = {};
+  const employeeFound = data.employees.find(
+    (employe) =>
+      employe.id === idOrName
+      || employe.firstName === idOrName
+      || employe.lastName === idOrName,
+  );
+  const animalName = employeeFound.responsibleFor.map((resposible) => {
+    const animalId = data.species.find((animal) => animal.id === resposible);
+    return animalId.name;
+  });
+  employeeCoverage[`${employeeFound.firstName} ${employeeFound.lastName}`] = animalName;
+  return employeeCoverage;
+};
+
 function getSpeciesByIds(...ids) {
   // seu código aqui
   let speciesFiltred = [];
@@ -174,9 +190,21 @@ function increasePrices(percentage) {
   data.prices.Child = Math.round(Child * (1 + percentage / 100) * 100) / 100;
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName = '') {
+  // seu código aqui
+  const employeeCoverage = {};
+  if (idOrName !== '') {
+    return getEmployee(idOrName);
+  }
+  data.employees.forEach((employee) => {
+    const animalName = employee.responsibleFor.map((resposible) => {
+      const animalId = data.species.find((animal) => animal.id === resposible);
+      return animalId.name;
+    });
+    employeeCoverage[`${employee.firstName} ${employee.lastName}`] = animalName;
+  });
+  return employeeCoverage;
+}
 
 module.exports = {
   calculateEntry,
@@ -185,7 +213,7 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
