@@ -104,9 +104,44 @@ console.log(addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
   ])); */
 // console.log(data.employees);
 
+/* const createAnimalsObject = (animalsArray, defaultObject) => {
+  const animalObject = defaultObject;
+  animalObject[Object.keys(animalsArray)] = `${Object.values(animalsArray)}`;
+  return animalObject;
+}; */
+
 /* function countAnimals(species) {
-  // seu código aqui
+  if (typeof (species) === 'undefined') {
+    const defaultAnimals = data.species.map((specie) => ({ [specie.name]: specie.popularity }));
+    const defaultAnimalsObject = {};
+    defaultAnimals.forEach((animal) => createAnimalsObject(animal, defaultAnimalsObject));
+    return defaultAnimalsObject;
+  }
 } */
+
+/* function countAnimals(species) {
+  if (typeof (species) === 'undefined') {
+    const animalsObject = {};
+    const defaultAnimals = data.species.map((specie) => {
+      const newObjectAnimals = { animal: specie.name, quantity: specie.residents.length };
+      return newObjectAnimals;
+    });
+    const animalsObjectFormat = ({ animal, quantity }) => animalsObject[animal] = quantity;
+    defaultAnimals.forEach((animal) => animalsObjectFormat(animal));
+    return animalsObject;
+  }
+} */
+
+function countAnimals(species) {
+  if (typeof (species) === 'undefined') {
+    const animalsObjs = data.species.map((specie) => ({ [specie.name]: specie.residents.length }));
+    return animalsObjs.reduce((prevValue, currValue) => Object.assign(prevValue, currValue), {});
+  } return data.species.find((specie) => specie.name === species).residents.length;
+}
+
+// console.log(countAnimals());
+// console.log(countAnimals('lions'));
+// console.log(countAnimals('snakes'));
 
 /* function calculateEntry(entrants) {
   // seu código aqui
@@ -135,7 +170,7 @@ console.log(addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe',
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
