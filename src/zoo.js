@@ -29,6 +29,7 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) {
     return {};
   }
+
   return employees.find(((employee) => employee.firstName === employeeName
     || employee.lastName === employeeName));
 }
@@ -43,6 +44,7 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   const managersIds = employees.reduce(((acc, employee) => [...acc, ...employee.managers]), []);
   const isManagerBool = managersIds.some((managerId) => managerId === id);
+
   return isManagerBool;
 }
 
@@ -54,15 +56,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     managers,
     responsibleFor,
   };
+
   employees.push(employee);
 }
 
 function countAnimals(animalName) {
   if (!animalName) {
     return species.reduce(((acc, specie) => {
-      const {
-        name,
-      } = specie;
+      const { name } = specie;
+
       return {
         ...acc,
         [name]: specie.residents.length,
@@ -71,6 +73,7 @@ function countAnimals(animalName) {
   }
 
   const quantity = species.find((specie) => specie.name === animalName).residents.length;
+
   return quantity;
 }
 
@@ -78,9 +81,13 @@ function calculateEntry(entrants) {
   if (!entrants) {
     return 0;
   }
+
   const {
-    Adult = 0, Senior = 0, Child = 0,
+    Adult = 0,
+    Senior = 0,
+    Child = 0,
   } = entrants;
+
   const {
     Adult: adultPrice,
     Senior: seniorPrice,
@@ -92,18 +99,23 @@ function calculateEntry(entrants) {
 
 //  FUNCTIONS TO SOLVE getAnimalMap()
 
-const onlyOneSex = (residents, sex) => residents.filter((resident) => resident.sex === sex)
-  .map((resident) => resident.name);
+const filterBySex = (residents, sex) => {
+  if (sex === 'both') {
+    return residents.map((resident) => resident.name);
+  }
+  return residents.filter((resident) => resident.sex === sex)
+    .map((resident) => resident.name);
+};
 
-const getSpeciesByLocation = (location, { includeNames = false, sorted = false, sex = 'both' }) => {
+const isSorted = (sorted, names) => (sorted ? names.sort() : names);
+
+const filterAnimals = (location, { includeNames = false, sorted = false, sex = 'both' }) => {
   const speciesFiltered = species.filter((specie) => specie.location === location)
     .reduce((acc, specie) => {
       const { name, residents } = specie;
       if (includeNames) {
-        const residentsName = sex === 'both' ? residents.map((resident) => resident.name)
-          : onlyOneSex(residents, sex);
-        return sorted ? [...acc, { [name]: residentsName.sort() }]
-          : [...acc, { [name]: residentsName }];
+        const residentsName = filterBySex(residents, sex);
+        return [...acc, { [name]: isSorted(sorted, residentsName) }];
       }
       return [...acc, name];
     }, []);
@@ -112,10 +124,10 @@ const getSpeciesByLocation = (location, { includeNames = false, sorted = false, 
 
 function getAnimalMap(options = {}) {
   const animalsByLocation = {
-    NE: getSpeciesByLocation('NE', options),
-    SW: getSpeciesByLocation('SW', options),
-    SE: getSpeciesByLocation('SE', options),
-    NW: getSpeciesByLocation('NW', options),
+    NE: filterAnimals('NE', options),
+    SW: filterAnimals('SW', options),
+    SE: filterAnimals('SE', options),
+    NW: filterAnimals('NW', options),
   };
 
   return animalsByLocation;
@@ -128,15 +140,10 @@ function getSchedule(dayName) {
     const days = Object.keys(hours);
     return days.reduce((acc, day) => {
       if (day === 'Monday') {
-        return {
-          ...acc,
-          [day]: 'CLOSED',
-        };
+        return { ...acc, [day]: 'CLOSED' };
       }
-      return {
-        ...acc,
-        [day]: `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`,
-      };
+      const openCloseMsg = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+      return { ...acc, [day]: openCloseMsg };
     }, {});
   }
 
