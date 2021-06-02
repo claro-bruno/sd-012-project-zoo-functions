@@ -110,21 +110,23 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 */
+const verifica = (dayName) => ((dayName === 'Monday') ? 'CLOSED'
+  : `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`);
 function getSchedule(dayName) {
   const calendario = Object.entries(hours);
   const saida = {};
-  if(dayName===undefined){
-    calendario.forEach((dia)=>{ (dia[0] === 'Monday') ? saida[dia[0]] = 'CLOSED' : saida[dia[0]] = `Open from ${dia[1].open}am until ${dia[1].close-12}pm`
+  if (dayName === undefined) {
+    const verifica2 = (dia) => ((dia[0] === 'Monday') ? 'CLOSED'
+      : `Open from ${dia[1].open}am until ${dia[1].close - 12}pm`);
+    calendario.forEach((dia) => {
+      saida[dia[0]] = verifica2(dia);
+      return saida;
     });
-  }
-  else if (dayName === 'Monday'){
-    saida[dayName] = `CLOSED`;
   } else {
-    saida[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close-12}pm`;
+    saida[dayName] = verifica(dayName);
   }
-   return saida;
+  return saida;
 }
-console.log(getSchedule('Friday'))
 /*
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
@@ -141,8 +143,8 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   calculateEntry,
   /*
-  getSchedule,
   getAnimalMap, */
+  getSchedule,
   countAnimals,
   getSpeciesByIds,
   getEmployeeByName,
