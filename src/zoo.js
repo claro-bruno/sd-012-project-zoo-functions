@@ -58,9 +58,11 @@ function countAnimals(species) {
   return speciePopulation.residents.length;
 }
 
-// entrants
-function calculateEntry() {
-  // seu código aqui
+function calculateEntry(entrants) {
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  return Object.keys(entrants).reduce((acc, crv) => acc + (entrants[crv] * data.prices[crv]), 0);
 }
 // options
 function getAnimalMap() {
