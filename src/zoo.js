@@ -56,8 +56,7 @@ function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   const { id, firstName, lastName } = personalInfo;
   const { managers, responsibleFor } = associatedWith;
-  return {
-    id,
+  return { id,
     firstName,
     lastName,
     managers,
@@ -99,9 +98,14 @@ function countAnimals(species) {
   return especieInserida.residents.length;
 }
 
-function calculateEntry() {
+function calculateEntry(entrants) {
   // seu código aqui
-  // entrants
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const arrayEntrants = Object.entries(entrants);
+  const soma = arrayEntrants.reduce((acc, pessoa) => acc + (data.prices[pessoa[0]] * pessoa[1]), 0);
+  return soma;
 }
 
 function getAnimalMap() {
