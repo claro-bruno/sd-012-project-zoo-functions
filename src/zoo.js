@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(...ids) {
+function getSpeciesByIds(ids) {
   const callBack = (code) => {
     for (let index = 0; index < data.species.length; index += 1) {
       if (code === data.species[index].id) {
@@ -29,9 +29,15 @@ function getAnimalsOlderThan(animal, age) {
     .residents.every((individuo) => individuo.age >= age);
   // every retirado de https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
 }
-// function getEmployeeByName(employeeName) {
-//   // seu código aqui
-// }
+
+function getEmployeeByName(employeeName) {
+  // seu código aqui
+  if (!employeeName) {
+    return ({});
+  }
+  return data.employees
+    .find((func) => func.firstName === employeeName || func.lastName === employeeName);
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -79,7 +85,7 @@ module.exports = {
   // countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
-  // getEmployeeByName,
+  getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
