@@ -19,27 +19,27 @@ function getSpeciesByIds(...ids) {
     return []
   };
   return species.filter((specie, index) =>
-  specie.id === ids[index]);
+    specie.id === ids[index]);
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const animals = species.filter((specie) => specie.name === animal); 
+  const animals = species.filter((specie) => specie.name === animal);
   return animals[0].residents.every((animal2) => animal2.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
-  if(!employeeName) {
+  if (!employeeName) {
     return {}
   };
-  
+
   const worker = employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
-  return worker   
-} 
+  return worker
+}
 
 function createEmployee(personalInfo, associatedWith) {
   const newEmployee = {
     ...personalInfo,
-    ... associatedWith,
+    ...associatedWith,
   }
   return newEmployee;
 }
@@ -61,8 +61,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species) {
-  // seu código aqui
-}
+  if (!species) {
+    const allAnimals = {}
+    data.species.forEach((animal) => allAnimals[animal.name] = animal.residents.length);
+    return allAnimals;
+  }
+  return data.species.find((animal) => animal.name === species).residents.length;   
+} 
+
+
 
 function calculateEntry(entrants) {
   // seu código aqui
