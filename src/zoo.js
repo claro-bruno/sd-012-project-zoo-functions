@@ -82,7 +82,7 @@ const calculateEntry = (entrants) => {
   array.push(entrants.Senior * prices.Senior);
   let price = 0;
   array.forEach((index) => {
-    if (index !== NaN) {
+    if (isNaN(index) === false) {
       price += index;
     }
   });
