@@ -37,14 +37,14 @@ function getEmployeeByName(employeeName) {
 }
 // console.log(getEmployeeByName('Wishart'))
 
-// function createEmployee(personalInfo, associatedWith) {
+function createEmployee(personalInfo, associatedWith) {
   // const { id, firstName, lastName } = personalInfo;
   // console.log(personalInfo)
   // const { managers, responsibleFor } = associatedWith;
   // console.log(associatedWith)
   // const newEmployee = {personalInfo, associatedWith};
   // return newEmployee;
-// }
+}
 
 function isManager(id) {
   const checkId = employees.some((employee, index) => employee.managers[index] === id);
@@ -64,9 +64,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return newEmployee;
 }
 
-// function countAnimals(specie) {
-//   ///
-// }
+function countAnimals(specie) {
+  ///
+}
 
 function calculateEntry(entrants) {
   const { Adult, Child, Senior } = entrants
@@ -74,38 +74,38 @@ function calculateEntry(entrants) {
   entrants.reduce((acc, act) => {})
 
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+function getAnimalMap(options) {
+  // seu código aqui
+}
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  // seu código aqui
+}
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+}
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  // seu código aqui
+}
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+}
 
 module.exports = {
-  // calculateEntry,
-  // getSchedule,
-  // countAnimals,
-  // getAnimalMap,
+  calculateEntry,
+  getSchedule,
+  countAnimals,
+  getAnimalMap,
   getSpeciesByIds,
-  // getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeByName,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
-  // increasePrices,
-  // createEmployee,
-}};
+  getOldestFromFirstSpecies,
+  increasePrices,
+  createEmployee,
+};
