@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -84,12 +84,74 @@ function calculateEntry(entrants) {
   return totalPrice;
 }
 
-function getAnimalMap() {
-  // options
+function getAnimalNoPar() {
+  const obj = { NE: [], NW: [], SE: [], SW: [] };
+  const NEobj = species.filter((specie) => specie.location === 'NE');
+  NEobj.forEach((animal) => {
+    obj.NE.push(animal.name);
+  });
+  const NWobj = species.filter((specie) => specie.location === 'NW');
+  NWobj.forEach((animal) => {
+    obj.NW.push(animal.name);
+  });
+  const SEobj = species.filter((specie) => specie.location === 'SE');
+  SEobj.forEach((animal) => {
+    obj.SE.push(animal.name);
+  });
+  const SWobj = species.filter((specie) => specie.location === 'SW');
+  SWobj.forEach((animal) => {
+    obj.SW.push(animal.name);
+  });
+  return obj;
 }
 
-function getSchedule() {
-  // dayName
+function getAnimalIncludeNames() {
+  const obj = { NE: {}, NW: {}, SE: {}, SW: {} };
+  const NEobj = species.filter((specie) => specie.location === 'NE');
+  NEobj.forEach((animal) => {
+    obj.NE[animal.name] = (animal.residents.map((resident) => resident.name));
+  });
+  const NWobj = species.filter((specie) => specie.location === 'NW');
+  NWobj.forEach((animal) => {
+    obj.NW[animal.name] = (animal.residents.map((resident) => resident.name));
+  });
+  const SEobj = species.filter((specie) => specie.location === 'SE');
+  SEobj.forEach((animal) => {
+    obj.SE[animal.name] = (animal.residents.map((resident) => resident.name));
+  });
+  const SWobj = species.filter((specie) => specie.location === 'SW');
+  SWobj.forEach((animal) => {
+    obj.SW[animal.name] = (animal.residents.map((resident) => resident.name));
+  });
+  return obj;
+}
+
+function getAnimalMap(options) {
+  if (!options) {
+    return getAnimalNoPar();
+  }
+  if (options.includeNames === true) {
+    return getAnimalIncludeNames();
+  }
+}
+
+function getSchedule(dayName) {
+  let hoursObj = {};
+  if (!dayName) {
+    hoursObj = {
+      Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+      Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+      Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+      Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+      Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+      Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+      Monday: 'CLOSED',
+    };
+    return hoursObj;
+  }
+  hoursObj[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  if (dayName === 'Monday') hoursObj[dayName] = 'CLOSED';
+  return hoursObj;
 }
 
 function getOldestFromFirstSpecies() {
