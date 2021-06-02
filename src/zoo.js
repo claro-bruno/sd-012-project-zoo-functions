@@ -77,9 +77,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(novoFuncionario);
 }
 
-function countAnimals() {
+function countAnimals(species) {
   // seu código aqui
-  // species
+  const animais = data.species.filter((especie) => especie.name);
+  if (species === undefined) {
+    const totalAnimais = {};
+    for (let i = 0; i < animais.length; i += 1) {
+      totalAnimais[animais[i].name] = animais[i].residents.length;
+    }
+    return totalAnimais;
+  }
+  const especieInserida = data.species.find((animal) => animal.name === species);
+  return especieInserida.residents.length;
 }
 
 function calculateEntry() {
