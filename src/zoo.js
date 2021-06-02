@@ -33,8 +33,8 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-function isManager() {
-  // seu código aqui id
+function isManager(id) {
+  return data.employees.some((manage) => manage.managers.includes(id));
 }
 
 function addEmployee() {
