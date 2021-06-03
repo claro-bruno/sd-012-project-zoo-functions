@@ -83,18 +83,21 @@ function getSchedule(dayName) {
     : { [dayName]: operationTime()[dayName] };
 }
 
-const getFunc = (id) => data.employees.find((func) => func.id === id);
-const getFirstAnimalFrom = (id) => [...getFunc(id).responsibleFor].shift();
-const getSpecieOlder = (id) => (Object.values(data.species
-  .find((spec) => spec.id === id).residents
-  .sort((a, b) => b.age - a.age)[0]));
-
 function getOldestFromFirstSpecies(id) {
-  return getSpecieOlder(getFirstAnimalFrom(id));
+  const getFunc = () => data.employees.find((func) => func.id === id);
+  const getFirstAnimalFrom = () => [...getFunc().responsibleFor].shift();
+  const getSpecieOlder = (speId) => (Object.values(data.species
+    .find((spec) => spec.id === speId).residents
+    .sort((a, b) => b.age - a.age)[0]));
+  return getSpecieOlder(getFirstAnimalFrom());
 }
 
-function increasePrices() {
-  // seu código aqui (percentage)
+function increasePrices(percentage) {
+  const arrayKeys = Object.keys(data.prices);
+  const converPercent = () => ((percentage / 100) + 1);
+  arrayKeys.forEach((key) => {
+    data.prices[key] = (Math.round(data.prices[key] * converPercent() * 100) / 100);
+  });
 }
 
 function getEmployeeCoverage() {
