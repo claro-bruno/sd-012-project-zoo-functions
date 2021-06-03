@@ -54,11 +54,20 @@ function isManager(id) {
 
 function addEmployee(...rest) {
   // seu código aqui
-  const { id, firstName, lastName, managers, responsibleFor } = { ...rest };
-  console.log({ id, firstName, lastName, managers, responsibleFor });
-  return employees.push(newPerson);
+  const arg = { ...rest };
+  const { 0: id, 1: firstName, 2: lastName } = arg;
+  if (arg[3] === undefined || arg[4] === undefined) {
+    const { 3: managers = [], 4: responsibleFor = [] } = arg;
+    console.log({ id, firstName, lastName, managers, responsibleFor });
+    employees.push({ id, firstName, lastName, managers, responsibleFor });
+    console.log(employees.length);
+    return employees.length;
+  }
+  const { 3: managers, 4: responsibleFor } = arg;
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
+  /* console.log(employees.length); */
+  return employees.length;
 }
-addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe');
 
 function countAnimals(species) {
   // seu código aqui
