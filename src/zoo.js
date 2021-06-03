@@ -146,9 +146,16 @@ function getOldestFromFirstSpecies(id) {
   return olderAnimalArray;
 }
 
-function increasePrices() {
+function increasePrices(percentage) {
   // seu código aqui
-  // percentage
+  const { Adult, Senior, Child } = data.prices;
+  const valorAdulto = (Adult + (Adult * (percentage / 100)));
+  const valorSenior = (Senior + (Senior * (percentage / 100)));
+  const valorCrianca = (Child + (Child * (percentage / 100)));
+  // Forma de arredondar as casas decimais do resultado final vista no link https://bit.ly/3g2wSFr;
+  data.prices.Adult = Math.round(valorAdulto * 100) / 100;
+  data.prices.Senior = Math.round(valorSenior * 100) / 100;
+  data.prices.Child = Math.round(valorCrianca * 100) / 100;
 }
 
 function getEmployeeCoverage() {
