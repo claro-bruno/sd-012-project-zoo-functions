@@ -162,12 +162,13 @@ function increasePrices(percentage) {
   };
 }
 
-const getEmployeeCoverageAux = (employees, employeeInfo, idOrName) => {  
-  const employee = employees.find(({ firstName, lastName, id }, index) => {
+const getEmployeeCoverageAux = (idOrName) => {
+  const employeeInfo = {};
+  const employee = data.employees.find(({ firstName, lastName, id }, index) => {
     if (firstName === idOrName || lastName === idOrName || id === idOrName) {
-      return employees[index];
-    }    
-  });  
+      return data.employees[index];
+    }
+  });
   const animalsID = employee.responsibleFor;
   const animalsNames = [];
   animalsID.forEach((id) => {
@@ -176,14 +177,13 @@ const getEmployeeCoverageAux = (employees, employeeInfo, idOrName) => {
   });
   employeeInfo[`${employee.firstName} ${employee.lastName}`] = animalsNames;
   return employeeInfo;
-}
+};
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-  const employees = data.employees;
   const employeeInfo = {};
   if (idOrName === undefined) {
-    employees.forEach((employee) => {
+    data.employees.forEach((employee) => {
       const animalsID = employee.responsibleFor;
       const animalsNames = [];
       animalsID.forEach((id) => {
@@ -194,7 +194,7 @@ function getEmployeeCoverage(idOrName) {
     });
     return employeeInfo;
   }
-  return getEmployeeCoverageAux(employees, employeeInfo, idOrName);
+  return getEmployeeCoverageAux(idOrName);
 }
 console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 module.exports = {
