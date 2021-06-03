@@ -84,12 +84,13 @@ function calculateEntry(entrants) {
 
 /* function getAnimalMap(options) {
   // seu código aqui
-} */
+}  */
 
 /* function getSchedule(dayName) {
   // seu código aqui
-  const weekDays = Object.keys(hours)
+  return hours.map((hour) => hour.Tuesday)
 }
+console.log(getSchedule())
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 } */
@@ -103,8 +104,13 @@ function increasePrices(percentage) {
 }
 /* function getEmployeeCoverage(idOrName) {
   // seu código aqui
-} */
-
+  if(!idOrName) {
+    const employeeName = employees.map((employee) => `${employee.firstName} ${employee.lastName}`)
+    const speciesName =  employees.map((employee) => employee.responsibleFor)
+    return speciesName.map((specie) => specie)
+  }
+}
+console.log(getEmployeeCoverage()) */
 module.exports = {
   calculateEntry,
   // getSchedule,
