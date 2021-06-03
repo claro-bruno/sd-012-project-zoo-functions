@@ -125,9 +125,9 @@ function getSchedule(dayName) {
   const newObj = {};
   days.forEach((day, position) => {
     days[position] = `Open from ${day.open}am until ${day.close - 12}pm`;
-    if (position === 6) { days[position] = 'CLOSED' };
+    if (position === 6) { days[position] = 'CLOSED'; }
   });
-  weekDays.forEach((wday, position) => {return newObj[`${wday}`] = days[position]});
+  weekDays.forEach((wday, position) => { return (newObj[`${wday}`] = days[position]); });
   if (!dayName) { return newObj; }
   const result = { [dayName]: newObj[Object.keys(newObj).find((key) => key === dayName)] };
   return result;
