@@ -82,27 +82,21 @@ function calculateEntry(entrants) {
 // function getAnimalMap(options) {
 //   // seu código aqui
 // }
+const cronograma = data.hours;
+const cronoEntries = Object.entries(cronograma);
 
 function getSchedule(dayName) {
-  const cronograma = data.hours;
-  const cronoEntries = Object.entries(cronograma);
   const dayCronoObj = {};
-  const cronoObj = {};
-  if(!dayName) {
-    for (dia of cronoEntries) {
-      if (dia[0] === 'Monday') {
-        cronoObj['Monday'] = 'CLOSED';
-      } else {
-        const currDay = dia[0]
-        const open = dia[1].open;
-        const close = (dia[1].close)%12;
-        cronoObj[`${currDay}`] = `Open from ${open}am until ${close}pm`;
-      }
-    };
+  if (!dayName) {
+    const cronoObj = {};
+    cronoEntries.forEach((dia) => {
+      cronoObj[`${dia[0]}`] = `Open from ${dia[1].open}am until ${(dia[1].close) % 12}pm`;
+    });
+    cronoObj.Monday = 'CLOSED';
     return cronoObj;
-  } else if (dayName !== 'Monday' && dayName !== '') {
+  } if (dayName !== 'Monday') {
     const selDay = cronoEntries.find((day) => day[0] === dayName);
-    dayCronoObj[`${dayName}`] = `Open from ${selDay[1].open}am until ${(selDay[1].close)%12}pm`;
+    dayCronoObj[`${dayName}`] = `Open from ${selDay[1].open}am until ${(selDay[1].close) % 12}pm`;
     return dayCronoObj;
   }
   dayCronoObj[`${dayName}`] = 'CLOSED';
