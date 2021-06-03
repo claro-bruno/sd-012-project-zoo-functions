@@ -70,23 +70,82 @@ function calculateEntry(entrants = 0) {
   return total;
 }
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-//   const animalsByRegion = data.species.reduce((acc, current) => {
-//     const arrayOfSpecies = data.species.filter((species) => species.location === current.location);
-//     const speciesByRegion = arrayOfSpecies.reduce((counter, currentValue) => {
-//       counter.push(currentValue.name);
-//       return counter;
-//     }, []);
-//     acc[current.location] = speciesByRegion;
-//     return acc;
-//   }, {});
-//   return animalsByRegion;
-// }
+function getAnimalByRegion() {
+  const animalsByRegion = data.species.reduce((acc, current) => {
+    const arrayOfSpecies = data.species.filter((species) => species.location === current.location);
+    const speciesByRegion = arrayOfSpecies.reduce((counter, currentValue) => {
+      counter.push(currentValue.name);
+      return counter;
+    }, []);
+    acc[current.location] = speciesByRegion;
+    return acc;
+  }, {});
+  return animalsByRegion;
+}
 
-// // console.log(getAnimalMap());
-// const teste = getAnimalMap();
-// console.log(teste)
+function includeNamesMap() {
+  const animalsWithNames = data.species.reduce((acc, current) => {
+    const arrayOfSpecies = data.species.filter((species) => species.location === current.location);
+    const namesOfSpecies = arrayOfSpecies.reduce((counter, currentValue) => {
+      counter.push({
+        [currentValue.name]: currentValue.residents.reduce((acc2, current2) => {
+          acc2.push(current2.name);
+          return acc2;
+        }, []),
+      });
+      return counter;
+    }, []);
+    acc[current.location] = namesOfSpecies;
+    return acc;
+  }, {});
+  return animalsWithNames;
+}
+
+function sortBySex(sex) {
+  const animalsBySex = data.species.reduce((acc, current) => {
+    const arrayOfSpecies = data.species.filter((species) => species.location === current.location);
+    const namesOfSpecies = arrayOfSpecies.reduce((counter, currentValue) => {
+      counter.push({
+        [currentValue.name]: currentValue.residents.filter((animal) => animal.sex === sex)
+          .reduce((acc2, current2) => {
+            acc2.push(current2.name);
+            return acc2;
+          }, []),
+      });
+      return counter;
+    }, []);
+    acc[current.location] = namesOfSpecies;
+    return acc;
+  }, {});
+  return animalsBySex;
+}
+
+function sortAnimals(map) {
+  const regions = Object.keys(map);
+  regions.forEach((region) => {
+    map[region].forEach((animal) => {
+      const species = Object.keys(animal);
+      animal[species[0]].sort();
+    });
+  });
+}
+
+function getAnimalMap(options = 0) {
+  // seu código aqui
+  const { includeNames, sorted, sex } = options;
+  let animalMap = getAnimalByRegion();
+  // sortAnimals(animalMap)
+  if (includeNames === true) {
+    animalMap = includeNamesMap();
+    if (sex !== undefined) {
+      animalMap = sortBySex(sex);
+    }
+    if (sorted === true) {
+      sortAnimals(animalMap);
+    }
+  }
+  return animalMap;
+}
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -144,13 +203,11 @@ function getEmployeeCoverage(idOrName) {
   return employees;
 }
 
-console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
