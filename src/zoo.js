@@ -99,7 +99,7 @@ const orderNames = (map) => {
   Object.values(map).forEach((value) => {
     value.forEach((obj) => {
       Object.keys(obj).forEach((key) => {
-        obj[key] = obj[key].sort();
+        obj[key].sort();
       });
     });
   });
