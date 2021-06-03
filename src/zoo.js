@@ -93,9 +93,6 @@ const getOldestFromFirstSpecies = (id) => {
   return Object.values(sortAnimal[0]);
 };
 
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-// ['Vicky', 'female', 12]
-
 const increasePrices = (percentage) => {
   const keys = Object.keys(prices);
   const values = Object.values(prices).map((value) =>
@@ -106,10 +103,32 @@ const increasePrices = (percentage) => {
   return prices;
 };
 
-function getEmployeeCoverage() {
-  // seu código aqui
-  // idOrName
-}
+const funcaoObjeto = (parameters = undefined) => {
+  const idEName = parameters;
+  const funcionárioFind = employees.find((employee) => employee.id === idEName
+  || employee.firstName === idEName || employee.lastName === idEName);
+  const animaisFilter = species.filter((animais) => animais);
+  const acharAnimais = funcionárioFind.responsibleFor.map((idName) =>
+    animaisFilter.filter((animal) => animal.id === idName))
+    .map((name) => name.map((name2) => name2.name)).join(' ').split(' ');
+  const fullName = [`${funcionárioFind.firstName} ${funcionárioFind.lastName}`];
+  const resultado = {};
+  fullName.forEach((key) => {
+    resultado[key] = acharAnimais;
+  });
+  return resultado;
+};
+
+const getEmployeeCoverage = (idOrName) => {
+  if (idOrName === undefined) {
+    const listaGeral = {};
+    employees.map((funcionários) =>
+      Object.assign(listaGeral, funcaoObjeto(funcionários.firstName)));
+    return listaGeral;
+  }
+  return funcaoObjeto(idOrName);
+};
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
