@@ -38,14 +38,13 @@ function createEmployee(personalInfo, associatedWith) {
   console.log(personalInfo);
   const EmployeeCreated = personalInfo.map((newEmployee) => {
     const EmployeeCreated = associatedWith.map((associatedWithInfo) => {
-      return { `id: ${personalInfo.id} firstName: ${personalInfo.firstName} lastName: ${personalInfo.lastName} managers: ${...associatedWith.managers} responsibleFor: ${...associatedWith.responsibleFor}`};
+      // return { `id: ${personalInfo.id} firstName: ${personalInfo.firstName} lastName: ${personalInfo.lastName} managers: ${...associatedWith.managers} responsibleFor: ${...associatedWith.responsibleFor}`};
     });
-  });
-  
+  });  
 }
 
 function isManager(id) {
-  // seu código aqui
+  const verifyManager = employees.some((manager) => id === manager.managers);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
