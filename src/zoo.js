@@ -93,9 +93,28 @@ const increasePrices = (percentage) => {
   return prices;
 };
 
-function getEmployeeCoverage() {
-  // seu código aqui
-}
+const getEmployeeCoverage = (idOrName) => {
+  if (idOrName) {
+    const employeeFoundByNameOrId = employees.find((employee) =>
+      employee.firstName === idOrName
+    || employee.lastName === idOrName
+    || employee.id === idOrName);
+    const animalsByEmployee = employeeFoundByNameOrId.responsibleFor;
+    const animals = species.filter((specie) =>
+      animalsByEmployee.find((animal) => specie.id === animal));
+    const animalsOnlyName = animals.map((animal) => animal.name);
+    const name = (`${employeeFoundByNameOrId.firstName} ${employeeFoundByNameOrId.lastName}`);
+    return { [name]: animalsOnlyName };
+  }
+  return employees.reduce((acc, employee) => (
+    { ...acc,
+      [`${employee.firstName} ${employee.lastName}`]:
+      employee.responsibleFor.map((specieId) =>
+        species.find((specie) => specieId === specie.id).name),
+    }), {});
+};
+
+console.log(getEmployeeCoverage('Stephanie'));
 
 module.exports = {
   calculateEntry,
