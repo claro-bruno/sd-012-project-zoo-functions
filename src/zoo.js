@@ -83,9 +83,31 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  const cronograma = data.hours;
+  const cronoEntries = Object.entries(cronograma);
+  const dayCronoObj = {};
+  const cronoObj = {};
+  if(!dayName) {
+    for (dia of cronoEntries) {
+      if (dia[0] === 'Monday') {
+        cronoObj['Monday'] = 'CLOSED';
+      } else {
+        const currDay = dia[0]
+        const open = dia[1].open;
+        const close = (dia[1].close)%12;
+        cronoObj[`${currDay}`] = `Open from ${open}am until ${close}pm`;
+      }
+    };
+    return cronoObj;
+  } else if (dayName !== 'Monday' && dayName !== '') {
+    const selDay = cronoEntries.find((day) => day[0] === dayName);
+    dayCronoObj[`${dayName}`] = `Open from ${selDay[1].open}am until ${(selDay[1].close)%12}pm`;
+    return dayCronoObj;
+  }
+  dayCronoObj[`${dayName}`] = 'CLOSED';
+  return dayCronoObj;
+}
 
 function getOldestFromFirstSpecies(id) {
   const getEmployee = data.employees.find((employee) => employee.id === id);
@@ -108,7 +130,7 @@ function getOldestFromFirstSpecies(id) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
