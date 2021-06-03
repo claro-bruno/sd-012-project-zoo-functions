@@ -137,7 +137,8 @@ function getOldestFromFirstSpecies(id) {
   const specieSel = employees.find((employee) => employee.id === id).responsibleFor[0];
   const animal = species.find((specie) => specie.id === specieSel).residents;
   const result = animal.map((anim) => anim.age);
-  const newobj = animal.find((an) => an.age === result.reduce((a, b) => { return Math.max(a, b); }));
+  const newobj = animal.find((an) => an.age === result.reduce((a, b) => {
+    return Math.max(a, b); }));
   return Object.values(newobj);
 }
 
