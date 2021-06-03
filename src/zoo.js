@@ -60,7 +60,7 @@ function isManager(id) {
 }
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 // console.log(isManager('stephanieId'));
-console.log(isManager('burlId'));
+// console.log(isManager('burlId'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
@@ -71,11 +71,23 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   };
   return data.employees.push(newEmployee);
-} // para colocar a questão do [] no managers e responsibleFor, tive que consultar o respositório de alguns colegas, como o da Camila Malves, pois não sabia.
+} // para colocar a questão do [] no managers e responsibleFor,
+// tive que consultar o respositório de alguns colegas, como o da Camila Malves, pois não sabia.
 
-// function countAnimals(species) {
-// // seu código aqui
-// }
+function countAnimals(species) {
+  const animals = data.species.reduce((acc, currentValue) => {
+    const animalName = currentValue.name;
+    acc[animalName] = currentValue.residents.length;
+    return acc;
+  }, {});
+  if (typeof (species) === 'string') {
+    return animals[species];
+  }
+  return animals;
+} // Para resolver essa questão tive que consultar novamente o final da mentoria do Jensen e
+// também consultei o repositório do colega Kevin Oliveira para unir as informações.
+// console.log(countAnimals('tigers'));
+// console.log(countAnimals());
 
 // function calculateEntry(entrants) {
 // // seu código aqui
@@ -104,7 +116,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
