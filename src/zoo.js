@@ -42,12 +42,18 @@ function getEmployeeByName(employeeName) {
   return {};
 }
 
-function createEmployee() {
+function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  // Recebo os parametros e faço uma desconstrução dentro de um novo array.
+  const newEmployee = { ...personalInfo, ...associatedWith };
+  return newEmployee;
 }
 
-function isManager() {
+function isManager(id) {
   // seu código aqui
+  // Verifica se algum dos elementos dentro do array é igual a o item que está dentro do managers
+  const findManager = employees.some((employe) => employe.managers.some((item) => item === id));
+  return findManager;
 }
 
 function addEmployee() {
