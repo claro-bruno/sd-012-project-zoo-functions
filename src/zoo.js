@@ -162,11 +162,27 @@ function increasePrices(percentage) {
   };
 }
 
+const getEmployeeCoverageAux = (employees, employeeInfo, idOrName) => {  
+  const employee = employees.find(({ firstName, lastName, id }, index) => {
+    if (firstName === idOrName || lastName === idOrName || id === idOrName) {
+      return employees[index];
+    }    
+  });  
+  const animalsID = employee.responsibleFor;
+  const animalsNames = [];
+  animalsID.forEach((id) => {
+    const animal = data.species.find((specie) => specie.id === id);
+    animalsNames.push(animal.name);
+  });
+  employeeInfo[`${employee.firstName} ${employee.lastName}`] = animalsNames;
+  return employeeInfo;
+}
+
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
   const employees = data.employees;
   const employeeInfo = {};
-  if (idOrName === undefined) {        
+  if (idOrName === undefined) {
     employees.forEach((employee) => {
       const animalsID = employee.responsibleFor;
       const animalsNames = [];
@@ -178,21 +194,9 @@ function getEmployeeCoverage(idOrName) {
     });
     return employeeInfo;
   }
-  const employee = employees.find(({ firstName, lastName, id }, index) => {
-    if (firstName === idOrName || lastName === idOrName || id === idOrName) {
-      return employees[index];
-    }
-  });
-  const animalsID = employee.responsibleFor;
-  const animalsNames = [];
-  animalsID.forEach((id) => {
-    const animal = data.species.find((specie) => specie.id === id);
-    animalsNames.push(animal.name);
-  });
-  employeeInfo[`${employee.firstName} ${employee.lastName}`] = animalsNames;
-  return employeeInfo;
+  return getEmployeeCoverageAux(employees, employeeInfo, idOrName);
 }
-
+console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 module.exports = {
   calculateEntry,
   getSchedule,
