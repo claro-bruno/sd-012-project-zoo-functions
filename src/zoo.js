@@ -9,7 +9,6 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
 const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -80,9 +79,9 @@ function calculateEntry(entrants) {
   return total;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -143,7 +142,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
