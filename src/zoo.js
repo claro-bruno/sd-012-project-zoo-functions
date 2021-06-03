@@ -18,29 +18,28 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const filterAge = species.filter((specie) => specie.name === animal);
-  return filterAge[0].residents.every((animal2) => animal2.age >= age);
+  const filterAge = species.find((specie) => specie.name === animal);
+  return filterAge.residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName = {}) {
-  const filterEmployeeFirst = employees.find(({ firstName }) => firstName === employeeName);
-  const filterEmployeeLast = employees.find(({ lastName }) => lastName === employeeName);
+  const findNames = employees.find((employee) => employeeName === employee.firstName);
+  const findLastNames = employees.find((employee) => employeeName === employee.lastName);
 
-  return filterEmployeeFirst || filterEmployeeLast || employeeName;
+  return findNames || findLastNames || employeeName;
 }
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-function isManager(id) {
-  const managerVerify = employees.some((employee) => employee.managers.includes(id));
+// function isManager(id) {
+//   // const managerVerify = employees.some((employee) => employee.managers.includes(id));
 
-  return managerVerify;
-}
+//   // return managerVerify;
+// }
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
 // }
 
 // function countAnimals(species) {
@@ -80,7 +79,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  isManager,
+  // isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
