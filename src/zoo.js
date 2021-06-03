@@ -89,9 +89,18 @@ function countAnimals(species) {
 // console.log(countAnimals('tigers'));
 // console.log(countAnimals());
 
-// function calculateEntry(entrants) {
-// // seu código aqui
-// }
+function calculateEntry(entrants) {
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultos = Adult * data.prices.Adult;
+  const child = Child * data.prices.Child;
+  const senior = Senior * data.prices.Senior;
+  return adultos + child + senior;
+} // Usei a Thread pelo Matheus Tkaczyk , onde o Bruno Yamamoto deu a dica de usar Object.keys para retornar 0,
+// quando a entrada fosse {}.
+// console.log(calculateEntry());
+// console.log(calculateEntry({}));
+// console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 // function getAnimalMap(options) {
 // // seu código aqui
@@ -114,7 +123,7 @@ function countAnimals(species) {
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
