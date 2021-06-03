@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 // Incio do Projeto
 const data = require('./data');
 
-const { species, employees, prices } = data;
+const { species, employees, prices, hours } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -92,13 +92,30 @@ function calculateEntry(entrants = 0) {
 
 /* function getAnimalMap(options) {
   // seu código aqui
-}
 
+} */
+
+// Function getSchedule feita com ajuda do Thalles durante plantao de duvidas
 function getSchedule(dayName) {
   // seu código aqui
+  const hoursArray = Object.entries(hours);
+
+  const hoursObject = hoursArray.reduce((accumulator, item) => {
+    const { open, close } = item[1];
+    accumulator[item[0]] = `Open from ${open}am until ${close - 12}pm`;
+
+    if (item[0] === 'Monday') {
+      accumulator[item[0]] = 'CLOSED';
+    }
+    return accumulator;
+  }, {});
+  if (!dayName) return hoursObject;
+
+  const daySchedule = { [dayName]: hoursObject[dayName] };
+  return daySchedule;
 }
 
-function getOldestFromFirstSpecies(id) {
+/* function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
@@ -119,6 +136,7 @@ module.exports = {
   addEmployee,
   countAnimals,
   calculateEntry,
+  getSchedule,
 };
 
 /* module.exports = {
