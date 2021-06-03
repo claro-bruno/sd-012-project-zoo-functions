@@ -23,9 +23,16 @@ console.log(getSpeciesByIds(''));
 
 // vamos começar!
 
+//1-Encontrando nome:
+
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const accessSpecie = data.species.find((specie) => specie.name === animal);
+  //2 - Encontrando true ou false relacionado com a idade:
+  return accessSpecie.residents.every((resident) => resident.age >= age);
 }
+console.log(getAnimalsOlderThan('lions', 3));
+
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
