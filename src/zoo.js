@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 // dica colega Caio para colocar as arrays de objetos aqui p chamar com amsi facilidades nas funçòes.
 const data = require('./data');
 
@@ -69,11 +69,19 @@ function countAnimals(species2) {
   const findSpecie = species.find((specie) => specie.name === species2);
   return findSpecie.residents.length;
 }
-console.log(countAnimals('lions'));
+// console.log(countAnimals('lions'));
 
-// function calculateEntry() {
-//   // seu código aqui entrants
-// }
+function calculateEntry(entrants) {
+  // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const { Adult: numberOfAdults = 0, Child: numberOfChildren = 0,
+    Senior: numberOfSeniors = 0 } = entrants; // dica de threads do slack.
+  const adults = numberOfAdults * prices.Adult;
+  const childs = numberOfChildren * prices.Child;
+  const seniors = numberOfSeniors * prices.Senior;
+  return adults + childs + seniors;
+}
+// calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 });
 
 // function getAnimalMap() {
 //   // seu código aqui options
@@ -96,7 +104,7 @@ console.log(countAnimals('lions'));
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
