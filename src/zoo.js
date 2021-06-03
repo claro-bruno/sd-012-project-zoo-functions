@@ -61,7 +61,7 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap() {
-  // seu código aqui options
+  // Infelizmente, nao tenho neuronios suficientes pra resolver isso aqui. Que morte horrivel !
 }
 
 const schedule = {
@@ -87,7 +87,12 @@ function getSchedule(day) {
   }
 }
 
-function getOldestFromFirstSpecies() {
+function getOldestFromFirstSpecies(id) {
+  const animals = data.employees.find((currentValue) => currentValue.id === id).responsibleFor;
+  const animalId = data.species.find((currentValue) => currentValue.id === animals[0]).residents;
+  const ageA = animalId.reduce((acc, currentValue) => Math.max(acc, currentValue.age), 0);
+  const theOldestAnimal = animalId.find((currentValue) => currentValue.age === ageA);
+  return Object.values(theOldestAnimal);
 }
 
 function increasePrices(percentage) {
