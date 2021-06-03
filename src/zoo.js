@@ -76,7 +76,23 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  return dayName;
+  const week = data.hours;
+  const arrayWeek = Object.entries(week);
+  if (dayName === undefined) {
+    const schedule = arrayWeek.reduce((acc, curr) => {
+      acc[curr[0]] = `Open from ${curr[1].open}am until ${curr[1].close - 12}pm`;
+      if (curr[0] === 'Monday') {
+        acc[curr[0]] = 'CLOSED';
+      }
+      return acc;
+    }, {});
+    return schedule;
+  }
+  const days = arrayWeek.find((day) => day[0] === dayName);
+  if (days[0] === 'Monday') {
+    return { [days[0]]: 'CLOSED' };
+  }
+  return { [days[0]]: `Open from ${days[1].open}am until ${days[1].close - 12}pm` };
 }
 
 function getOldestFromFirstSpecies(id) {
