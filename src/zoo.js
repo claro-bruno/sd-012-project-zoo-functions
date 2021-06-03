@@ -34,9 +34,13 @@ function getAnimalsOlderThan(animal, age) {
   const idadeAnimal = nomeAnimal.residents.every((idadeMax) => idadeMax.age >= age);
   return idadeAnimal;
 }
-console.log(getAnimalsOlderThan('bears', 4));
+// console.log(getAnimalsOlderThan('bears', 4));
 
 function getEmployeeByName(employeeName) {
+  if (!employeeName) return {};
+  const nomeColaborador = data.employees.find((employee) =>
+    employee.firstName === employeeName || employee.lastName === employeeName);
+  return nomeColaborador;
 }
 
 function createEmployee(personalInfo, associatedWith) {
