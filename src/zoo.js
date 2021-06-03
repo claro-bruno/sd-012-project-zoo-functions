@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const { species, employees } = require('./data');
 const data = require('./data');
 
-console.log(data);
+// console.log(data);
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -56,8 +56,17 @@ function isManager(id) {
   return findManager;
 }
 
-function addEmployee() {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
+  // ex bem simples, porém esqueci de adicionar '[]' como default parameters
+  const moreEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return employees.push(moreEmployee);
 }
 
 function countAnimals() {
