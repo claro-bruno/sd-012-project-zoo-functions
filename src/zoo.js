@@ -42,8 +42,10 @@ function createEmployee(personalInfo, associatedWith) {
     responsibleFor,
   };
 }
-function isManager() {
-  // seu código aqui id
+// usa some para localizar em -employees- um id de gerente
+function isManager(id) {
+  return data.employees.some((employee) =>
+    employee.managers.some((manager) => manager === id));
 }
 
 function addEmployee() {
