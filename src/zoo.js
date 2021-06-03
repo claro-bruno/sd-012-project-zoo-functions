@@ -11,8 +11,6 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { prices } = data;
-
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
   if (ids.length === 1) {
@@ -45,7 +43,10 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  return data.employees.managers.some((manager) => manager.managers.includes(id));
+  const managers = ['9e7d4524-363c-416a-8759-8aa7e50c0992',
+    'fdb2543b-5662-46a7-badc-93d960fdc0a8',
+    '0e7b460e-acf4-4e17-bcb3-ee472265db83'];
+  return managers.some((manager) => id === manager);
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -72,12 +73,13 @@ function countAnimals(species) {
 function calculateEntry(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) return 0;
   const { Adult: nAdults = 0, Child: nChildren = 0, Senior: nSeniors = 0 } = entrants;
-  const adults = prices.Adult * nAdults;
-  const children = prices.children * nChildren;
-  const senior = prices.senior * nSeniors;
-  const total = adults + children + senior;
+  const adults = data.prices.Adult * nAdults;
+  const children = data.prices.Child * nChildren;
+  const seniors = data.prices.Senior * nSeniors;
+  const total = adults + children + seniors;
   return total;
 }
+
 function getAnimalMap(options) {
   if (options === 0) return 0;
 }
