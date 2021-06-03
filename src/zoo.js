@@ -123,7 +123,21 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  const obj = {};
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    obj[`${firstName} ${lastName}`] = responsibleFor
+      .map((aidi) => species.find(({ id }) => id === aidi).name);
+  });
+  if (!idOrName) {
+    return obj;
+  }
+  const employee = employees.find(({ id, firstName, lastName }) =>
+    idOrName === id || idOrName === firstName || idOrName === lastName);
+  const animal = employee.responsibleFor
+    .map((aidi) => species.find(({ id }) => id === aidi).name);
+  return { [`${employee.firstName} ${employee.lastName}`]: animal };
 }
+console.log(getEmployeeCoverage('Azevado'));
 
 module.exports = {
   calculateEntry,
