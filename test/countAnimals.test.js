@@ -24,7 +24,7 @@ describe('Implemente a função countAnimals', () => {
     let actual = zoo.countAnimals('lions');
     let expected = 4;
     assert.deepStrictEqual(actual, expected);
-
+    
     actual = zoo.countAnimals('snakes');
     expected = 2;
     assert.deepStrictEqual(actual, expected);
