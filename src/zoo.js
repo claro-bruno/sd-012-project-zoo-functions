@@ -55,8 +55,9 @@ function countAnimals(species0) {
   return data.species.find((specie) => specie.name === species0).residents.length;
 }
 
-function calculateEntry() {
-  // seu código aqui entrants
+function calculateEntry(entrants) {
+  if (entrants === {} || !entrants) return 0;
+  return Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * data.prices[curr]), 0);
 }
 
 function getAnimalMap() {
