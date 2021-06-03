@@ -71,8 +71,6 @@ function calculateEntry(entrants) {
   return Adult * data.prices.Adult + Senior * data.prices.Senior + Child * data.prices.Child;
 }
 
-console.log(calculateEntry({}));
-
 function getAnimalMap(options) {
   return options;
 }
@@ -85,8 +83,14 @@ function getOldestFromFirstSpecies(id) {
   return id;
 }
 
-function increasePrices(percentage) {
-  return percentage;
+function increasePrices(percentage) { // https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+  const { Adult, Senior, Child } = data.prices;
+  data.prices = {
+    Adult: Math.round(Adult * ((100 + percentage) / 100) * 100) / 100,
+    Senior: Math.round(Senior * ((100 + percentage) / 100) * 100) / 100,
+    Child: Math.round(Child * ((100 + percentage) / 100) * 100) / 100,
+  };
+  return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
