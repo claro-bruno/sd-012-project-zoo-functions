@@ -39,7 +39,6 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // { [ {} {} {} {} {} ] }
   const employeesManagers = data.employees.find((employee) => employee.managers.includes(id));
   if (employeesManagers) return true;
   return false;
@@ -61,7 +60,6 @@ function countAnimals(species) {
   const especificAnimal = data.species.find((specie) => specie.name === species);
   return especificAnimal.residents.length;
 }
-// console.log(countAnimals());
 
 function calculateEntry(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === 0) {
@@ -96,8 +94,20 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  return id;
+  const employeeFromId = data.employees.find((employee) => employee.id === id);
+  const responsibleForThis = employeeFromId.responsibleFor;
+  const speciesOfId = (...responsibleFor) => data.species
+    .filter((specie) => responsibleFor.includes(specie.id));
+  const residentsSpecies = speciesOfId(...responsibleForThis).reduce((acc, curr) => {
+    const { residents } = curr;
+    acc.push(...residents);
+    return acc;
+  }, []);
+  residentsSpecies.sort((a, b) => b.age - a.age);
+  return Object.values(residentsSpecies[0]);
 }
+
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) { // https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
   const { Adult, Senior, Child } = data.prices;
