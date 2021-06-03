@@ -8,25 +8,23 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { species } = require('./data');
+const {
+  species
+} = require('./data');
 const data = require('./data');
-const { id } = species
 
 function getSpeciesByIds(...ids) {
-  const { species } = require('./data');
-  const [id] = species;
-  if (ids.length === 0 ) return [];
-  const busca = species.find((ids) => ids === id);
-  return [busca];
-  }
+  return ids.map((idAnimal) => data.species.find((animals) => idAnimal === animals.id));
+} 
+//https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 
-function getAnimalsOlderThan(namepar,numberage) {
-  //const { species } = require('./data');
-  
-  //const condition = species.age > 7
-  //return receivdname.every(condition)
+function getAnimalsOlderThan(animal, age) {
+  return data.species.find(({
+    name
+  }) => name === animal).residents.every((individuo) => individuo.age >= age);
 }
-console.log(getAnimalsOlderThan('otters',7))
+//referencia  https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+
 function getEmployeeByName(employeeName) {
   // seu código aqui
 }
@@ -72,17 +70,17 @@ function getEmployeeCoverage(idOrName) {
 }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
-  getSpeciesByIds,
-  getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
-  getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
+  //  calculateEntry,
+  //  getSchedule,
+  //  countAnimals,
+  //  getAnimalMap,
+  //  getSpeciesByIds,
+  //  getEmployeeByName,
+  //  getEmployeeCoverage,
+  //  addEmployee,
+  //  isManager,
+  //  getAnimalsOlderThan,
+  //  getOldestFromFirstSpecies,
+  //  increasePrices,
+  //  createEmployee,
 };
