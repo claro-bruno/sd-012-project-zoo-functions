@@ -9,15 +9,14 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
-
-const {species, employees} = data;
+const {species, employees} = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
   const findId = species.filter((specie) => ids.find((id) => id === specie.id)); // O filter já retorna um array vazio se nçao recebe nenhum parâmetro.
   return findId;
 }
+
 console.log(getSpeciesByIds('tigersId'));
 
 function getAnimalsOlderThan(animal, age) {
@@ -28,7 +27,7 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
-  if(!employeeName) return {};
+  if (!employeeName) return {};
   const employee = employees.find((name) => name.firstName === employeeName || name.lastName === employeeName);
   return employee;
 }
@@ -36,26 +35,26 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  return {...associatedWith, ...personalInfo};
+  return { ...associatedWith, ...personalInfo };
 }
 
 function isManager(id) {
   // seu código aqui
 }
 
-function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[]) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-  const newEmployee = {id, firstName, lastName, managers, responsibleFor};
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   return employees.push(newEmployee);
 }
 
 function countAnimals(animal) {
-  // seu código aqui
-  if (!species) return {};
-const animals = species.forEach((animal) => {
-  species.find((name) => name === animal.name)
-})
-return animals;
+//   // seu código aqui
+//   if (!species) return {};
+// const animals = species.forEach((animal) => {
+//   species.find((name) => name === animal.name)
+// })
+// return animals;
 }
 
 function calculateEntry(entrants) {
