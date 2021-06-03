@@ -28,10 +28,11 @@ const getEmployeeByName = (employeeName) => {
     employee.firstName === employeeName || employee.lastName === employeeName);
 };
 
-function createEmployee() {
-  // seu código aqui
-  // personalInfo, associatedWith
-}
+const createEmployee = (personalInfo, associatedWith) => {
+  const novoFuncionario = {};
+  Object.assign(novoFuncionario, personalInfo, associatedWith);
+  return novoFuncionario;
+};
 
 const isManager = (ids) => employees.some((employee) =>
   employee.managers.find((id) => ids === id));
@@ -105,8 +106,10 @@ const increasePrices = (percentage) => {
 
 const funcaoObjeto = (parameters = undefined) => {
   const idEName = parameters;
-  const funcionárioFind = employees.find((employee) => employee.id === idEName
-  || employee.firstName === idEName || employee.lastName === idEName);
+  const funcionárioFind = employees.find((employee) =>
+    employee.id === idEName
+    || employee.firstName === idEName
+    || employee.lastName === idEName);
   const animaisFilter = species.filter((animais) => animais);
   const acharAnimais = funcionárioFind.responsibleFor.map((idName) =>
     animaisFilter.filter((animal) => animal.id === idName))
