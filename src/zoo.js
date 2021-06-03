@@ -164,9 +164,10 @@ function increasePrices(percentage) {
 
 const getEmployeeCoverageAux = (idOrName) => {
   const employeeInfo = {};
-  const employee = data.employees.find(({ firstName, lastName, id }, index) => {
-    if (firstName === idOrName || lastName === idOrName || id === idOrName) {
-      return data.employees[index];
+  let employee = {};
+  data.employees.forEach(({ id, firstName, lastName }, index) => {
+    if (id === idOrName || firstName === idOrName || lastName === idOrName) {
+      employee = data.employees[index];
     }
   });
   const animalsID = employee.responsibleFor;
@@ -196,7 +197,7 @@ function getEmployeeCoverage(idOrName) {
   }
   return getEmployeeCoverageAux(idOrName);
 }
-console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+
 module.exports = {
   calculateEntry,
   getSchedule,
