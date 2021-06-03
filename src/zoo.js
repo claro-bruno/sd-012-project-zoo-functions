@@ -109,13 +109,14 @@ function getAnimalMap(options) {
   // seu código aqui
   if (!options) return entireMap();
   if (options.includeNames) {
-    if (options.sorted) return orderNames(mapper(locations));
+    if (options.sex && options.sorted) return orderNames(mapper(locations, options.sex));
     if (options.sex) return mapper(locations, options.sex);
+    if (options.sorted) return orderNames(mapper(locations));
     return mapper(locations);
   } 
 }
 
-console.log(getAnimalMap({includeNames: true, sex: 'male'}).NE[0]);
+console.log(getAnimalMap({includeNames: true, sex: 'female', sorted: false}).NE[0]);
 
 // TENTAR REFAZER ESTE DE UM JEITO MELHOR
 const returnString = (day) => `Open from ${hours[day].open}am until ${hours[day].close % 12}pm`;
