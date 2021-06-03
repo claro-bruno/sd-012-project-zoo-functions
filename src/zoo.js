@@ -37,10 +37,16 @@ const createEmployee = (personalInfo, associatedWith) => {
 const isManager = (ids) => employees.some((employee) =>
   employee.managers.find((id) => ids === id));
 
-function addEmployee() {
-  // seu código aqui
-  // id, firstName, lastName, managers, responsibleFor
-}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
+  const createFuncionario = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return employees.push(createFuncionario);
+};
 
 const countAnimals = (especies) => {
   if (especies === undefined) {
@@ -131,7 +137,6 @@ const getEmployeeCoverage = (idOrName) => {
   }
   return funcaoObjeto(idOrName);
 };
-console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
