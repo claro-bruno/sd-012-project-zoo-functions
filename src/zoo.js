@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /*
 eslint no-unused-vars: [
   "error",
@@ -34,7 +32,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some((itemArray) => itemArray.id === id && (itemArray.managers).length <= 1);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -84,4 +82,3 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
->>>>>>> 561bfffa3c8493251848f43743700ed44ede0315
