@@ -13,9 +13,12 @@ const data = require('./data');
 
 const {species, employees} = data;
 
-function getSpeciesByIds(ids) {
+function getSpeciesByIds(...ids) {
   // seu código aqui
+  const findId = species.filter((specie) => ids.find((id) => id === specie.id)); // O filter já retorna um array vazio se nçao recebe nenhum parâmetro.
+  return findId;
 }
+console.log(getSpeciesByIds('tigersId'));
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
@@ -40,12 +43,19 @@ function isManager(id) {
   // seu código aqui
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[]) {
   // seu código aqui
+  const newEmployee = {id, firstName, lastName, managers, responsibleFor};
+  return employees.push(newEmployee);
 }
 
-function countAnimals(species) {
+function countAnimals(animal) {
   // seu código aqui
+  if (!species) return {};
+const animals = species.forEach((animal) => {
+  species.find((name) => name === animal.name)
+})
+return animals;
 }
 
 function calculateEntry(entrants) {

@@ -1,7 +1,21 @@
+/*
+eslint no-unused-vars: [
+  "error",
+  {
+    "args": "none",
+    "vars": "local",
+    "varsIgnorePattern": "data"
+  }
+]
+*/
 
-function getEmployeeByName(employeeName) {
+const data = require('./data');
+
+const {species, employees} = data;
+
+function getSpeciesByIds(...ids) {
   // seu código aqui
-  const employee = employees.find((name) => name.firstName === employeeName || name.lastName === employeeName);
-  return employee;
+  const findId = species.filter((specie) => ids.find((id) => id === specie.id)); // O filter já retorna um array vazio se nçao recebe nenhum parâmetro.
+  return findId;
 }
-console.log(getEmployeeByName('Wishart'));
+console.log(getSpeciesByIds('tigersId'));
