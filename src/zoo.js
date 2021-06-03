@@ -35,9 +35,13 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
+  console.log(personalInfo);
   const EmployeeCreated = personalInfo.map((newEmployee) => {
-    return { `id: ${personalInfo.id} firstName: ${personalInfo.firstName} lastName: ${personalInfo.lastName}`};
+    const EmployeeCreated = associatedWith.map((associatedWithInfo) => {
+      return { `id: ${personalInfo.id} firstName: ${personalInfo.firstName} lastName: ${personalInfo.lastName} managers: ${...associatedWith.managers} responsibleFor: ${...associatedWith.responsibleFor}`};
+    });
   });
+  
 }
 
 function isManager(id) {
