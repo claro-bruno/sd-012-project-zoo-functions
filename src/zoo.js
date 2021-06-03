@@ -115,9 +115,21 @@ function getOldestFromFirstSpecies(ids) {
   return result;
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  // seu código aqui
+  const nameValue = Object.keys(data.prices);
+  const arrayPrices = Object.values(data.prices);
+  const objResult = {};
+  const indexOfPeople = [];
+  nameValue.forEach((name, index) => indexOfPeople.push(index));
+  indexOfPeople.forEach((index) => {
+    objResult[nameValue[index]] = Math.round(100
+    * (arrayPrices[index] + (arrayPrices[index] * (percentage / 100))
+    )) / 100;
+    return 0;
+  });
+  data.prices = objResult;
+}
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
@@ -135,6 +147,6 @@ module.exports = {
   // getAnimalMap,
   getSchedule,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   // getEmployeeCoverage,
 };
