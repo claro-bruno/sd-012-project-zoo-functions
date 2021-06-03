@@ -1,6 +1,7 @@
-function getAnimalsOlderThan(animal, age) {
+
+function getEmployeeByName(employeeName) {
   // seu código aqui
-  const verifySpecie = species.find((specie) => specie.name === animal);
-  return verifySpecie.residents.every((ageId) => ageId.age === age);
+  const employee = employees.find((name) => name.firstName === employeeName || name.lastName === employeeName);
+  return employee;
 }
-console.log(getAnimalsOlderThan());
+console.log(getEmployeeByName('Wishart'));
