@@ -42,9 +42,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(speciesParam) {
+  if (!speciesParam) {
+    return species.reduce((accumulator, current) => ({ ...accumulator,
+      [current.name]: current.residents.length }), {}); // importante definir valor inicial como objeto vazio, senão ele pega o primeiro objeto inteiro, sem reduzir
+  }
+  return species.find((specie) => specie.name === speciesParam).residents.length;
+}
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -73,7 +77,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
