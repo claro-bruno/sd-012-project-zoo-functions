@@ -10,7 +10,6 @@ eslint no-unused-vars: [
 */
 
 const { species, employees, prices, hours } = require('./data');
-const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   return species.filter((search) => {
@@ -82,7 +81,7 @@ function calculateEntry(entrants = {}) {
   return adults + children + senior;
 }
 
-function getAnimalMap(options) {
+function getAnimalMap() {
   // seu código aqui
 }
 
@@ -105,17 +104,32 @@ function getSchedule(dayName) {
   return obj;
 }
 
-console.log(getSchedule());
-
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const rightEmployee = employees.filter((employee) => employee.id === id);
+  const animals = species.filter((specie) => {
+    const { id: x } = specie;
+    return x === rightEmployee[0].responsibleFor[0];
+  });
+  const animal = animals[0].residents.reduce((acc, curr) => {
+    if (acc.age < curr.age) {
+      return curr;
+    }
+    return acc;
+  });
+  return [animal.name, animal.sex, animal.age];
 }
 
+console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+
+// prettier-ignore
 function increasePrices(percentage) {
-  // seu código aqui
+  prices.Adult = Math.round(prices.Adult * (100 + percentage)) / 100;
+  prices.Child = Math.round((prices.Child + 0.002) * (100 + percentage)) / 100;
+  prices.Senior = Math.round((prices.Senior + 0.002) * (100 + percentage)) / 100;
+  return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
   // seu código aqui
 }
 
