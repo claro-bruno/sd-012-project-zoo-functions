@@ -332,15 +332,3 @@ module.exports = {
     Child: 20.99,
   },
 };
-const data = require('./data');
-const emplys = data.employees;
-
-function isManager(id) {
-  const eGerente = emplys.some((gerente) => gerente.id === id && gerente.managers.length < 2);
-  return eGerente;
-}
-
-// false
-console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
-console.log(isManager(burlId));
-// true Gerente

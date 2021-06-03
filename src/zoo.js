@@ -13,13 +13,9 @@ const data = require('./data');
 const speciesArray = data.species;
 const emplys = data.employees;
 
-
 function getSpeciesByIds(...ids) {
   return speciesArray.filter((value, i) => value.id === ids[i]);
-};
-
-// Quero retornar o residents do "Animal ex: pinguim"
-// COmparar a "age idade" com a age do paremetro.
+}
 
 function getAnimalsOlderThan(animal, age) {
   const oldBixo = speciesArray.find((value) => value.name === animal);
@@ -28,12 +24,13 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  const resultado = emplys.find((nameOrLast) => nameOrLast.firstName === employeeName || nameOrLast.lastName === employeeName)
-  return resultado ? resultado : {}
+  const resultado = emplys.find((nameOrLast) =>
+    nameOrLast.firstName === employeeName || nameOrLast.lastName === employeeName);
+  return resultado === undefined ? resultado : {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  let resultado = {...personalInfo, ...associatedWith};
+  const resultado = { ...personalInfo, ...associatedWith };
   return resultado;
 }
 
@@ -42,35 +39,43 @@ function isManager(id) {
   return eGerente;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee() {
+  // id, firstName, lastName, managers, responsibleFor
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals() {
+  // species
   // seu código aqui
 }
 
-function calculateEntry(entrants) {
+function calculateEntry() {
+  // entrants
   // seu código aqui
 }
 
-function getAnimalMap(options) {
+function getAnimalMap() {
+  // options
   // seu código aqui
 }
 
-function getSchedule(dayName) {
+function getSchedule() {
+  // dayName
   // seu código aqui
 }
 
-function getOldestFromFirstSpecies(id) {
+function getOldestFromFirstSpecies() {
+  // id
   // seu código aqui
 }
 
-function increasePrices(percentage) {
+function increasePrices() {
+  // percentage
   // seu código aqui
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
+  // idOrName
   // seu código aqui
 }
 
