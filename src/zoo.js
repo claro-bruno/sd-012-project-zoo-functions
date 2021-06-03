@@ -85,9 +85,22 @@ function calculateEntry({ Adult = 0, Senior = 0, Child = 0 } = { Adult: 0, Senio
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  // seu código aqui
+  const obj = {};
+  const daysWeek = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  daysWeek.forEach((day) => {
+    obj[day] = `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+    return 0;
+  });
+  obj.Monday = 'CLOSED';
+  if (dayName === undefined) {
+    return obj;
+  }
+  const objDayName = {};
+  objDayName[dayName] = obj[dayName];
+  return objDayName;
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -111,7 +124,7 @@ module.exports = {
   countAnimals,
   calculateEntry,
   // getAnimalMap,
-  // getSchedule,
+  getSchedule,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // getEmployeeCoverage,
