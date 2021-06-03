@@ -32,8 +32,15 @@ function getEmployeeByName(nome) {
   return retorno;
 }
 
-function createEmployee() {
-
+function createEmployee(person, associate) {
+  const obj = {
+    id: person.id,
+    firstName: person.firstName,
+    lastName: person.lastName,
+    managers: associate.managers,
+    responsibleFor: associate.responsibleFor,
+  };
+  return obj;
 }
 
 function isManager() {
