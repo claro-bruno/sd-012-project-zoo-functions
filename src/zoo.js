@@ -91,9 +91,21 @@ function calculateEntry(entrants) {
 //   // seu código aqui dayName
 // }
 
-// function getOldestFromFirstSpecies() {
-//   // seu código aqui id
-// }
+function getOldestFromFirstSpecies(id2) {
+  // seu código aqui
+  // 1º pegar o objeto que de dentro da array employees que tenha o id igual ao id2 do parâmetro:
+  const getEmployee = employees.find((employee) => employee.id === id2);
+  // 2º pegar o id do animal que o employee.id2 é resposável:
+  const idSpecie = getEmployee.responsibleFor[0];
+  // 3º Pegar a array objeto do specie co idSpecie
+  const objSpecie = species.find((specie) => specie.id === idSpecie);
+  // 4º Pegar a chave residents com todos os residentes e colocar ela em ordem decrescente em relação a idade dos residentes.
+  const residentsInOrder = objSpecie.residents.sort((a, b) => b.age - a.age);
+  // 5º Pegar o pirmeiro residente da array de objetos redidentInOrder, pois ele será o mais velho e retornas seus valores.
+  const oldestResident = residentsInOrder[0];
+  return Object.values(oldestResident);
+}
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // function increasePrices() {
 //   // seu código aqui percentage
@@ -114,7 +126,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
