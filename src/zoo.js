@@ -75,15 +75,22 @@ function calculateEntry(entrants) {
   );
 }
 
-function includeNamesObj(speciesLoc) {
-  function getAnimalsNames(animal) {
-    return species
-      .find((elem) => elem.name === animal)
-      .residents.map((elem) => elem.name);
-  }
+function getAnimalsNames(animal) {
+  return species
+    .find((elem) => elem.name === animal)
+    .residents.map((elem) => elem.name);
+}
 
+function includeNamesObj(speciesLoc) {
   return Object.keys(speciesLoc).reduce((acc, curr) => {
     acc[curr] = speciesLoc[curr].map((elem) => ({ [elem]: getAnimalsNames(elem) }));
+    return acc;
+  }, {});
+}
+
+function includeNamesObjSorted(speciesLoc) {
+  return Object.keys(speciesLoc).reduce((acc, curr) => {
+    acc[curr] = speciesLoc[curr].map((elem) => ({ [elem]: getAnimalsNames(elem).sort() }));
     return acc;
   }, {});
 }
@@ -104,9 +111,10 @@ function getAnimalMap(options) {
       .map((elem) => elem.name),
   };
   if (!options) return speciesLoc;
+  if (options.includeNames && options.sorted) return includeNamesObjSorted(speciesLoc);
   if (options.includeNames) return includeNamesObj(speciesLoc);
 }
-const options = { includeNames: true };
+const options = { includeNames: true, sorted: true };
 console.log(getAnimalMap(options));
 
 const { hours } = data;
