@@ -62,7 +62,7 @@ function calculateEntry(entrants) {
   return Object.keys(entrants).reduce(((sum, price) => sum + prices[price] * entrants[price]), 0);
 }
 
-const locations = ['NE', 'NW', 'SE', 'SW'];
+const locationsArr = ['NE', 'NW', 'SE', 'SW'];
 
 const mapping = (location) => species.filter((spec) => spec.location === location)
   .map((animal) => animal.name);
@@ -75,14 +75,15 @@ const entireMap = () => ({
 });
 
 const mapper = (locations, sex) => {
-  let returnObj = {};
+  const returnObj = {};
   locations.forEach((loc) => {
     const arr = [];
     mapping(loc).forEach((nome) => {
       const name = nome;
       const animals = species.find((spec) => spec.name === nome);
       if (sex) {
-        const filteredBySex = animals.residents.filter((res) => res.sex === sex).map((each) => each.name);
+        const filteredBySex = animals.residents.filter((res) => res.sex === sex)
+          .map((each) => each.name);
         arr.push({ [name]: filteredBySex });
       } else {
         const animalNames = animals.residents.map((each) => each.name);
@@ -99,24 +100,22 @@ const orderNames = (map) => {
     value.forEach((obj) => {
       Object.keys(obj).forEach((key) => {
         obj[key] = obj[key].sort();
-      })
-    })
+      });
+    });
   });
   return map;
-}
+};
 
 function getAnimalMap(options) {
   // seu código aqui
   if (!options || !options.includeNames) return entireMap();
   if (options.includeNames) {
-    if (options.sex && options.sorted) return orderNames(mapper(locations, options.sex));
-    if (options.sex) return mapper(locations, options.sex);
-    if (options.sorted) return orderNames(mapper(locations));
-    return mapper(locations);
-  } 
+    if (options.sex && options.sorted) return orderNames(mapper(locationsArr, options.sex));
+    if (options.sex) return mapper(locationsArr, options.sex);
+    if (options.sorted) return orderNames(mapper(locationsArr));
+    return mapper(locationsArr);
+  }
 }
-
-console.log(getAnimalMap({sex: 'female', sorted: true}).NE[0]);
 
 // TENTAR REFAZER ESTE DE UM JEITO MELHOR
 const returnString = (day) => `Open from ${hours[day].open}am until ${hours[day].close % 12}pm`;
