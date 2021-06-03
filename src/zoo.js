@@ -20,13 +20,15 @@ function getSpeciesByIds(...ids) {
     return [];
   }
   /* result = species.filter((spec) => spec.id === ids) */
-  const identidade = species.filter((spec, indice) => spec.id === ids[indice]);
+  const identidade = species
+    .filter((spec, indice) => spec.id === ids[indice]);
   return identidade;
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  species.filter((obj) => species[obj].name === animal).every((resident) => resident.age === age);
+  return species.find((esp) => esp.name === animal).residents
+    .every((exemplares) => exemplares.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
