@@ -71,7 +71,7 @@ function calculateEntry(entrants) {
 
 function increasePrices(percentage) {
   const { Adult, Senior, Child } = data.prices;
-  const adult = Math.round((Adult + Adult * percentage * 0.01) * 100) / 100;
+  const adult = Math.round((Adult + Adult * percentage * 0.01) * 100) / 100;   // x 0.01 para transformar em 0,XX. Ex: 12 vira 0,12
   const senior = Math.round((Senior + Senior * percentage * 0.01) * 100) / 100;
   const child = Math.round((Child + Child * percentage * 0.01) * 100) / 100;
   data.prices = {
