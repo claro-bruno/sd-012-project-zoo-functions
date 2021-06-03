@@ -60,8 +60,6 @@ function isManager(ids) {
     .some((manager) => manager.managers.length === 1 || manager.managers.length === 0);
 }
 
-console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
-
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
 // }
