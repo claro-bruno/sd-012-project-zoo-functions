@@ -97,7 +97,7 @@ function calculateEntry(entrants) {
 // function getAnimalMap(options) {
 //   if (!options) {
 //     return Auxiliar();
-//   } 
+//   }
 //   if (options === {includesNames: true}){
 //     let array = Auxiliar();
 //     array.NE.map((animal) => animal)
@@ -124,12 +124,12 @@ function getSchedule(dayName) {
   const days = Object.values(data.hours);
   const newObj = {};
   days.forEach((day, position) => {
-    days[position] = `Open from ${day.open}am until ${day.close-12}pm` 
-    if(position === 6) {days[position] = `CLOSED`}
+    days[position] = `Open from ${day.open}am until ${day.close - 12}pm`;
+    if (position === 6) { days[position] = 'CLOSED' };
   });
-  weekDays.forEach((wday, position) => newObj[`${wday}`] = days[position]);
-  if (!dayName) { return newObj;}
-  const result = {[dayName]: newObj[Object.keys(newObj).find((key) => key === dayName)]};
+  weekDays.forEach((wday, position) => {return newObj[`${wday}`] = days[position]});
+  if (!dayName) { return newObj; }
+  const result = { [dayName]: newObj[Object.keys(newObj).find((key) => key === dayName)] };
   return result;
 }
 
