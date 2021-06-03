@@ -147,8 +147,19 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(olderAnimal);
 }
 
-function increasePrices(/* percentage */) {
+function increasePrices(percentage) {
   // seu código aqui
+  /* Consultei o stack overflow para conseguir sanar o problema do arredondamento da casa decimal.
+  https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary */
+  const { Adult, Senior, Child } = data.prices;
+  const newAdultPrice = Math.round((Adult + ((Adult * percentage) / 100)) * 100) / 100;
+  const newSeniorPrice = Math.round((Senior + ((Senior * percentage) / 100)) * 100) / 100;
+  const newChildPrice = Math.round((Child + ((Child * percentage) / 100)) * 100) / 100;
+  data.prices = {
+    Adult: newAdultPrice,
+    Senior: newSeniorPrice,
+    Child: newChildPrice,
+  };
 }
 
 function getEmployeeCoverage(/* idOrName */) {
