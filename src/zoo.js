@@ -1,6 +1,6 @@
 /*
 eslint no-unused-vars: [
-  "error", xablauzitos da sorte
+  "error",
   {
     "args": "none",
     "vars": "local",
@@ -8,17 +8,25 @@ eslint no-unused-vars: [
   }
 ]
 */
-
+const { species } = require('./data');
 const data = require('./data');
+const { id } = species
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+function getSpeciesByIds(...ids) {
+  const { species } = require('./data');
+  const [id] = species;
+  if (ids.length === 0 ) return [];
+  const busca = species.find((ids) => ids === id);
+  return [busca];
+  }
+
+function getAnimalsOlderThan(namepar,numberage) {
+  //const { species } = require('./data');
+  
+  //const condition = species.age > 7
+  //return receivdname.every(condition)
 }
-
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
-}
-
+console.log(getAnimalsOlderThan('otters',7))
 function getEmployeeByName(employeeName) {
   // seu código aqui
 }
