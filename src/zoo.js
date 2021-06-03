@@ -52,9 +52,13 @@ function isManager(id) {
     .some((man) => man.id === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(...rest) {
   // seu código aqui
+  const { id, firstName, lastName, managers, responsibleFor } = { ...rest };
+  console.log({ id, firstName, lastName, managers, responsibleFor });
+  return employees.push(newPerson);
 }
+addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe');
 
 function countAnimals(species) {
   // seu código aqui
