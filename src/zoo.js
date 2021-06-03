@@ -56,7 +56,6 @@ function countAnimals(species) {
   }
   return data.species.find((key) => key.name === species).residents.length;
 }
-console.log(countAnimals());
 
 function calculateEntry(entrants = 0) {
   if (!entrants) return entrants;
@@ -82,10 +81,15 @@ function calculateEntry(entrants = 0) {
 //   // seu código aqui
 // }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
-
+function getOldestFromFirstSpecies(id) {
+  const employee = data.employees.find((item) => item.id === id);
+  const animalId = employee.responsibleFor.find((item) => item);
+  const arrayAnimaInfo = data.species.find(({ id }) => id === animalId);
+  const arrayOldAnim = arrayAnimaInfo.residents.map(({ age }) => age);
+  const findOldest = arrayAnimaInfo.residents.find(({ age }) => age === Math.max.apply(Math, arrayOldAnim));
+  return Object.values(findOldest);
+}
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
@@ -105,7 +109,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
