@@ -50,9 +50,12 @@ function countAnimals(speciesParam) {
   return species.find((specie) => specie.name === speciesParam).residents.length;
 }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants) {
+  if (!entrants || entrants === {}) return 0;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants; // parametro inicial importante, para evitar retorno NaN
+  const { prices } = data;
+  return Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -75,7 +78,7 @@ function countAnimals(speciesParam) {
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
