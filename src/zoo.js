@@ -23,18 +23,20 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return data.species.filter((arrayItem) => arrayItem.id === ids);
+  return data.species.filter((arrayItem) => ids.find((arrayItem1) => arrayItem.id === arrayItem1));
 }
 
-console.log(getSpeciesByIds('lionId'));
+// console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 // seu código aqui
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const nomeAnimal = data.species.find((specie) => specie.name === animal);
+  const idadeAnimal = nomeAnimal.residents.every((idadeMax) => idadeMax.age >= age);
+  return idadeAnimal;
 }
+console.log(getAnimalsOlderThan('bears', 4));
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
 }
 
 function createEmployee(personalInfo, associatedWith) {
