@@ -27,12 +27,23 @@ function getAnimalsOlderThan(animal, age) {
   const verify = individuals.every((idades) => idades.age > age);
   return verify;
 }
-console.log(getAnimalsOlderThan('elephants', 10));
+// console.log(getAnimalsOlderThan('elephants', 10));
 
-function getEmployeeByName() {
-  // seu código aqui
-  // employeeName
+function getEmployeeByName(employeeName) {
+  // Probabily metod to utilize: find and map
+  // Split the name
+  // 1° Find the first name of the employees
+  // 2° Find te last name of the employees
+  if (typeof employeeName === 'undefined') {
+    return {};
+  }
+  const breakName = employeeName.split(' ');
+  const firstName = breakName[0];
+  const lastName = breakName[breakName.length - 1];
+  const { employees } = data;
+  return employees.find((names) => names.firstName === firstName || names.lastName === lastName);
 }
+console.log(getEmployeeByName('Sthepanie Strauss'));
 
 function createEmployee() {
   // seu código aqui
