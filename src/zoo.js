@@ -52,11 +52,19 @@ function isManager(id) {
   return manager;
 }
 
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return employees.push(newEmployee);
 }
 
-function countAnimals(species) {
+/* function countAnimals(species) {
   // seu código aqui
 }
 
@@ -90,6 +98,7 @@ module.exports = {
   getEmployeeByName,
   createEmployee,
   isManager,
+  addEmployee,
 };
 
 /* module.exports = {
