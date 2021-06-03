@@ -41,34 +41,34 @@ function getEmployeeByName(employeeName) {
 }
 // console.log(getEmployeeByName('Sthepanie Strauss'));
 
-const newEmployee = {
-  id: '0e7b460e-acf4-4e17-b3cb-ea472512pz83',
-  firstName: 'Luiz',
-  lastName: 'Henrique' };
-const responsabilities = {
-  managers: [
-    'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1',
-    '9e7d4524-363c-416a-8759-8aa7e50c0992',
-  ],
-  responsibleFor: [
-    '0938aa23-f153-4937-9f88-4858b24d6bce',
-    '89be95b3-47e4-4c5b-b687-1fabf2afa274',
-    'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5',
-  ],
-};
+// const newEmployee = {
+//   id: '0e7b460e-acf4-4e17-b3cb-ea472512pz83',
+//   firstName: 'Luiz',
+//   lastName: 'Henrique' };
+// const responsabilities = {
+//   managers: [
+//     'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1',
+//     '9e7d4524-363c-416a-8759-8aa7e50c0992',
+//   ],
+//   responsibleFor: [
+//     '0938aa23-f153-4937-9f88-4858b24d6bce',
+//     '89be95b3-47e4-4c5b-b687-1fabf2afa274',
+//     'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5',
+//   ],
+// };
 function createEmployee(personalInfo, associatedWith) {
   // Recognize how use spread in the arguments
   // make the parameters
   // make a new object with 2 parameters
   return { ...personalInfo, ...associatedWith };
 }
-console.log(createEmployee(newEmployee, responsabilities));
+// console.log(createEmployee(newEmployee, responsabilities));
 
-function isManager() {
-  // seu código aqui
-  // id
+function isManager(id) {
+  const employee = data.employees.find((empregado) => empregado.id === id);
+  return employee.managers.length === 1;
 }
-
+console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 function addEmployee() {
   // seu código aqui
   // id, firstName, lastName, managers, responsibleFor
