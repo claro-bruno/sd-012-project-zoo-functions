@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require("./data");
+const data = require('./data');
 
 const { species } = data;
 const { employees } = data;
@@ -28,7 +28,7 @@ function getAnimalsOlderThan(animal, age) {
 function getEmployeeByName(employeeName) {
   const gotEmployee = employees.find(
     (employee) =>
-      employee.firstName === employeeName || employee.lastName === employeeName
+      employee.firstName === employeeName || employee.lastName === employeeName,
   );
   if (gotEmployee) return gotEmployee;
   return {};
@@ -43,8 +43,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   return employees.some((employee) =>
-    employee.managers.some((elem) => elem === id)
-  );
+    employee.managers.some((elem) => elem === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -72,18 +71,19 @@ function calculateEntry(entrants) {
   if (!entrants || Object.entries(entrants).length === 0) return 0;
   return Object.entries(entrants).reduce(
     (acc, curr) => prices[curr[0]] * curr[1] + acc,
-    0
+    0,
   );
 }
 
 function includeNamesObj(speciesLoc) {
+  function getAnimalsNames(animal) {
+    return species
+      .find((elem) => elem.name === animal)
+      .residents.map((elem) => elem.name);
+  }
+
   return Object.keys(speciesLoc).reduce((acc, curr) => {
-    acc[curr] = speciesLoc[curr].reduce((acc, curr) => {
-      acc[curr] = species
-        .find((elem) => elem.name === curr)
-        .residents.map((elem) => elem.name);
-      return acc;
-    }, []);
+    acc[curr] = speciesLoc[curr].map((elem) => ({ [elem]: getAnimalsNames(elem) }));
     return acc;
   }, {});
 }
@@ -91,28 +91,28 @@ function includeNamesObj(speciesLoc) {
 function getAnimalMap(options) {
   const speciesLoc = {
     NE: species
-      .filter((specie) => specie.location === "NE")
+      .filter((specie) => specie.location === 'NE')
       .map((elem) => elem.name),
     NW: species
-      .filter((specie) => specie.location === "NW")
+      .filter((specie) => specie.location === 'NW')
       .map((elem) => elem.name),
     SE: species
-      .filter((specie) => specie.location === "SE")
+      .filter((specie) => specie.location === 'SE')
       .map((elem) => elem.name),
     SW: species
-      .filter((specie) => specie.location === "SW")
+      .filter((specie) => specie.location === 'SW')
       .map((elem) => elem.name),
   };
   if (!options) return speciesLoc;
   if (options.includeNames) return includeNamesObj(speciesLoc);
 }
 const options = { includeNames: true };
-console.log(getAnimalMap());
+console.log(getAnimalMap(options));
 
 const { hours } = data;
 
 function dayInfo(day) {
-  if (hours[day].open === 0 && hours[day].close === 0) return "CLOSED";
+  if (hours[day].open === 0 && hours[day].close === 0) return 'CLOSED';
   return `Open from ${
     hours[day].open < 12 ? `${hours[day].open}am` : `${hours[day].open - 12}pm`
   } until ${
@@ -136,11 +136,11 @@ function getOldestFromFirstSpecies(id) {
   const firstAnimal = species.find((specie) => specie.id === firstAnimalId);
   const oldestAnimal = firstAnimal.residents.find(
     (elem) =>
-      elem.age ===
-      firstAnimal.residents.reduce(
+      elem.age
+      === firstAnimal.residents.reduce(
         (acc, curr) => (curr.age > acc ? curr.age : acc),
-        0
-      )
+        0,
+      ),
   );
   return [...Object.values(oldestAnimal)];
 }
@@ -161,9 +161,9 @@ function getEmployeeCoverage(idOrName) {
   if (idOrName) {
     const employee = employees.find(
       (currEmployee) =>
-        currEmployee.id === idOrName ||
-        currEmployee.firstName === idOrName ||
-        currEmployee.lastName === idOrName
+        currEmployee.id === idOrName
+        || currEmployee.firstName === idOrName
+        || currEmployee.lastName === idOrName,
     );
     const fullName = `${employee.firstName} ${employee.lastName}`;
     return { [fullName]: responsibleSpecies(employee.responsibleFor) };
@@ -171,7 +171,7 @@ function getEmployeeCoverage(idOrName) {
 
   const employeesResponsibilities = employees.reduce((acc, curr) => {
     acc[`${curr.firstName} ${curr.lastName}`] = responsibleSpecies(
-      curr.responsibleFor
+      curr.responsibleFor,
     );
     return acc;
   }, {});
