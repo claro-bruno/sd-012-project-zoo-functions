@@ -44,11 +44,11 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const verifyManager = employees.some((manager) => id === manager.managers);
+  const verifyManager = data.employees.some((manager) => id === manager.managers);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  return data.employees.push(`{id: ${id}, firstName: ${firstName}, lastName: ${lastName}, managers: ${managers}, responsibleFor: ${responsibleFor}}`);
 }
 
 function countAnimals(species) {
