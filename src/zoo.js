@@ -9,23 +9,20 @@ eslint no-unused-vars: [
 ]
 */
 
-let aB = 'teste';
-
-console.log(typeof aB.value);
-
 const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const newArray = [];
   const inputId = species.filter((especie) => especie.id === ids);
-  console.log(inputId);
-  const inputArray = inputId.forEach((especie) => newArray.push(especie)); 
+  const inputArray = inputId.forEach((especie) => newArray.push(especie));
   return newArray;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const verifyAnimal = species.find((animalSpecies) => animalSpecies.name === animal);
+  const verifyOlderThan = verifyAnimal.every((animals) => animals.residents.age > age);
+  return verifyOlderThan;
 }
 
 function getEmployeeByName(employeeName) {
