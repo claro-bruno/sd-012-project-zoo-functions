@@ -33,11 +33,9 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-// function isManager(id) {
-//   // const managerVerify = employees.some((employee) => employee.managers.includes(id));
-
-//   // return managerVerify;
-// }
+function isManager(id) {
+  return employees.some((employee) => employee.managers.includes(id));
+}
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 // }
@@ -79,7 +77,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
