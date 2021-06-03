@@ -74,22 +74,27 @@ const entireMap = () => ({
   SW: mapping('SW'),
 });
 
-const mapWithNames = (...loc) => {
+const mapper = (locations, sex) => {
   let returnObj = {};
-  loc.forEach((item) => {
+  locations.forEach((loc) => {
     const arr = [];
-    mapping(item).forEach((nome) => {
+    mapping(loc).forEach((nome) => {
       const name = nome;
-      const animals = species.find((spec) => spec.name === nome).residents.map((each) => each.name);
-      arr.push({ [name]: animals });
+      const animals = species.find((spec) => spec.name === nome);
+      if (sex) {
+        const filteredBySex = animals.residents.filter((res) => res.sex === sex).map((each) => each.name);
+        arr.push({ [name]: filteredBySex });
+      } else {
+        const animalNames = animals.residents.map((each) => each.name);
+        arr.push({ [name]: animalNames });
+      }
     });
-    Object.assign(returnObj, { [item]: arr });
+    Object.assign(returnObj, { [loc]: arr });
   });
   return returnObj;
 };
 
-const orderNames = () => {
-  const map = mapWithNames(...locations);
+const orderNames = (map) => {
   Object.values(map).forEach((value) => {
     value.forEach((obj) => {
       Object.keys(obj).forEach((key) => {
@@ -104,10 +109,13 @@ function getAnimalMap(options) {
   // seu código aqui
   if (!options) return entireMap();
   if (options.includeNames) {
-    if (options.sorted) return orderNames();
-    return mapWithNames(...locations);
+    if (options.sorted) return orderNames(mapper(locations));
+    if (options.sex) return mapper(locations, options.sex);
+    return mapper(locations);
   } 
 }
+
+console.log(getAnimalMap({includeNames: true, sex: 'male'}).NE[0]);
 
 // TENTAR REFAZER ESTE DE UM JEITO MELHOR
 const returnString = (day) => `Open from ${hours[day].open}am until ${hours[day].close % 12}pm`;
