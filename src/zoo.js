@@ -38,7 +38,8 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const eGerente = emplys.some((gerente) => gerente.id === id && gerente.managers.length < 2);
+  return eGerente;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
