@@ -12,13 +12,14 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return data.species.filter((itemSpecies) => ids.find((valueIds) => itemSpecies.id === valueIds));
+  return data.species.filter((specie) => ids.find((id) => specie.id === id));
 }
 
 // console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5'));
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const especie = data.species.find((specie) => specie.name === animal);
+  return especie.residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
