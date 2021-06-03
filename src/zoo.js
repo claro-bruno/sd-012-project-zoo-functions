@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 const speciesArray = data.species;
 const emplys = data.employees;
 
