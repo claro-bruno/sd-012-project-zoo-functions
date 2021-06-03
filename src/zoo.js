@@ -30,11 +30,18 @@ function getEmployeeByName(employeeName) {
     return fullName;
   });
 }
-
-function createEmployee() {
-  // seu código aqui personalInfo, associatedWith
+// using Object Destructuring
+function createEmployee(personalInfo, associatedWith) {
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
 }
-
 function isManager() {
   // seu código aqui id
 }
