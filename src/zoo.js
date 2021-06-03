@@ -122,13 +122,12 @@ function getSchedule(dayName) {
   const workTime = Object.values(hours);
   const allResult = {};
   days.map((day, index) => {
-    if ((workTime[index].open === 0) && (workTime[index].close === 0)) {
+    const openTime = workTime[index].open;
+    let closeTime = workTime[index].close;
+    if (closeTime > 12) closeTime %= 12;
+    allResult[`${day}`] = `Open from ${openTime}am until ${closeTime}pm`;
+    if (workTime[index].open === 0) {
       allResult[`${day}`] = 'CLOSED';
-    } else {
-      const openTime = workTime[index].open;
-      let closeTime = workTime[index].close;
-      if (closeTime > 12) closeTime %= 12;
-      allResult[`${day}`] = `Open from ${openTime}am until ${closeTime}pm`;
     }
     return allResult;
   });
