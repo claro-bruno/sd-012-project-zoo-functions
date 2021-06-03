@@ -85,54 +85,58 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalNoPar() {
-  const obj = { NE: [], NW: [], SE: [], SW: [] };
-  const NEobj = species.filter((specie) => specie.location === 'NE');
-  NEobj.forEach((animal) => {
-    obj.NE.push(animal.name);
-  });
-  const NWobj = species.filter((specie) => specie.location === 'NW');
-  NWobj.forEach((animal) => {
-    obj.NW.push(animal.name);
-  });
-  const SEobj = species.filter((specie) => specie.location === 'SE');
-  SEobj.forEach((animal) => {
-    obj.SE.push(animal.name);
-  });
-  const SWobj = species.filter((specie) => specie.location === 'SW');
-  SWobj.forEach((animal) => {
-    obj.SW.push(animal.name);
+  const obj = {};
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  locations.forEach((location) => {
+    obj[location] = [];
+    const locationAnimals = species.filter((specie) => specie.location === location);
+    locationAnimals.forEach((animal) => {
+      obj[location].push(animal.name);
+    });
   });
   return obj;
 }
 
-function getAnimalIncludeNames() {
-  const obj = { NE: {}, NW: {}, SE: {}, SW: {} };
-  const NEobj = species.filter((specie) => specie.location === 'NE');
-  NEobj.forEach((animal) => {
-    obj.NE[animal.name] = (animal.residents.map((resident) => resident.name));
+function getAnimalIncludeNames(options) {
+  const obj = {};
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  locations.forEach((location) => {
+    obj[location] = [];
+    const locationAnimals = species.filter((specie) => specie.location === location);
+    locationAnimals.forEach((animal) => {
+      obj[location].push({ [animal.name]: (animal.residents.map((resident) => resident.name)) });
+    });
+    if (options.sorted === true) obj[location].forEach((animal) => Object.values(animal)[0].sort());
   });
-  const NWobj = species.filter((specie) => specie.location === 'NW');
-  NWobj.forEach((animal) => {
-    obj.NW[animal.name] = (animal.residents.map((resident) => resident.name));
-  });
-  const SEobj = species.filter((specie) => specie.location === 'SE');
-  SEobj.forEach((animal) => {
-    obj.SE[animal.name] = (animal.residents.map((resident) => resident.name));
-  });
-  const SWobj = species.filter((specie) => specie.location === 'SW');
-  SWobj.forEach((animal) => {
-    obj.SW[animal.name] = (animal.residents.map((resident) => resident.name));
+  return obj;
+}
+
+function getAnimalSex(options) {
+  const obj = {};
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  locations.forEach((location) => {
+    obj[location] = [];
+    const locationAnimals = species.filter((specie) => specie.location === location);
+    locationAnimals.forEach((animal) => {
+      obj[location].push({ [animal.name]: (animal.residents.reduce((acc, resident) => {
+        if (resident.sex === options.sex) acc.push(resident.name);
+        return acc;
+      }, [])),
+      });
+    });
+    if (options.sorted === true) obj[location].forEach((animal) => Object.values(animal)[0].sort());
   });
   return obj;
 }
 
 function getAnimalMap(options) {
-  if (!options) {
+  if (options === undefined || options.includeNames === undefined) {
     return getAnimalNoPar();
   }
-  if (options.includeNames === true) {
-    return getAnimalIncludeNames();
+  if (options.sex !== undefined) {
+    return getAnimalSex(options);
   }
+  return getAnimalIncludeNames(options);
 }
 
 function getSchedule(dayName) {
