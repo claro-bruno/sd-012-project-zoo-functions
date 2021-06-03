@@ -31,10 +31,9 @@ function getEmployeeByName(nome) {
   const retorno = ml.find((employee) => employee.firstName === nome || employee.lastName === nome);
   return retorno;
 }
-console.log(getEmployeeByName());
 
 function createEmployee() {
-  // seu código aqui
+
 }
 
 function isManager() {
@@ -45,8 +44,14 @@ function addEmployee() {
   // seu código aqui
 }
 
-function countAnimals() {
-  // seu código aqui
+function countAnimals(contador) {
+  let obj = {};
+  if (contador !== undefined) {
+    obj = data.species.find((cont) => cont.name === contador).residents.length;
+  } else {
+    data.species.forEach((valor) => { obj[valor.name] = valor.residents.length; });
+  }
+  return obj;
 }
 
 function calculateEntry() {
