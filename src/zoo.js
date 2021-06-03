@@ -14,6 +14,7 @@ const data = require('./data');
 
 const { employees } = data;
 const { prices } = data;
+const { hours } = data;
 
 // Req 1
 function getSpeciesByIds(...ids) {
@@ -140,12 +141,25 @@ function getAnimalMap(options) {
 
 // Req 10
 function getSchedule(dayName) {
-  // seu código aqui
+  const days = Object.keys(hours);
+  const schedule = days.reduce((acc, current) => {
+    const close = (hours[current].close > 12) ? hours[current].close -= 12 : hours[current].close;
+    acc[current] = `Open from ${hours[current].open}am until ${close}pm`;
+    return acc;
+  }, {});
+  schedule.Monday = 'CLOSED';
+  if (dayName) return { [dayName]: schedule[dayName] };
+  return schedule;
 }
+
 // Req 11
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies(myId) {
+  const firstSpeciesId = employees.find((employee) => employee.id === myId).responsibleFor[0];
+  const members = species.find((specie) => specie.id === firstSpeciesId).residents;
+  const oldest = members.sort((a, b) => b.age - a.age)[0];
+  return Object.values(oldest);
 }
+
 // Req 12
 function increasePrices(percentage) {
   // seu código aqui
