@@ -17,19 +17,24 @@ function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.some((id) => specie.id === id));
 }
 console.log(species);
-// fim questão 01
+// fim questão 01 -------------------<
 
 function getAnimalsOlderThan(animal, age) {
   const animalChave = species.find((specie) => animal === specie.name);
 
   return animalChave.residents.every((residents) => residents.age > age);
 }
-/*
+// fim questão 02 -------------------<
 
-function getEmployeeByName(employeeName) {
+const { residents } = require('./data');
+
+function getEmployeeByName(...employeeName) {
   // seu código aqui
+  return residents.filter((resident) => employeeName.some((id) => resident.id === id));
 }
+console.log(residents);
 
+/*
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
@@ -77,7 +82,7 @@ module.exports = {
   // countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
-  // getEmployeeByName,
+  getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
