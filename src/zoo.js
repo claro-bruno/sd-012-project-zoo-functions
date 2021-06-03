@@ -121,12 +121,15 @@ function calculateEntry(entrants) {
 
 function getSchedule(dayName) {
   if (!dayName) { 
-    const aux = (param) => {
-      return `Open from ${param[0]}am until ${param[1]-12}pm`
-    }
-    const days = [data.hours];
-    days.forEach((day, position) => console.log(days.push(aux(day))));
-    return days;
+    const weekDays = Object.keys(data.hours);
+    const days = Object.values(data.hours);
+    let newObj = {};
+    days.forEach((day, position) => {
+      days[position] = `Open from ${day.open}am until ${day.close-12}pm` 
+      if(position === 6) {days[position] = `CLOSED`}
+    })
+    weekDays.forEach((wday, position) => newObj[`${wday}`] = days[position]);
+    return newObj;
   }
 }
 console.log(getSchedule());
