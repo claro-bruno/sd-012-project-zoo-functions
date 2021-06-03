@@ -87,7 +87,7 @@ function getOldestFromFirstSpecies(id) {
   const arrayAnimaInfo = data.species.find((specie) => specie.id === animalId); // encontra o primeiro objeto/animal e suas propriedades através do mesmo id do primeiro animal que está na lista responsibleFor dos empregados. (não vem em formato de array, só traz o elemente, que é um objeto)
   const arrayAges = arrayAnimaInfo.residents.map(({ age }) => age); // traz um array só com as idades. Acessa o objeto arrayAnimalInfo e nele acessa a chave residents que contém a idade.
   const findOldest = arrayAnimaInfo.residents // parte que acessa o objeto inteiro e, dentro dele, acessa a chave/objeto residentes que contém as chaves name, sex, age. residents é um objeto com as informações de cada espécie de animal.
-    .find(({ age }) => age === Math.max(Math, ...arrayAges)); // usa o find para trazer o objeto cujo age seja o maior na array de idades arrayAges. Usar apenas Math.max(arrayAges) retorna NaN, impossibilitando encontrar o maior. Spread foi solicitado pelo lint.
+    .find(({ age }) => age === Math.max(...arrayAges)); // usa o find para trazer o objeto cujo age seja o maior na array de idades arrayAges. Usar apenas Math.max(arrayAges) retorna NaN, impossibilitando encontrar o maior. Spread foi solicitado pelo lint.
   return Object.values(findOldest); // retorna os valores do objeto findOldest em um array.
 }
 
