@@ -88,11 +88,15 @@ function getSchedule(day) {
 }
 
 function getOldestFromFirstSpecies() {
-  // seu código aqui id
 }
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  const adultdc = (((percentage / 100) * (data.prices.Adult))) + data.prices.Adult + 0.001;
+  const childdc = (((percentage / 100) * (data.prices.Child))) + data.prices.Child + 0.001;
+  const seniordc = (((percentage / 100) * (data.prices.Senior))) + data.prices.Senior + 0.001;
+  data.prices.Adult = (adultdc).toFixed(2);
+  data.prices.Child = (childdc).toFixed(2);
+  data.prices.Senior = (seniordc).toFixed(2);
 }
 
 function getEmployeeCoverage() {
