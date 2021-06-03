@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 // Incio do Projeto
 const data = require('./data');
 
-const { species, employees } = data;
+const { species, employees, prices } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -79,13 +79,18 @@ function countAnimals(animalToCount) {
   return countAnimal;
 }
 
-console.log(countAnimals('lions'));
-
-/* function calculateEntry(entrants) {
+// Function calculateEntry feita com ajuda do Thalles durante plantao de ajuda
+function calculateEntry(entrants = 0) {
   // seu código aqui
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultPrice = prices.Adult * Adult;
+  const childPrice = prices.Child * Child;
+  const seniorPrice = prices.Senior * Senior;
+
+  return adultPrice + childPrice + seniorPrice;
 }
 
-function getAnimalMap(options) {
+/* function getAnimalMap(options) {
   // seu código aqui
 }
 
@@ -113,6 +118,7 @@ module.exports = {
   isManager,
   addEmployee,
   countAnimals,
+  calculateEntry,
 };
 
 /* module.exports = {
