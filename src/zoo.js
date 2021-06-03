@@ -38,14 +38,13 @@ function getEmployeeByName(employee) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui   : personalInfo, associatedWith
-  data.employees.id = personalInfo.id;
-  data.employees.firstName = personalInfo.firstName;
-  data.employees.lastName = personalInfo.lastName;
+
+  const employeeNew = { ...personalInfo, ...associatedWith };
+  return employeeNew;
 }
 
-function isManager() {
-  // seu código aqui   :  id
+function isManager(id) {
+  // seu código aqui   :  
 }
 
 function addEmployee() {
