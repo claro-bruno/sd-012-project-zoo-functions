@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
+function getSpeciesByIds(...ids) {
   const callBack = (code) => {
     for (let index = 0; index < data.species.length; index += 1) {
       if (code === data.species[index].id) {
@@ -42,7 +42,7 @@ function getEmployeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   data.employees.push({
-    ...personalInfo, 
+    ...personalInfo,
     ...associatedWith,
   });
   return data.employees[data.employees.length - 1];
@@ -56,13 +56,23 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-  data.employees.push({id, firstName, lastName, managers, responsibleFor})
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
-
+function countAnimals(species) {
+  // seu código aqui
+  
+  if (!!species) {
+    const logo = data.species.find((num) => num.name === species);
+    return logo.residents.length;
+  }
+  const retorna = {}
+  data.species.forEach((num) => {
+    retorna[num.name] = num.residents.length;
+  });
+  console.log(retorna)
+  return retorna;
+}
 // function calculateEntry(entrants) {
 //   // seu código aqui
 // }
@@ -90,7 +100,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
