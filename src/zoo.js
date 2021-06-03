@@ -118,17 +118,14 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  const days = Object.keys(hours);
   const workTime = Object.values(hours);
   const allResult = {};
-  days.map((day, index) => {
+  Object.keys(hours).map((day, index) => {
     const openTime = workTime[index].open;
     let closeTime = workTime[index].close;
     if (closeTime > 12) closeTime %= 12;
     allResult[`${day}`] = `Open from ${openTime}am until ${closeTime}pm`;
-    if (workTime[index].open === 0) {
-      allResult[`${day}`] = 'CLOSED';
-    }
+    if (workTime[index].open === 0) allResult[`${day}`] = 'CLOSED';
     return allResult;
   });
   if (dayName === undefined) return allResult;
@@ -140,11 +137,16 @@ function getSchedule(dayName) {
   return result;
 }
 
-console.log(getSchedule('Tuesday'));
+// console.log(getSchedule('Tuesday'));
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const person = employees.find((employee) => employee.id === id);
+  const firstSpecie = species.find((specie) => specie.id === person.responsibleFor[0]);
+  const oldest = firstSpecie.residents.sort((a, b) => b.age - a.age);
+  return Object.values(oldest[0]);
 }
+
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
   // seu código aqui
@@ -153,7 +155,6 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
-
 
 module.exports = {
   calculateEntry,
