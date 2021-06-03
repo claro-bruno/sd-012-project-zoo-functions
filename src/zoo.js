@@ -110,10 +110,8 @@ function getAnimalMap(options) {
   // seu código aqui
   if (!options || !options.includeNames) return entireMap();
   if (options.includeNames) {
-    if (options.sex && options.sorted) return orderNames(mapper(locationsArr, options.sex));
-    if (options.sex) return mapper(locationsArr, options.sex);
-    if (options.sorted) return orderNames(mapper(locationsArr));
-    return mapper(locationsArr);
+    if (options.sorted) return orderNames(mapper(locationsArr, options.sex));
+    return mapper(locationsArr, options.sex);
   }
 }
 
