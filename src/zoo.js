@@ -107,8 +107,6 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(residentsSpecies[0]);
 }
 
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
 function increasePrices(percentage) { // https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
   const { Adult, Senior, Child } = data.prices;
   data.prices = {
@@ -120,8 +118,27 @@ function increasePrices(percentage) { // https://stackoverflow.com/questions/118
 }
 
 function getEmployeeCoverage(idOrName) {
-  return idOrName;
+  if (idOrName === undefined) {
+    const nameAndResponsibles = data.employees.reduce((acc, curr) => {
+      const animalId = (id) => data.species.find((specie) => specie.id === id).name;
+      const animalNames = curr.responsibleFor.map(animalId);
+      acc[`${curr.firstName} ${curr.lastName}`] = animalNames;
+      return acc;
+    }, {});
+    return nameAndResponsibles;
+  }
+  const employeeAskedFor = data.employees.filter(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  const finalStructure = employeeAskedFor.reduce((acc, curr) => {
+    const animalId2 = (id) => data.species.find((specie) => specie.id === id).name;
+    const animalNames2 = curr.responsibleFor.map(animalId2);
+    acc[`${curr.firstName} ${curr.lastName}`] = animalNames2;
+    return acc;
+  }, {});
+  return finalStructure;
 }
+
+console.log(getEmployeeCoverage('Azevado'));
 
 module.exports = {
   calculateEntry,
