@@ -23,9 +23,7 @@ function getAnimalsOlderThan(animal, age) {
   // Depois chegar a idade dos animais  OK
   // Verificação de idade OK
   const animals = data.species.find((animalList) => animalList.name === animal);
-  const individuals = animals.residents;
-  const verify = individuals.every((idades) => idades.age > age);
-  return verify;
+  return animals.residents.every((idades) => idades.age > age);
 }
 // console.log(getAnimalsOlderThan('elephants', 10));
 
@@ -34,21 +32,37 @@ function getEmployeeByName(employeeName) {
   // Split the name
   // 1° Find the first name of the employees
   // 2° Find te last name of the employees
-  if (typeof employeeName === 'undefined') {
-    return {};
-  }
+  if (!employeeName) return {};
   const breakName = employeeName.split(' ');
   const firstName = breakName[0];
   const lastName = breakName[breakName.length - 1];
   const { employees } = data;
   return employees.find((names) => names.firstName === firstName || names.lastName === lastName);
 }
-console.log(getEmployeeByName('Sthepanie Strauss'));
+// console.log(getEmployeeByName('Sthepanie Strauss'));
 
-function createEmployee() {
-  // seu código aqui
-  // personalInfo, associatedWith
+const newEmployee = {
+  id: '0e7b460e-acf4-4e17-b3cb-ea472512pz83',
+  firstName: 'Luiz',
+  lastName: 'Henrique' };
+const responsabilities = {
+  managers: [
+    'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1',
+    '9e7d4524-363c-416a-8759-8aa7e50c0992',
+  ],
+  responsibleFor: [
+    '0938aa23-f153-4937-9f88-4858b24d6bce',
+    '89be95b3-47e4-4c5b-b687-1fabf2afa274',
+    'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5',
+  ],
+};
+function createEmployee(personalInfo, associatedWith) {
+  // Recognize how use spread in the arguments
+  // make the parameters
+  // make a new object with 2 parameters
+  return { ...personalInfo, ...associatedWith };
 }
+console.log(createEmployee(newEmployee, responsabilities));
 
 function isManager() {
   // seu código aqui
