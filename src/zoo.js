@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 // dica colega Caio para colocar as arrays de objetos aqui p chamar com amsi facilidades nas funçòes.
 const data = require('./data');
 
@@ -87,9 +87,27 @@ function calculateEntry(entrants) {
 //   // seu código aqui options
 // }
 
-// function getSchedule() {
-//   // seu código aqui dayName
-// }
+function getSchedule(dayName) {
+  // seu código aqui
+  // MEGA ajuda do Thalles
+  // 1º peguei as chaves/valores do objeto hours
+  const arraySchedule = Object.entries(hours);
+  // 2º Criei um objeto com o reduce que vai acumulando todos as chaves e valores do arraySchedule. Lembrando que tem a aexeção qd o dayName é 'Segunda'.
+  const objSchedule = arraySchedule.reduce((acc, curr) => {
+    const { open, close } = curr[1];
+    acc[curr[0]] = `Open from ${open}am until ${close - 12}pm`;
+    if (curr[0] === 'Monday') {
+      acc[curr[0]] = 'CLOSED';
+    }
+    return acc;
+  }, {});
+  // 3º Se não for passaod parâmetro ele retorna o objSchule inteiro.
+  if (!dayName) return objSchedule;
+  // 4º Agora caso o parâmetro seja passado eu criei um objeto, que tem como chave o próprio dayName, lembrando que eu usei o break point (colchetes) pois é assim que atribui elemento ao objeto.
+  const objDayName = { [dayName]: objSchedule[dayName] };
+  return objDayName;
+}
+// console.log(getSchedule('Tuesday'));
 
 function getOldestFromFirstSpecies(id2) {
   // seu código aqui
@@ -105,11 +123,24 @@ function getOldestFromFirstSpecies(id2) {
   const oldestResident = residentsInOrder[0];
   return Object.values(oldestResident);
 }
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
-// function increasePrices() {
-//   // seu código aqui percentage
+// function increasePrices(percentage) {
+//   // seu código aqui
+//   prices.forEach((type) => {
+//     const total = ((percentage) => {
+//       const increase = ((price) => price * (percentage/100));
+//       return  Math.round((prices.type + increase * 100) / 100);
+//     })
+//   })
+
+//   // 1º Saber o quando á mais vai ser o reajuste
+//   // 2º função que calcula o novo valor
+//   // const newPrices = ((price) => price.)
+
+//   // const increase = ((price) => Math.round((price * (percentage/100) )
 // }
+// console.log(increasePrices(50));
 
 // function getEmployeeCoverage() {
 //   // seu código aqui idOrName
@@ -117,7 +148,7 @@ console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
