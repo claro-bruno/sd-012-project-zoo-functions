@@ -9,8 +9,9 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
 const data = require('./data');
+
+const { prices } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
@@ -44,7 +45,7 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  return managers.some((manager => manager.managers.includes(id)));
+  return data.employees.managers.some((manager) => manager.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -61,7 +62,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function countAnimals(species) {
   if (species === undefined) {
     const key = {};
-    data.species.map((specie) => {
+    data.species.forEach((specie) => {
       key[specie.name] = specie.residents.length;
     });
     return key;
@@ -78,7 +79,7 @@ function calculateEntry(entrants) {
   return total;
 }
 function getAnimalMap(options) {
-  // seu código aqui
+  if (options === 0) return 0;
 }
 
 function getSchedule(dayName) {
@@ -118,7 +119,7 @@ function increasePrices(percentage) {
   return data.prices;
 }
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === 0) return 0;
 }
 
 module.exports = {
