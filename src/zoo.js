@@ -120,19 +120,18 @@ function calculateEntry(entrants) {
 // console.log(getAnimalMap());
 
 function getSchedule(dayName) {
-  if (!dayName) { 
-    const weekDays = Object.keys(data.hours);
-    const days = Object.values(data.hours);
-    let newObj = {};
-    days.forEach((day, position) => {
-      days[position] = `Open from ${day.open}am until ${day.close-12}pm` 
-      if(position === 6) {days[position] = `CLOSED`}
-    })
-    weekDays.forEach((wday, position) => newObj[`${wday}`] = days[position]);
-    return newObj;
-  }
+  const weekDays = Object.keys(data.hours);
+  const days = Object.values(data.hours);
+  const newObj = {};
+  days.forEach((day, position) => {
+    days[position] = `Open from ${day.open}am until ${day.close-12}pm` 
+    if(position === 6) {days[position] = `CLOSED`}
+  });
+  weekDays.forEach((wday, position) => newObj[`${wday}`] = days[position]);
+  if (!dayName) { return newObj;}
+  const result = {[dayName]: newObj[Object.keys(newObj).find((key) => key === dayName)]};
+  return result;
 }
-console.log(getSchedule());
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
