@@ -25,8 +25,8 @@ console.log(getAnimalsOlderThan('lions', 20));
 
 const getEmployeeByName = (employeeName) => {
   if (!employeeName) return {};
-  return data.employees.find((employ) => employ.firstName === employeeName
-   || employ.lastName === employeeName);
+  return data.employees.find((employee) => employee.firstName === employeeName
+   || employee.lastName === employeeName);
 };
 
 console.log(getEmployeeByName('Nigel'));
@@ -44,9 +44,12 @@ console.log(getEmployeeByName('Nigel'));
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 // console.log(createEmployee(obj, obj2));
 
-function isManager() {
-  // seu código aqui id
-}
+const isManager = (id) => data.employees
+  .some((employee) => employee.managers
+    .some((employeeId) => employeeId === id));
+
+console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function addEmployee() {
   // seu código aqui id, firstName, lastName, managers, responsibleFor
