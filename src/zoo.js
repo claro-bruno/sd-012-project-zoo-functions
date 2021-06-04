@@ -131,20 +131,22 @@ function increasePrices(percentage) {
   });
 }
 
+const speciesCoverage = (employee) => employee.responsibleFor.map((specieId) =>
+  getSpeciesByIds(specieId)[0].name);
+
 function getEmployeeCoverage(idOrName) {
   if (idOrName) {
     const employeeFound = data.employees.find((employee) =>
       ((employee.id === idOrName) || (employee.firstName === idOrName)
         || (employee.lastName === idOrName)));
-    return { [`${employeeFound.firstName} ${employeeFound.lastName}`]: employeeFound
-      .responsibleFor.map((specieId) => data.species.find((specie) =>
-        specie.id === specieId).name) };
+    return { [`${employeeFound.firstName} ${employeeFound.lastName}`]:
+      speciesCoverage(employeeFound) };
   }
 
   const employeesCovarage = {};
   data.employees.forEach((employee) => {
-    employeesCovarage[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
-      .map((specieId) => getSpeciesByIds(specieId)[0].name);
+    employeesCovarage[`${employee.firstName} ${employee
+      .lastName}`] = speciesCoverage(employee);
   });
   return employeesCovarage;
 }
