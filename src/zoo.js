@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 // console.log(species);
 function getSpeciesByIds(...ids) {
@@ -34,13 +34,12 @@ function getEmployeeByName(employeeName) {
   // O que será avaliado:
 
   // Sem parâmetros, retorna um objeto vazio
-  if (!employeeName) { return []; }
+  if (!employeeName) { return {}; }
 
   // Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
-  // if (employeeName === data.employees.firstName) {  };
-
   // Quando provido o último nome do funcionário, retorna o objeto do funcionário
-  // if (employeeName === employees.lastName) { return  };
+  return employees.find((employee) => employeeName === employee.firstName
+    || employeeName === employee.lastName);
 }
 
 // function createEmployee(personalInfo, associatedWith) {
