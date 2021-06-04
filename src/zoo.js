@@ -170,9 +170,18 @@ function getEmployeeCoverage(idOrName) {
     }, {});
     return objetoFinal;
   }
+  const searchEmployee = data.employees.find((employee) => {
+    const { id, firstName, lastName } = employee;
+    return idOrName === id || idOrName === firstName || idOrName === lastName;
+  });
+  const speciesNames = searchEmployee.responsibleFor.map((id) => {
+    const objSpecie = data.species.find((specie) => specie.id === id);
+    return objSpecie.name;
+  });
+  return {[`${searchEmployee.firstName} ${searchEmployee.lastName}`]: speciesNames };
 }
 
-console.log(getEmployeeCoverage());
+console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
