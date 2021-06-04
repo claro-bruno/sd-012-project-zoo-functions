@@ -103,8 +103,10 @@ function getSchedule(dayName) {
   return dayCronoObj;
 }
 
+const employeeList = data.employees;
+
 function getOldestFromFirstSpecies(id) {
-  const getEmployee = data.employees.find((employee) => employee.id === id);
+  const getEmployee = employeeList.find((employee) => employee.id === id);
   const getAnimalId = getEmployee.responsibleFor[0];
   const selectedAnimal = data.species.find((animal) => animal.id === getAnimalId);
   const maiorIdade = selectedAnimal.residents.map((anim) => anim.age)
@@ -118,9 +120,24 @@ function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName) {
+  const emplCoverageObj = {};
+  const emplCovObj = {};
+  if (typeof idOrName !== 'string') {
+    employeeList.forEach((empl) => {
+      const animalList = empl.responsibleFor.map((element) =>
+        data.species.find((ani) => ani.id === element).name);
+      emplCoverageObj[`${empl.firstName} ${empl.lastName}`] = animalList;
+    });
+    return emplCoverageObj;
+  }
+  const targetEmp = data.employees.find((eemp) =>
+    eemp.lastName === idOrName || eemp.firstName === idOrName || eemp.id === idOrName);
+  const nameList = targetEmp.responsibleFor.map((animaal) =>
+    data.species.find((sp) => sp.id === animaal).name);
+  emplCovObj[`${targetEmp.firstName} ${targetEmp.lastName}`] = nameList;
+  return emplCovObj;
+}
 
 module.exports = {
   calculateEntry,
@@ -129,7 +146,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,

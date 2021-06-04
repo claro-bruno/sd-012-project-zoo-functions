@@ -300,7 +300,7 @@ Antes de começar, analise o arquivo `src/data.js`, para ver os dados que serão
 
 ### 11. IMPLEMENTE A FUNÇÃO getOldestFromFirstSpecies
 
-  A função busca por informações do animal mais velho da primeira espécie gerenciada pela pessoa colaboradora do parâmetro
+  A função busca por informações do animal mais velho da primeira espécie gerenciada pela pessoa colaboradora do parâmetro'
 
   **O que será avaliado**
 
