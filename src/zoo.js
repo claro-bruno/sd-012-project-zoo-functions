@@ -112,38 +112,38 @@ const parameterIncludeName = () => {
 };
 
 // com parametro: includeNames = true , sorted = true ---------------------------------------------
-const getAnimalsRegionSorted = (region) => {
-  const objRegions = {};
-  let arrayAnimals = [];
-  const animalsRegion = species.filter(({ location }) => location === region);
-  const objAnimalsRegion = animalsRegion.map(({ name, residents }) => {
-    const objAnimal = {};
-    //const orderedResidents = (residents.name).sort((a, b) => a - b);
-    objAnimal[name] = orderedResidents.map(({ name }) => name);
-    console.log(objAnimal);
-    return objAnimal;
-  });
-  arrayAnimals = [...objAnimalsRegion];
-  objRegions[region] = arrayAnimals;
-  return objRegions;
-};
+// const getAnimalsRegionSorted = (region) => {
+//   const objRegions = {};
+//   let arrayAnimals = [];
+//   const animalsRegion = species.filter(({ location }) => location === region);
+//   const objAnimalsRegion = animalsRegion.map(({ name, residents }) => {
+//     const objAnimal = {};
+//     //const orderedResidents = (residents.name).sort((a, b) => a - b);
+//     objAnimal[name] = orderedResidents.map(({ name }) => name);
+//     console.log(objAnimal);
+//     return objAnimal;
+//   });
+//   arrayAnimals = [...objAnimalsRegion];
+//   objRegions[region] = arrayAnimals;
+//   return objRegions;
+// };
 
-const parameterIncludeNameSorted = () => {
-  const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getAnimalsRegionSorted(region));
-  return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
-};
+// const parameterIncludeNameSorted = () => {
+//   const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getAnimalsRegionSorted(region));
+//   return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
+// };
 // ------------------------------------------------------------------------------------------------
-function getAnimalMap(options) {
-  if (!options) {
-    return noParameterMap();
-  } else if (options.includeNames === true && options.sorted === true) {
-     return parameterIncludeNameSorted()
-  } else if (options.includeNames === true) {
-    return parameterIncludeName();
-  };
-}
+// function getAnimalMap(options) {
+//   if (!options) {
+//     return noParameterMap();
+//   } else if (options.includeNames === true && options.sorted === true) {
+//      return parameterIncludeNameSorted()
+//   } else if (options.includeNames === true) {
+//     return parameterIncludeName();
+//   };
+// }
 
-console.log(getAnimalMap({ includeNames: true, sorted: true }));
+// console.log(getAnimalMap({ includeNames: true, sorted: true }));
 
 
 // ------------------------------------- ---------- ----------------------------
@@ -172,9 +172,14 @@ function getSchedule(dayName) {
   return dayName ? getDaySchedule(dayName) : getWeekSchedule();
 }
     
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies(wantedId) {
+  const { responsibleFor } = employees.find(({ id }) => id === wantedId);
+  const { residents } = species.find(({ id }) => id === responsibleFor[0]);
+  const { name, sex, age } = residents.sort((a, b) => b.age - a.age)[0];
+  return [name, sex, age];
 }
+
+console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 function increasePrices(percentage) {
   // seu código aqui
@@ -188,7 +193,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  //getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
