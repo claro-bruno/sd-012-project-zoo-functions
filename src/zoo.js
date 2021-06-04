@@ -22,12 +22,12 @@ function getSpeciesByIds(...ids) {
   return findSpecie;
 }
 
-// function getAnimalsOlderThan(animal) {
-//   // seu código aqui
-//   species.filter((specie) => specie.name === animal);
-// }
-
-// console.log(getAnimalsOlderThan('otters'));
+function getAnimalsOlderThan(animal, age) {
+  // seu código aqui
+  const verifyName = species.find((specie) => specie.name === animal);
+  const verifyAnimals = verifyName.residents.every((verifyAge) => verifyAge.age >= age);
+  return verifyAnimals;
+}
 
 // function getEmployeeByName(employeeName) {
 //   // seu código aqui
@@ -83,7 +83,7 @@ module.exports = {
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
-  // getAnimalsOlderThan,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
