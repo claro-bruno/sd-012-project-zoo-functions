@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   const filterSpecies = species.filter((specie) => ids.some((id) => specie.id === id));
@@ -66,21 +66,31 @@ function countAnimals(animals) {
 }
 
 function calculateEntry(entrants) {
-  if (!entrants) {
+  if(!entrants) {
     return 0;  
   }
-  const { Adult = 0, Child = 0, Senior = 0,} = entrants
-  const { Adult: adultPrice, Child: chilPrice, Senior: seniorPrice,} = prices;
+  const { Adult = 0,
+    Child = 0,
+    Senior = 0,
+  } = entrants;
+
+  const {
+    Adult: adultPrice,
+    Child: chilPrice, 
+    Senior: seniorPrice,
+  } = prices;
+
   const someAllEntry = (Adult * adultPrice + Child * chilPrice + Senior * seniorPrice);
   return someAllEntry;
 }
 
 // function getAnimalMap(options) {
-//   // seu código aqui
+//   const { location } = species;
+//   const regioes = ['NE', 'NW', 'SE', 'SW'];
 // }
 
 // function getSchedule(dayName) {
-//   // seu código aqui
+
 // }
 
 // function getOldestFromFirstSpecies(id) {
