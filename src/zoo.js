@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 const getSpeciesByIds = (...ids) => species.filter((specie) => ids.some((id) => specie.id === id));
 
@@ -71,7 +71,22 @@ const calculateEntry = (entrants) => {
 
 const getAnimalMap = () => {};
 
-const getSchedule = () => {};
+const getSchedule = (dayName) => { //REFATORAR
+  const weekDays = Object.keys(hours);
+  const weekHours = Object.values(hours);
+  if (!dayName) {
+    return weekHours.reduce((acc, hour, day) => {
+      if (weekDays[day] !== 'Monday') {
+        acc[weekDays[day]] = `Open from ${hour.open}am until ${hour.close - 12}pm`;
+      } else acc[weekDays[day]] = 'CLOSED';
+      return acc;
+    }, {});
+  }
+  if (dayName !== 'Monday') {
+    return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
+  }
+  return { [dayName]: 'CLOSED' };
+};
 
 const getOldestFromFirstSpecies = (id) => {
   const employeeFoundById = employees.find((employee) => employee.id === id);
@@ -113,8 +128,6 @@ const getEmployeeCoverage = (idOrName) => {
         species.find((specie) => specieId === specie.id).name),
     }), {});
 };
-
-console.log(getEmployeeCoverage('Stephanie'));
 
 module.exports = {
   calculateEntry,
