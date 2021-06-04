@@ -31,9 +31,18 @@ const getEmployeeByName = (employeeName) => {
 
 console.log(getEmployeeByName('Nigel'));
 
-function createEmployee() {
-  // seu código aqui personalInfo, associatedWith
-}
+// const obj = {
+//   id: 'xablau',
+//   firstNome: 'Gabriel',
+//   lastNome: 'Viana',
+// }
+// const obj2 = {
+//   menagers: ['tunico', 'tinoco'],
+//   animals: ['macaco', 'leão', 'rinoceronte'],
+// }
+
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
+// console.log(createEmployee(obj, obj2));
 
 function isManager() {
   // seu código aqui id
