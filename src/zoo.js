@@ -128,10 +128,8 @@ function includeNamesObjSorted(speciesLoc, sex) {
 }
 
 function getAnimalMap(options) {
-  if (!options) return speciesLocations();
-  if (options.includeNames
-    && options.sex
-    && options.sorted) return includeNamesObjSorted(speciesLocations(), options.sex);
+  if (!options || !options.includeNames) return speciesLocations();
+  if (options.includeNames && options.sex && options.sorted) return includeNamesObjSorted(speciesLocations(), options.sex);
   if (options.includeNames && options.sex) return includeNamesObj(speciesLocations(), options.sex);
   if (options.includeNames && options.sorted) return includeNamesObjSorted(speciesLocations());
   if (options.includeNames) return includeNamesObj(speciesLocations());
