@@ -110,7 +110,7 @@ function increasePrices(percentage) {
 
 const getAllAnimalsEmployeeCoverage = (responsible) => {
   const animals = responsible.map((specieId) =>
-  data.species.find(({ id }) => id === specieId).name);
+    data.species.find(({ id }) => id === specieId).name);
   return animals;
 };
 
