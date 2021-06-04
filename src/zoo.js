@@ -71,7 +71,6 @@ function getAnimalMap(options) {
 }
 */
 
-// eslint-disable-next-line max-lines-per-function
 function getSchedule(dayName) {
   if (!dayName) {
     const arraySchedule = Object.entries(hours);
@@ -89,11 +88,19 @@ function getSchedule(dayName) {
   return day;
 }
 
-/*
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const getId = employees.find((employee) => employee.id === id);
+  const getFirstSpecies = getId.responsibleFor[0];
+  const getSpecies = species.find((specie) => specie.id === getFirstSpecies);
+  const getResidents = getSpecies.residents;
+  const getOldest = getResidents.reduce((acc, curr) => {
+    if (curr.age > acc.age) return curr;
+    return acc;
+  });
+  return Object.values(getOldest);
 }
 
+/*
 function increasePrices(percentage) {
   // seu código aqui
 }
@@ -113,7 +120,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
