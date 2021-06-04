@@ -50,7 +50,8 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 
 function isManager(id) {
   // eslint-disable-next-line max-len
-  const accessId = data.employees.some((employee) => employee.managers.some(((manage) => manage === id)));
+  const accessId = data.employees.some((employee) =>
+    employee.managers.some(((manage) => manage === id)));
   return accessId;
 }
 console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
