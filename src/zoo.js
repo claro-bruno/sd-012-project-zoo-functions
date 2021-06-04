@@ -93,12 +93,33 @@ function calculateEntry(entrants) {
 // console.log(calculateEntry({ Child: 2, Senior: 1 }));
 
 function getAnimalMap(options) {
-  return options;
+  const object = { NE: [], NW: [], SE: [], SW: [] };
+  if (options === undefined) {
+    data.species.map((element) => {
+      const insert = object[element.location].push(element.name);
+      return insert;
+    });
+    return object;
+  }
 }
 
+// console.log(getAnimalMap());
+
 function getSchedule(dayName) {
-  return dayName;
+  const prog = {};
+  const dayprog = {};
+  Object.entries(data.hours).forEach((day) => {
+    if (day[1].open === 0) {
+      prog[day[0]] = 'CLOSED';
+    } else {
+      prog[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+    }
+  });
+  dayprog[dayName] = prog[dayName];
+  return (dayName === undefined) ? prog : dayprog;
 }
+
+// console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
   return id;
