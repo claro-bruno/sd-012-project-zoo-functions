@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /*
 eslint no-unused-vars: [
   "error",
@@ -10,7 +11,8 @@ eslint no-unused-vars: [
 */
 
 // const { get } = require('cypress/types/lodash');
-const { species, employees, prices } = require('./data');
+// const { find } = require('cypress/types/lodash');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 // Referência: Natalia Souza - turma 11.
@@ -47,6 +49,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(newEnployee);
 }
 
+// Referência: Natalia Souza - turma 11.
 function countAnimals(species1) {
   if (!species1) {
     return species.reduce((acc, animal) => {
@@ -57,6 +60,7 @@ function countAnimals(species1) {
   return species.find((animal) => animal.name === species1).residents.length;
 }
 
+// Referencia: Rodrigo Merlone.
 function calculateEntry(entrants) {
   if (!entrants || entrants === {}) return 0;
   const callback = (acc, entrant) => acc + entrants[entrant] * prices[entrant];
@@ -64,13 +68,40 @@ function calculateEntry(entrants) {
 }
 
 // function getAnimalMap(options) {
-//   // seu código aqui
+// if (!options) {
+//   return species.reduce((acc, specie) => {
+//     const callbackFilter = (specie2) => specie2.location === specie.location;
+//     const callbackMap = (animal) => animal.name;
+//     acc[specie.location] = species.filter(callbackFilter).map(callbackMap);
+//     return acc;
+//   }, {});
 // }
-
-// function getSchedule(dayName) {
-//   // seu código aqui
+// const speciesAndAnimalsName = species.reduce((acc, specie) => {
+// const callbackFilter = (specie2) => specie2.location === specie.location;
+// const callbackMap = (animal) => animal.residents.map((animal2) => animal2.name);
+//   acc[specie.name] = specie.residents.map((animal) => animal.name);
+//   return acc;
+// }, {});
+// return species.reduce((acc, specie) => {
+//   acc[specie.location] = speciesAndAnimalsName;
+//   return acc;
+// }, {});
+//   return console.log(speciesAndAnimalsName);
 // }
+// console.log(getAnimalMap());
 
+function getSchedule(dayName) {
+  if (!dayName) {
+    return Object.keys(hours).reduce((acc, day) => {
+      acc[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+      acc.Monday = 'CLOSED';
+      return acc;
+    }, {});
+  }
+  if (hours[dayName].open === 0 && hours[dayName].close === 0) return { [dayName]: 'CLOSED' };
+  return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
+}
+console.log(getSchedule());
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
@@ -85,7 +116,7 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
