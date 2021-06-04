@@ -78,9 +78,11 @@ function countAnimals(specieName) {
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   // seu código aqui
   const { Adult: AdultPrice, Child: ChildPrice, Senior: seniorPrices } = prices;
+
   const adultTotal = Adult * AdultPrice;
   const childTotal = Child * ChildPrice;
   const seniorTotal = Senior * seniorPrices;
+
   const totalCharge = adultTotal + childTotal + seniorTotal;
 
   return totalCharge;
@@ -104,7 +106,6 @@ function getSchedule(dayName) {
   }
   return newObj;
 }
-console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
@@ -123,18 +124,19 @@ function increasePrices(percentage) {
   });
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-//   if (!idOrName) {
-//     return employees.reduce((reader, person) => {
-//       const firstAnimal = species.find((animal) => animal.id === person.responsibleFor[0]);
-//       const secondAnimal = species.find((animal) => animal.id === person.responsibleFor[1]);
-//       // nao consigo atribuir nome e sobrenome
-//       reader[person.firstName] = [secondAnimal.name, firstAnimal.name];
-//       return reader;
-//     }, {});
-//   }
-// }
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+  if (!idOrName) {
+    return employees.reduce((reader, person) => {
+      const fullObj = reader;
+      const firstAnimal = species.find((animal) => animal.id === person.responsibleFor[0]);
+      const secondAnimal = species.find((animal) => animal.id === person.responsibleFor[1]);
+      // nao consigo atribuir nome e sobrenome
+      fullObj[`${person.firstName} ${person.lastName}`] = [secondAnimal.name, firstAnimal.name];
+      return fullObj;
+    }, {});
+  }
+}
 
 module.exports = {
   calculateEntry,
@@ -143,7 +145,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
