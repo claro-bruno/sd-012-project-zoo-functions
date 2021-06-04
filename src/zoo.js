@@ -58,24 +58,42 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   ?
 }
 
-function countAnimals() {
-  // seu código aqui - species
+function countAnimals(species) {
+  species.filter((number) = number );
+
 }
 
-function calculateEntry() {
-  // seu código aqui - entrants
+function calculateEntry(entrants) {
+  entrants = {
+    Adult: '',
+    Child: '',
+    Senior: '',
+  }
+
+  if ( parametro === []) {
+    return 0;
+  };
+
+  if (Object.length === 0) {
+    return 0;
+  };
+
+  const totalPrice = 
+  reduce();
 }
 
-function getAnimalMap() {
-  // seu código aqui - options
+function getAnimalMap(options) {
+  ????
 }
 
-function getSchedule() {
-  // seu código aqui - dayName
+function getSchedule(dayName) {
+  ?????
 }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui - id
+function getOldestFromFirstSpecies(id) {
+  document.getElementById('');
+  species.find();
+  return id.name.sex.age
 }
 
 function increasePrices() {
