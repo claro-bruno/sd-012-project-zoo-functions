@@ -17,13 +17,8 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  let resultado = true;
-  const targetSpecie = data.species.find((specie) => specie.name === animal);
-  const youngResidents = targetSpecie.residents.filter((resident) => resident.age < age);
-  if (youngResidents.length !== 0) {
-    resultado = false;
-  }
-  return resultado;
+  const targetSpecie = species.find((specie) => specie.name === animal);
+  return targetSpecie.residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
