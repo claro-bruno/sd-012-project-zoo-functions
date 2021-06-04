@@ -117,11 +117,8 @@ function increasePrices(percentage) {
   const pricesValues = Object.values(prices);
   let pricesArray = pricesValues.map((p) => Number(p + p * (percentage / 100)).toFixed(3) * 100);
   pricesArray = pricesArray.map((b) => Math.ceil(b) / 100);
-  return {
-    Adult: pricesArray[0],
-    Senior: pricesArray[1],
-    Child: pricesArray[2],
-  };
+  [prices.Adult, prices.Senior, prices.Child] = pricesArray;
+  return prices;
 }
 console.log(increasePrices(50));
 /* function getEmployeeCoverage(idOrName) {
