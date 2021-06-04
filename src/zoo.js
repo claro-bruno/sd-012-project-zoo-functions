@@ -179,10 +179,12 @@ function getOldestFromFirstSpecies(wantedId) {
   return [name, sex, age];
 }
 
-console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Senior, Child } = prices;
+  prices.Adult = Math.round(Adult * (1 + percentage / 100) * 100) / 100;
+  prices.Senior = Math.round(Senior * (1 + percentage / 100) * 100) / 100;
+  prices.Child = Math.round(Child * (1 + percentage / 100) * 100) / 100;
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
