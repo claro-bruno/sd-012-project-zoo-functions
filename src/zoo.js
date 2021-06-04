@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices, } = require('./data');
+const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.includes(specie.id));
@@ -60,20 +60,19 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
 }
 
 function getSchedule(dayName) {
   const cronograma = {
-    'Tuesday': 'Open from 8am until 6pm',
-    'Wednesday': 'Open from 8am until 6pm',
-    'Thursday': 'Open from 10am until 8pm',
-    'Friday': 'Open from 10am until 8pm',
-    'Saturday': 'Open from 8am until 10pm',
-    'Sunday': 'Open from 8am until 8pm',
-    'Monday': 'CLOSED'
-  }
-  return dayName === undefined ? cronograma : { [dayName]: cronograma[dayName] }
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+  return dayName === undefined ? cronograma : { [dayName]: cronograma[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -89,11 +88,15 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach((preco) => {
+    prices[preco] *= ((percentage + 100) / 100);
+    prices[preco] = Math.round(prices[preco] * 100) / 100;
+  });
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  
 }
 
 module.exports = {
