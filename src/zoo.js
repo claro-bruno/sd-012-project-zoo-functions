@@ -20,7 +20,7 @@ eslint no-unused-vars: [
 // Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
 // Ao receber mais de um id, retorna um array com as espécies referentes aos ids
 
-const data = require("./data");
+const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   return data.species.filter((arrayItem) =>
@@ -55,9 +55,9 @@ function createEmployee(personalInfo, associatedWith) {
   return { id, firstName, lastName, managers, responsibleFor };
 }
 
-function isManager(id) {
-  // seu código aqui
-}
+// function isManager(id) {
+//   // seu código aqui
+// }
 
 function addEmployee(
   id,
@@ -75,46 +75,46 @@ function addEmployee(
   });
 }
 
-function countAnimals(species) {
-  // seu código aqui
-}
+// function countAnimals(species) {
+//   // seu código aqui
+// }
 
-function calculateEntry(entrants) {
-  // seu código aqui
-}
+// function calculateEntry(entrants) {
+//   // seu código aqui
+// }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
-function getSchedule(dayName) {
-  // seu código aqui
-}
+// function getSchedule(dayName) {
+//   // seu código aqui
+// }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function getOldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
-  isManager,
+  // isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
