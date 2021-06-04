@@ -23,7 +23,7 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   const idadeMinima = species.find((ani) => ani.name === animal)
-  .residents.every((ani) => ani.age >= age);
+    .residents.every((ani) => ani.age >= age);
   return idadeMinima;
 }
 // console.log(getAnimalsOlderThan('otters', 7))
@@ -32,19 +32,20 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) {
     return {};
   }
-  const achaFunc = employees.find((func) => func.firstName === employeeName || func.lastName === employeeName);
+  const achaFunc = employees.find((func) =>
+   func.firstName === employeeName || func.lastName === employeeName);
   return achaFunc;
 }
 // console.log(getEmployeeByName('Wishart'))
 
-function createEmployee({id, firstName, lastName},{managers = [], responsibleFor = []}) {
-const newEmployee = {
-  id,
-  firstName,
-  lastName,
-  managers,
-  responsibleFor,
-}
+function createEmployee({ id, firstName, lastName },{ managers = [], responsibleFor = [] }) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+};
 return newEmployee;
 }
 
