@@ -31,12 +31,11 @@ function getEmployeeByName(employeeName) {
     employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
-/*
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return {...personalInfo, ...associatedWith};
 }
 
-function isManager(id) {
+/* function isManager(id) {
   // seu código aqui
 }
 
@@ -76,6 +75,7 @@ module.exports = {
   getSpeciesByIds,
   getAnimalsOlderThan,
   getEmployeeByName,
+  createEmployee,
 /*   calculateEntry,
   getSchedule,
   countAnimals,
@@ -84,6 +84,5 @@ module.exports = {
   addEmployee,
   isManager,
   getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee, */
+  increasePrices, */
 };

@@ -293,7 +293,10 @@ module.exports = {
       firstName: 'Sharonda',
       lastName: 'Spry',
       managers: [burlId, olaId],
-      responsibleFor: [ottersId, frogsId],
+      responsibleFor: [
+        ottersId,
+        frogsId,
+      ],
     },
     {
       id: 'c1f50212-35a6-4ecd-8223-f835538526c2',
