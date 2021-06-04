@@ -118,7 +118,7 @@ console.log(increasePrices(50))
 console.log(getEmployeeCoverage()) */
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
