@@ -219,11 +219,10 @@ function increasePrices(percentage) {
 // Retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
 const responsibleList = () => employees.reduce((acc, employee) => {
   const fullName = `${employee.firstName} ${employee.lastName}`;
-  acc[fullName] = employee.responsibleFor.reduce((acc2, specieID) => {
-    const animal = species.filter((specie) => (specie.id === specieID))[0];
-    acc2.push(animal.name);
-    return acc2;
-  }, []);
+  acc[fullName] = employee.responsibleFor.map((specieID) => {
+    const animal = species.find((specie) => (specie.id === specieID));
+    return animal.name;
+  });
   return acc;
 }, {});
 
@@ -234,15 +233,14 @@ function getEmployeeCoverage(idOrName) {
     return responsibleList();
   }
   return employees.reduce((acc, employee) => {
-    const fullName = `${employee.firstName} ${employee.lastName}`;
     if (idOrName === employee.id
       || idOrName === employee.firstName
       || idOrName === employee.lastName) {
-      acc[fullName] = employee.responsibleFor.reduce((acc2, specieID) => {
-        const animal = species.filter((specie) => (specie.id === specieID));
-        acc2.push(animal[0].name);
-        return acc2;
-      }, []);
+      const fullName = `${employee.firstName} ${employee.lastName}`;
+      acc[fullName] = employee.responsibleFor.map((specieID) => {
+        const animal = species.find((specie) => (specie.id === specieID));
+        return animal.name;
+      });
     }
     return acc;
   }, {});
