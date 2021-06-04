@@ -66,23 +66,27 @@ function calculateEntry(entrants) {
   return total;
 }
 
-function getAnimalMap(options) {
+function getAnimalMap(options = {}) {
+  const locations = { NE: [], NW: [], SE: [], SW: [] };
+  if (!options.includeNames) {
+    data.species.forEach((specie) => locations[specie.location].push(specie.name));
+    return locations;
+  }
+}
+
+function getSchedule(/* dayName */) {
   // seu código aqui
 }
 
-function getSchedule(dayName) {
+function getOldestFromFirstSpecies(/* id */) {
   // seu código aqui
 }
 
-function getOldestFromFirstSpecies(id) {
+function increasePrices(/* percentage */) {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
-
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage(/* idOrName */) {
   // seu código aqui
 }
 
