@@ -107,9 +107,33 @@ function increasePrices(percentage) {
   prices.Child = Math.round(((prices.Child * pricePercentage) + prices.Child) * 100) / 100;
   prices.Senior = Math.round(((prices.Senior * pricePercentage) + prices.Senior) * 100) / 100;
 }
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+
+const getAllAnimalsEmployeeCoverage = (responsible) => {
+  const animals = responsible.map((specieId) => data.species.find(({ id }) => id === specieId).name);
+  return animals;
+};
+
+function getAllEmployeeCoverage() {
+  const result = {};
+  employees.forEach(({ firstName, lastName, responsibleFor}) => {
+    result[`${firstName} ${lastName}`] = getAllAnimalsEmployeeCoverage(responsibleFor);
+  });
+  return result;
+}
+
+function getEmployeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    return getAllEmployeeCoverage();
+  }
+  const employee = data.employees
+    .find(({ id, firstName, lastName }) =>
+      idOrName === id || idOrName === firstName || idOrName === lastName);
+
+  const { firstName, lastName, responsibleFor } = employee;
+  const animals = getAllAnimalsEmployeeCoverage(responsibleFor);
+
+  return { [`${firstName} ${lastName}`]: animals };
+}
 
 module.exports = {
   calculateEntry,
@@ -118,7 +142,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
