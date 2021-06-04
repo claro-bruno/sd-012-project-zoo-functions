@@ -36,8 +36,16 @@ function getEmployeeByName(employeeName) {
   employees.lastName.filter();
 }
 
-function createEmployee() {
-  // seu código aqui - personalInfo, associatedWith
+function createEmployee(personalInfo, associatedWith) {
+  personalInfo = {
+    id: '',
+    firstName: '',
+    lastName: '',
+  };
+  associatedWith = {
+    managers: '',
+    responsibleFor: '',
+  }
 }
 
 function isManager() {
