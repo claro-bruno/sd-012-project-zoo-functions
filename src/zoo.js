@@ -17,12 +17,12 @@ function getSpeciesByIds(...codigo) {
   return especie;
 }
 
-// function getAnimalsOlderThan(animal, age) {
-//   const encontrarAnimal = species.find((itemArray) => itemArray.name === animal);
-//   const animalVelho = encontrarAnimal.residents.every((itemArray) => itemArray.age > age);
-//   return animalVelho;
-//   // console.log(animalVelho); //funciona no console.log mas não no return;
-// }
+function getAnimalsOlderThan(animal, age) {
+  const encontrarAnimal = species.find((itemArray) => itemArray.name === animal);
+  const animalVelho = encontrarAnimal.residents.every((itemArray) => itemArray.age > age);
+  return animalVelho;
+  // console.log(animalVelho); //funciona no console.log mas não no return;
+}
 // getAnimalsOlderThan('penguins', 10);
 
 // function getEmployeeByName(employeeName) {
@@ -121,7 +121,7 @@ module.exports = {
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
-  // getAnimalsOlderThan,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
