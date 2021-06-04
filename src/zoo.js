@@ -30,12 +30,14 @@ function getAnimalsOlderThan(animal, age) {
 }
 // testar Default Parameters para saber a opção de não ter parametro Bloco 8.5
 function getEmployeeByName(employeeName) {
-  const nameArray = [];
-  const verifyNames = employees.find(
+  if (employeeName === undefined) {
+    const nameArray = {};
+    return nameArray;
+  }
+  const verifyNames = data.employees.find(
     (name) => name.firstName === employeeName || name.lastName === employeeName,
   );
-  nameArray.push(verifyNames);
-  return nameArray;
+  return verifyNames;
 }
 
 function createEmployee(personalInfo, associatedWith) {
