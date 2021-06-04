@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function getSpeciesByIds() {
-    //seu código aqui ids
+  // seu código aqui ids
   // const speciesByIds = data.species.find(species => species.id === id)
   // return speciesByIds
 }
