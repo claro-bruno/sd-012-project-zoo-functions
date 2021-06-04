@@ -57,7 +57,7 @@ function addEmployee(...rest) {
   const arg = { ...rest };
   const { 0: id, 1: firstName, 2: lastName } = arg;
   if (arg[3] === undefined || arg[4] === undefined) {
-    const { 3: managers = [], 4: responsibleFor = [] } = arg;/* 
+    const { 3: managers = [], 4: responsibleFor = [] } = arg;/*
     console.log({ id, firstName, lastName, managers, responsibleFor }); */
     employees.push({ id, firstName, lastName, managers, responsibleFor });
     /* console.log(employees.length); */
@@ -102,7 +102,7 @@ function calculateEntry(entrants) {
     /* console.log(atual); */
     accumulator += atual;
     return accumulator;
- }, 0);
+  }, 0);
   return result;
 }
 
