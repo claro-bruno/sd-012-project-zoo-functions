@@ -38,10 +38,10 @@ function getEmployeeByName(employeeName) {
   const acharSegundoNome = data.employees.find((nome) => nome.lastName === employeeName);
   return acharPrimeiroNome || acharSegundoNome || userDisplay;
 }
-console.log(getEmployeeByName());
 
-function createEmployee() {
-  // seu código aqui personalInfo, associatedWith
+function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui
+  return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager() {
