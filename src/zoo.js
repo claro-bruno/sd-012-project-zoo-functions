@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 // 0938aa23-f153-4937-9f88-4858b24d6bce id de teste
 const data = require('./data');
 const arraysOfData = data.species; // recolhe o objeto "species" da variavel data
+;
 function getSpeciesByIds(...ids){ 
   let idGathered = arraysOfData.filter( element => ids.find( verId  => verId === element.id));// Compara o parametro com a data e retorna seu resultado
   //console.log(idGathered)
@@ -18,9 +19,12 @@ function getSpeciesByIds(...ids){
 };
 //getSpeciesByIds('fdb2543b-5662-46a7-badc-93d960fdc0a8', '0e7b460e-acf4-4e17-bcb3-ee472265db83'); testes diretos
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const animalName = arraysOfData.find( item => item.name === animal);
+  const animalAgeVerify = animalName.residents.every(item => item.age >= age);
+  console.log(`Verifica o retorno da comparação do animal com seu respectiva idade: (${animalAgeVerify})`);
+  return animalAgeVerify;
 }
-
+//getAnimalsOlderThan('lions', 5) teste
 function getEmployeeByName(employeeName) {
   // seu código aqui
 }
