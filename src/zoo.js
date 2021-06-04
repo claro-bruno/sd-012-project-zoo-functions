@@ -61,53 +61,111 @@ function calculateEntry(entrants) {
   return sumEntry(Object.entries(entrants));
 }
 
-/* const getSpeciesByLocation = (species, location) => {
+const getSpeciesByLocation = (species, location) => {
   const specieByLocation = species.filter((specie) => specie.location === location);
   return specieByLocation.map((specie) => specie.name);
-}; */
+};
 
-/* const getSpeciesWithName = (species, location) => {
+const getSpeciesWithName = (species, location) => {
   const specieWithName = species.filter((specie) => specie.location === location).map((specie) => {
     const objectSpecie = { [specie.name]: (specie.residents.map((resident) => resident.name)) };
     return objectSpecie;
   });
   return specieWithName;
-}; */
+};
 
-/* const getSpeciesWithNameSorted = (species, location) => {
+const getSpeciesWithNameSorted = (species, location) => {
   const specieSorted = species.filter((specie) => specie.location === location).map((specie) => {
-    const objectSpecieSorted = { [specie.name]: (specie.residents).sort((a, b) => {
+    const residentsCopy = [...specie.residents];
+    const objectSpecieSorted = { [specie.name]: (residentsCopy).sort((a, b) => {
       if (b.name > a.name) return -1;
       return 0;
     }).map((resident) => resident.name) };
     return objectSpecieSorted;
   });
   return specieSorted;
-}; */
+};
 
-/* const callAnimalMapFunction = (animalMapFunction) => ({
-  NE: animalMapFunction(data.species, 'NE'),
-  NW: animalMapFunction(data.species, 'NW'),
-  SE: animalMapFunction(data.species, 'SE'),
-  SW: animalMapFunction(data.species, 'SW'),
-}); */
+const getSpeciesWithSex = (species, location, sex) => {
+  const specieSex = species.filter((specie) => specie.location === location).map((specie) => {
+    const objectSpecie = { [specie.name]: (specie.residents.filter((resident) => {
+      const verifySex = resident.sex === sex;
+      return verifySex;
+    }).map((resident) => resident.name)) };
+    return objectSpecie;
+  });
+  return specieSex;
+};
 
-/* function getAnimalMap(options) {
-  const optionDefault = (typeof (options) === 'undefined');
-  if (optionDefault) {
-    return callAnimalMapFunction(getSpeciesByLocation);
+const getSpeciesWithSexSorted = (species, location, sex) => {
+  const specieSexSorted = species.filter((specie) => specie.location === location).map((specie) => {
+    const residentsCopy = [...specie.residents];
+    const objectSpecieSorted = { [specie.name]: (residentsCopy.filter((resident) => {
+      const verifySexSorted = resident.sex === sex;
+      return verifySexSorted;
+    }).sort((a, b) => {
+      if (b.name > a.name) return -1;
+      return 0;
+    }).map((resident) => resident.name)) };
+    return objectSpecieSorted;
+  });
+  return specieSexSorted;
+};
+
+const callAnimalMapFunction = (animalMapFunction, sex) => {
+  if (animalMapFunction === getSpeciesWithSex || animalMapFunction === getSpeciesWithSexSorted) {
+    return {
+      NE: animalMapFunction(data.species, 'NE', sex),
+      NW: animalMapFunction(data.species, 'NW', sex),
+      SE: animalMapFunction(data.species, 'SE', sex),
+      SW: animalMapFunction(data.species, 'SW', sex),
+    };
   }
-  const optionNames = (options.includeNames === true && Object.entries(options).length === 1);
-  if (optionNames) {
-    return callAnimalMapFunction(getSpeciesWithName);
-  }
-  const optionSorted = (options.includeNames === true && options.sorted === true);
-  if (optionSorted) {
-    return callAnimalMapFunction(getSpeciesWithNameSorted);
-  }
-  // const optionSex = ();
-  // const optionSexSorted = ();
-} */
+  return {
+    NE: animalMapFunction(data.species, 'NE'),
+    NW: animalMapFunction(data.species, 'NW'),
+    SE: animalMapFunction(data.species, 'SE'),
+    SW: animalMapFunction(data.species, 'SW'),
+  };
+};
+
+const verifyDefault = (options) => (typeof (options) === 'undefined');
+
+const verifyNames = (names, length) => (names === true && length === 1);
+
+const verifySorted = (names, length, sorted) => (names === true && sorted === true && length === 2);
+
+const existSex = (sex) => (sex === 'female' || sex === 'male');
+
+const verifySex = (names, length, sex) => (names === true && sex === true && length === 2);
+
+const verifySexSorted = (names, sex, sorted) => (names === true && sex === true && sorted === true);
+
+const verifyWrong = (names, sex, sorted) => (names !== true && (sex === true || sorted === true));
+
+const getAnimalMapExtend = (options) => {
+  const { includeNames, sorted } = options;
+  const optionsLength = Object.entries(options).length;
+  const sex = existSex(options.sex);
+  const optionSex = verifySex(includeNames, optionsLength, sex);
+  if (optionSex) return callAnimalMapFunction(getSpeciesWithSex, options.sex);
+  const optionSexSorted = verifySexSorted(includeNames, sex, sorted);
+  if (optionSexSorted) return callAnimalMapFunction(getSpeciesWithSexSorted, options.sex);
+  const optionWrong = verifyWrong(includeNames, sex, sorted);
+  if (optionWrong) return callAnimalMapFunction(getSpeciesByLocation);
+};
+
+function getAnimalMap(options) {
+  const optionDefault = verifyDefault(options);
+  if (optionDefault) return callAnimalMapFunction(getSpeciesByLocation);
+  const { includeNames, sorted } = options;
+  const optionsLength = Object.entries(options).length;
+  const optionNames = verifyNames(includeNames, optionsLength);
+  if (optionNames) return callAnimalMapFunction(getSpeciesWithName);
+  const optionSorted = verifySorted(includeNames, optionsLength, sorted);
+  if (optionSorted) return callAnimalMapFunction(getSpeciesWithNameSorted);
+  return getAnimalMapExtend(options);
+}
 
 const formatSchedule = (hour) => {
   if (hour[0] === 'Monday') return ({ [hour[0]]: 'CLOSED' });
@@ -174,7 +232,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
