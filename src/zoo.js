@@ -140,6 +140,13 @@ function getEmployeeCoverage(idOrName) {
       .responsibleFor.map((specieId) => data.species.find((specie) =>
         specie.id === specieId).name) };
   }
+
+  const employeesCovarage = {};
+  data.employees.forEach((employee) => {
+    employeesCovarage[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
+      .map((specieId) => getSpeciesByIds(specieId)[0].name);
+  });
+  return employeesCovarage;
 }
 
 module.exports = {
