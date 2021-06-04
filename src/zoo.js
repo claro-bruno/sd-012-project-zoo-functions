@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -86,23 +86,27 @@ function calculateEntry(entrants) {
   // seu código aqui
 }  */
 
-/* function getSchedule(dayName) {
+function getSchedule(dayName) {
   // seu código aqui
-  return hours.map((hour) => hour.Tuesday)
+  let arrayObj = Object.entries(hours).map((hour) => hour);
+  if (!dayName) {
+    arrayObj = arrayObj.map((d) => `"${d[0]}": "Open from ${d[1].open}am until ${d[1].close}pm"`);
+    return JSON.parse(`{${arrayObj.join(', ')}}`);
+  } let d = arrayObj.find((day) => day[0] === dayName)
+  return `"${d[0]}": "Open from ${d[1].open}am until ${d[1].close}pm"`
 }
-console.log(getSchedule())
-function getOldestFromFirstSpecies(id) {
+console.log(getSchedule('Monday'));
+/* function getOldestFromFirstSpecies(id) {
   // seu código aqui
 } */
-
-function increasePrices(percentage) {
+/* function increasePrices(percentage) {
   // seu código aqui
-  prices.Adult += Math.round((prices.Adult) / 100, 2) * percentage;
-  prices.Child += Math.round((prices.Child) / 100, 2) * percentage;
-  prices.Senior += Math.round((prices.Senior) / 100, 2) * percentage;
-  return prices;
+  percentage = percentage/100
+  let pricesValues = Object.values(prices)
+  pricesValues = pricesValues.map((priceValue) => priceValue += priceValue * percentage)
+  return pricesValues
 }
-
+console.log(increasePrices(50))
 /* function getEmployeeCoverage(idOrName) {
   // seu código aqui
   if(!idOrName) {
@@ -124,6 +128,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  increasePrices,
+  // increasePrices,
   createEmployee,
 };
