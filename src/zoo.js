@@ -107,24 +107,21 @@ const increasePrices = (percentage) => {
 };
 
 const getEmployeeCoverage = (idOrName) => {
-  if (idOrName) {
-    const employeeFoundByNameOrId = employees.find((employee) =>
-      employee.firstName === idOrName
-    || employee.lastName === idOrName
-    || employee.id === idOrName);
-    const animalsByEmployee = employeeFoundByNameOrId.responsibleFor;
-    const animals = species.filter((specie) =>
-      animalsByEmployee.find((animal) => specie.id === animal));
-    const animalsOnlyName = animals.map((animal) => animal.name);
-    const name = (`${employeeFoundByNameOrId.firstName} ${employeeFoundByNameOrId.lastName}`);
-    return { [name]: animalsOnlyName };
-  }
-  return employees.reduce((acc, employee) => (
+  const employeeCoverage = employees.reduce((acc, employee) => (
     { ...acc,
       [`${employee.firstName} ${employee.lastName}`]:
       employee.responsibleFor.map((specieId) =>
         species.find((specie) => specieId === specie.id).name),
     }), {});
+
+  if (!idOrName) return employeeCoverage;
+  const employeeChose = employees.find((employee) =>
+    employee.firstName === idOrName
+  || employee.lastName === idOrName
+  || employee.id === idOrName);
+  const employeeName = `${employeeChose.firstName} ${employeeChose.lastName}`;
+  const employeeCaught = Object.entries(employeeCoverage).find((name) => name[0] === employeeName);
+  return { [employeeCaught[0]]: employeeCaught[1] };
 };
 
 module.exports = {
