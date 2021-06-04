@@ -75,28 +75,8 @@ function calculateEntry(entrants) {
   );
 }
 
-function getAnimalsNames(animal) {
-  return species
-    .find((elem) => elem.name === animal)
-    .residents.map((elem) => elem.name);
-}
-
-function includeNamesObj(speciesLoc) {
-  return Object.keys(speciesLoc).reduce((acc, curr) => {
-    acc[curr] = speciesLoc[curr].map((elem) => ({ [elem]: getAnimalsNames(elem) }));
-    return acc;
-  }, {});
-}
-
-function includeNamesObjSorted(speciesLoc) {
-  return Object.keys(speciesLoc).reduce((acc, curr) => {
-    acc[curr] = speciesLoc[curr].map((elem) => ({ [elem]: getAnimalsNames(elem).sort() }));
-    return acc;
-  }, {});
-}
-
-function getAnimalMap(options) {
-  const speciesLoc = {
+function speciesLocations() {
+  return {
     NE: species
       .filter((specie) => specie.location === 'NE')
       .map((elem) => elem.name),
@@ -110,9 +90,51 @@ function getAnimalMap(options) {
       .filter((specie) => specie.location === 'SW')
       .map((elem) => elem.name),
   };
-  if (!options) return speciesLoc;
-  if (options.includeNames && options.sorted) return includeNamesObjSorted(speciesLoc);
-  if (options.includeNames) return includeNamesObj(speciesLoc);
+}
+
+function getAnimalsNames(animal, sex) {
+  if (sex) {
+    return species
+      .find((elem) => elem.name === animal)
+      .residents.filter((elem) => elem.sex === sex).map((elem) => elem.name);
+  }
+
+  // const female = species
+  // .find((elem) => elem.name === animal)
+  // .residents.filter((elem) => elem.sex === 'female').map((elem)=> elem.name);
+
+  // const male = species
+  // .find((elem) => elem.name === animal)
+  // .residents.filter((elem) => elem.sex === 'male').map((elem)=> elem.name);
+
+  return species
+    .find((elem) => elem.name === animal)
+    .residents.map((elem) => elem.name);
+}
+// console.log(getAnimalsNames('lions'));
+
+function includeNamesObj(speciesLoc, sex) {
+  return Object.keys(speciesLoc).reduce((acc, curr) => {
+    acc[curr] = speciesLoc[curr].map((elem) => ({ [elem]: getAnimalsNames(elem, sex) }));
+    return acc;
+  }, {});
+}
+
+function includeNamesObjSorted(speciesLoc, sex) {
+  return Object.keys(speciesLoc).reduce((acc, curr) => {
+    acc[curr] = speciesLoc[curr].map((elem) => ({ [elem]: getAnimalsNames(elem, sex).sort() }));
+    return acc;
+  }, {});
+}
+
+function getAnimalMap(options) {
+  if (!options) return speciesLocations();
+  if (options.includeNames
+    && options.sex
+    && options.sorted) return includeNamesObjSorted(speciesLocations(), options.sex);
+  if (options.includeNames && options.sex) return includeNamesObj(speciesLocations(), options.sex);
+  if (options.includeNames && options.sorted) return includeNamesObjSorted(speciesLocations());
+  if (options.includeNames) return includeNamesObj(speciesLocations());
 }
 const options = { includeNames: true, sorted: true };
 console.log(getAnimalMap(options));
