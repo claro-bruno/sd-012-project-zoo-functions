@@ -15,6 +15,7 @@ const data = require('./data');
 const { species } = data;
 const { employees } = data;
 const { prices } = data;
+const { hours } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -78,11 +79,33 @@ function calculateEntry(entrants = { Adult: 0, Senior: 0, Child: 0 }) {
 
 // function getAnimalMap(options) {
 //   // seu código aqui
+//   if (!options) {
+//     const localizationAnimals = species.reduce((animal) => animal.location);
+
+//   }
+//   return 'oi';
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+// console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));
+
+// Fiz essa questão com o pull request do David Gonzaga;
+// https://github.com/tryber/sd-012-project-zoo-functions/pull/42/files
+
+function getSchedule(dayName) {
+  // seu código aqui
+  const infoDays = {};
+  const daysWeek = Object.keys(hours);
+  const response = {};
+  daysWeek.forEach((day) => {
+    const { open, close } = hours[day];
+    const information = open === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+    infoDays[day] = information;
+  });
+  response[dayName] = infoDays[dayName];
+  return dayName ? response : infoDays;
+}
+
+getSchedule('Tuesday');
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -98,7 +121,7 @@ function calculateEntry(entrants = { Adult: 0, Senior: 0, Child: 0 }) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
