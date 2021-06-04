@@ -86,8 +86,31 @@ function getAnimalMap(options = {}) {
   return locations;
 }
 
-function getSchedule(/* dayName */) {
-  // seu código aqui
+function hoursConverter(hour) {
+  if (hour > 12) return `${(hour - 12)}pm`;
+  if (hour === 0) return '12pm';
+  return `${hour}am`;
+}
+
+function scheduleMessage(dayName, schedule) {
+  if (schedule[dayName].open !== schedule[dayName].close) {
+    return `Open from ${hoursConverter(schedule[dayName]
+      .open)} until ${hoursConverter(schedule[dayName].close)}`;
+  }
+  return 'CLOSED';
+}
+
+function getSchedule(dayName) {
+  const schedule = {};
+  const { hours } = data;
+  if (dayName) {
+    schedule[dayName] = scheduleMessage(dayName, hours);
+  } else {
+    Object.keys(hours).forEach((day) => {
+      schedule[day] = scheduleMessage(day, hours);
+    });
+  }
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(/* id */) {
