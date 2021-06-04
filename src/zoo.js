@@ -130,8 +130,8 @@ function increasePrices(percentage) {
     return 0;
   }
   Object.entries(data.prices).forEach((element) => {
-    const count = element[1] * percentage / 100 + element[1];
-    const float = parseFloat((Math.round( count * 100) / 100).toFixed(2));
+    const count = element[1] * (percentage / 100) + element[1];
+    const float = parseFloat((Math.round(count * 100) / 100).toFixed(2));
     data.prices[element[0]] = float;
   });
   return data.prices;
