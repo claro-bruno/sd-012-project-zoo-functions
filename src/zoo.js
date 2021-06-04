@@ -128,12 +128,11 @@ const getAnimalMap = (options = undefined) => {
     return optionUndefined();
   }
   const { sex = undefined, sorted = undefined } = options;
-  // const localizations = ['NE', 'NW', 'SE', 'SW'];
-  const arrayNe = [...arrayTiposNames('NE', sex, sorted)];
-  const arrayNw = [...arrayTiposNames('NW', sex, sorted)];
-  const arraySe = [...arrayTiposNames('SE', sex, sorted)];
-  const arraySw = [...arrayTiposNames('SW', sex, sorted)];
-  const objeto = { NE: arrayNe, NW: arrayNw, SE: arraySe, SW: arraySw };
+  const localizations = ['NE', 'NW', 'SE', 'SW'];
+  const objeto = {};
+  localizations.forEach((key) => {
+    objeto[key] = arrayTiposNames(key, sex, sorted);
+  });
   return objeto;
 };
 
