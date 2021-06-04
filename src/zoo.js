@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.includes(specie.id));
@@ -26,7 +26,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return {...personalInfo, ...associatedWith};
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -40,21 +40,22 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  }
+  };
   return employees.push(novoFuncionario);
 }
 
 function countAnimals(specie) {
   const objeto = {};
-  species.forEach((animal) => { objeto[animal.name] = animal.residents.length});
-  return specie === undefined ? objeto : species.find((animal) =>  animal.name === specie).residents.length;
+  species.forEach((animal) => { objeto[animal.name] = animal.residents.length; });
+  return specie === undefined
+    ? objeto : species.find((animal) => animal.name === specie).residents.length;
 }
 
 function calculateEntry(entrants) {
   if (entrants === undefined) {
     return 0;
   }
-  const {Adult = 0, Child = 0, Senior = 0} = entrants;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return ((Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior));
 }
 
@@ -63,7 +64,16 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const cronograma = {
+    'Tuesday': 'Open from 8am until 6pm',
+    'Wednesday': 'Open from 8am until 6pm',
+    'Thursday': 'Open from 10am until 8pm',
+    'Friday': 'Open from 10am until 8pm',
+    'Saturday': 'Open from 8am until 10pm',
+    'Sunday': 'Open from 8am until 8pm',
+    'Monday': 'CLOSED'
+  }
+  return dayName === undefined ? cronograma : { [dayName]: cronograma[dayName] }
 }
 
 function getOldestFromFirstSpecies(id) {
