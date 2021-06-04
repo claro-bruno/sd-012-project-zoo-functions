@@ -9,10 +9,11 @@ eslint no-unused-vars: [
 ]
 */
 
+const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  const searchSpecies = document.getElementById('');
+  document.getElementById('');
   const array = [];
   if (array === []) {
     return '';
@@ -22,7 +23,11 @@ function getSpeciesByIds(...ids) {
 console.log(getSpeciesByIds());
 
 function getAnimalsOlderThan() {
-  // seu código aqui - animal, age
+  document.getElementsByTagName('');
+  species.name.every();
+  const idadeMinina = [''];
+  species.name.age.filter();
+
 }
 
 function getEmployeeByName() {
