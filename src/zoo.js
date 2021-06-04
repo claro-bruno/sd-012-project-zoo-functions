@@ -14,7 +14,7 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const newArray = [];
-  const inputId = species.filter((especie) => especie.id === ids);
+  const inputId = data.species.filter((especie) => especie.id === ids);
   const inputArray = inputId.forEach((especie) => newArray.push(especie));
   return newArray;
 }
@@ -24,7 +24,7 @@ function getAnimalsOlderThan(animal, age) {
   const verifyOlderThan = verifyAnimal.every((animals) => animals.residents.age > age);
   return verifyOlderThan;
 }
-
+// testar Default Parameters para saber a opção de não ter parametro Bloco 8.5
 function getEmployeeByName(employeeName) {
   const nameArray = [];
   const verifyNames = employees.find(
@@ -46,13 +46,22 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   const verifyManager = data.employees.some((manager) => id === manager.managers);
 }
-
+// testar shorthand Bloco 8.5
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  return data.employees.push(`{id: ${id}, firstName: ${firstName}, lastName: ${lastName}, managers: ${managers}, responsibleFor: ${responsibleFor}}`);
+  return data.employees.push(`{id: ${id}, firstName: ${firstName}, lastName: ${lastName}, managers: ${[...managers]}, responsibleFor: ${[...responsibleFor]},`);
 }
-
+// Testar object Destructuring para extrair valores das chaves bloco 8.5
 function countAnimals(species) {
-  // seu código aqui
+  const {...name} = data.species;
+  const animalCounter = data.species.find((especie) => {
+    data.species.name === species
+    return Object.keys(data.species.residents).length;
+  });
+  const noParameter = data.species.map(() => {
+    '{name: Object.keys(data.species.residents).length}: 
+  });
+  const 
+  return {};
 }
 
 function calculateEntry(entrants) {
