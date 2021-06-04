@@ -43,8 +43,9 @@ function createEmployee(person, associate) {
   return obj;
 }
 
-function isManager() {
-  // seu código aqui
+function isManager(id) {
+  return data.employees.some((valor) => valor.managers.some((manager) =>
+    manager === id));
 }
 
 function addEmployee() {
