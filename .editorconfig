@@ -2,7 +2,8 @@
 
 # top-most EditorConfig file
 root = true
-
+[*]
+quote_type = single
 # Unix-style newlines with a newline ending every file
 # Matches multiple files with brace expansion notation
 # Set default charset
