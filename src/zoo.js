@@ -9,32 +9,33 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  document.getElementById('');
-  const array = [];
-  if (array === []) {
-    return '';
+  if (ids.length === 0) {
+    return [];
   }
+  return ids.map((itemIds) => species.find((itemArray) => itemArray.id === itemIds));
 }
 
-console.log(getSpeciesByIds());
+// console.log(getSpeciesByIds());
 
 function getAnimalsOlderThan(animal, age) {
-  document.getElementsByTagName('');
-  species.name.every(); //booleano
-  const idadeMinina = [''];
-  species.name.age.filter();
-
+  return species.some((itemArray) => itemArray.name === animal
+  && itemArray.residents.every((itemResi) => itemResi.age >= age));
 }
+// console.log(getAnimalsOlderThan('lions', 12));
 
 function getEmployeeByName(employeeName) {
-  const buscaNome = document.getElementsByTagName('');
-  employees.firstName.filter();
-  employees.lastName.filter();
+  if (!employeeName) {
+    return {};
+  }
+  return employees.find((itemArray) => itemArray.firstName === employeeName
+  || itemArray.lastName === employeeName);
 }
+
+console.log(getEmployeeByName());
 
 function createEmployee(personalInfo, associatedWith) {
   personalInfo = {
@@ -55,7 +56,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  ?
+  
 }
 
 function countAnimals(species) {
@@ -83,11 +84,11 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  ????
+  
 }
 
 function getSchedule(dayName) {
-  ?????
+  
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -96,12 +97,16 @@ function getOldestFromFirstSpecies(id) {
   return id.name.sex.age
 }
 
-function increasePrices() {
-  // seu código aqui - percentage
+function increasePrices(percentage) {
+  
 }
 
-function getEmployeeCoverage() {
-  // seu código aqui - idOrName
+function getEmployeeCoverage(idOrName) {
+  id
+  firstName
+  lastName
+
+
 }
 
 module.exports = {
