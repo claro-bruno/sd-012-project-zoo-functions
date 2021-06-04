@@ -79,14 +79,8 @@ function calculateEntry(entrants = { Adult: 0, Senior: 0, Child: 0 }) {
 
 // function getAnimalMap(options) {
 //   // seu código aqui
-//   if (!options) {
-//     const localizationAnimals = species.reduce((animal) => animal.location);
-
-//   }
-//   return 'oi';
+//
 // }
-
-// console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));
 
 // Fiz essa questão com o pull request do David Gonzaga;
 // https://github.com/tryber/sd-012-project-zoo-functions/pull/42/files
@@ -105,9 +99,23 @@ function getSchedule(dayName) {
   return dayName ? response : infoDays;
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+// Fiz essa questão com o pull request do David Gonzaga;
+// https://github.com/tryber/sd-012-project-zoo-functions/pull/42/files
+
+function getOldestFromFirstSpecies(idEmployee) {
+  // seu código aqui
+  const { responsibleFor } = employees.find(({ id }) => id === idEmployee);
+  console.log(responsibleFor);
+  const careAnimals = getSpeciesByIds(...responsibleFor);
+  console.log(careAnimals);
+  const infoAnimals = careAnimals.reduce((acc, specie) => {
+    const { residents } = specie;
+    acc.push(...residents);
+    return acc;
+  }, []);
+  infoAnimals.sort((ageA, ageB) => ageB.age - ageA.age);
+  return Object.values(infoAnimals[0]);
+}
 
 // Fiz essa questão com o pull request do David Gonzaga;
 // https://github.com/tryber/sd-012-project-zoo-functions/pull/42/files
@@ -137,7 +145,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
