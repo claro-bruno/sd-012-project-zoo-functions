@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { hours } = require('./data');
+const { hours, species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -49,13 +49,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(species) {
-  if (!species) {
+function countAnimals(species2) {
+  if (!species2) {
     const objSpecie = {};
     data.species.forEach((item) => { objSpecie[item.name] = item.residents.length; });
     return objSpecie;
   }
-  return data.species.find((key) => key.name === species).residents.length;
+  return data.species.find((key) => key.name === species2).residents.length;
 }
 
 function calculateEntry(entrants = 0) {
@@ -117,9 +117,35 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+const responsibleFor = () => {
+  const allEmployess = data.employees.reduce((acc, employee) => { // acessar objeto com dados do funcionário (first name, last name, responsabile)
+    const animalId = employee.responsibleFor;
+    const speciesMap = animalId.map((idSpecie) => { // formar lista com o nome das espécies pelas quais cada profissional é responsábel
+      const filterSpecies = species.find((specie) => specie.id === idSpecie); // encontrar a espécie pelo id
+      return filterSpecies.name;
+    });
+    acc[`${employee.firstName} ${employee.lastName}`] = speciesMap;
+    return acc;
+  }, {});
+  return allEmployess;
+};
+
+function getEmployeeCoverage(idOrName) {
+  if (!idOrName) return responsibleFor();
+  return data.employees.reduce((acc, employee) => {
+    if (idOrName === employee.firstName
+      || idOrName === employee.lastName
+      || idOrName === employee.id) {
+      const animalId = employee.responsibleFor;
+      const speciesMap = animalId.map((idSpecie) => { // formar lista com o nome das espécies pelas quais cada profissional é responsábel
+        const filterSpecies = species.find((specie) => specie.id === idSpecie); // encontrar a espécie pelo id
+        return filterSpecies.name;
+      });
+      acc[`${employee.firstName} ${employee.lastName}`] = speciesMap;
+    }
+    return acc;
+  }, {});
+}
 
 module.exports = {
   calculateEntry,
@@ -128,7 +154,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
