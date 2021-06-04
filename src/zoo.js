@@ -64,14 +64,24 @@ function addEmployee(...rest) {
     return employees.length;
   }
   const { 3: managers, 4: responsibleFor } = arg;
+
   employees.push({ id, firstName, lastName, managers, responsibleFor });
   /* console.log(employees.length); */
   return employees.length;
 }
 
-function countAnimals(species) {
+function countAnimals(especies) {
   // seu código aqui
+  if (especies === undefined) {
+    const arrayPopularity = data.species.map((number, indice) => number.popularity);
+    const arrayInd = data.species.map((populacao) => populacao.name);
+    console.log({...arrayInd});
+    return 'oi';
+  }
+  const numEspecimes = data.species.find((spec) => spec.name === especies);
+  return numEspecimes.popularity;
 }
+countAnimals();
 
 function calculateEntry(entrants) {
   // seu código aqui
