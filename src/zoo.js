@@ -90,6 +90,7 @@ function calculateEntry(entrants) {
 // }
 // console.log(getAnimalMap());
 
+// Referência: Natalia Souza - turma 11.
 function getSchedule(dayName) {
   if (!dayName) {
     return Object.keys(hours).reduce((acc, day) => {
@@ -103,18 +104,20 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const callback1 = (employee) => employee.id === id;
-  const callback2 = (specieId) => specieId[0];
-  const getSpecieIdByEmployeeId = employees.find(callback1).responsibleFor.find(callback2);
-  const callback3 = (specie) => specie.id === getSpecieIdByEmployeeId;
-  const callback4 = (acc, animal) => ((acc.age > animal.age) ? acc : animal);
-  const oldestAnimal = species.find(callback3).residents.reduce(callback4);
+  const callback = (employee) => employee.id === id;
+  const firstSpecieRespId = employees.find(callback).responsibleFor[0];
+  const oldestAnimal = species
+    .find((specie) => specie.id === firstSpecieRespId).residents
+    .reduce((acc, resident) => ((acc.age > resident.age) ? acc : resident));
   return Object.values(oldestAnimal);
 }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  Object.keys(prices).forEach((newPrice) => {
+    prices[newPrice] = Math.round(prices[newPrice] * (1 + percentage / 100) * 100) / 100;
+  });
+  return prices;
+}
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
@@ -132,6 +135,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
