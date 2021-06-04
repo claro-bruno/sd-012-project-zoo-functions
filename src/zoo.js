@@ -15,13 +15,13 @@ const data = require('./data');
 
 const getSpeciesByIds = (...ids) => data.species.filter((specie, i) => specie.id === ids[i]);
 // seu código aqui
-console.log(getSpeciesByIds());
+// console.log(getSpeciesByIds());
 
 const getAnimalsOlderThan = (animal, age) => data.species
   .find((specie) => specie.name === animal).residents
   .every((resident) => resident.age >= age);
 
-console.log(getAnimalsOlderThan('lions', 20));
+// console.log(getAnimalsOlderThan('lions', 20));
 
 const getEmployeeByName = (employeeName) => {
   if (!employeeName) return {};
@@ -29,7 +29,7 @@ const getEmployeeByName = (employeeName) => {
    || employee.lastName === employeeName);
 };
 
-console.log(getEmployeeByName('Nigel'));
+// console.log(getEmployeeByName('Nigel'));
 
 // const obj = {
 //   id: 'xablau',
@@ -62,9 +62,15 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
   return data.employees.push(newEmployee);
 };
 
-function countAnimals() {
-  // seu código aqui species
-}
+const countAnimals = (species) => {
+  if (!species) {
+    return data.species.reduce((acumulador, item) => ({
+      ...acumulador, [item.name]: item.residents.length,
+    }), {});
+  }
+  return data.species.find((specie) => specie.name === species).residents.length;
+};
+// console.log(countAnimals())
 
 function calculateEntry() {
   // seu código aqui entrants
