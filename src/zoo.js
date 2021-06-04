@@ -109,10 +109,19 @@ function getSchedule(dayName) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+// Fiz essa questão com o pull request do David Gonzaga;
+// https://github.com/tryber/sd-012-project-zoo-functions/pull/42/files
 
+function increasePrices(percentage) {
+  // seu código aqui
+  const pricesKeys = Object.keys(prices);
+
+  pricesKeys.forEach((key) => {
+    const price = prices[key] + prices[key] * (percentage / 100);
+    const decimal = Math.ceil((price - Math.floor(price)) * 100) / 100;
+    prices[key] = Math.floor(price) + decimal;
+  });
+}
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
 // }
@@ -129,6 +138,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
