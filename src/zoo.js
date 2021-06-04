@@ -15,19 +15,19 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  return data.species.filter((specie) => ids.find((id) => specie.id === id));
+  return species.filter((specie) => ids.find((id) => specie.id === id));
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  return data.species.find((specie) => specie.name === animal).residents
+  return species.find((specie) => specie.name === animal).residents
     .every((resident) => resident.age > age);
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
   if (employeeName) {
-    return data.employees.find((employee) => employee.firstName === employeeName
+    return employees.find((employee) => employee.firstName === employeeName
       || employee.lastName === employeeName);
   }
   return {};
@@ -38,37 +38,37 @@ function createEmployee(personalInfo, associatedWith) {
   return {
     ...personalInfo,
     ...associatedWith,
-  }
+  };
 }
 
 function isManager(id) {
   // seu código aqui
-  return data.employees.some((employee) => employee.managers
+  return employees.some((employee) => employee.managers
     .some((manager) => manager === id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals(speciesName) {
   // seu código aqui
   if (speciesName) {
-    return data.species.find(({ name }) => name === speciesName).residents.length;
+    return species.find(({ name }) => name === speciesName).residents.length;
   }
   // O código a seguir foi retirado de: https://vmarchesin.medium.com/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
-  return data.species.reduce((acc, specie) => ({
+  return species.reduce((acc, specie) => ({
     ...acc, [specie.name]: specie.residents.length,
   }), {});
 }
 
 function calculateEntry(entrants) {
   // seu código aqui
-  const prices = data.prices;
+  const { AdultPrice, ChildPrice, SeniorPrice } = data.prices;
   if (entrants) {
     const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-    return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+    return (Adult * AdultPrice) + (Child * ChildPrice) + (Senior * SeniorPrice);
   }
   return 0;
 }
@@ -96,6 +96,11 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const animalId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const oldestAnimal = species.find((animal) => animal.id === animalId).residents
+    .reduce((residentA, residentB) => (residentA.age > residentB.age ? residentA : residentB));
+  const { name, sex, age } = oldestAnimal;
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
