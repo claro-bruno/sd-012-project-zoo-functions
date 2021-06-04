@@ -108,10 +108,23 @@ function getSchedule() {
   // dayName
 }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui
-  // id
+function getOldestFromFirstSpecies(id) {
+  // find the employee OK
+  // find the first curated specie of this employee OK
+  // find the older animal of this specie OK
+  // return sex, name and age of this older animal
+  const employeesList = data.employees.map((functionary) => functionary);
+  const employee = employeesList.find((functionaryList) => functionaryList.id === id);
+  const idCuratedSpecie = employee.responsibleFor[0];
+  const species = data.species.map((animals) => animals);
+  const curatedSpecie = species.find((animalsList) => animalsList.id === idCuratedSpecie);
+  const curatedSpecieResidents = curatedSpecie.residents;
+  const oldAgeInSpecieResidents = Math.max(...curatedSpecieResidents.map((o) => o.age));
+  const olderResident = curatedSpecieResidents.find((old) => old.age === oldAgeInSpecieResidents);
+  const organizeOlderResident = Object.values(olderResident);
+  return organizeOlderResident;
 }
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices() {
   // seu código aqui
