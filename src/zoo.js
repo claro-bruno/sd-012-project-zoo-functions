@@ -146,10 +146,23 @@ function getOldestFromFirstSpecies(id) {
   /* console.log(oldData); */
   return [oldData.name, oldData.sex, oldData.age];
 }
-getOldestFromFirstSpecies('fdb2543b-5662-46a7-badc-93d960fdc0a8');
+
 function increasePrices(percentage) {
   // seu código aqui
+  const newPercent = parseFloat(((100 + percentage) / 100).toPrecision(4));
+  /* const chaves = Object.keys(prices);
+  chaves.forEach((chave) => {
+    prices[chave] = Math.round((prices[chave] * newPercent) * 100) / 100;
+    console.log(prices);
+  }); */
+  prices.Adult = Math.round((prices.Adult * newPercent) * 100) / 100;
+  prices.Senior = Math.round((prices.Senior * newPercent) * 100) / 100;
+  prices.Child = Math.round((prices.Child * newPercent) * 100) / 100;
+  console.log(prices);
+  return prices;
+  /* return prices[chave]; */
 }
+/* increasePrices(50); */
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
