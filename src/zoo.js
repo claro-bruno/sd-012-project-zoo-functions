@@ -37,13 +37,15 @@ function getEmployeeByName(employeeName) {
 }
 // console.log(getEmployeeByName('Wishart'))
 
-function createEmployee(personalInfo, associatedWith) {
-  // const { id, firstName, lastName } = personalInfo;
-  // console.log(personalInfo)
-  // const { managers, responsibleFor } = associatedWith;
-  // console.log(associatedWith)
-  // const newEmployee = {personalInfo, associatedWith};
-  // return newEmployee;
+function createEmployee({id, firstName, lastName},{managers = [], responsibleFor = []}) {
+const newEmployee = {
+  id,
+  firstName,
+  lastName,
+  managers,
+  responsibleFor,
+}
+return newEmployee;
 }
 
 function isManager(id) {
@@ -69,8 +71,8 @@ function countAnimals(specie) {
 }
 
 function calculateEntry(entrants) {
-  if (entrants === undefined || Object.keys(entrants).length === 0) {return 0};
-  const {Adult = 0, Child = 0, Senior = 0} = entrants
+  if (entrants === undefined || Object.keys(entrants).length === 0) { return 0 };
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return  Adult * data.prices.Adult + Child * data.prices.Child + Senior * data.prices.Senior
 }
 // console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }))
@@ -80,12 +82,18 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  
+  if (Object.keys(dayName).length === 0) { return }
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies(funcId) {
+  const checkFunId = employees.find((person) => funcId === person.id).responsibleFor.find((especie) => especie);
+  const checkSpecie = species.filter((specie) => specie.id === checkFunId)
+  
+
+
+  return checkSpecie;
 }
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'))
 
 function increasePrices(percentage) {
   // seu código aqui
