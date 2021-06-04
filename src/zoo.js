@@ -14,6 +14,7 @@ const data = require('./data');
 
 const { species } = data;
 const { employees } = data;
+const { prices } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -69,11 +70,11 @@ function countAnimals(specie) {
   return verifyPopularity;
 }
 
-console.log(countAnimals());
-
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants = { Adult: 0, Senior: 0, Child: 0 }) {
+  // seu código aqui
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  return Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -96,7 +97,7 @@ console.log(countAnimals());
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
