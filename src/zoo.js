@@ -142,7 +142,24 @@ function increasePrices(percentage) {
 // Para o arrendodamento usando (Math.round(data.prices.Child * 100) / 100) utilizei a fonte: https://stackoverflow.com/questions/10015027/javascript-tofixed-not-rounding
 
 function getEmployeeCoverage(idOrName) {
-  return idOrName;
+  if (idOrName === undefined || idOrName === null) {
+    const object = {};
+    data.employees.forEach((employee) => {
+      const { firstName, lastName, responsibleFor } = employee;
+      const names = responsibleFor.map((name) => data.species
+        .find((specie) => specie.id === name).name);
+      object[`${firstName} ${lastName}`] = names;
+    });
+    return object;
+  }
+  const newObject = {};
+  const people = data.employees.find((person) => person
+    .id === idOrName || person.firstName === idOrName || person.lastName === idOrName);
+  const { firstName, lastName, responsibleFor } = people;
+  const names = responsibleFor.map((name) => data.species
+    .find((specie) => specie.id === name).name);
+  newObject[`${firstName} ${lastName}`] = names;
+  return newObject;
 }
 
 module.exports = {
