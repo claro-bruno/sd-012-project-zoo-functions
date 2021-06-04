@@ -72,7 +72,7 @@ function isManager(id) {
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
-sd-012-project-zoo-functions on  vini
+module.exports = {
   // countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
