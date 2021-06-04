@@ -38,8 +38,10 @@ function getEmployeeByName(employeeName) {
 };
 //getEmployeeByName('Nelson'); 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const employeeCreated = {...personalInfo, ...associatedWith};
+  return employeeCreated; 
 }
+//createEmployee({nome: 'teste'},{sobre: 'teste2'})
 
 function isManager(id) {
   // seu código aqui
