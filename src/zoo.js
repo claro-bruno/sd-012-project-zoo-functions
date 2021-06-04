@@ -44,19 +44,15 @@ function isManager(id) {
   return employees.some((person) => person.managers.includes(id))
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const emp = {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return employees.push({
     id: id,
     firstName: firstName,
     lastName: lastName,
-    managers: [managers],
-    responsibleFor: [responsibleFor],
-  };
-
-  employees.push(emp);
-  return employees;
+    managers: managers,
+    responsibleFor: responsibleFor,
+  })
 }
-
 
 
 function countAnimals(species) {
