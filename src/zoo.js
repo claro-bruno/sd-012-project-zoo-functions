@@ -17,17 +17,15 @@ const getSpeciesByIds = (...ids) => species.filter((specie) => ids.includes(spec
 
 function getAnimalsOlderThan(animal, age) {
   const armazenaAnimal = species.find((specie) => specie.name === animal);
-  const armazenaIdade = armazenaAnimal.residents.every((animals) => animals.age >= age);
+  const armazenaIdade = armazenaAnimal.residents.every((resident) => resident.age >= age);
   return armazenaIdade;
 }
 
 function getEmployeeByName(employeeName) {
-  if (!employeeName) return ({});
-  const pegaObjeto = () => {
-    employees.find((employes) =>
-      employes === employees.firstName || employes === employees.lastName);
-  };
-  return pegaObjeto;
+  if (!employeeName) return {};
+  const job = employees.find((employes) =>
+    employes.firstName === employeeName || employes.lastName === employeeName);
+  return job;
 }
 
 // function createEmployee(personalInfo, associatedWith) {
