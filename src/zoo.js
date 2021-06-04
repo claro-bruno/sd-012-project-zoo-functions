@@ -21,7 +21,7 @@ function getSpeciesByIds(...ids) {
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   return data.species.find((specie) => specie.name === animal).residents
-    .every((individual) => individual.age > age);
+    .every((resident) => resident.age > age);
 }
 
 function getEmployeeByName(employeeName) {
@@ -52,8 +52,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(species) {
+function countAnimals(speciesName) {
   // seu código aqui
+  if (speciesName) {
+    return data.species.find(({ name }) => name === speciesName).residents.length;
+  }
+  // O código a seguir foi retirado de: https://vmarchesin.medium.com/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
+  return data.species.reduce((acc, specie) => ({
+    ...acc, [specie.name]: specie.residents.length,
+  }), {});
 }
 
 function calculateEntry(entrants) {
