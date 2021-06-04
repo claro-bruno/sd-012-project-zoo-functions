@@ -113,14 +113,16 @@ function getAnimalsNames(animal, sex) {
 }
 // console.log(getAnimalsNames('lions'));
 
-function includeNamesObj(speciesLoc, sex) {
+function includeNamesObj(sex) {
+  const speciesLoc = speciesLocations();
   return Object.keys(speciesLoc).reduce((acc, curr) => {
     acc[curr] = speciesLoc[curr].map((elem) => ({ [elem]: getAnimalsNames(elem, sex) }));
     return acc;
   }, {});
 }
 
-function includeNamesObjSorted(speciesLoc, sex) {
+function includeNamesObjSorted(sex) {
+  const speciesLoc = speciesLocations();
   return Object.keys(speciesLoc).reduce((acc, curr) => {
     acc[curr] = speciesLoc[curr].map((elem) => ({ [elem]: getAnimalsNames(elem, sex).sort() }));
     return acc;
@@ -129,10 +131,8 @@ function includeNamesObjSorted(speciesLoc, sex) {
 
 function getAnimalMap(options) {
   if (!options || !options.includeNames) return speciesLocations();
-  if (options.includeNames && options.sex && options.sorted) return includeNamesObjSorted(speciesLocations(), options.sex);
-  if (options.includeNames && options.sex) return includeNamesObj(speciesLocations(), options.sex);
-  if (options.includeNames && options.sorted) return includeNamesObjSorted(speciesLocations());
-  if (options.includeNames) return includeNamesObj(speciesLocations());
+  if (options.includeNames && options.sorted) return includeNamesObjSorted(options.sex);
+  return includeNamesObj(options.sex);
 }
 const options = { includeNames: true, sorted: true };
 console.log(getAnimalMap(options));
