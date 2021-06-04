@@ -20,10 +20,12 @@ eslint no-unused-vars: [
 // Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
 // Ao receber mais de um id, retorna um array com as espécies referentes aos ids
 
-const data = require('./data');
+const data = require("./data");
 
 function getSpeciesByIds(...ids) {
-  return data.species.filter((arrayItem) => ids.find((arrayItem1) => arrayItem.id === arrayItem1));
+  return data.species.filter((arrayItem) =>
+    ids.find((arrayItem1) => arrayItem.id === arrayItem1)
+  );
 }
 
 // console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
@@ -31,28 +33,46 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   const nomeAnimal = data.species.find((specie) => specie.name === animal);
-  const idadeAnimal = nomeAnimal.residents.every((idadeMax) => idadeMax.age >= age);
+  const idadeAnimal = nomeAnimal.residents.every(
+    (idadeMax) => idadeMax.age >= age
+  );
   return idadeAnimal;
 }
 // console.log(getAnimalsOlderThan('bears', 4));
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
-  const nomeColaborador = data.employees.find((employee) =>
-    employee.firstName === employeeName || employee.lastName === employeeName);
+  const nomeColaborador = data.employees.find(
+    (employee) =>
+      employee.firstName === employeeName || employee.lastName === employeeName
+  );
   return nomeColaborador;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 
 function isManager(id) {
   // seu código aqui
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = []
+) {
+  return data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function countAnimals(species) {
