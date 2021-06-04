@@ -72,7 +72,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 
 function calculateEntry(entrants) {
-  if (entrants === undefined || Object.keys(entrants).length === 0)  return 0 
+  if (entrants === undefined || Object.keys(entrants).length === 0) return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return Adult * data.prices.Adult + Child * data.prices.Child + Senior * data.prices.Senior;
 }
@@ -88,11 +88,8 @@ function calculateEntry(entrants) {
 
 function getOldestFromFirstSpecies(funcId) {
   const checkFunId = employees.find((person) => funcId === person.id)
-  .responsibleFor.find((especie) => especie);
+    .responsibleFor.find((especie) => especie);
   const checkSpecie = species.filter((specie) => specie.id === checkFunId);
-  
-
-
   return checkSpecie;
 }
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'))
