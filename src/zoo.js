@@ -55,21 +55,32 @@ function isManager(id) {
   return gerentes.some((pessoa, index) => (pessoa[index] === id));
 }
 
-function addEmployee(a, e, i, o = [], u = []) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   const resposta = {
-    id: a,
-    firstName: e,
-    lastName: i,
-    managers: o,
-    responsibleFor: u,
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
   };
   funcionarios.push(resposta);
   // return funcionarios;
 }
 
-function countAnimals() {
-  // seu código aqui species
+function countAnimals(species) {
+  // seu código aqui
+  const nomesEspecies = especies.map((especie) => especie.name);
+  const numerosEspecies = especies.map((animal) => animal.residents.length);
+  if (nomesEspecies.some((animal) => animal === species)) {
+    const animalParam = especies.find((animal) => animal.name === species);
+    return animalParam.residents.length;
+  }
+  const resposta = nomesEspecies.reduce((accumulator, currentValue, index) => {
+    accumulator[currentValue] = numerosEspecies[index];
+    return accumulator;
+  }, {});
+  return resposta;
 }
 
 function calculateEntry() {
