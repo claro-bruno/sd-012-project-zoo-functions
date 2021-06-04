@@ -131,9 +131,25 @@ function increasePrices(percentage) {
   data.prices = objResult;
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+  const obj = {};
+
+  if (!idOrName) {
+    data.employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      obj[`${firstName} ${lastName}`] = responsibleFor.map((animal) =>
+        data.species.find(({ id }) => id === animal).name);
+    });
+  } else {
+    const employeeResponsabity = data.employees.find(({ id, firstName, lastName }) =>
+      idOrName === id || idOrName === firstName || idOrName === lastName);
+
+    obj[`${employeeResponsabity.firstName} ${employeeResponsabity.lastName}`
+    ] = employeeResponsabity.responsibleFor.map((animal) =>
+      data.species.find(({ id }) => animal === id).name);
+  }
+  return obj;
+}
 
 module.exports = {
   getSpeciesByIds,
@@ -148,5 +164,5 @@ module.exports = {
   getSchedule,
   getOldestFromFirstSpecies,
   increasePrices,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
 };
