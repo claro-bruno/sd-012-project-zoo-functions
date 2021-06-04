@@ -158,10 +158,21 @@ function increasePrices(percentage) {
   data.prices.Child = Math.round(valorCrianca * 100) / 100;
 }
 
-function getEmployeeCoverage() {
-  // seu código aqui
-  // idOrName
+function getEmployeeCoverage(idOrName) {
+  if (!idOrName) {
+    const objetoFinal = data.employees.reduce((acc, employee) => {
+      const speciesNames = employee.responsibleFor.map((id) => {
+        const objSpecie = data.species.find((specie) => specie.id === id);
+        return objSpecie.name;
+      });
+      acc[`${employee.firstName} ${employee.lastName}`] = speciesNames;
+      return acc;
+    }, {});
+    return objetoFinal;
+  }
 }
+
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
