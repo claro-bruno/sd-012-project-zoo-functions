@@ -106,9 +106,14 @@ function getSchedule(dayName) {
   return { [dayName]: 'CLOSED' };
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(inputId) {
+  const { responsibleFor } = employees.find(({ id }) => id === inputId);
+  const firstAnimalId = responsibleFor[0];
+  const { residents } = species.find(({ id }) => id === firstAnimalId);
+  const oldest = residents.sort((a, b) => b.age - a.age)[0];
+  const chaves = Object.keys(oldest);
+  return chaves.map((chave) => oldest[chave]);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -129,7 +134,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
