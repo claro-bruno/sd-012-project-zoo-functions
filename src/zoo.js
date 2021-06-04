@@ -88,12 +88,21 @@ function calculateEntry(entrants) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  hours =  {
+    Friday: "Open from 10am until 8pm",
+    Monday: "CLOSED",
+    Saturday: "Open from 8am until 10pm",
+    Sunday: "Open from 8am until 8pm",
+    Thursday: "Open from 10am until 8pm",
+    Tuesday: "Open from 8am until 6pm",
+    Wednesday: "Open from 8am until 6pm",
+  }
   let arrayObj = Object.entries(hours).map((hour) => hour);
   if (!dayName) {
     arrayObj = arrayObj.map((d) => `"${d[0]}": "Open from ${d[1].open}am until ${d[1].close}pm"`);
     return JSON.parse(`{${arrayObj.join(', ')}}`);
   } const d = arrayObj.find((day) => day[0] === dayName);
-  return `"${d[0]}": "Open from ${d[1].open}am until ${d[1].close}pm"`;
+  return `${d[0]}: Open from ${d[1].open}am until ${d[1].close}pm`;
 }
 console.log(getSchedule('Monday'));
 /* function getOldestFromFirstSpecies(id) {
