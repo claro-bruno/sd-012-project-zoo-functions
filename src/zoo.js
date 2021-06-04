@@ -147,10 +147,13 @@ function increasePrices(percentage) {
   const mult = parseFloat(`1.${percentage}`);
   const newPrices = [];
   pricesValues.forEach((price) => newPrices.push((Math.round((price * mult) * 100) / 100)));
-  const newObj = {};
+  const newObj = prices;
   pricesKeys.forEach((key, pos) => { newObj[`${key}`] = newPrices[pos]; });
   data.prices = newObj;
 }
+increasePrices(50)
+increasePrices(30)
+console.log(data.prices)
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
