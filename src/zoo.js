@@ -92,23 +92,21 @@ function calculateEntry(entrants) {
     return 0;
   }
   const ageVisitants = Object.keys(entrants);
-  const price = Object.values(data.prices);
-  console.log(price)
   return ageVisitants.reduce((acc, item) => {
     const finalValue = acc + entrants[item] * data.prices[item];
     return finalValue;
   }, 0);
 }
-console.log(calculateEntry({ Adult: 2221122287154138, Child: 316616, Senior: 10000 }));
+// console.log(calculateEntry({ Adult: 2, Child: 3, Senior: 1 }));
 
 function getAnimalMap() {
   // seu código aqui
   // options
 }
 
-function getSchedule() {
+function getSchedule(dayName) {
   // seu código aqui
-  // dayName
+  // 
 }
 
 function getOldestFromFirstSpecies() {
