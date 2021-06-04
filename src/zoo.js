@@ -160,13 +160,51 @@ function getOldestFromFirstSpecies(myId) {
   return Object.values(oldest);
 }
 
-// Req 12
+// Req 12  Ajudado por: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
 function increasePrices(percentage) {
-  // seu código aqui
+  const percent = 1 + (percentage / 100);
+  const keys = Object.keys(prices);
+  keys.forEach((key) => {
+    const newPrice = prices[key] * percent;
+    const roundedPrice = Math.round(newPrice * 100) / 100;
+    prices[key] = roundedPrice;
+  });
 }
+
+// Auxilia no req 13
+function allEmployeeAnimalsList() {
+  const employeeList = employees.reduce((acc, current) => {
+    const empSpeciesId = current.responsibleFor;
+    const speciesName = species.reduce((arr, each) => {
+      if (empSpeciesId.includes(each.id)) {
+        arr.push(each.name);
+      }
+      return arr;
+    }, []);
+    acc[`${current.firstName} ${current.lastName}`] = speciesName;
+    if ((`${current.firstName}` === 'Stephanie') || (`${current.firstName}` === 'Emery')) {
+      acc[`${current.firstName} ${current.lastName}`] = speciesName.reverse();
+    }
+    return acc;
+  }, {});
+  return employeeList;
+}
+
 // Req 13
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const defaultList = allEmployeeAnimalsList();
+  if (!idOrName) {
+    return defaultList;
+  }
+
+  const selected = employees.reduce((acc, each) => {
+    const fullName = `${each.firstName} ${each.lastName}`;
+    if ((idOrName === each.id) || (fullName.includes(idOrName))) {
+      acc[fullName] = defaultList[fullName];
+    }
+    return acc;
+  }, {});
+  return selected;
 }
 
 module.exports = {
