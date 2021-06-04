@@ -87,38 +87,85 @@ function calculateEntry(entrants) {
   return sum;
 }
 
-function getAnimalMap(options) {
-  const object = {};
-  const { species } = data;
-  // const animals = species.map((specie) => specie.name);
-  // const names = species.map((specie) => {
-  //   const eachName = specie.residents.map((name) => name.name);
-  //   return eachName;
-  // });
-  const locations = species.map((specie) => specie.location);
-  if (options === undefined || options === null) {
-    locations.forEach((location) => {
-      const animalsLoc = species.filter((specie) => specie.location === location);
-      const animalsFound = animalsLoc.map((name) => name.name);
-      object[location] = animalsFound;
+const locations = data.species.map((specie) => specie.location);
+
+const positionAndAnimals = () => {
+  const newObject = {};
+  locations.forEach((location) => {
+    const animalsLoc = data.species.filter((specie) => specie.location === location);
+    const animalsFound = animalsLoc.map((name) => name.name);
+    newObject[location] = animalsFound;
+  });
+  return newObject;
+};
+
+const positionAndNames = (sorted) => {
+  const newObject = {};
+  locations.forEach((location) => {
+    const animalsLoc = data.species.filter((specie) => specie.location === location);
+    const animalsFound = animalsLoc.map((name) => {
+      const object = {};
+      const names = name.residents.map((resident) => resident.name);
+      if (sorted === true) {
+        object[name.name] = names.sort();
+      } else {
+        object[name.name] = names;
+      }
+      return object;
     });
-    return object;
+    newObject[location] = animalsFound;
+  });
+  return newObject;
+};
+
+const animalsAndGender = (sex, sorted) => {
+  const newObject = {};
+  locations.forEach((location) => {
+    const animalsLoc = data.species.filter((specie) => specie.location === location);
+    const animalsFound = animalsLoc.map((name) => {
+      const object = {};
+      const names = name.residents.filter((resident) => resident.sex === sex);
+      const namesAndSex = names.map((maleOrFemale) => maleOrFemale.name);
+      if (sorted === true) {
+        object[name.name] = namesAndSex.sort();
+      } else {
+        object[name.name] = namesAndSex;
+      }
+      return object;
+    });
+    newObject[location] = animalsFound;
+  });
+  return newObject;
+};
+
+function getAnimalMap(options) {
+  // Utilizei como referência o repositório do colega Luciano Almeida https://github.com/tryber/sd-012-project-zoo-functions/pull/83/commits/9ec7f1bf03cacc5c56f789a283be81d8a4ac8d6e
+
+  if (options === undefined || options.includeNames === undefined) {
+    return positionAndAnimals();
+  }
+  if (options.sex !== undefined) {
+    return animalsAndGender(options.sex, options.sorted);
+  }
+  if (options.includeNames === true) {
+    return positionAndNames(options.sorted);
   }
 }
 
 function getSchedule(dayName) {
   const dayEntries = Object.entries(data.hours);
-  const newObject = {};
+  const object = {};
   dayEntries.forEach((day) => {
     if (day[1].open === 0) {
-      newObject[day[0]] = 'CLOSED';
+      object[day[0]] = 'CLOSED';
     } else {
-      newObject[day[0]] = `Open from ${day[1].open}am until ${day[1].close % 12}pm`;
+      object[day[0]] = `Open from ${day[1].open}am until ${day[1].close % 12}pm`;
     }
+    // Para resolver o problema da transformação da hora para am/pm utilizei a seguinte referência: https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
   });
-  const object = {};
-  object[dayName] = newObject[dayName];
-  return (dayName === undefined || dayName === null) ? newObject : object;
+  const newObject = {};
+  newObject[dayName] = object[dayName];
+  return (dayName === undefined || dayName === null) ? object : newObject;
 }
 
 function getOldestFromFirstSpecies(id) {
