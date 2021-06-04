@@ -69,10 +69,73 @@ const calculateEntry = ({ Adult = 0, Senior = 0, Child = 0 } = 0) => {
   return soma;
 };
 
-function getAnimalMap() {
-  // seu código aqui
-  // options
-}
+const optionUndefined = () => {
+  const acharAnimaisLocalization = (localization) => species.filter((specie) =>
+    specie.location === localization).map((specie2) => specie2.name);
+  const localizations = ['NE', 'NW', 'SE', 'SW'];
+  const resultado = {};
+  const tipoAnimais = localizations.map((localization) => acharAnimaisLocalization(localization));
+  localizations.forEach((key, index) => {
+    resultado[key] = tipoAnimais[index];
+  });
+  return resultado;
+};
+
+const animaisSexSortTrueFalse = (localization, index, sex = undefined, sorted = undefined) => {
+  let acharAnimaisSexTrueFalse;
+  if (sex === undefined) {
+    acharAnimaisSexTrueFalse = species.filter((specie) => specie.location === localization)
+      .map((specie2) => specie2.residents.map((name) => name.name))[index];
+  } else {
+    acharAnimaisSexTrueFalse = species.filter((specie) => specie.location === localization)
+      .map((specie2) => (specie2.residents.filter((specie) => specie.sex === sex)
+        .map((name) => name.name)))[index];
+  }
+  let ordemTrueFalse;
+  if (sorted === true) {
+    ordemTrueFalse = acharAnimaisSexTrueFalse.sort();
+  } else {
+    ordemTrueFalse = acharAnimaisSexTrueFalse;
+  }
+  return ordemTrueFalse;
+};
+
+const indexLocalization = (localizations) => species.map((localization) => localization.location)
+  .filter((loc) => loc === localizations);
+
+const animaisLocalization = (localization, index) => species.filter((specie) =>
+  specie.location === localization).map((specie2) => specie2.name)[index];
+
+const objetosTiposNames = (localization, index, sex, sorted) => {
+  const objeto = {
+    [animaisLocalization(localization, index)]:
+      animaisSexSortTrueFalse(localization, index, sex, sorted),
+  };
+  return objeto;
+};
+
+const arrayTiposNames = (localization, sex, sorted) => {
+  const array = [];
+  const localizations = indexLocalization(localization);
+  for (let index = 0; index < localizations.length; index += 1) {
+    array.push(objetosTiposNames(localization, index, sex, sorted));
+  }
+  return array;
+};
+
+const getAnimalMap = (options = undefined) => {
+  if (options === undefined || options.includeNames === undefined) {
+    return optionUndefined();
+  }
+  const { sex = undefined, sorted = undefined } = options;
+  // const localizations = ['NE', 'NW', 'SE', 'SW'];
+  const arrayNe = [...arrayTiposNames('NE', sex, sorted)];
+  const arrayNw = [...arrayTiposNames('NW', sex, sorted)];
+  const arraySe = [...arrayTiposNames('SE', sex, sorted)];
+  const arraySw = [...arrayTiposNames('SW', sex, sorted)];
+  const objeto = { NE: arrayNe, NW: arrayNw, SE: arraySe, SW: arraySw };
+  return objeto;
+};
 
 const getSchedule = (dayName) => {
   let resultado = {};
