@@ -105,8 +105,6 @@ function getSchedule(dayName) {
   return dayName ? response : infoDays;
 }
 
-getSchedule('Tuesday');
-
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
