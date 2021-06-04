@@ -97,18 +97,16 @@ function calculateEntry(entrants) {
     .map((chave) => (k.some((ki) => chave === ki) ? (prices[chave] * entrants[chave]) : 0));
   /* console.log(valores); */
   const result = valores.reduce((acc, current) => {
-    // eslint-disable-next-line no-param-reassign
-    acc += current;
-    return acc;
+    let accumulator = acc;
+    accumulator += current;
+    return accumulator;
   }, 0);
   return result;
 }
 
-let entrants = { 'Adult': 2, 'Child': 3, 'Senior': 1 };
-calculateEntry(entrants);
-
 function getAnimalMap(options) {
   // seu código aqui
+
 }
 
 function getSchedule(dayName) {
