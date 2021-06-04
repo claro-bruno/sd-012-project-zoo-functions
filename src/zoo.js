@@ -100,8 +100,26 @@ function increasePrices(percentage) {
   });
 }
 
-function getEmployeeCoverage() {
-  // seu código aqui (idOrName)
+const getFunc = (func) => (data.employees.find(({ id, firstName: fn, lastName: ln }) =>
+  id === func || fn === func || ln === func));
+
+const showEmploRespon = (employee) => {
+  const array = employee.responsibleFor.map((respId) => (
+    data.species.find((animal) => animal.id === respId).name));
+  return { [`${employee.firstName} ${employee.lastName}`]: array };
+};
+
+const showAllEmploRespon = () => {
+  const emploResp = data.employees.reduce((acc, func) => ({ ...acc,
+    [`${func.firstName} ${func.lastName}`]: func.responsibleFor.map((funcRespId) =>
+      data.species.find((ani) => ani.id === funcRespId).name) }), {});
+  return emploResp;
+};
+
+function getEmployeeCoverage(func) {
+  return !func
+    ? showAllEmploRespon()
+    : showEmploRespon(getFunc(func));
 }
 
 module.exports = {
