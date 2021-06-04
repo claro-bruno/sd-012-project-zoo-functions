@@ -39,14 +39,17 @@ function getEmployeeByName(employeeName) {
 //getEmployeeByName('Nelson'); 
 function createEmployee(personalInfo, associatedWith) {
   const employeeCreated = {...personalInfo, ...associatedWith};
-  return employeeCreated; 
+  return employeeCreated;
 }
 //createEmployee({nome: 'teste'},{sobre: 'teste2'})
 
 function isManager(id) {
-  // seu código aqui
-}
-
+  //0e7b460e-acf4-4e17-bcb3-ee472265db83
+  const managerFinder = arraysOfemployee.some( item => item.managers.find( element => element === id ));
+  console.log(managerFinder);
+  return managerFinder;
+};
+//isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
