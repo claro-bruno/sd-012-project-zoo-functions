@@ -54,7 +54,7 @@ function isManager(id) {
     employee.managers.some(((manage) => manage === id)));
   return accessId;
 }
-console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return data.employees.push({
@@ -66,9 +66,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(species) {
+  if (species === undefined) {
+    const animalsQtd = data.species.reduce((acc, currentValue) => {
+      acc[currentValue.name] = currentValue.residents.length;
+      return acc;
+    }, {});
+    return animalsQtd;
+  }
+  const contagem = data.species.find((specie) => specie.name === species);
+  return contagem.residents.length;
+}
+console.log(countAnimals());
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -97,7 +106,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
