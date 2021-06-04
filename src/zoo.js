@@ -51,9 +51,16 @@ const isManager = (id) => data.employees
 console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
-function addEmployee() {
-  // seu código aqui id, firstName, lastName, managers, responsibleFor
-}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return data.employees.push(newEmployee);
+};
 
 function countAnimals() {
   // seu código aqui species
