@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -84,9 +84,27 @@ function calculateEntry(entrants = 0) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+// eslint-disable-next-line max-lines-per-function
+function getSchedule(dayName) {
+  const dias = Object.keys(hours);
+  const horarios = Object.values(hours);
+  const prog = {};
+  dias.forEach((dia, index) => {
+    if (dia !== 'Monday') {
+      prog[dia] = `Open from ${horarios[index].open}am until ${horarios[index].close - 12}pm`;
+    } else {
+      prog[dia] = 'CLOSED';
+    }
+  });
+  if (!dayName) { return prog; }
+  if (dayName !== 'Monday') {
+    const diaEspecifico = hours[dayName];
+    return {
+      [dayName]: `Open from ${diaEspecifico.open}am until ${diaEspecifico.close - 12}pm`,
+    };
+  }
+  return { [dayName]: 'CLOSED' };
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -102,7 +120,7 @@ function calculateEntry(entrants = 0) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
