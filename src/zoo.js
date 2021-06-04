@@ -113,9 +113,9 @@ function calculateEntry(entrants) {
 
 // console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+
+// }
 
 function getSchedule(dayName) {
   const workTime = Object.values(hours);
@@ -152,7 +152,7 @@ function increasePrices(percentage) {
   const increase = (percentage / 100) + 1;
   const newPrices = prices;
   newPrices.Adult = Math.round((newPrices.Adult * increase) * 100) / 100;
-  newPrices.Senior = Math.round((newPrices.Senior * increase) * 100) / 100;;
+  newPrices.Senior = Math.round((newPrices.Senior * increase) * 100) / 100;
   newPrices.Child = Math.round((newPrices.Child * increase) * 100) / 100;
   return newPrices;
 }
@@ -160,14 +160,24 @@ function increasePrices(percentage) {
 // console.log(increasePrices(50));
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const searchedEmployee = employees.find(() => Object.values((value) => value === idOrName));
+  const { firstName, lastName } = searchedEmployee;
+  const idSpecies = searchedEmployee.responsibleFor;
+  const nameSpecies = idSpecies.map((id) => species.find((name) => name.id === id));
+  const [first, second] = nameSpecies;
+  const result = {};
+  result[`${firstName} ${lastName}`] = [`${first.name}`, `${second.name}`];
+
+  return result;
 }
+
+// console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
