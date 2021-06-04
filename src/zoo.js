@@ -149,8 +149,15 @@ function getOldestFromFirstSpecies(id) {
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
-  // seu código aqui!
+  const increase = (percentage / 100) + 1;
+  const newPrices = prices;
+  newPrices.Adult = Math.round((newPrices.Adult * increase) * 100) / 100;
+  newPrices.Senior = Math.round((newPrices.Senior * increase) * 100) / 100;;
+  newPrices.Child = Math.round((newPrices.Child * increase) * 100) / 100;
+  return newPrices;
 }
+
+// console.log(increasePrices(50));
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
