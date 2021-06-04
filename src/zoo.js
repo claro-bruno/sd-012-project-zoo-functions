@@ -101,10 +101,16 @@ function getSchedule(dayName) {
   if (hours[dayName].open === 0 && hours[dayName].close === 0) return { [dayName]: 'CLOSED' };
   return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
-console.log(getSchedule());
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+
+function getOldestFromFirstSpecies(id) {
+  const callback1 = (employee) => employee.id === id;
+  const callback2 = (specieId) => specieId[0];
+  const getSpecieIdByEmployeeId = employees.find(callback1).responsibleFor.find(callback2);
+  const callback3 = (specie) => specie.id === getSpecieIdByEmployeeId;
+  const callback4 = (acc, animal) => ((acc.age > animal.age) ? acc : animal);
+  const oldestAnimal = species.find(callback3).residents.reduce(callback4);
+  return Object.values(oldestAnimal);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -125,7 +131,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
