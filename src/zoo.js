@@ -92,8 +92,8 @@ function getSchedule(dayName) {
   if (!dayName) {
     arrayObj = arrayObj.map((d) => `"${d[0]}": "Open from ${d[1].open}am until ${d[1].close}pm"`);
     return JSON.parse(`{${arrayObj.join(', ')}}`);
-  } let d = arrayObj.find((day) => day[0] === dayName)
-  return `"${d[0]}": "Open from ${d[1].open}am until ${d[1].close}pm"`
+  } const d = arrayObj.find((day) => day[0] === dayName);
+  return `"${d[0]}": "Open from ${d[1].open}am until ${d[1].close}pm"`;
 }
 console.log(getSchedule('Monday'));
 /* function getOldestFromFirstSpecies(id) {
