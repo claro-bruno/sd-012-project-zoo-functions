@@ -57,10 +57,10 @@ function addEmployee(...rest) {
   const arg = { ...rest };
   const { 0: id, 1: firstName, 2: lastName } = arg;
   if (arg[3] === undefined || arg[4] === undefined) {
-    const { 3: managers = [], 4: responsibleFor = [] } = arg;
-    console.log({ id, firstName, lastName, managers, responsibleFor });
+    const { 3: managers = [], 4: responsibleFor = [] } = arg;/* 
+    console.log({ id, firstName, lastName, managers, responsibleFor }); */
     employees.push({ id, firstName, lastName, managers, responsibleFor });
-    console.log(employees.length);
+    /* console.log(employees.length); */
     return employees.length;
   }
   const { 3: managers, 4: responsibleFor } = arg;
@@ -99,10 +99,10 @@ function calculateEntry(entrants) {
   const result = valores.reduce((acc, current) => {
     let accumulator = acc;
     const atual = current;
-    console.log(atual);
+    /* console.log(atual); */
     accumulator += atual;
     return accumulator;
-  }, 0);
+ }, 0);
   return result;
 }
 
@@ -129,7 +129,6 @@ function getSchedule(dayName) {
     Saturday: 'Open from 8am until 10pm',
     Sunday: 'Open from 8am until 8pm',
     Monday: 'CLOSED' };
-  const keyDays = Object.keys(objeto);
   if (dayName === undefined) {
     return objeto;
   }
