@@ -69,8 +69,15 @@ function countAnimals(contador) {
   return obj;
 }
 
-function calculateEntry() {
-  // seu código aqui
+function calculateEntry(paramter) {
+  if (paramter === undefined || Object.keys(paramter).length === 0) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = paramter;
+
+  const sum = Adult * data.prices.Adult
+   + Child * data.prices.Child + Senior * data.prices.Senior;
+  return sum;
 }
 
 function getAnimalMap() {
