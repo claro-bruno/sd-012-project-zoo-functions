@@ -109,13 +109,14 @@ function increasePrices(percentage) {
 }
 
 const getAllAnimalsEmployeeCoverage = (responsible) => {
-  const animals = responsible.map((specieId) => data.species.find(({ id }) => id === specieId).name);
+  const animals = responsible.map((specieId) =>
+  data.species.find(({ id }) => id === specieId).name);
   return animals;
 };
 
 function getAllEmployeeCoverage() {
   const result = {};
-  employees.forEach(({ firstName, lastName, responsibleFor}) => {
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
     result[`${firstName} ${lastName}`] = getAllAnimalsEmployeeCoverage(responsibleFor);
   });
   return result;
