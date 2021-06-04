@@ -68,16 +68,26 @@ function isManager(id) {
   const employee = data.employees.find((empregado) => empregado.id === id);
   return employee.managers.length === 1;
 }
-console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
-function countAnimals() {
-  // seu código aqui
-  // species
+function countAnimals(species) {
+  // probabily to use reduce and maybe use a filter
+  // find the animals OK
+  // make a object with the name of animals, and the quantity of animals
+  if (!species) {
+    const obj = {};
+    data.species.forEach((animals) => {
+      obj[animals.name] = animals.residents.length;
+    });
+    return obj;
+  }
+  const finder = data.species.find((animal) => animal.name === species);
+  return finder.residents.length;
 }
-
+console.log(countAnimals('tigers'));
 function calculateEntry() {
   // seu código aqui
   // entrants
