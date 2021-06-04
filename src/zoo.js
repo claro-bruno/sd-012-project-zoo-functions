@@ -71,21 +71,19 @@ const calculateEntry = (entrants) => {
 
 const getAnimalMap = () => {};
 
-const getSchedule = (dayName) => { //REFATORAR
+const getSchedule = (dayName) => {
   const weekDays = Object.keys(hours);
   const weekHours = Object.values(hours);
-  if (!dayName) {
-    return weekHours.reduce((acc, hour, day) => {
-      if (weekDays[day] !== 'Monday') {
-        acc[weekDays[day]] = `Open from ${hour.open}am until ${hour.close - 12}pm`;
-      } else acc[weekDays[day]] = 'CLOSED';
-      return acc;
-    }, {});
-  }
-  if (dayName !== 'Monday') {
-    return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
-  }
-  return { [dayName]: 'CLOSED' };
+  const schedule = weekHours.reduce((acc, hour, day) => {
+    if (weekDays[day] !== 'Monday') {
+      acc[weekDays[day]] = `Open from ${hour.open}am until ${hour.close - 12}pm`;
+    } else acc[weekDays[day]] = 'CLOSED';
+    return acc;
+  }, {});
+
+  if (!dayName) return schedule;
+  const dayChose = Object.entries(schedule).find((day) => day[0] === dayName);
+  return { [dayChose[0]]: dayChose[1] };
 };
 
 const getOldestFromFirstSpecies = (id) => {
