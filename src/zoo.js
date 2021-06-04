@@ -10,9 +10,9 @@ eslint no-unused-vars: [
 */
 // 0938aa23-f153-4937-9f88-4858b24d6bce id de teste
 const data = require('./data');
-const arraysOfData = data.species; // recolhe o objeto "species" da variavel data
-;
-function getSpeciesByIds(...ids){ 
+const arraysOfData = data.species; // especies
+const arraysOfemployee = data.employees; // empregados
+function getSpeciesByIds(...ids) { 
   let idGathered = arraysOfData.filter( element => ids.find( verId  => verId === element.id));// Compara o parametro com a data e retorna seu resultado
   //console.log(idGathered)
   return idGathered;
@@ -26,9 +26,17 @@ function getAnimalsOlderThan(animal, age) {
 }
 //getAnimalsOlderThan('lions', 5) teste
 function getEmployeeByName(employeeName) {
-  // seu código aqui
-}
-
+  if(employeeName === undefined){
+    const objVazio = {};
+    console.log(`Nenhum paramentro encontrado!${objVazio}`);
+    return objVazio;
+  }else{
+    const name = arraysOfemployee.find( item => item.firstName === employeeName || item.lastName === employeeName);
+    console.log(name);
+    return name;
+  };
+};
+//getEmployeeByName('Nelson'); 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
