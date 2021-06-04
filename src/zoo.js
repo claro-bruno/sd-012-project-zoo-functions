@@ -14,7 +14,7 @@ const data = require('./data');
 const {
   species,
   employees,
-  // hours,
+  hours,
   prices,
 } = data;
 
@@ -111,9 +111,21 @@ function calculateEntry(entrants) {
 
 // }
 
-// function getSchedule(dayName) {
+function getSchedule(dayName) {
+  if (!dayName) {
+    const days = Object.keys(hours);
+    return days.reduce((acc, day) => {
+      if (day === 'Monday') {
+        return { ...acc, [day]: 'CLOSED' };
+      }
+      const openCloseMsg = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+      return { ...acc, [day]: openCloseMsg };
+    }, {});
+  }
 
-// }
+  return dayName === 'Monday' ? { [dayName]: 'CLOSED' }
+    : { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
+}
 
 function getOldestFromFirstSpecies(id) {
   const employeeResponsible = employees.find((emp) => emp.id === id);
@@ -137,7 +149,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
