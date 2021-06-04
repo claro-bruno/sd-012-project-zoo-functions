@@ -98,7 +98,9 @@ function calculateEntry(entrants) {
   /* console.log(valores); */
   const result = valores.reduce((acc, current) => {
     let accumulator = acc;
-    accumulator += current;
+    const atual = current;
+    console.log(atual);
+    accumulator += atual;
     return accumulator;
   }, 0);
   return result;
