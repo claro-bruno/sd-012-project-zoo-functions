@@ -108,11 +108,34 @@ function calculateEntry(entrants) {
 
 function getAnimalMap(options) {
   // seu código aqui
-
+  let semParametro = { NE: [], NW: [], SE: [], SW: [] };
+  const chaveSem = Object.keys(semParametro);
+  if (options === undefined) {
+    const objeto = {
+      NE: ['lions', 'giraffes'],
+      NW: ['tigers', 'bears', 'elephants'],
+      SE: ['penguins', 'otters'],
+      SW: ['frogs', 'snakes'] };
+    return objeto;
+  }
 }
 
 function getSchedule(dayName) {
   // seu código aqui
+  const objeto = { Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED' };
+  const keyDays = Object.keys(objeto);
+  if (dayName === undefined) {
+    return objeto;
+  }
+  const result = {};
+  result[dayName] = objeto[dayName];
+  return result;
 }
 
 function getOldestFromFirstSpecies(id) {
