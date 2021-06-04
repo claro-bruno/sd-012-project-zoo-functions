@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -77,9 +78,21 @@ function calculateEntry(entrants = 0) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  /** Consultei o repositório de Caio Takeshi para resolver esta parte:
+   * link: https://github.com/tryber/sd-012-project-zoo-functions/pull/11/files
+   */
+  const objectAll = {};
+  Object.keys(hours).forEach((chave) => {
+    if (hours[chave].close !== 0) {
+      objectAll[chave] = `Open from ${hours[chave].open}am until ${hours[chave].close - 12}pm`;
+    } else {
+      objectAll[chave] = 'CLOSED';
+    }
+  });
+  if (!dayName) return objectAll;
+  return { [dayName]: objectAll[dayName] };
+}
 
 function getOldestFromFirstSpecies(id) {
   const employee = data.employees.find((item) => item.id === id); // encontra o primeiro empregado com o mesmo id dado no parâmetro
@@ -110,7 +123,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
