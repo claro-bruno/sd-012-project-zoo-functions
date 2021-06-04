@@ -109,7 +109,7 @@ function getOldestFromFirstSpecies(id) {
   const employeeObj = employees.find((employee) => employee.id === id);
   const residents = species.find((specie) => specie.id === employeeObj.responsibleFor[0]);
   const residentsOBj = residents.residents.sort((specieA, specieB) => specieB.age - specieA.age)[0];
-  return Object.values(residentsOBj)
+  return Object.values(residentsOBj);
 }
 console.log(getOldestFromFirstSpecies('b0dc644a-5335-489b-8a2c-4e086c7819a2'));
 /* function increasePrices(percentage) {
