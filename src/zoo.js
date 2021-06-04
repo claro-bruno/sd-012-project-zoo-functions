@@ -20,11 +20,13 @@ eslint no-unused-vars: [
 // Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
 // Ao receber mais de um id, retorna um array com as espécies referentes aos ids
 
-const data = require('./data');
+const { employees } = require("./data");
+const data = require("./data");
 
 function getSpeciesByIds(...ids) {
   return data.species.filter((arrayItem) =>
-    ids.find((arrayItem1) => arrayItem.id === arrayItem1));
+    ids.find((arrayItem1) => arrayItem.id === arrayItem1)
+  );
 }
 
 // console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
@@ -33,7 +35,7 @@ function getSpeciesByIds(...ids) {
 function getAnimalsOlderThan(animal, age) {
   const nomeAnimal = data.species.find((specie) => specie.name === animal);
   const idadeAnimal = nomeAnimal.residents.every(
-    (idadeMax) => idadeMax.age >= age,
+    (idadeMax) => idadeMax.age >= age
   );
   return idadeAnimal;
 }
@@ -43,7 +45,7 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
   const nomeColaborador = data.employees.find(
     (employee) =>
-      employee.firstName === employeeName || employee.lastName === employeeName,
+      employee.firstName === employeeName || employee.lastName === employeeName
   );
   return nomeColaborador;
 }
@@ -54,16 +56,19 @@ function createEmployee(personalInfo, associatedWith) {
   return { id, firstName, lastName, managers, responsibleFor };
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
-
-function addEmployee(
-  id,
+function isManager(id) {
+  const manager = data.employees.some((employee) =>
+    employee.managers.find((employe) => employe === id));
+    return manager;
+  }
+  console.log(isManager('e7b460e-acf4-4e17-bcb3-ee472265db83'));
+  
+  function addEmployee(
+    id,
   firstName,
   lastName,
   managers = [],
-  responsibleFor = [],
+  responsibleFor = []
 ) {
   return data.employees.push({
     id,
@@ -111,7 +116,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
