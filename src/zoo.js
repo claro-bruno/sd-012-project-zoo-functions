@@ -144,11 +144,11 @@ function getOldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   const pricesValues = Object.values(prices);
   const pricesKeys = Object.keys(prices);
-  const mult = parseFloat(`1.${percentage}`)
-  let newPrices = [];
-  pricesValues.forEach((price, pos) => newPrices.push((Math.round((price * mult) * 100) / 100)))
-  let newObj = {};
-  pricesKeys.forEach((key, pos) => {newObj[`${key}`] = newPrices[pos]});
+  const mult = parseFloat(`1.${percentage}`);
+  const newPrices = [];
+  pricesValues.forEach((price) => newPrices.push((Math.round((price * mult) * 100) / 100)));
+  const newObj = {};
+  pricesKeys.forEach((key, pos) => { newObj[`${key}`] = newPrices[pos]; });
   data.prices = newObj;
 }
 
