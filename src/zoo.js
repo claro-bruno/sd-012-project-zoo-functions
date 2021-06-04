@@ -103,10 +103,14 @@ function getSchedule(dayName) {
   } const d = arrayObj.find((day) => day[0] === dayName);
   return JSON.parse(`{"${d[0]}": "${d[1]}"}`);
 }
-console.log(getSchedule('Monday'));
-/* function getOldestFromFirstSpecies(id) {
+
+function getOldestFromFirstSpecies(id) {
   // seu código aqui
-} */
+  const employeeObj = employees.find((employee) => employee.id === id);
+  const residents = species.find((specie) => specie.id === employeeObj.responsibleFor[0]);
+  return residents.residents.sort((specieA, specieB) => specieB.age - specieA.age)[0];
+}
+console.log(getOldestFromFirstSpecies('b0dc644a-5335-489b-8a2c-4e086c7819a2'));
 /* function increasePrices(percentage) {
   // seu código aqui
   percentage = percentage/100
