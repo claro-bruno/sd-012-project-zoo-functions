@@ -55,7 +55,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const manager = data.employees.some((employee) =>
+  const manager = data.employees.some(() =>
     data.employee.managers.find((employe) => employe === id));
   return manager;
 }
