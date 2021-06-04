@@ -17,17 +17,15 @@ function getSpeciesByIds(...ids) {
   if (ids.length === 0) {
     return [];
   }
-  // if (ids.length === 1) {
-  //   return [data.species.find((element) => element.id === ids[0])];
-  // }
   if (ids.length >= 1) {
     return data.species.filter((element, index) => element.id === ids[index]);
   }
-  console.log('ids:', ids);
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const specie = data.species.find((species) => species.name === animal);
+  return specie.residents.every((specimen) => specimen.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
