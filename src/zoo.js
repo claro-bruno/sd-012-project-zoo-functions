@@ -151,9 +151,6 @@ function increasePrices(percentage) {
   pricesKeys.forEach((key, pos) => { newObj[`${key}`] = newPrices[pos]; });
   data.prices = newObj;
 }
-increasePrices(50)
-increasePrices(30)
-console.log(data.prices)
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
