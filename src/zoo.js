@@ -126,8 +126,18 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  return percentage;
+  if (percentage === undefined || percentage === null) {
+    return 0;
+  }
+  Object.entries(data.prices).forEach((element) => {
+    const count = element[1] * percentage / 100 + element[1];
+    const float = parseFloat((Math.round( count * 100) / 100).toFixed(2));
+    data.prices[element[0]] = float;
+  });
+  return data.prices;
 }
+// Inseri o Math.round para que o valor fique apenas com duas casas depois da vírgula. Contei com a ajuda do colega Rodrigo Facury;
+// console.log(increasePrices(200));
 
 function getEmployeeCoverage(idOrName) {
   return idOrName;
