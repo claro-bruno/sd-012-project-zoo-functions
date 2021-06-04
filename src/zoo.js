@@ -181,15 +181,40 @@ function getOldestFromFirstSpecies(wantedId) {
 
 function increasePrices(percentage) {
   const keysPrices = Object.keys(prices);
-  console.log(keysPrices);
   return keysPrices.forEach((key) => {
     prices[key] = Math.round(prices[key] * (1 + percentage / 100) * 100) / 100;
-    console.log(prices[key]);
   });
 }
 
+const getSpeciesName = (responsibleFor) => {
+  const names = [];
+  responsibleFor.forEach((animal) => {
+    const { name } = species.find(({ id }) => id === animal);
+    names.push(name);
+  });
+  return names;
+};
+
+const noParameterEmployeeCoverage = () => {
+  const employeeAndAnimals = {};
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    const key = `${firstName} ${lastName}`;
+    employeeAndAnimals[key] = getSpeciesName(responsibleFor);
+  });
+  return employeeAndAnimals;
+};
+
+const yesParameterEmployeeCoverage = (idOrName) => {
+  const employeeAndAnimals = {};
+  const { firstName, lastName, responsibleFor } = employees.find(({ id, firstName, lastName }) =>
+    (id === idOrName) || (firstName === idOrName) || (lastName === idOrName));
+  const key = `${firstName} ${lastName}`;
+  employeeAndAnimals[key] = getSpeciesName(responsibleFor);
+  return employeeAndAnimals;
+};
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  return idOrName ? yesParameterEmployeeCoverage(idOrName) : noParameterEmployeeCoverage();
 }
 
 module.exports = {
