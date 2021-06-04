@@ -12,16 +12,20 @@ eslint no-unused-vars: [
 const { species } = require('./data');
 const data = require('./data');
 
+// Testar o spread operator 8.5 para substituir o push
 function getSpeciesByIds(...ids) {
-  const newArray = [];
-  const inputId = data.species.filter((especie) => especie.id === ids);
-  const inputArray = inputId.forEach((especie) => newArray.push(especie));
-  return newArray;
+  const emptyArray = [];
+  if(ids.length === 0){
+    return emptyArray;
+  }
+  const outputArray = data.species.forEach((especie) => especie.id === ids);
+  return outputArray;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const verifyAnimal = species.find((animalSpecies) => animalSpecies.name === animal);
-  const verifyOlderThan = verifyAnimal.every((animals) => animals.residents.age > age);
+  const verifyAnimal = data.species.find((animalSpecie) => animalSpecie.name === animal);
+  const verifyOlderThan = verifyAnimal.residents.every((resident) => resident.age > age);
+  console.log(verifyOlderThan);
   return verifyOlderThan;
 }
 // testar Default Parameters para saber a opção de não ter parametro Bloco 8.5
@@ -58,10 +62,10 @@ function countAnimals(species) {
     return Object.keys(data.species.residents).length;
   });
   const noParameter = data.species.map(() => {
-    '{name: Object.keys(data.species.residents).length}: 
+  // '{name: Object.keys(data.species.residents).length}: 
   });
-  const 
-  return {};
+  // const 
+  // return {};
 }
 
 function calculateEntry(entrants) {
@@ -103,3 +107,11 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+
+const greeting = (user = 'usuário') => {
+  return `Welcome ${user}!`;
+} 
+
+
+
+greeting(); 
