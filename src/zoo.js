@@ -125,22 +125,16 @@ function getOldestFromFirstSpecies(id2) {
 }
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-//   prices.forEach((type) => {
-//     const total = ((percentage) => {
-//       const increase = ((price) => price * (percentage/100));
-//       return  Math.round((prices.type + increase * 100) / 100);
-//     })
-//   })
-
-//   // 1º Saber o quando á mais vai ser o reajuste
-//   // 2º função que calcula o novo valor
-//   // const newPrices = ((price) => price.)
-
-//   // const increase = ((price) => Math.round((price * (percentage/100) )
-// }
-// console.log(increasePrices(50));
+function increasePrices(percentage) {
+  // Vou fazer um forEach para aplicar em todos os elementos da array Object.keys(prices) --que é uma array com as chaves do obj prices. Depois de acessar cada elemento do obj prices eu vou aplicar o incremento da percentage passada como parâmetro. E por fim arredondar para 2 casas decimais.
+  Object.keys(prices).forEach((element) => {
+    // const increase = prices[element] * (percentage / 100);
+    prices[element] *= (1 + percentage / 100);
+    prices[element] = Math.round(prices[element] * 100) / 100;
+  });
+  return prices;
+}
+// console.log(increasePrices(30));
 
 // function getEmployeeCoverage() {
 //   // seu código aqui idOrName
@@ -158,6 +152,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
