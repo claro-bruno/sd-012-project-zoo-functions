@@ -73,15 +73,17 @@ function addEmployee(...rest) {
 function countAnimals(especies) {
   // seu código aqui
   if (especies === undefined) {
-    const arrayPopularity = data.species.map((number, indice) => number.popularity);
-    const arrayInd = data.species.map((populacao) => populacao.name);
-    console.log({...arrayInd});
-    return 'oi';
+    const objeto = {};
+    const arrayPopularity = data.species.map((number) => number.residents.length);
+    data.species.map((populacao) => populacao.name).forEach((iname, iresidents) => {
+      objeto[iname] = arrayPopularity[iresidents];
+    });
+    console.log(objeto);
+    return objeto;
   }
   const numEspecimes = data.species.find((spec) => spec.name === especies);
-  return numEspecimes.popularity;
+  return numEspecimes.residents.length;
 }
-countAnimals();
 
 function calculateEntry(entrants) {
   // seu código aqui
