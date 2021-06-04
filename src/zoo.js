@@ -9,7 +9,6 @@ eslint no-unused-vars: [
 ]
 */
 
-const { prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -104,9 +103,9 @@ function getAnimalMap() {
   // options
 }
 
-function getSchedule(dayName) {
+function getSchedule() {
   // seu código aqui
-  // 
+  // dayName
 }
 
 function getOldestFromFirstSpecies() {
