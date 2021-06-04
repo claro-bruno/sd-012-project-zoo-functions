@@ -72,9 +72,46 @@ function calculateEntry(entrants) {
   return adultPrice + childPrice + seniorPrice;
 }
 
-// function getAnimalMap(options) {
+function crateLocationsAnimals(arrayCoordinates) {
+  return arrayCoordinates.reduce((object, coordinates) => {
+    const objectCoordinates = object;
+    const arraySpecies = species
+      .filter(({ location }) => location === coordinates)
+      .map((specie) => specie.name);
+    objectCoordinates[coordinates] = arraySpecies;
+    return objectCoordinates;
+  }, {});
+}
 
-// }
+function createSpeciesName(animals, options) {
+  return animals.reduce((array, specieName) => {
+    const object = {};
+    let arrayNames = species.find((specie) => specie.name === specieName).residents;
+
+    if (options.sex) arrayNames = arrayNames.filter((animal) => animal.sex === options.sex);
+
+    arrayNames = arrayNames.map((animal) => animal.name);
+
+    if (options.sorted) arrayNames.sort();
+
+    object[specieName] = arrayNames;
+    array.push(object);
+    return array;
+  }, []);
+}
+
+function getAnimalMap(options) {
+  const coordinates = ['NE', 'NW', 'SE', 'SW'];
+  const animalsLocation = crateLocationsAnimals(coordinates);
+  const namesLocation = {};
+
+  if (!options || !options.includeNames) return animalsLocation;
+
+  coordinates.forEach((key) => {
+    namesLocation[key] = createSpeciesName(animalsLocation[key], options);
+  });
+  return namesLocation;
+}
 
 function getSchedule(dayName) {
   const days = Object.keys(hours);
@@ -140,7 +177,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
