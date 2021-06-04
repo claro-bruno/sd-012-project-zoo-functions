@@ -58,14 +58,9 @@ function countAnimals(animal) {
 }
 
 function calculateEntry(entrants) {
-  if (entrants === undefined || Object.values(entrants).length === 0) {
-    return 0;
-  }
+  if (!entrants) return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  const adultPrice = data.prices.Adult;
-  const childPrice = data.prices.Child;
-  const seniorPrice = data.prices.Senior;
-  const resultado = Adult * adultPrice + Child * childPrice + Senior * seniorPrice;
+  const resultado = Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
   return resultado;
 }
 
