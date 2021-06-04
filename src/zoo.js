@@ -13,14 +13,14 @@ const { species } = require('./data');
 const data = require('./data');
 
 // Testar o spread operator 8.5 para substituir o push
-function getSpeciesByIds(...ids) {
-  const emptyArray = [];
-  if(ids.length === 0){
-    return emptyArray;
-  }
-  const outputArray = data.species.forEach((especie) => especie.id === ids);
-  return outputArray;
-}
+// Precisa iterar tanto o ids quanto o data.species.filter
+//function getSpeciesByIds(...ids) {
+//  if(ids.length === 0){
+//    return [];
+//  }
+//  const outputArray = data.species.filter((especie) => especie.id === ids);
+//  return outputArray;
+//}
 
 function getAnimalsOlderThan(animal, age) {
   const verifyAnimal = data.species.find((animalSpecie) => animalSpecie.name === animal);
@@ -28,7 +28,7 @@ function getAnimalsOlderThan(animal, age) {
   console.log(verifyOlderThan);
   return verifyOlderThan;
 }
-// testar Default Parameters para saber a opção de não ter parametro Bloco 8.5
+
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     const nameArray = {};
@@ -41,13 +41,8 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  console.log(personalInfo);
-  const EmployeeCreated = personalInfo.map((newEmployee) => {
-    const EmployeeCreated = associatedWith.map((associatedWithInfo) => {
-      // return { `id: ${personalInfo.id} firstName: ${personalInfo.firstName} lastName: ${personalInfo.lastName} managers: ${...associatedWith.managers} responsibleFor: ${...associatedWith.responsibleFor}`};
-    });
-  });  
-}
+  return {...personalInfo, ...associatedWith };
+ }
 
 function isManager(id) {
   const verifyManager = data.employees.some((manager) => id === manager.managers);
