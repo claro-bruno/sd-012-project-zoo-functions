@@ -34,13 +34,13 @@ function getEmployeeByName(employeeName) {
     employee.firstName === employeeName || employee.lastName === employeeName);
   return (first);
 }
-// console.tabe(employees);
 
-/*
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const newEmployee = { ...personalInfo, ...associatedWith };
+  return newEmployee;
 }
-
+/*
 function isManager(id) {
   // seu código aqui
 }
@@ -91,5 +91,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
