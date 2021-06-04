@@ -32,11 +32,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const resultado = data.employees.find((emp) => emp.managers.find((manager) => manager === id));
-  if (resultado === undefined) {
-    return false;
-  }
-  return true;
+  return employees.some((employee, index) => employee.managers[index] === id);
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
