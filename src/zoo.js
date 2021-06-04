@@ -13,6 +13,7 @@ const data = require('./data');
 
 const especies = data.species;
 const funcionarios = data.employees;
+const precos = data.prices;
 
 function getSpeciesByIds(...ids) {
   const acessSpecies = especies;
@@ -83,8 +84,13 @@ function countAnimals(species) {
   return resposta;
 }
 
-function calculateEntry() {
-  // seu código aqui entrants
+function calculateEntry(entrants) {
+  // seu código aqui
+  if (!entrants || entrants.length > 3) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return Adult * precos.Adult + Child * precos.Child + Senior * precos.Senior;
 }
 
 function getAnimalMap() {
