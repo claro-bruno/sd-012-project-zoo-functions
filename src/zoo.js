@@ -160,18 +160,27 @@ function increasePrices(percentage) {
 // console.log(increasePrices(50));
 
 function getEmployeeCoverage(idOrName) {
-  const searchedEmployee = employees.find(() => Object.values((value) => value === idOrName));
-  const { firstName, lastName } = searchedEmployee;
-  const idSpecies = searchedEmployee.responsibleFor;
-  const nameSpecies = idSpecies.map((id) => species.find((name) => name.id === id));
-  const [first, second] = nameSpecies;
+  const allResults = {};
+  employees.forEach((employee) => {
+    const { firstName, lastName } = employee;
+    const idSpecies = employee.responsibleFor.map((id) => species.find((name) => name.id === id));
+    const specieList = [];
+    idSpecies.forEach((specie) => specieList.push(specie.name));
+    allResults[`${firstName} ${lastName}`] = specieList;
+  });
+  if (idOrName === undefined) return allResults;
+  const srchEmp = employees.find((emp) => Object.values(emp).find((info) => info === idOrName));
+  const { firstName, lastName } = srchEmp;
+  const idSpecies = srchEmp.responsibleFor.map((id) => species.find((name) => name.id === id));
+  // const [first, second] = nameSpecies;
   const result = {};
-  result[`${firstName} ${lastName}`] = [`${first.name}`, `${second.name}`];
-
+  const specieList = [];
+  idSpecies.forEach((specie) => specieList.push(specie.name));
+  result[`${firstName} ${lastName}`] = specieList;
   return result;
 }
 
-// console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+// console.log(getEmployeeCoverage('Bethea'));
 
 module.exports = {
   calculateEntry,
