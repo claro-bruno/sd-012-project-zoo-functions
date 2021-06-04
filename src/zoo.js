@@ -111,7 +111,7 @@ function getOldestFromFirstSpecies(id) {
   const residentsOBj = residents.residents.sort((specieA, specieB) => specieB.age - specieA.age)[0];
   return Object.values(residentsOBj);
 }
-console.log(getOldestFromFirstSpecies('b0dc644a-5335-489b-8a2c-4e086c7819a2'));
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 /* function increasePrices(percentage) {
   // seu código aqui
   percentage = percentage/100
