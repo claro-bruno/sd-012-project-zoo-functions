@@ -10,23 +10,26 @@ eslint no-unused-vars: [
 */
 
 // const { species } = require('./data');
+
 const data = require('./data');
 
 const getSpeciesByIds = (...ids) => data.species.filter((specie, i) => specie.id === ids[i]);
 // seu código aqui
 console.log(getSpeciesByIds());
 
-const getAnimalsOlderThan = (animal, age) => (
-  // seu código aqui
-  data.species
-    .find((specie) => specie.name === animal).residents
-    .every((resident) => resident.age >= age)
-);
+const getAnimalsOlderThan = (animal, age) => data.species
+  .find((specie) => specie.name === animal).residents
+  .every((resident) => resident.age >= age);
+
 console.log(getAnimalsOlderThan('lions', 20));
 
-function getEmployeeByName() {
-  // seu código aqui employeeName
-}
+const getEmployeeByName = (employeeName) => {
+  if (!employeeName) return {};
+  return data.employees.find((employ) => employ.firstName === employeeName
+   || employ.lastName === employeeName);
+};
+
+console.log(getEmployeeByName('Nigel'));
 
 function createEmployee() {
   // seu código aqui personalInfo, associatedWith
