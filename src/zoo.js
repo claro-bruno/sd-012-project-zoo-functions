@@ -19,7 +19,7 @@ function getSpeciesByIds(...ids) {
   return zooData;
 }
 
-console.log(getSpeciesByIds(''));
+// console.log(getSpeciesByIds(''));
 
 // vamos começar!
 
@@ -30,7 +30,7 @@ function getAnimalsOlderThan(animal, age) {
   // 2 - Encontrando true ou false relacionado com a idade:
   return accessSpecie.residents.every((resident) => resident.age >= age);
 }
-console.log(getAnimalsOlderThan('lions'));
+// console.log(getAnimalsOlderThan('lions'));
 
 function getEmployeeByName(employeeName = {}) {
   return data.employees.find((employee) =>
@@ -48,10 +48,12 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
   };
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
-
+function isManager(id) {
+  // eslint-disable-next-line max-len
+  const accessId = data.employees.some((employee) => employee.managers.some(((manage) => manage === id)));
+  return accessId;
+}
+console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
 // }
@@ -93,7 +95,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
