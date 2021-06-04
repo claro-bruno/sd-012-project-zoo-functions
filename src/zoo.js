@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -73,25 +74,32 @@ function isManager(id) {
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
+
 function countAnimals(species) {
   // probabily to use reduce and maybe use a filter
   // find the animals OK
   // make a object with the name of animals, and the quantity of animals
   if (!species) {
-    const obj = {};
-    data.species.forEach((animals) => {
-      obj[animals.name] = animals.residents.length;
-    });
-    return obj;
+    return data.species.reduce((acc, item) => ({ ...acc, [item.name]: item.residents.length }), {});
   }
-  const finder = data.species.find((animal) => animal.name === species);
-  return finder.residents.length;
+  return data.species.find((animal) => animal.name === species).residents.length;
 }
-console.log(countAnimals('tigers'));
-function calculateEntry() {
-  // seu código aqui
-  // entrants
+// console.log(countAnimals('lions'));
+
+function calculateEntry(entrants) {
+  // Test the parameters
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const ageVisitants = Object.keys(entrants);
+  const price = Object.values(data.prices);
+  console.log(price)
+  return ageVisitants.reduce((acc, item) => {
+    const finalValue = acc + entrants[item] * data.prices[item];
+    return finalValue;
+  }, 0);
 }
+console.log(calculateEntry({ Adult: 2221122287154138, Child: 316616, Senior: 10000 }));
 
 function getAnimalMap() {
   // seu código aqui
