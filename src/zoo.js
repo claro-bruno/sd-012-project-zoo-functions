@@ -120,7 +120,6 @@ function increasePrices(percentage) {
   [prices.Adult, prices.Senior, prices.Child] = pricesArray;
   return prices;
 }
-console.log(increasePrices(50));
 /* function getEmployeeCoverage(idOrName) {
   // seu código aqui
   if(!idOrName) {
