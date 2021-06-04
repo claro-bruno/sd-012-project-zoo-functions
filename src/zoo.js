@@ -12,6 +12,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 const especies = data.species;
+const funcionarios = data.employees;
 
 function getSpeciesByIds(...ids) {
   const acessSpecies = especies;
@@ -44,8 +45,10 @@ function createEmployee(personalInfo, associatedWith) {
   return Object.assign(personalInfo, associatedWith);
 }
 
-function isManager() {
-  // seu código aqui id
+function isManager(id) {
+  // seu código aqui
+  const gerentes = funcionarios.map((gerente) => gerente.managers);
+  return gerentes.some((pessoa, index) => (pessoa[index] === id));
 }
 
 function addEmployee() {
