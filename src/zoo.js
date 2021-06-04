@@ -42,7 +42,11 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  return Object.assign(personalInfo, associatedWith);
+  const resposta = {
+    ...personalInfo,
+    ...associatedWith,
+  };
+  return resposta;
 }
 
 function isManager(id) {
@@ -51,8 +55,17 @@ function isManager(id) {
   return gerentes.some((pessoa, index) => (pessoa[index] === id));
 }
 
-function addEmployee() {
-  // seu código aqui id, firstName, lastName, managers, responsibleFor
+function addEmployee(a, e, i, o = [], u = []) {
+  // seu código aqui
+  const resposta = {
+    id: a,
+    firstName: e,
+    lastName: i,
+    managers: o,
+    responsibleFor: u,
+  };
+  funcionarios.push(resposta);
+  // return funcionarios;
 }
 
 function countAnimals() {
