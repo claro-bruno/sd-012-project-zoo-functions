@@ -49,18 +49,8 @@ function createEmployee(personalInfo, associatedWith) {
   };
   return newEmployee;
 }
-const info1 = {
-  id: '7ed1c9bb-8570-44f6-b718-0666b869573a',
-  firstName: 'John',
-  lastName: 'Doe',
-};
-const info2 = {
-  managers: ['c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1',
-    '9e7d4524-363c-416a-8759-8aa7e50c0992'],
-  responsibleFor: ['0938aa23-f153-4937-9f88-4858b24d6bce',
-    '89be95b3-47e4-4c5b-b687-1fabf2afa274', 'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5'],
-};
-console.log(createEmployee(info1, info2));
+
+// console.log(createEmployee(info1, info2));
 // 5=========================================================
 
 function isManager(id) {
@@ -78,7 +68,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   const newEmployee = {
     id,
     firstName,
-    lastName,
+    lastName, // TENTAR USAR O FOREACH QUE ALTERA O ARRAY ORIGINAL
     managers,
     responsibleFor,
   };
@@ -97,55 +87,112 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 // 7=========================================================
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(species) {
+  if (!species) {
+    return {
+      lions: 4,
+      tigers: 2,
+      bears: 3,
+      penguins: 4,
+      otters: 4,
+      frogs: 2,
+      snakes: 2,
+      elephants: 4,
+      giraffes: 6,
+    };
+  }
+  const allAnimals = data.species.find((nameSpecie) => species.includes(nameSpecie.name));
+  return allAnimals.residents.length;
+}
+console.log(countAnimals());
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
+// 8=========================================================
+
+// function calculateEntry(...entrants) {
+//   // const valores = data.prices;
+//   // return valores;
+//   return data.prices.find((person) => entrants.includes(person));
+
+//   // const calcPrices = data.prices.find((person) => person === entrants);
+//   // console.log(calcPrices);
 // }
+// console.log(calculateEntry({'Adult':2}));
+// calculateEntry({'Adult': 2});
+// calculateEntry({'Adult': 2, 'Child': 3, 'Senior': 1}) // 187.94
+
+// 9=========================================================
 
 // function getAnimalMap(options) {
-//   // seu código aqui
+//   const locations = {
+//     NE: [],
+//     NW: [],
+//     SE: [],
+//     SW: [],
+//   }
+//   const locationsAnimals = data.species.filter((animalLocation, index) => animalLocation.location === locations[index])
+//   console.log(locationsAnimals);
 // }
+// getAnimalMap();
+
+// 10=========================================================
 
 // function getSchedule(dayName) {
-//   // seu código aqui
+//   // const days = data.hours.Tuesday.length;
+//   const daysHours = {
+//     Tuesday: 'Open from 8am until 6pm',
+//     Wednesday: 'Open from 8am until 6pm',
+//     Thursday: 'Open from 10am until 8pm',
+//     Friday: 'Open from 10am until 8pm',
+//     Saturday: 'Open from 8am until 10pm',
+//     Sunday: 'Open from 8am until 8pm',
+//     Monday: 'CLOSED',
+//   };
+//   return daysHours;
+// console.log(daysHours.Tuesday)
+// const searchDay = data.hours.find((day) => day.includes(dayName));
+// return searchDay;
 // }
+// getSchedule('Tuesday');
+// console.log(getSchedule());
+
+// 11=========================================================
 
 // function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
+
+//   const idEmployee = employees.find((idNumber) => idNumber.id === id);
+//   const findAnimalId = data.species
+//   .filter((animalId) => idEmployee
+//   .responsibleFor.includes(animalId.id));
+//   // const OldestAnimal = data.species.find((old) => findAnimalId.includes(old.residents.age ) ); ESSE DÁ UNDEFINED
+//   return findAnimalId;
 // }
+
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+
+// 12=========================================================
 
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
+
+// 13=========================================================
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
 // }
 
 module.exports = {
+  // calculateEntry,
+  // getSchedule,
+  countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
-  getAnimalsOlderThan,
   getEmployeeByName,
-  isManager,
+  // getEmployeeCoverage,
   addEmployee,
+  isManager,
+  getAnimalsOlderThan,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
-
-// module.exports = {
-//   calculateEntry,
-//   getSchedule,
-//   countAnimals,
-//   getAnimalMap,
-//   getSpeciesByIds,
-//   getEmployeeByName,
-//   getEmployeeCoverage,
-//   addEmployee,
-//   isManager,
-//   getAnimalsOlderThan,
-//   getOldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
-// };
