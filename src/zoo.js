@@ -97,12 +97,11 @@ function getSchedule(dayName) {
     Tuesday: 'Open from 8am until 6pm',
     Wednesday: 'Open from 8am until 6pm',
   };
-  let arrayObj = Object.entries(horas).map((hour) => hour);
+  const arrayObj = Object.entries(horas).map((hour) => hour);
   if (!dayName) {
-    arrayObj = arrayObj.map((d) => `"${d[0]}": "Open from ${d[1].open}am until ${d[1].close}pm"`);
-    return JSON.parse(`{${arrayObj.join(', ')}}`);
+    return horas;
   } const d = arrayObj.find((day) => day[0] === dayName);
-  return `${d[0]}: Open from ${d[1].open}am until ${d[1].close}pm`;
+  return JSON.parse(`{"${d[0]}": "${d[1]}"}`);
 }
 console.log(getSchedule('Monday'));
 /* function getOldestFromFirstSpecies(id) {
