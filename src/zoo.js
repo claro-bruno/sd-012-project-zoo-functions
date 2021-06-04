@@ -24,7 +24,7 @@ console.log(getSpeciesByIds());
 
 function getAnimalsOlderThan(animal, age) {
   document.getElementsByTagName('');
-  species.name.every();
+  species.name.every(); //booleano
   const idadeMinina = [''];
   species.name.age.filter();
 
@@ -49,8 +49,9 @@ function createEmployee(personalInfo, associatedWith) {
   const novoColaborador = () => {};
 }
 
-function isManager() {
-  // seu código aqui - id
+function isManager(id) {
+  document.getElementById('stephanieId');
+  id.some();
 }
 
 function addEmployee() {
