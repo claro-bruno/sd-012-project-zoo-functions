@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { species, employees } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -72,14 +72,7 @@ function isManager(id) {
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
-
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
-
-module.exports = {
-  // calculateEntry,
-  // getSchedule,
+sd-012-project-zoo-functions on  vini
   // countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
