@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /*
 eslint no-unused-vars: [
   "error",
@@ -11,7 +12,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { species, employees, hours /* prices */ } = data;
+const { species, employees, hours, prices } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
@@ -60,9 +61,9 @@ function countAnimals(specie) {
 }
 
 function calculateEntry(entrants) {
-  if (!entrants || Object.entries(entrants).length === 0) return 0;
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  return Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * prices[curr]), 0);
 }
-console.log(calculateEntry());
 
 /*
 function getAnimalMap(options) {
