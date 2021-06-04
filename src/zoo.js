@@ -28,8 +28,15 @@ function getAnimalsOlderThan(animal, age) {
   return specie.residents.every((specimen) => specimen.age >= age);
 }
 
-function getEmployeeByName(employeeName) {
+function getEmployeeByName(...employeeName) {
   // seu código aqui
+  if (employeeName.length === 0) {
+    return {};
+  }
+  const employee = data.employees.find((person) =>
+    person.firstName === employeeName[0] || person.lastName === employeeName[0]);
+  // return employee;
+  return employee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
