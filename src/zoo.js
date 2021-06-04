@@ -22,7 +22,7 @@ function getSpeciesByIds(...ids) {
 
 console.log(getSpeciesByIds());
 
-function getAnimalsOlderThan() {
+function getAnimalsOlderThan(animal, age) {
   document.getElementsByTagName('');
   species.name.every();
   const idadeMinina = [''];
@@ -30,8 +30,10 @@ function getAnimalsOlderThan() {
 
 }
 
-function getEmployeeByName() {
-  // seu código aqui - employeeName
+function getEmployeeByName(employeeName) {
+  const buscaNome = document.getElementsByTagName('');
+  employees.firstName.filter();
+  employees.lastName.filter();
 }
 
 function createEmployee() {
