@@ -42,13 +42,27 @@ function getEmployeeByName(employeeName) {
     || employeeName === employee.lastName);
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+// Observações técnicas
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+  // O parâmetro personalInfo recebe um objeto que contém o id, o firstName e o lastName
+  // O parâmetro associatedWith recebe um objeto que contém dois array: managers e responsibleFor
+
+  // O que será avaliado:
+
+  // Cria um novo colaborador a partir de objetos contendo informações pessoais e gerentes e animais gerenciados.
+  return { ...personalInfo, ...associatedWith };
+}
+
+function isManager(id) {
+// Observações técnicas
+
+  // Deve retornar um valor booleano
+  // O que será avaliado
+
+  // Testa se o id passado é de um gerente
+  return employees.some((employee) => id === employee.managers);
+}
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -91,9 +105,9 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
