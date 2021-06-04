@@ -46,6 +46,7 @@ function createEmployee(personalInfo, associatedWith) {
     managers: '',
     responsibleFor: '',
   }
+  const novoColaborador = () => {};
 }
 
 function isManager() {
