@@ -12,11 +12,12 @@ eslint no-unused-vars: [
 const data = require('./data');
 const arraysOfData = data.species; // recolhe o objeto "species" da variavel data
 
-function getSpeciesByIds(ids) { 
-  let idGathered = arraysOfData.filter((element) => element.id === ids); // Compara o parametro com a data e retorna seu resultado
-  return idGathered;//console.log(idGathered) 
+function getSpeciesByIds(...ids) { 
+  let idGathered = arraysOfData.filter( element => ids.find( verId  => verId === element.id)); // Compara o parametro com a data e retorna seu resultado
+  //console.log(idGathered) 
+  return idGathered;
 };
-//getSpeciesByIds('baa6e93a-f295-44e7-8f70-2bcdc6f6948d');
+//getSpeciesByIds('fdb2543b-5662-46a7-badc-93d960fdc0a8', '0e7b460e-acf4-4e17-bcb3-ee472265db83'); testes diretos
 
 
 function getAnimalsOlderThan(animal, age) {
