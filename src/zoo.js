@@ -186,7 +186,7 @@ function getEmployeeCoverage(idOrName) {
     return object;
   }
   if (idOrName.length > 25) return findById(idOrName);
-  findByName(idOrName);
+  return findByName(idOrName);
 }
 
 module.exports = {
