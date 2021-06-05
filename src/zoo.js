@@ -1,27 +1,20 @@
-/* eslint-disable complexity */
-/* eslint-disable max-lines-per-function */
 // const assert = require('assert');
-/*
-eslint no-unused-vars: [
-  'error',
-  {
-    'args': 'none',
-    'vars': 'local',
-    'varsIgnorePattern': 'data'
-  }
-]
-*/
+// /*
+// eslint no-unused-vars: [
+//   'error',
+//   {
+//     'args': 'none',
+//     'vars': 'local',
+//     'varsIgnorePattern': 'data'
+//   }
+// ]
+// */
 
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // OK
   // seu código aqui
-  // if (!ids.length) return [];
-  // const getSpeciesById = (id, index) => {
-  //   if (data.species[index].id === id) return data.species[index];
-  // };
-  // return ids.map(getSpeciesById);
   return ids.reduce((acc, id, index) => {
     if (data.species[index].id === id) {
       acc.push(data.species[index]);
@@ -213,8 +206,6 @@ function addEmployee(
 }
 
 // addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe');
-// console.log(data.employees[8]);
-// console.log(data.employees.length);
 // assert.strictEqual(data.employees.length, 9);
 
 // let lastEmployee = data.employees[8];
@@ -318,151 +309,88 @@ function calculateEntry(entrants) {
 // actual11 = calculateEntry(entrants);
 // assert.strictEqual(actual11, 45.98);
 
-function getAnimalSpeciesByLocationAndSex(species, location, sex) {
-  return species
-    .filter((animal) => animal.location === location)
-    .filter((animal, index) => animal.residents[index].sex === sex)
-    .map((animal) => animal.name);
-}
+const resetAcc = () => {
+  const acc = [
+    {
+      NE: [],
+      NW: [],
+      SE: [],
+      SW: [],
+    },
+    {
+      NE: [],
+      NW: [],
+      SE: [],
+      SW: [],
+    },
+  ];
+  return acc;
+};
 
-function getSortedAnimalNamesByLocationAndSex(species, location, sex) {
-  return species
-    .filter((animal) => animal.location === location)
-    .reduce((acc, { name, residents }) => {
-      const obj = {
-        [name]: residents
-          .filter((resident) => resident.sex === sex)
-          .map((resident) => resident.name)
-          .sort(),
-      };
-      acc.push(obj);
-      return acc;
-    }, []);
-}
+const sortNoNames = (noNames) => ({
+  NE: noNames.NE.sort(),
+  NW: noNames.NW.sort(),
+  SW: noNames.NW.sort(),
+  SE: noNames.SE.sort(),
+});
 
-function getAnimalNamesByLocationAndSex(species, location, sex) {
-  return species
-    .filter((animal) => animal.location === location)
-    .reduce((acc, { name, residents }) => {
-      const obj = {
-        [name]: residents
-          .filter((resident) => resident.sex === sex)
-          .map((resident) => resident.name),
-      };
-      acc.push(obj);
-      return acc;
-    }, []);
-}
+const getRightLocation = (speciesObj) => {
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  return locations.find((location) => speciesObj.location === location);
+};
 
-function getSortedAnimalNamesByLocation(species, location) {
-  return species
-    .filter((animal) => animal.location === location)
-    .reduce((acc, { name, residents }) => {
-      const obj = {
-        [name]: residents.map((resident) => resident.name).sort(),
-      };
-      acc.push(obj);
-      return acc;
-    }, []);
-}
+const cutResidentsArrayToSize = (speciesObj, sex) => {
+  const residentsArray = speciesObj.residents;
+  if (sex) {
+    return residentsArray
+      .filter((resident) => resident.sex === sex)
+      .reduce((acc, resident) => {
+        acc.push(resident.name);
+        return acc;
+      }, []);
+  }
+  return residentsArray.reduce((acc, resident) => {
+    acc.push(resident.name);
+    return acc;
+  }, []);
+};
 
-function getSortedAnimalSpeciesByLocation(species, location) {
-  return species
-    .filter((animal) => animal.location === location)
-    .map((animal) => animal.name)
-    .sort();
-}
+const populateLocationArrays = (acc, speciesObj, sex, sorted) => {
+  const rightLocation = getRightLocation(speciesObj);
+  if (sorted) {
+    acc[0][rightLocation].push({
+      [speciesObj.name]: cutResidentsArrayToSize(speciesObj, sex).sort(),
+    });
+  } else {
+    acc[0][rightLocation].push({
+      [speciesObj.name]: cutResidentsArrayToSize(speciesObj, sex),
+    });
+  }
+  if (!acc[1][rightLocation].includes(speciesObj.name)) {
+    acc[1][rightLocation].push(speciesObj.name);
+  }
+  return acc;
+};
 
-function getAnimalNamesByLocation(species, location) {
-  return species
-    .filter((animal) => animal.location === location)
-    .reduce((acc, { name, residents }) => {
-      const obj = {
-        [name]: residents.map((resident) => resident.name),
-      };
-      acc.push(obj);
-      return acc;
-    }, []);
-}
-
-function getAnimalSpeciesByLocation(species, location) {
-  return species
-    .filter((animal) => animal.location === location)
-    .map((animal) => animal.name);
-}
-
-function gamNoOpt() {
-  return {
-    NE: getAnimalSpeciesByLocation(data.species, 'NE'),
-    NW: getAnimalSpeciesByLocation(data.species, 'NW'),
-    SE: getAnimalSpeciesByLocation(data.species, 'SE'),
-    SW: getAnimalSpeciesByLocation(data.species, 'SW'),
-  };
-}
-
-function gamSortSexNames(sex) {
-  return {
-    SE: getSortedAnimalNamesByLocationAndSex(data.species, 'SE', sex),
-    NW: getSortedAnimalNamesByLocationAndSex(data.species, 'NW', sex),
-    SW: getSortedAnimalNamesByLocationAndSex(data.species, 'SW', sex),
-    NE: getSortedAnimalNamesByLocationAndSex(data.species, 'NE', sex),
-  };
-}
-
-function gamSexNames(sex) {
-  return {
-    NE: getAnimalNamesByLocationAndSex(data.species, 'NE', sex),
-    NW: getAnimalNamesByLocationAndSex(data.species, 'NW', sex),
-    SE: getAnimalNamesByLocationAndSex(data.species, 'SE', sex),
-    SW: getAnimalNamesByLocationAndSex(data.species, 'SW', sex),
-  };
-}
-
-function gamSex(sex) {
-  return {
-    NE: getAnimalSpeciesByLocationAndSex(data.species, 'NE', sex),
-    NW: getAnimalSpeciesByLocationAndSex(data.species, 'NW', sex),
-    SE: getAnimalSpeciesByLocationAndSex(data.species, 'SE', sex),
-    SW: getAnimalSpeciesByLocationAndSex(data.species, 'SW', sex),
-  };
-}
-
-function gamSortNames() {
-  return {
-    NE: getSortedAnimalNamesByLocation(data.species, 'NE'),
-    NW: getSortedAnimalNamesByLocation(data.species, 'NW'),
-    SE: getSortedAnimalNamesByLocation(data.species, 'SE'),
-    SW: getSortedAnimalNamesByLocation(data.species, 'SW'),
-  };
-}
-
-function gamSort() {
-  return {
-    NE: getSortedAnimalSpeciesByLocation(data.species, 'NE'),
-    NW: getSortedAnimalSpeciesByLocation(data.species, 'NW'),
-    SE: getSortedAnimalSpeciesByLocation(data.species, 'SE'),
-    SW: getSortedAnimalSpeciesByLocation(data.species, 'SW'),
-  };
-}
-
-function gamNames() {
-  return {
-    NE: getAnimalNamesByLocation(data.species, 'NE'),
-    NW: getAnimalNamesByLocation(data.species, 'NW'),
-    SE: getAnimalNamesByLocation(data.species, 'SE'),
-    SW: getAnimalNamesByLocation(data.species, 'SW'),
-  };
-}
+const groupAnimalsByLocation = (speciesArray, sex, sorted) => speciesArray.reduce(
+  (acc, speciesObj) => populateLocationArrays(acc, speciesObj, sex, sorted),
+  resetAcc(),
+);
 
 function getAnimalMap(options) {
   // seu código aqui
-  if (!options) return gamNoOpt();
-  if (options.sex && options.sorted && options.includeNames) return gamSortSexNames(options.sex);
-  if (options.sex && options.includeNames) return gamSexNames(options.sex);
-  if (options.sex) return gamSex(options.sex);
-  if (options.sorted && options.includeNames) return gamSortNames();
-  if (options.sorted) return gamSort();
-  if (options.includeNames) return gamNames();
+  const noOptions = { includeNames: false, sorted: false, sex: false };
+  const {
+    includeNames = false,
+    sorted = false,
+    sex = false,
+  } = options || noOptions;
+  let animalMap = data.species;
+  animalMap = groupAnimalsByLocation(animalMap, sex, sorted);
+  const [withNames, noNames] = animalMap;
+  if (includeNames) return withNames;
+  if (sorted && includeNames) return sortNoNames(noNames);
+  return noNames;
 }
 
 // const expected12 = {
@@ -555,22 +483,44 @@ function getAnimalMap(options) {
 // expected17 = 'lions';
 // assert.strictEqual(actual17, expected17);
 
+// function convert24To12Hs(hour24) {
+//   const hour12 = hour24 % 12;
+//   const amOrPm = (hour24 > 12) ? 'pm' : 'am';
+//   return ({ hour: hour12, amOrPm });
+// }
+
 function getSchedule(dayName) {
   // seu código aqui
   return dayName;
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+// const actual16 = getSchedule();
+// const expected16 = {
+//   'Tuesday': 'Open from 8am until 6pm',
+//   'Wednesday': 'Open from 8am until 6pm',
+//   'Thursday': 'Open from 10am until 8pm',
+//   'Friday': 'Open from 10am until 8pm',
+//   'Saturday': 'Open from 8am until 10pm',
+//   'Sunday': 'Open from 8am until 8pm',
+//   'Monday': 'CLOSED'
+// };
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+// assert.deepStrictEqual(actual16, expected16);
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  return id;
+}
+
+function increasePrices(percentage) {
+  // seu código aqui
+  return percentage;
+}
+
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+  return idOrName;
+}
 
 module.exports = {
   calculateEntry,
@@ -579,11 +529,11 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
-  // increasePrices,
+  getOldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
