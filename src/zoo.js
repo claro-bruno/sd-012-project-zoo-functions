@@ -93,39 +93,26 @@ function calculateEntry(...entrants) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-
-//   // const schedule = {
-//   //   'Tuesday': 'Open from 8am until 6pm',
-//   //   'Wednesday': 'Open from 8am until 6pm',
-//   //   'Thursday': 'Open from 10am until 8pm',
-//   //   'Friday': 'Open from 10am until 8pm',
-//   //   'Saturday': 'Open from 8am until 10pm',
-//   //   'Sunday': 'Open from 8am until 8pm',
-//   //   'Monday': 'CLOSED'
-//   // }
-
-//   // if(!dayName) {
-//   //   return schedule;
-//   // }
-
-//   // return 
-
-//   // const fullSchedule = data.hours;
-
-//   // console.log(fullSchedule, 'datas');
-
-//   // const {Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Monday} = fullSchedule;
-
-//   // console.log(Tuesday, 'horario');
-
-
-
-//   // if(dayName = 0){
-//   //   return 
-//   // }
-
-// }
+function getSchedule(dayName) {
+  const schedule = {};
+  function getHours(element) {
+    if (element[0] === 'Monday') {
+      schedule[element[0]] = 'CLOSED';
+    } else {
+      schedule[element[0]] = `Open from ${element[1].open}am until ${element[1].close - 12}pm`;
+    }
+  }
+  Object.entries(data.hours).forEach(getHours);
+  if (!dayName) {
+    return schedule;
+  }
+  const newSchedule = Object.entries(schedule).find((day) => day[0] === dayName);
+  const first = newSchedule[0];
+  const second = newSchedule[1];
+  const dailySchedule = {};
+  dailySchedule[first] = second;
+  return dailySchedule;
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -143,14 +130,14 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
