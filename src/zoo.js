@@ -55,9 +55,14 @@ function isManager(id) {
 // console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 // requisito 6
-function addEmployee() {
-  // seu código aqui id, firstName, lastName, managers, responsibleFor
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // managers e responsibleFor sao arrays, adicionar ao data.employees...
+  // ...usando push a partir dos dados preenchidos nos parametros assim adicionando ao fim da lista
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  const addNewEmployee = data.employees.push(newEmployee);
+  return addNewEmployee;
 }
+//console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe', managers = [], responsibleFor = []));
 
 // requisito 7
 function countAnimals() {
