@@ -100,6 +100,11 @@ function getEmployeeCoverage() {
   // seu código aqui
 }
 
+const teste = Object.keys(data.hours);
+teste.forEach((days) => {
+  
+});
+
 module.exports = {
   calculateEntry,
   getSchedule,
