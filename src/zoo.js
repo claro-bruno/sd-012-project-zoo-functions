@@ -372,10 +372,11 @@ const populateLocationArrays = (acc, speciesObj, sex, sorted) => {
   return acc;
 };
 
-const groupAnimalsByLocation = (speciesArray, sex, sorted) => speciesArray.reduce(
-  (acc, speciesObj) => populateLocationArrays(acc, speciesObj, sex, sorted),
-  resetAcc(),
-);
+const groupAnimalsByLocation = (speciesArray, sex, sorted) =>
+  speciesArray.reduce(
+    (acc, speciesObj) => populateLocationArrays(acc, speciesObj, sex, sorted),
+    resetAcc(),
+  );
 
 function getAnimalMap(options) {
   // seu código aqui
@@ -485,8 +486,8 @@ function getAnimalMap(options) {
 
 function convert24To12Hs(hour24) {
   const hour12 = hour24 % 12;
-  const amOrPm = (hour24 > 12) ? 'pm' : 'am';
-  return ({ hour: hour12, amOrPm });
+  const amOrPm = hour24 > 12 ? 'pm' : 'am';
+  return { hour: hour12, amOrPm };
 }
 
 const toHumanReadable = (acc, curr) => {
@@ -496,16 +497,19 @@ const toHumanReadable = (acc, curr) => {
   }
   const open = convert24To12Hs(data.hours[curr].open);
   const close = convert24To12Hs(data.hours[curr].close);
-  acc[curr] = `Open from ${open.hour}${open.amOrPm} until ${close.hour}${close.amOrPm}`;
+  acc[
+    curr
+  ] = `Open from ${open.hour}${open.amOrPm} until ${close.hour}${close.amOrPm}`;
   return acc;
 };
 
-const allDays = (schedule) => schedule
-  .reduce((acc, curr) => toHumanReadable(acc, curr), {});
+const allDays = (schedule) =>
+  schedule.reduce((acc, curr) => toHumanReadable(acc, curr), {});
 
-const aDay = (schedule, dayName) => schedule
-  .filter((day) => day === dayName)
-  .reduce((acc, curr) => toHumanReadable(acc, curr), {});
+const aDay = (schedule, dayName) =>
+  schedule
+    .filter((day) => day === dayName)
+    .reduce((acc, curr) => toHumanReadable(acc, curr), {});
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -542,10 +546,33 @@ function getSchedule(dayName) {
 // };
 // assert.deepStrictEqual(actual17, expected);
 
+const getResponsible = (employees, id) =>
+  employees.find((employee) => employee.id === id);
+
+const getFirstSpecies = (employee, species) =>
+  species.find((speciesObj) => speciesObj.id === employee.responsibleFor[0]);
+
+const getOldestResident = (firstSpecies) => [
+  ...Object.values(firstSpecies.residents.sort((a, b) => b.age - a.age)[0]),
+];
+
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
-  return id;
+  let { employees } = data;
+  const { species } = data;
+  employees = getResponsible(employees, id);
+  const firstSpecies = getFirstSpecies(employees, species);
+  const oldestResident = getOldestResident(firstSpecies);
+  return oldestResident;
 }
+
+// let actual18 = getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
+// let expected18 = ['Vicky', 'female', 12];
+// assert.deepStrictEqual(actual18, expected18);
+
+// actual18 = getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
+// expected18 = ['Margherita', 'female', 10];
+// assert.deepStrictEqual(actual18, expected18);
 
 function increasePrices(percentage) {
   // seu código aqui
