@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 // const data = require('./data');
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -65,7 +65,7 @@ function countAnimals(species1) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui entrants
+  // seu código aqui
   if (entrants === undefined || entrants === {}) {
     return 0;
   }
@@ -77,8 +77,24 @@ function getAnimalMap() {
   // seu código aqui options
 }
 
-function getSchedule() {
-  // seu código aqui dayName
+function getSchedule(dayName) {
+  // seu código aqui
+  // O código a seguir foi inspirado pela resposta do colega Roberval Filho. Na sequência, seguem comentários de cado passo para comprovar que eu entendi o racional que levou a esta solução.
+
+  // 1 - Cria um objeto vazio para receber as keys/value do objeto 'hours' 2 - Chama o Object.keys para retorna um array da propriedades do objeto hours e chama o forEach para executar cada um dos elementos do agora array que contém os valores do objeto hours. 3 - Verifica se o parametro 'day' receba a string 'Monday', se sim, retorna a string 'CLOSED'. 4 - Senão, em um template literals, retorna o dia selecionado pelo usuário e seu horário de funcionamento, chamando as propriedades 'open' e 'close' 5 - Se o parametro dayName retornar um valor undefined, retorna a programação semanal. 6 - Se o parametro retornar algum dia da semana, retorna-se a const 'zooSchedule' contendo o nome do parametro e o objeto que contém o dia e seu respectivo horário.
+  const weekDays = {};
+  Object.keys(hours).forEach((day) => {
+    const { open, close } = hours[day];
+    if (day === 'Monday') {
+      weekDays[day] = 'CLOSED';
+    } else {
+      weekDays[day] = `Open from ${open}am until ${close - 12}pm`;
+    }
+  });
+  if (dayName === undefined) return weekDays;
+
+  const zooSchedule = { [dayName]: weekDays[dayName] };
+  return zooSchedule;
 }
 
 function getOldestFromFirstSpecies() {
