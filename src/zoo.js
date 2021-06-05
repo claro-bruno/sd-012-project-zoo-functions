@@ -81,15 +81,16 @@ function getSchedule(dayName) {
     Saturday: 'Open from 8am until 10pm',
     Sunday: 'Open from 8am until 8pm',
     Monday: 'CLOSED',
+  };
+
+  if (typeof dayName === 'string') {
+    return { [dayName]: daysList[dayName] };
   }
-  
-  if (typeof dayName === 'string') return { [dayName]: daysList[dayName] };
 
   return daysList;
 }
 
 // function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
 // }
 
 // function increasePrices(percentage) {
