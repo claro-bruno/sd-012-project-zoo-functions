@@ -31,12 +31,13 @@ function getAnimalsOlderThan(animal, age) {
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
   const employ = employees.find((em) => { return (employeeName === em.firstName
-    || employeeName === em.lastName) } );
+    || employeeName === em.lastName) });
   return employ;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  
+  const employee = { ...personalInfo, ...associatedWith };
+return employee;
 }
 
 function isManager(id) {
