@@ -36,16 +36,22 @@ function getEmployeeByName(employeeName) {
   return employees.find((n) => n.firstName === employeeName || n.lastName === employeeName);
 }
 // console.log(getEmployeeByName());
+// RETURN COM VÁRIAS OPÇÕES----------------------------
+// return algo || algo || algo
 
 // 4=========================================================
 
 function createEmployee(personalInfo, associatedWith) {
+  // const newEmployee = {
+  //   id: personalInfo.id,
+  //   firstName: personalInfo.firstName,
+  //   lastName: personalInfo.lastName,
+  //   managers: associatedWith.managers,
+  //   responsibleFor: associatedWith.responsibleFor,
+  // };
   const newEmployee = {
-    id: personalInfo.id,
-    firstName: personalInfo.firstName,
-    lastName: personalInfo.lastName,
-    managers: associatedWith.managers,
-    responsibleFor: associatedWith.responsibleFor,
+    ...personalInfo,
+    ...associatedWith,
   };
   return newEmployee;
 }
@@ -104,21 +110,25 @@ function countAnimals(species) {
   const allAnimals = data.species.find((nameSpecie) => species.includes(nameSpecie.name));
   return allAnimals.residents.length;
 }
-console.log(countAnimals());
+// console.log(countAnimals());
 
 // 8=========================================================
 
-// function calculateEntry(...entrants) {
-//   // const valores = data.prices;
-//   // return valores;
-//   return data.prices.find((person) => entrants.includes(person));
+// function calculateEntry(entrants = 0) {
+//   // adicionando "= 0" ao entrants quando o valor for vazio o retorno é sempre zero
 
-//   // const calcPrices = data.prices.find((person) => person === entrants);
-//   // console.log(calcPrices);
+//   const personAge = Object.keys(entrants); // pega as chaves do entrants [Adult, Senior, Child]
+//   const prices = Object.values(data.prices); // pega o valor do data.prices [49.99, 24.99, 20.99]
+
+//   return personAge.reduce((acc, curr) => {
+//     const teste = acc + entrants[curr] * prices[curr]; // PERGUNTAR PQ NÃO FUNCIONA ASSIM
+//     return prices;
+//   }, 0);
+// // entrants[curr] é igual ao value do entrants. Ex: {'Senior': 2} = 2
+
 // }
-// console.log(calculateEntry({'Adult':2}));
-// calculateEntry({'Adult': 2});
-// calculateEntry({'Adult': 2, 'Child': 3, 'Senior': 1}) // 187.94
+
+// console.log(calculateEntry({'Senior': 2}));
 
 // 9=========================================================
 
@@ -136,24 +146,24 @@ console.log(countAnimals());
 
 // 10=========================================================
 
-// function getSchedule(dayName) {
-//   // const days = data.hours.Tuesday.length;
-//   const daysHours = {
-//     Tuesday: 'Open from 8am until 6pm',
-//     Wednesday: 'Open from 8am until 6pm',
-//     Thursday: 'Open from 10am until 8pm',
-//     Friday: 'Open from 10am until 8pm',
-//     Saturday: 'Open from 8am until 10pm',
-//     Sunday: 'Open from 8am until 8pm',
-//     Monday: 'CLOSED',
-//   };
-//   return daysHours;
-// console.log(daysHours.Tuesday)
-// const searchDay = data.hours.find((day) => day.includes(dayName));
-// return searchDay;
-// }
-// getSchedule('Tuesday');
-// console.log(getSchedule());
+function getSchedule(dayName) {
+  const daysHours = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+
+  if (!dayName) {
+    return daysHours;
+  }
+  return { [dayName]: daysHours[dayName] };
+}
+
+console.log(getSchedule('Monday'));
 
 // 11=========================================================
 
@@ -183,7 +193,7 @@ console.log(countAnimals());
 
 module.exports = {
   // calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
