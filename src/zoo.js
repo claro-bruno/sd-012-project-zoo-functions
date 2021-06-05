@@ -61,11 +61,14 @@ function isManager(id) {
   // O que será avaliado
 
   // Testa se o id passado é de um gerente
-  return employees.some((employee) => id === employee.managers);
+  return employees.some((employee) => employee.managers.some((manager) => manager === id));
 }
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
+// A função irá adicionar uma nova pessoa colaboradora ao array employees, presente no arquivo data.js.
+
+// O que será avaliado
+// Adiciona um funcionário no fim da lista
 // }
 
 // function countAnimals(species) {
