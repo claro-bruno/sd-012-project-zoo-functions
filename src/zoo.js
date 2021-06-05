@@ -14,13 +14,14 @@ const data = require('./data');
 
 // Testar o spread operator 8.5 para substituir o push
 // Precisa iterar tanto o ids quanto o data.species.filter
-//function getSpeciesByIds(...ids) {
-//  if(ids.length === 0){
-//    return [];
-//  }
-//  const outputArray = data.species.filter((especie) => especie.id === ids);
-//  return outputArray;
-//}
+// HOF não trabalha com objeto
+function getSpeciesByIds(...ids) {
+  //  if(ids.length === 0){
+  //    return [];
+  //  }
+  //  const outputArray = data.species.find((animal) => ids.some((idss) => animal.id === idss) === ids);
+  //  return outputArray;
+}
 
 function getAnimalsOlderThan(animal, age) {
   const verifyAnimal = data.species.find((animalSpecie) => animalSpecie.name === animal);
@@ -41,15 +42,22 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return {...personalInfo, ...associatedWith };
- }
+  return { ...personalInfo, ...associatedWith };
+}
 
 function isManager(id) {
-  const verifyManager = data.employees.some((manager) => id === manager.managers);
+  const someManager = data.employees.some(
+    (employee) => employee.managers.find(
+      (manager) => manager === id,
+    ) === id,
+  );
+  return someManager;
 }
+
 // testar shorthand Bloco 8.5
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  return data.employees.push(`{id: ${id}, firstName: ${firstName}, lastName: ${lastName}, managers: ${[...managers]}, responsibleFor: ${[...responsibleFor]},`);
+  // return data.employees.push(`{id: ${id}, firstName: ${firstName}, lastName: ${lastName}, managers: ${[...managers]}, responsibleFor: ${[...responsibleFor]},`);
+  return data.employees.push(...id);
 }
 // Testar object Destructuring para extrair valores das chaves bloco 8.5
 function countAnimals(species) {
