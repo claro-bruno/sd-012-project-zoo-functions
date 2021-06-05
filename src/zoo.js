@@ -50,8 +50,7 @@ function isManager(id) {
 // Questão 06
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({
-    id, firstName, lastName, managers, responsibleFor
-  });
+    id, firstName, lastName, managers, responsibleFor });
 }
 // console.log(employees);
 // Questão 07
