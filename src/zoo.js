@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { species } = data;
+const { species, employees } = data;
 
 function getSpeciesByIds(...codigo) {
   const especie = species.filter((itemArray, index) => itemArray.id === codigo[index]);
@@ -21,23 +21,17 @@ function getAnimalsOlderThan(animal, age) {
   const encontrarAnimal = species.find((itemArray) => itemArray.name === animal);
   const animalVelho = encontrarAnimal.residents.every((itemArray) => itemArray.age > age);
   return animalVelho;
-  // console.log(animalVelho); //funciona no console.log mas não no return;
 }
-// getAnimalsOlderThan('penguins', 10);
 
-// function getEmployeeByName(employeeName) {
-//   const funcionario = employees.filter((itemArray) => itemArray.firstName === employeeName || itemArray.lastName === employeeName);
-//   // console.log(funcionario);
-//   return funcionario;
-// }
-// getEmployeeByName('Nigel');
+function getEmployeeByName(employeeName) {
+  const funcionario = employees.find((itemArray) =>
+    itemArray.firstName === employeeName || itemArray.lastName === employeeName);
+  return !employeeName ? {} : funcionario;
+}
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // const novato = Object.assign({}, personalInfo, associatedWith);
-//   // const novato = data.employees.map(() => {...personalInfo, ...associatedWith});
-//   const novato = () => data.employeess.map(() => (personalInfo, associatedWith));
-//   return novato;
-// }
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
+}
 
 // function isManager(id) {
 //   // const encontraPessoa = employees.find((itemArray) => itemArray.id === id);
@@ -117,12 +111,12 @@ module.exports = {
   // countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
-  // getEmployeeByName,
+  getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
