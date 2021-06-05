@@ -37,8 +37,17 @@ function isManager(id) {
   return data.employees.some((manage) => manage.managers.includes(id));
 }
 
-function addEmployee() {
-  // seu código aqui id, firstName, lastName, managers, responsibleFor
+//manager = [] significa que se não receber parâmetro esse é seu valor
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const add = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+
+  return data.employees.push(add);
 }
 
 function countAnimals() {
