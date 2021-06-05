@@ -175,8 +175,8 @@ function getEmployeeCoverage(idOrName) {
   const listAnimals = employees.find((work) => work.id === idOrName);
   /* const responsabil = listAnimals.responsibleFor; */
   const fullName = `${listAnimals.firstName} ${listAnimals.lastName}`;
-  result[fullName] = listAnimals;
-  console.log(result[fullName]);
+  const animais = listAnimals.responsibleFor.filter((idAni) => idAni === species.id);
+  console.log(animais);
   return result;
 }
 getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
