@@ -74,79 +74,59 @@ function calculateEntry(entrants = 0) {
   return arrayEntrants.length === 0 ? 0 : sum(arrayEntrants);
 }
 
-// ********************************************* REQUISITO 9 ********************************
-
-// sem parametro ------------------------------------------------------------------------------
-const getSpeciesRegion = (region) => {
-  const objSpeciesRegion = {};
-  const speciesRegion = species.filter(({ location }) => location === region);
-  const namesSpeciesRegion = speciesRegion.map(({ name }) => name);
-  objSpeciesRegion[region] = namesSpeciesRegion;
-  return objSpeciesRegion;
+const getSpeciesByRegion = (region, regions) => {
+  const namesSpecies = [];
+  const speciesByRegion = species.filter(({ location }) => location === region);
+  speciesByRegion.forEach(({ name }) => namesSpecies.push(name));
+  regions[region] = namesSpecies;
+  return regions;
 };
 
-const noParameterMap = () => {
-  const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getSpeciesRegion(region));
-  return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
+const noParameterOrNotIncludeNames = () => {
+  const regions = {};
+  ['NE', 'NW', 'SE', 'SW'].forEach((region) => getSpeciesByRegion(region, regions));
+  return regions;
 };
 
-// com parametro: includeNames = true -----------------------------------------------------------
-
-const getAnimalsRegion = (region) => {
-  const objRegions = {};
-  let arrayAnimals = [];
-  const animalsRegion = species.filter(({ location }) => location === region);
-  const objAnimalsRegion = animalsRegion.map(({ name, residents }) => {
-    const objAnimal = {};
-    objAnimal[name] = residents.map(({ name }) => name);
-    return objAnimal;
+const getSpeciesByRegionIncludingNames = (region, regions, sorted, animalSex) => {
+  const speciesAndNamesbyRegion = [];
+  const speciesByRegion = species.filter(({ location }) => location === region);
+  speciesByRegion.forEach(({ name, residents }) => {
+    const namesSpecies = {};
+    let animalsNames = [];
+    if (animalSex === 'female') {
+      const females = residents.filter(({ sex }) => sex === 'female');
+      animalsNames = females.map(({ name }) => name);
+    } else if (animalSex === 'male') {
+      const males = residents.filter(({ sex }) => sex === 'male');
+      animalsNames = males.map(({ name }) => name);
+    } else {
+      animalsNames = residents.map(({ name }) => name);
+    };
+    if (sorted === true) {
+      animalsNames.sort();
+    }
+    namesSpecies[name] = animalsNames;
+    speciesAndNamesbyRegion.push(namesSpecies);
   });
-  arrayAnimals = [...objAnimalsRegion];
-  objRegions[region] = arrayAnimals;
-  return objRegions;
+  regions[region] = speciesAndNamesbyRegion;
+  return regions;
 };
 
-const parameterIncludeName = () => {
-  const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getAnimalsRegion(region));
-  return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
+const yesParameterAndIncludeNames = (sorted, sex) => {
+  const regions = {};
+  ['NE', 'NW', 'SE', 'SW'].forEach((region) =>
+    getSpeciesByRegionIncludingNames(region, regions, sorted, sex));
+  return regions;
 };
 
-// com parametro: includeNames = true , sorted = true ---------------------------------------------
-// const getAnimalsRegionSorted = (region) => {
-//   const objRegions = {};
-//   let arrayAnimals = [];
-//   const animalsRegion = species.filter(({ location }) => location === region);
-//   const objAnimalsRegion = animalsRegion.map(({ name, residents }) => {
-//     const objAnimal = {};
-//     //const orderedResidents = (residents.name).sort((a, b) => a - b);
-//     objAnimal[name] = orderedResidents.map(({ name }) => name);
-//     console.log(objAnimal);
-//     return objAnimal;
-//   });
-//   arrayAnimals = [...objAnimalsRegion];
-//   objRegions[region] = arrayAnimals;
-//   return objRegions;
-// };
-
-// const parameterIncludeNameSorted = () => {
-//   const arrayObjects = ['NE', 'NW', 'SE', 'SW'].map((region) => getAnimalsRegionSorted(region));
-//   return arrayObjects.reduce((acc, crr) => Object.assign(acc, crr), {});
-// };
-// ------------------------------------------------------------------------------------------------
-// function getAnimalMap(options) {
-//   if (!options) {
-//     return noParameterMap();
-//   } else if (options.includeNames === true && options.sorted === true) {
-//      return parameterIncludeNameSorted()
-//   } else if (options.includeNames === true) {
-//     return parameterIncludeName();
-//   };
-// }
-
-// console.log(getAnimalMap({ includeNames: true, sorted: true }));
-
-
-// ------------------------------------- ---------- ----------------------------
+function getAnimalMap(options) {
+  if (!options || !options.includeNames) {
+    return noParameterOrNotIncludeNames();
+  } else {
+    return yesParameterAndIncludeNames(options.sorted, options.sex);
+  }
+}
 
 const getWeekSchedule = () => {
   const weekDays = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -221,7 +201,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  //getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
