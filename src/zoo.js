@@ -77,10 +77,19 @@ function addEmployee(
   });
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
-
+function countAnimals(species) {
+  const vazio = {};
+  if (species === undefined) {
+    data.species.forEach((specie) => {
+      const nome = specie.name;
+      const quantidade = specie.residents.length;
+      vazio[nome] = quantidade;
+    });
+    return vazio;
+  }
+  return data.species.find((specie) => specie.name === species).residents.length;
+}
+console.log(countAnimals());
 // function calculateEntry(entrants) {
 //   // seu código aqui
 // }
@@ -108,7 +117,7 @@ function addEmployee(
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
