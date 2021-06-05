@@ -64,66 +64,31 @@ function calculateEntry(entrants) {
 } // ok8
 
 function getAnimalMap(options) {
-  const { includeNames, sex } = options;
   const res = species.reduce((acc, specie) => {
     const { name, location, residents } = specie;
     if (acc[location] === undefined) {
       acc[location] = [];
-    }    
-    acc[location][name] = [];
-    // let residents = acc[location][name].map((resident) => {
-    //   return resident.
-    // });
-
-
-
-    console.log('------------');
-    console.log(specie);
+    }console.log(options);
+    if (!options.includeNames){
+      acc[location].push(name);
+      return acc;
+    }
+    const residents2 = [];
+    residents.forEach((resident) => {
+      if (options.sex === undefined || options.sex === resident.sex) {
+        residents2.push(resident.name);
+      }
+    });
+    if (options.sorted){
+      residents2.sort();
+    }
+    acc[location].push({[name]: residents2});
     return acc
   }, {});
-
-
-} getAnimalMap({});
-
-/*
-  1 Com species.reduce(OBJ), varrer todo o arr e ir acc o obj com as
-  localidades como chaves.
-  Se o local nao existir, criar a chave com uma arr vazia.
-  Se existir, acessar o valor e popular a arr com o animal 
-  Este resultado deve ser retornado caso nao haja argumentos na func.
-  {
-    NE: ['lions', 'giraffes'],
-    NW: ['tigers', 'bears', 'elephants'],
-    SE: ['penguins', 'otters'],
-    SW: ['frogs', 'snakes']
-  };
-  
-  2 Se includeNames: true, 
-  Olocal - A - Oanimal - Anomes
-  {
-    NE: [
-      { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] },
-      { giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'] }
-    ]
-  }
-
-  3 Se sorted: true e se includeNames: true
-  {
-    NE: [
-      { lions: ['Dee', 'Faustino', 'Maxwell', 'Zena'] },
-      { giraffes: ['Antone', 'Arron', 'Bernard', 'Clay', 'Gracia', 'Vicky'] }
-    ]
-  }
-
-  4 sex: '*gender*' e se includeNames: true
-  5 sex: '*gender*' sorted: true e se includeNames: true
-  
-*/
-
-
-
-
-
+  return res;
+} 
+console.log(getAnimalMap());
+// console.log(getAnimalMap({sex: 'male', sorted: true, includeNames: false}));
 
 function getSchedule(dayName) {
   const obj = {};
