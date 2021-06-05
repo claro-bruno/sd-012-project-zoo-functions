@@ -29,12 +29,9 @@ function getSpeciesByIds(...ids) {
 // console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
-  const getSpecie = species.filter((specie) => specie.name === animal);
-  const getResidents = getSpecie.map((resident) => resident.residents);
-  // testar REDUCE posteriormente
-  // console.log(getResidents);
-  return getResidents.every((specie) => age < specie[0].age);
+  const getSpecie = species.find((specie) => specie.name === animal);
+  const isOlder = getSpecie.residents.every((resident) => age < resident.age);
+  return isOlder;
 }
 
 // console.log(getAnimalsOlderThan('otters', 7));
