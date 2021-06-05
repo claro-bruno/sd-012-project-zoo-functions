@@ -48,8 +48,8 @@ const isManager = (id) => data.employees
   .some((employee) => employee.managers
     .some((employeeId) => employeeId === id));
 
-console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
-console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
   const newEmployee = {
@@ -80,21 +80,23 @@ const calculateEntry = (entrants) => {
   return Adult * data.prices.Adult + Senior * data.prices.Senior + Child * data.prices.Child;
 };
 // console.log(calculateEntry({ 'Child': 1, 'Senior': 1 }));
+
 function getAnimalMap() {
   // seu código aqui options
 }
 
-function getSchedule() {
-  // seu código aqui dayName
-}
+const getSchedule = () => {
+  // dayName
+  // if(!dayName) {
+  //   return data.hours.map((hour) => Object.keys())
+  // }
+};
 
 const getOldestFromFirstSpecies = (id) => {
   // Procurar id em employees (find)
   const getEmployee = data.employees.find((employee) => employee.id === id);
-  console.log(`Array animais ${getEmployee}`);
   // Procurar animal responsabilidade do getEmployee
   const getSpecie = data.species.find((specie) => specie.id === getEmployee.responsibleFor[0]);
-  console.log(`Animal ${getSpecie}`);
   // Comparar as idades dos animais e trazer o mais velho
   const getOlder = getSpecie.residents.reduce((acumulador, item) => {
     if (item.age > acumulador.age) {
@@ -105,11 +107,20 @@ const getOldestFromFirstSpecies = (id) => {
   return Object.values(getOlder);
 };
 
-console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
-function increasePrices() {
-  // seu código aqui percentage
-}
+const increasePrices = (percentage) => {
+  const { Adult, Senior, Child } = data.prices;
+  const percent = percentage / 100 + 1;
+  data.prices = {
+    Adult: Math.round((Adult * percent) * 100) / 100,
+    Child: Math.round((Child * percent) * 100) / 100,
+    Senior: Math.round((Senior * percent) * 100) / 100,
+  };
+  return data.prices;
+};
+// console.log(increasePrices(50));
+// console.log(increasePrices(30));
 
 function getEmployeeCoverage() {
   // seu código aqui idOrName
