@@ -62,7 +62,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   const addNewEmployee = data.employees.push(newEmployee);
   return addNewEmployee;
 }
-//console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe', managers = [], responsibleFor = []));
+// console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe', managers = [], responsibleFor = []));
 
 // requisito 7
 function countAnimals() {
