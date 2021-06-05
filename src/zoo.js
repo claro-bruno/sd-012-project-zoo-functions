@@ -147,14 +147,23 @@ function getSchedule(dayName) {
   };
   return resposta;
 }
-console.log(getSchedule('Friday'));
 
 function getOldestFromFirstSpecies() {
-  // seu código aqui id
+  // seu código aqui
+  // const acharFuncionario = funcionarios.find((funcionario) => funcionario.id === id).responsibleFor;
+  // console.log(acharFuncionario);
 }
+// getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  // seu código aqui
+  const precoAdulto = precos.Adult + (precos.Adult * (percentage / 100));
+  const precoSenior = precos.Senior + (precos.Senior * (percentage / 100));
+  const precoChild = precos.Child + (precos.Child * (percentage / 100));
+  precos.Adult = Math.round(precoAdulto * 100) / 100;
+  precos.Senior = Math.round(precoSenior * 100) / 100;
+  precos.Child = Math.round(precoChild * 100) / 100;
+  return precos;
 }
 
 function getEmployeeCoverage() {
