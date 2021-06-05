@@ -78,10 +78,68 @@ function calculateEntry(entrants) {
   }
   return calculaValor(entrants.Adult, entrants.Senior, entrants.Child);
 }
+//----------------------------separando--------------------------------------//
+ //link utilizado neste requisito: https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+function getLocalSortedArray() {
+  const newArr = data.species.map((especie) => especie.location).sort();
+  const locArr = newArr.filter((item, index) => newArr.indexOf(item) === index);
+  return locArr
+};
+
+function getAnimalsNames(speciesss) {
+  const targetAnimal = data.species.find((anys) => anys.name === speciesss);
+  const residentsNames = targetAnimal.residents.map((ittem) => ittem.name);
+  return residentsNames;
+}
+
+function getSpeciesEachLocation(sorted = false) {
+  const locAniArr = Object.values(getAnimalLocation());
+  const arrayObjsAni =  locAniArr.map((element) => {
+    return element.map((element2) => {
+      let newOb = {};
+      if (sorted === true) {
+        newOb[element2] = getAnimalsNames(element2).sort();
+        return newOb;
+      }
+      newOb[element2] = getAnimalsNames(element2);
+      return newOb;
+    })
+  })
+  return arrayObjsAni
+};
+
+function getAnimalLocation() {
+  const animalLocation = {};
+  getLocalSortedArray().forEach((loc) => { 
+    const anList = data.species.filter((animal) => animal.location === loc);
+    const namesArr = anList.map((item) => item.name);
+    animalLocation[loc] = namesArr;
+  })
+  return animalLocation
+};
+
+const locArr = getLocalSortedArray();
+
+function getAnimalMap(options) {
+  if (!options) {
+    return getAnimalLocation();
+  }
+  if (options.includeNames === true) {
+    const monsterObj = {};
+    if (options.sorted === true) {
+      getSpeciesEachLocation(true).forEach((ani, index) => {
+      monsterObj[locArr[index]] = ani;
+      });
+      return monsterObj;
+    }
+    getSpeciesEachLocation().forEach((ani, index) => {
+      monsterObj[locArr[index]] = ani;
+      });
+    return monsterObj;
+  }
+};
+
 const cronograma = data.hours;
 const cronoEntries = Object.entries(cronograma);
 
@@ -143,7 +201,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
