@@ -88,9 +88,24 @@ function getSchedule() {
   // seu código aqui dayName
 }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui id
-}
+const getOldestFromFirstSpecies = (id) => {
+  // Procurar id em employees (find)
+  const getEmployee = data.employees.find((employee) => employee.id === id);
+  console.log(`Array animais ${getEmployee}`);
+  // Procurar animal responsabilidade do getEmployee
+  const getSpecie = data.species.find((specie) => specie.id === getEmployee.responsibleFor[0]);
+  console.log(`Animal ${getSpecie}`);
+  // Comparar as idades dos animais e trazer o mais velho
+  const getOlder = getSpecie.residents.reduce((acumulador, item) => {
+    if (item.age > acumulador.age) {
+      return item;
+    }
+    return acumulador;
+  });
+  return Object.values(getOlder);
+};
+
+console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 function increasePrices() {
   // seu código aqui percentage
