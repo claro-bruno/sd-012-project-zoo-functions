@@ -32,8 +32,9 @@ function getEmployeeByName(employeeName) {
   return employees.find((objectEmployee));
 }
 
-function createEmployee() {
-  // seu código aqui personalInfo, associatedWith
+function createEmployee(personalInfo, associatedWith) {
+  const employeeInclude = { ...personalInfo, ...associatedWith };
+  return employeeInclude;
 }
 
 function isManager() {
