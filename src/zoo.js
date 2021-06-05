@@ -9,7 +9,6 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
 const { employees, species, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -147,17 +146,47 @@ function getOldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   // seu código aqui
   const getPrices = Object.entries(prices);
-  let adjust = 0.01;
   const object = getPrices.map((price) => {
     const cal = price[1] + (price[1] * (percentage / 100));
     const just = Math.round(cal * 100) / 100;
     return { [price[0]]: just };
-  })
+  });
   object.map((obj) => Object.assign(prices, obj));
 }
 
+const createObject = (employee) => {
+  const object = {};
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  object[fullName] = [];
+  employee.responsibleFor.forEach((res) => {
+    const { name } = species.find(({ id }) => id === res);
+    object[fullName].push(name);
+  });
+  return object;
+};
+
+const findById = (id) => {
+  const find = employees.find((employee) => employee.id === id);
+  return createObject(find);
+};
+
+const findByName = (name) => {
+  const find = employees.find(({ firstName, lastName }) => firstName === name
+    || lastName === name);
+  return createObject(find);
+};
+
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  if (!idOrName) {
+    const object = {};
+    employees.forEach((employee) => {
+      Object.assign(object, createObject(employee));
+    });
+    return object;
+  }
+  if (idOrName.length > 25) return findById(idOrName);
+  findByName(idOrName);
 }
 
 module.exports = {
