@@ -36,7 +36,9 @@ function getEmployeeByName(employeeName) {
   const breakName = employeeName.split(' ');
   const firstName = breakName[0];
   const lastName = breakName[breakName.length - 1];
-  const { employees } = data;
+  const {
+    employees,
+  } = data;
   return employees.find((names) => names.firstName === firstName || names.lastName === lastName);
 }
 // console.log(getEmployeeByName('Sthepanie Strauss'));
@@ -60,7 +62,10 @@ function createEmployee(personalInfo, associatedWith) {
   // Recognize how use spread in the arguments
   // make the parameters
   // make a new object with 2 parameters
-  return { ...personalInfo, ...associatedWith };
+  return {
+    ...personalInfo,
+    ...associatedWith,
+  };
 }
 // console.log(createEmployee(newEmployee, responsabilities));
 
@@ -71,7 +76,13 @@ function isManager(id) {
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function countAnimals(species) {
@@ -79,7 +90,10 @@ function countAnimals(species) {
   // find the animals OK
   // make a object with the name of animals, and the quantity of animals
   if (!species) {
-    return data.species.reduce((acc, item) => ({ ...acc, [item.name]: item.residents.length }), {});
+    return data.species.reduce((acc, item) => ({
+      ...acc,
+      [item.name]: item.residents.length,
+    }), {});
   }
   return data.species.find((animal) => animal.name === species).residents.length;
 }
@@ -104,7 +118,9 @@ function getAnimalMap() {
 }
 
 function getSchedule(dayName) {
-  const { hours } = data;
+  const {
+    hours,
+  } = data;
   hours.Tuesday = 'Open from 8am until 6pm';
   hours.Wednesday = 'Open from 8am until 6pm';
   hours.Thursday = 'Open from 10am until 8pm';
@@ -115,14 +131,11 @@ function getSchedule(dayName) {
   if (!dayName) {
     return hours;
   }
-  return { [dayName]: hours[dayName] };
+  return {
+    [dayName]: hours[dayName],
+  };
 }
-console.log(getSchedule('Tuesday'));
-// const ageVisitants = Object.keys(entrants);
-// return ageVisitants.reduce((acc, item) => {
-//   const finalValue = acc + entrants[item] * data.prices[item];
-//   return finalValue;
-// }, 0);
+// console.log(getSchedule('Tuesday'));
 function getOldestFromFirstSpecies(id) {
   // find the employee OK
   // find the first curated specie of this employee OK
@@ -141,9 +154,15 @@ function getOldestFromFirstSpecies(id) {
 }
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
-function increasePrices() {
-  // seu código aqui
-  // percentage
+function increasePrices(percentage) {
+  const percent = percentage / 100 + 1
+  const { Adult, Senior, Child } = data.prices;
+  data.prices = {
+    Adult: Math.round((Adult * percent) * 100) / 100,
+    Child: Math.round((Child * percent) * 100) / 100,
+    Senior: Math.round((Senior * percent) * 100) / 100,
+  };
+  return data.prices;
 }
 
 function getEmployeeCoverage() {
