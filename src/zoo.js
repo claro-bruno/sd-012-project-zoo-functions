@@ -45,20 +45,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return novato;
 }
 
-// addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe');
-
-// function countAnimals(species) {
-//   const bicho = data.species.find((itemArray) => itemArray.name === species);
-//   let retorno;
-//   // console.log(bicho.popularity);
-//   if (bicho === undefined) {
-//     retorno = {};
-//   } else {
-//     retorno = bicho.popularity;
-//   }
-//   return retorno;// console.log(bicho.popularity);
-// }
-// countAnimals();
+function countAnimals(specie) {
+  if (specie) {
+    const bicho = data.species.find((itemArray) => itemArray.name === specie).residents.length;
+    return bicho;
+  }
+  const retorno = {};
+  species.forEach((itemArray) => {
+    retorno[itemArray.name] = itemArray.residents.length;
+  });
+  return retorno;
+}
 
 // function calculateEntry(entrants) {
 //   const oi = entrants.filter((itemArray) => Object.key(itemArray) === 'Senior');
@@ -101,7 +98,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
