@@ -24,10 +24,10 @@ function getAnimalsOlderThan(animal, age) {
   let thisAnimalsAreOlder = false;
   data.species.forEach((specie) => {
     const theyAreOlder = specie.residents.every((resident) => resident.age >= age);
-    if(specie.name === animal && theyAreOlder === true){
+    if (specie.name === animal && theyAreOlder === true) {
       thisAnimalsAreOlder = true;
-    };
-  })
+    }
+  });
   return thisAnimalsAreOlder;
 }
 
