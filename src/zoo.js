@@ -75,8 +75,27 @@ function getAnimalMap() {
   // seu código aqui options
 }
 
-function getSchedule() {
-  // seu código aqui dayName
+// Resolvido de acordo com o PR do Carlos Eduardo Tomé
+// https://github.com/tryber/sd-012-project-zoo-functions/pull/132/files
+function getSchedule(dayName) {
+  const { hours } = data;
+  const weekDays = Object.keys(hours);
+  const hourDay = Object.values(hours);
+  const cronogram = {};
+  weekDays.forEach((day, index) => { // monta o cronograma da semana
+    if (day !== 'Monday') {
+      cronogram[day] = `Open from ${hourDay[index].open}am until ${hourDay[index].close - 12}pm`;
+    } else {
+      cronogram[day] = 'CLOSED';
+    }
+  });
+  if (!dayName) { return cronogram; }// verifica parametro e remonta o cronograma de acordo com a requisição
+  if (dayName !== 'Monday') {
+    const day = hours[dayName];
+    return {
+      [dayName]: `Open from ${day.open}am until ${day.close - 12}pm`,
+    };
+  } return { [dayName]: 'CLOSED' };
 }
 
 function getOldestFromFirstSpecies() {
