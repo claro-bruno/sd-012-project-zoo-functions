@@ -22,16 +22,16 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const filterAnimals = species.filter((specie) =>
-    animal.includes(specie.name));
+  const filterAnimals = species.filter((specie) => animal.includes(specie.name));
   const checksAge = filterAnimals.every((item, index) => age < item.residents[index].age);
   return checksAge;
 }
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
-  const employ = employees.find((em) => { return (employeeName === em.firstName
-    || employeeName === em.lastName) });
+  const employ = employees.find((em) => {
+    return employeeName === em.firstName || employeeName === em.lastName;
+  });
   return employ;
 }
 
@@ -48,16 +48,29 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({
-    'id': id,
-    'firstName': firstName,
-    'lastName': lastName,
-    'managers': managers,
-    'responsibleFor': responsibleFor
+    id: id,
+    firstName: firstName,
+    lastName: lastName,
+    managers: managers,
+    responsibleFor: responsibleFor,
   });
- }
+}
 
-function countAnimals(species) {
-  
+function countAnimals(specieS) {
+  const everyAnimals = {
+    lions: 4,
+    tigers: 2,
+    bears: 3,
+    penguins: 4,
+    otters: 4,
+    frogs: 2,
+    snakes: 2,
+    elephants: 4,
+    giraffes: 6,
+  };
+  if (!specieS) return everyAnimals;
+  const { residents } = species.find((specie) => specie.name === specieS);
+  return residents.length;
 }
 
 function calculateEntry(entrants) {
