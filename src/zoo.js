@@ -10,16 +10,17 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { employees, species } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  return ids.map((id) => data.species.filter((specie) => specie.id === id)[0]);
+  return ids.map((id) => species.filter((specie) => specie.id === id)[0]);
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   const isOlder = (bixo) => bixo.age > age;
-  return data.species.find((specie) => specie.name === animal).residents.every(isOlder);
+  return species.find((specie) => specie.name === animal).residents.every(isOlder);
 }
 
 function getEmployeeByName(employeeName) {
@@ -27,7 +28,7 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
   const name = employeeName;
   const filter = ({ firstName, lastName }) => firstName === name || lastName === name;
-  return data.employees.find(filter);
+  return employees.find(filter);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -38,7 +39,7 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // seu código aqui
   const algum = (valor) => valor === id;
-  return data.employees.some(({ managers }) => managers.some(algum));
+  return employees.some(({ managers }) => managers.some(algum));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -51,13 +52,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   };
 
-  return data.employees.push(obj);
+  return employees.push(obj);
 }
 
-function countAnimals(species) {
+function countAnimals(Species) {
   // seu código aqui
-  if (species) return data.species.find(({ name }) => name === species).residents.length;
-  return data.species.reduce((acc, { name, residents }) =>
+  if (Species) return species.find(({ name }) => name === Species).residents.length;
+  return species.reduce((acc, { name, residents }) =>
     ({ ...acc, [name]: residents.length }), {});
 }
 
@@ -66,8 +67,6 @@ function calculateEntry(entrants) {
   if (!entrants) return 0;
   return Object.keys(entrants).reduce((acc, cur) => acc + entrants[cur] * data.prices[cur], 0);
 }
-
-const { species } = require('./data');
 
 const fil = (local) => species.filter(({ location }) => location === local);
 
@@ -138,6 +137,11 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const getEm = employees.find((employee) => employee.id === id);
+  const result = getEm.responsibleFor.map((res) => species.find((specie) => specie.id === res));
+  const oldeSpecie = result[0].residents.reduce((acc, cur) => (cur.age > acc.age ? cur : acc));
+  const array = Object.values(oldeSpecie);
+  return array;
 }
 
 function increasePrices(percentage) {
