@@ -37,11 +37,13 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   const employee = { ...personalInfo, ...associatedWith };
-return employee;
+  return employee;
 }
 
 function isManager(id) {
- 
+  const managers = employees.map((employee) => employee.managers);
+  const idIsManager = managers.some((manager, index) => manager[index] === id);
+  return idIsManager;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
