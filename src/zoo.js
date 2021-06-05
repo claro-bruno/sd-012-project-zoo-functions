@@ -33,12 +33,11 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-// function isManager(id) {
-//   // const encontraPessoa = employees.find((itemArray) => itemArray.id === id);
-//   const gerente = data.employees.some((itemArray) => itemArray.managers === id);
-//   // return gerente;
-//   console.log(gerente);
-// }
+function isManager(id) {
+  const encontraPessoa = employees.filter((itemArray) => itemArray.managers.length > 0);
+  const gerente = encontraPessoa.some((itemArray) => itemArray.managers.includes(id));
+  return gerente;
+}
 // isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83');
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -114,7 +113,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
