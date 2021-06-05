@@ -12,21 +12,16 @@ eslint no-unused-vars: [
 const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
-const arrayVazio = [];
-const objetoVazio = {};
-
 function getSpeciesByIds(...ids) {
   if (ids === undefined) {
+    const arrayVazio = [];
     return arrayVazio;
   }
-  const [firstSpecie, secondSpecie] = ids;
-  const specie1 = species.filter((specie) => specie.id === firstSpecie);
-  const specie2 = species.filter((specie) => specie.id === secondSpecie);
-  const allSpecies = [...specie1, ...specie2];
+  const allSpecies = ids.map((id) => species.find((specie) => specie.id === id));
   return allSpecies;
 }
 
-// console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
+// console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
 
 function getAnimalsOlderThan(animal, age) {
   const getSpecie = species.find((specie) => specie.name === animal);
@@ -39,6 +34,7 @@ function getAnimalsOlderThan(animal, age) {
 function getEmployeeByName(employeeName) {
   // seu código aqui
   if (employeeName === undefined) {
+    const objetoVazio = {};
     return objetoVazio;
   }
 
