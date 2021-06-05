@@ -114,6 +114,15 @@ function mapaAnimais(location) {
   return locateAnimals.map((specie) => specie.name);
 }
 
+function mapaAnimaisNome(location) {
+  const locateAnimals = data.species.filter((specie) => (specie.location === location));
+  return locateAnimals.reduce((acc, specie) => {
+    const residentNames = specie.residents.map((resident) => resident.name);
+    acc.push({ [specie.name]: residentNames });
+    return acc;
+  }, []);
+}
+
 function getAnimalMap(options) {
   if (!options) {
     return {
@@ -123,9 +132,18 @@ function getAnimalMap(options) {
       SW: mapaAnimais('SW'),
     };
   }
+  const { includeNames } = options;
+  if (includeNames === true) {
+    return {
+      NE: mapaAnimaisNome('NE'),
+      NW: mapaAnimaisNome('NW'),
+      SE: mapaAnimaisNome('SE'),
+      SW: mapaAnimaisNome('SW'),
+    };
+  }
 }
 
-console.log(getAnimalMap());
+console.log(getAnimalMap({ includeNames: true }));
 
 function getSchedule(dayName) {
   // seu código aqui
