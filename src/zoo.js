@@ -8,38 +8,34 @@ eslint no-unused-vars: [
   }
 ]
 */
-
-const { species, employees, prices, hours } = require('./data');
-
 const data = require('./data');
 
-function getSpeciesByIds(...ids) {
-  // seu código aqui
-  const chosenAnimal = species.filter((specie) => ids.includes(specie.id));
+// destructuring individual objects from the 'data' file.
+const { species, employees, prices, hours } = require('./data');
 
-  return chosenAnimal;
+function getSpeciesByIds(...ids) {
+  return species.filter((specie) => ids.includes(specie.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  // first gets all data from certain species.
   const chosenAnimal = species.find((specie) => specie.name === animal);
 
-  const old = chosenAnimal.residents.every((resident) => resident.age > age);
-  return old;
+  // then we look on all residents if EVERYone matches the parameter.
+  return chosenAnimal.residents.every((resident) => resident.age > age);
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
-  if (!employeeName) {
-    return {};
+  if (employeeName) {
+    return employees.find(
+      (emp) => emp.firstName === employeeName || emp.lastName === employeeName,
+    );
   }
-  return employees.find(
-    (fun) => fun.firstName === employeeName || fun.lastName === employeeName,
-  );
+  return {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  // using rest to assemble information in order.
   return {
     ...personalInfo,
     ...associatedWith,
@@ -47,13 +43,16 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
   return employees.some((employee) => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // seu código aqui
-
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) {
   const newEmployee = {
     id,
     firstName,
@@ -61,31 +60,38 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     managers,
     responsibleFor,
   };
+
   data.employees.push(newEmployee);
 }
 
 function countAnimals(specieName) {
-  // seu código aqui
+  // first getting specific species.
   const selectedSpecies = species.find((specie) => specie.name === specieName);
+
+  // if specified species, return residents count which is equal to number of animals.
   if (specieName) {
     return selectedSpecies.residents.length;
   }
-  const retorno = {};
-  species.forEach((specie) => { retorno[specie.name] = specie.residents.length; });
-  return retorno;
+  // if not specified, create object and populate it.
+  // for each animal that exists in species original object, create an entry on the fullCount obj.
+  // keys will be the species that we are reading on the original object.
+  // values will be a count of residents of the same species.
+  const fullCount = {};
+  species.forEach((specie) => {
+    fullCount[specie.name] = specie.residents.length;
+  });
+  return fullCount;
 }
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
-  // seu código aqui
+  // destructuring the price value of the original object
   const { Adult: AdultPrice, Child: ChildPrice, Senior: seniorPrices } = prices;
 
   const adultTotal = Adult * AdultPrice;
   const childTotal = Child * ChildPrice;
   const seniorTotal = Senior * seniorPrices;
 
-  const totalCharge = adultTotal + childTotal + seniorTotal;
-
-  return totalCharge;
+  return adultTotal + childTotal + seniorTotal;
 }
 
 // function getAnimalMap(options) {
@@ -96,27 +102,33 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
 
 function getSchedule(dayName) {
   const newObj = {};
+
   Object.keys(hours).forEach((key) => {
-    newObj[key] = `Open from ${hours[key].open}am until ${hours[key].close % 12}pm`;
+    newObj[key] = `Open from ${hours[key].open}am until ${
+      hours[key].close % 12
+    }pm`;
     if (key === 'Monday') newObj[key] = 'CLOSED';
   });
 
   if (dayName) {
     return { [dayName]: newObj[dayName] };
   }
+
   return newObj;
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-  const specieId = employees.find((person) => person.id === id).responsibleFor[0];
-  const findSpecie = species.find((animal) => animal.id === specieId).residents;
+  const specieId = employees.find((person) => person.id === id);
+  const firstAnimal = specieId.responsibleFor[0];
+  const findSpecie = species.find(
+    (animal) => animal.id === firstAnimal,
+  ).residents;
   const oldestAnimal = findSpecie.sort((a, b) => b.age - a.age)[0];
+
   return [`${oldestAnimal.name}`, `${oldestAnimal.sex}`, oldestAnimal.age];
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
   const pricesArray = Object.keys(prices);
 
   return pricesArray.forEach((eachPrice) => {
@@ -125,17 +137,24 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-  if (!idOrName) {
-    return employees.reduce((reader, person) => {
-      const fullObj = reader;
-      const firstAnimal = species.find((animal) => animal.id === person.responsibleFor[0]);
-      const secondAnimal = species.find((animal) => animal.id === person.responsibleFor[1]);
-      // nao consigo atribuir nome e sobrenome
-      fullObj[`${person.firstName} ${person.lastName}`] = [secondAnimal.name, firstAnimal.name];
-      return fullObj;
-    }, {});
+  const empObj = {};
+  if (idOrName) {
+    const findEmp = employees.find(
+      (emp) => emp.firstName === idOrName || emp.lastName === idOrName
+      || emp.id === idOrName,
+    );
+    const animalsCoverage = findEmp.responsibleFor.map((parametro) =>
+      species.find((animal) => animal.id === parametro)).map((each) => each.name);
+    empObj[`${findEmp.firstName} ${findEmp.lastName}`] = animalsCoverage;
+    return empObj;
   }
+  return employees.reduce((reader, person) => {
+    const animalNames = person.responsibleFor.map((xablau) =>
+      species.find((animal) => animal.id === xablau));
+    const namesArray = animalNames.map((each) => each.name);
+    empObj[`${person.firstName} ${person.lastName}`] = namesArray;
+    return reader;
+  }, empObj);
 }
 
 module.exports = {
