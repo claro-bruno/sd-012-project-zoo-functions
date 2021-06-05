@@ -35,7 +35,10 @@ function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  const determinedEmployee = employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  const determinedEmployee = employees.find((employee) => {
+    const findByName = employee.firstName === employeeName || employee.lastName === employeeName;
+    return findByName;
+  });
   return determinedEmployee;
 }
 
