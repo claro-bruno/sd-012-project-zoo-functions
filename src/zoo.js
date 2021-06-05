@@ -54,10 +54,20 @@ function isManager(id) {
   return someManager;
 }
 
-// testar shorthand Bloco 8.5
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // return data.employees.push(`{id: ${id}, firstName: ${firstName}, lastName: ${lastName}, managers: ${[...managers]}, responsibleFor: ${[...responsibleFor]},`);
-  return data.employees.push(...id);
+  const inputArray = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  if (managers === undefined || responsibleFor.length === undefined) {
+    inputArray.managers = [];
+    inputArray.responsibleFor = [];
+    return data.employees.push(inputArray);
+  }
+  return data.employees.push(inputArray);
 }
 // Testar object Destructuring para extrair valores das chaves bloco 8.5
 function countAnimals(species) {
@@ -112,11 +122,3 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-
-const greeting = (user = 'usuário') => {
-  return `Welcome ${user}!`;
-} 
-
-
-
-greeting(); 
