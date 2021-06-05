@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { species, employees } = data;
+const { species, employees, prices } = data;
 
 function getSpeciesByIds(...codigo) {
   const especie = species.filter((itemArray, index) => itemArray.id === codigo[index]);
@@ -57,22 +57,16 @@ function countAnimals(specie) {
   return retorno;
 }
 
-// function calculateEntry(entrants) {
-//   const oi = entrants.filter((itemArray) => Object.key(itemArray) === 'Senior');
-//   const a = entrants.Senior * data.prices.Senior;
-//   console.log(oi);
-//     // if (typeof entrants.Adult === 'number'){
-//   //   const adulto = entrants.Adult * 49.99;
-//   //   if (typeof entrants.Child === 'number'){
-//   //     const criança = entrants.Child * 20.99;
-//   //     if (typeof entrants.Senior === 'number'){
-//   //       const idoso = entrants.Senior * 24.99;
-//   //       let preçoTotal = adulto + criança + idoso;
-//   //       console.log(preçoTotal);
-//   //     }}}
-  
-//   // if (entrants.Adult !== undefined || entrants.Child !== undefined || entrants.Senior !== undefined)
-// }
+function calculateEntry(entrants) {
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const { Adult: adulto = 0, Child: criança = 0, Senior: idoso = 0 } = entrants;
+  const totalAdulto = Number(adulto) * Number(prices.Adult);
+  const totalCriança = Number(criança) * Number(prices.Child);
+  const totalIdoso = Number(idoso) * Number(prices.Senior);
+  return totalAdulto + totalCriança + totalIdoso;
+}
 // calculateEntry([{ 'Senior': 1 }]);
 
 // function getAnimalMap(options) {
@@ -96,7 +90,7 @@ function countAnimals(specie) {
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
