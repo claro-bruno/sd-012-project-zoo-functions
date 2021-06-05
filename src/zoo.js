@@ -109,12 +109,20 @@ function calculateEntry(entrants) {
   return soma;
 }
 
+//  Requisito 9
 function mapaAnimais(location) {
   const locateAnimals = data.species.filter((specie) => (specie.location === location));
   return locateAnimals.map((specie) => specie.name);
 }
 
-function mapaAnimaisNome(location) {
+const listaAnimais = {
+  NE: mapaAnimais('NE'),
+  NW: mapaAnimais('NW'),
+  SE: mapaAnimais('SE'),
+  SW: mapaAnimais('SW'),
+};
+
+function mapaAnimais2(location) {
   const locateAnimals = data.species.filter((specie) => (specie.location === location));
   return locateAnimals.reduce((acc, specie) => {
     const residentNames = specie.residents.map((resident) => resident.name);
@@ -123,27 +131,24 @@ function mapaAnimaisNome(location) {
   }, []);
 }
 
+const mapaAnimaisNome = {
+  NE: mapaAnimais2('NE'),
+  NW: mapaAnimais2('NW'),
+  SE: mapaAnimais2('SE'),
+  SW: mapaAnimais2('SW'),
+};
+
 function getAnimalMap(options) {
   if (!options) {
-    return {
-      NE: mapaAnimais('NE'),
-      NW: mapaAnimais('NW'),
-      SE: mapaAnimais('SE'),
-      SW: mapaAnimais('SW'),
-    };
+    return listaAnimais;
   }
   const { includeNames } = options;
   if (includeNames === true) {
-    return {
-      NE: mapaAnimaisNome('NE'),
-      NW: mapaAnimaisNome('NW'),
-      SE: mapaAnimaisNome('SE'),
-      SW: mapaAnimaisNome('SW'),
-    };
+    return mapaAnimaisNome;
   }
 }
 
-console.log(getAnimalMap({ includeNames: true }));
+//  Fim requisito 9
 
 function getSchedule(dayName) {
   // seu código aqui
