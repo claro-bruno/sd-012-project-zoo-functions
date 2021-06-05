@@ -37,11 +37,11 @@ function getEmployeeByName(employeeName) {
 }
 // console.log(getEmployeeByName('Emery'));
 
-//requisito 4
+// requisito 4
 function createEmployee(personalInfo, associatedWith) {
   const employee = Object.assign(personalInfo, associatedWith);
   return employee;
-};
+}
 
 // requisito 5
 function isManager(id) {
@@ -78,7 +78,7 @@ function getSchedule() {
   // seu código aqui dayName
 }
 
-//requisito 11
+// requisito 11
 function getOldestFromFirstSpecies() {
   // seu código aqui id
 }
