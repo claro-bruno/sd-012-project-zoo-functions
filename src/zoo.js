@@ -109,10 +109,23 @@ function calculateEntry(entrants) {
   return soma;
 }
 
-function getAnimalMap() {
-  // seu código aqui
-// options
+function mapaAnimais(location) {
+  const locateAnimals = data.species.filter((specie) => (specie.location === location));
+  return locateAnimals.map((specie) => specie.name);
 }
+
+function getAnimalMap(options) {
+  if (!options) {
+    return {
+      NE: mapaAnimais('NE'),
+      NW: mapaAnimais('NW'),
+      SE: mapaAnimais('SE'),
+      SW: mapaAnimais('SW'),
+    };
+  }
+}
+
+console.log(getAnimalMap());
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -181,7 +194,7 @@ function getEmployeeCoverage(idOrName) {
   });
   return { [`${searchEmployee.firstName} ${searchEmployee.lastName}`]: speciesNames };
 }
-console.log(getEmployeeCoverage());
+
 module.exports = {
   calculateEntry,
   getSchedule,
