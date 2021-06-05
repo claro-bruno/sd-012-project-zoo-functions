@@ -37,9 +37,10 @@ function createEmployee(personalInfo, associatedWith) {
   return employeeInclude;
 }
 
-function isManager() {
-  // seu código aqui id
-}
+const isManager = (id) => {
+  const yesManager = employees.find((manager) => manager.id === id).managers.length <= 1;
+  return yesManager;
+};
 
 function addEmployee() {
   // seu código aqui id, firstName, lastName, managers, responsibleFor
