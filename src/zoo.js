@@ -14,6 +14,7 @@ const data = require('./data');
 const { species } = data;
 const { employees } = data;
 const { prices } = data;
+const { hours } = data;
 
 function getSpeciesByIds(...ids) {
   const findId = (id) => species.find((specie) => specie.id === id);
@@ -56,19 +57,17 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function countAnimals(speciesInput) {
-  const { species: specieData } = data;
   if (speciesInput) {
-    return specieData.find((elem) => elem.name === speciesInput).residents
+    return species.find((elem) => elem.name === speciesInput).residents
       .length;
   }
-  return specieData.reduce((acc, curr) => {
+  return species.reduce((acc, curr) => {
     acc[curr.name] = curr.residents.length;
     return acc;
   }, {});
 }
 
-function calculateEntry(entrants) {
-  if (!entrants || Object.entries(entrants).length === 0) return 0;
+function calculateEntry(entrants = 0) {
   return Object.entries(entrants).reduce(
     (acc, curr) => prices[curr[0]] * curr[1] + acc,
     0,
@@ -98,20 +97,10 @@ function getAnimalsNames(animal, sex) {
       .find((elem) => elem.name === animal)
       .residents.filter((elem) => elem.sex === sex).map((elem) => elem.name);
   }
-
-  // const female = species
-  // .find((elem) => elem.name === animal)
-  // .residents.filter((elem) => elem.sex === 'female').map((elem)=> elem.name);
-
-  // const male = species
-  // .find((elem) => elem.name === animal)
-  // .residents.filter((elem) => elem.sex === 'male').map((elem)=> elem.name);
-
   return species
     .find((elem) => elem.name === animal)
     .residents.map((elem) => elem.name);
 }
-// console.log(getAnimalsNames('lions'));
 
 function includeNamesObj(sex) {
   const speciesLoc = speciesLocations();
@@ -134,10 +123,6 @@ function getAnimalMap(options) {
   if (options.includeNames && options.sorted) return includeNamesObjSorted(options.sex);
   return includeNamesObj(options.sex);
 }
-const options = { includeNames: true, sorted: true };
-console.log(getAnimalMap(options));
-
-const { hours } = data;
 
 function dayInfo(day) {
   if (hours[day].open === 0 && hours[day].close === 0) return 'CLOSED';
@@ -198,9 +183,7 @@ function getEmployeeCoverage(idOrName) {
   }
 
   const employeesResponsibilities = employees.reduce((acc, curr) => {
-    acc[`${curr.firstName} ${curr.lastName}`] = responsibleSpecies(
-      curr.responsibleFor,
-    );
+    acc[`${curr.firstName} ${curr.lastName}`] = responsibleSpecies(curr.responsibleFor);
     return acc;
   }, {});
   return employeesResponsibilities;
