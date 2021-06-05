@@ -11,10 +11,9 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds() {
-  // seu código aqui ids
-  // const speciesByIds = data.species.find(species => species.id === id)
-  // return speciesByIds
+function getSpeciesByIds(ids) {
+  // const speciesByIds = data.species.find((specie) => specie.id === ids);
+  // return speciesByIds;
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -32,9 +31,15 @@ function createEmployee() {
   // seu código aqui personalInfo, associatedWith
 }
 
-function isManager() {
-  // seu código aqui id
+function isManager(id) {
+  const managerId = data.employees.some((employee) =>
+  employee.managers.some((manager) => manager === id));
+  return managerId;
+  
+  /* acessar o data para acessar lista de employees, identificar se algum dos employees é manager.
+  retornar se o employee ocupa cargo de gerente em relação ao id, entao testar o id para verificar true ou false. */
 }
+console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function addEmployee() {
   // seu código aqui id, firstName, lastName, managers, responsibleFor
