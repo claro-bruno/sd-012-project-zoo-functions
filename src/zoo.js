@@ -140,9 +140,43 @@ function increasePrices(percentage) {
   return prices;
 }
 
-/* function getEmployeeCoverage(idOrName) {
+function employeeCoverageNameId(idOrName) {
+  const employee = employees.find((item) => item.firstName === idOrName
+    || item.lastName === idOrName || item.id === idOrName);
+
+  const animalList = employee.responsibleFor;
+
+  const newAnimalList = animalList.map((animalItem) => species
+    .find((specieItem) => specieItem.id === animalItem).name);
+
+  const display = {
+    [`${employee.firstName} ${employee.lastName}`]: newAnimalList,
+  };
+
+  return display;
+}
+
+console.log(employeeCoverageNameId('Burl'));
+
+function getEmployeeCoverage(idOrName) {
   // seu código aqui
-} */
+  const employeeList = employees.reduce((accumulator, item) => {
+    const employeeAnimals = item.responsibleFor;
+
+    const animalsArray = employeeAnimals.map((animalItem) => species
+      .find((specieItem) => specieItem.id === animalItem).name);
+
+    accumulator[`${item.firstName} ${item.lastName}`] = animalsArray;
+
+    return accumulator;
+  }, {});
+
+  if (idOrName === undefined) return employeeList;
+
+  return employeeCoverageNameId(idOrName);
+}
+
+// console.log(getEmployeeCoverage());
 
 module.exports = {
   getSpeciesByIds,
@@ -156,6 +190,7 @@ module.exports = {
   getSchedule,
   getOldestFromFirstSpecies,
   increasePrices,
+  getEmployeeCoverage,
 };
 
 /* module.exports = {
