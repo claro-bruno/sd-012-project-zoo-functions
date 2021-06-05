@@ -189,9 +189,16 @@ function getEmployeeCoverage(idOrName) {
       });
       obj2return[`${aux.firstName} ${aux.lastName}`] = arrayAnimal;
     });
-  } // else {
-
-  // }
+  } else {
+    const specId = func.find((aux) => (aux.id === idOrName) || (aux.firstName === idOrName) || 
+    (aux.lastName === idOrName));
+    const animals = [];
+    specId.responsibleFor.forEach((aux) => {
+      const found = species.find((animal) => (animal.id === aux));
+      animals.push(found.name);
+    });
+    obj2return[`${specId.firstName} ${specId.lastName}`] = animals;
+  }
   return obj2return;
 }
 
