@@ -64,12 +64,13 @@ function isManager(id) {
   return employees.some((employee) => employee.managers.some((manager) => manager === id));
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
 // A função irá adicionar uma nova pessoa colaboradora ao array employees, presente no arquivo data.js.
 
-// O que será avaliado
-// Adiciona um funcionário no fim da lista
-// }
+  // O que será avaliado
+  // Adiciona um funcionário no fim da lista
+  return employees.push({ id, firstName, lastName, managers, responsibleFor });
+}
 
 // function countAnimals(species) {
 //   // seu código aqui
@@ -107,7 +108,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
