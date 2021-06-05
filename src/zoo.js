@@ -10,41 +10,43 @@ eslint no-unused-vars: [
 */
 
 // const data = require('./data');
+// Questão 01
 const { species, employees } = require('./data');
 
 function getSpeciesByIds(...ids) {
-  // seu código aqui
   return species.filter((specie) => ids.some((id) => specie.id === id));
 }
 // console.table(species);
 // console.log(species);
-// fim questão 01 -------------------<
 
+// Questão 02
 function getAnimalsOlderThan(animal, age) {
   const animalChave = species.find((specie) => animal === specie.name);
 
   return animalChave.residents.every((residents) => residents.age > age);
 }
 
-// fim questão 02 -------------------<
-
+// Questão 03
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
   const first = employees.find((employee) =>
     employee.firstName === employeeName || employee.lastName === employeeName);
   return (first);
 }
-
+// Questão 04
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   const newEmployee = { ...personalInfo, ...associatedWith };
   return newEmployee;
 }
-/*
+// Questão 05
 function isManager(id) {
   // seu código aqui
-}
+  // return employees.some((managers) => id.find((idManeger) => employees.managers.includes === id));
 
+  return employees.some((manage) => manage.managers.includes(id));
+}
+// console.loge(employees);
+/*
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
@@ -87,7 +89,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
