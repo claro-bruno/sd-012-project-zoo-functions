@@ -38,19 +38,13 @@ function isManager(id) {
   const gerente = encontraPessoa.some((itemArray) => itemArray.managers.includes(id));
   return gerente;
 }
-// isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83');
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   const novato = employees.map(() => {
-//     id: id;
-//     firstName: firstName;
-//     lastName: lastName;
-//     managers: managers;
-//     responsibleFor: responsibleFor,
-//   });
-//   data.employees.push(novato);
-//   return novato;
-// };
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const novato = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(novato);
+  return novato;
+}
+
 // addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe');
 
 // function countAnimals(species) {
@@ -112,7 +106,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
