@@ -45,19 +45,48 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const getAdm = employees.some((employee) => employee.managers.some((item) => item === id));
+  return getAdm;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+    const newEmployee = () => ({
+      id,
+      firstName,
+      lastName,
+      managers,
+      responsibleFor,
+    });
+    data.employees.push(newEmployee());
+    return employees;
+  }
 }
 
-function countAnimals(species) {
-  // seu código aqui
-}
+function countAnimals(getSpecies) {
+  if (getSpecies === undefined) {
+    const result = {};
+    const eachSpecie = species.map((specie) => {
+      const nome = specie.name;
+      const quantidade = specie.residents.length;
+      result[`${nome}`] = quantidade;
+      return result;
+      });
+      return eachSpecie[0];
+    }
+    const specie = (nome) => species.find((thisSpecie) => thisSpecie.name === nome).residents.length;
+    return specie(getSpecies);
+  }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined) {
+    return 0;
+  }
+  const entryPrices = prices;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultPriceTotal = Adult * entryPrices.Adult;
+  const seniorPriceTotal = Senior * entryPrices.Senior;
+  const childPriceTotal = Child * entryPrices.Child;
 }
 
 function getAnimalMap(options) {
