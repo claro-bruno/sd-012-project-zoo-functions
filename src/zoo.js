@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 const { species, employees, prices } = data;
 
 function getSpeciesByIds(...codigo) {
@@ -67,7 +68,6 @@ function calculateEntry(entrants) {
   const totalIdoso = Number(idoso) * Number(prices.Senior);
   return totalAdulto + totalCriança + totalIdoso;
 }
-// calculateEntry([{ 'Senior': 1 }]);
 
 // function getAnimalMap(options) {
 //   // seu código aqui
