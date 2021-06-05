@@ -96,8 +96,12 @@ function getOldestFromFirstSpecies() {
   // seu código aqui id
 }
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  const entrance = Object.keys(data.prices);
+  entrance.forEach((type) => {
+    data.prices[type] *= ((100 + percentage) / 100);
+    data.prices[type] = Math.round(data.prices[type] * 100) / 100;
+  });
 }
 
 function getEmployeeCoverage() {
