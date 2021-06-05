@@ -11,7 +11,8 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
+function getSpeciesByIds() {
+  // ids
   // const speciesByIds = data.species.find((specie) => specie.id === ids);
   // return speciesByIds;
 }
@@ -33,9 +34,9 @@ function createEmployee() {
 
 function isManager(id) {
   const managerId = data.employees.some((employee) =>
-  employee.managers.some((manager) => manager === id));
+    employee.managers.some((manager) => manager === id));
   return managerId;
-  
+
   /* acessar o data para acessar lista de employees, identificar se algum dos employees é manager.
   retornar se o employee ocupa cargo de gerente em relação ao id, entao testar o id para verificar true ou false. */
 }
