@@ -65,7 +65,7 @@ function countAnimals(speciesName) {
 
 function calculateEntry(entrants) {
   // seu código aqui
-  const { AdultPrice, ChildPrice, SeniorPrice } = data.prices;
+  const { Adult: AdultPrice, Child: ChildPrice, Senior: SeniorPrice } = data.prices;
   if (entrants) {
     const { Adult = 0, Child = 0, Senior = 0 } = entrants;
     return (Adult * AdultPrice) + (Child * ChildPrice) + (Senior * SeniorPrice);
@@ -128,7 +128,6 @@ function getEmployeeCoverage(idOrName) {
       .map((id) => species.find((animal) => animal.id === id).name),
   }), {});
 }
-console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
