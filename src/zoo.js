@@ -71,20 +71,28 @@ function calculateEntry(entrants) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
-
+// Questão 09 'Difícil :/'
 /*
 function getAnimalMap(options) {
   // seu código aqui
 }
 
+// Questão 10 'Difícil :/'
 function getSchedule(dayName) {
   // seu código aqui
 }
-
+*/
+// Questão 11 - Inspiração do colega ==> ( Rodrigo Merlone )
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employee = employees.find((employeeId) => employeeId.id === id);
+  const firstIdResponsable = employee.responsibleFor[0];
+  const specieOld = species.find((specie) => specie.id === firstIdResponsable)
+    .residents.sort((age1, age2) => age2.age - age1.age)[0];
+  const { name, sex, age } = specieOld;
+  return [name, sex, age];
 }
 
+/*
 function increasePrices(percentage) {
   // seu código aqui
 }
@@ -105,7 +113,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
