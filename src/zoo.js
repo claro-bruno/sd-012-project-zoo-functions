@@ -89,8 +89,23 @@ function calculateEntry(entrants) {
 //   const regioes = ['NE', 'NW', 'SE', 'SW'];
 // }
 
-// function getSchedule(dayName) {
-// };
+function getSchedule(dayName) {
+  const daysWeek = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+
+  if (typeof dayName === 'string') {
+    return { [dayName]: daysWeek[dayName] };
+  }
+
+  return daysWeek;
+}
 
 function getOldestFromFirstSpecies(id) {
   const func = employees.find((employee) => employee.id === id).responsibleFor[0];
@@ -117,7 +132,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
