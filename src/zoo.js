@@ -108,7 +108,7 @@ function calculateEntry(entrants) {
 
 function getAnimalMap(options) {
   // seu código aqui
-  let semParametro = { NE: [], NW: [], SE: [], SW: [] };
+  const semParametro = { NE: [], NW: [], SE: [], SW: [] };
   const chaveSem = Object.keys(semParametro);
   console.log(`${chaveSem}`);
   if (options === undefined) {
