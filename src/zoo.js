@@ -109,18 +109,15 @@ function calculateEntry(entrants) {
 function getAnimalMap(options) {
   // seu código aqui
   const semParametro = { NE: [], NW: [], SE: [], SW: [] };
-  const chaveSem = Object.keys(semParametro);
-  console.log(`${chaveSem}`);
+  const chaveSP = Object.keys(semParametro);
+  const animalsList = 'xablau';
   if (options === undefined) {
-    const objeto = {
-      NE: ['lions', 'giraffes'],
-      NW: ['tigers', 'bears', 'elephants'],
-      SE: ['penguins', 'otters'],
-      SW: ['frogs', 'snakes'] };
-    semParametro.NE = 'a';
-    return objeto;
+    species.forEach((spec) => chaveSP.find((chave) =>
+      (spec.location === chave ? semParametro[spec.location].push(spec.name) : '')));
+    return semParametro;
   }
 }
+getAnimalMap();
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -168,23 +165,21 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-  if (idOrName === undefined) {
-    return;
-  }
-  const dataEmplo = employees.find((work) => work.id === idOrName);
-  /* const responsabil = listAnimals.responsibleFor; */
-  const fullName = `${dataEmplo.firstName} ${dataEmplo.lastName}`;
-  const animalsIds = dataEmplo.responsibleFor;
-  const arrayAnimals = [];
-  species
-    .forEach((spec) => animalsIds
-      .some((id) => (id === spec.id ? arrayAnimals.push(spec.name) : '')));
   const result = {};
-  result[fullName] = arrayAnimals;
-  console.log(result);
+  const animalObject = {};
+  let arrayAnimalsU = [];
+  if (idOrName === undefined) {
+    /* result[`${worker.firstName} ${worker.lastName}`] = arrayAnimalsU; */
+    return console.log(arrayAnimalsU);
+  }
+  const arrayAnimalsD = [];
+  const dataEmplo = employees.find((worker) => worker.id === idOrName);
+  species.forEach((spec) => dataEmplo.responsibleFor
+    .some((id) => (id === spec.id ? arrayAnimalsD.push(spec.name) : '')));
+  result[`${dataEmplo.firstName} ${dataEmplo.lastName}`] = arrayAnimalsD;
   return result;
 }
-getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
+getEmployeeCoverage();
 
 module.exports = {
   calculateEntry,
@@ -201,3 +196,23 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+
+/* function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+  const result = {};
+  if (idOrName === undefined) {
+    let arrayAnimalsU = [];
+    employees.forEach((worker) => {
+      species.forEach((spec) => worker.responsibleFor
+        .some((id) => (id === spec.id ? arrayAnimalsU.push(spec.name) : '')));
+      result[`${worker.firstName} ${worker.lastName}`] = arrayAnimalsU;
+      arrayAnimalsU = [];
+    });
+    return console.log(result);
+  }
+  const arrayAnimalsD = [];
+  const dataEmplo = employees.find((worker) => worker.id === idOrName);
+  species.forEach((spec) => dataEmplo.responsibleFor
+    .some((id) => (id === spec.id ? arrayAnimalsD.push(spec.name) : '')));
+  result[`${dataEmplo.firstName} ${dataEmplo.lastName}`] = arrayAnimalsD;
+  return result; */
