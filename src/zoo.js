@@ -47,17 +47,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species) {
   if (!species) {
-    return {
-      lions: 4,
-      tigers: 2,
-      bears: 3,
-      penguins: 4,
-      otters: 4,
-      frogs: 2,
-      snakes: 2,
-      elephants: 4,
-      giraffes: 6,
-    };
+    const speciesCount = {};
+    animals.forEach((animal) => {
+      speciesCount[animal.name] = animal.residents.length;
+    });
+    return speciesCount;
   }
   const { residents } = animals.find((animal) => animal.name === species);
   return residents.length;
@@ -70,35 +64,41 @@ function calculateEntry(entrants = 0) {
   return total;
 }
 
+// let animalsMap = {};
+
 // function getAnimalMap(options) {
-//   // seu código aqui
+//   const map = ['NE', 'NW', 'SE', 'SW'];
+
+//   if (!options) {
+//     const species = map.map((dir) => animals.filter((animal) => animal.location === dir));
+//     const speciesName = species.map((animal) => animal);
+//     return species;
+//   }
 // }
 
-const schedule = {
-  Tuesday: 'Open from 8am until 6pm',
-  Wednesday: 'Open from 8am until 6pm',
-  Thursday: 'Open from 10am until 8pm',
-  Friday: 'Open from 10am until 8pm',
-  Saturday: 'Open from 8am until 10pm',
-  Sunday: 'Open from 8am until 8pm',
-  Monday: 'CLOSED',
-};
+// console.log(getAnimalMap());
+
+let schedule = {};
 
 const scheduleGenerate = (date) => {
   const week = Object.entries(hours);
   const day = week.find((dayDate) => dayDate[0] === date);
   const daySchedule = day[1];
   const dayName = day[0];
-  if (daySchedule.open === 0 && daySchedule.close === 0) { return { [dayName]: 'CLOSED' }; }
-  return { [dayName]: `Open from ${daySchedule.open}am until ${daySchedule.close - 12}pm` };
+  if (daySchedule.open === 0 && daySchedule.close === 0) {
+    schedule[dayName] = 'CLOSED';
+  } else {
+    schedule[dayName] = `Open from ${daySchedule.open}am until ${daySchedule.close - 12}pm`;
+  }
+  return schedule;
 };
 
 function getSchedule(dayName) {
-  // const week = Object.keys(hours);
+  const week = Object.keys(hours);
   if (!dayName) {
-    // return week.map((day) => scheduleGenerate(day));
-    return schedule;
+    return week.map((day) => scheduleGenerate(day))[0];
   }
+  schedule = {};
   return scheduleGenerate(dayName);
 }
 
@@ -117,28 +117,23 @@ function increasePrices(percentage) {
   return prices;
 }
 
-const employeesCoverage = {
-  'Nigel Nelson': ['lions', 'tigers'],
-  'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
-  'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
-  'Wilburn Wishart': ['snakes', 'elephants'],
-  'Stephanie Strauss': ['giraffes', 'otters'],
-  'Sharonda Spry': ['otters', 'frogs'],
-  'Ardith Azevado': ['tigers', 'bears'],
-  'Emery Elser': ['elephants', 'bears', 'lions'],
-};
+let coverage = {};
 
-function getEmployeeCoverage(idOrName) {
-  if (!idOrName) { return employeesCoverage; }
+const generateCoverage = (emInfo) => {
   const { firstName, lastName, responsibleFor } = employees.find((em) => {
-    const result = em.firstName === idOrName || em.id === idOrName || em.lastName === idOrName;
+    const result = em.firstName === emInfo || em.id === emInfo || em.lastName === emInfo;
     return result;
   });
   const species = responsibleFor.map((id) => animals.find((animal) => animal.id === id));
   const speciesNames = species.map((animal) => animal.name);
-  return {
-    [`${firstName} ${lastName}`]: speciesNames,
-  };
+  coverage[`${firstName} ${lastName}`] = speciesNames;
+  return coverage;
+};
+
+function getEmployeeCoverage(idOrName) {
+  if (!idOrName) { return employees.map((employee) => generateCoverage(employee.id))[0]; }
+  coverage = {};
+  return generateCoverage(idOrName);
 }
 
 module.exports = {
