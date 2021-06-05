@@ -111,7 +111,7 @@ function calculateEntry(entrants) {
 //   return resultado;
 // };
 
-function getAnimalMap(options) {
+function getAnimalMap() {
   // seu código aqui
   // if (options.includeNames = true) {
   //   console.log(getDefault().NE.map((animal) => animal));
