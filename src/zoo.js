@@ -12,21 +12,21 @@ eslint no-unused-vars: [
 const { species, employees } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(...ids) {
+const getSpeciesByIds = (...ids) => {
   // seu código aqui
   const animalId = species.filter((specie) => ids.includes(specie.id));
   return animalId;
 }
 
-function getAnimalsOlderThan(animal, age) {
+const getAnimalsOlderThan = (animal, age) => {
   // seu código aqui
   const animalAge = species.find((specie) => specie.name === animal);
   const yearsOld = animalAge.residents.every((resident) => resident.age > age);
-  
+
   return yearsOld;
 }
 
-function getEmployeeByName(employeeName) {
+const getEmployeeByName = (employeeName) => {
   // seu código aqui
   if (!employeeName) { // used '!' come from https://pt.stackoverflow.com/questions/108973/qual-a-fun%C3%A7%C3%A3o-do-operador-exclama%C3%A7%C3%A3o
     return {};
@@ -34,10 +34,9 @@ function getEmployeeByName(employeeName) {
   return employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+const createEmployee = (personalInfo, associatedWith) => {return {...personalInfo, ...associatedWith};
 }
-
+//console.log(createEmployee('juan', 'lion'));
 function isManager(id) {
   // seu código aqui
 }
@@ -46,12 +45,12 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(specieName) {
+const countAnimals = (specieName) => {
   // seu código aqui
   const selectSpecies = species.find((specie) => specie.name === specieName);
   const returnQtd = {};
-  if (specieName) {return selectSpecies.residents.length};
-  
+  if (specieName) { return selectSpecies.residents.length };
+
   species.forEach((specie) => { returnQtd[specie.name] = specie.residents.length; });
   return returnQtd;
 }
