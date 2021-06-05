@@ -10,9 +10,9 @@ eslint no-unused-vars: [
 */
 
 // const data = require('./data');
-// Questão 01
-const { species, employees } = require('./data');
 
+const { species, employees, prices } = require('./data');
+// Questão 01
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.some((id) => specie.id === id));
 }
@@ -47,13 +47,14 @@ function isManager(id) {
   return employees.some((manage) => manage.managers.includes(id));
 }
 // console.loge(employees);
-// Questão 05
+// Questão 06
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({
-    id, firstName, lastName, managers, responsibleFor });
+    id, firstName, lastName, managers, responsibleFor
+  });
 }
 // console.log(employees);
-
+// Questão 07
 function countAnimals(speciesConunts) {
   const animals = {};
   species.forEach(({ name, residents }) => {
@@ -63,11 +64,16 @@ function countAnimals(speciesConunts) {
     animal.name === speciesConunts).residents.length;
   return allAnimals;
 }
-/*
+// Questão 08
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
 
+/*
 function getAnimalMap(options) {
   // seu código aqui
 }
@@ -90,7 +96,7 @@ function getEmployeeCoverage(idOrName) {
 */
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
