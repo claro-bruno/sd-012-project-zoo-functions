@@ -36,7 +36,6 @@ function isManager(id) {
   const managerId = data.employees.some((employee) =>
     employee.managers.some((manager) => manager === id));
   return managerId;
-
   /* acessar o data para acessar lista de employees, identificar se algum dos employees é manager.
   retornar se o employee ocupa cargo de gerente em relação ao id, entao testar o id para verificar true ou false. */
 }
