@@ -110,12 +110,14 @@ function getAnimalMap(options) {
   // seu código aqui
   let semParametro = { NE: [], NW: [], SE: [], SW: [] };
   const chaveSem = Object.keys(semParametro);
+  console.log(`${chaveSem}`);
   if (options === undefined) {
     const objeto = {
       NE: ['lions', 'giraffes'],
       NW: ['tigers', 'bears', 'elephants'],
       SE: ['penguins', 'otters'],
       SW: ['frogs', 'snakes'] };
+    semParametro.NE = 'a';
     return objeto;
   }
 }
@@ -166,7 +168,18 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  const result = {};
+  if (idOrName === undefined) {
+    return;
+  }
+  const listAnimals = employees.find((work) => work.id === idOrName);
+  /* const responsabil = listAnimals.responsibleFor; */
+  const fullName = `${listAnimals.firstName} ${listAnimals.lastName}`;
+  result[fullName] = listAnimals;
+  console.log(result[fullName]);
+  return result;
 }
+getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
 
 module.exports = {
   calculateEntry,
