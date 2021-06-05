@@ -13,6 +13,8 @@ const data = require('./data');
 
 const { species } = data;
 
+const { employees } = data;
+
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
   const resultado = species.filter((specie) => ids.includes(specie.id));
@@ -20,52 +22,56 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const filterAnimals = species.filter((specie) => animal.includes(specie.name));
+  const filterAnimals = species.filter((specie) =>
+    animal.includes(specie.name));
   const checksAge = filterAnimals.every((item, index) => age < item.residents[index].age);
   return checksAge;
 }
 
-function getEmployeeByName() {
+function getEmployeeByName(employeeName) {
+  if (!employeeName) return {};
+  const employ = employees.find((em) => { return (employeeName === em.firstName
+    || employeeName === em.lastName) } );
+  return employ;
+}
+
+function createEmployee(personalInfo, associatedWith) {
+  
+}
+
+function isManager(id) {
+ 
+}
+
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+
+ }
+
+function countAnimals(species) {
+  
+}
+
+function calculateEntry(entrants) {
   // seu código aqui
 }
 
-function createEmployee() {
+function getAnimalMap(options) {
   // seu código aqui
 }
 
-function isManager() {
+function getSchedule(dayName) {
   // seu código aqui
 }
 
-function addEmployee() {
+function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-function countAnimals() {
+function increasePrices(percentage) {
   // seu código aqui
 }
 
-function calculateEntry() {
-  // seu código aqui
-}
-
-function getAnimalMap() {
-  // seu código aqui
-}
-
-function getSchedule() {
-  // seu código aqui
-}
-
-function getOldestFromFirstSpecies() {
-  // seu código aqui
-}
-
-function increasePrices() {
-  // seu código aqui
-}
-
-function getEmployeeCoverage() {
+function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
 
