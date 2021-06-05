@@ -85,25 +85,34 @@ function msgSchedule(msg) {
   return `Open from ${fusoHorario(hours[msg].open)} until ${fusoHorario(hours[msg].close)}`;
 }
 
-let result = {};
+// let result = {};
 
-function result2(day) {
-  result[day] = msgSchedule(day);
-}
+// function result2(day) {
+//   result[day] = msgSchedule(day);
+// }
 
 function getSchedule(dayName) {
-  result = {};
+  let result = {};
   if (!dayName) {
-    Object.keys(hours).forEach(result2);
+    // Object.keys(hours).forEach(result2);
+    result = Object.keys(hours).reduce((acc, day) => {
+      acc[day] = msgSchedule(day);
+      return acc;
+    }, {});
   } else {
     result[dayName] = msgSchedule(dayName);
   }
   return result;
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  const firstSpecies = employees.find((person) => person.id === id);
+  const foundId = firstSpecies.responsibleFor[0];
+  const objAnimal = species.find((animal) => animal.id === foundId);
+  const animalList = objAnimal.residents;
+  const sortedList = animalList.sort((a, b) => b.age - a.age);
+  return Object.values(sortedList[0]);
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -124,7 +133,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
