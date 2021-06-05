@@ -138,10 +138,27 @@ function getAnimalMap(options = {}) {
   data.species.forEach((ar) => objectEmpth[ar.location].push(ar.name));
   return objectEmpth;
 }
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
 
+function getSchedule(dayName) {
+  const { hours } = data;
+  const days = Object.keys(hours);
+  const obj2return = {};
+  if (!dayName) {
+    days.forEach((aux) => {
+      obj2return[aux] = `Open from ${hours[aux].open}am until ${hours[aux].close - 12}pm`;
+    });
+    obj2return.Monday = 'CLOSED';
+    return obj2return;
+  }
+  const day = days.findIndex((aux) => dayName === aux);
+  if (dayName !== 'Monday') {
+    obj2return[days[day]] = `Open from ${hours[days[day]].open}am until ${hours[days[day]]
+      .close - 12}pm`;
+  } else {
+    obj2return.Monday = 'CLOSED';
+  }
+  return obj2return;
+}
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
@@ -156,7 +173,7 @@ function getAnimalMap(options = {}) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   getAnimalMap,
   getSpeciesByIds,
