@@ -124,12 +124,23 @@ function getOldestFromFirstSpecies(id) {
   const { name, sex, age } = findResidents[0];
   return [name, sex, age];
 }
-
-/* function increasePrices(percentage) {
+// Function increasePrices feita com a ajuda do Thalles durante plantao de duvidas, ele ajudou a tratar o arredondamento das casas decimais
+function increasePrices(percentage) {
   // seu código aqui
+  const { Adult, Child, Senior } = prices;
+  const multiplier = percentage / 100 + 1;
+  const adultValue = Adult * multiplier;
+  const childValue = Child * multiplier;
+  const seniorValue = Senior * multiplier;
+
+  prices.Adult = Math.round(adultValue * 100) / 100;
+  prices.Child = Math.round(childValue * 100) / 100;
+  prices.Senior = Math.round(seniorValue * 100) / 100;
+
+  return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
+/* function getEmployeeCoverage(idOrName) {
   // seu código aqui
 } */
 
@@ -144,6 +155,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   getOldestFromFirstSpecies,
+  increasePrices,
 };
 
 /* module.exports = {
