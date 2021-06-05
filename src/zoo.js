@@ -75,11 +75,12 @@ function calculateEntry(entrants = 0) {
 }
 
 const getSpeciesByRegion = (region, regions) => {
+  const objRegions = regions;
   const namesSpecies = [];
   const speciesByRegion = species.filter(({ location }) => location === region);
   speciesByRegion.forEach(({ name }) => namesSpecies.push(name));
-  regions[region] = namesSpecies;
-  return regions;
+  objRegions[region] = namesSpecies;
+  return objRegions;
 };
 
 const noParameterOrNotIncludeNames = () => {
@@ -88,44 +89,52 @@ const noParameterOrNotIncludeNames = () => {
   return regions;
 };
 
-const getSpeciesByRegionIncludingNames = (region, regions, sorted, animalSex) => {
-  const speciesAndNamesbyRegion = [];
-  const speciesByRegion = species.filter(({ location }) => location === region);
-  speciesByRegion.forEach(({ name, residents }) => {
-    const namesSpecies = {};
-    let animalsNames = [];
-    if (animalSex === 'female') {
-      const females = residents.filter(({ sex }) => sex === 'female');
-      animalsNames = females.map(({ name }) => name);
-    } else if (animalSex === 'male') {
-      const males = residents.filter(({ sex }) => sex === 'male');
-      animalsNames = males.map(({ name }) => name);
-    } else {
-      animalsNames = residents.map(({ name }) => name);
-    };
-    if (sorted === true) {
-      animalsNames.sort();
-    }
-    namesSpecies[name] = animalsNames;
-    speciesAndNamesbyRegion.push(namesSpecies);
-  });
-  regions[region] = speciesAndNamesbyRegion;
-  return regions;
+const getSpecieByRegion = (specieByRegion, speciesAndNamesbyRegion, options) => {
+  const { name, residents } = specieByRegion;
+  const { sorted, sex: sexOp } = options;
+  const namesSpecies = {};
+  let animalsNames = [];
+  if (sexOp === 'female') {
+    const females = residents.filter(({ sex }) => sex === 'female');
+    animalsNames = females.map(({ name: nameFemales }) => nameFemales);
+  } else if (sexOp === 'male') {
+    const males = residents.filter(({ sex }) => sex === 'male');
+    animalsNames = males.map(({ name: nameMales }) => nameMales);
+  } else {
+    animalsNames = residents.map(({ name: nameResident }) => nameResident);
+  }
+  if (sorted === true) {
+    animalsNames.sort();
+  }
+  namesSpecies[name] = animalsNames;
+  speciesAndNamesbyRegion.push(namesSpecies);
 };
 
-const yesParameterAndIncludeNames = (sorted, sex) => {
+const getSpeciesIncludingNames = (region, regions, options) => {
+  const objRegions = regions;
+  const speciesAndNamesbyRegion = [];
+  const speciesByRegion = species.filter(({ location }) => location === region);
+  speciesByRegion.forEach((specieByRegion) =>
+    getSpecieByRegion(specieByRegion, speciesAndNamesbyRegion, options));
+  objRegions[region] = speciesAndNamesbyRegion;
+  return objRegions;
+};
+
+const yesParameterAndIncludeNames = (options) => {
   const regions = {};
   ['NE', 'NW', 'SE', 'SW'].forEach((region) =>
-    getSpeciesByRegionIncludingNames(region, regions, sorted, sex));
+    getSpeciesIncludingNames(region, regions, options));
   return regions;
 };
 
 function getAnimalMap(options) {
+  let obj = {};
   if (!options || !options.includeNames) {
-    return noParameterOrNotIncludeNames();
+    obj = noParameterOrNotIncludeNames();
   } else {
-    return yesParameterAndIncludeNames(options.sorted, options.sex);
+    obj = yesParameterAndIncludeNames(options);
   }
+  return obj;
 }
 
 const getWeekSchedule = () => {
@@ -151,7 +160,7 @@ const getDaySchedule = (dayName) => {
 function getSchedule(dayName) {
   return dayName ? getDaySchedule(dayName) : getWeekSchedule();
 }
-    
+
 function getOldestFromFirstSpecies(wantedId) {
   const { responsibleFor } = employees.find(({ id }) => id === wantedId);
   const { residents } = species.find(({ id }) => id === responsibleFor[0]);
@@ -186,8 +195,9 @@ const noParameterEmployeeCoverage = () => {
 
 const yesParameterEmployeeCoverage = (idOrName) => {
   const employeeAndAnimals = {};
-  const { firstName, lastName, responsibleFor } = employees.find(({ id, firstName, lastName }) =>
-    (id === idOrName) || (firstName === idOrName) || (lastName === idOrName));
+  const { firstName, lastName, responsibleFor } = employees
+    .find(({ id, firstName: firstNameEmployee, lastName: lastNameEmployee }) =>
+      (id === idOrName) || (firstNameEmployee === idOrName) || (lastNameEmployee === idOrName));
   const key = `${firstName} ${lastName}`;
   employeeAndAnimals[key] = getSpeciesName(responsibleFor);
   return employeeAndAnimals;
