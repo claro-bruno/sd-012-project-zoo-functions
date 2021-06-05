@@ -177,8 +177,22 @@ function increasePrices(percentage) {
   return prices;
 }
 
+const withIdOrName = (idOrName, func, species) => {
+  const specId = func
+    .find((aux) => (aux.id === idOrName) || (aux.firstName === idOrName) || (aux
+      .lastName === idOrName));
+  const animals = [];
+  specId.responsibleFor.forEach((aux) => {
+    const found = species.find((animal) => (animal.id === aux));
+    animals.push(found.name);
+  });
+  const obj = {};
+  obj[`${specId.firstName} ${specId.lastName}`] = animals;
+  return obj;
+};
+
 function getEmployeeCoverage(idOrName) {
-  const obj2return = {};
+  let obj2return = {};
   const { employees: func, species } = data;
   if (!idOrName) {
     func.forEach((aux) => {
@@ -190,14 +204,7 @@ function getEmployeeCoverage(idOrName) {
       obj2return[`${aux.firstName} ${aux.lastName}`] = arrayAnimal;
     });
   } else {
-    const specId = func.find((aux) => (aux.id === idOrName) || (aux.firstName === idOrName) || 
-    (aux.lastName === idOrName));
-    const animals = [];
-    specId.responsibleFor.forEach((aux) => {
-      const found = species.find((animal) => (animal.id === aux));
-      animals.push(found.name);
-    });
-    obj2return[`${specId.firstName} ${specId.lastName}`] = animals;
+    obj2return = withIdOrName(idOrName, func, species);
   }
   return obj2return;
 }
