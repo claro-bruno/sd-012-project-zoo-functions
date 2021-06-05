@@ -24,9 +24,16 @@ function getAnimalsOlderThan(animal, age) {
   return ageResidents;
 }
 
-function getEmployeeByName() {
-  // seu código aqui employeeName
+function getEmployeeByName(employeeName) {
+  if (!employeeName)
+  return {};
+  
+  const findEmployee = data.employees.find((employee) =>
+  employee.firstName === employeeName || employee.lastName === employeeName);
+  
+  return findEmployee;
 }
+console.log(getEmployeeByName('Emery'));
 
 function createEmployee() {
   // seu código aqui personalInfo, associatedWith
