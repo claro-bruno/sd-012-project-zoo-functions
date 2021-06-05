@@ -15,16 +15,14 @@ function getSpeciesByIds(...ids) {
   return data.species.filter((specie) => ids.find((id) => specie.id === id));
 }
 
-// console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5'));
-
 function getAnimalsOlderThan(animal, age) {
   const especie = data.species.find((specie) => specie.name === animal);
   return especie.residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName = {}) {
-  return data.employees.find((employee) =>
-    employeeName === employee.firstName || employeeName === employee.lastName) || employeeName;
+  return data.employees.find((employee) => employeeName === employee.firstName
+  || employeeName === employee.lastName) || employeeName;
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -32,8 +30,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some((employee) =>
-    employee.managers.includes(id));
+  return data.employees.some((employee) => employee.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -46,9 +43,20 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(species) {
+  const empty = {};
+  if (species === undefined) {
+    data.species.forEach((specie) => {
+      const especieVar = specie.name;
+      const totalAnimals = specie.residents.length;
+      empty[especieVar] = totalAnimals;
+    });
+    return empty;
+  }
+  return data.species.find((specie) => specie.name === species).residents.length;
+}
+// eslint-disable-next-line no-console
+console.log(countAnimals());
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -77,7 +85,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
