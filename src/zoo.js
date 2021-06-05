@@ -483,15 +483,38 @@ function getAnimalMap(options) {
 // expected17 = 'lions';
 // assert.strictEqual(actual17, expected17);
 
-// function convert24To12Hs(hour24) {
-//   const hour12 = hour24 % 12;
-//   const amOrPm = (hour24 > 12) ? 'pm' : 'am';
-//   return ({ hour: hour12, amOrPm });
-// }
+function convert24To12Hs(hour24) {
+  const hour12 = hour24 % 12;
+  const amOrPm = (hour24 > 12) ? 'pm' : 'am';
+  return ({ hour: hour12, amOrPm });
+}
+
+const toHumanReadable = (acc, curr) => {
+  if (curr === 'Monday') {
+    acc[curr] = 'CLOSED';
+    return acc;
+  }
+  const open = convert24To12Hs(data.hours[curr].open);
+  const close = convert24To12Hs(data.hours[curr].close);
+  acc[curr] = `Open from ${open.hour}${open.amOrPm} until ${close.hour}${close.amOrPm}`;
+  return acc;
+};
+
+const allDays = (schedule) => schedule
+  .reduce((acc, curr) => toHumanReadable(acc, curr), {});
+
+const aDay = (schedule, dayName) => schedule
+  .filter((day) => day === dayName)
+  .reduce((acc, curr) => toHumanReadable(acc, curr), {});
 
 function getSchedule(dayName) {
   // seu código aqui
-  return dayName;
+  let schedule = Object.keys(data.hours);
+  if (dayName === undefined) {
+    schedule = allDays(schedule);
+    return schedule;
+  }
+  return aDay(schedule, dayName);
 }
 
 // const actual16 = getSchedule();
@@ -506,6 +529,18 @@ function getSchedule(dayName) {
 // };
 
 // assert.deepStrictEqual(actual16, expected16);
+
+// let actual17 = getSchedule('Monday');
+// let expected = {
+//   'Monday': 'CLOSED'
+// };
+// assert.deepStrictEqual(actual17, expected);
+
+// actual17 = getSchedule('Tuesday');
+// expected = {
+//   'Tuesday': 'Open from 8am until 6pm'
+// };
+// assert.deepStrictEqual(actual17, expected);
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
