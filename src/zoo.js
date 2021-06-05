@@ -14,6 +14,15 @@ const data = require('./data');
 const especies = data.species;
 const funcionarios = data.employees;
 const precos = data.prices;
+const horarios = data.hours;
+// const localizarNe = especies
+//   .filter((especie) => especie.location === 'NE').map((nome) => nome.name);
+// const localizarNw = especies
+//   .filter((especie) => especie.location === 'NW').map((nome) => nome.name);
+// const localizarSe = especies
+//   .filter((especie) => especie.location === 'SE').map((nome) => nome.name);
+// const localizarSw = especies
+//   .filter((especie) => especie.location === 'SW').map((nome) => nome.name);
 
 function getSpeciesByIds(...ids) {
   const acessSpecies = especies;
@@ -33,12 +42,11 @@ function getAnimalsOlderThan(animal, age) {
   return acharResidents.residents.every((idade) => idade.age >= age);
 }
 
-function getEmployeeByName(employeeName) {
+function getEmployeeByName(employeeName = {}) {
   // seu código aqui
-  const userDisplay = typeof employeeName === 'undefined' ? {} : employeeName;
   const acharPrimeiroNome = data.employees.find((nome) => nome.firstName === employeeName);
   const acharSegundoNome = data.employees.find((nome) => nome.lastName === employeeName);
-  return acharPrimeiroNome || acharSegundoNome || userDisplay;
+  return acharPrimeiroNome || acharSegundoNome || employeeName;
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -93,13 +101,53 @@ function calculateEntry(entrants) {
   return Adult * precos.Adult + Child * precos.Child + Senior * precos.Senior;
 }
 
-function getAnimalMap() {
-  // seu código aqui options
-}
+// const getDefault = () => {
+//   const resultado = {
+//     NE: localizarNe,
+//     NW: localizarNw,
+//     SE: localizarSe,
+//     SW: localizarSw,
+//   };
+//   return resultado;
+// };
 
-function getSchedule() {
-  // seu código aqui dayName
+function getAnimalMap(options) {
+  // seu código aqui
+  // if (options.includeNames = true) {
+  //   console.log(getDefault().NE.map((animal) => animal));
+  // }
+  // return getDefault();
 }
+const getScheduleDefault = () => {
+  const resultado = {
+    Tuesday: `Open from ${horarios.Tuesday.open}am until ${horarios.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${horarios.Wednesday.open}am until ${horarios.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${horarios.Thursday.open}am until ${horarios.Thursday.close - 12}pm`,
+    Friday: `Open from ${horarios.Friday.open}am until ${horarios.Friday.close - 12}pm`,
+    Saturday: `Open from ${horarios.Saturday.open}am until ${horarios.Saturday.close - 12}pm`,
+    Sunday: `Open from ${horarios.Sunday.open}am until ${horarios.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+  return resultado;
+};
+
+function getSchedule(dayName) {
+  // seu código aqui
+  if (!dayName) {
+    return getScheduleDefault();
+  }
+  if (dayName === 'Monday') {
+    const closed = {
+      [dayName]: 'CLOSED',
+    };
+    return closed;
+  }
+  const resposta = {
+    [dayName]: `Open from ${horarios[dayName].open}am until ${horarios[dayName].close - 12}pm`,
+  };
+  return resposta;
+}
+console.log(getSchedule('Friday'));
 
 function getOldestFromFirstSpecies() {
   // seu código aqui id
