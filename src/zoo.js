@@ -155,7 +155,7 @@ function getOldestFromFirstSpecies(id) {
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
-  const percent = percentage / 100 + 1
+  const percent = percentage / 100 + 1;
   const { Adult, Senior, Child } = data.prices;
   data.prices = {
     Adult: Math.round((Adult * percent) * 100) / 100,
