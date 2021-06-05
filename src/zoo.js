@@ -80,10 +80,64 @@ function calculateEntry(...entrants) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants[0];
   return (Adult * data.prices.Adult) + (Child * data.prices.Child) + (Senior * data.prices.Senior);
 }
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+// ======
 
+const testSexTrue = (test, objectLocal, species) => {
+  species.forEach((aux) => {
+    const nome = aux.name;
+    const obj = {};
+    obj[nome] = [];
+    const arrayObjRes = [];
+    arrayObjRes.push(aux.residents.filter((aux2) => test === aux2.sex));
+    arrayObjRes.forEach((aux2) => aux2.forEach((aux3) => obj[nome].push(aux3.name)));
+    objectLocal[aux.location].push(obj);
+    return objectLocal;
+  });
+};
+
+const testSex = (test, objectLocal) => {
+  const { species } = data;
+  if (!test) {
+    species.forEach((aux) => {
+      const nome = aux.name;
+      const obj = {};
+      obj[nome] = aux.residents.map((aux2) => aux2.name);
+      objectLocal[aux.location].push(obj);
+    });
+  } else {
+    testSexTrue(test, objectLocal, species);
+  }
+  return objectLocal;
+};
+
+const testSort = (objectTest, objectName) => {
+  const loc = Object.keys(objectName);
+  if (objectTest.sorted) {
+    for (let index = 0; index < loc.length; index += 1) {
+      objectName[loc[index]].forEach((aux) => {
+        const key = Object.keys(aux);
+        aux[key].sort();
+      });
+    }
+  }
+  return objectName;
+};
+
+function getAnimalMap(options = {}) {
+  const objectEmpth = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  if (options.includeNames) {
+    let objectReturn1 = testSex(options.sex, objectEmpth);
+    objectReturn1 = testSort(options, objectReturn1);
+    return objectReturn1;
+  }
+  data.species.forEach((ar) => objectEmpth[ar.location].push(ar.name));
+  return objectEmpth;
+}
 // function getSchedule(dayName) {
 //   // seu código aqui
 // }
@@ -104,7 +158,7 @@ module.exports = {
   calculateEntry,
   // getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
