@@ -50,11 +50,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return data.employees.push(add);
 }
 
-function countAnimals() {
-  // if (species === undefined) data.species.map((specie) => specie.name = specie.residents.length);
+// countAnimals resolvido com ajuda do PR do https://github.com/tryber/sd-012-project-zoo-functions/pull/41/files
+function countAnimals(species) {
+  if (species === undefined) {
+    const objName = {};
+    data.species.forEach(({ name, residents }) => {
+      objName[name] = residents.length;
+    });
+    return objName;
+  }
+  const result = data.species.find(({ name }) => name === species).residents.length;
+  return result;
 }
-
-// console.log(countAnimals());
 
 function calculateEntry() {
   // seu código aqui entrants
