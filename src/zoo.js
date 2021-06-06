@@ -14,7 +14,7 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   const animals = data.species.filter((specie, index) => specie.id === ids[index]);
   return animals;
-};
+}
 
 // function getAnimalsOlderThan(animal, age) {
 //   const Species = data.species.find((specie) => animal === specie.name);
@@ -66,7 +66,6 @@ function getSpeciesByIds(...ids) {
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
 // }
-
 
 module.exports = {
   // calculateEntry,
