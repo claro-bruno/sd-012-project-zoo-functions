@@ -13,6 +13,7 @@ const data = require('./data');
 
 const speciesArray = data.species;
 const emplys = data.employees;
+const pricesArray = data.prices;
 
 function getSpeciesByIds(...ids) {
   return speciesArray.filter((value, i) => value.id === ids[i]);
@@ -58,9 +59,12 @@ function countAnimals(species) {
   teste = speciesArray.find((value) => value.name === species); return teste.residents.length;
 }
 
-function calculateEntry() {
-  // entrants
-  // seu código aqui
+function calculateEntry(entrants) {
+  let resultado = 0;
+  if (entrants === undefined || entrants === {}) return resultado;
+  for (let i = 0; i < Object.keys(entrants).length; i += 1) {
+    resultado += Object.values(entrants)[i] * pricesArray[Object.keys(entrants)[i]];
+  } return resultado;
 }
 
 function getAnimalMap() {
