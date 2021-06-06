@@ -69,7 +69,40 @@ const calculateEntry = (entrants) => {
   return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 };
 
-const getAnimalMap = () => {};
+const getAnimalMap = (options = {}) => {
+  const { includeNames = false, sorted = false, sex = false } = options;
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  const speciesByLocation = Object.values(locations.map((location) =>
+    species.filter((specie) =>
+      specie.location === location)));
+        
+  if (includeNames === true) {
+    return speciesByLocation.reduce((acc, curr) =>
+      ({ ...acc, [curr[0].location]: curr.reduce((acc, curr) => {
+        const animalNames = ({ ...acc,
+          [curr.name]: (curr.residents.map((specie) => specie.name))});
+        const animalNamesSorted = ({ ...acc,
+          [curr.name]: (curr.residents.map((specie) => specie.name).sort())});
+        if (sorted === true) {
+          return animalNamesSorted;
+        } else if (sex === male) {
+
+        } else if (sex === female) {
+
+        }
+        return animalNames;
+        }, {}) }), {});
+  }
+
+  return speciesByLocation.reduce((acc, curr) =>
+  ({ ...acc, 
+    [curr[0].location]: curr.map((animalByLocation) =>
+    animalByLocation.name) }), {});
+};
+
+console.log(getAnimalMap());
+// console.log(getAnimalMap({ includeNames: true }));
+// console.log(getAnimalMap({ includeNames: true, sorted: true }));
 
 const getSchedule = (dayName) => {
   const weekDays = Object.keys(hours);
