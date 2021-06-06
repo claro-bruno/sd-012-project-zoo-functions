@@ -105,9 +105,9 @@ function getOldestFromFirstSpecies(funcId) {
 }
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')) CORRIGIR
 
-function increasePrices(percentage) {
-  
-}
+// function increasePrices(percentage) {
+///
+// }
 
 // function getEmployeeCoverage(idOrName) {
 //   if (idOrName) {
@@ -129,6 +129,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  increasePrices,
+  // increasePrices,
   createEmployee,
 };
