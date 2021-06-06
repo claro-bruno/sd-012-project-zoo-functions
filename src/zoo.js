@@ -82,13 +82,14 @@ const generateNameAnimals = (specs, sorted, sex) => {
     let arrAnimals = species.find((specie) => specie.name === specieName).residents;
     if (sex) arrAnimals = arrAnimals.filter((animal) => animal.sex === sex);
     arrAnimals = arrAnimals.map((animal) => animal.name);
-    objAnimalsName[specieName] = sorted ? arrAnimals.sort() : arrAnimals;
+    if (sorted) arrAnimals = arrAnimals.sort();
+    objAnimalsName[specieName] = arrAnimals;
     arrAnimalsSpecie.push(objAnimalsName);
   });
   return arrAnimalsSpecie;
 };
 
-const generateBaseMapAnimals = (regions, names, sorted, sex) => {
+const generateBaseMapAnimals = (regions, options) => {
   const objRegionsSpecies = {};
   const objNamesSpecies = {};
   regions.forEach((location) => {
@@ -97,7 +98,8 @@ const generateBaseMapAnimals = (regions, names, sorted, sex) => {
     objRegionsSpecies[location] = dataAnimals;
   });
 
-  if (names || sorted || sex) {
+  if (options && options.includeNames) {
+    const { sorted = false, sex = '' } = options;
     regions.forEach((location) => {
       objNamesSpecies[location] = generateNameAnimals(objRegionsSpecies[location], sorted, sex);
     });
@@ -106,12 +108,12 @@ const generateBaseMapAnimals = (regions, names, sorted, sex) => {
   return objRegionsSpecies;
 };
 
-function getAnimalMap(includeNames = false, sorted = false, sex = '') {
+function getAnimalMap(options) {
   const locations = ['NE', 'NW', 'SE', 'SW'];
-  const getSpeciesLocation = generateBaseMapAnimals(locations, includeNames, sorted, sex);
+  const getSpeciesLocation = generateBaseMapAnimals(locations, options);
   return getSpeciesLocation;
 }
-console.log(getAnimalMap(true, true, ''));
+console.log(getAnimalMap());
 
 function getSchedule(dayName) {
   const schedule = {};
