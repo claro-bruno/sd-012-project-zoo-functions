@@ -169,6 +169,8 @@ function getEmployeeCoverage(idOrName) {
   return getEmployeeList();
 }
 
+// Requisito 13 cumprido com a ajuda do Rodrigo Facury; Dividi em duas funções baseada no código do colega Luciano Almeida.
+
 console.log(getEmployeeCoverage('Azevado'));
 
 module.exports = {
