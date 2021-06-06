@@ -78,11 +78,11 @@ function countAnimals(animals) {
       return numberOfAnimals;
     }
   });
-  return species === undefined ? membersOfSpecie : numberOfAnimals;
+  return animals === undefined ? membersOfSpecie : numberOfAnimals;
 }
 
-function calculateEntry() {
-  // seu código aqui entrants
+function calculateEntry(entrants) {
+  // seu código aqui 
 }
 
 function getAnimalMap() {
