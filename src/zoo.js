@@ -42,10 +42,10 @@ function createEmployee(personalInfo, associatedWith) {
   return employeeNew;
 }
 
-function isManager() {
-  // id
- /*  return data.employees.find((employees) =>
-    (employees.firstName === employee) || (employees.lastName === employee)); */
+/* const data = require('./data'); */
+
+function isManager(id) {
+  return data.employees.some((employee, index) => employee.managers[index] === id);
 }
 
 function addEmployee() {
