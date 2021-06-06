@@ -74,18 +74,18 @@ function getEmployeeByName(employeeName) {
 //   // seu código aqui
 // }
 
-module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
-  getSpeciesByIds,
-  getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
-  getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
-};
+// module.exports = {
+//   calculateEntry,
+//   getSchedule,
+//   countAnimals,
+//   getAnimalMap,
+//   getSpeciesByIds,
+//   getEmployeeByName,
+//   getEmployeeCoverage,
+//   addEmployee,
+//   isManager,
+//   getAnimalsOlderThan,
+//   getOldestFromFirstSpecies,
+//   increasePrices,
+//   createEmployee,
+// };
