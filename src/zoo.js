@@ -22,12 +22,10 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   return (
-    species.filter((specie) => (
+    species.find((specie) => (
       specie.name === animal
-    )).every((filteredSpecie) => (
-      filteredSpecie.residents.every((resident) => (
-        resident.age >= age
-      ))
+    )).residents.every((resident) => (
+      resident.age >= age
     ))
   );
 }
