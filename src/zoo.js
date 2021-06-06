@@ -15,7 +15,7 @@ const { species } = data;
 
 const { employees } = data;
 
-// const { prices } = data;
+const { prices } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
@@ -73,8 +73,16 @@ function countAnimals(specieS) {
   return residents.length;
 }
 
-function calculateEntry() {
-  // entrants
+function calculateEntry(entrants = { Adult: 0, Child: 0, Senior: 0 }) {
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const pricePerPeople = [
+    prices.Adult * Adult,
+    prices.Child * Child,
+    prices.Senior * Senior,
+  ];
+  const amount = pricePerPeople.reduce((previousV, currentV) => previousV + currentV);
+  return amount;
 }
 
 function getAnimalMap() {
