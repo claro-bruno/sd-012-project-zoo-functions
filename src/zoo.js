@@ -42,14 +42,19 @@ function createEmployee(personalInfo, associatedWith) {
   return employeeNew;
 }
 
-/* const data = require('./data'); */
-
 function isManager(id) {
   return data.employees.some((employee, index) => employee.managers[index] === id);
 }
 
-function addEmployee() {
-  // seu código aqui  : id, firstName, lastName, managers, responsibleFor
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  data.employees.push(newEmployee);
 }
 
 function countAnimals() {
