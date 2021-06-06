@@ -87,7 +87,8 @@ function calculateEntry(entrants) {
 function getAnimalMap() {
   // seu código aqui options
 }
-
+// Fiz esse requisito com apoio do PR do Kevin Oliveira //https://github.com/tryber/sd-012-project-zoo-functions/pull/40/
+// commits/16fcd013fba9033347251dfe799c9b292aaaaa52#
 function getSchedule(dayName) {
   const days = Object.keys(data.hours);
   const schedule = days.reduce((acc, curr) => {
@@ -101,8 +102,12 @@ function getSchedule(dayName) {
   return schedule;
 }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui id
+function getOldestFromFirstSpecies(id) {
+  const animalId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const takeSpecie = data.species.find((specie) => specie.id === animalId);
+  const moreOlder = takeSpecie.residents.sort((a, b) => b.age - a.age)[0];
+  const { name, sex, age } = moreOlder;
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
