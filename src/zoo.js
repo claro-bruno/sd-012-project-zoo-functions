@@ -72,9 +72,41 @@ function calculateEntry(entrants) {
   }
   return 0;
 }
+// O código a seguir foi retirado de: https://dicasdejavascript.com.br/javascript-como-remover-valores-repetidos-de-um-array/
+const getLocations = [...new Set(species.map((specie) => specie.location))];
+
+const getAnimalLocations = () => getLocations.reduce((acc, location) => ({
+  ...acc,
+  [`${location}`]: species.filter((specie) => specie.location === location).map((e) => e.name),
+}), {});
+
+const getAnimalNames = (sorted, sex) => getLocations.reduce((acc, location) => ({
+  ...acc,
+  [`${location}`]: species.filter((specie) => specie.location === location)
+    .map((element) => {
+      let { residents } = element;
+      if (sex) {
+        residents = residents.filter((e) => e.sex === sex);
+      }
+      residents = residents.map((resident) => resident.name);
+      if (sorted) {
+        residents.sort();
+      }
+      return { [element.name]: residents };
+    }),
+}), {});
 
 function getAnimalMap(options) {
   // seu código aqui
+  if (!options || !options.includeNames) {
+    return getAnimalLocations();
+  }
+
+  const { includeNames, sorted = false, sex = false } = options;
+
+  if (includeNames) {
+    return getAnimalNames(sorted, sex);
+  }
 }
 
 function getSchedule(dayName) {
