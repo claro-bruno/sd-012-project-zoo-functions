@@ -77,12 +77,21 @@ function countAnimals(species) {
   const contagem = data.species.find((specie) => specie.name === species);
   return contagem.residents.length;
 }
-console.log(countAnimals());
+// console.log(countAnimals());
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants) {
+  
+  if (entrants !== undefined) {
+    
+    const  { Adult = 0, Child = 0, Senior = 0 } = entrants;
 
+    return data.prices.Adult*Adult + data.prices.Child*Child + data.prices.Senior*Senior;
+  }
+ 
+    return 0;
+  }
+
+console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 // function getAnimalMap(options) {
 //   // seu código aqui
 // }
@@ -104,7 +113,7 @@ console.log(countAnimals());
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
