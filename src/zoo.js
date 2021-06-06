@@ -40,11 +40,11 @@ function isManager(id) {
   return employees.some((employee) => employee.managers.some(checkManager));
 }
 
-/* console.log(isManager('b0dc644a-5335-489b-8a2c-4e086c7819a2')); */
-
-/* function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
+
+/*
 
 function countAnimals(species) {
   // seu código aqui
@@ -76,12 +76,12 @@ module.exports = {
   getEmployeeByName,
   createEmployee,
   isManager,
+  addEmployee,
 /*   calculateEntry,
   getSchedule,
   countAnimals,
   getAnimalMap,
   getEmployeeCoverage,
-  addEmployee,
   getOldestFromFirstSpecies,
   increasePrices, */
 };
