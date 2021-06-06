@@ -75,17 +75,17 @@ function getEmployeeByName(employeeName) {
 // }
 
 module.exports = {
-//   calculateEntry,
-//   getSchedule,
-//   countAnimals,
-//   getAnimalMap,
+  //   calculateEntry,
+  //   getSchedule,
+  //   countAnimals,
+  //   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
+  // getEmployeeCoverage,
+  // addEmployee,
+  // isManager,
   getAnimalsOlderThan,
-//   getOldestFromFirstSpecies,
-//   increasePrices,
-//   createEmployee,
+  //   getOldestFromFirstSpecies,
+  //   increasePrices,
+  //   createEmployee,
 };
