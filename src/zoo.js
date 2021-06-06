@@ -81,8 +81,16 @@ function countAnimals(animals) {
   return animals === undefined ? membersOfSpecie : numberOfAnimals;
 }
 
-function calculateEntry() {
-  // seu código aqui entrants
+function calculateEntry(entrants) {
+  if (entrants === undefined) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const priceAdult = 49.99 * Adult;
+  const priceSenior = 24.99 * Senior;
+  const priceChild = 20.99 * Child;
+  const totalPrice = priceAdult + priceSenior + priceChild;
+  return totalPrice;
 }
 
 function getAnimalMap() {
