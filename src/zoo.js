@@ -90,17 +90,45 @@ function countAnimals(oneSpecie) {
   return takeAnimal.residents.length;
 }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+/* function calculateEntry(entrants) {
+  // seu código aqui
+  if (typeof entrants === 'undefined' || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+
+  const adult = 0;
+  const child = 0;
+  const senior = 0;
+
+  return ;
+} */
 
 // function getAnimalMap(options) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  // seu código aqui
+  if (typeof dayName === 'undefined') {
+    return { Tuesday: 'Open from 8am until 6pm',
+      Wednesday: 'Open from 8am until 6pm',
+      Thursday: 'Open from 10am until 8pm',
+      Friday: 'Open from 10am until 8pm',
+      Saturday: 'Open from 8am until 10pm',
+      Sunday: 'Open from 8am until 8pm',
+      Monday: 'CLOSED' };
+  }
+  const takeDays = Object.keys(data.hours);
+  const takeOneDay = takeDays.find((day) => day === dayName);
+  if (takeOneDay === 'Tuesday') {
+    return { [takeOneDay]: `Open from 8am until 6pm` };
+  }
+  if (takeOneDay === 'Monday') {
+    return { [takeOneDay]: `CLOSED` };
+  }
+}
+
+console.log(getSchedule('Monday'));
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -115,8 +143,8 @@ function countAnimals(oneSpecie) {
 // }
 
 module.exports = {
-  //   calculateEntry,
-  //   getSchedule,
+  // calculateEntry,
+  getSchedule,
   countAnimals,
   //   getAnimalMap,
   //   getSpeciesByIds,
