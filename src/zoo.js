@@ -61,9 +61,17 @@ function addEmployee(
   });
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(animal) {
+  // seu código aqui
+  const countForSpecies = species.reduce((count, specie) => {
+    count[specie.name] = specie.residents.length;
+    return count;
+  }, {});
+  if (animal !== undefined) {
+    return countForSpecies[animal];
+  }
+  return countForSpecies;
+}
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -85,7 +93,7 @@ function addEmployee(
 //   // seu código aqui
 // }
 module.exports = {
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
