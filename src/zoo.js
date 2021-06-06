@@ -9,7 +9,6 @@ eslint no-unused-vars: [
 ]
 */
 
-// const data = require('./data');
 const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -103,11 +102,8 @@ function getSchedule(dayName) {
       schedule[day] = `Open from ${open}am until ${close - 12}pm`;
     }
   });
-  if (dayName === undefined) {
-    return schedule;
-  }
-  const result = { [dayName]: schedule[dayName] };
-  return result;
+  if (!dayName) return schedule;
+  return { [dayName]: schedule[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -119,9 +115,8 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // const { prices } = data;
   Object.keys(prices).forEach((key) => {
-    const newPrice = (prices[key] * (1 + (percentage / 100))) + 0.001;
+    const newPrice = (prices[key] * (1 + percentage / 100)) + 0.001;
     prices[key] = Number(newPrice.toPrecision(4));
   });
 }
@@ -140,9 +135,7 @@ const getAllEmployeeCoverage = () => {
 };
 
 function getEmployeeCoverage(idOrName) {
-  if (idOrName === undefined) {
-    return getAllEmployeeCoverage();
-  }
+  if (!idOrName) return getAllEmployeeCoverage();
   const employee = employees
     .find(({ id, firstName, lastName }) =>
       idOrName === id || idOrName === firstName || idOrName === lastName);
