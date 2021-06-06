@@ -107,28 +107,36 @@ function countAnimals(oneSpecie) {
 //   // seu código aqui
 // }
 
+const defaultHours = {
+  Tuesday: 'Open from 8am until 6pm',
+  Wednesday: 'Open from 8am until 6pm',
+  Thursday: 'Open from 10am until 8pm',
+  Friday: 'Open from 10am until 8pm',
+  Saturday: 'Open from 8am until 10pm',
+  Sunday: 'Open from 8am until 8pm',
+  Monday: 'CLOSED',
+};
+
 function getSchedule(dayName) {
   // seu código aqui
   if (typeof dayName === 'undefined') {
-    return { Tuesday: 'Open from 8am until 6pm',
-      Wednesday: 'Open from 8am until 6pm',
-      Thursday: 'Open from 10am until 8pm',
-      Friday: 'Open from 10am until 8pm',
-      Saturday: 'Open from 8am until 10pm',
-      Sunday: 'Open from 8am until 8pm',
-      Monday: 'CLOSED' };
+    return defaultHours;
   }
   const takeDays = Object.keys(data.hours);
   const takeOneDay = takeDays.find((day) => day === dayName);
-  if (takeOneDay === 'Tuesday') {
-    return { [takeOneDay]: `Open from 8am until 6pm` };
+  const takeValues = Object.values(data.hours[takeOneDay]);
+  if (dayName === 'Monday') {
+    return { [takeOneDay]: 'CLOSED' };
   }
-  if (takeOneDay === 'Monday') {
-    return { [takeOneDay]: `CLOSED` };
+  let convertHour;
+  switch (takeValues[1]) {
+  case 18: convertHour = 6; break;
+  case 20: convertHour = 8; break;
+  // case 22: convertHour = 10; break;
+  default: convertHour = 0;
   }
+  return { [takeOneDay]: `Open from ${takeValues[0]}am until ${convertHour}pm` };
 }
-
-console.log(getSchedule('Monday'));
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
