@@ -49,7 +49,7 @@ function countAnimals(animal) {
     const targetSpecie = species.find((specie) => specie.name === animal);
     return targetSpecie.residents.length;
   }
-  let resultado = {};
+  const resultado = {};
   species.forEach((specie) => {
     const { name, residents } = specie;
     resultado[name] = residents.length;
@@ -119,7 +119,7 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const { prices } = data;
+  // const { prices } = data;
   Object.keys(prices).forEach((key) => {
     const newPrice = (prices[key] * (1 + (percentage / 100))) + 0.001;
     prices[key] = Number(newPrice.toPrecision(4));
