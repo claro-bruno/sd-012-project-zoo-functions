@@ -66,7 +66,7 @@ function calculateEntry(entrants) {
 // }
 
 function getOldestFromFirstSpecies(id) {
-  const animal = employees.find((animalResponsible) => animalResponsible.id === id).responsibleFor[0];
+  const animal = employees.find((responsibleFor) => responsibleFor.id === id).responsibleFor[0];
   const animals = species.find((search) => search.id === animal);
   const resindentAnimals = animals.residents;
   resindentAnimals.sort((a, b) => b.age - a.age);
