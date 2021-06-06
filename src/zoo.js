@@ -18,14 +18,10 @@ function getSpeciesByIds(...ids) {
   return getSpecies;
 }
 
-/* function getAnimalsOlderThan(animal, age) {
+function getAnimalsOlderThan(animal, age) {
 // Questao 2
-  const filterSpecie = (arr) => arr.filter(
-    ({ animal, age }) =>
-      animal === 'name'
-      && age >= age,
-    );
-    const getAnimalsOlderThan = getAnimalsOlderThan(species);
+  const filterSpecie = data.species.find((animais) => animais.name === animal);
+  return filterSpecie.residents.every((animais) => animais.age > age);
 }
 
 /*
@@ -89,7 +85,7 @@ module.exports = {
   //  getEmployeeCoverage,
   //  addEmployee,
   isManager,
-  //  getAnimalsOlderThan,
+  getAnimalsOlderThan,
   //  getOldestFromFirstSpecies,
   //  increasePrices,
   createEmployee,
