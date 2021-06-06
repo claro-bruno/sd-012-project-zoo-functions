@@ -138,22 +138,26 @@ function increasePrices(percentage) {
 }
 // Inseri o Math.round para que o valor fique apenas com duas casas depois da vírgula. Contei com a ajuda do colega Rodrigo Facury;
 // console.log(increasePrices(200));
+const listId = {};
 
-function getEmployeeCoverage(idOrName) {
-  const listId = {};
+function getEmployeeList() {
   data.employees.map((element) => {
     const name = `${element.firstName} ${element.lastName}`;
     listId[name] = [];
-    element.responsibleFor.map((id) => {
-      const nameAnimal = data.species.forEach((key) => {
+    element.responsibleFor.forEach((id) => {
+      data.species.forEach((key) => {
         if (id === key.id) {
           listId[name].push(key.name);
         }
       });
-      return nameAnimal;
     });
     return listId;
   });
+  return listId;
+}
+
+function getEmployeeCoverage(idOrName) {
+  getEmployeeList();
   const callManager = {};
   if (idOrName !== undefined) {
     const search = data.employees.find((element) =>
@@ -162,10 +166,10 @@ function getEmployeeCoverage(idOrName) {
     callManager[found] = listId[found];
     return callManager;
   }
-  return listId;
+  return getEmployeeList();
 }
 
-// console.log(getEmployeeCoverage('Azevado'));
+console.log(getEmployeeCoverage('Azevado'));
 
 module.exports = {
   calculateEntry,
