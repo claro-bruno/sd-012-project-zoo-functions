@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { species, employees, prices } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return ids;
@@ -28,7 +28,8 @@ function getEmployeeByName(employeeName) {
     return {};
   }
   const employee = employees.find(
-    ({ firstName, lastName }) => firstName === employeeName || lastName === employeeName,
+    ({ firstName, lastName }) =>
+      firstName === employeeName || lastName === employeeName,
   );
   return employee;
 }
@@ -45,13 +46,17 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const manager = employees.some(
-    (manage) => manage.managers.includes(id),
-  );
+  const manager = employees.some((manage) => manage.managers.includes(id));
   return manager;
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) {
   employees.push({
     id,
     firstName,
@@ -82,11 +87,11 @@ function calculateEntry(entrants = 0) {
   const entrantsKeys = Object.keys(entrants);
   entrantsKeys.forEach((key) => {
     if (key === 'Adult') {
-      total += (entrants[key] * prices.Adult);
+      total += entrants[key] * prices.Adult;
     } else if (key === 'Senior') {
-      total += (entrants[key] * prices.Senior);
+      total += entrants[key] * prices.Senior;
     } else {
-      total += (entrants[key] * prices.Child);
+      total += entrants[key] * prices.Child;
     }
   });
   return total;
@@ -97,12 +102,16 @@ function calculateEntry(entrants = 0) {
 // }
 
 // function getSchedule(dayName) {
-//   // seu código aqui
 // }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(ids) {
+  const { responsibleFor } = employees.find(({ id }) => ids === id);
+  const firstAnimal = responsibleFor[0];
+  const { residents } = species.find(({ id }) => id === firstAnimal);
+  const animalAge = residents.sort((a, b) => b.age - a.age)[0];
+  return Object.values(animalAge);
+}
+console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -123,7 +132,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
