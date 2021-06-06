@@ -41,12 +41,24 @@ function isManager(id) {
 
 function addEmployee() {
   // id, firstName, lastName, managers, responsibleFor
-  // seu código aqui
+  // const newEmploy = [id, firstName, lastName, managers, responsibleFor];
+  // console.log(newEmploy);
+  // newEmploy.managers === undefined ? newEmploy.managers = [] : false
+  // newEmploy.responsibleFor === undefined ? newEmploy.responsibleFor = [] : false;
+  // emplys.push(newEmploy);
 }
 
-function countAnimals() {
-  // species
-  // seu código aqui
+function countAnimals(species) {
+  const vazia = {};
+  let teste = 0;
+  if (species === undefined) {
+    const newKeys = speciesArray.map((key) => key.name);
+    const newValues = speciesArray.map((value) => value.residents.length);
+    for (let i = 0; i < newKeys.length; i += 1) {
+      vazia[newKeys[i]] = newValues[i];
+    } return vazia;
+  }
+  teste = speciesArray.find((value) => value.name === species); return teste.residents.length;
 }
 
 function calculateEntry() {
