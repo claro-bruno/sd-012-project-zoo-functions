@@ -63,14 +63,15 @@ function addEmployee(
 
 function countAnimals(animal) {
   // seu código aqui
-  const countForSpecies = species.reduce((count, specie) => {
+  const countingSpecies = species.reduce((count, specie) => {
+    // eslint-disable-next-line no-param-reassign
     count[specie.name] = specie.residents.length;
     return count;
   }, {});
   if (animal !== undefined) {
-    return countForSpecies[animal];
+    return countingSpecies[animal];
   }
-  return countForSpecies;
+  return countingSpecies;
 }
 
 // function calculateEntry(entrants) {
