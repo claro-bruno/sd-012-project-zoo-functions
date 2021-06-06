@@ -61,9 +61,15 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  const keys = Object.keys(data.hours);
+  const days = keys.reduce((accumulator, current) => ({ ...accumulator,
+    [current]: `Open from ${data.hours[current].open}am until ${data.hours[current].close - 12}pm`,
+  }), {});
+  days.Monday = 'CLOSED';
+  if (!dayName) return days;
+  return { [dayName]: days[dayName] };
+}
 
 function getOldestFromFirstSpecies(id) {
   const animal = employees.find((responsibleFor) => responsibleFor.id === id).responsibleFor[0];
@@ -92,7 +98,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
