@@ -66,7 +66,7 @@ function countAnimals(animal) {
   const countingSpecies = species.reduce((count, specie) => {
     const counter = count;
     counter[specie.name] = specie.residents.length;
-    return count;
+    return counter;
   }, {});
   if (animal !== undefined) {
     return countingSpecies[animal];
