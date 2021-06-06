@@ -29,9 +29,9 @@ function getAnimalsOlderThan(animal, age) {
 function getEmployeeByName(employeeName) {
   const peopleEmployee = data.employees.map(() => {
     employeeName === employees.firstName || employeeName === employees.lastName;
-  });
 
-  return peopleEmployee;
+    return peopleEmployee;
+  });
 }
 
 // function createEmployee(personalInfo, associatedWith) {
