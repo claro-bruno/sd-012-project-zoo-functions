@@ -63,6 +63,19 @@ function calculateEntry(entrants) {
     .reduce((acc, entrant) => acc + entrants[entrant] * prices[entrant], 0);
 } // ok8
 
+function getAnimalMapFix(options, residents) {
+  const residents2 = [];
+  residents.forEach((resident) => {
+    if (options.sex === undefined || options.sex === resident.sex) {
+      residents2.push(resident.name);
+    }
+  });
+  if (options.sorted) {
+    residents2.sort();
+  }
+  return residents2;
+}
+
 function getAnimalMap(options) {
   const res = species.reduce((acc, specie) => {
     const { name, location, residents } = specie;
@@ -73,22 +86,12 @@ function getAnimalMap(options) {
       acc[location].push(name);
       return acc;
     }
-    const residents2 = [];
-    residents.forEach((resident) => {
-      if (options.sex === undefined || options.sex === resident.sex) {
-        residents2.push(resident.name);
-      }
-    });
-    if (options.sorted){
-      residents2.sort();
-    }
-    acc[location].push({[name]: residents2});
-    return acc
+    const residents2 = getAnimalMapFix(options, residents);
+    acc[location].push({ [name]: residents2 });
+    return acc;
   }, {});
   return res;
-} 
-console.log(getAnimalMap());
-// console.log(getAnimalMap({sex: 'male', sorted: true, includeNames: false}));
+} // ok9
 
 function getSchedule(dayName) {
   const obj = {};
