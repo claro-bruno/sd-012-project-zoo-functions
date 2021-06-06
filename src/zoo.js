@@ -97,8 +97,14 @@ function getSchedule(dayName) {
   return zooSchedule;
 }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui id
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  const findAnimalId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const findResidents = species.find((oldestAnimal) => oldestAnimal.id === findAnimalId).residents;
+
+  findResidents.sort((a, b) => b.age - a.age);
+
+  return Object.values(findResidents[0]);
 }
 
 function increasePrices() {
