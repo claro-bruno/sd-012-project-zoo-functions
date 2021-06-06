@@ -66,10 +66,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
   return newEmployee;
 }
-
-// function countAnimals(specie) {
-//   ///
-// }
+//Exercício feito com a ajuda do meu amigo Caio Morato
+function countAnimals(specie) {
+  const countagem = species.find((animal) => animal.name === specie);
+  if (specie) {
+    return countagem.residents.length;
+  }
+  const todos = {};
+  species.forEach((specie) => {
+    todos[specie.name] = specie.residents.length;
+  })
+  return todos;
+  }
+// console.log(countAnimals())
 
 function calculateEntry(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === 0) return 0;
@@ -90,22 +99,27 @@ function getOldestFromFirstSpecies(funcId) {
   const checkFunId = employees.find((person) => funcId === person.id)
     .responsibleFor.find((especie) => especie);
   const checkSpecie = species.filter((specie) => specie.id === checkFunId);
+
   return checkSpecie;
 }
-// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'))
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')) CORRIGIR
 
 // function increasePrices(percentage) {
-//   // seu código aqui
+  
 // }
 
 // function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
+//   if (idOrName) {
+//     const checkCredentials = employees.find((employee) => employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
+//     return {[`${checkCredentials.firstName} ${checkCredentials.lastName}`]: `${checkCredentials.responsibleFor}`}
+//   }
 // }
+// console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'))
 
 module.exports = {
   calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
