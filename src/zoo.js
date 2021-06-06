@@ -12,15 +12,18 @@ eslint no-unused-vars: [
 const { species } = require('./data');
 const data = require('./data');
 
-// Testar o spread operator 8.5 para substituir o push
-// Precisa iterar tanto o ids quanto o data.species.filter
-// HOF não trabalha com objeto
 function getSpeciesByIds(...ids) {
-  //  if(ids.length === 0){
-  //    return [];
-  //  }
-  //  const outputArray = data.species.find((animal) => ids.some((idss) => animal.id === idss) === ids);
-  //  return outputArray;
+  if (ids.length === 0) {
+    return [];
+  }
+  if (ids.length > 0) {
+    const especie = data.species.filter(
+      (animal) => ids.find(
+        (idInput) => idInput === animal.id,
+      ) === animal.id,
+    );
+    return especie;
+  }
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -84,7 +87,23 @@ function countAnimals(especie) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined || {}) {
+    return 0;
+  }
+  const price = entrants.reduce((previousValue, currentValue) => {
+    return accumulator + currentValue.Adult * 49.99 + currentValue.Senior * 24.99 + currentValue.Child * 20.99;
+    // if(entrants.Adult) {
+   //   return accumulator + currentValue.Adult * 49.99;
+   // }
+   // if(entrants.Senior) {
+   //   return accumulator + currentValue.Senior * 24.99;
+   // }
+   // if(entrants.Child) {
+   //   return accumulator + currentValue.Child * 20.99;
+   // }
+    return accumulator;
+  });
+  //console.log(entrants);
 }
 
 function getAnimalMap(options) {
@@ -103,7 +122,8 @@ function getOldestFromFirstSpecies(id) {
     // usando forEach defina uma idade igual a 1 para ser a idade do mais velho, 
     // ao ser comparado reatribua o valor do comparador igual ao animal, caso o animal seja o mais velho na comparação
     // Ao reatribuir a idade do comparador, também reatribua o nome e sexo do mesmo
-    //retornar o valor     
+    // retornar o valor   
+    // No lugar do comparador pode utilizar o reduce 
 }
 
 function increasePrices(percentage) {
