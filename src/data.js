@@ -11,14 +11,12 @@ const olaId = 'fdb2543b-5662-46a7-badc-93d960fdc0a8';
 const burlId = '0e7b460e-acf4-4e17-bcb3-ee472265db83';
 
 module.exports = {
-  species: [
-    {
+  species: [{
       id: lionId,
       name: 'lions',
       popularity: 4,
       location: 'NE',
-      residents: [
-        {
+      residents: [{
           name: 'Zena',
           sex: 'female',
           age: 12,
@@ -45,8 +43,7 @@ module.exports = {
       name: 'tigers',
       popularity: 5,
       location: 'NW',
-      residents: [
-        {
+      residents: [{
           name: 'Shu',
           sex: 'female',
           age: 19,
@@ -63,8 +60,7 @@ module.exports = {
       name: 'bears',
       popularity: 5,
       location: 'NW',
-      residents: [
-        {
+      residents: [{
           name: 'Hiram',
           sex: 'male',
           age: 4,
@@ -86,8 +82,7 @@ module.exports = {
       name: 'penguins',
       popularity: 4,
       location: 'SE',
-      residents: [
-        {
+      residents: [{
           name: 'Joe',
           sex: 'male',
           age: 10,
@@ -114,8 +109,7 @@ module.exports = {
       name: 'otters',
       popularity: 4,
       location: 'SE',
-      residents: [
-        {
+      residents: [{
           name: 'Neville',
           sex: 'male',
           age: 9,
@@ -142,8 +136,7 @@ module.exports = {
       name: 'frogs',
       popularity: 2,
       location: 'SW',
-      residents: [
-        {
+      residents: [{
           name: 'Cathey',
           sex: 'female',
           age: 3,
@@ -160,8 +153,7 @@ module.exports = {
       name: 'snakes',
       popularity: 3,
       location: 'SW',
-      residents: [
-        {
+      residents: [{
           name: 'Paulette',
           sex: 'female',
           age: 5,
@@ -178,8 +170,7 @@ module.exports = {
       name: 'elephants',
       popularity: 5,
       location: 'NW',
-      residents: [
-        {
+      residents: [{
           name: 'Ilana',
           sex: 'female',
           age: 11,
@@ -206,8 +197,7 @@ module.exports = {
       name: 'giraffes',
       popularity: 4,
       location: 'NE',
-      residents: [
-        {
+      residents: [{
           name: 'Gracia',
           sex: 'female',
           age: 11,
@@ -240,8 +230,7 @@ module.exports = {
       ],
     },
   ],
-  employees: [
-    {
+  employees: [{
       id: 'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1',
       firstName: 'Nigel',
       lastName: 'Nelson',
@@ -257,7 +246,8 @@ module.exports = {
         lionId,
         tigersId,
         bearsId,
-        'ef3778eb-2844-4c7c-b66c-f432073e1c6b'],
+        'ef3778eb-2844-4c7c-b66c-f432073e1c6b'
+      ],
     },
     {
       id: olaId,
@@ -318,13 +308,34 @@ module.exports = {
     },
   ],
   hours: {
-    Tuesday: { open: 8, close: 18 },
-    Wednesday: { open: 8, close: 18 },
-    Thursday: { open: 10, close: 20 },
-    Friday: { open: 10, close: 20 },
-    Saturday: { open: 8, close: 22 },
-    Sunday: { open: 8, close: 20 },
-    Monday: { open: 0, close: 0 },
+    Tuesday: {
+      open: 8,
+      close: 18
+    },
+    Wednesday: {
+      open: 8,
+      close: 18
+    },
+    Thursday: {
+      open: 10,
+      close: 20
+    },
+    Friday: {
+      open: 10,
+      close: 20
+    },
+    Saturday: {
+      open: 8,
+      close: 22
+    },
+    Sunday: {
+      open: 8,
+      close: 20
+    },
+    Monday: {
+      open: 0,
+      close: 0
+    },
   },
   prices: {
     Adult: 49.99,
