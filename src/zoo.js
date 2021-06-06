@@ -64,16 +64,16 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   employees.push(createEmployee(personalInfo, associatedWith));
 }
 
-function countAnimals(species) {
-  let membersOfSpecie = {};
+function countAnimals(animals) {
+  const membersOfSpecie = {};
   let numberOfAnimals = 0;
   data.species.forEach((specie) => {
-    if (species === undefined) {
+    if (animals === undefined) {
       membersOfSpecie[specie.name] = specie.residents.length;
       return membersOfSpecie;
     }
-    if (typeof species === 'string') {
-      const thatSpecie = data.species.find((specie) => specie.name === species);
+    if (typeof animals === 'string') {
+      const thatSpecie = data.species.find((animal) => animal.name === animals);
       numberOfAnimals = thatSpecie.residents.length;
       return numberOfAnimals;
     }
