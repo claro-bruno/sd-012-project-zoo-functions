@@ -36,7 +36,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({
+  employees.push({
     id,
     firstName,
     lastName,
@@ -66,14 +66,14 @@ function calculateEntry(entrants) {
 
 const regions = ['NE', 'NW', 'SE', 'SW'];
 const getAllByRegion = () => regions.reduce((accumulator, current) => {
-  accumulator[current] = data.species.filter((specie) =>
-    specie.location === current).map((getNames) => getNames.name);
+  accumulator[current] = species.filter((specie) =>
+    specie.location === current).map((objSpecie) => objSpecie.name);
   return accumulator;
 }, {});
 
 const getAllByRegionWNames = (sex, sorted) => regions.reduce((accumulator, current) => {
-  accumulator[current] = data.species.filter((getSpecies) =>
-    getSpecies.location === current).map((getNames) => {
+  accumulator[current] = species.filter((specie) =>
+    specie.location === current).map((getNames) => {
     const object = {};
     object[getNames.name] = getNames.residents.map((getSpecimen) => getSpecimen.name);
     if (sorted === true) { object[getNames.name].sort(); }
@@ -87,23 +87,16 @@ const getAllByRegionWNames = (sex, sorted) => regions.reduce((accumulator, curre
 }, {});
 
 function getAnimalMap(options) {
-  if (options === undefined) {
-    return getAllByRegion();
-  }
+  if (!options) return getAllByRegion();
   const { includeNames = false, sorted = false, sex = '' } = options;
-  if (includeNames === false) {
-    return getAllByRegion();
-  }
-  if (includeNames === true) {
-    const map = getAllByRegionWNames(sex, sorted);
-    return map;
-  }
+  if (includeNames === false) return getAllByRegion();
+  return getAllByRegionWNames(sex, sorted);
 }
 
 function getSchedule(dayName) {
   const schedule = {};
-  Object.keys(data.hours).forEach((day) => {
-    const { open, close } = data.hours[day];
+  Object.keys(hours).forEach((day) => {
+    const { open, close } = hours[day];
     if (day === 'Monday') {
       schedule[day] = 'CLOSED';
     } else {
@@ -118,8 +111,8 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const targetEmployee = data.employees.find((employee) => employee.id === id);
-  const animal = data.species.find((specie) => specie.id === targetEmployee.responsibleFor[0]);
+  const targetEmployee = employees.find((employee) => employee.id === id);
+  const animal = species.find((specie) => specie.id === targetEmployee.responsibleFor[0]);
   const oldestAnimal = animal.residents.sort((a, b) => b.age - a.age)[0];
   const { name, sex, age } = oldestAnimal;
   return [name, sex, age];
@@ -134,13 +127,13 @@ function increasePrices(percentage) {
 }
 
 const getAllAnimalsEmployeeCoverage = (respFor) => {
-  const animals = respFor.map((specieId) => data.species.find(({ id }) => id === specieId).name);
+  const animals = respFor.map((specieId) => species.find(({ id }) => id === specieId).name);
   return animals;
 };
 
 const getAllEmployeeCoverage = () => {
   const result = {};
-  data.employees.forEach(({ firstName, lastName, responsibleFor }) => {
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
     result[`${firstName} ${lastName}`] = getAllAnimalsEmployeeCoverage(responsibleFor);
   });
   return result;
@@ -150,7 +143,7 @@ function getEmployeeCoverage(idOrName) {
   if (idOrName === undefined) {
     return getAllEmployeeCoverage();
   }
-  const employee = data.employees
+  const employee = employees
     .find(({ id, firstName, lastName }) =>
       idOrName === id || idOrName === firstName || idOrName === lastName);
 
