@@ -11,56 +11,176 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+const { species, employees, hours, prices } = data;
+
+function getSpeciesByIds(...ids) {
+  return species.filter((specie, index) => specie.id === ids[index]);
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const dataAnimal = species.find((specie) => specie.name === animal);
+  const checkAgeAnimals = dataAnimal.residents.every((resident) => resident.age > age);
+  return checkAgeAnimals;
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  const employeeData = employees.find((employ) =>
+    employ.firstName === employeeName
+    || employ.lastName === employeeName);
+  return employeeName !== undefined ? employeeData : {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return newEmployee;
 }
 
 function isManager(id) {
-  // seu código aqui
+  const employeesManager = employees.filter((employee) => employee.managers.length > 0);
+  return employeesManager.some((manager) => manager.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+
+  employees.push(newEmployee);
 }
 
-function countAnimals(species) {
-  // seu código aqui
+function countAnimals(specie) {
+  if (specie) {
+    const resultCountSpecie = species.find((especie) => especie.name === specie).residents.length;
+    return resultCountSpecie;
+  }
+
+  const resultCountSpecies = {};
+  species.forEach((spec) => {
+    resultCountSpecies[spec.name] = spec.residents.length;
+  });
+  return resultCountSpecies;
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const { Adult: adults = 0, Child: children = 0, Senior: seniors = 0 } = entrants;
+  const totalEntryAdult = Number(adults) * Number(prices.Adult);
+  const totalEntryChild = Number(children) * Number(prices.Child);
+  const totalEntrySenior = Number(seniors) * Number(prices.Senior);
+  const total = totalEntryAdult + totalEntryChild + totalEntrySenior;
+
+  return total;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+const generateNameAnimals = (specs, sorted, sex) => {
+  const arrAnimalsSpecie = [];
+  specs.forEach((specieName) => {
+    const objAnimalsName = {};
+    let arrAnimals = species.find((specie) => specie.name === specieName).residents;
+    if (sex) arrAnimals = arrAnimals.filter((animal) => animal.sex === sex);
+    arrAnimals = arrAnimals.map((animal) => animal.name);
+    objAnimalsName[specieName] = sorted ? arrAnimals.sort() : arrAnimals;
+    arrAnimalsSpecie.push(objAnimalsName);
+  });
+  return arrAnimalsSpecie;
+};
+
+const generateBaseMapAnimals = (regions, names, sorted, sex) => {
+  const objRegionsSpecies = {};
+  const objNamesSpecies = {};
+  regions.forEach((location) => {
+    const dataAnimals = species.filter((loc) =>
+      loc.location === location).map((specie) => specie.name);
+    objRegionsSpecies[location] = dataAnimals;
+  });
+
+  if (names || sorted || sex) {
+    regions.forEach((location) => {
+      objNamesSpecies[location] = generateNameAnimals(objRegionsSpecies[location], sorted, sex);
+    });
+    return objNamesSpecies;
+  }
+  return objRegionsSpecies;
+};
+
+function getAnimalMap(includeNames = false, sorted = false, sex = '') {
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  const getSpeciesLocation = generateBaseMapAnimals(locations, includeNames, sorted, sex);
+  return getSpeciesLocation;
 }
+console.log(getAnimalMap(true, true, ''));
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  if (!dayName) {
+    const scheduleDays = Object.keys(hours);
+    scheduleDays.forEach((day) => {
+      const { open, close } = hours[day];
+      schedule[day] = day !== 'Monday' ? `Open from ${open}am until ${close - 12}pm` : 'CLOSED';
+    });
+    return schedule;
+  }
+
+  const { open, close } = hours[dayName];
+  schedule[dayName] = dayName !== 'Monday' ? `Open from ${open}am until ${close - 12}pm` : 'CLOSED';
+
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const speciesList = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animalList = species.find((spec) => spec.id === speciesList).residents;
+  const elder = animalList.reduce((elderAnimal, animal) => {
+    const { name, sex, age } = animal;
+    const { age: ageOlder } = elderAnimal;
+    return age > ageOlder ? { name, sex, age } : elderAnimal;
+  }, { name: '', sex: '', age: 0 });
+  return Object.values(elder);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  // Utilizado o link abaixo para fixar as casas decimais
+  // https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+
+  Object.keys(data.prices).forEach((price) => {
+    data.prices[price] = Math.round((prices[price] * (1 + (percentage / 100)) * 100)) / 100;
+  });
+  return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const employeeSpecies = {};
+  if (idOrName) {
+    const getEmployeeSpecies = employees.find(({ firstName, lastName, id }) =>
+      firstName === idOrName || lastName === idOrName || id === idOrName);
+
+    const { firstName, lastName, responsibleFor } = getEmployeeSpecies;
+    const speciesAnimals = responsibleFor.map((specie) =>
+      species.find((spec) => spec.id === specie).name);
+
+    employeeSpecies[`${firstName} ${lastName}`] = speciesAnimals;
+    return employeeSpecies;
+  }
+
+  employees.forEach(({ firstName: nome, lastName: sobreNome, responsibleFor: idsSpecie }) => {
+    employeeSpecies[`${nome} ${sobreNome}`] = idsSpecie.map((specieId) =>
+      species.find((spec) => spec.id === specieId).name);
+  });
+  return employeeSpecies;
 }
 
 module.exports = {
