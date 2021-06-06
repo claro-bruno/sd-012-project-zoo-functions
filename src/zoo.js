@@ -76,12 +76,24 @@ function calculateEntry(entrants) {
 function getAnimalMap(options) {
   // seu código aqui
 }
-
-// Questão 10 'Difícil :/'
-function getSchedule(dayName) {
-  // seu código aqui
-}
 */
+// Questão 10
+function getSchedule(dayName) {
+  const schedulesWeek = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+  if (!dayName) {
+    return schedulesWeek;
+  }
+  return { [dayName]: schedulesWeek[dayName] };
+}
+
 // Questão 11 - Inspiração do colega ==> ( Rodrigo Merlone )
 function getOldestFromFirstSpecies(id) {
   const employee = employees.find((employeeId) => employeeId.id === id);
@@ -108,7 +120,7 @@ function getEmployeeCoverage(idOrName) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
