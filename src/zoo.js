@@ -69,17 +69,12 @@ function countAnimals(species) {
 
 function calculateEntry(entrants) {
   // seu código aqui
-  if (!entrants || entrants === {}) {
+  if (!entrants) {
     return 0;
   }
-  const priceChild = 20.99;
-  const priceAdult = 49.99;
-  const priceSenior = 24.99;
-  const total = priceChild * parseInt(entrants.Child)
-  + priceAdult * parseInt(entrants.Adult)
-  + priceSenior * parseInt(entrants.Senior);
-  return total;
-  // console.log('ENTRANTS.Adult', entrants.Adult);
+  const { Child: childNumber = 0, Adult: adultNumber = 0, Senior: seniorNumber = 0 } = entrants;
+  const { Child: childPrice, Adult: adultPrice, Senior: seniorPrice } = data.prices;
+  return childNumber * childPrice + adultNumber * adultPrice + seniorNumber * seniorPrice;
 }
 
 function getAnimalMap(options) {
