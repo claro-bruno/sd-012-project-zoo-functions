@@ -107,7 +107,7 @@ function getOldestFromFirstSpecies() {
 
 function increasePrices(numero) {
   const chaves = Object.keys(data.prices);
-  chaves.forEach((valor, index) => {
+  chaves.forEach((valor) => {
     data.prices[valor] = Math.round((prices[valor] * (1 + (numero / 100)) * 100)) / 100;
   });
 }
