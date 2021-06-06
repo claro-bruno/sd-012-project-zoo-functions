@@ -35,19 +35,10 @@ function getEmployeeByName(employeeName) {
   || itemArray.lastName === employeeName);
 }
 
-console.log(getEmployeeByName());
+// console.log(getEmployeeByName());
 
 function createEmployee(personalInfo, associatedWith) {
-  personalInfo = {
-    id: '',
-    firstName: '',
-    lastName: '',
-  };
-  associatedWith = {
-    managers: '',
-    responsibleFor: '',
-  }
-  const novoColaborador = () => {};
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -55,58 +46,36 @@ function isManager(id) {
   id.some();
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  
+function addEmployee() {
+  // id, firstName, lastName, managers, responsibleFor
 }
 
-function countAnimals(species) {
-  species.filter((number) = number );
-
+function countAnimals() {
+  // species
 }
 
 function calculateEntry(entrants) {
-  entrants = {
-    Adult: '',
-    Child: '',
-    Senior: '',
-  }
-
-  if ( parametro === []) {
-    return 0;
-  };
-
-  if (Object.length === 0) {
-    return 0;
-  };
-
-  const totalPrice = 
-  reduce();
+  // entrants
 }
 
-function getAnimalMap(options) {
-  
+function getAnimalMap() {
+  // options
 }
 
-function getSchedule(dayName) {
-  
+function getSchedule() {
+  // dayName
 }
 
-function getOldestFromFirstSpecies(id) {
-  document.getElementById('');
-  species.find();
-  return id.name.sex.age
+function getOldestFromFirstSpecies() {
+  // id
 }
 
-function increasePrices(percentage) {
-  
+function increasePrices() {
+  // percentage
 }
 
 function getEmployeeCoverage(idOrName) {
-  id
-  firstName
-  lastName
-
-
+  // idOrName
 }
 
 module.exports = {
