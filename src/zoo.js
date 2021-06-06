@@ -96,9 +96,12 @@ function getSchedule(dayName) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const increaseValue = (100 + percentage) / 100;
+  Object.keys(data.prices).forEach((key) => {
+    data.prices[key] = Math.round(100 * (data.prices[key] * increaseValue)) / 100;
+  });
+}
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
@@ -116,6 +119,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
