@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { employees, species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -74,14 +75,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 } // para colocar a questão do [] no managers e responsibleFor,
 // tive que consultar o respositório de alguns colegas, como o da Camila Malves, pois não sabia.
 
-function countAnimals(species) {
+function countAnimals(species1) {
   const animals = data.species.reduce((acc, currentValue) => {
     const animalName = currentValue.name;
     acc[animalName] = currentValue.residents.length;
     return acc;
   }, {});
-  if (typeof (species) === 'string') {
-    return animals[species];
+  if (typeof (species1) === 'string') {
+    return animals[species1];
   }
   return animals;
 } // Para resolver essa questão tive que consultar novamente o final da mentoria do Jensen e
@@ -125,9 +126,14 @@ function getSchedule(dayName) {
 // console.log(getSchedule('Friday'));
 // consultei repositórios de colegas como da Marcela Silva e Kevin Oliveira
 
-// function getOldestFromFirstSpecies(id) {
-// // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  const findEmployeeId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const findSpecie = species.find((specie) => specie.id === findEmployeeId);
+  const residentOrder = findSpecie.residents.sort((a, b) => b.age - a.age);
+  const oldestResident = residentOrder[0];
+  return Object.values(oldestResident);
+}// Usei a dica do Leo Ferreira no slack na thread do Julio Barros
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // function increasePrices(percentage) {
 // // seu código aqui
@@ -148,7 +154,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
