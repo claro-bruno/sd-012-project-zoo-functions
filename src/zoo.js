@@ -13,8 +13,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  const zooData = data.species.filter((especie) => ids.find((animalId) =>
-    especie.id === animalId));
+  const zooData = data.species.filter((especie) => ids.find((animalId) => especie.id === animalId));
 
   return zooData;
 }
@@ -33,8 +32,7 @@ function getAnimalsOlderThan(animal, age) {
 // console.log(getAnimalsOlderThan('lions'));
 
 function getEmployeeByName(employeeName = {}) {
-  return data.employees.find((employee) =>
-    employee.firstName === employeeName || employee.lastName
+  return data.employees.find((employee) => employee.firstName === employeeName || employee.lastName
   === employeeName) || employeeName;
 }
 
@@ -50,8 +48,7 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 
 function isManager(id) {
   // eslint-disable-next-line max-len
-  const accessId = data.employees.some((employee) =>
-    employee.managers.some(((manage) => manage === id)));
+  const accessId = data.employees.some((employee) => employee.managers.some(((manage) => manage === id)));
   return accessId;
 }
 // console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
@@ -80,18 +77,16 @@ function countAnimals(species) {
 // console.log(countAnimals());
 
 function calculateEntry(entrants) {
-  
   if (entrants !== undefined) {
-    
-    const  { Adult = 0, Child = 0, Senior = 0 } = entrants;
-
-    return data.prices.Adult*Adult + data.prices.Child*Child + data.prices.Senior*Senior;
-  }
- 
-    return 0;
+    const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+    return data.prices.Adult * Adult
+     + data.prices.Child * Child + data.prices.Senior * Senior;
   }
 
-console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
+  return 0;
+}
+
+// console.log(calculateEntry({ Adult: 2, Child: 3, Senior: 1 }));
 // function getAnimalMap(options) {
 //   // seu código aqui
 // }
