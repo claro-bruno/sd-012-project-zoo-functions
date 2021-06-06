@@ -103,12 +103,27 @@ function calculateEntry(entrants) {
 // console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 // function getAnimalMap(options) {
-// // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-// // seu código aqui
-// }
+function getSchedule(dayName) {
+  const objetoDays = Object.keys(data.hours); // pego o objeto todo
+  const objetoSchedule = objetoDays.reduce((acc, curr) => {
+    acc[curr] = `Open from ${data.hours[curr].open}am until ${data.hours[curr].close - 12}pm`; // -12 por conta de como está as horas no data
+    return acc;
+  }, {});
+  objetoSchedule.Monday = 'CLOSED'; // pois Monday temos a exceção de estar fechado
+  if (!dayName) {
+    return objetoSchedule; // sem parametro,retorno obj inteiro
+  }
+  if (objetoDays.includes(dayName) === true) {
+    return { [dayName]: objetoSchedule[dayName] }; // com parametro, retorno esse obj onde a chave será o dia q foi passado
+    // como parâmetro, uso do [] como break point p atribuir o elemento ao obj
+  }
+}
+// console.log(getSchedule());
+// console.log(getSchedule('Monday'));
+// console.log(getSchedule('Friday'));
+// consultei repositórios de colegas como da Marcela Silva e Kevin Oliveira
 
 // function getOldestFromFirstSpecies(id) {
 // // seu código aqui
@@ -124,7 +139,7 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
