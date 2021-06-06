@@ -17,6 +17,8 @@ const { employees } = data;
 
 const { prices } = data;
 
+// const { hours } = data;
+
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
   const resultado = species.filter((specie) => ids.includes(specie.id));
@@ -86,11 +88,28 @@ function calculateEntry(entrants = { Adult: 0, Child: 0, Senior: 0 }) {
 }
 
 function getAnimalMap() {
-  // seu código aqui options
+  /*   const region = { (options)
+      NE: ['lions', 'giraffes'],
+      NW: ['tigers', 'bears', 'elephants'],
+      SE: ['penguins', 'otters'],
+      SW: ['frogs', 'snakes'],
+    };
+    if (options) return region; */
 }
 
-function getSchedule() {
-  // seu código aqui dayName
+function getSchedule(dayName) {
+  const infos = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+  if (!dayName) return infos;
+  const dayChose = Object.entries(infos).find((day) => day[0] === dayName);
+  return { [dayChose[0]]: dayChose[1] };
 }
 
 function getOldestFromFirstSpecies() {
