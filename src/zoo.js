@@ -133,11 +133,23 @@ function getOldestFromFirstSpecies(id) {
   const oldestResident = residentOrder[0];
   return Object.values(oldestResident);
 }// Usei a dica do Leo Ferreira no slack na thread do Julio Barros
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
-// function increasePrices(percentage) {
-// // seu código aqui
-// }
+function increasePrices(percentage) {
+  const { Adult, Child, Senior } = data.prices;
+  const adultPrice = Math.round((Adult * (1 + (percentage / 100)) * 100)) / 100;
+  const childPrice = Math.round((Child * (1 + (percentage / 100)) * 100)) / 100;
+  const seniorPrice = Math.round((Senior * (1 + (percentage / 100)) * 100)) / 100;
+  data.prices = {
+    Adult: adultPrice,
+    Child: childPrice,
+    Senior: seniorPrice,
+  };
+  return data.prices;
+} // usei a dica do Thalles Carneiro de usar o Math.round(utilizei seu repositório) na thread postada pelo Rodrigo Merlone
+// https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+// console.log(increasePrices(50));
+// console.log(increasePrices(30));
 
 // function getEmployeeCoverage(idOrName) {
 // // seu código aqui
@@ -155,6 +167,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
