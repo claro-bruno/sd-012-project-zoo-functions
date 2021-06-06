@@ -57,10 +57,29 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species) {
   // seu código aqui
+  if (!species) {
+    const animalHeadCount = {};
+    data.species.forEach(({ name, residents }) => {
+      animalHeadCount[name] = residents.length;
+    });
+    return animalHeadCount;
+  }
+  return data.species.find((element) => element.name === species).residents.length;
 }
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (!entrants || entrants === {}) {
+    return 0;
+  }
+  const priceChild = 20.99;
+  const priceAdult = 49.99;
+  const priceSenior = 24.99;
+  const total = priceChild * parseInt(entrants.Child)
+  + priceAdult * parseInt(entrants.Adult)
+  + priceSenior * parseInt(entrants.Senior);
+  return total;
+  // console.log('ENTRANTS.Adult', entrants.Adult);
 }
 
 function getAnimalMap(options) {
