@@ -11,70 +11,79 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
+const { species, employees, hours, prices } = data;
 
+function getSpeciesByIds(...ids) {
+
+  const allAnimais = species.filter((specie, index) => specie.id === ids[index]);
+
+  return allAnimais;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const nomeSpecie = species.find((specie) => specie.name === animal);
+
+  return nomeSpecie.residents.every((specieAnimal) => specieAnimal.age >= age);
 }
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
-}
+// console.log(getAnimalsOlderThan('lions', 4));
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+// function getEmployeeByName(employeeName) {
+//  seu código aqui
+// }
 
-function isManager(id) {
-  // seu código aqui
-}
+// function createEmployee(personalInfo, associatedWith) {
+//  seu código aqui
+// }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+// function isManager(id) {
+//  seu código aqui
+// }
 
-function countAnimals(species) {
-  // seu código aqui
-}
+// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+//  seu código aqui
+// }
 
-function calculateEntry(entrants) {
-  // seu código aqui
-}
+// function countAnimals(species) {
+//   seu código aqui
+// }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function calculateEntry(entrants) {
+//  seu código aqui
+// }
 
-function getSchedule(dayName) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//  seu código aqui
+// }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function getSchedule(dayName) {
+//  seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function getOldestFromFirstSpecies(id) {
+//  seu código aqui
+// }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//  seu código aqui
+// }
+
+// function getEmployeeCoverage(idOrName) {
+//  seu código aqui
+// }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
-  getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
+  // getEmployeeByName,
+  // getEmployeeCoverage,
+  // addEmployee,
+  // isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
+  // createEmployee,
 };
