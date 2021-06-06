@@ -69,7 +69,7 @@ function getAnimalMap(options) {
     if (acc[location] === undefined) {
       acc[location] = [];
     }console.log(options);
-    if (!options.includeNames){
+    if (options === undefined || !options.includeNames) {
       acc[location].push(name);
       return acc;
     }
