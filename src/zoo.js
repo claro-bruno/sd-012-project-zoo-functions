@@ -11,7 +11,24 @@ eslint no-unused-vars: [
 
 const { species, employees, prices } = require('./data');
 const data = require('./data');
-
+//
+//
+//
+const objetoPopular = { NE: [], NW: [], SE: [], SW: [] };
+const chaveSP = Object.keys(objetoPopular);
+// Contém um array com as chaves do objetoPopular.
+const animalsList = species.map((spec, indiceRes) => spec.residents[indiceRes].name); // Contém um array com o nome das espécies.
+const speciesLocation = () => {
+  const valores = Object.values(objetoPopular);
+  chaveSP.forEach((chave) => valores
+    .some((valor, indice) => objetoPopular[chave][indice][valor] = animalsList));
+};
+species.forEach((spec) => chaveSP.find((chave) =>
+  (spec.location === chave ? objetoPopular[spec.location]
+    .push(spec.name) : '')));
+//
+//
+//
 function getSpeciesByIds(...ids) {
   /* console.log(ids); */
   // seu código aqui
@@ -108,14 +125,10 @@ function calculateEntry(entrants) {
 
 function getAnimalMap(options) {
   // seu código aqui
-  const semParametro = { NE: [], NW: [], SE: [], SW: [] };
-  const chaveSP = Object.keys(semParametro);
-  const animalsList = 'xablau';
-  if (options === undefined) {
-    species.forEach((spec) => chaveSP.find((chave) =>
-      (spec.location === chave ? semParametro[spec.location].push(spec.name) : '')));
-    return semParametro;
-  }
+  if (!options) {
+    speciesLocation();
+    return objetoPopular;
+  } if (includeNames === true && sex === sorted === undefined) { return 'oi'}
 }
 getAnimalMap();
 
