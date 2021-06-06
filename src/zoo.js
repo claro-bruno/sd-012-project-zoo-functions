@@ -81,8 +81,8 @@ function countAnimals(animals) {
   return animals === undefined ? membersOfSpecie : numberOfAnimals;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui 
+function calculateEntry() {
+  // seu código aqui entrants
 }
 
 function getAnimalMap() {
