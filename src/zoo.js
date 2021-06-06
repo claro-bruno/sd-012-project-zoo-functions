@@ -36,13 +36,14 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   return data.employees.some((employee) => employee.managers.find((manager) => manager === id));
 }
-// console.log(isManager(stephanieId))
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push(createEmployee({ id, firstName, lastName },
+    { managers, responsibleFor }));
+  }
 
 // function countAnimals(species) {
-//   // seu código aqui
+
 // }
 
 // function calculateEntry(entrants) {
@@ -77,7 +78,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
