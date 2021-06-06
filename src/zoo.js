@@ -20,6 +20,7 @@ eslint no-unused-vars: [
 // Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
 // Ao receber mais de um id, retorna um array com as espécies referentes aos ids
 
+const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -89,7 +90,7 @@ function countAnimals(species) {
   }
   return data.species.find((specie) => specie.name === species).residents.length;
 }
-console.log(countAnimals());
+// console.log(countAnimals());
 // function calculateEntry(entrants) {
 //   // seu código aqui
 // }
@@ -98,10 +99,21 @@ console.log(countAnimals());
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
-
+function getSchedule(dayName) {
+  const agenda = {...hours};
+  const days = Object.keys(agenda);
+  days.forEach((day) => {
+    agenda[day] = `Open from ${agenda[day].open}am until ${agenda[day].close - 12}pm`;
+    if (day === 'Monday') agenda[day] = 'CLOSED';
+  });
+  if (dayName === undefined) {
+    return agenda;
+  }
+  const vazio = {};
+  vazio[dayName] = agenda[dayName];
+  return vazio;
+}
+console.log(getSchedule('Sunday'));
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
@@ -116,7 +128,7 @@ console.log(countAnimals());
 
 module.exports = {
   // calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
