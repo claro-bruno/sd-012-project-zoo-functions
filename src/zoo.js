@@ -77,12 +77,53 @@ function calculateEntry(entrants) {
   return childNumber * childPrice + adultNumber * adultPrice + seniorNumber * seniorPrice;
 }
 
-function getAnimalMap(options) {
+function getAnimalMap(directions) {
   // seu código aqui
+  // if (!options) {
+  directions.forEach((place) => {
+    const locality = data.species.filter(({ location }) => location === place);
+  });
 }
+const directions = ['NE', 'NW', 'SE', 'SW'];
 
+// if (element.location === 'NE') {
+//   animalsByLocation.NE.push(element.name);
+// }
+// if (element.location === 'NW') {
+//   animalsByLocation.NW.push(element.name);
+// }
+// if (element.location === 'SE') {
+//   animalsByLocation.SE.push(element.name);
+// }
+// if (element.location === 'SW') {
+//   animalsByLocation.SW.push(element.name);
+// }
+// });
+// return animalsByLocation;
+// }
+// }
+// }
+const days = Object.keys(data.hours);
+const time = Object.values(data.hours);
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  days.forEach((day, index) => {
+    if (day !== 'Monday') {
+      schedule[day] = `Open from ${time[index].open}am until ${time[index].close - 12}pm`;
+    } else {
+      schedule[day] = 'CLOSED';
+    }
+  });
+  if (!dayName) {
+    return schedule;
+  }
+  if (dayName !== 'Monday') {
+    const daySchedule = data.hours[dayName];
+    return {
+      [dayName]: `Open from ${daySchedule.open}am until ${daySchedule.close - 12}pm`,
+    };
+  }
+  return { [dayName]: 'CLOSED' };
 }
 
 function getOldestFromFirstSpecies(id) {
