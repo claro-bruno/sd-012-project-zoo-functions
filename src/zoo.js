@@ -128,7 +128,7 @@ function getSchedule(dayname) {
   }
   return result;
 }
-console.log(getSchedule());
+
 function getOldestFromFirstSpecies(id) {
   const funcionario = employees.find((element) => element.id === id);
   const findAnimal = funcionario.responsibleFor[0];
