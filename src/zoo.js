@@ -78,37 +78,93 @@ function calculateEntry(entrants) {
   }
   return calculaValor(entrants.Adult, entrants.Senior, entrants.Child);
 }
-//----------------------------separando--------------------------------------//
- //link utilizado neste requisito: https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c
+//----------------------------separando--------------------------------------// 
+//link utilizado neste requisito: https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c 
 
+//função que retorna o array [NE, SW, SE, SW] 
 function getLocalSortedArray() {
   const newArr = data.species.map((especie) => especie.location).sort();
   const locArr = newArr.filter((item, index) => newArr.indexOf(item) === index);
-  return locArr
-};
-
-function getAnimalsNames(speciesss) {
-  const targetAnimal = data.species.find((anys) => anys.name === speciesss);
-  const residentsNames = targetAnimal.residents.map((ittem) => ittem.name);
-  return residentsNames;
+  return locArr;
 }
 
-function getSpeciesEachLocation(sorted = false) {
+const locArray = getLocalSortedArray();
+
+//função que retorna os nomes dos animais de cada especie, com a opção de selecionar o sexo (sem seleção mostra todos)//
+function getAnimalsNames(speciesss, sex) {
+  const targetAnimal = data.species.find((anys) => anys.name === speciesss);
+  const residentsNames = targetAnimal.residents.map((ittem) => ittem.name);
+  if (!sex) {
+    return residentsNames;
+  } if (sex === 'female') {
+    const femaleIndividuals = targetAnimal.residents.filter((animal => animal.sex === 'female'));
+    const femaleNames = femaleIndividuals.map((animal) => animal.name);
+    return femaleNames;
+  } if (sex === 'male') {
+    const maleIndividuals = targetAnimal.residents.filter((animal => animal.sex === 'male'));
+    const maleNames = maleIndividuals.map((animal) => animal.name);
+    return maleNames;
+  }
+}
+
+//retorna um array composto por arrays menores com o seguinte formato: [ { lions: [Array] }, { giraffes: [Array] } ]
+//cada especie tem um array com nomes não ordenados se não houver parametro; para ordenar precisa fazer sort === 'sorted'
+//também retorna animais de apenas um sexo combinado com o sorted
+function getObjAnimalLocation(sort, sex) {
   const locAniArr = Object.values(getAnimalLocation());
-  const arrayObjsAni =  locAniArr.map((element) => {
+  const arrayObjsAni = locAniArr.map((element) => {
     return element.map((element2) => {
-      let newOb = {};
-      if (sorted === true) {
-        newOb[element2] = getAnimalsNames(element2).sort();
-        return newOb;
+      if (sort === 'sorted') {
+        if (sex === 'female') {
+          const newOb1 = {};
+          newOb1[element2] = getAnimalsNames(element2, 'female').sort();
+          return newOb1;
+        }
+        else if (sex === 'male') {
+          const newOb2 = {};
+          newOb2[element2] = getAnimalsNames(element2, 'male').sort();
+          return newOb2;
+        }
+        const newOb3 = {};
+        newOb3[element2] = getAnimalsNames(element2).sort();
+        return newOb3;
       }
-      newOb[element2] = getAnimalsNames(element2);
-      return newOb;
-    })
-  })
-  return arrayObjsAni
+      const newOb6 = {};
+      newOb6[element2] = getAnimalsNames(element2);
+      return newOb6;
+    });
+  });
+  const monsterObj = {};
+  arrayObjsAni.forEach((animal, index) => {
+    monsterObj[locArray[index]] = animal;
+  });
+  return monsterObj;
 };
 
+//retorna um array composto por arrays menores com o seguinte formato: [ { lions: [Array] }, { giraffes: [Array] } ];
+//retorna todos os nomes dos animais de apenas um sexo; recebe o sexo como parâmetro
+function animalNamesSex(sex) {
+  const locAniArr2 = Object.values(getAnimalLocation());
+  const arrayObjsAni2 =  locAniArr2.map((element) => {
+    return element.map((element2) => {
+      if (sex === 'female') {
+        const newOb7 = {};
+        newOb7[element2] = getAnimalsNames(element2, 'female');
+        return newOb7;
+      }
+      const newOb8 = {};
+      newOb8[element2] = getAnimalsNames(element2, 'male');
+      return newOb8;
+    });
+  });
+  const monsterObj2 = {};
+  arrayObjsAni2.forEach((animal, index) => {
+    monsterObj2[locArray[index]] = animal;
+  })
+  return monsterObj2;
+};  
+
+//função que retorna objeto cujas chaves são as localizações e os valores são arrays com os respectivos animais (sem nomes)
 function getAnimalLocation() {
   const animalLocation = {};
   getLocalSortedArray().forEach((loc) => { 
@@ -119,26 +175,27 @@ function getAnimalLocation() {
   return animalLocation
 };
 
-const locArr = getLocalSortedArray();
-
 function getAnimalMap(options) {
   if (!options) {
     return getAnimalLocation();
-  }
-  if (options.includeNames === true) {
-    const monsterObj = {};
+  } else if (options.includeNames === true) {
     if (options.sorted === true) {
-      getSpeciesEachLocation(true).forEach((ani, index) => {
-      monsterObj[locArr[index]] = ani;
-      });
-      return monsterObj;
+      if(options.sex === 'female') {
+        return getObjAnimalLocation('sorted', 'female');
+      }
+      if (options.sex === 'male') {
+        return getObjAnimalLocation('sorted', 'male');
+      }
+      return getObjAnimalLocation('sorted');
     }
-    getSpeciesEachLocation().forEach((ani, index) => {
-      monsterObj[locArr[index]] = ani;
-      });
-    return monsterObj;
+    else if (options.sex === 'female') {
+      return animalNamesSex('female');
+    }else if (options.sex === 'male') {
+      return animalNamesSex('male');
+    }
+    return getObjAnimalLocation();
   }
-};
+}
 
 const cronograma = data.hours;
 const cronoEntries = Object.entries(cronograma);
