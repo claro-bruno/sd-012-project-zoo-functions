@@ -197,4 +197,6 @@ module.exports = {
   getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
+  generateBaseMapAnimals,
+  generateNameAnimals,
 };
