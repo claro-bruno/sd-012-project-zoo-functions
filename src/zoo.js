@@ -54,7 +54,7 @@ function countAnimals() {
   // species
 }
 
-function calculateEntry(entrants) {
+function calculateEntry() {
   // entrants
 }
 
@@ -74,7 +74,7 @@ function increasePrices() {
   // percentage
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
   // idOrName
 }
 
