@@ -80,23 +80,23 @@ function calculateEntry(entrants = {}) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  return options;
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  return dayName;
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  return id;
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return percentage;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  return idOrName;
 }
 
 module.exports = {
