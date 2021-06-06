@@ -140,8 +140,32 @@ function increasePrices(percentage) {
 // console.log(increasePrices(200));
 
 function getEmployeeCoverage(idOrName) {
-  return idOrName;
+  const listId = {};
+  data.employees.map((element) => {
+    const name = `${element.firstName} ${element.lastName}`;
+    listId[name] = [];
+    element.responsibleFor.map((id) => {
+      const nameAnimal = data.species.forEach((key) => {
+        if (id === key.id) {
+          listId[name].push(key.name);
+        }
+      });
+      return nameAnimal;
+    });
+    return listId;
+  });
+  const callManager = {};
+  if (idOrName !== undefined) {
+    const search = data.employees.find((element) =>
+      (idOrName === element.id || idOrName === element.firstName || idOrName === element.lastName));
+    const found = Object.keys(listId).find((employee) => employee.includes(search.firstName));
+    callManager[found] = listId[found];
+    return callManager;
+  }
+  return listId;
 }
+
+// console.log(getEmployeeCoverage('Azevado'));
 
 module.exports = {
   calculateEntry,
