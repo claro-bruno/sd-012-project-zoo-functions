@@ -70,17 +70,17 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   return data.employees.push(inputArray);
 }
 // Testar object Destructuring para extrair valores das chaves bloco 8.5
-function countAnimals(species) {
-  const {...name} = data.species;
-  const animalCounter = data.species.find((especie) => {
-    data.species.name === species
-    return Object.keys(data.species.residents).length;
-  });
-  const noParameter = data.species.map(() => {
-  // '{name: Object.keys(data.species.residents).length}: 
-  });
-  // const 
-  // return {};
+function countAnimals(especie) {
+  const animalsObj = {};
+  if (especie === undefined) {
+    data.species.forEach(
+      (animal) => animalsObj[`${animal.name}`] = animal.residents.length,
+    );
+    return animalsObj;
+  }
+  const findAnimals = data.species.find((animal) => animal.name === especie);
+  const findresidents = findAnimals.residents.length;
+  return findresidents;
 }
 
 function calculateEntry(entrants) {
@@ -96,7 +96,14 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+    // const allAnimals = data.species.map((animal) => `${animal.name}:${animal.residents.length}`)
+    // id do funcionário você encontra o mesmo com find em employees, 
+    // você usa o find para encontrar o primeiro id no responsibleFor em employees
+    // O id (primeiro resposibleFor) encontrado será comparado com o id em species
+    // usando forEach defina uma idade igual a 1 para ser a idade do mais velho, 
+    // ao ser comparado reatribua o valor do comparador igual ao animal, caso o animal seja o mais velho na comparação
+    // Ao reatribuir a idade do comparador, também reatribua o nome e sexo do mesmo
+    //retornar o valor     
 }
 
 function increasePrices(percentage) {
@@ -122,3 +129,4 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+
