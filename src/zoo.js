@@ -42,9 +42,8 @@ const isManager = (id) => {
   return yesManager;
 };
 
-function addEmployee() {
-  // seu código aqui id, firstName, lastName, managers, responsibleFor
-}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => employees
+  .push({ ...employees, id, firstName, lastName, managers, responsibleFor });
 
 function countAnimals() {
   // seu código aqui species
