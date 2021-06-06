@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 // console.log(species);
 function getSpeciesByIds(...ids) {
@@ -41,6 +41,7 @@ function getEmployeeByName(employeeName) {
   return employees.find((employee) => employeeName === employee.firstName
     || employeeName === employee.lastName);
 }
+// console.log(getEmployeeByName());
 
 function createEmployee(personalInfo, associatedWith) {
 // Observações técnicas
@@ -72,13 +73,26 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(speciess) {
+  // Sem parâmetros, retorna animais e suas quantidades
+  if (!speciess) {
+    return species.reduce((acc, item) =>
+      ({ ...acc, [item.name]: item.residents.length }), {});
+  }
+  // Com o nome de uma espécie de animal, retorna somente a quantidade
+  return species.find((specie) => specie.name === speciess).residents.length;
+}
+console.log(countAnimals());
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants) {
+  // Retorna 0 se nenhum argumento for passado
+  // Retorna 0 se um objeto vazio for passado
+  if (!entrants || Object.keys(entrants).length === 0) { return 0; }
+  // Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
+  const { Adult: adult = 0, Child: child = 0, Senior: senior = 0 } = entrants;
+  const preçoTotal = ((adult * prices.Adult) + (child * prices.Child)
+  + (senior * prices.Senior)); return preçoTotal;
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -101,9 +115,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
