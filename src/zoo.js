@@ -39,13 +39,10 @@ function isManager(id) {
   return eGerente;
 }
 
-function addEmployee() {
-  // id, firstName, lastName, managers, responsibleFor
-  // const newEmploy = [id, firstName, lastName, managers, responsibleFor];
-  // console.log(newEmploy);
-  // newEmploy.managers === undefined ? newEmploy.managers = [] : false
-  // newEmploy.responsibleFor === undefined ? newEmploy.responsibleFor = [] : false;
-  // emplys.push(newEmploy);
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmploy = { id, firstName, lastName, managers, responsibleFor };
+  data.employees.push(newEmploy);
+  return newEmploy;
 }
 
 function countAnimals(species) {
