@@ -32,10 +32,10 @@ const getEmployeeByName = (employeeName) => {
     return {};
   }
   return employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
-}
+};
 
-function createEmployee (personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith, }
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -50,23 +50,22 @@ const countAnimals = (specieName) => {
   // seu código aqui
   const selectSpecies = species.find((specie) => specie.name === specieName);
   const returnQtd = {};
-  if (specieName) { return selectSpecies.residents.length };
+  if (specieName) { return selectSpecies.residents.length; }
 
   species.forEach((specie) => { returnQtd[specie.name] = specie.residents.length });
   return returnQtd;
-}
+};
 
 function calculateEntry(entrants) {
   // seu código aqui
 
-  const { Adult: AdultTickets, Child: ChildTickets, Senior: SeniorTickets } = data.prices;
+  const { Adult: AdultTickets, Child: ChildTickets, Senior: SeniorTickets } = prices;
   if (entrants) {
     const { Adult = 0, Child = 0, Senior = 0 } = entrants;
     return (Adult * AdultTickets) + (Child * ChildTickets) + (Senior * SeniorTickets);
   }
   return 0;
 }
-
 
 function getAnimalMap(options) {
   // seu código aqui
