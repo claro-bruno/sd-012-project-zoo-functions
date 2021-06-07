@@ -123,8 +123,11 @@ function getOldestFromFirstSpecies(id) {
   return [...infosAnimal];
 }
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  prices.Adult = Math.round(((prices.Adult * (percentage / 100)) + prices.Adult) * 100) / 100;
+  prices.Child = Math.round(((prices.Child * (percentage / 100)) + prices.Child) * 100) / 100;
+  prices.Senior = Math.round(((prices.Senior * (percentage / 100)) + prices.Senior) * 100) / 100;
+  return prices;
 }
 
 function getEmployeeCoverage() {
