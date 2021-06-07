@@ -16,7 +16,7 @@ const getSpeciesByIds = (...ids) => {
   // seu código aqui
   const animalId = species.filter((specie) => ids.includes(specie.id));
   return animalId;
-}
+};
 
 const getAnimalsOlderThan = (animal, age) => {
   // seu código aqui
@@ -24,7 +24,7 @@ const getAnimalsOlderThan = (animal, age) => {
   const yearsOld = animalAge.residents.every((resident) => resident.age > age);
 
   return yearsOld;
-}
+};
 
 const getEmployeeByName = (employeeName) => {
   // seu código aqui
@@ -34,9 +34,10 @@ const getEmployeeByName = (employeeName) => {
   return employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
-const createEmployee = (personalInfo, associatedWith) => {return {...personalInfo, ...associatedWith};
+function createEmployee (personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith, }
 }
-//console.log(createEmployee('juan', 'lion'));
+
 function isManager(id) {
   // seu código aqui
 }
@@ -51,7 +52,7 @@ const countAnimals = (specieName) => {
   const returnQtd = {};
   if (specieName) { return selectSpecies.residents.length };
 
-  species.forEach((specie) => { returnQtd[specie.name] = specie.residents.length; });
+  species.forEach((specie) => { returnQtd[specie.name] = specie.residents.length });
   return returnQtd;
 }
 
