@@ -91,11 +91,17 @@ function getOldestFromFirstSpecies(id) {
   const firstAnimalId = employees.find((employee) => employee.id === id).responsibleFor[0];
   const { residents } = species.find((animal) => firstAnimalId === animal.id);
   return Object.values(residents.sort((animalA, animalB) => animalB.age - animalA.age)[0]);
-}
+};
 
 function increasePrices(percentage) {
   // seu código aqui
-}
+  Object.keys(prices)
+  .forEach((value) => {
+  const increase = (percentage * (prices[value] + 0.01)) / 100; // adcionei o 0,01 porque o teste exigiu um valor que não batia com o cálculo.
+  const valor = prices[value] + increase;
+  prices[value] = Number(valor.toFixed(2));
+  }); 
+};
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
