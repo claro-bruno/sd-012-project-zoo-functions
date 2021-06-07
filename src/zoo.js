@@ -138,7 +138,7 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function getEmployeeCoverage(idOrName, list = {}) {
+function getEmployeeCoverage(idOrName) {
   if (!idOrName) {
     return employees.reduce((acc, empName) => {
       const { responsibleFor } = empName;
