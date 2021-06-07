@@ -9,41 +9,39 @@ eslint no-unused-vars: [
 ]
 */
 
+const data = require('./data');
 const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  if (arguments.length === 0) {
-    return [];
-  }
-  const arraySpecie = ids.map((idi) => species.find((specie) => specie.id === idi));
+  if (!ids) return [];
+  const arraySpecie = ids.map((idi) =>
+    species
+      .find(({ id }) => id === idi));
   return arraySpecie;
 }
 
-function getAnimalsOlderThan(animal, age) {
+function getAnimalsOlderThan(animal, agee) {
   // seu código aqui
-  const minimumAge = species.find((specie) => specie.name === animal)
-    .residents.every((resident) => resident.age >= age);
+  const minimumAge = species.find(({ name }) => name === animal)
+    .residents.every(({ age }) => age >= agee);
   return minimumAge;
 }
 
-function getEmployeeByName(employeeName) {
+function getEmployeeByName(e) {
   // seu código aqui
-  if (arguments.length === 0) {
-    return {};
-  }
+  if (!e) return {};
 
-  const name = employeeName;
-
-  const employeeObject = employees.find((e) => e.firstName === name || e.lastName === name);
-  return employeeObject;
+  const emplObject = employees.find(({ firstName, lastName }) => firstName === e || lastName === e);
+  return emplObject;
 }
 
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
 function isManager(id) {
   // seu código aqui
-  const manager = employees.some((employee) => employee.managers.includes(id));
+  const manager = employees.some(({ managers }) =>
+    managers.includes(id));
   return manager;
 }
 
@@ -55,21 +53,22 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function countAnimals(specieS) {
   // seu código aqui
   const obj = {};
-  if (arguments.length === 0) {
-    species.forEach((specie) => {
-      obj[specie.name] = specie.residents.length;
-    });
+  if (!specieS) {
+    species
+      .forEach(({ name, residents }) => {
+        obj[name] = residents.length;
+      });
     return obj;
   }
-  const okArguments = species.find((specie) => specie.name === specieS).residents.length;
+  const okArguments = species
+    .find(({ name }) => name === specieS)
+    .residents.length;
   return okArguments;
 }
 
 function calculateEntry(entrants) {
   // seu código aqui
-  if (!entrants || Object.keys(entrants).length === 0) {
-    return 0;
-  }
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
 
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   const { Adult: adultPrices, Senior: seniorPrices, Child: childPrices } = prices;
@@ -79,9 +78,42 @@ function calculateEntry(entrants) {
   return total;
 }
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+function generateAnimalsLocation(arrayCoord) {
+  return arrayCoord.reduce((object, coord) => {
+    const objectCoord = object;
+    const arraySpecies = species
+      .filter(({ location }) => location === coord)
+      .map(({ name }) => name);
+    objectCoord[coord] = arraySpecies;
+    return objectCoord;
+  }, {});
+}
+
+function generateSpeciesName(arrayAnimal, options) {
+  return arrayAnimal.reduce((array, specieName) => {
+    const object = {};
+    let arrayNames = species.find(({ name }) => name === specieName)
+      .residents;
+    if (options.sex) arrayNames = arrayNames.filter(({ sex }) => sex === options.sex);
+    arrayNames = arrayNames.map(({ name }) => name);
+    if (options.sorted) arrayNames.sort();
+    object[specieName] = arrayNames;
+    array.push(object);
+    return array;
+  }, []);
+}
+
+function getAnimalMap(options) {
+  // seu código aqui
+  const coords = ['NE', 'NW', 'SE', 'SW'];
+  const animalsLocation = generateAnimalsLocation(coords);
+  const namesLocation = {};
+  if (!options || !options.includeNames) return animalsLocation;
+  coords.forEach((key) => {
+    namesLocation[key] = generateSpeciesName(animalsLocation[key], options);
+  });
+  return namesLocation;
+}
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -142,7 +174,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
