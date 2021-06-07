@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -69,9 +69,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 // Exercício feito com a ajuda do meu amigo Caio Morato
 function countAnimals(specie) {
-  const countagem = species.find((animal) => animal.name === specie);
+  const contagem = species.find((animal) => animal.name === specie);
   if (specie) {
-    return countagem.residents.length;
+    return contagem.residents.length;
   }
   const todos = {};
   species.forEach((animal) => {
@@ -105,14 +105,23 @@ function getOldestFromFirstSpecies(funcId) {
 }
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')) CORRIGIR
 
-// function increasePrices(percentage) {
-///
-// }
+function increasePrices(percentage) {
+  const { Adult, Senior, Child } = data.prices
+  const calculo = data.prices = {
+    Adult: Math.round((Adult * (percentage / 100) + Adult) * 100) / 100,
+    Senior: Math.round((Senior * (percentage / 100) + Senior) * 100) / 100,
+    Child: Math.round((Child * (percentage / 100) + Child) * 100) / 100,
+  }
+  return calculo;
+}
+// console.log(increasePrices(30))
 
 // function getEmployeeCoverage(idOrName) {
 //   if (idOrName) {
 //     const checkCredentials = employees.find((employee) => employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
-//     return {[`${checkCredentials.firstName} ${checkCredentials.lastName}`]: `${checkCredentials.responsibleFor}`}
+//     return ({[`${checkCredentials.firstName} ${checkCredentials.lastName}`]: `${checkCredentials.responsibleFor}`})
+//   } else {
+//     employees.forEach((employee) => ({[`${employee.firstName} ${employee.lastName}`]: `${employee.responsibleFor}`}))
 //   }
 // }
 // console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'))
@@ -129,6 +138,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
