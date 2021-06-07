@@ -9,23 +9,18 @@ eslint no-unused-vars: [
 ]
 */
 
-// Iniciando o projeto
-const { species, employees } = require('./data');
-const data = require('./data');
+const { species, employees, hours, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
-  // seu código aqui
-  return species.filter((specie) => ids.find((id) => specie.id === id));
+  return species.filter((specie, index) => specie.id === ids[index]);
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
   return species.find((specie) => specie.name === animal).residents
     .every((resident) => resident.age > age);
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
   if (employeeName) {
     return employees.find((employee) => employee.firstName === employeeName
       || employee.lastName === employeeName);
@@ -34,7 +29,6 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   return {
     ...personalInfo,
     ...associatedWith,
@@ -42,18 +36,14 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
-  return employees.some((employee) => employee.managers
-    .some((manager) => manager === id));
+  return employees.some((employee, index) => employee.managers[index] === id);
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // seu código aqui
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals(speciesName) {
-  // seu código aqui
   if (speciesName) {
     return species.find(({ name }) => name === speciesName).residents.length;
   }
@@ -64,14 +54,13 @@ function countAnimals(speciesName) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
-  const { Adult: AdultPrice, Child: ChildPrice, Senior: SeniorPrice } = data.prices;
   if (entrants) {
     const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-    return (Adult * AdultPrice) + (Child * ChildPrice) + (Senior * SeniorPrice);
+    return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
   }
   return 0;
 }
+
 // O código a seguir foi retirado de: https://dicasdejavascript.com.br/javascript-como-remover-valores-repetidos-de-um-array/
 const getLocations = [...new Set(species.map((specie) => specie.location))];
 
@@ -80,7 +69,7 @@ const getAnimalLocations = () => getLocations.reduce((acc, location) => ({
   [`${location}`]: species.filter((specie) => specie.location === location).map((e) => e.name),
 }), {});
 
-const getAnimalNames = (sorted, sex) => getLocations.reduce((acc, location) => ({
+const getAnimalNames = (includeNames, sorted, sex) => getLocations.reduce((acc, location) => ({
   ...acc,
   [`${location}`]: species.filter((specie) => specie.location === location)
     .map((element) => {
@@ -97,23 +86,17 @@ const getAnimalNames = (sorted, sex) => getLocations.reduce((acc, location) => (
 }), {});
 
 function getAnimalMap(options) {
-  // seu código aqui
   if (!options || !options.includeNames) {
     return getAnimalLocations();
   }
-
   const { includeNames, sorted = false, sex = false } = options;
-
-  if (includeNames) {
-    return getAnimalNames(sorted, sex);
-  }
+  return getAnimalNames(includeNames, sorted, sex);
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
   const schedule = {};
-  Object.keys(data.hours).forEach((day) => {
-    const { open, close } = data.hours[day];
+  Object.keys(hours).forEach((day) => {
+    const { open, close } = hours[day];
     if (day === 'Monday') {
       schedule[day] = 'CLOSED';
     } else {
@@ -127,7 +110,6 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
   const animalId = employees.find((employee) => employee.id === id).responsibleFor[0];
   const oldestAnimal = species.find((animal) => animal.id === animalId).residents
     .reduce((residentA, residentB) => (residentA.age > residentB.age ? residentA : residentB));
@@ -136,8 +118,6 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
-  const { prices } = data;
   Object.keys(prices)
     .forEach((key) => {
       prices[key] = Math.round(prices[key] * (1 + (percentage / 100)) * 100) / 100;
@@ -145,7 +125,6 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
   if (idOrName) {
     const employee = employees.find((e) => idOrName === e.id
       || idOrName === e.firstName
