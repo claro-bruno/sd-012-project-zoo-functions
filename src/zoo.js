@@ -75,16 +75,8 @@ function countAnimals(specie) {
     return animalList;
   }
   return species.find((item) => item.name === specie).residents.length;
-  // const residentes = (item.residents).length;
-  // animalList[item] = residentes;
-  // // console.log(item.name);
-  // // console.log(item.residents.length);
-  // console.log(animalList);
-  // return animalList;
-  // animalList.item = item.residents.length;
-  // console.log(animalList);
 }
-console.log(countAnimals());
+
 function calculateEntry() {
   // seu código aqui
 }
