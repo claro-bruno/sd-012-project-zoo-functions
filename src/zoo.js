@@ -79,7 +79,6 @@ const test = {
     };
 }
 
-
 function getSchedule(dayName) {
 // Questao 10
 }
@@ -93,10 +92,13 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
 // Questao 12
-const pricePercentage = percentage / 100;
-  data.prices.Adult = Math.round(((data.prices.Adult * pricePercentage) + data.prices.Adult) * 100) / 100;
-  data.prices.Child = Math.round(((data.prices.Child * pricePercentage) + data.prices.Child) * 100) / 100;
-  data.prices.Senior = Math.round(((data.prices.Senior * pricePercentage) + data.prices.Senior) * 100) / 100;
+  const pricePercentage = percentage / 100;
+  data.prices.Adult = Math.round((
+    (data.prices.Adult * pricePercentage) + data.prices.Adult) * 100) / 100;
+  data.prices.Child = Math.round((
+    (data.prices.Child * pricePercentage) + data.prices.Child) * 100) / 100;
+  data.prices.Senior = Math.round((
+    (data.prices.Senior * pricePercentage) + data.prices.Senior) * 100) / 100;
 }
 
 /*
