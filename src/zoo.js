@@ -120,7 +120,6 @@ function getOldestFromFirstSpecies(id) {
   const { employees, species } = data;
   const animalId = employees.find((employee) => employee.id === id).responsibleFor[0];
   const animal = species.find((element) => element.id === animalId);
-  // return [animal.name, animal.residents];
   const oldestSpecimen = animal.residents.reduce((accumulator, currentValue) =>
     (accumulator.age > currentValue.age ? accumulator : currentValue));
   return [oldestSpecimen.name, oldestSpecimen.sex, oldestSpecimen.age];
@@ -135,8 +134,25 @@ function increasePrices(percentage) {
   });
 }
 
-// function getEmployeeCoverage(idOrName) {
-// }
+function getEmployeeCoverage(idOrName) {
+  const { employees, species } = data;
+  const employeeList = {};
+  if (!idOrName) {
+    employees.forEach((employee) => {
+      const speciesArray = employee.responsibleFor.map((speciesId) =>
+        (species.find(({ id }) => id === speciesId)).name);
+      employeeList[`${employee.firstName} ${employee.lastName}`] = speciesArray;
+    });
+    return employeeList;
+  }
+  const employee = employees.find(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  const speciesArray = employee.responsibleFor.map((speciesId) =>
+    (species.find(({ id }) => id === speciesId)).name);
+  employeeList[`${employee.firstName} ${employee.lastName}`] = speciesArray;
+  return employeeList;
+}
+/* Credito em grande parte a [Eric Kreis] */
 
 module.exports = {
   calculateEntry,
@@ -145,7 +161,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
