@@ -103,18 +103,44 @@ function calculateEntry(entrants) {
 }
 
 // console.log(calculateEntry({ Adult: 2, Child: 3, Senior: 1 }));
+
 // function getAnimalMap(options) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
+// eslint-disable-next-line consistent-return
+function getSchedule(...dayName) {
 //   // seu código aqui
-// }
+  const expected = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+  if (dayName === undefined) {
+    // const days = Object.keys(schedule);
+    return expected;
+  }
+  // const weekDays { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Monday } = expected;
+  const abc = Object.keys(expected);
+  return abc.find((hour) => hour[dayName] === dayName);
+  // return days.open.map((openItem) => (`${}`))
+}
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+// console.log(getSchedule('Monday'));
 
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  const workerId = data.employees.find((employee) => employee.id === id);
+  const animalId = workerId.responsibleFor[0];
+  const animalIdConverter = data.species.find((specie) => specie.id === animalId);
+  const animalAge = animalIdConverter.residents.sort((a, b) => b.age - a.age)[0];
+  return Object.values(animalAge);
+}
+console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
@@ -125,7 +151,7 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
@@ -134,7 +160,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
