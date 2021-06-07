@@ -41,8 +41,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(specie) {
-  // Sem parâmetros, retorna animais e suas quantidades em um objeto
-  // Com o nome de uma espécie de animal, retorna somente a quantidade, um número
   if (specie) {
     const animal = species.find((itemEspecie) => itemEspecie.name === specie).residents.length;
     return animal;
