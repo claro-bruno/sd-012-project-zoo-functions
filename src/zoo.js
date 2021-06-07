@@ -96,9 +96,9 @@ function calculateEntry(entrants) {
 //   if (Object.keys(dayName).length === 0) { return }
 // }
 
-//Requisito concluido com auxílio do repositório do colega Rodrigo Facury
+// Requisito concluido com auxílio do repositório do colega Rodrigo Facury, precisei de ajuda para desenvolver a lógica
 function getOldestFromFirstSpecies(funcId) {
-  const checkFunId = employees.find((person) => funcId === person.id)
+  const checkFunId = employees.find((person) => funcId === person.id);
   const getFirstSpecie = checkFunId.responsibleFor.find((especie) => especie);
   const checkSpecie = species.find((specie) => specie.id === getFirstSpecie);
   const { residents } = checkSpecie;
