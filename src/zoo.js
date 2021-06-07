@@ -9,11 +9,9 @@ eslint no-unused-vars: [
 ]
 */
 
-// const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  // seu código aqui
   if (ids.length === 0) {
     return [];
   }
@@ -23,13 +21,11 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
   const specie = data.species.find((species) => species.name === animal);
   return specie.residents.every((specimen) => specimen.age >= age);
 }
 
 function getEmployeeByName(...employeeName) {
-  // seu código aqui
   if (employeeName.length === 0) {
     return {};
   }
@@ -39,24 +35,19 @@ function getEmployeeByName(...employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
-  // seu código aqui
   return data.employees.some((element) => element.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // seu código aqui
   const person = { id, firstName, lastName, managers, responsibleFor };
   data.employees.push(person);
-  // return person;
 }
 
 function countAnimals(species) {
-  // seu código aqui
   if (!species) {
     const animalHeadCount = {};
     data.species.forEach(({ name, residents }) => {
@@ -68,7 +59,6 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
   if (!entrants) {
     return 0;
   }
@@ -78,13 +68,12 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(directions) {
-  // seu código aqui
   // if (!options) {
-  directions.forEach((place) => {
-    const locality = data.species.filter(({ location }) => location === place);
-  });
+  // directions.forEach((place) => {
+  //   const locality = data.species.filter(({ location }) => location === place);
+  // });
 }
-const directions = ['NE', 'NW', 'SE', 'SW'];
+// const directions = ['NE', 'NW', 'SE', 'SW'];
 
 // if (element.location === 'NE') {
 //   animalsByLocation.NE.push(element.name);
@@ -131,7 +120,12 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { prices } = data;
+  const entrants = Object.keys(data.prices);
+  entrants.forEach((ageGroup) => {
+    prices[ageGroup] *= (1 + percentage / 100) + 0.0001;
+    prices[ageGroup] = Number(prices[ageGroup].toFixed(2));
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
