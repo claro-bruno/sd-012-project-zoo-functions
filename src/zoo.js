@@ -26,7 +26,6 @@ function getAnimalsOlderThan(animal, age) {
   return isOlder;
 }
 
-
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     const emptyObject = {};
