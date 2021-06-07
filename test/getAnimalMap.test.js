@@ -11,7 +11,7 @@ describe('Implemente a função getAnimalMap', () => {
     };
 
     assert.deepStrictEqual(zoo.getAnimalMap(), expected);
-  });
+  }); 
 
   it('Com a opção `includeNames: true` especificada, retorna nomes de animais', () => {
     const options = { includeNames: true };

@@ -39,19 +39,46 @@ function allNameResidents(objeto) {
   return objetoPopulado;
 }
 
-const speciesLocation = (options) => {
+const speciesLocation = () => {
   objetoAPopular = { NE: [], NW: [], SE: [], SW: [] };
   species.forEach((spec) => chaveOP.find((chave) =>
     (spec.location === chave ? objetoAPopular[chave]
       .push(spec.name) : '')));
-  if (options === undefined) {
-    return objetoAPopular;
-  }
-  if (options.includeNames === true && !options.sex && !options.sorted) {
-    return allNameResidents(objetoAPopular);
-  }
+  return objetoAPopular;
+};
+//
+//
+//
+const segundaAnalise = (sex) => {
+  if (sex === true) {
+
+  };
+
 };
 
+const analiseDeCaso = (options) => {
+  const {includeNames, sorted, sex} = options;
+  if (includeNames === true) {
+    if (sorted === true) {
+    segundaAnalise (sex);     
+    };
+    if (sex === 'female') {
+
+    };
+    return speciesLocation();
+  };
+  if (sorted === true) {
+  /*   if (sex === 'female') {
+     
+    }; */
+
+  };
+  allNameResidents(speciesLocation());
+/*   if (sex === 'female') {
+   
+  }; */
+  return speciesLocation(options);
+};
 //
 //
 //
@@ -151,7 +178,7 @@ function calculateEntry(entrants) {
 
 function getAnimalMap(options) {
   // seu código aqui
-  return speciesLocation(options);
+  analiseDeCaso(options);
 } /* if (includeNames === true && sex === sorted === undefined) { return 'oi'} */
 
 getAnimalMap(2);
