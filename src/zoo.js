@@ -48,19 +48,17 @@ function isManager(id) {
   return getAdm;
 }
 
-
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newEmployee = () => ({
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
-  });
-  data.employees.push(newEmployee());
-  return employees;
-}
-
+// function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+//   const newEmployee = () => ({
+//     id,
+//     firstName,
+//     lastName,
+//     managers,
+//     responsibleFor,
+//   });
+//   //data.employees.push(newEmployee());
+//   return employees;
+// }
 
 function countAnimals(getSpecies) {
   if (getSpecies === undefined) {
@@ -81,16 +79,16 @@ function calculateEntry(entrants) {
   if (entrants === undefined) {
     return 0;
   }
-  const entryPrices = prices;
-  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  const adultPriceTotal = Adult * entryPrices.Adult;
-  const seniorPriceTotal = Senior * entryPrices.Senior;
-  const childPriceTotal = Child * entryPrices.Child;
+// const entryPrices = prices;
+// const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+// const adultPriceTotal = Adult * entryPrices.Adult;
+// const seniorPriceTotal = Senior * entryPrices.Senior;
+// const childPriceTotal = Child * entryPrices.Child;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
 function getSchedule(dayName) {
   const workTime = Object.values(hours);
@@ -152,11 +150,9 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
-  addEmployee,
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
