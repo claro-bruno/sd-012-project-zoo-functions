@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { species } = require('./data');
+const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -72,7 +73,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   }
   return data.employees.push(inputArray);
 }
-// Testar object Destructuring para extrair valores das chaves bloco 8.5
+
 function countAnimals(especie) {
   const animalsObj = {};
   if (especie === undefined) {
@@ -87,23 +88,20 @@ function countAnimals(especie) {
 }
 
 function calculateEntry(entrants) {
-  if (entrants === undefined || {}) {
+  if (entrants === undefined || entrants === {}) {
     return 0;
   }
-  const price = entrants.reduce((previousValue, currentValue) => {
-    return accumulator + currentValue.Adult * 49.99 + currentValue.Senior * 24.99 + currentValue.Child * 20.99;
-    // if(entrants.Adult) {
-   //   return accumulator + currentValue.Adult * 49.99;
-   // }
-   // if(entrants.Senior) {
-   //   return accumulator + currentValue.Senior * 24.99;
-   // }
-   // if(entrants.Child) {
-   //   return accumulator + currentValue.Child * 20.99;
-   // }
-    return accumulator;
-  });
-  //console.log(entrants);
+  if (entrants.Child === undefined) {
+    entrants.Child = 0;
+  }
+  if (entrants.Senior === undefined) {
+    entrants.Senior = 0;
+  }
+  if (entrants.Adult === undefined) {
+    entrants.Adult = 0;
+  }
+ const price = data.prices.Adult * entrants.Adult + data.prices.Child * entrants.Child + data.prices.Senior * entrants.Senior;
+ return price;
 }
 
 function getAnimalMap(options) {
@@ -111,7 +109,26 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  
+  if (dayName === undefined) {
+ 
+    const objToArray = Object.entries(data.hours);
+    console.log('esseo é o valor do objToArray', objToArray);
+    const daysArray = [];
+    const forEachschendule = objToArray.forEach((schedule) =>  console.log(`${schedule[0]}:`)); 
+    console.log(forEachschendule);
+    for(let index = 0; index <= objToArray.length; index += 1) {
+      let objToArray2 = Object.entries(objToArray[index][1]);
+      let objToArray20 = objToArray2[0][1];
+      daysArray.push(objToArray20);
+      let objToArray21 = objToArray2[1][1];
+      daysArray.push(objToArray21);
+      console.log(objToArray2[0][1]); // 8
+      console.log(objToArray2[1][1]); // 18 
+      console.log(daysArray);
+    }
+    // const forEachschendule = objToArray.forEach((schedule) => daysArray.forEach((hours) => console.log(`${schedule[0]}:`)));    
+  }
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -126,8 +143,20 @@ function getOldestFromFirstSpecies(id) {
     // No lugar do comparador pode utilizar o reduce 
 }
 
+// Utilizar um ForEach
 function increasePrices(percentage) {
-  // seu código aqui
+  data.prices.Adult = Math.round(
+    (data.prices.Adult + data.prices.Adult * percentage * 0.01
+    ) * 100,
+  ) / 100;
+  data.prices.Senior = Math.round(
+    (data.prices.Senior + data.prices.Senior * percentage * 0.01
+    ) * 100,
+  ) / 100;
+  data.prices.Child = Math.round(
+    (data.prices.Child + data.prices.Child * percentage * 0.01
+    ) * 100,
+  ) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
@@ -149,4 +178,3 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-
