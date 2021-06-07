@@ -14,6 +14,7 @@ const data = require('./data');
 const speciesArray = data.species;
 const emplys = data.employees;
 const pricesArray = data.prices;
+// const hoursArray = data.hours;
 
 function getSpeciesByIds(...ids) {
   return speciesArray.filter((value, i) => value.id === ids[i]);
@@ -42,7 +43,7 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmploy = { id, firstName, lastName, managers, responsibleFor };
-  data.employees.push(newEmploy);
+  emplys.push(newEmploy);
   return newEmploy;
 }
 
@@ -74,12 +75,23 @@ function getAnimalMap() {
 
 function getSchedule() {
   // dayName
-  // seu código aqui
+  // let testeDay = 0;
+  // let testeVazio = {};
+  // if (dayName === 'Monday') return {[dayName]:'CLOSED'};
+  // if(dayName === undefined) {
+  //   for (let i = 0; i < Object.keys(hoursArray).length; i += 1) {
+  //    console.log(testeVazio = {[Object.values(hoursArray)[i]] : `Open from ${Object.values(hoursArray)[i].open}am until ${Object.values(hoursArray)[i].close}pm`});
+  //    }
+  // }
+  // return {[dayName]: `Open from ${hoursArray[dayName].open}am until ${hoursArray[dayName].close -12}pm`}
 }
 
-function getOldestFromFirstSpecies() {
-  // id
-  // seu código aqui
+function getOldestFromFirstSpecies(id) {
+  const cuidador = emplys.find((value) => id === value.id);
+  const fName = speciesArray.find((value2) => value2.id === cuidador.responsibleFor[0]);
+  const result = fName.residents.reduce((acc, valor) => Math.max(acc, valor.age), 0);
+  const moreOlden = fName.residents.find((maxAge) => maxAge.age === result);
+  return [moreOlden.name, moreOlden.sex, moreOlden.age];
 }
 
 function increasePrices() {
