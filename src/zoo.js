@@ -53,21 +53,14 @@ function countAnimals(animalName) {
   }
   return species.reduce((acc, curr) => ({
     ...acc,
-    [curr.name] : curr.residents.length,
+    [curr.name]: curr.residents.length,
   }), {});
-  // const resultado = {};
-  // species.forEach((specie) => {
-  //   const { name, residents } = specie;
-  //   resultado[name] = residents.length;
-  // });
-  // return resultado;
 }
 
 function calculateEntry(entrants) {
   if (!entrants) return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  const resultado = Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
-  return resultado;
+  return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
 
 const regions = ['NE', 'NW', 'SE', 'SW'];
