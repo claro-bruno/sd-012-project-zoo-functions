@@ -154,9 +154,28 @@ function increasePrices(percentage) {
   });
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+// feito com ajuda de Caio Morato
+// https://github.com/tryber/sd-012-project-zoo-functions/blob/Caio-Morato-zoo-functions-project/src/zoo.js
+function getEmployeeCoverage(idOrName) {
+  const empObj = {};
+  if (idOrName) {
+    const findEmp = employees.find(
+      (emp) => emp.firstName === idOrName || emp.lastName === idOrName
+      || emp.id === idOrName,
+    );
+    const animalsCoverage = findEmp.responsibleFor.map((parametro) =>
+      species.find((animal) => animal.id === parametro)).map((each) => each.name);
+    empObj[`${findEmp.firstName} ${findEmp.lastName}`] = animalsCoverage;
+    return empObj;
+  }
+  return employees.reduce((reader, person) => {
+    const animalNames = person.responsibleFor.map((xablau) =>
+      species.find((animal) => animal.id === xablau));
+    const namesArray = animalNames.map((each) => each.name);
+    empObj[`${person.firstName} ${person.lastName}`] = namesArray;
+    return reader;
+  }, empObj);
+}
 
 module.exports = {
   calculateEntry,
@@ -165,7 +184,7 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
