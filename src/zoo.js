@@ -47,7 +47,9 @@ const speciesLocation = (options) => {
   if (options === undefined) {
     return objetoAPopular;
   }
-  return allNameResidents(objetoAPopular);
+  if (options.includeNames === true && !options.sex && !options.sorted) {
+    return allNameResidents(objetoAPopular);
+  }
 };
 
 //
