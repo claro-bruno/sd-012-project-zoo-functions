@@ -195,9 +195,23 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+// Requisito 13
+const responsibleList = () => data.employees.reduce((acc, currentValue) => {
+  const employeeName = `${currentValue.firstName} ${currentValue.lastName}`;
+  const employeeResponsibles = currentValue.responsibleFor
+    .map((specieId) => data.species
+      .find((specie) => specie.id === specieId).name);
+  const employeeAndResponsibles = { [employeeName]: employeeResponsibles };
+  return Object.assign(acc, employeeAndResponsibles);
+}, {});
+
+function getEmployeeCoverage(idOrName) {
+  if (!idOrName) return responsibleList();
+  const employeeObj = data.employees.find((employee) => employee.id === idOrName
+  || employee.firstName === idOrName || employee.lastName === idOrName);
+  const employeeName = `${employeeObj.firstName} ${employeeObj.lastName}`;
+  return { [employeeName]: responsibleList()[employeeName] };
+}
 
 module.exports = {
   calculateEntry,
@@ -206,7 +220,7 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
