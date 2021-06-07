@@ -172,22 +172,22 @@ function getSchedule(dayName) {
   return { [dayName]: daysHours[dayName] };
 }
 
-// console.log(getSchedule('Monday'));
+console.log(getSchedule('Sunday'));
 
 // 11=========================================================
 
-function getOldestFromFirstSpecies(id) {
-  const idEmployee = employees
-    .find((idNumber) => idNumber.id === id).responsibleFor[0];
-  // encontra o employee
-  const findAnimalId = data.species
-    .find((animalId) => idEmployee
-      .responsibleFor.includes(animalId.id));
-  // encontra os animais que o employee é responsável
-  return findAnimalId;
-  // achar o animal mais velho que ele é responsável ???
-}
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+// function getOldestFromFirstSpecies(id) {
+//   const idEmployee = employees
+//     .find((idNumber) => idNumber.id === id).responsibleFor[0];
+//   // encontra o employee
+//   const findAnimalId = data.species
+//     .find((animalId) => idEmployee
+//       .responsibleFor.includes(animalId.id));
+//   // encontra os animais que o employee é responsável
+//   return findAnimalId;
+//   // achar o animal mais velho que ele é responsável ???
+// }
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // 12=========================================================
 
@@ -203,7 +203,7 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-// console.log(increasePrices(50));
+console.log(increasePrices(30));
 
 // 13=========================================================
 
