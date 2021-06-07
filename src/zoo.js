@@ -48,7 +48,7 @@ function isManager(id) {
 
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {  // Declarei as ultimas duas variáveis como array
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) { // Declarei as ultimas duas variáveis como array
   // seu código aqui
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   return employees.push(newEmployee);
@@ -83,23 +83,23 @@ function calculateEntry(entrants) {
 
 // console.log(calculateEntry({ 'Adult': 2, 'Senior': 3, 'Child': 1 }));
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
 function getSchedule(dayName) {
   // seu código aqui
   const obj = {};
   Object.keys(hours).forEach((index) => {
-  const { open , close } = hours[index];
+    const { open, close } = hours[index];
     if (index === 'Monday') {
       obj[index] = 'CLOSED';
     } else {
       obj[index] = `Open from ${open}am until ${close - 12}pm`;
-    };
-});
-if (!dayName) return obj
-return {[dayName]: obj[dayName]}
+    }
+  });
+  if (!dayName) return obj;
+  return { [dayName]: obj[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -113,15 +113,15 @@ function increasePrices(percentage) {
   // seu código aqui
   Object.keys(prices)
     .forEach((value) => {
-    const increase = (percentage * (prices[value] + 0.01)) / 100; // adcionei o 0,01 porque o teste exigiu um valor que não batia com o cálculo.
-    const valor = prices[value] + increase;
-    prices[value] = Number(valor.toFixed(2));
-  });
+      const increase = (percentage * (prices[value] + 0.01)) / 100; // adcionei o 0,01 porque o teste exigiu um valor que não batia com o cálculo.
+      const valor = prices[value] + increase;
+      prices[value] = Number(valor.toFixed(2));
+    });
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   calculateEntry,
