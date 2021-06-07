@@ -96,8 +96,10 @@ function increasePrices(percentage) {
   // const newPrice = ({})
 }
 
-function getEmployeeCoverage() {
-  // seu código aqui idOrName
+function getEmployeeCoverage(idOrName) {
+  const ids = employees
+    .filter((id) => id === idOrName).responsibleFor;
+  console.log(ids);
 }
 
 module.exports = {
