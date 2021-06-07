@@ -84,7 +84,7 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 } */
- 
+
 module.exports = {
   calculateEntry,
   getSchedule,
