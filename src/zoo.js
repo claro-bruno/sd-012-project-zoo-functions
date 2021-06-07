@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -73,12 +73,62 @@ function calculateEntry(entrants) {
 }
 
 // function getAnimalMap(options) {
-//   // seu código aqui
+//   const animalTotal = {};
+//   if (options === { includeNames: true }) {
+//     const residentsList = [];
+//     const animalList = {};
+//     species.forEach((animal) => {
+//       animal.residents.forEach((resident) => {
+//         residentsList.push(resident.name);
+//       });
+//       animalList[animal.name] = residentsList;
+//       animalTotal[animal.location] += animalList;
+//     });
+//     return animalTotal;
+//   }
+//   species.forEach((animal) => {
+//     if (!(animal.location in animalTotal)) {
+//       animalTotal[animal.location] = [];
+//     }
+//     animalTotal[animal.location].push(animal.name);
+//   });
+//   return animalTotal;
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+const dayList = Object.entries(hours);
+
+const dayObjectList = () => {
+  const dayFinal = {};
+  dayList.forEach(([day, value]) => {
+    if (value.open === 0 && value.close === 0) {
+      dayFinal[day] = 'CLOSED';
+    } else {
+      dayFinal[day] = `Open from ${value.open}am until ${value.close - 12}pm`;
+    }
+  });
+  return dayFinal;
+};
+
+const dayObject = (dayName) => {
+  const dayFinal = {};
+  dayList.forEach(([day, value]) => {
+    if (day === dayName) {
+      if (value.open === 0 && value.close === 0) {
+        dayFinal[day] = 'CLOSED';
+      } else {
+        dayFinal[day] = `Open from ${value.open}am until ${value.close - 12}pm`;
+      }
+    }
+  });
+  return dayFinal;
+};
+
+function getSchedule(dayName) {
+  if (dayName) {
+    return dayObject(dayName);
+  }
+  return dayObjectList();
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -94,7 +144,7 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
