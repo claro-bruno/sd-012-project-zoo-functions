@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const data = require('./data');
 const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -53,14 +54,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(newEmployee);
 };
 
-// function countAnimals(animal) {
-//   // seu código aqui
-//   if (!species) return {};
-// const animals = species.forEach((animal) => {
-//   species.find((name) => name === animal.name)
-// })
-// return animals;
-// }
+function countAnimals(animal) {
+  // seu código aqui
+  if (!species) return {};
+const animals = species.forEach((animal) => {
+  species.find((name) => name === animal.name)
+})
+return animals;
+}
 
 function calculateEntry(entrants) {
   // seu código aqui
@@ -77,25 +78,28 @@ function calculateEntry(entrants) {
 
 // console.log(calculateEntry({ 'Adult': 2, 'Senior': 3, 'Child': 1 }));
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+function getAnimalMap(options) {
+  // seu código aqui
+}
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  // seu código aqui
+}
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  const firstAnimalId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const { residents } = species.find((animal) => firstAnimalId === animal.id);
+  return Object.values(residents.sort((animalA, animalB) => animalB.age - animalA.age)[0]);
+}
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  // seu código aqui
+}
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+}
 
 module.exports = {
   calculateEntry,
