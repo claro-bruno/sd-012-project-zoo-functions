@@ -73,17 +73,21 @@ function getSchedule(dayName) {
   return schedule;
 }
 
-/* function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
-
-function increasePrices(percentage) {
-  // seu código aqui
-}
-
-function getEmployeeCoverage(idOrName) {
+ /* function getOldestFromFirstSpecies(id) {
   // seu código aqui
 } */
+
+function increasePrices(percentage) {
+  const entrance = Object.keys(data.prices);
+  entrance.forEach((type) => {
+    data.prices[type] *= ((100 + percentage) / 100);
+    data.prices[type] = Math.round(data.prices[type] * 100) / 100;
+  });
+}
+
+/* function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+}  */
 
 module.exports = {
   calculateEntry,
@@ -97,6 +101,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
