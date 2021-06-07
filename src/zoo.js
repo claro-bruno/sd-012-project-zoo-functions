@@ -13,7 +13,7 @@ const data = require('./data');
 
 // const { species, employees, hours, prices } = data;
 
-const { species, employees, prices } = data;
+const { species, employees, prices, hours } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) {
@@ -84,13 +84,25 @@ function calculateEntry(entrants) {
 
 /*  function getAnimalMap(options) {
   // seu código aqui
-}
+} */
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const days = Object.keys(hours);
+  const week = days.reduce((accumulator, currentValue) => {
+    if (currentValue === 'Monday') {
+      accumulator[currentValue] = 'CLOSED';
+      return accumulator;
+    }
+    accumulator[currentValue] = `Open from ${hours[currentValue].open}am until ${hours[currentValue].close - 12}pm`;
+    return accumulator;
+  }, {});
+  if (dayName) {
+    return { [dayName]: week[dayName] };
+  }
+  return week;
 }
 
-function getOldestFromFirstSpecies(id) {
+/*  function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
@@ -104,7 +116,7 @@ function getEmployeeCoverage(idOrName) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
