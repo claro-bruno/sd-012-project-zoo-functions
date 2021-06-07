@@ -142,7 +142,6 @@ function getEmployeeCoverage(idOrName) {
   const srchEmp = employees.find((emp) => Object.values(emp).find((info) => info === idOrName));
   const { firstName, lastName } = srchEmp;
   const idSpecies = srchEmp.responsibleFor.map((id) => species.find((name) => name.id === id));
-  // const [first, second] = nameSpecies;
   const result = {};
   const specieList = [];
   idSpecies.forEach((specie) => specieList.push(specie.name));
