@@ -56,15 +56,24 @@ const calculateEntry = (entrants) => {
   return result;
 };
 
-/* function getAnimalMap(options) {
+/*  function getAnimalMap(options) {
   // seu código aqui
-}
+} */
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const infoDays = {};
+  const daysWeek = Object.keys(hours);
+  const response = {};
+  daysWeek.forEach((day) => {
+    const { open, close } = hours[day];
+    const information = open === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+    infoDays[day] = information;
+  });
+  response[dayName] = infoDays[dayName];
+  return dayName ? response : infoDays;
 }
 
-function getOldestFromFirstSpecies(id) {
+/* function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
@@ -74,11 +83,11 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-}
- */
+} */
+ 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
