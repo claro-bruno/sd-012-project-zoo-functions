@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -101,8 +101,24 @@ function calculateEntry(entrants = 0) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-// }
+function getSchedule(dayName) {
+  const days = Object.keys(hours);
+  const hour = Object.values(hours);
+  const obj = {};
+  days.forEach((element, index) => {
+    if (element !== 'Monday') {
+      obj[element] = `Open from ${hour[index].open}am until ${hour[index].close - 12}pm`;
+    } else {
+      obj[element] = 'CLOSED';
+    }
+  });
+  if (!dayName) {
+    return obj;
+  } if (dayName !== 'Monday') {
+    const userDay = hours[dayName];
+    return { [dayName]: `Open from ${userDay.open}am until ${userDay.close - 12}pm` };
+  } return { [dayName]: 'CLOSED' };
+}
 
 function getOldestFromFirstSpecies(ids) {
   const { responsibleFor } = employees.find(({ id }) => ids === id);
@@ -111,10 +127,8 @@ function getOldestFromFirstSpecies(ids) {
   const animalAge = residents.sort((a, b) => b.age - a.age)[0];
   return Object.values(animalAge);
 }
-console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 // function increasePrices(percentage) {
-//   // seu código aqui
 // }
 
 // function getEmployeeCoverage(idOrName) {
@@ -123,7 +137,7 @@ console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
