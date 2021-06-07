@@ -102,6 +102,7 @@ function generateSpeciesName(arrayAnimal, options) {
     return array;
   }, []);
 }
+// resolução do colega de Trybe David Gonzaga https://github.com/tryber/sd-012-project-zoo-functions/blob/9aeb2d40fe827dfdf5a009b871a8dba52bd9c89e/src/zoo.js
 
 function getAnimalMap(options) {
   // seu código aqui
