@@ -50,11 +50,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(employeeLastList);
 }
 
-/*
 function countAnimals(species) {
 // Questao 7
+  if (!species) {
+    return data.species.reduce((accumulator, location) => {
+      accumulator[location.name] = location.residents.length;
+      return accumulator;
+    }, {});
+  }
+  return data.species.find((element) => element.name === species).residents.length;
 }
 
+/*
 function calculateEntry(entrants) {
 // Questao 8
 }
@@ -81,10 +88,10 @@ function getEmployeeCoverage(idOrName) {
 */
 
 module.exports = {
-//  calculateEntry,
-//  getSchedule,
-//  countAnimals,
-//  getAnimalMap,
+  //  calculateEntry,
+  //  getSchedule,
+  countAnimals,
+  //  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   //  getEmployeeCoverage,
