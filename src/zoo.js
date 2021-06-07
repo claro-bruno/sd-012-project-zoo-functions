@@ -38,20 +38,27 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-/* function isManager(id) {
+function isManager(id) {
   // seu código aqui
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
-} */
+  return employees.push({
+    id: id,
+    firstName: firstName,
+    lastName: lastName,
+    managers: managers || [],
+    responsibleFor: responsibleFor || [], // ideia da condição veio de https://github.com/tryber/sd-012-project-zoo-functions/blob/tharcio-sampaio-zoo-functions-project/src/zoo.js
+  });
+}
 
 const countAnimals = (specieName) => {
   // seu código aqui
   const selectSpecies = species.find((specie) => specie.name === specieName);
   const returnQtd = {};
   species.forEach((specie) => { returnQtd[specie.name] = specie.residents.length });
-  
+
   if (specieName) {
     return selectSpecies.residents.length;
   }
@@ -69,7 +76,7 @@ function calculateEntry(entrants) {
   return 0;
 }
 
-/* function getAnimalMap(options) {
+function getAnimalMap(options) {
   // seu código aqui
 }
 
@@ -88,7 +95,7 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
- */
+
 module.exports = {
   calculateEntry,
   getSchedule,
