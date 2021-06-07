@@ -90,18 +90,20 @@ function countAnimals(oneSpecie) {
   return takeAnimal.residents.length;
 }
 
-/* function calculateEntry(entrants) {
+function calculateEntry(entrants) {
   // seu código aqui
-  if (typeof entrants === 'undefined' || Object.keys(entrants).length === 0) {
+  if (typeof entrants === 'undefined') {
     return 0;
   }
 
-  const adult = 0;
-  const child = 0;
-  const senior = 0;
+  const adultPrice = entrants.Adult ? data.prices.Adult * entrants.Adult : 0;
+  const childPrice = entrants.Child ? data.prices.Child * entrants.Child : 0;
+  const seniorPrice = entrants.Senior ? data.prices.Senior * entrants.Senior : 0;
 
-  return ;
-} */
+  return adultPrice + childPrice + seniorPrice;
+}
+
+console.log(calculateEntry({}));
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -151,7 +153,7 @@ function getSchedule(dayName) {
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   getSchedule,
   countAnimals,
   //   getAnimalMap,
