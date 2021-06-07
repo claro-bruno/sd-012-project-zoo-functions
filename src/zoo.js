@@ -47,7 +47,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  }
+  };
   return data.employees.push(addName);
 }
 
@@ -57,7 +57,7 @@ function countAnimals(species) {
     data.species.forEach((num) => {
       returnArray[num.name] = num.residents.length;
     });
-    return returnArray
+    return returnArray;
   }
   const animal = data.species.find((num) =>
     num.name === species);
