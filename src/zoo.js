@@ -13,7 +13,7 @@ const data = require('./data');
 
 // const { species, employees, hours, prices } = data;
 
-const { species, employees } = data;
+const { species, employees, prices } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) {
@@ -72,11 +72,17 @@ function countAnimals(animal) {
 
 // Conforme orientação do Jensen, inicialmente, garantimos que a função retorne um objeto vazio quando não há parametros, passando no primeiro teste. Após, dentro do array species, executamos o metodo forEach , ou seja, executa uma callback para cada elemento do array, dessa forma, ele irá procurar o nome de cada elemento de devolvendo um array com a quantidade de nomes, cada nome será um numero acrescido nesse novo array. Assim, ao final, utiliza-se o metodo find para que quando passado o parametro, retorne o número de animais correspondente.
 
-/*  function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants) {
+  if (entrants === undefined) {
+    return 0;
+  }
+  const price = Object.keys(entrants);
+  return price.reduce((previousValue, currentValue) => previousValue + (entrants[currentValue] * prices[currentValue]), 0);
 }
 
-function getAnimalMap(options) {
+//  Conforme orientação, a primeira parte da função concentra-se em retornar 0 quando não houver argumento ou o objeto for vazio, desta forma, sempre que entrants for undefined, o return será zero. Após, declaramos uma constante price onde através do object.keys, recebemos um array enumerado com os valores das entradas. Após, com o reduce, pegamos o valor da entrada, começando em zero, e realizamos diversas calculos para selecionar o tipo de entrada e multiplicalo pelo seu valor correspondente, deixando esse valor no acumulador, para ser somado aos demais valores, e retornando o total a ser cobrado de acordo com o número de adultos, crianças e idosos.
+
+/*  function getAnimalMap(options) {
   // seu código aqui
 }
 
@@ -97,7 +103,7 @@ function getEmployeeCoverage(idOrName) {
 } */
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
