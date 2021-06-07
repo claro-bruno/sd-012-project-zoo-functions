@@ -109,26 +109,18 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  
+  const objToArray = Object.entries(data.hours);
+  const objSchedule = {};
+  const objDay = {};
+  objToArray.forEach((schedule) => objSchedule.[schedule[0]] = `Open from ${Object.values(schedule[1])[0]}am until ${Object.values(schedule[1])[1] - 12}pm`);
+  objSchedule.Monday = 'CLOSED';
   if (dayName === undefined) {
- 
-    const objToArray = Object.entries(data.hours);
-    console.log('esseo é o valor do objToArray', objToArray);
-    const daysArray = [];
-    const forEachschendule = objToArray.forEach((schedule) =>  console.log(`${schedule[0]}:`)); 
-    console.log(forEachschendule);
-    for(let index = 0; index <= objToArray.length; index += 1) {
-      let objToArray2 = Object.entries(objToArray[index][1]);
-      let objToArray20 = objToArray2[0][1];
-      daysArray.push(objToArray20);
-      let objToArray21 = objToArray2[1][1];
-      daysArray.push(objToArray21);
-      console.log(objToArray2[0][1]); // 8
-      console.log(objToArray2[1][1]); // 18 
-      console.log(daysArray);
-    }
-    // const forEachschendule = objToArray.forEach((schedule) => daysArray.forEach((hours) => console.log(`${schedule[0]}:`)));    
+    return objSchedule;    
   }
+  const scheduleToArray = Object.entries(objSchedule);
+  const findDayName = scheduleToArray.find((name) => dayName === name[0]);
+  objDay.[findDayName[0]] = findDayName[1];
+  return objDay;  
 }
 
 function getOldestFromFirstSpecies(id) {
