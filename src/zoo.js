@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...args) {
@@ -51,13 +51,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function countAnimals(species) {
-//   // seu código aqui
+// function countAnimals(especime) {
+
 // }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants) {
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const values = [];
+  Object.keys(entrants).forEach((key) => {
+    values.push(entrants[key] * prices[key]);
+  });
+  return values.reduce((accum, entry) => accum + entry);
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -71,16 +76,20 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const operator = (1 + (percentage / 100));
+
+  Object.keys(prices).forEach((key) => {
+    prices[key] = Math.round((prices[key] * operator) * 100) / 100;
+  });
+}
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   // countAnimals,
   // getAnimalMap,
@@ -91,6 +100,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
