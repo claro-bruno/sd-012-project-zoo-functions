@@ -55,10 +55,10 @@ function countAnimals(species) {
   if (!species) {
     const returnArray = {};
     data.species.forEach((num) => {
-      returnArray[num.name]= num.residents.length;
+      returnArray[num.name] = num.residents.length;
     });
-    return returnArray
-  };
+    return returnArray;
+  }
   const animal = data.species.find((num) =>
     num.name === species);
   return animal.residents.length;
