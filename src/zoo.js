@@ -114,35 +114,46 @@ function countAnimals(species) {
 
 // 8=========================================================
 
-// function calculateEntry(entrants = 0) {
-//   // adicionando "= 0" ao entrants quando o valor for vazio o retorno é sempre zero
+function calculateEntry(entrants = 0) {
+  
+  const personAge = Object.keys(entrants); // pega as chaves do entrants [Adult, Senior, Child]
+  // const prices = Object.values(data.prices); // pega o valor do data.prices [49.99, 24.99, 20.99]
+  const prices = data.prices;
+  // return prices.Adult;
+  
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return  Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
+  // return personAge.reduce((acc, curr) => {
+  //   const teste = acc + entrants[curr] * prices[curr]; // PERGUNTAR PQ NÃO FUNCIONA ASSIM
+  //   return teste;
+  // }, 0);
+  // entrants[curr] é igual ao value do entrants. Ex: {'Senior': 2} = 2
+}
 
-//   const personAge = Object.keys(entrants); // pega as chaves do entrants [Adult, Senior, Child]
-//   const prices = Object.values(data.prices); // pega o valor do data.prices [49.99, 24.99, 20.99]
-
-//   return personAge.reduce((acc, curr) => {
-//     const teste = acc + entrants[curr] * prices[curr]; // PERGUNTAR PQ NÃO FUNCIONA ASSIM
-//     return prices;
-//   }, 0);
-// // entrants[curr] é igual ao value do entrants. Ex: {'Senior': 2} = 2
-
-// }
-
-// console.log(calculateEntry({'Senior': 2}));
+console.log(calculateEntry({'Adult': 2, 'Child': 3, 'Senior': 1}));
 
 // 9=========================================================
 
-// function getAnimalMap(options) {
-//   const locations = {
-//     NE: [],
-//     NW: [],
-//     SE: [],
-//     SW: [],
-//   }
-//   const locationsAnimals = data.species.filter((animalLocation, index) => animalLocation.location === locations[index])
-//   console.log(locationsAnimals);
-// }
-// getAnimalMap();
+function getAnimalMap(options) {  
+  // const expected = {
+  //   NE: ['lions', 'giraffes'],
+  //   NW: ['tigers', 'bears', 'elephants'],
+  //   SE: ['penguins', 'otters'],
+  //   SW: ['frogs', 'snakes']
+  // };
+  // return expected;
+  
+  // const locations = data.species.reduce((animals) => {
+  //   return { [animals.location]:  [animals.name] }
+  // })
+
+  const locations = data.species.reduce((acc , curr) => {
+    return acc = { [curr.location]:  [curr.name] }
+  }, {}) 
+  return locations;  
+
+}
+// console.log(getAnimalMap());
 
 // 10=========================================================
 
@@ -163,46 +174,73 @@ function getSchedule(dayName) {
   return { [dayName]: daysHours[dayName] };
 }
 
-console.log(getSchedule('Monday'));
+// console.log(getSchedule('Monday'));
 
 // 11=========================================================
 
 // function getOldestFromFirstSpecies(id) {
 
+//   // const teste = data.species[0].residents[0].age ;
+//   // return teste;
+
 //   const idEmployee = employees.find((idNumber) => idNumber.id === id);
+//   //encontra o employee
 //   const findAnimalId = data.species
 //   .filter((animalId) => idEmployee
 //   .responsibleFor.includes(animalId.id));
-//   // const OldestAnimal = data.species.find((old) => findAnimalId.includes(old.residents.age ) ); ESSE DÁ UNDEFINED
+//   // encontra os animais que o employee é responsável
 //   return findAnimalId;
+//   // achar o animal mais velho que ele é responsável ???
+
 // }
 
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // 12=========================================================
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+
+  const { Adult, Senior, Child } = data.prices;
+  const percentValue = ((percentage / 100) + 1);
+  return { Adult: Math.round(Adult * percentValue * 100) / 100,
+    Senior: Math.round(Senior * percentValue * 100) / 100,
+    Child: Math.round(Child * percentValue * 100) / 100 };
+
+}
+
+// console.log(increasePrices(30));
 
 // 13=========================================================
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName) {
+  // achar todos employees 
+  const allEmployees = employees.map((idEmployee) => idEmployee);
+  // achar todos animais
+  const allAnimals = data.species.map((animal) => animal);
+  // todos funcionarios e seus respectivos animais
+const funcionarioAtual = allEmployees.filter(({responsibleFor}) => responsibleFor.responsibleFor === allAnimals.id);
+  return funcionarioAtual
+
+
+}
+
+
+// console.log(getEmployeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+
+
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
