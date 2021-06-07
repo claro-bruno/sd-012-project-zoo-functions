@@ -118,7 +118,7 @@ function calculateEntry(entrants = 0) {
   // const personAge = Object.keys(entrants); // pega as chaves do entrants [Adult, Senior, Child]
   // const prices = Object.values(data.prices); // pega o valor do data.prices [49.99, 24.99, 20.99]
   const { prices } = data.prices;
-  // return prices.Adult;
+  // return prices.Adultt;
 
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
