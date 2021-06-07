@@ -61,17 +61,23 @@ const calculateEntry = (entrants) => {
 } */
 
 function getSchedule(dayName) {
-  const infoDays = {};
-  const daysWeek = Object.keys(hours);
-  const response = {};
-  daysWeek.forEach((day) => {
-    const { open, close } = hours[day];
-    const information = open === 0 ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
-    infoDays[day] = information;
-  });
-  response[dayName] = infoDays[dayName];
-  return dayName ? response : infoDays;
+  let schedule = Object.keys(data.hours);
+  if (dayName === undefined) {
+    schedule = allDays(schedule);
+    return schedule;
+  }
+  return aDay(schedule, dayName);
 }
+
+const getResponsible = (employees, id) =>
+  employees.find((employee) => employee.id === id);
+
+const getFirstSpecies = (employee, species) =>
+  species.find((speciesObj) => speciesObj.id === employee.responsibleFor[0]);
+
+const getOldestResident = (firstSpecies) => [
+  ...Object.values(firstSpecies.residents.sort((a, b) => b.age - a.age)[0]),
+];
 
 /* function getOldestFromFirstSpecies(id) {
   // seu código aqui
