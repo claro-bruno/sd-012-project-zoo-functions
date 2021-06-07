@@ -13,7 +13,7 @@ const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return species.filter((elem) => ids.includes(elem.id));
+  return species.filter((elem) => ids.find((id) => elem.id === id));
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -31,7 +31,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return employees.some((elem) => elem.managers.includes(id));
+  return employees.some((elm) => elm.managers.find((man) => man === id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -45,71 +45,73 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(addEmp);
 }
 
-function countAnimals(specie) {
-  const array = {};
-  species.forEach(({ name, residents }) => { array[name] = residents.length; });
-  return specie === undefined
-    ? array
-    : species.find((elem2) => elem2.name === specie).residents.length;
+function countAnimals(speciesName) {
+  return !speciesName
+    ? species.reduce((obj, elm) => ({ ...obj, [elm.name]: elm.residents.length }), {})
+    : species.find((elem) => elem.name === speciesName).residents.length;
 }
 
 function calculateEntry(entrants = 0) {
-  let soma = 0;
+  if (!entrants) return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  soma += prices.Adult * Adult;
-  soma += prices.Child * Child;
-  soma += prices.Senior * Senior;
-  return soma;
+  let sum = 0;
+  sum += Adult * prices.Adult;
+  sum += Child * prices.Child;
+  sum += Senior * prices.Senior;
+  return sum;
 }
 
-function getLocation(regioes) {
-  return regioes.reduce((obj, regiao) => {
-    const objLocation = obj;
-    const arraySpecies = species.filter(({ location }) => location === regiao)
-      .map((specie) => specie.name);
-    objLocation[regiao] = arraySpecies;
-    return objLocation;
-  }, {});
-}
-
-function getName(key, options) {
-  return key.reduce((array, sName) => {
-    const obj = {};
-    let arrayNames = species.find((elem) => elem.name === sName).residents;
-    // console.log(arrayNames)
-    if (options.sex) arrayNames = arrayNames.filter((animal) => animal.sex === options.sex);
-    arrayNames = arrayNames.map((animal) => animal.name);
-    if (options.sorted) arrayNames.sort();
-    obj[sName] = arrayNames;
-    array.push(obj);
-    return array;
-  }, []);
+function getAnimalName(sorted, sex, local) {
+  return local.reduce((acc, loc) => ({
+    ...acc,
+    [loc]: species.filter((sElm) => sElm.location === loc).map((elm) => {
+      let { residents } = elm;
+      if (sex) {
+        residents = residents.filter((el) => el.sex === sex);
+      }
+      residents = residents.map((resid) => resid.name);
+      if (sorted) {
+        residents.sort();
+      }
+      return { [elm.name]: residents };
+    }),
+  }), {});
 }
 
 function getAnimalMap(options) {
-  const regioes = ['NE', 'NW', 'SE', 'SW'];
-  const animalLocation = getLocation(regioes);
-  const nameLocation = {};
-  if (!options || !options.includeNames) return animalLocation;
-  regioes.forEach((key) => {
-    nameLocation[key] = getName(animalLocation[key], options);
-  });
-  return nameLocation;
+  const local = [...new Set(species.map((elem) => elem.location))];
+  if (!options || !options.includeNames) {
+    return local.reduce((acc, loc) => ({
+      ...acc,
+      [loc]: species.filter((sElm) => sElm.location === loc).map((filtSpec) => filtSpec.name),
+    }), {});
+  }
+
+  const { includeNames, sorted = false, sex = false } = options;
+  if (includeNames) {
+    return getAnimalName(sorted, sex, local);
+  }
 }
-// console.log(getAnimalMap({ includeNames: true }));
 
 function getSchedule(dayName) {
-  const open = hours;
-  const result = {};
-  Object.keys(open).forEach((key) => {
-    if (open[key].close === 0) {
-      result[key] = 'CLOSED';
-    } else {
-      result[key] = `Open from ${open[key].open}am until ${open[key].close - 12}pm`;
+  if (dayName) {
+    const { open, close } = hours[dayName];
+    if (dayName === 'Monday') {
+      return ({ [dayName]: 'CLOSED' });
     }
+    return ({ [dayName]: `Open from ${open}am until ${close - 12}pm` });
+  }
+  // Maneira 1
+  // const teste = Object.keys(hours).map((day) => ({ [day]: (hours[day].open === 0) ? 'CLOSED' : `Open from ${hours[day].open}am until ${hours[day].close - 12}pm` })).reduce((elm, cur) => ({...elm, ...cur}) ,{})
+  // return teste
+
+  // Maneira 2
+  const testa = {};
+  Object.keys(hours).forEach((day) => {
+    const { open, close } = hours[day];
+    testa[day] = day === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
   });
-  if (dayName !== undefined) return { [dayName]: result[dayName] };
-  return result;
+  return testa;
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -137,18 +139,20 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName, list = {}) {
-  const employeeName = employees.map((employee) => employee.firstName);
   if (!idOrName) {
-    return employeeName.reduce((empList, name) => getEmployeeCoverage(name, empList), {});
+    return employees.reduce((acc, empName) => {
+      const { responsibleFor } = empName;
+      const NewName = `${empName.firstName} ${empName.lastName}`;
+      return { ...acc,
+        [NewName]: responsibleFor.map((animalID) =>
+          species.find((specName) => specName.id === animalID).name) };
+    }, {});
   }
-  const { firstName, lastName, responsibleFor } = employees.find((employee) => {
-    const { firstName: name, lastName: lname, id } = employee;
-    return (name === idOrName || lname === idOrName || id === idOrName);
-  });
-  const copy = list;
-  const fullName = `${firstName} ${lastName}`;
-  copy[fullName] = responsibleFor.map((animalId) => species.find(({ id }) => id === animalId).name);
-  return list;
+  const empSelect = employees.find((emp) =>
+    emp.id === idOrName || emp.firstName === idOrName || emp.lastName === idOrName);
+  const selecName = `${empSelect.firstName} ${empSelect.lastName}`;
+  return { [selecName]: empSelect.responsibleFor.map((animalID) =>
+    species.find((speciesName) => speciesName.id === animalID).name) };
 }
 
 module.exports = {
