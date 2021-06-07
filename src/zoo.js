@@ -57,9 +57,16 @@ function countAnimals(species) {
   return specie.residents.length;
 }
 
+// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/typeof
 function calculateEntry(entrants) {
   if (typeof entrants === 'object' && Object.entries(entrants).length === 0) return 0;
   if (!entrants) return 0;
+  const visit = Object.keys(entrants); // verifica as chaves do objeto passado
+  // usa o valor do total para o reduce.
+  return visit.reduce((accumulator, currentValue) => {
+    const total = accumulator + entrants[currentValue] * data.prices[currentValue];
+    return total;
+  }, 0);
 }
 
 function getAnimalMap() {
