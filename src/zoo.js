@@ -14,18 +14,42 @@ const data = require('./data');
 //
 //
 //
-const objetoPopular = { NE: [], NW: [], SE: [], SW: [] };
-const chaveSP = Object.keys(objetoPopular);
-// Contém um array com as chaves do objetoPopular.
-const animalsList = species.map((spec, indiceRes) => spec.residents[indiceRes].name); // Contém um array com o nome das espécies.
-const speciesLocation = () => {
-  const valores = Object.values(objetoPopular);
-  chaveSP.forEach((chave) => valores
-    .some((valor, indice) => objetoPopular[chave][indice][valor] = animalsList));
+let objetoAPopular = { NE: [], NW: [], SE: [], SW: [] };
+const chaveOP = Object.keys(objetoAPopular);
+/* const animalsNameList = species.map((spec, indice) =>
+({ [spec.residents[indice].name]: [spec.residents[indice].sex] })); */
+// Nome de cada residente do zoo acompanhado do seu sexo.
+
+function arrayNames(animal) {
+  let animalsNameList = [];
+  species.forEach((spec) => {
+    if (spec.name === animal) {
+      animalsNameList = spec.residents
+        .map((resident) => resident.name);
+    }
+  });
+  return animalsNameList;
+}
+
+function allNameResidents(objeto) {
+  const objetoPopulado = objeto;
+  chaveOP.forEach((region) => objetoPopulado[region].forEach((arPositionPop, indice) => {
+    objetoPopulado[region][indice] = { [arPositionPop]: arrayNames(arPositionPop) };
+  }));
+  return objetoPopulado;
+}
+
+const speciesLocation = (options) => {
+  objetoAPopular = { NE: [], NW: [], SE: [], SW: [] };
+  species.forEach((spec) => chaveOP.find((chave) =>
+    (spec.location === chave ? objetoAPopular[chave]
+      .push(spec.name) : '')));
+  if (options === undefined) {
+    return objetoAPopular;
+  }
+  return allNameResidents(objetoAPopular);
 };
-species.forEach((spec) => chaveSP.find((chave) =>
-  (spec.location === chave ? objetoPopular[spec.location]
-    .push(spec.name) : '')));
+
 //
 //
 //
@@ -110,10 +134,10 @@ function calculateEntry(entrants) {
   const k = Object.keys(entrants);
   console.log(entrants);
   /* console.log(Object.keys(entrants)); */
-  const valores = Object.keys(prices)
+  const preços = Object.keys(prices)
     .map((chave) => (k.some((ki) => chave === ki) ? (prices[chave] * entrants[chave]) : 0));
   /* console.log(valores); */
-  const result = valores.reduce((acc, current) => {
+  const result = preços.reduce((acc, current) => {
     let accumulator = acc;
     const atual = current;
     /* console.log(atual); */
@@ -125,13 +149,10 @@ function calculateEntry(entrants) {
 
 function getAnimalMap(options) {
   // seu código aqui
-  if (!options) {
-    speciesLocation();
-    return objetoPopular;
-  } if (includeNames === true && sex === sorted === undefined) { return 'oi'}
-}
-getAnimalMap();
+  return speciesLocation(options);
+} /* if (includeNames === true && sex === sorted === undefined) { return 'oi'} */
 
+getAnimalMap(2);
 function getSchedule(dayName) {
   // seu código aqui
   const objeto = { Tuesday: 'Open from 8am until 6pm',
