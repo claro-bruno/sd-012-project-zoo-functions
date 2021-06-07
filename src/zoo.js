@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { species } = data;
+const { species, employees } = data;
 // , employees, hours, prices
 
 function getSpeciesByIds(...ids) {
@@ -25,68 +25,70 @@ function getAnimalsOlderThan(animal, age) {
 
 // console.log(getAnimalsOlderThan('lions', 4));
 
-function getEmployeeByName() {
-  // (employeeName)
-  //  seu código aqui
+function getEmployeeByName(employeeName) {
+  if (employeeName === undefined) return {};
+  return employees.find((employee) => employee.firstName === employeeName
+  || employee.lastName === employeeName);
 }
 
-function createEmployee() {
-  // (personalInfo, associatedWith)
-  //  seu código aqui
+console.log(getEmployeeByName('Emery'));
+
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager() {
 
-// seu código aqui
-// (id)
+  // seu código aqui
+  // (id)
 }
 
 function addEmployee() {
 
-//  seu código aqui
-// (id, firstName, lastName, managers, responsibleFor)
+  //  seu código aqui
+  // (id, firstName, lastName, managers, responsibleFor)
 }
 
 function countAnimals() {
 
-//   seu código aqui
-// (species)
+  //   seu código aqui
+  // (species)
 }
 
 function calculateEntry() {
 
-//  seu código aqui
-// (entrants)
+  //  seu código aqui
+  // (entrants)
 }
 
 function getAnimalMap() {
 
-//  seu código aqui
-// (options)
+  //  seu código aqui
+  // (options)
 }
 
 function getSchedule() {
 
-//  seu código aqui
-// (dayName)
+  //  seu código aqui
+  // (dayName)
 }
 
 function getOldestFromFirstSpecies() {
 
-//  seu código aqui
-// (id)
+  //  seu código aqui
+  // (id)
 }
 
 function increasePrices() {
 
-//  seu código aqui
-// (percentage)
+  //  seu código aqui
+  // (percentage)
 }
 
 function getEmployeeCoverage() {
 
-//  seu código aqui
-// (idOrName)
+  //  seu código aqui
+  // (idOrName)
 }
 
 module.exports = {
