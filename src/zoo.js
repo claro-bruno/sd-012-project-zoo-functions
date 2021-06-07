@@ -103,16 +103,15 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   const targetEmployee = employees.find((employee) => employee.id === id);
-  const animal = species.find((specie) => specie.id === targetEmployee.responsibleFor[0]);
-  const oldestAnimal = animal.residents.sort((a, b) => b.age - a.age)[0];
+  const animalId = species.find((specie) => specie.id === targetEmployee.responsibleFor[0]);
+  const oldestAnimal = animalId.residents.sort((a, b) => b.age - a.age)[0];
   const { name, sex, age } = oldestAnimal;
   return [name, sex, age];
 }
 
 function increasePrices(percentage) {
   Object.keys(prices).forEach((key) => {
-    const newPrice = (prices[key] * (1 + percentage / 100)) + 0.001;
-    prices[key] = Number(newPrice.toPrecision(4));
+    prices[key] = Math.round(prices[key] * (1 + (percentage / 100)) * 100) / 100;
   });
 }
 
