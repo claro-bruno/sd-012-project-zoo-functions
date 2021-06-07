@@ -40,13 +40,29 @@ function getEmployeeByName(employeeName) {
 //   // seu código aqui
 // }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const addName = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  }
+  return data.employees.push(addName);
+}
 
-// function countAnimals(species) {
-//   // seu código aqui
-// }
+function countAnimals(species) {
+  if (!species) {
+    const returnArray = {};
+    data.species.forEach((num) => {
+      returnArray[num.name] = num.residents.length;
+    });
+    return returnArray
+  }
+  const animal = data.species.find((num) =>
+    num.name === species);
+  return animal.residents.length;
+}
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
@@ -75,15 +91,15 @@ function getEmployeeByName(employeeName) {
 module.exports = {
   //   calculateEntry,
   //   getSchedule,
-  //   countAnimals,
+  countAnimals,
   //   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   // isManager,
   getAnimalsOlderThan,
   //   getOldestFromFirstSpecies,
   //   increasePrices,
-  //   createEmployee,
+  // createEmployee,
 };
