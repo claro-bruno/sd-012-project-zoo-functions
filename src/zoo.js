@@ -24,11 +24,14 @@ function getAnimalsOlderThan(animal, age) {
   return filterSpecie.residents.every((animais) => animais.age > age);
 }
 
-/*
 function getEmployeeByName(employeeName) {
 // Questao 3
+  if (employeeName === undefined) return {};
+  const fistAndLast = data.employees.find(({ firstName, lastName }) =>
+    (firstName === employeeName || lastName === employeeName));
+  return fistAndLast;
 }
-*/
+
 function createEmployee(personalInfo, associatedWith) {
 // Questao 4
   const information = { ...personalInfo, ...associatedWith };
@@ -81,7 +84,7 @@ module.exports = {
 //  countAnimals,
 //  getAnimalMap,
   getSpeciesByIds,
-  //  getEmployeeByName,
+  getEmployeeByName,
   //  getEmployeeCoverage,
   //  addEmployee,
   isManager,
