@@ -81,8 +81,19 @@ function getOldestFromFirstSpecies() {
   // seu código aqui id
 }
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  // const perCent = percentage / 100;
+  const { Adult, Child, Senior } = data.prices;
+  data.prices = {
+    // toFixed não funciona!! Nada funcionava, consegui com a ajuda do Josimar Souza em
+    // https://github.com/tryber/sd-012-project-zoo-functions/pull/134/commits/44dbb557423d42aeb15b862239d3d6c334fc80c6
+    Adult: Math.round((Adult + ((Adult * percentage) / 100)) * 100) / 100,
+    Child: Math.round((Child + ((Child * percentage) / 100)) * 100) / 100,
+    Senior: Math.round((Senior + ((Senior * percentage) / 100)) * 100) / 100,
+  };
+  return data.prices;
+
+  // const newPrice = ({})
 }
 
 function getEmployeeCoverage() {
