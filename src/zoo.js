@@ -61,15 +61,17 @@ function countAnimals(species) {
   return data.species.find((element) => element.name === species).residents.length;
 }
 
-/*
 function calculateEntry(entrants) {
 // Questao 8
+  if (!entrants) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return (Adult * data.prices.Adult) + (Child * data.prices.Child) + (Senior * data.prices.Senior);
 }
 
+/*
 function getAnimalMap(options) {
 // Questao 9
 }
-
 function getSchedule(dayName) {
 // Questao 10
 }
@@ -88,7 +90,7 @@ function getEmployeeCoverage(idOrName) {
 */
 
 module.exports = {
-  //  calculateEntry,
+  calculateEntry,
   //  getSchedule,
   countAnimals,
   //  getAnimalMap,
