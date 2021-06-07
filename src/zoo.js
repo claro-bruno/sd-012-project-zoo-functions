@@ -8,19 +8,25 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { species } = require('./data');
-const { employees } = require('./data');
+const {
+  species,
+} = require('./data');
+const {
+  employees,
+} = require('./data');
 // const { data } = require('./data');
 
 function getSpeciesByIds(...ids) {
-// return ids.map((idAnimal) => species.find((animals) => idAnimal === animals.id));
+  // return ids.map((idAnimal) => species.find((animals) => idAnimal === animals.id));
   return ids.map((id) => species.find((specie) => id === specie.id));
 }
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 
 function getAnimalsOlderThan(animal, age) {
   return species
-    .find(({ name }) => name === animal).residents.every((animalonly) => animalonly.age >= age);
+    .find(({
+      name,
+    }) => name === animal).residents.every((animalonly) => animalonly.age >= age);
 }
 // referencia  https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
 
@@ -30,7 +36,10 @@ function getEmployeeByName(name) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith };
+  return {
+    ...personalInfo,
+    ...associatedWith,
+  };
 }
 
 function isManager(id) {
@@ -38,15 +47,37 @@ function isManager(id) {
 }
 //  https://www.alura.com.br/artigos/o-que-e-o-operador-ternario?gclid=Cj0KCQjw5PGFBhC2ARIsAIFIMNd7ReICV3cuH5g_2lyjEwAbJ1cO2XeOR2nLS7eNWKhyZg7VoIPJxEMaAk20EALw_wcB
 
-/*
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  if (managers === undefined && responsibleFor === undefined) {
+    employees.push({
+      id,
+      firstName,
+      lastName,
+      managers: [],
+      responsibleFor: [],
+    });
+  } else {
+    employees.push({
+      id,
+      firstName,
+      lastName,
+      managers,
+      responsibleFor,
+    });
+  }
 }
 
-function countAnimals(species) {
-  // seu código aqui
-}
+/* function countAnimals(input) {
+  if (!input) return species.forEach((calback) => calback.name && calback.residents.length);
 
+  species.find((specie) => {
+    (specie.name === input); {
+      return specie.name && specie.residents.length;
+    }
+  });
+}
+countAnimals('lions');/*
+/*
 function calculateEntry(entrants) {
   // seu código aqui
 }
@@ -79,7 +110,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   //  getEmployeeCoverage,
-  //  addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   //  getOldestFromFirstSpecies,
