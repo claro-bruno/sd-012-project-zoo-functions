@@ -69,21 +69,37 @@ function calculateEntry(entrants) {
 }
 
 /*
-function getAnimalMap(options) {
+function getAnimalMap(options = {}) {
 // Questao 9
+const test = {
+      NE: [],
+      NW: [],
+      SE: [],
+      SW: []
+    };
 }
+
+
 function getSchedule(dayName) {
 // Questao 10
 }
-
+*/
+/*
 function getOldestFromFirstSpecies(id) {
 // Questao 11
+
 }
+*/
 
 function increasePrices(percentage) {
 // Questao 12
+const pricePercentage = percentage / 100;
+  data.prices.Adult = Math.round(((data.prices.Adult * pricePercentage) + data.prices.Adult) * 100) / 100;
+  data.prices.Child = Math.round(((data.prices.Child * pricePercentage) + data.prices.Child) * 100) / 100;
+  data.prices.Senior = Math.round(((data.prices.Senior * pricePercentage) + data.prices.Senior) * 100) / 100;
 }
 
+/*
 function getEmployeeCoverage(idOrName) {
 // Questao 13
 }
@@ -101,6 +117,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   //  getOldestFromFirstSpecies,
-  //  increasePrices,
+  increasePrices,
   createEmployee,
 };
