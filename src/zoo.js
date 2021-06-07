@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const data = require('./data');
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -46,9 +46,9 @@ function isManager(id) {
     employee.managers.find((idManager) => idManager === id));
 }
 
-console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {  // Declarei as ultimas duas variáveis como array
   // seu código aqui
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   return employees.push(newEmployee);
@@ -58,12 +58,12 @@ function countAnimals(animal) {
   // seu código aqui
   const obj = {};
   if (!animal) {
-   species.forEach((index) => {
+    species.forEach((index) => {
       obj[index.name] = index.residents.length;
     });
 
     return obj;
-  };
+  }
 
   return species.find((index) => index.name === animal).residents.length;
 }
@@ -89,6 +89,17 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  const obj = {};
+  Object.keys(hours).forEach((index) => {
+  const { open , close } = hours[index];
+    if (index === 'Monday') {
+      obj[index] = 'CLOSED';
+    } else {
+      obj[index] = `Open from ${open}am until ${close - 12}pm`;
+    };
+});
+if (!dayName) return obj
+return {[dayName]: obj[dayName]}
 }
 
 function getOldestFromFirstSpecies(id) {
