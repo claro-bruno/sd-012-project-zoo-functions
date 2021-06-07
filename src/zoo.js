@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { species } = require('./data');
+const { prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -120,14 +121,10 @@ function getSchedule(...dayName) {
     Sunday: 'Open from 8am until 8pm',
     Monday: 'CLOSED',
   };
-  if (dayName === undefined) {
-    // const days = Object.keys(schedule);
-    return expected;
-  }
-  // const weekDays { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Monday } = expected;
-  const abc = Object.keys(expected);
-  return abc.find((hour) => hour[dayName] === dayName);
-  // return days.open.map((openItem) => (`${}`))
+  //   if (dayName === undefined) {
+  return expected;
+//   }
+//   else if (dayName === '')
 }
 
 // console.log(getSchedule('Monday'));
@@ -141,9 +138,17 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(animalAge);
 }
 // console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const { Adult: adulto, Senior: idoso, Child: jovem } = prices;
+
+  const prencheObj = {
+    Adult: Math.round((adulto * 100) * (1 + (percentage / 100))).toFixed(2) / 100,
+    Senior: Math.round((idoso * 100) * (1 + (percentage / 100))).toFixed(2) / 100,
+    Child: Math.round((jovem * 100) * (1 + (percentage / 100))).toFixed(2) / 100,
+  };
+  return Object.assign(prices, prencheObj);
+}
+// console.log(increasePrices(50));
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
@@ -161,6 +166,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
