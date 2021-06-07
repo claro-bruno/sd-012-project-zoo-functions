@@ -64,33 +64,26 @@ function calculateEntry(entrants) {
 }
 
 const regions = ['NE', 'NW', 'SE', 'SW'];
-const getAllByRegion = () => regions.reduce((accumulator, current) => {
-  accumulator[current] = species.filter((specie) =>
-    specie.location === current).map((objSpecie) => objSpecie.name);
-  return accumulator;
-}, {});
+const getAllByRegion = () => regions.reduce((acc, curr) => ({
+  ...acc,
+  [`${curr}`]: species.filter((specie) => specie.location === curr).map((specie) => specie.name),
+}), {});
 
-const getAllByRegionWNames = (sex, sorted) => regions.reduce((accumulator, current) => {
-  accumulator[current] = species.filter((specie) =>
-    specie.location === current).map((objSpecie) => {
-    const object = {};
-    object[objSpecie.name] = objSpecie.residents.map((getSpecimen) => getSpecimen.name);
-    // se 'sorted' iqual a 'true' ordena objeto
-    if (sorted) object[objSpecie.name].sort();
-    // se 'sex' for especificado, retorna por sexo
-    if (sex.length !== 0) {
-      object[objSpecie.name] = object[objSpecie.name].filter((animal) =>
-        objSpecie.residents.find((resident) => resident.name === animal).sex === sex);
-    }
-    return object;
-  });
-  return accumulator;
-}, {});
+const getAllByRegionWNames = (sex, sorted) => regions.reduce((accumulator, current) => ({
+  ...accumulator,
+  [`${current}`]: species.filter((specie) => specie.location === current)
+    .map((element) => {
+      let { residents } = element;
+      if (sex.length !== 0) residents = residents.filter((animal) => animal.sex === sex);
+      residents = residents.map((resident) => resident.name);
+      if (sorted) residents.sort();
+      return { [element.name]: residents };
+    }),
+}), {});
 
 function getAnimalMap(options) {
-  if (!options) return getAllByRegion();
-  const { includeNames = false, sorted = false, sex = '' } = options;
-  if (includeNames === false) return getAllByRegion();
+  if (!options || !options.includeNames) return getAllByRegion();
+  const { sorted = false, sex = '' } = options;
   return getAllByRegionWNames(sex, sorted);
 }
 
