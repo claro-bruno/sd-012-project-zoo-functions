@@ -31,16 +31,14 @@ function getEmployeeByName(employeeName) {
   || employee.lastName === employeeName);
 }
 
-console.log(getEmployeeByName('Emery'));
+// console.log(getEmployeeByName('Emery'));
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-function isManager() {
-
-  // seu código aqui
-  // (id)
+function isManager(id) {
+  return employees.some((employee) => employee.managers.some((managerId) => managerId === id));
 }
 
 function addEmployee() {
