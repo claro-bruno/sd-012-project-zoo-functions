@@ -44,11 +44,13 @@ function isManager(id) {
   return getEmployee;
 }
 
-/*
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
 // Questao 6
+  const employeeLastList = { id, firstName, lastName, managers, responsibleFor };
+  data.employees.push(employeeLastList);
 }
 
+/*
 function countAnimals(species) {
 // Questao 7
 }
@@ -86,7 +88,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   //  getEmployeeCoverage,
-  //  addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   //  getOldestFromFirstSpecies,
