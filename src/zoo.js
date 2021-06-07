@@ -89,11 +89,44 @@ function calculateEntry(entrants = 0) {
 
   return adultPrice + childPrice + seniorPrice;
 }
+// Function trueName feita com a ajuda do David Gonzaga - turma 12
+function trueName(regionsArray, regionsObject, sorted, sex) {
+  const display = {};
+  regionsArray.forEach((itemArray) => {
+    display[itemArray] = regionsObject[itemArray]
+      .reduce((accumulator, currentItem) => {
+        const residents = {};
+        let residentSpecies = species.find((itemSpec) => itemSpec.name === currentItem).residents;
+        if (sex) {
+          residentSpecies = residentSpecies.filter((itemResident) => itemResident.sex === sex);
+        }
+        residentSpecies = residentSpecies.map((item) => item.name);
+        if (sorted) residentSpecies.sort();
+        residents[currentItem] = residentSpecies;
+        accumulator.push(residents);
+        return accumulator;
+      }, []);
+  });
+  return display;
+}
 
-/* function getAnimalMap(options) {
+function getAnimalMap(options) {
   // seu código aqui
+  const locations = ['NE', 'NW', 'SE', 'SW'];
 
-} */
+  const regions = {};
+  locations.forEach((itemArray) => {
+    regions[itemArray] = species.filter((itemSpecies) => itemSpecies.location === itemArray)
+      .map((itemAnimals) => itemAnimals.name);
+  });
+
+  if (options === undefined) return regions;
+  const { includeNames, sorted, sex } = options;
+  if (includeNames === true) {
+    return trueName(locations, regions, sorted, sex);
+  }
+  return regions;
+}
 
 // Function getSchedule feita com ajuda do Thalles durante plantao de duvidas
 function getSchedule(dayName) {
@@ -156,8 +189,6 @@ function employeeCoverageNameId(idOrName) {
   return display;
 }
 
-console.log(employeeCoverageNameId('Burl'));
-
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
   const employeeList = employees.reduce((accumulator, item) => {
@@ -176,8 +207,6 @@ function getEmployeeCoverage(idOrName) {
   return employeeCoverageNameId(idOrName);
 }
 
-// console.log(getEmployeeCoverage());
-
 module.exports = {
   getSpeciesByIds,
   getAnimalsOlderThan,
@@ -191,20 +220,5 @@ module.exports = {
   getOldestFromFirstSpecies,
   increasePrices,
   getEmployeeCoverage,
-};
-
-/* module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
   getAnimalMap,
-  getSpeciesByIds,
-  getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
-  isManager,
-  getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,
-}; */
+};
