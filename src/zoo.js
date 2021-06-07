@@ -18,7 +18,7 @@ function getSpeciesByIds(...ids) {
   return zooData;
 }
 
-// console.log(getSpeciesByIds(''));
+// console.log(getSpeciesByIds('baa6e93a-f295-44e7-8f70-2bcdc6f6948d'));
 
 // vamos começar!
 
@@ -140,7 +140,7 @@ function getOldestFromFirstSpecies(id) {
   const animalAge = animalIdConverter.residents.sort((a, b) => b.age - a.age)[0];
   return Object.values(animalAge);
 }
-console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+// console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
