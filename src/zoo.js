@@ -67,12 +67,12 @@ function calculateEntry(entrants) {
   return childNumber * childPrice + adultNumber * adultPrice + seniorNumber * seniorPrice;
 }
 
-function getAnimalMap(directions) {
-  // if (!options) {
-  // directions.forEach((place) => {
-  //   const locality = data.species.filter(({ location }) => location === place);
-  // });
-}
+// function getAnimalMap(directions) {
+// if (!options) {
+// directions.forEach((place) => {
+//   const locality = data.species.filter(({ location }) => location === place);
+// });
+// }
 // const directions = ['NE', 'NW', 'SE', 'SW'];
 
 // if (element.location === 'NE') {
@@ -115,9 +115,9 @@ function getSchedule(dayName) {
   return { [dayName]: 'CLOSED' };
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function getOldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
 function increasePrices(percentage) {
   const { prices } = data;
@@ -128,22 +128,22 @@ function increasePrices(percentage) {
   });
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
+  // getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
