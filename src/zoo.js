@@ -10,7 +10,6 @@ eslint no-unused-vars: [
 */
 
 const { species, employees, prices } = require('./data');
-// const data = require('./data');
 
 function getSpeciesByIds(...args) {
   return species.filter((animal) => args.includes(animal.id));
@@ -51,9 +50,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function countAnimals(especime) {
-
-// }
+function countAnimals(especime) {
+  //feito com a dica do Gabriel Bueno usando como base o código na seguinte fonte:
+  //https://vmarchesin.medium.com/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
+  if (!especime) {
+    return species.reduce((acumulador, animal) => ({
+      ...acumulador, [animal.name]: animal.residents.length
+    }), {});
+  }
+  const anim = species.find((animal) => animal.name === especime);
+  return anim.residents.length;
+}
 
 function calculateEntry(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) return 0;
@@ -91,7 +98,7 @@ function increasePrices(percentage) {
 module.exports = {
   calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
