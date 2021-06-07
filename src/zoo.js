@@ -47,10 +47,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  }
+  };
   return data.employees.push(addName);
 }
-
 
 // function countAnimals(species) {
 //   if (!species) {
