@@ -103,8 +103,6 @@ function calculateEntry(entrants) {
   return adultPrice + childPrice + seniorPrice;
 }
 
-console.log(calculateEntry({}));
-
 // function getAnimalMap(options) {
 //   // seu código aqui
 // }
@@ -140,9 +138,15 @@ function getSchedule(dayName) {
   return { [takeOneDay]: `Open from ${takeValues[0]}am until ${convertHour}pm` };
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  const takeEmployee = data.employees.find((employee) => employee.id === id);
+  const takeResponsible = takeEmployee.responsibleFor[0];
+  const takeSpecie = data.species.find((specie) => specie.id === takeResponsible);
+  const takeOldestAnimal = takeSpecie.residents.sort((a, b) => b.age - a.age);
+
+  return Object.values(takeOldestAnimal.find((oldest) => oldest));
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -163,7 +167,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  //   getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   //   increasePrices,
   createEmployee,
 };
