@@ -21,8 +21,10 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  const result = employees.find((e) => e.firstName === employeeName || e.lastName === employeeName);
-  if (result) return result;
+  if (employeeName) {
+    return employees.find((employee) => employee.firstName === employeeName
+      || employee.lastName === employeeName);
+  }
   return {};
 }
 
@@ -43,17 +45,22 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   });
 }
-function countAnimals(animal) {
-  if (animal) {
-    const targetSpecie = species.find((specie) => specie.name === animal);
+
+function countAnimals(animalName) {
+  if (animalName) {
+    const targetSpecie = species.find((specie) => specie.name === animalName);
     return targetSpecie.residents.length;
   }
-  const resultado = {};
-  species.forEach((specie) => {
-    const { name, residents } = specie;
-    resultado[name] = residents.length;
-  });
-  return resultado;
+  return species.reduce((acc, curr) => ({
+    ...acc,
+    [curr.name] : curr.residents.length,
+  }), {});
+  // const resultado = {};
+  // species.forEach((specie) => {
+  //   const { name, residents } = specie;
+  //   resultado[name] = residents.length;
+  // });
+  // return resultado;
 }
 
 function calculateEntry(entrants) {
@@ -72,13 +79,15 @@ const getAllByRegion = () => regions.reduce((accumulator, current) => {
 
 const getAllByRegionWNames = (sex, sorted) => regions.reduce((accumulator, current) => {
   accumulator[current] = species.filter((specie) =>
-    specie.location === current).map((getNames) => {
+    specie.location === current).map((objSpecie) => {
     const object = {};
-    object[getNames.name] = getNames.residents.map((getSpecimen) => getSpecimen.name);
-    if (sorted === true) { object[getNames.name].sort(); }
+    object[objSpecie.name] = objSpecie.residents.map((getSpecimen) => getSpecimen.name);
+    // se 'sorted' iqual a 'true' ordena objeto
+    if (sorted) object[objSpecie.name].sort();
+    // se 'sex' for especificado, retorna por sexo
     if (sex.length !== 0) {
-      object[getNames.name] = object[getNames.name].filter((animal) =>
-        getNames.residents.find((resident) => resident.name === animal).sex === sex);
+      object[objSpecie.name] = object[objSpecie.name].filter((animal) =>
+        objSpecie.residents.find((resident) => resident.name === animal).sex === sex);
     }
     return object;
   });
