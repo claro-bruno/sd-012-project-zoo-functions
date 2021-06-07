@@ -96,14 +96,17 @@ function calculateEntry(entrants) {
 //   if (Object.keys(dayName).length === 0) { return }
 // }
 
+//Requisito concluido com auxílio do repositório do colega Rodrigo Facury
 function getOldestFromFirstSpecies(funcId) {
   const checkFunId = employees.find((person) => funcId === person.id)
-    .responsibleFor.find((especie) => especie);
-  const checkSpecie = species.filter((specie) => specie.id === checkFunId);
-
-  return checkSpecie;
+  const getFirstSpecie = checkFunId.responsibleFor.find((especie) => especie);
+  const checkSpecie = species.find((specie) => specie.id === getFirstSpecie);
+  const { residents } = checkSpecie;
+  const findAge = residents.map((resident) => resident.age).sort((a, b) => b - a);
+  const oldestAge = residents.find((resident) => resident.age === findAge[0]);
+  return Object.values(oldestAge);
 }
-// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')) CORRIGIR
+// console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'))
 
 function increasePrices(percentage) {
   const { Adult, Senior, Child } = data.prices;
