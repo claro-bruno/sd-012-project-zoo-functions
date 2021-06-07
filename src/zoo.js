@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -85,18 +86,23 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  const week = {
-    Tuesday: 'Open from 8am until 6pm',
-    Wednesday: 'Open from 8am until 6pm',
-    Thursday: 'Open from 10am until 8pm',
-    Friday: 'Open from 10am until 8pm',
-    Saturday: 'Open from 8am until 10pm',
-    Sunday: 'Open from 8am until 8pm',
-    Monday: 'CLOSED',
-  };
-  if (dayName === undefined) return week;
-  return data.hours.find((hour) => hour.hours === dayName);
+  if (!dayName) {
+    const schedule = Object.entries(data.hours);
+    const entries = (acc, entrie) => {
+      const { open, close } = entrie[1];
+      acc[entrie[0]] = `Open from ${open}am until ${close - 12}pm`;
+      if (entrie[0] === 'Monday') acc[entrie[0]] = 'CLOSED';
+      return acc;
+    };
+    const scheduleA = schedule.reduce(entries, {});
+    return scheduleA;
+  }
+  const { open, close } = hours[dayName];
+  const scheduleDay = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
+  if (dayName === 'Monday') scheduleDay[dayName] = 'CLOSED';
+  return scheduleDay;
 }
+// Ajuda dos amigos do slack para este exercicio
 
 function getOldestFromFirstSpecies(id) {
   const employer = data.employees.find((employe) => employe.id === id);
