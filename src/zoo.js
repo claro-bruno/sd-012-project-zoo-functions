@@ -83,9 +83,10 @@ function calculateEntry(entrants) {
 
 // console.log(calculateEntry({ 'Adult': 2, 'Senior': 3, 'Child': 1 }));
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+function getAnimalMap(options) {
+  // seu código aqui
+  return options;
+}
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -119,9 +120,10 @@ function increasePrices(percentage) {
     });
 }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+  return idOrName;
+}
 
 module.exports = {
   calculateEntry,
