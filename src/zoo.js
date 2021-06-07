@@ -61,11 +61,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 // De acordo com o teste e o arquivo data, os elementos managers e responsibleFor são arrays, assim, houve necessidade de acrescenter no parametro da função. Após, declarada uma constante com a estrutura do novo employee e assim, através do push, o newEmployee é acrescentado ao final do array employees
 
-/* function countAnimals(species) {
-  // seu código aqui
+function countAnimals(animal) {
+  if (animal === undefined) {
+    const animals = {};
+    species.forEach((element) => { animals[element.name] = element.residents.length; });
+    return animals;
+  }
+  return species.find((element) => element.name === animal).residents.length;
 }
 
-function calculateEntry(entrants) {
+// Conforme orientação do Jensen, inicialmente, garantimos que a função retorne um objeto vazio quando não há parametros, passando no primeiro teste. Após, dentro do array species, executamos o metodo forEach , ou seja, executa uma callback para cada elemento do array, dessa forma, ele irá procurar o nome de cada elemento de devolvendo um array com a quantidade de nomes, cada nome será um numero acrescido nesse novo array. Assim, ao final, utiliza-se o metodo find para que quando passado o parametro, retorne o número de animais correspondente.
+
+/*  function calculateEntry(entrants) {
   // seu código aqui
 }
 
@@ -92,7 +99,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
