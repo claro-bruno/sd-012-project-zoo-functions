@@ -51,11 +51,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(especime) {
-  //feito com a dica do Gabriel Bueno usando como base o código na seguinte fonte:
-  //https://vmarchesin.medium.com/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
+  //  feito com a dica do Gabriel Bueno usando como base o código na seguinte fonte:
+  //  https://vmarchesin.medium.com/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
   if (!especime) {
     return species.reduce((acumulador, animal) => ({
-      ...acumulador, [animal.name]: animal.residents.length
+      ...acumulador, [animal.name]: animal.residents.length,
     }), {});
   }
   const anim = species.find((animal) => animal.name === especime);
@@ -79,20 +79,17 @@ function getSchedule(dayName) {
   const schedule = {};
   if (!dayName) {
     Object.keys(hours).forEach((key) => {
-      schedule[key] = `Open from ${hours[key].open}am until ${hours[key].close - 12}pm`
+      schedule[key] = `Open from ${hours[key].open}am until ${hours[key].close - 12}pm`;
     });
-    schedule.Monday = 'CLOSED'
+    schedule.Monday = 'CLOSED';
     return schedule;
   }
 
-  if (dayName === 'Monday') {
-    schedule[dayName] = 'CLOSED';
-    return schedule;
-  } else {
-    const dia = hours[dayName]
-    schedule[dayName] = `Open from ${dia.open}am until ${dia.close - 12}pm`
-    return schedule;
-  }
+  if (dayName === 'Monday') { schedule[dayName] = 'CLOSED'; return schedule; }
+
+  const dia = hours[dayName];
+  schedule[dayName] = `Open from ${dia.open}am until ${dia.close - 12}pm`;
+  return schedule;
 }
 
 // function getOldestFromFirstSpecies(id) {
