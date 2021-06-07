@@ -48,19 +48,19 @@ function isManager(id) {
   return getAdm;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-    const newEmployee = () => ({
-      id,
-      firstName,
-      lastName,
-      managers,
-      responsibleFor,
-    });
-    data.employees.push(newEmployee());
-    return employees;
-  }
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = () => ({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+  data.employees.push(newEmployee());
+  return employees;
 }
+
 
 function countAnimals(getSpecies) {
   if (getSpecies === undefined) {
@@ -70,12 +70,12 @@ function countAnimals(getSpecies) {
       const quantidade = specie.residents.length;
       result[`${nome}`] = quantidade;
       return result;
-      });
-      return eachSpecie[0];
-    }
-    const specie = (nome) => species.find((thisSpecie) => thisSpecie.name === nome).residents.length;
-    return specie(getSpecies);
+    });
+    return eachSpecie[0];
   }
+  const specie = (nome) => species.find((thisSpecie) => thisSpecie.name === nome).residents.length;
+  return specie(getSpecies);
+}
 
 function calculateEntry(entrants) {
   if (entrants === undefined) {
