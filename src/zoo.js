@@ -106,7 +106,7 @@ function getOldestFromFirstSpecies(funcId) {
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')) CORRIGIR
 
 function increasePrices(percentage) {
-  let { Adult, Senior, Child } = prices;
+  const { Adult, Senior, Child } = prices;
   prices = {
     Adult: Math.round((Adult * (percentage / 100) + Adult) * 100) / 100,
     Senior: Math.round((Senior * (percentage / 100) + Senior) * 100) / 100,
