@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { species, employees, prices } = require('./data');
-const data = require('./data');
+//const data = require('./data');
 
 const getSpeciesByIds = (...ids) => {
   // seu código aqui
@@ -30,14 +30,17 @@ const getEmployeeByName = (employeeName) => {
   if (!employeeName) { // used '!' come from https://pt.stackoverflow.com/questions/108973/qual-a-fun%C3%A7%C3%A3o-do-operador-exclama%C3%A7%C3%A3o
     return {};
   }
-  return employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  return employees.find((employee) => 
+  employee.firstName === employeeName || employee.lastName === employeeName);
 };
 
 const createEmployee = (personalInfo, associatedWith) => {
   return { ...personalInfo, ...associatedWith };
-}
+};
 
-const isManager = (id) => {return employees.some((employee) => employee.managers.includes(id))};
+const isManager = (id) => {
+  return employees.some((employee) => employee.managers.includes(id));
+};
 
 const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
   return employees.push({
@@ -47,7 +50,7 @@ const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
     managers: managers || [],
     responsibleFor: responsibleFor || [], // ideia da condição veio de https://github.com/tryber/sd-012-project-zoo-functions/blob/tharcio-sampaio-zoo-functions-project/src/zoo.js
   });
-}
+};
 
 const countAnimals = (specieName) => {
   const selectSpecies = species.find((specie) => specie.name === specieName);
@@ -67,7 +70,7 @@ const calculateEntry = (entrants) => {
     return (Adult * AdultTickets) + (Child * ChildTickets) + (Senior * SeniorTickets);
   }
   return 0;
-}
+};
 
 function getAnimalMap(options) {
   // seu código aqui
