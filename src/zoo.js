@@ -30,15 +30,15 @@ function createEmployee() {
 }
 
 function isManager() {
-  // seu código aqui  
+  // seu código aqui
 }
 
 function addEmployee() {
   // seu código aqui (id, firstName, lastName, managers, responsibleFor)
 }
 
-function countAnimals(){
-  // seu código aqui (species) 
+function countAnimals() {
+  // seu código aqui (species)
 }
 
 function calculateEntry() {
