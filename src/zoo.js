@@ -87,7 +87,17 @@ function getAnimalMap(options = {}) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  const { hours } = data;
+  if (dayName) {
+    schedule[dayName] = scheduleMessage(dayName, hours);
+  } else {
+    Object.keys(hours).forEach((day) => {
+      schedule[day] = scheduleMessage(day, hours);
+    });
+  }
+  return schedule;
+}
 }
 
 function getOldestFromFirstSpecies(id) {
