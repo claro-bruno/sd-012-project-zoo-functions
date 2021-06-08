@@ -77,8 +77,8 @@ const calculateEntry = (entrants) => {
     Senior: idoso = 0,
     Child: crianca = 0,
   } = entrants;
-  const totalValue = ((adulto * data.prices.Adult) + (idoso * data.prices.Senior) +
-    (crianca * data.prices.Child));
+  const totalValue = ((adulto * data.prices.Adult) + (idoso * data.prices.Senior)
+  + (crianca * data.prices.Child));
   return totalValue;
 };
 
@@ -97,9 +97,7 @@ function getSchedule(dayName) {
     Monday: 'CLOSED',
   };
   if (!dayName) return days;
-  return {
-    [dayName]: days[dayName]
-  };
+  return { [dayName]: days[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -108,7 +106,7 @@ function getOldestFromFirstSpecies(id) {
     .residents.reduce((accumulator, currentValue) => {
       if (accumulator.age > currentValue.age) return accumulator;
       return currentValue;
-    })
+    });
   return [firstAnimal.name, firstAnimal.sex, firstAnimal.age];
 }
 
