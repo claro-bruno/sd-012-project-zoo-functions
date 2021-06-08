@@ -20,26 +20,45 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const animals = species.find((species1) => species1.name === animal);
+  return animals.residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  if (!employeeName) {
+    return {};
+  }
+  return employees.find(((employee) => employee.firstName === employeeName
+  || employee.lastName === employeeName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  return {
+    ...personalInfo,
+    ...associatedWith,
+  };
 }
 
 function isManager(id) {
   // seu código aqui
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers =[], responsibleFor = []) {
   // seu código aqui
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(species) {
+function countAnimals(species2) {
   // seu código aqui
+  if (!species2) {
+    const animalObj = {};
+    species.forEach((specie) => { animalObj[specie.name] = specie.residents.length; });
+    return animalObj;
+  }
+  return species.find((specie) => specie.name === species2).residents.length;
 }
 
 function calculateEntry(entrants) {
