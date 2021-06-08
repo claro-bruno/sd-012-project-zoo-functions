@@ -55,7 +55,8 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 const countAnimals = (specieName) => {
   const selectSpecies = species.find((specie) => specie.name === specieName);
   const returnQtd = {};
-  species.forEach((specie) => { returnQtd[specie.name] = specie.residents.length });
+
+  species.forEach((specie) => { returnQtd[specie.name] = specie.residents.length; });
 
   if (specieName) {
     return selectSpecies.residents.length;
@@ -72,16 +73,16 @@ const calculateEntry = (entrants) => {
   return 0;
 };
 
-function getAnimalMap(options) {
+/* function getAnimalMap(options) {
   // seu código aqui
-}
+} */
 
 function getSchedule(dayName) {
   const schedules = {};
 
   Object.keys(hours).forEach((key) => {
     schedules[key] = `Open from ${hours[key].open}am until ${hours[key].close - 12}pm`;
-    if (key === 'Monday') { 
+    if (key === 'Monday') {
       schedules[key] = 'CLOSED';
     }
   });
@@ -92,7 +93,7 @@ function getSchedule(dayName) {
   return schedules;
 }
 
-function getOldestFromFirstSpecies(id) {
+/* function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
@@ -102,7 +103,7 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-}
+} */
 
 module.exports = {
   calculateEntry,
