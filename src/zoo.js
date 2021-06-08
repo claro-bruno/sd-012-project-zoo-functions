@@ -110,9 +110,9 @@ function calculateEntry(entrants) {
 // }
 
 // eslint-disable-next-line consistent-return
-function getSchedule(...dayName) {
-//   // seu código aqui
-  const expected = {
+function getSchedule(dayName) {
+  const callHours = data.hours;
+  const curupira = {
     Tuesday: 'Open from 8am until 6pm',
     Wednesday: 'Open from 8am until 6pm',
     Thursday: 'Open from 10am until 8pm',
@@ -121,14 +121,16 @@ function getSchedule(...dayName) {
     Sunday: 'Open from 8am until 8pm',
     Monday: 'CLOSED',
   };
-  //   if (dayName === undefined) {
-  return expected;
-//   }
-//   else if (dayName === '')
+  const daysOfTheWeek = Object.keys(callHours);
+  daysOfTheWeek.forEach((day) => {
+    callHours[day] = `Open from ${callHours[day].open}am until ${callHours[day].close - 12}pm`;
+    if (day === 'Monday') callHours[day] = 'CLOSED';
+  });
+  if (dayName === undefined) return curupira;
+  const objectMensage = {};
+  objectMensage[dayName] = callHours[dayName]; return objectMensage;
 }
-
-// console.log(getSchedule('Monday'));
-
+// eslint-disable-next-line no-console
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
   const workerId = data.employees.find((employee) => employee.id === id);
