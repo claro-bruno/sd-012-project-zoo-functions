@@ -58,19 +58,19 @@ function calculateEntry(entrants = {}) {
 }
 
 function getAnimalMap() {
-  // options
-  // const animals = data.species;
+  const animals = data.species;
 
-  // const locations = animals.reduce((acc, current) => {
-  //   acc[current.location] = [];
-  //   return acc;
-  // }, {});
+  const locations = animals.reduce((acc, current) => {
+    acc[current.location] = [];
+    return acc;
+  }, {});
 
-  // const animalsBySex = (sex) => {
-  //   return animals.filter((element) => element.residents).filter((animal) => animal.sex === 'sex');
-  // };
-
-  // return animalsBySex('female');
+  Object.keys(locations).forEach((key) => {
+    const arrayAnimals = data.species.filter((currentAnimal) => currentAnimal.location === key);
+    const nameAnimals = arrayAnimals.map((animal) => animal.name);
+    locations[key] = nameAnimals;
+  });
+  return locations;
 }
 
 const msgReturn = (acc, day) => {
@@ -114,8 +114,60 @@ function increasePrices(percentage) {
   });
 }
 
-function getEmployeeCoverage() {
-  // seu código aqui idOrName
+const getResponsibleFor = (employeesObj) => {
+  const { employees: allEmployees, species } = data;
+
+  const employeesNames = Object.keys(employeesObj);
+  employeesNames.forEach((currentName) => {
+    const firstName = currentName.split(' ')[0];
+    const employee = allEmployees.filter((people) => people.firstName === firstName);
+    const animalsId = employee[0].responsibleFor;
+
+    animalsId.forEach((currentId) => {
+      const animal = species.filter((currentAnimal) => currentAnimal.id === currentId)[0].name;
+      employeesObj[currentName].push(animal);
+    });
+  });
+};
+
+const createObjSinglePeople = (filter) => {
+  const [people] = filter;
+  const obj = {};
+  obj[`${people.firstName} ${people.lastName}`] = [];
+  getResponsibleFor(obj);
+  return obj;
+};
+
+const getSinglePeople = (idOrName) => {
+  let people = data.employees.filter((currentPeople) => currentPeople.id === idOrName);
+  if (people.length > 0) {
+    return createObjSinglePeople(people);
+  }
+
+  people = data.employees.filter((currentPeople) => currentPeople.firstName === idOrName);
+  if (people.length > 0) {
+    return createObjSinglePeople(people);
+  }
+
+  people = data.employees.filter((currentPeople) => currentPeople.lastName === idOrName);
+  if (people.length > 0) {
+    return createObjSinglePeople(people);
+  }
+};
+
+function getEmployeeCoverage(idOrName) {
+  const { employees: allEmployees } = data;
+
+  if (typeof idOrName === 'undefined') {
+    const employeesObj = allEmployees.reduce((accumulator, current) => {
+      const name = `${current.firstName} ${current.lastName}`;
+      accumulator[name] = [];
+      return accumulator;
+    }, {});
+    getResponsibleFor(employeesObj);
+    return employeesObj;
+  }
+  return getSinglePeople(idOrName);
 }
 
 module.exports = {
