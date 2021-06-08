@@ -115,13 +115,10 @@ function countAnimals(species) {
 // 8=========================================================
 
 function calculateEntry(entrants = 0) {
-  // const personAge = Object.keys(entrants); // pega as chaves do entrants [Adult, Senior, Child]
-  // const prices = Object.values(data.prices); // pega o valor do data.prices [49.99, 24.99, 20.99]
-  const { prices } = data.prices;
-  // return prices.Adultt;
+  const personsPrice = data.prices;
 
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
+  return Adult * personsPrice.Adult + Child * personsPrice.Child + Senior * personsPrice.Senior;
   // return personAge.reduce((acc, curr) => {
   //   const teste = acc + entrants[curr] * prices[curr]; // PERGUNTAR PQ NÃO FUNCIONA ASSIM
   //   return teste;
@@ -172,7 +169,7 @@ function getSchedule(dayName) {
   return { [dayName]: daysHours[dayName] };
 }
 
-console.log(getSchedule('Sunday'));
+// console.log(getSchedule('Sunday'));
 
 // 11=========================================================
 
@@ -203,7 +200,7 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-console.log(increasePrices(30));
+// console.log(increasePrices(30));
 
 // 13=========================================================
 
