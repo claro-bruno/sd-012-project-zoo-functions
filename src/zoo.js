@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { species } = require('./data');
-const { prices } = require('./data');
+const { prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -111,8 +111,8 @@ function calculateEntry(entrants) {
 
 // eslint-disable-next-line consistent-return
 function getSchedule(dayName) {
-  const callHours = data.hours;
-  const curupira = {
+  const callHours = { ...hours };
+  const weekDays = {
     Tuesday: 'Open from 8am until 6pm',
     Wednesday: 'Open from 8am until 6pm',
     Thursday: 'Open from 10am until 8pm',
@@ -126,11 +126,13 @@ function getSchedule(dayName) {
     callHours[day] = `Open from ${callHours[day].open}am until ${callHours[day].close - 12}pm`;
     if (day === 'Monday') callHours[day] = 'CLOSED';
   });
-  if (dayName === undefined) return curupira;
+  if (dayName === undefined) return weekDays;
   const objectMensage = {};
   objectMensage[dayName] = callHours[dayName]; return objectMensage;
 }
+// eslint-disable-next-line no-undef
 // eslint-disable-next-line no-console
+console.log(getSchedule('Tuesday'));
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
   const workerId = data.employees.find((employee) => employee.id === id);
@@ -153,8 +155,27 @@ function increasePrices(percentage) {
 // console.log(increasePrices(50));
 
 // function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
+//   const employeesAnimals = {
+//     'Nigel Nelson': ['lions', 'tigers'],
+//     'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+//     'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+//     'Wilburn Wishart': ['snakes', 'elephants'],
+//     'Stephanie Strauss': ['giraffes', 'otters'],
+//     'Sharonda Spry': ['otters', 'frogs'],
+//     'Ardith Azevado': ['tigers', 'bears'],
+//     'Emery Elser': ['elephants', 'bears', 'lions'],
+//   };
+//   const employeeId = data.employees.find((employee) => employee.id === idOrName);
+//   const employeeFirstName = employeeId.firstName;
+//   const employeeLastName = employeeId.lastName;
+//   const employeeAnimals = employeeId.responsibleFor;
+//   const animalName = data.species.filter((specie) =>
+//     idOrName.find((animalId) => specie.id === animalId));
+//   //   if (idOrName = employeeId ) {`${employeeFirstName} ${employeeLastName}: `
+//   // }
+//   return animalName;
 // }
+// console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
