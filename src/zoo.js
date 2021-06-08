@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const data = require('./data');
+// const data = require('./data');
 const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -121,8 +121,8 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function getEmployeeCoverage() {
-  // seu código aqui idOrName
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
 }
 
 module.exports = {
