@@ -39,10 +39,10 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
-// function isManager(id) {
-//   const employees = data.employees.find((employee) => employee.id === id);
-//   return employees.managers.length === 1;
-// }
+function isManager(id) {
+  const employees = data.employees.find((employee) => employee.id === id);
+  return employees.managers.length === 1;
+}
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const addName = {
@@ -101,7 +101,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
