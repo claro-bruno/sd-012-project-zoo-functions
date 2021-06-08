@@ -35,12 +35,12 @@ function getEmployeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) {
   return {
     ...personalInfo,
-    ...associatedWith
+    ...associatedWith,
   };
 }
 
 function isManager(id) {
-  const employees = data.employees.find((employee) => employee.id === id)
+  const employees = data.employees.find((employee) => employee.id === id);
   return employees.managers.length === 1;
 }
 
