@@ -100,9 +100,12 @@ function getOldestFromFirstSpecies(id) {
   return [moreOlden.name, moreOlden.sex, moreOlden.age];
 }
 
-function increasePrices() {
-  // percentage
-  // seu código aqui
+function increasePrices(percentage) {
+//  Algoritimo reaproveitado de @thalles-carneirothalles-carneiro.
+  pricesArray.Adult = Math.round((pricesArray.Adult * (1 + (percentage / 100)) * 100)) / 100;
+  pricesArray.Child = Math.round((pricesArray.Child * (1 + (percentage / 100)) * 100)) / 100;
+  pricesArray.Senior = Math.round((pricesArray.Senior * (1 + (percentage / 100)) * 100)) / 100;
+  return pricesArray;
 }
 
 function getEmployeeCoverage() {

@@ -332,3 +332,6 @@ module.exports = {
     Child: 20.99,
   },
 };
+// mplemente a função getAnimalMap
+// Implemente a função increasePrices
+// Implemente a função getEmployeeCoverage
