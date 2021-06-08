@@ -54,9 +54,10 @@ function countAnimals(especime) {
   //  feito com a dica do Gabriel Bueno usando como base o código na seguinte fonte:
   //  https://vmarchesin.medium.com/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
   if (!especime) {
-    return species.reduce((acumulador, animal) => ({
+    const anim = species.reduce((acumulador, animal) => ({
       ...acumulador, [animal.name]: animal.residents.length,
     }), {});
+    return anim;
   }
   const anim = species.find((animal) => animal.name === especime);
   return anim.residents.length;
@@ -72,7 +73,6 @@ function calculateEntry(entrants) {
 }
 
 // function getAnimalMap() {
-
 // }
 
 function getSchedule(dayName) {
@@ -92,9 +92,17 @@ function getSchedule(dayName) {
   return schedule;
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  const funcionario = employees.find((person) => person.id === id);
+  const firstAnimal = funcionario.responsibleFor.find((animal) => animal[0]);
+  const bixo = species.find((animal) => animal.id === firstAnimal);
+  return Object.values(bixo.residents.reduce((previous, current) => ((previous.age > current.age)
+    ? previous : current)));
+}
+// a função abaixo foi feita com base na resposta do seguinte post no stack Overflow:
+// https://stackoverflow.com/questions/4020796/finding-the-max-value-of-an-attribute-in-an-array-of-objects
+
+getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
 
 function increasePrices(percentage) {
   const operator = (1 + (percentage / 100));
@@ -119,7 +127,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
