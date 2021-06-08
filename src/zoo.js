@@ -84,9 +84,12 @@ function getSchedule(dayName) {
 
 // }
 
-// function increasePrices(percentage) {
-
-// }
+function increasePrices(percentage) {
+  const priceKeys = Object.keys(prices);
+  priceKeys.forEach((key) => {
+    prices[key] = Math.round(prices[key] * (1 + percentage / 100) * 100) / 100;
+  });
+}
 
 // function getEmployeeCoverage(idOrName) {
 
@@ -104,6 +107,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
