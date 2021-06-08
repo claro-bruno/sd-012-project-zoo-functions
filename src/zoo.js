@@ -28,6 +28,11 @@ function getAnimalsOlderThan(animal, age) {
   const specie = species.find((animals) => animals.name === animal);
   return specie.residents.every((resident) => resident.age >= age);
 }
+/* function getAnimalsOlderThan(animal, age) {
+  const { species } = data;
+  const specie = species.find((name) => name.name === animal);
+  return specie.residents.every((animalonly) => animalonly.age >= age);
+} */
 
 function getEmployeeByName(employee) {
   if (employee === undefined) {
@@ -57,12 +62,29 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(newEmployee);
 }
 
-function countAnimals() {
-  // seu código aqui  :  species
+function countAnimals(species) {
+  // species.names.residents
+  if (!species) {
+    const result = {};
+    data.species.forEach(({ name, residents }) => {
+      result[name] = residents.length;
+    });
+    return result;
+  }
+  return data.species.find((specie) => specie.name === species).residents.length;
 }
 
-function calculateEntry() {
-  // seu código aqui : entrants
+function calculateEntry(entrants) {
+  // prices:
+  // Adult, Child e Senior,
+  if (!entrants || entrants.length === 0) return 0;
+  // desestrutura algumas chaves e predefine valores caso estes nao venham do parametro
+  const { Adult: countAdults = 0, Child: countChildren = 0,
+    Senior: countSeniors = 0 } = entrants;
+  const accumulatorAdults = data.prices.Adult * countAdults;
+  const accumulatorChildren = data.prices.Child * countChildren;
+  const accumulatorSeniors = data.prices.Senior * countSeniors;
+  return (accumulatorAdults + accumulatorChildren + accumulatorSeniors);
 }
 
 function getAnimalMap() {
