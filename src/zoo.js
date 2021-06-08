@@ -76,7 +76,7 @@ const calculateEntry = (entrants) => {
   const totalValue = ((adulto * data.prices.Adult) + (idoso * data.prices.Senior)
     + (crianca * data.prices.Child));
   return totalValue;
-}
+};
 
 // function getAnimalMap(options) {
 //   // seu código aqui
