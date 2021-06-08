@@ -80,7 +80,9 @@ function countAnimals(especie) {
   const animalsObj = {};
   if (especie === undefined) {
     data.species.forEach(
-      (animal) => animalsObj[`${animal.name}`] = animal.residents.length,
+      (animal) => {
+        animalsObj[`${animal.name}`] = animal.residents.length;
+      },
     );
     return animalsObj;
   }
@@ -101,20 +103,19 @@ function calculateEntry(entrants) {
   return price;
 }
 
-
-
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+// seu código aqui
+// }
 
 function getSchedule(dayName) {
-  const objToArray = Object.entries(data.hours);
   const objSchedule = {};
   const objDay = {};
-  objToArray.forEach(
-    (
-      schedule,
-    ) => objSchedule[schedule[0]] = `Open from ${Object.values(schedule[1])[0]}am until ${Object.values(schedule[1])[1] - 12}pm`,
+  Object.entries(data.hours).forEach(
+    (schedule) => {
+      objSchedule[
+        schedule[0]] = `Open from ${
+        Object.values(schedule[1])[0]}am until ${Object.values(schedule[1])[1] - 12}pm`;
+    },
   );
   objSchedule.Monday = 'CLOSED';
   if (dayName === undefined) {
@@ -122,7 +123,8 @@ function getSchedule(dayName) {
   }
   const scheduleToArray = Object.entries(objSchedule);
   const findDayName = scheduleToArray.find((name) => dayName === name[0]);
-  objDay[findDayName[0]] = findDayName[1];
+  const [firstDayName, secondDayName] = findDayName;
+  objDay[firstDayName] = secondDayName;
   return objDay;
 }
 
@@ -150,28 +152,17 @@ function increasePrices(percentage) {
   ) / 100;
 }
 
-function getEmployeeCoverage(idOrName) {
-  if (idOrName === undefined) {
-    const objCovarage = {};
-    // const objName = {};
-    data.employees.forEach((covarage) => objCovarage[`${covarage.firstName} ${covarage.lastName}`] = covarage.responsibleFor);
-    console.log(objCovarage);
-    console.log(objCovarage['Nigel Nelson'][0]); // 0938aa23-f153-4937-9f88-4858b24d6bce
-    console.log(objCovarage['Nigel Nelson']); // [ '0938aa23-f153-4937-9f88-4858b24d6bce','e8481c1d-42ea-4610-8e11-1752cfc05a46' ]
-    console.log(Object.entries(objCovarage));
-    // const arrayName = objCovarage.map((id) => data.species.find((idAnimal) => id === idAnimal) console.log(`${idAnimal.name}`));
-    // console.log('arrayName:', arrayName);
-  }
-}
+// function getEmployeeCoverage(idOrName) {
+// }
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
