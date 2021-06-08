@@ -32,12 +32,16 @@ function getEmployeeByName(employeeName) {
   return peopleEmployees;
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  return {
+    ...personalInfo,
+    ...associatedWith,
+  };
+}
 
 // function isManager(id) {
-//   // seu código aqui
+//   const employees = data.employees.find((employee) => employee.id === id);
+//   return employees.managers.length === 1;
 // }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -101,5 +105,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
