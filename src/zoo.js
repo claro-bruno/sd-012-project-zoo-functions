@@ -77,7 +77,7 @@ const calculateEntry = (entrants) => {
     Senior: idoso = 0,
     Child: crianca = 0,
   } = entrants;
-  const totalValue = ((adulto * data.prices.Adult) + (idoso * data.prices.Senior) 
+  const totalValue = ((adulto * data.prices.Adult) + (idoso * data.prices.Senior)
   + (crianca * data.prices.Child));
   return totalValue;
 };
