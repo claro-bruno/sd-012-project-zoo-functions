@@ -113,11 +113,17 @@ function getOldestFromFirstSpecies(id) {
 
 //  Com base nos testes, primeiro buscamos o primeiro funcionário responsável por gerenciar a especie. Com o Id desse funcionário, localizamos os animais daquela espécie. Através do sort, com a inversão na parte final do age2 - ag1, ordenamos o array do maior para o menor, e assim, apenas pedimos o retorno dos valores da posição 0, que será o animal de maior idade.
 
-/*  function increasePrices(percentage) {
-  // seu código aqui
+function increasePrices(percentage) {
+  const priceIncrease = (1 + (percentage / 100));
+  Object.keys(prices).forEach((key) => {
+    prices[key] = Math.round(prices[key] * priceIncrease * 100) / 100;
+  });
+  return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
+//  Em uma constante, colocamos o calculo da porcentagem, acessando as chaves do objeto price e realizando uma iteração para cada chave, alterando seu valor, de acordo com o parametro passado, onde o valor da chave do objeto price será igual ao valor arrendondado (atraves do math.round), do resultado da aplicação da porcentagem passada como parametro, retornando, ao final, o valor devidamente atualizado.
+
+/*  function getEmployeeCoverage(idOrName) {
   // seu código aqui
 } */
 
@@ -133,6 +139,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
