@@ -86,6 +86,12 @@ function getAnimalMap(options = {}) {
   return locations;
 }
 
+function hoursConverter(hour) {
+  if (hour > 12) return `${(hour - 12)}pm`;
+  if (hour === 0) return '12pm';
+  return `${hour}am`;
+}
+
 function scheduleMessage(dayName, schedule) {
   if (schedule[dayName].open !== schedule[dayName].close) {
     return `Open from ${hoursConverter(schedule[dayName]
