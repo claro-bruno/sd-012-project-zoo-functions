@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -46,17 +46,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species1) { // referencia: eullerbraz-tuma-12
   if (!species1) { // reduce e spread para criar novo objeto com nome e quant de animais.
-    return data.species.reduce((acc, specie) => 
-    ({ ...acc, [specie.name]: specie.residents.length }), {});
+    return data.species.reduce((acc, specie) =>
+      ({ ...acc, [specie.name]: specie.residents.length }), {});
   }
   return data.species.find((specie) => specie.name === species1).residents.length;
 }
 
 function calculateEntry(entrants) {
   if (!entrants) return 0;
-  
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return ((prices.Adult * Adult) + (prices.Child * Child) + (prices.Senior * Senior));
 }
-
 /* function getSchedule(dayName) {
   // seu código aqui
 }
