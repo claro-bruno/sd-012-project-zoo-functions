@@ -96,6 +96,7 @@ function getOldestFromFirstSpecies(id) {
   });
   return Object.values(getOldest);
 }
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
   const getPrices = Object.keys(prices);
@@ -106,10 +107,24 @@ function increasePrices(percentage) {
   return prices;
 }
 
-/*
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-} */
+  if (!idOrName) {
+    const result = {};
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      result[`${firstName} ${lastName}`] = responsibleFor;
+    });
+    return result;
+  }
+  
+  const find = employees.find((employee) => employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
+  
+  console.log(find);
+
+}
+console.log(getEmployeeCoverage('Azevado'));
+
+// return { [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor };
+// || employee.firstName === idOrName || employee.lastName === idOrName
 
 module.exports = {
   calculateEntry,
@@ -118,7 +133,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
