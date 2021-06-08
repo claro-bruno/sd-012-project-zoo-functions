@@ -51,10 +51,16 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   employees.push(createEmployee(personalInfo, associatedWith));
 }
 
-function countAnimals() {
+function countAnimals(speciesName) {
+  if (speciesName) {
+    return species.find(({ name }) => speciesName === name).residents.length;
+  }
+  const speciescontagem = species.reduce((acc, atual) => {
+    acc[atual.name] = atual.residents.length;
+    return acc;
+  }, {});
+  return speciescontagem;
 
-  //   seu código aqui
-  // (species)
 }
 
 function calculateEntry() {
