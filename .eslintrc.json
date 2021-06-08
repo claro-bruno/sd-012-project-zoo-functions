@@ -6,6 +6,6 @@
     "rules": {
         "max-lines": "off",
         "max-params": "off",
-        "linebrak-style": "off"
+        "linebreak-style": "off"
     }
 }
