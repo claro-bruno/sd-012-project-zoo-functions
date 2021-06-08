@@ -92,9 +92,28 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   if (Object.keys(dayName).length === 0) { return }
-// }
+function getSchedule(dayName) {
+  const newSchedule = {};
+  const workingDays = Object.keys(data.hours);
+  workingDays.forEach((day) => {
+    const { open, close } = data.hours[day];
+    if (day === 'Monday'){
+      newSchedule[day] = 'CLOSED';
+    } else {
+      newSchedule[day] = `Open from ${open}am until ${close - 12}pm`;
+    }
+  });
+  if (!dayName) {
+    return newSchedule;
+  }
+  const requested = { 
+    [dayName]: newSchedule[dayName]
+  };
+  console.log(newSchedule[dayName])
+  return requested;
+
+}
+console.log(getSchedule('Thursday'));
 
 // Requisito concluido com auxílio do repositório do colega Rodrigo Facury, precisei de ajuda para desenvolver a lógica
 function getOldestFromFirstSpecies(funcId) {
@@ -120,18 +139,19 @@ function increasePrices(percentage) {
 // console.log(increasePrices(30))
 
 // function getEmployeeCoverage(idOrName) {
+//   const obj = {};
 //   if (idOrName) {
-//     const checkCredentials = employees.find((employee) => employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
-//     return ({[`${checkCredentials.firstName} ${checkCredentials.lastName}`]: `${checkCredentials.responsibleFor}`})
-//   } else {
-//     employees.forEach((employee) => ({[`${employee.firstName} ${employee.lastName}`]: `${employee.responsibleFor}`}))
+//     const checkCredentials = employees.find((employee) => employee.id === idOrName 
+//     || employee.firstName === idOrName || employee.lastName === idOrName);
 //   }
+//   employees.forEach((employee) => obj[`${employee.firstName} ${employee.lastName}`]);
 // }
+
 // console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'))
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
