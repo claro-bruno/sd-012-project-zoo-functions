@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-// const data = require('./data');
+const data = require('./data');
 const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -107,8 +107,18 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(findResidents[0]);
 }
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  // seu código aqui
+  const { Adult, Senior, Child } = prices;
+  const adultPrice = Math.round((((Adult * percentage) / 100) + Adult) * 100) / 100;
+  const seniorPrice = Math.round((((Senior * percentage) / 100) + Senior) * 100) / 100;
+  const childPrice = Math.round((((Child * percentage) / 100) + Child) * 100) / 100;
+
+  prices.Adult = adultPrice;
+  prices.Senior = seniorPrice;
+  prices.Child = childPrice;
+
+  return prices;
 }
 
 function getEmployeeCoverage() {
