@@ -102,11 +102,18 @@ function getSchedule(dayName) {
   return week;
 }
 
-/*  function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+// Precisei sair buscar minha filha. * Lembrar de acrescentar a explicacao depois.
+
+function getOldestFromFirstSpecies(id) {
+  const funcionarioId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const specieId = species.find((specie) => specie.id === funcionarioId).residents;
+  const oldAnimal = specieId.sort((age1, age2) => age2.age - age1.age);
+  return [oldAnimal[0].name, oldAnimal[0].sex, oldAnimal[0].age];
 }
 
-function increasePrices(percentage) {
+//  Com base nos testes, primeiro buscamos o primeiro funcionário responsável por gerenciar a especie. Com o Id desse funcionário, localizamos os animais daquela espécie. Através do sort, com a inversão na parte final do age2 - ag1, ordenamos o array do maior para o menor, e assim, apenas pedimos o retorno dos valores da posição 0, que será o animal de maior idade.
+
+/*  function increasePrices(percentage) {
   // seu código aqui
 }
 
@@ -125,7 +132,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
