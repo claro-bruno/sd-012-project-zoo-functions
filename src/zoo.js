@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 const { species } = data;
 
 function getSpeciesByIds(...ids) {
@@ -17,65 +18,65 @@ function getSpeciesByIds(...ids) {
   return allAnimals;
 }
 
-function getAnimalsOlderThan() {
-  // seu código aqui (animal, age)
+function getAnimalsOlderThan(animal, age) {
+  // seu código aqui 
 }
 
-function getEmployeeByName() {
-  // seu código aqui (employeeName)
+function getEmployeeByName(employeeName) {
+  // seu código aqui 
 }
-function createEmployee() {
-  // seu código aqui (personalInfo, associatedWith)
-}
-
-function isManager() {
-  // seu código aqui (id)
+function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui 
 }
 
-function addEmployee() {
-  // seu código aqui (id, firstName, lastName, managers, responsibleFor)
+function isManager(id) {
+  // seu código aqui 
 }
 
-function countAnimals() {
-  // seu código aqui (species)
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  // seu código aqui 
 }
 
-function calculateEntry() {
-  // seu código aqui (entrants)
+function countAnimals(species) {
+  // seu código aqui 
 }
 
-function getAnimalMap() {
-  // seu código aqui (options)
+function calculateEntry(entrants) {
+  // seu código aqui 
 }
 
-function getSchedule() {
-  // seu código aqui (dayName)
+function getAnimalMap(options) {
+  // seu código aqui 
 }
 
-function getOldestFromFirstSpecies() {
-  // seu código aqui (id)
+function getSchedule(dayName) {
+  // seu código aqui 
 }
 
-function increasePrices() {
-  // seu código aqui (percentage)
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
 }
 
-function getEmployeeCoverage() {
-  // seu código aqui (idOrName)
+function increasePrices(percentage) {
+  // seu código aqui 
+}
+
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui 
 }
 
 module.exports = {
-  //calculateEntry,
-  //getSchedule,
-  //countAnimals,
-  //getAnimalMap,
+  calculateEntry,
+  getSchedule,
+  countAnimals,
+  getAnimalMap,
   getSpeciesByIds,
-  //getEmployeeByName,
-  //getEmployeeCoverage,
-  //addEmployee,
-  //isManager,
-  //getAnimalsOlderThan,
-  //getOldestFromFirstSpecies,
-  //increasePrices,
-  //createEmployee,
+  getEmployeeByName,
+  getEmployeeCoverage,
+  addEmployee,
+  isManager,
+  getAnimalsOlderThan,
+  getOldestFromFirstSpecies,
+  increasePrices,
+  createEmployee,
 };
