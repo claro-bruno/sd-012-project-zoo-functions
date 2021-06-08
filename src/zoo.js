@@ -57,21 +57,46 @@ function countAnimals(getSpecies) {
   return specie(getSpecies);
 }
 
-// function calculateEntry(entrants) {
-
-// }
+function calculateEntry(...entrants) {
+  if (!entrants.length || Object.keys(entrants).length > 1) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants[0];
+  return (Adult * data.prices.Adult) + (Child * data.prices.Child) + (Senior * data.prices.Senior);
+}
 
 // function getAnimalMap(options) {
-//   // seu código aqui
+  
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  const { hours } = data;
+  const days = Object.keys(hours);
+  const obj2return = {};
+  if (!dayName) {
+    days.forEach((aux) => {
+      obj2return[aux] = `Open from ${hours[aux].open}am until ${hours[aux].close - 12}pm`;
+    });
+    obj2return.Monday = 'CLOSED';
+    return obj2return;
+  }
+  const day = days.findIndex((aux) => dayName === aux);
+  if (dayName !== 'Monday') {
+    obj2return[days[day]] = `Open from ${hours[days[day]].open}am until ${hours[days[day]]
+      .close - 12}pm`;
+  } else {
+    obj2return.Monday = 'CLOSED';
+  }
+  return obj2return;
+}
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  const specId = data.employees.find((aux) => aux.id === id).responsibleFor[0];
+  const animal = data.species.find((aux) => aux.id === specId);
+  const arrayAnimal = animal.residents;
+  const localiza = arrayAnimal.reduce((acc, value) => (acc.age >= value.age ? acc : value));
+  return [localiza.name, localiza.sex, localiza.age];
+}
 
 // function increasePrices(percentage) {
 //   // seu código aqui
@@ -82,8 +107,8 @@ function countAnimals(getSpecies) {
 // }
 
 module.exports = {
-  // calculateEntry,
-  // getSchedule,
+  calculateEntry,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
@@ -92,7 +117,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // increasePrices,
   createEmployee,
 };
