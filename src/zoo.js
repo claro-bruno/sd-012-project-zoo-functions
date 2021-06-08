@@ -82,7 +82,7 @@ function countAnimals(speciess) {
   // Com o nome de uma espécie de animal, retorna somente a quantidade
   return species.find((specie) => specie.name === speciess).residents.length;
 }
-console.log(countAnimals());
+// console.log(countAnimals());
 
 function calculateEntry(entrants) {
   // Retorna 0 se nenhum argumento for passado
@@ -105,19 +105,31 @@ function getSchedule(dayName) {
   if (!dayName) {
     const days = Object.entries(data.hours);
     // days.reduce((acc, item) => )
-    // Reduce, filter, find, some, every, foreach, map - funcionam para um array
+    // Reduce, filter, find, some, every, forEach, map - funcionam para um array
     return days;
   }
   // Se um único dia for passado, retorna somente este dia em um formato legível para humanos
+  // Object.values mostra os valores do objeto; Object.keys mostra as chaves do objeto; Object.entries mostra o array com toda a informação.
 }
 console.log(getSchedule());
+
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  // Se o parâmetro da função recebe o valor 20, o aumento é de 20%
+  // Altera o objeto prices do arquivo data.js
+  // Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais
+  const { Adult, Senior, Child } = data.prices;
+  data.prices = {
+    Adult: Math.round(Adult * (1 + percentage / 100) * 100) / 100,
+    Senior: Math.round(Senior * (1 + percentage / 100) * 100) / 100,
+    Child: Math.round(Child * (1 + percentage / 100) * 100) / 100,
+  };
+  return data.prices;
+}
+// Essa questão estava com um problema de arredondamento que foi resolvido com a ajuda do colega Raphael Soares!
 
 function getEmployeeCoverage(idOrName) {
   // Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
@@ -150,6 +162,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
