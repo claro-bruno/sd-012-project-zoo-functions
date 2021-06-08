@@ -74,13 +74,22 @@ function calculateEntry(entrants) {
 
 /* function getAnimalMap(options) {
   // seu código aqui
-}
+} */
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const days = Object.keys(data.hours);
+  const allWeek = days.reduce((acc, item) => ({
+    ...acc,
+    [item]: `Open from ${data.hours[item].open}am until ${data.hours[item].close - 12}pm`,
+  }), {});
+  allWeek.Monday = 'CLOSED';
+  if (!dayName) {
+    return allWeek;
+  }
+  return { [dayName]: allWeek[dayName] };
 }
 
-function getOldestFromFirstSpecies(id) {
+/* function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
@@ -94,7 +103,7 @@ function getEmployeeCoverage(idOrName) {
 
 module.exports = {
   calculateEntry,
-  /* getSchedule, */
+  getSchedule,
   countAnimals,
   /* getAnimalMap, */
   getSpeciesByIds,
