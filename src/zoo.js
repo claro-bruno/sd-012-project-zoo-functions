@@ -69,14 +69,14 @@ function calculateEntry(entrants) {
   return totalAdulto + totalCriança + totalIdoso;
 }
 
-function getAnimalMap(options) {
-  if (options = {}) {
-    const animaisLocaliacao = species.filter((itemArray) => itemArray.location);
-    animaisLocaliacao.sort();
-    console.log(animaisLocaliacao);
-  }
-}
-getAnimalMap();
+// function getAnimalMap(options) {
+//   if (options = {}) {
+//     const animaisLocaliacao = species.filter((itemArray) => itemArray.location);
+//     animaisLocaliacao.sort();
+//     console.log(animaisLocaliacao);
+//   }
+// }
+// getAnimalMap();
 
 function getSchedule(dayName) {
   if (dayName === 'Monday') {
@@ -129,7 +129,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
@@ -139,4 +139,4 @@ module.exports = {
   getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
-}
+};
