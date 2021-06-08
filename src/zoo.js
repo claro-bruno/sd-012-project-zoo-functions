@@ -24,27 +24,28 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  const newAnimal = species.filter((specie) => specie.name === animal );
+  const newAnimal = species.filter((specie) => specie.name === animal);
   const allAnimals = newAnimal[0].residents;
-  return allAnimals.every((animal) => animal.age >= age)
+  return allAnimals.every((item) => item.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
   if (employeeName === undefined || employeeName === null) {
-     return {};
+    return {};
   }
-  return employees.find((person) => person.firstName === employeeName || person.lastName === employeeName );
+  const answer = employees.find((person) => person.firstName === employeeName || person.lastName === employeeName);
+  return answer;
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   const newEmployee = {
-     ...personalInfo,
-     ...associatedWith
+    ...personalInfo,
+    ...associatedWith,
   };
 
-  return newEmployee
+  return newEmployee;
 }
 
 function isManager(id) {
@@ -55,11 +56,11 @@ function isManager(id) {
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   const newEmployee = {
-     id,
-     firstName,
-     lastName,
-     managers,
-     responsibleFor
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
   };
   employees.push(newEmployee);
 }
@@ -67,11 +68,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function countAnimals(especie) {
   // seu código aqui
   if (especie === undefined || especie === null) {
-     const newObj = {};
-     species.forEach((item) => {
-      newObj[item.name] = item.residents.length
-   });
-   return newObj;
+    const newObj = {};
+    species.forEach((item) => {
+      newObj[item.name] = item.residents.length;
+    });
+    return newObj;
   }
   const newAnimal = species.find((item) => item.name === especie);
   return newAnimal.residents.length;
@@ -80,34 +81,36 @@ function countAnimals(especie) {
 function calculateEntry(entrants) {
   // seu código aqui
   if (entrants === undefined || Object.keys(entrants).length === 0) {
-     return 0;
-  };
+    return 0;
+  }
   const totalPrice = (Adult = 0, Senior = 0, Child = 0) => {
-   return Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
-  };
+    const total  = Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
+    return total;
+   }
+
   return totalPrice(entrants.Adult, entrants.Senior, entrants.Child);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-  const NElocate = species.filter((item) => item.location === 'NE');
-  const NWlocate = species.filter((item) => item.location === 'NW');
-  const SElocate = species.filter((item) => item.location === 'SE');
-  const SWlocate = species.filter((item) => item.location === 'SW');
-  const newObj = {};
-  if (options === undefined) {
-     newObj.NE = [NElocate[0].name, NElocate[1].name];
-     newObj.NW = [NWlocate[0].name, NWlocate[1].name, NWlocate[2].name];
-     newObj.SE = [SElocate[0].name, SElocate[1].name];
-     newObj.SW = [SWlocate[0].name, SWlocate[1].name];
-     return newObj;
-  }
-  if (options.includeNames === true) {
-   NElocate.forEach((item) => {
+// function getAnimalMap(options) {
+//   // seu código aqui
+//   const NElocate = species.filter((item) => item.location === 'NE');
+//   const NWlocate = species.filter((item) => item.location === 'NW');
+//   const SElocate = species.filter((item) => item.location === 'SE');
+//   const SWlocate = species.filter((item) => item.location === 'SW');
+//   const newObj = {};
+//   if (options === undefined) {
+//      newObj.NE = [NElocate[0].name, NElocate[1].name];
+//      newObj.NW = [NWlocate[0].name, NWlocate[1].name, NWlocate[2].name];
+//      newObj.SE = [SElocate[0].name, SElocate[1].name];
+//      newObj.SW = [SWlocate[0].name, SWlocate[1].name];
+//      return newObj;
+//   }
+//   if (options.includeNames === true) {
+//    NElocate.forEach((item) => {
       
-   })
-  }
-}
+//    })
+//   }
+// }
 
 function getSchedule(dayName) {
   // seu código aqui
