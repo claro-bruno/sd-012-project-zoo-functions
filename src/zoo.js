@@ -127,7 +127,6 @@ function increasePrices(percentage) {
 
 const speciesCoverage = (employee) => employee.responsibleFor.map((specieId) =>
   getSpeciesByIds(specieId)[0].name);
-}
 
 function getEmployeeCoverage(idOrName) {
   if (idOrName) {
