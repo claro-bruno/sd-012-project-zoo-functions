@@ -94,7 +94,7 @@ function countAnimals(species) {
 
 function calculateEntry(entrants) {
   // seu código aqui
-  if (!entrants || entrants.length > 3) {
+  if (!entrants) {
     return 0;
   }
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
@@ -170,10 +170,27 @@ function increasePrices(percentage) {
   return precos;
 }
 
-function getEmployeeCoverage() {
-  // seu código aqui idOrName
-}
+const defaultGetEmployeeCoverage = () => {
+  const objVazio = {};
+  funcionarios.forEach((funcionario) => {
+    const nome = `${funcionario.firstName} ${funcionario.lastName}`;
+    objVazio[nome] = funcionario.responsibleFor.map((id) => especies.find((especie) =>
+      especie.id === id).name);
+  });
+  return objVazio;
+};
 
+function getEmployeeCoverage(idOrNames) {
+  // seu código aqui
+  if (!idOrNames) {
+    return defaultGetEmployeeCoverage();
+  }
+  const funcionarioSelected = funcionarios.find((funcionario) =>
+    funcionario.firstName === idOrNames || funcionario
+      .lastName === idOrNames || funcionario.id === idOrNames);
+  const nomes = `${funcionarioSelected.firstName} ${funcionarioSelected.lastName}`;
+  return { [nomes]: defaultGetEmployeeCoverage()[nomes] };
+}
 module.exports = {
   calculateEntry,
   getSchedule,
