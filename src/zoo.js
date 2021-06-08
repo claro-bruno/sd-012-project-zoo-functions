@@ -13,14 +13,15 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
-  const findSpecie = (id) => data.species.find((specie) => id === specie.id);
-  const speciesSelected = ids.map(findSpecie);
-  return speciesSelected;
+  const specieFinder = (id) => data.species.find((specie) => id === specie.id);
+  const selectSpecie = ids.map(specieFinder);
+  return selectSpecie;
 }
 
-
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const specieFinder = data.species.find((specie) => animal === specie.name)
+  const ageCompare = specieFinder.residents.every((resident) => resident.age > age)
+  return ageCompare;
 }
 
 function getEmployeeByName(employeeName) {
