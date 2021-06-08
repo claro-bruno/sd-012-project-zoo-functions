@@ -62,7 +62,7 @@ function countAnimals(speciesName) {
   return speciescontagem;
 }
 
-function calculateEntry(entrants) {
+function calculateEntry() {
 
   //  seu código aqui
   // (entrants)
