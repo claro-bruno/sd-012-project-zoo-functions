@@ -102,8 +102,7 @@ function getSchedule(dayName) {
 
 function increasePrices(percentage) {
   const key = Object.keys(data.prices);
-  key.forEach((key) => {
-  const price = data.prices[key];
+  key.forEach((key) => {  
   return data.prices[key] = Math.round(data.prices[key] * (1 + percentage / 100) * 100) / 100;
 });
 }
