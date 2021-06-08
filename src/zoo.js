@@ -28,11 +28,13 @@ function getEmployeeByName(employeeName) {
   return foundEmployee;
 }
 
-/*
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newEmployee = {};
+  Object.assign(newEmployee, personalInfo, associatedWith);
+  return newEmployee;
 }
 
+/*
 function isManager(id) {
   // seu código aqui
 }
@@ -82,6 +84,6 @@ module.exports = {
   isManager,  */
   getAnimalsOlderThan,
   /* getOldestFromFirstSpecies,
-  increasePrices,
-  createEmployee,  */
+  increasePrices,  */
+  createEmployee,
 };
