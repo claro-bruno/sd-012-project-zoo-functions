@@ -78,96 +78,30 @@ function calculateEntry(entrants) {
   }
   return calculaValor(entrants.Adult, entrants.Senior, entrants.Child);
 }
-//----------------------------separando--------------------------------------// 
-//link utilizado neste requisito: https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c 
+// ----------------------------separando--------------------------------------// 
+// link utilizado neste requisito: https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c 
 
-//função que retorna o array [NE, SW, SE, SW] 
-function getLocalSortedArray() {
-  const newArr = data.species.map((especie) => especie.location).sort();
-  const locArr = newArr.filter((item, index) => newArr.indexOf(item) === index);
-  return locArr;
-}
+let locArray = ['NE', 'NW', 'SE', 'SW'];
 
-const locArray = getLocalSortedArray();
-
-//função que retorna os nomes dos animais de cada especie, com a opção de selecionar o sexo (sem seleção mostra todos)//
+// função que retorna os nomes dos animais de cada especie, com a opção de selecionar o sexo (sem seleção mostra todos)//
 function getAnimalsNames(speciesss, sex) {
   const targetAnimal = data.species.find((anys) => anys.name === speciesss);
   const residentsNames = targetAnimal.residents.map((ittem) => ittem.name);
   if (!sex) {
     return residentsNames;
-  } if (sex === 'female') {
+  } else if (sex === 'female') {
     const femaleIndividuals = targetAnimal.residents.filter((animal => animal.sex === 'female'));
     const femaleNames = femaleIndividuals.map((animal) => animal.name);
     return femaleNames;
-  } if (sex === 'male') {
-    const maleIndividuals = targetAnimal.residents.filter((animal => animal.sex === 'male'));
-    const maleNames = maleIndividuals.map((animal) => animal.name);
-    return maleNames;
-  }
+  } 
+  const maleIndividuals = targetAnimal.residents.filter((animal => animal.sex === 'male'));
+  const maleNames = maleIndividuals.map((animal) => animal.name);
+  return maleNames;
 }
 
-//retorna um array composto por arrays menores com o seguinte formato: [ { lions: [Array] }, { giraffes: [Array] } ]
-//cada especie tem um array com nomes não ordenados se não houver parametro; para ordenar precisa fazer sort === 'sorted'
-//também retorna animais de apenas um sexo combinado com o sorted
-function getObjAnimalLocation(sort, sex) {
-  const locAniArr = Object.values(getAnimalLocation());
-  const arrayObjsAni = locAniArr.map((element) => {
-    return element.map((element2) => {
-      if (sort === 'sorted') {
-        if (sex === 'female') {
-          const newOb1 = {};
-          newOb1[element2] = getAnimalsNames(element2, 'female').sort();
-          return newOb1;
-        }
-        else if (sex === 'male') {
-          const newOb2 = {};
-          newOb2[element2] = getAnimalsNames(element2, 'male').sort();
-          return newOb2;
-        }
-        const newOb3 = {};
-        newOb3[element2] = getAnimalsNames(element2).sort();
-        return newOb3;
-      }
-      const newOb6 = {};
-      newOb6[element2] = getAnimalsNames(element2);
-      return newOb6;
-    });
-  });
-  const monsterObj = {};
-  arrayObjsAni.forEach((animal, index) => {
-    monsterObj[locArray[index]] = animal;
-  });
-  return monsterObj;
-};
-
-//retorna um array composto por arrays menores com o seguinte formato: [ { lions: [Array] }, { giraffes: [Array] } ];
-//retorna todos os nomes dos animais de apenas um sexo; recebe o sexo como parâmetro
-function animalNamesSex(sex) {
-  const locAniArr2 = Object.values(getAnimalLocation());
-  const arrayObjsAni2 =  locAniArr2.map((element) => {
-    return element.map((element2) => {
-      if (sex === 'female') {
-        const newOb7 = {};
-        newOb7[element2] = getAnimalsNames(element2, 'female');
-        return newOb7;
-      }
-      const newOb8 = {};
-      newOb8[element2] = getAnimalsNames(element2, 'male');
-      return newOb8;
-    });
-  });
-  const monsterObj2 = {};
-  arrayObjsAni2.forEach((animal, index) => {
-    monsterObj2[locArray[index]] = animal;
-  })
-  return monsterObj2;
-};  
-
-//função que retorna objeto cujas chaves são as localizações e os valores são arrays com os respectivos animais (sem nomes)
 function getAnimalLocation() {
   const animalLocation = {};
-  getLocalSortedArray().forEach((loc) => { 
+  locArray.forEach((loc) => { 
     const anList = data.species.filter((animal) => animal.location === loc);
     const namesArr = anList.map((item) => item.name);
     animalLocation[loc] = namesArr;
@@ -175,28 +109,40 @@ function getAnimalLocation() {
   return animalLocation
 };
 
+//retorna um array composto por arrays menores com o seguinte formato: [ { lions: [Array] }, { giraffes: [Array] } ]
+//cada especie tem um array com nomes não ordenados se não houver parametro; para ordenar precisa fazer sort === 'sorted'
+//também retorna animais de apenas um sexo, combinado ou não, com o sorted
+function getObjAnimalLocation(sex, sort) {
+  const locAniArr = Object.values(getAnimalLocation());
+  const finalObj = {};
+  locAniArr.forEach((element, index) => {
+    let element2 = element.map((animal) => {
+      if (sex && !sort) {
+        let nameList = getAnimalsNames(animal, sex);
+        return { [`${animal}`]: nameList }
+      }
+      else if (sort === true) {
+        let nameList = (getAnimalsNames(animal, sex)).sort();
+        return { [`${animal}`]: nameList }
+      }
+      let nameList = getAnimalsNames(animal, sex);
+      return { [`${animal}`]: nameList }
+    })
+    finalObj[locArray[index]] = element2;
+  })
+  return finalObj;
+}
+
 function getAnimalMap(options) {
-  if (!options) {
+  if (!options || !options.includeNames) {
     return getAnimalLocation();
-  } else if (options.includeNames === true) {
-    if (options.sorted === true) {
-      if(options.sex === 'female') {
-        return getObjAnimalLocation('sorted', 'female');
-      }
-      if (options.sex === 'male') {
-        return getObjAnimalLocation('sorted', 'male');
-      }
-      return getObjAnimalLocation('sorted');
-    }
-    else if (options.sex === 'female') {
-      return animalNamesSex('female');
-    }else if (options.sex === 'male') {
-      return animalNamesSex('male');
-    }
-    return getObjAnimalLocation();
+  }
+  else if (options.includeNames = 'true') {
+    return getObjAnimalLocation(options.sex, options.sorted);
   }
 }
 
+// ----------------------------------------------------------------
 const cronograma = data.hours;
 const cronoEntries = Object.entries(cronograma);
 
