@@ -19,27 +19,30 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const specieFinder = data.species.find((specie) => animal === specie.name)
-  const ageCompare = specieFinder.residents.every((resident) => resident.age > age)
+  const specieFinder = data.species.find((specie) => animal === specie.name);
+  const ageCompare = specieFinder.residents.every((resident) => resident.age > age);
   return ageCompare;
 }
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) return {};
-  const findEmployee = data.employees.find((employee) => employeeName === employee.firstName || employeeName === employee.lastName)
-  return findEmployee;
+  const findEmployee = (employee) =>
+    employee.firstName === employeeName || employee.lastName === employeeName;
+  const getEmployee = data.employees.find(findEmployee);
+  return getEmployee;
 }
-
+console.log(getEmployeeByName('Emery'));
 function createEmployee(personalInfo, associatedWith) {
-  const newEmployee = {...personalInfo, ...associatedWith};
+  const newEmployee = { ...personalInfo, ...associatedWith };
   return newEmployee;
 }
 
 function isManager(id) {
-  // seu código aqui
+  const manager = data.employees.some((employee) => employee.managers.includes(id));
+  return manager;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+/*  function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
@@ -69,20 +72,20 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-}
+} */
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
-  countAnimals,
-  getAnimalMap,
+  // calculateEntry,
+  // getSchedule,
+  // countAnimals,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
-  addEmployee,
+  // getEmployeeCoverage,
+  // addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
