@@ -118,19 +118,18 @@ function getSchedule(dayName) {
     if (day === dayName) {
       newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
       if (day === 'Monday') {
-         newObj[day] = "CLOSED";
+        newObj[day] = 'CLOSED';
       }
     }
-   });
-
+  });
   if (dayName === undefined) { 
     keys.forEach((day) => {
       newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
       if (day === 'Monday') {
-       newObj[day] = "CLOSED";
+        newObj[day] = 'CLOSED';
       }
     });
-  };
+  }
 
   return newObj;
 }
@@ -150,7 +149,7 @@ function getOldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   const keys = Object.keys(prices);
   const pctg1 = percentage + 100;
-  keys.forEach((p) => { prices[p] = parseFloat(((prices[p] * pctg1) / 100 + 0.005).toFixed(2)) });
+  keys.forEach((p) => { prices[p] = parseFloat(((prices[p] * pctg1) / 100 + 0.005).toFixed(2)); });
 }
 
 // function getEmployeeCoverage(idOrName) {
