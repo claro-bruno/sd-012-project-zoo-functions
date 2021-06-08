@@ -130,9 +130,21 @@ function getOldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-// function increasePrices(percentage) {
-
-// }
+function increasePrices(percentage) {
+  const valor = data.prices;
+  const increaseAdulto = (valor.Adult + ((percentage / 100)
+  * valor.Adult + ((0.5) / 100))).toFixed(2) / 1;
+  const increaseSenior = (valor.Senior + ((percentage / 100)
+  * valor.Senior + (0.5 / 100))).toFixed(2) / 1;
+  const increaseChild = (valor.Child + ((percentage / 100)
+  * valor.Child + (0.5 / 100))).toFixed(2) / 1;
+  valor.Adult = (increaseAdulto);
+  valor.Senior = (increaseSenior);
+  valor.Child = (increaseChild);
+  return valor;
+}
+// console.log(increasePrices(50));
+// console.log(increasePrices(30));
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
@@ -150,6 +162,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
