@@ -97,6 +97,7 @@ function getSchedule(dayName) {
   return schedule;
 }
 
+// Algoritmo do colega Mateus B. Gonzaga
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
   const person = employees.find((employee) => employee.id === id);
