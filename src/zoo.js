@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -74,14 +74,31 @@ function calculateEntry(entrants) {
   return total;
 }
 
-calculateEntry();
 /* function getAnimalMap(options) {
   // seu código aqui
 } */
 
-/* function getSchedule(dayName) {
-  // seu código aqui
-} */
+function getSchedule(dayName) {
+  const schedule = {
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+  if (typeof dayName === 'undefined') return schedule;
+
+  const specificdayObj = {};
+  const scheduleArray = Object.entries(schedule);
+  const specificDay = scheduleArray.find((string) => string[0] === dayName);
+  // eslint-disable-next-line prefer-destructuring
+  specificdayObj[specificDay[0]] = specificDay[1];
+  console.log(specificdayObj);
+  return specificdayObj;
+}
+getSchedule('Sunday');
 
 /* function getOldestFromFirstSpecies(id) {
   // seu código aqui
@@ -97,7 +114,7 @@ calculateEntry();
 
 module.exports = {
   calculateEntry,
-  /*  getSchedule, */
+  getSchedule,
   countAnimals,
 
   /*   getAnimalMap, */
