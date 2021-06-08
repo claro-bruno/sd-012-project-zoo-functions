@@ -183,22 +183,26 @@ function getOldestFromFirstSpecies(id) {
     .sort((old1, old2) => old2.age - old1.age)[0];
   return Object.values(findAnimalId);
 }
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // 12=========================================================
 
-// function increasePrices(percentage) {
-//   const prices = data.prices;
-//   const adultPrice = prices.Adult + (prices.Adult * (percentage / 100));
-//   const seniortPrice = prices.Senior + (prices.Senior * (percentage / 100));
-//   const childPrice = prices.Child + (prices.Child * (percentage / 100));
-//   prices.Adult = Math.round(adultPrice * 100) / 100;
-//   prices.Senior = Math.round(seniortPrice * 100) / 100;
-//   prices.Child = Math.round(childPrice * 100) / 100;
-//   return prices;
-// }
-
-// console.log(increasePrices(50));
+function increasePrices(percentage) {
+  // const { Adult, Senior, Child } = data.prices;
+  // data.prices = {
+  //   Adult: Math.round((Adult * (1 + (percentage / 100)) * 100)) / 100,
+  //   Child: Math.round((Child * (1 + (percentage / 100)) * 100)) / 100,
+  //   Senior: Math.round((Senior * (1 + (percentage / 100)) * 100)) / 100,
+  // };
+  const prices = data.prices;
+  const adultPrice = prices.Adult + (prices.Adult * (percentage / 100));
+  const seniortPrice = prices.Senior + (prices.Senior * (percentage / 100));
+  const childPrice = prices.Child + (prices.Child * (percentage / 100));
+  prices.Adult = Math.round(adultPrice * 100) / 100;
+  prices.Senior = Math.round(seniortPrice * 100) / 100;
+  prices.Child = Math.round(childPrice * 100) / 100;
+  return prices;
+}
 
 // 13=========================================================
 
@@ -225,6 +229,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
