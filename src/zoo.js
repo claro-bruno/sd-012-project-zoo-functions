@@ -78,58 +78,56 @@ function calculateEntry(entrants) {
   }
   return calculaValor(entrants.Adult, entrants.Senior, entrants.Child);
 }
-// ----------------------------separando--------------------------------------// 
-// link utilizado neste requisito: https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c 
+// ----------------------------REQUISITO 9--------------------------------------
 
-let locArray = ['NE', 'NW', 'SE', 'SW'];
+const locArray = ['NE', 'NW', 'SE', 'SW'];
 
-// função que retorna os nomes dos animais de cada especie, com a opção de selecionar o sexo (sem seleção mostra todos)//
+// função que retorna os nomes dos animais de cada especie, com a opção de selecionar o sexo (sem seleção mostra todos)
 function getAnimalsNames(speciesss, sex) {
   const targetAnimal = data.species.find((anys) => anys.name === speciesss);
   const residentsNames = targetAnimal.residents.map((ittem) => ittem.name);
   if (!sex) {
     return residentsNames;
-  } else if (sex === 'female') {
-    const femaleIndividuals = targetAnimal.residents.filter((animal => animal.sex === 'female'));
+  } if (sex === 'female') {
+    const femaleIndividuals = targetAnimal.residents.filter((animal) => animal.sex === 'female');
     const femaleNames = femaleIndividuals.map((animal) => animal.name);
     return femaleNames;
-  } 
-  const maleIndividuals = targetAnimal.residents.filter((animal => animal.sex === 'male'));
+  }
+  const maleIndividuals = targetAnimal.residents.filter((animal) => animal.sex === 'male');
   const maleNames = maleIndividuals.map((animal) => animal.name);
   return maleNames;
 }
 
 function getAnimalLocation() {
   const animalLocation = {};
-  locArray.forEach((loc) => { 
+  locArray.forEach((loc) => {
     const anList = data.species.filter((animal) => animal.location === loc);
     const namesArr = anList.map((item) => item.name);
     animalLocation[loc] = namesArr;
-  })
-  return animalLocation
-};
+  });
+  return animalLocation;
+}
 
-//retorna um array composto por arrays menores com o seguinte formato: [ { lions: [Array] }, { giraffes: [Array] } ]
-//cada especie tem um array com nomes não ordenados se não houver parametro; para ordenar precisa fazer sort === 'sorted'
-//também retorna animais de apenas um sexo, combinado ou não, com o sorted
+// retorna um array composto por arrays menores com o seguinte formato: [ { lions: [Array] }, { giraffes: [Array] } ]
+// cada especie tem um array com nomes não ordenados se não houver parametro; para ordenar precisa fazer sort === 'sorted'
+// também retorna animais de apenas um sexo, combinado ou não, com o sorted
 function getObjAnimalLocation(sex, sort) {
   const locAniArr = Object.values(getAnimalLocation());
   const finalObj = {};
   locAniArr.forEach((element, index) => {
-    let element2 = element.map((animal) => {
+    const element2 = element.map((animal) => {
       if (sex && !sort) {
-        let nameList = getAnimalsNames(animal, sex);
-        return { [`${animal}`]: nameList }
+        const nameList = getAnimalsNames(animal, sex);
+        return { [`${animal}`]: nameList };
+      } if (sort === true) {
+        const nameList = (getAnimalsNames(animal, sex)).sort();
+        return { [`${animal}`]: nameList };
       }
-      else if (sort === true) {
-        let nameList = (getAnimalsNames(animal, sex)).sort();
-        return { [`${animal}`]: nameList }
-      }
-      let nameList = getAnimalsNames(animal, sex);
-      return { [`${animal}`]: nameList }
-    })
+      const nameList = getAnimalsNames(animal, sex);
+      return { [`${animal}`]: nameList };
+    });
     finalObj[locArray[index]] = element2;
-  })
+  });
   return finalObj;
 }
 
@@ -137,7 +135,7 @@ function getAnimalMap(options) {
   if (!options || !options.includeNames) {
     return getAnimalLocation();
   }
-  else if (options.includeNames = 'true') {
+  if (options.includeNames) {
     return getObjAnimalLocation(options.sex, options.sorted);
   }
 }
