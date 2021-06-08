@@ -108,7 +108,7 @@ function getSchedule(dayName) {
 function getOldestFromFirstSpecies(id) {
   const searchEmployeesId = employees.find((employee) => employee.id === id);
   const searchSpecieId = searchEmployeesId.responsibleFor[0];
-  const searchSpecie = species.find((especie) => especie.id === searchSpecieId);
+  const searchSpecie = species.find((specie) => specie.id === searchSpecieId);
   const olderSpecies = searchSpecie.residents.sort((specie1, specie2) =>
     specie2.age - specie1.age)[0];
   const { name, sex, age } = olderSpecies;
@@ -131,11 +131,11 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  //   getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  //   increasePrices,
+  // increasePrices,
   createEmployee,
 };
