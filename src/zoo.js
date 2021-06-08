@@ -31,7 +31,7 @@ function getEmployeeByName(employeeName) {
   const getEmployee = data.employees.find(findEmployee);
   return getEmployee;
 }
-console.log(getEmployeeByName('Emery'));
+
 function createEmployee(personalInfo, associatedWith) {
   const newEmployee = { ...personalInfo, ...associatedWith };
   return newEmployee;
@@ -42,15 +42,26 @@ function isManager(id) {
   return manager;
 }
 
-/*  function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals(species) {
-  // seu código aqui
+  if (!species) {
+    const reduceSpecie = (acc, { name, residents }) => {
+      acc[name] = residents.length;
+      return acc;
+    };
+    const speciesObj = data.species.reduce(reduceSpecie, {});
+    return speciesObj;
+  }
+  const findSpecie = data.species.filter(({ name }) => name === species);
+  const reduceToSpecieCount = (acc, { residents }) => acc + residents.length;
+  const specieCount = findSpecie.reduce(reduceToSpecieCount, 0);
+  return specieCount;
 }
 
-function calculateEntry(entrants) {
+/* function calculateEntry(entrants) {
   // seu código aqui
 }
 
@@ -77,12 +88,12 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   // calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
