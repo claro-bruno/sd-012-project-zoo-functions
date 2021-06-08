@@ -102,9 +102,9 @@ function getSchedule(dayName) {
 
 function increasePrices(percentage) {
   const key = Object.keys(data.prices);
-    key.forEach((key) => { 
-      data.prices[key] = Math.round(data.prices[key] * (1 + percentage / 100) * 100) / 100;
-    });
+  key.forEach((key) => {
+    data.prices[key] = Math.round(data.prices[key] * (1 + percentage / 100) * 100) / 100;
+  });
 }
 
 // function getEmployeeCoverage(idOrName) {
