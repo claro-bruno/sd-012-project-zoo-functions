@@ -97,7 +97,7 @@ function getSchedule(dayName) {
   const workingDays = Object.keys(data.hours);
   workingDays.forEach((day) => {
     const { open, close } = data.hours[day];
-    if (day === 'Monday'){
+    if (day === 'Monday') {
       newSchedule[day] = 'CLOSED';
     } else {
       newSchedule[day] = `Open from ${open}am until ${close - 12}pm`;
@@ -106,14 +106,13 @@ function getSchedule(dayName) {
   if (!dayName) {
     return newSchedule;
   }
-  const requested = { 
-    [dayName]: newSchedule[dayName]
+  const requested = {
+    [dayName]: newSchedule[dayName],
   };
-  console.log(newSchedule[dayName])
+  console.log(newSchedule[dayName]);
   return requested;
-
 }
-console.log(getSchedule('Thursday'));
+// console.log(getSchedule('Thursday'));
 
 // Requisito concluido com auxílio do repositório do colega Rodrigo Facury, precisei de ajuda para desenvolver a lógica
 function getOldestFromFirstSpecies(funcId) {
