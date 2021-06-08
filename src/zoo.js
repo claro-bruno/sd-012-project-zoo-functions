@@ -50,6 +50,12 @@ function countAnimals(species) {
     const count = data.species.find((specie) =>
       specie.name === species).residents.length;
     return count;
+  }
+  const allSpeciesCount = {};
+  data.species.forEach((specie) => {
+    allSpeciesCount[specie.name] = specie.residents.length;
+  });
+  return allSpeciesCount;
 }
 
 function calculateEntry(entrants) {
@@ -90,4 +96,4 @@ module.exports = {
   getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
-};
+}
