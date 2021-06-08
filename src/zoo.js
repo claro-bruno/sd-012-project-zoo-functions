@@ -105,24 +105,22 @@ function calculateEntry(entrants) {
 //      return newObj;
 //   }
 //   if (options.includeNames === true) {
-//    NElocate.forEach((item) => {
-      
+//    NElocate.forEach((item) => {     
 //    })
 //   }
 // }
 
 function getSchedule(dayName) {
-  // seu código aqui
   const keys = Object.keys(hours);
   const newObj = {};
 
   keys.forEach((day) => {
       if (day === dayName) {
          newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-         if (day === 'Monday') {
-            newObj[day] = `CLOSED`;
-         };
-      }
+       if (day === 'Monday') {
+         newObj[day] = `CLOSED`;
+       };
+   }
    })
 
    if (dayName === undefined) { 
@@ -150,24 +148,23 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
   const keys = Object.keys(prices);
-  const percentage1 = percentage + 100;
-  keys.forEach((p) => prices[p] = parseFloat((prices[p] * percentage1 / 100 + 0.005).toFixed(2)));
+  const pctg1 = percentage + 100;
+  keys.forEach((p) => {prices[p] = parseFloat((prices[p] * pctg1 / 100 + 0.005).toFixed(2))});
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+//   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+//   getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
