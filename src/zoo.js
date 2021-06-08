@@ -11,26 +11,23 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 // MEU TESTE AQUI
-/*
-const filteringSpecies = species
-  .filter((specie) => specie.id === '0938aa23-f153-4937-9f88-4858b24d6bce');
+
+/* const filteringSpecies = data.species
+  .find((specie) => specie.id === '0938aa23-f153-4937-9f88-4858b24d6bce');
 
 console.log(filteringSpecies); */
 
 // FUNÇÃO PARA O TESTE ACIMA
 
-/*
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  if (typeof ids === 'undefined') {
-    return [];
+  if (!ids) {
+    return ids;
   }
-
-  const filteringSpecies = species.filter((specie) => specie.id === ids);
-  return filteringSpecies;
+  return ids.map((id) => data.species.find((specie) => specie.id === id));
 }
 
-console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce')); */
+console.log(getSpeciesByIds());
 
 function getAnimalsOlderThan(animal, minAge) {
   // seu código aqui
@@ -161,13 +158,13 @@ module.exports = {
   getSchedule,
   countAnimals,
   //   getAnimalMap,
-  //   getSpeciesByIds,
+  getSpeciesByIds,
   getEmployeeByName,
   //   getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  //   increasePrices,
+  // increasePrices,
   createEmployee,
 };
