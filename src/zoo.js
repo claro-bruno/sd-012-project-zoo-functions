@@ -96,13 +96,11 @@ function getOldestFromFirstSpecies(id) {
   const funcionario = employees.find((person) => person.id === id);
   const firstAnimal = funcionario.responsibleFor.find((animal) => animal[0]);
   const bixo = species.find((animal) => animal.id === firstAnimal);
+  // a função abaixo foi feita com base na resposta do seguinte post no stack Overflow:
+  // https://stackoverflow.com/questions/4020796/finding-the-max-value-of-an-attribute-in-an-array-of-objects
   return Object.values(bixo.residents.reduce((previous, current) => ((previous.age > current.age)
     ? previous : current)));
 }
-// a função abaixo foi feita com base na resposta do seguinte post no stack Overflow:
-// https://stackoverflow.com/questions/4020796/finding-the-max-value-of-an-attribute-in-an-array-of-objects
-
-getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
 
 function increasePrices(percentage) {
   const operator = (1 + (percentage / 100));
