@@ -96,20 +96,19 @@ const { species, employees, prices, hours } = data;
 //   }, {});
 // }
 
-function getOldestFromFirstSpecies(id) {
-  const funcionario = employees.find((itemArray) => itemArray.id === id).responsibleFor[0];
-  const animal = species.find((itemArray) => itemArray.id === funcionario).residents;
-  const maiorIdade = animal.sort((a, b) => b.age - a.age)[0];
-  return Object.values(maiorIdade);
-// console.log(maiorIdade);
-}
-// getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
-// function increasePrices(percentage) {
-//   const acrescimo = prices.forEach((itemArray) => itemArray * ((percentage / 100) + 1));
-//   return acrescimo;
-//   // console.log(acrescimo);
+// function getOldestFromFirstSpecies(id) {
+//   const funcionario = employees.find((itemArray) => itemArray.id === id).responsibleFor[0];
+//   const animal = species.find((itemArray) => itemArray.id === funcionario).residents;
+//   const maiorIdade = animal.sort((a, b) => b.age - a.age)[0];
+//   return Object.values(maiorIdade);
 // }
-// // increasePrices(20);
+
+function increasePrices(percentage) {
+  Object.keys(prices).forEach((itemArray) => {
+    const acrescimo = prices[itemArray] * ((percentage / 100) + 1);
+    prices[itemArray] = Math.round((acrescimo + Number.EPSILON) * 100) / 100;
+  });
+}
 
 // function getEmployeeCoverage(idOrName) {
 //   if (idOrName) {
@@ -140,7 +139,7 @@ module.exports = {
   // addEmployee,
   // isManager,
   // getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  // // increasePrices,
+  // getOldestFromFirstSpecies,
+  increasePrices,
   // createEmployee,
 }
