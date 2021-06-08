@@ -93,8 +93,8 @@ function getSchedule(dayName) {
   const specificdayObj = {};
   const scheduleArray = Object.entries(schedule);
   const specificDay = scheduleArray.find((string) => string[0] === dayName);
-  // eslint-disable-next-line prefer-destructuring
-  specificdayObj[specificDay[0]] = specificDay[1];
+  const [index0, index1] = specificDay;
+  specificdayObj[index0] = index1;
   console.log(specificdayObj);
   return specificdayObj;
 }
