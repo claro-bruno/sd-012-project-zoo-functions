@@ -15,6 +15,7 @@ const {
   employees,
 } = require('./data');
 // const { data } = require('./data');
+const { prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // return ids.map((idAnimal) => species.find((animals) => idAnimal === animals.id));
@@ -79,11 +80,18 @@ function countAnimals(input) {
   return resut.residents.length; // .length pu
 }
 // obtive ajuda do aluno Kevin Oliveira; https://github.com/tryber/sd-012-project-zoo-functions/blob/kevin-oliveira-zoo-functions-project/src/zoo.js
-/*
-function calculateEntry(entrants) {
-  // seu código aqui
-}
 
+function calculateEntry(entrants = 0) {
+  if (Object.keys(entrants).length === 0) return 0;
+  let { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  Adult *= prices.Adult;
+  Child *= prices.Child;
+  Senior *= prices.Senior;
+  // const myarray = [Adult, Child, Senior];
+  const total = Adult + Child + Senior;
+  return total;
+}
+/*
 function getAnimalMap(options) {
   // seu código aqui
 }
@@ -105,7 +113,7 @@ function getEmployeeCoverage(idOrName) {
 }
 */
 module.exports = {
-  //  calculateEntry,
+  calculateEntry,
   //  getSchedule,
   countAnimals,
   //  getAnimalMap,
