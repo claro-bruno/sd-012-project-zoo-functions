@@ -150,7 +150,6 @@ function increasePrices(percentage) {
   data.prices.Adult = Math.round(Adult * (1 + percentage / 100) * 100) / 100;
   data.prices.Child = Math.round(Child * (1 + percentage / 100) * 100) / 100;
   data.prices.Senior = Math.round(Senior * (1 + percentage / 100) * 100) / 100;
-
 }
 
 // function getEmployeeCoverage(idOrName) {
