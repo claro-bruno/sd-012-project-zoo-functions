@@ -89,20 +89,35 @@ function calculateEntry(entrants) {
   return (adults * prices.Adult) + (seniors * prices.Senior) + (childs * prices.Child);
 }
 
-function getAnimalMap() {
+function getAnimalMap(map) {
   // seu código aqui
+  // const buscar = (animais) => {
+  //   if (animais.location === 'NE') {
+  //     return animais.location;
+  //   }
+  // };
+
+  // return species.filter(buscar);
 }
 
-function getSchedule() {
+function getSchedule(dayName) {
   // seu código aqui
+  // if (typeof dayName === 'undefined') {
+  //   return hours;
+  // }
 }
 
 function getOldestFromFirstSpecies() {
   // seu código aqui
 }
 
-function increasePrices() {
+function increasePrices(percentage) {
   // seu código aqui
+  // Não tava conseguindo imprimir o valor certo então recorri ao repo do  cristiano lima 'https://github.com/tryber/sd-012-project-zoo-functions/blob/cristiano-lima-zoo-functions-project/src/zoo.js'
+  const { Adult, Senior, Child } = prices;
+  prices.Adult = Math.round(Adult * (1 + percentage / 100) * 100) / 100;
+  prices.Senior = Math.round(Senior * (1 + percentage / 100) * 100) / 100;
+  prices.Child = Math.round(Child * (1 + percentage / 100) * 100) / 100;
 }
 
 function getEmployeeCoverage() {
