@@ -92,9 +92,13 @@ function getOldestFromFirstSpecies(id) {
   return [animalMaisVelho.name, animalMaisVelho.sex, animalMaisVelho.age];
 }
 
-function increasePrices() {
-
+function increasePrices(percentage) {
+  const percentual = percentage / 100;
+  data.prices.Adult = Math.round((prices.Adult + ((prices.Adult) * percentual)) * 100) / 100;
+  data.prices.Child = Math.round((prices.Child + ((prices.Child) * percentual)) * 100) / 100;
+  data.prices.Senior = Math.round((prices.Senior + ((prices.Senior) * percentual)) * 100) / 100;
 }
+
 function getEmployeeCoverage() {
   // seu código aqui
 }
