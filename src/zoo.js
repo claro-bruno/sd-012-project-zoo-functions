@@ -43,10 +43,13 @@ console.log(getEmployeeByName('Wishart'));
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
+console.log(createEmployee());
 
-// function isManager(id) {
-// seu código aqui
-// }
+function isManager(id) {
+  return data.employees.some(({ managers }) => managers.some((idManager) => idManager === id));
+}
+console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 // seu código aqui
@@ -89,7 +92,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
