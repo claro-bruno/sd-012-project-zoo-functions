@@ -95,13 +95,22 @@ function calculateEntry(entrants) {
 }
 
 // function getAnimalMap(options) {
-//   // seu código aqui
+// seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+// O que será avaliado
 
+  // Sem parâmetros, retorna um cronograma legível para humanos
+  if (!dayName) {
+    const days = Object.entries(data.hours);
+    // days.reduce((acc, item) => )
+    // Reduce, filter, find, some, every, foreach, map - funcionam para um array
+    return days;
+  }
+  // Se um único dia for passado, retorna somente este dia em um formato legível para humanos
+}
+console.log(getSchedule());
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
 // }
@@ -110,18 +119,33 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-// }
+function getEmployeeCoverage(idOrName) {
+  // Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
+  if (!idOrName) {
+    return employees.reduce((acc, item) => {
+      const animalName = item.responsibleFor
+        .map((id) => species.find((specie) => id === specie.id).name);
+      return ({ ...acc, [`${item.firstName} ${item.lastName}`]: animalName });
+    }, []);
+  }
+  // Com o id de um funcionário, retorna os animais pelos quais o funcionário é responsável
+  // Com o primeiro nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+  // Com o último nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+  const employe = employees.find((employee) => employee.id === idOrName
+  || employee.firstName === idOrName || employee.lastName === idOrName);
+
+  return { [`${employe.firstName} ${employe.lastName}`]: employe.responsibleFor
+    .map((id) => species.find((specie) => id === specie.id).name) };
+}
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
