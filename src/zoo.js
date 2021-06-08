@@ -63,8 +63,9 @@ function countAnimals(nameSpecies) {
   return animalInfo;
 }
 
-function calculateEntry() {
-
+function calculateEntry(entrants) {
+  if (typeof (entrants) === 'undefined' || Object.keys(entrants).length === 0) return 0;
+  return sumEntry(Object.entries(entrants));
 }
 
 function getAnimalMap() {
