@@ -11,6 +11,8 @@ eslint no-unused-vars: [
 
 // const { species } = require('./data');
 // const { hours } = require('./data');
+const { prices } = require('./data');
+
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -88,21 +90,18 @@ function countAnimals(especie) {
 }
 
 function calculateEntry(entrants) {
-  if (entrants === undefined || entrants === {}) {
-    return 0;
-  }
-  if (entrants.Child === undefined) {
-    entrants.Child = 0;
-  }
-  if (entrants.Senior === undefined) {
-    entrants.Senior = 0;
-  }
-  if (entrants.Adult === undefined) {
-    entrants.Adult = 0;
-  }
- const price = data.prices.Adult * entrants.Adult + data.prices.Child * entrants.Child + data.prices.Senior * entrants.Senior;
- return price;
+  if (entrants === undefined) return 0;
+  let senior = entrants.Senior;
+  let child = entrants.Child;
+  let adult = entrants.Adult;
+  if (child === undefined) child = 0;
+  if (senior === undefined) senior = 0;
+  if (adult === undefined) adult = 0;
+  const price = prices.Adult * adult + prices.Child * child + prices.Senior * senior;
+  return price;
 }
+
+
 
 function getAnimalMap(options) {
   // seu código aqui
@@ -112,15 +111,19 @@ function getSchedule(dayName) {
   const objToArray = Object.entries(data.hours);
   const objSchedule = {};
   const objDay = {};
-  objToArray.forEach((schedule) => objSchedule[schedule[0]] = `Open from ${Object.values(schedule[1])[0]}am until ${Object.values(schedule[1])[1] - 12}pm`);
+  objToArray.forEach(
+    (
+      schedule,
+    ) => objSchedule[schedule[0]] = `Open from ${Object.values(schedule[1])[0]}am until ${Object.values(schedule[1])[1] - 12}pm`,
+  );
   objSchedule.Monday = 'CLOSED';
   if (dayName === undefined) {
-    return objSchedule;    
+    return objSchedule;
   }
   const scheduleToArray = Object.entries(objSchedule);
   const findDayName = scheduleToArray.find((name) => dayName === name[0]);
   objDay[findDayName[0]] = findDayName[1];
-  return objDay;  
+  return objDay;
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -147,19 +150,18 @@ function increasePrices(percentage) {
   ) / 100;
 }
 
-function getEmployeeCoverage(idOrName) {  
+function getEmployeeCoverage(idOrName) {
   if (idOrName === undefined) {
     const objCovarage = {};
-    //const objName = {};
-    data.employees.forEach((covarage) => objCovarage[`${covarage.firstName} ${covarage.lastName}`]= covarage.responsibleFor);
+    // const objName = {};
+    data.employees.forEach((covarage) => objCovarage[`${covarage.firstName} ${covarage.lastName}`] = covarage.responsibleFor);
     console.log(objCovarage);
-    console.log(objCovarage['Nigel Nelson'][0]); //0938aa23-f153-4937-9f88-4858b24d6bce
-    console.log(objCovarage['Nigel Nelson']); //[ '0938aa23-f153-4937-9f88-4858b24d6bce','e8481c1d-42ea-4610-8e11-1752cfc05a46' ]
-    console.log(Object.entries(objCovarage)); 
+    console.log(objCovarage['Nigel Nelson'][0]); // 0938aa23-f153-4937-9f88-4858b24d6bce
+    console.log(objCovarage['Nigel Nelson']); // [ '0938aa23-f153-4937-9f88-4858b24d6bce','e8481c1d-42ea-4610-8e11-1752cfc05a46' ]
+    console.log(Object.entries(objCovarage));
     // const arrayName = objCovarage.map((id) => data.species.find((idAnimal) => id === idAnimal) console.log(`${idAnimal.name}`));
-    console.log('arrayName:', arrayName);
+    // console.log('arrayName:', arrayName);
   }
-  
 }
 
 module.exports = {
