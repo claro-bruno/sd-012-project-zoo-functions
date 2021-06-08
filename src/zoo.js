@@ -119,10 +119,26 @@ function increasePrices(percentage) {
   // seu código aqui
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
 */
+const speciesCoverage = (employee) => employee.responsibleFor.map((specieId) =>
+  getSpeciesByIds(specieId)[0].name);
+
+function getEmployeeCoverage(idOrName) {
+  if (idOrName) {
+    const employeeFound = data.employees.find((employee) =>
+      ((employee.id === idOrName) || (employee.firstName === idOrName)
+        || (employee.lastName === idOrName)));
+    return { [`${employeeFound.firstName} ${employeeFound.lastName}`]:
+      speciesCoverage(employeeFound) };
+  }
+
+  const employeesCovarage = {};
+  data.employees.forEach((employee) => {
+    employeesCovarage[`${employee.firstName} ${employee
+      .lastName}`] = speciesCoverage(employee);
+  });
+  return employeesCovarage;
+}
 
 module.exports = {
   calculateEntry,
@@ -131,7 +147,7 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  /*  getEmployeeCoverage,  */
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
