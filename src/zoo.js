@@ -46,17 +46,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species1) { // referencia: eullerbraz-tuma-12
   if (!species1) { // reduce e spread para criar novo objeto com nome e quant de animais.
-    return data.species.reduce((acc, specie) =>
-      ({ ...acc, [specie.name]: specie.residents.length }), {});
+    return data.species.reduce((acc, specie) => 
+    ({ ...acc, [specie.name]: specie.residents.length }), {});
   }
-  return data.species.find((specie) => specie.name === species).residents.length;
+  return data.species.find((specie) => specie.name === species1).residents.length;
 }
 
-/* function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants) {
+  if (!entrants) return 0;
+  
 }
 
-function getSchedule(dayName) {
+/* function getSchedule(dayName) {
   // seu código aqui
 }
 
@@ -80,8 +81,8 @@ module.exports = {
   isManager,
   addEmployee,
   countAnimals,
-/*   calculateEntry,
-  getSchedule,
+  calculateEntry,
+  /* getSchedule,
   getAnimalMap,
   getEmployeeCoverage,
   getOldestFromFirstSpecies,
