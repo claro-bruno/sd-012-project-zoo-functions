@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { species } = require('./data');
-const { hours } = require('./data');
+// const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -112,27 +112,23 @@ function getSchedule(dayName) {
   const objToArray = Object.entries(data.hours);
   const objSchedule = {};
   const objDay = {};
-  objToArray.forEach((schedule) => objSchedule.[schedule[0]] = `Open from ${Object.values(schedule[1])[0]}am until ${Object.values(schedule[1])[1] - 12}pm`);
+  objToArray.forEach((schedule) => objSchedule[schedule[0]] = `Open from ${Object.values(schedule[1])[0]}am until ${Object.values(schedule[1])[1] - 12}pm`);
   objSchedule.Monday = 'CLOSED';
   if (dayName === undefined) {
     return objSchedule;    
   }
   const scheduleToArray = Object.entries(objSchedule);
   const findDayName = scheduleToArray.find((name) => dayName === name[0]);
-  objDay.[findDayName[0]] = findDayName[1];
+  objDay[findDayName[0]] = findDayName[1];
   return objDay;  
 }
 
 function getOldestFromFirstSpecies(id) {
-    // const allAnimals = data.species.map((animal) => `${animal.name}:${animal.residents.length}`)
-    // id do funcionário você encontra o mesmo com find em employees, 
-    // você usa o find para encontrar o primeiro id no responsibleFor em employees
-    // O id (primeiro resposibleFor) encontrado será comparado com o id em species
-    // usando forEach defina uma idade igual a 1 para ser a idade do mais velho, 
-    // ao ser comparado reatribua o valor do comparador igual ao animal, caso o animal seja o mais velho na comparação
-    // Ao reatribuir a idade do comparador, também reatribua o nome e sexo do mesmo
-    // retornar o valor   
-    // No lugar do comparador pode utilizar o reduce 
+  const findId = data.employees.find((employee) => id === employee.id);
+  const findIdAnimals = data.species.find((species) => findId.responsibleFor[0] === species.id);
+  const sortOldest = findIdAnimals.residents.sort((animalA, animalB) => animalB.age - animalA.age);
+  const oldest = Object.values(sortOldest[0]);
+  return oldest;
 }
 
 // Utilizar um ForEach
@@ -151,8 +147,19 @@ function increasePrices(percentage) {
   ) / 100;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getEmployeeCoverage(idOrName) {  
+  if (idOrName === undefined) {
+    const objCovarage = {};
+    //const objName = {};
+    data.employees.forEach((covarage) => objCovarage[`${covarage.firstName} ${covarage.lastName}`]= covarage.responsibleFor);
+    console.log(objCovarage);
+    console.log(objCovarage['Nigel Nelson'][0]); //0938aa23-f153-4937-9f88-4858b24d6bce
+    console.log(objCovarage['Nigel Nelson']); //[ '0938aa23-f153-4937-9f88-4858b24d6bce','e8481c1d-42ea-4610-8e11-1752cfc05a46' ]
+    console.log(Object.entries(objCovarage)); 
+    // const arrayName = objCovarage.map((id) => data.species.find((idAnimal) => id === idAnimal) console.log(`${idAnimal.name}`));
+    console.log('arrayName:', arrayName);
+  }
+  
 }
 
 module.exports = {
