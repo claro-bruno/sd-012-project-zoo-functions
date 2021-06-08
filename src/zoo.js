@@ -89,7 +89,7 @@ function calculateEntry(entrants) {
   return (adults * prices.Adult) + (seniors * prices.Senior) + (childs * prices.Child);
 }
 
-function getAnimalMap(map) {
+function getAnimalMap() {
   // seu código aqui
   // const buscar = (animais) => {
   //   if (animais.location === 'NE') {
@@ -100,15 +100,29 @@ function getAnimalMap(map) {
   // return species.filter(buscar);
 }
 
-function getSchedule(dayName) {
+function getSchedule() {
   // seu código aqui
   // if (typeof dayName === 'undefined') {
   //   return hours;
   // }
 }
 
-function getOldestFromFirstSpecies() {
+function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  // O empregado  é  stephanieId a primeira especie é girafa e o animal mais velho é a vickie
+  // expected ['Vicky', 'female', 12];
+  // Encontrando a primeira especie de animais do emplopyee/empregado
+  const animal = employees.find((employee) => employee.id === id).responsibleFor[0];
+  // Coletando a informação dos animais
+  const animalInfo = species.find((item) => item.id === animal).residents;
+  // Pensei em usar um for each mas acabei me enrolando então recorri ao repo do  Bruno Yamamoto: https://github.com/tryber/sd-012-project-zoo-functions/blob/bruno-yamamoto-zoo-functions-project/src/zoo.js
+  const oldestAnimal = animalInfo.sort((a, b) => b.age - a.age)[0];
+  const {
+    name,
+    sex,
+    age,
+  } = oldestAnimal;
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
