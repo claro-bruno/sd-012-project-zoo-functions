@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 const { employees } = require('./data');
+const { prices } = require('./data');
 
 // 1=========================================================
 
@@ -173,34 +174,33 @@ function getSchedule(dayName) {
 
 // 11=========================================================
 
-// function getOldestFromFirstSpecies(id) {
-//   const idEmployee = employees
-//     .find((idNumber) => idNumber.id === id).responsibleFor[0];
-//   // encontra o employee
-//   const findAnimalId = data.species
-//     .find((animalId) => idEmployee
-//       .responsibleFor.includes(animalId.id));
-//   // encontra os animais que o employee é responsável
-//   return findAnimalId;
-//   // achar o animal mais velho que ele é responsável ???
-// }
-// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+function getOldestFromFirstSpecies(id) {
+  const idEmployee = employees
+    .find((idNumber) => idNumber.id === id).responsibleFor[0];
+  // encontra o employee
+  const findAnimalId = data.species
+    .find((animalId) => idEmployee === animalId.id).residents
+    .sort((old1, old2) => old2.age - old1.age)[0];
+    const {name, sex, age} = findAnimalId;
+    return Object.values(findAnimalId)
+ 
+}
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // 12=========================================================
 
 function increasePrices(percentage) {
-  const { Adult, Senior, Child } = data.prices;
-  const percentValue = ((percentage / 100) + 1);
-  const adulto = Math.round(Adult * percentValue * 100) / 100;
-  const senior = Math.round(Senior * percentValue * 100) / 100;
-  const child = Math.round(Child * percentValue * 100) / 100;
-  data.prices.Adult = adulto;
-  data.prices.Child = child;
-  data.prices.Senior = senior;
-  return data.prices;
+  const prices = data.prices;
+  const adultPrice = prices.Adult + (prices.Adult * (percentage / 100));
+  const seniortPrice = prices.Senior + (prices.Senior * (percentage / 100));
+  const childPrice = prices.Child + (prices.Child * (percentage / 100));
+  prices.Adult = Math.round(adultPrice * 100) / 100;
+  prices.Senior = Math.round(seniortPrice * 100) / 100;
+  prices.Child = Math.round(childPrice * 100) / 100;
+  return prices;
 }
 
-// console.log(increasePrices(30));
+// console.log(increasePrices(50));
 
 // 13=========================================================
 
@@ -226,7 +226,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
