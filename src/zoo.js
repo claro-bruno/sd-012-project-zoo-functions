@@ -9,6 +9,10 @@ eslint no-unused-vars: [
 ]
 */
 
+
+const {
+  hours
+} = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -72,9 +76,13 @@ const calculateEntry = (entrants) => {
   if (!entrants || entrants === {}) {
     return 0;
   }
-  const { Adult: adulto = 0, Senior: idoso = 0, Child: crianca = 0 } = entrants;
-  const totalValue = ((adulto * data.prices.Adult) + (idoso * data.prices.Senior)
-    + (crianca * data.prices.Child));
+  const {
+    Adult: adulto = 0,
+    Senior: idoso = 0,
+    Child: crianca = 0
+  } = entrants;
+  const totalValue = ((adulto * data.prices.Adult) + (idoso * data.prices.Senior) +
+    (crianca * data.prices.Child));
   return totalValue;
 };
 
@@ -82,9 +90,20 @@ const calculateEntry = (entrants) => {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  const days = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED'
+  };
+  if (!dayName) return days;
+  
+  return {[dayName]: days[dayName]}
+};
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -100,7 +119,7 @@ const calculateEntry = (entrants) => {
 
 module.exports = {
   calculateEntry,
-  //   getSchedule,
+  getSchedule,
   countAnimals,
   //   getAnimalMap,
   getSpeciesByIds,
