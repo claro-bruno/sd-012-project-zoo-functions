@@ -75,10 +75,10 @@ const calculateEntry = (entrants) => {
   const {
     Adult: adulto = 0,
     Senior: idoso = 0,
-    Child: crianca = 0
+    Child: crianca = 0,
   } = entrants;
-  const totalValue = ((adulto * data.prices.Adult) + (idoso * data.prices.Senior) +
-    (crianca * data.prices.Child));
+  const totalValue = ((adulto * data.prices.Adult) + (idoso * data.prices.Senior) 
+  + (crianca * data.prices.Child));
   return totalValue;
 };
 
@@ -94,12 +94,11 @@ function getSchedule(dayName) {
     Friday: 'Open from 10am until 8pm',
     Saturday: 'Open from 8am until 10pm',
     Sunday: 'Open from 8am until 8pm',
-    Monday: 'CLOSED'
+    Monday: 'CLOSED',
   };
   if (!dayName) return days;
-  
-  return {[dayName]: days[dayName]}
-};
+  return { [dayName]: days[dayName] };
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
