@@ -79,11 +79,14 @@ function getAnimalMap(options) {
 function getSchedule(dayName) {
   const schedules = {};
 
-  Object.keys(hours).forEach((key) => schedules[key]) = `Open from ${hours[key].open } am until ${hours[key].close} pm`;
-  if (key === 'Monday') {
-    schedules[key] = 'Closed';
-  }
-  if (dayName) { 
+  Object.keys(hours).forEach((key) => {
+    schedules[key] = `Open from ${hours[key].open}am until ${hours[key].close - 12}pm`;
+    if (key === 'Monday') { 
+      schedules[key] = 'CLOSED';
+    }
+  });
+
+  if (dayName) {
     return { [dayName]: schedules[dayName] };
   }
   return schedules;
