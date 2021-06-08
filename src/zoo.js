@@ -121,8 +121,8 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getEmployeeCoverage() {
+  // seu código aqui idOrName
 }
 
 module.exports = {
