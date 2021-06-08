@@ -100,12 +100,15 @@ function getSchedule(dayName) {
   return weekSchedule;
 }
 
-/*
 function getOldestFromFirstSpecies(id) {
 // Questao 11
+  const animalId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const findResidents = data.species.find((idOldAnima) => idOldAnima.id === animalId).residents;
 
+  findResidents.sort((a, b) => b.age - a.age);
+
+  return Object.values(findResidents[0]);
 }
-*/
 
 function increasePrices(percentage) {
 // Questao 12
@@ -117,13 +120,11 @@ function increasePrices(percentage) {
   data.prices.Senior = Math.round((
     (data.prices.Senior * pricePercentage) + data.prices.Senior) * 100) / 100;
 }
-
 /*
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage(id) {
 // Questao 13
 }
 */
-
 module.exports = {
   calculateEntry,
   getSchedule,
@@ -135,7 +136,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  //  getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
