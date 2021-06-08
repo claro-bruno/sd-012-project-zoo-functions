@@ -136,8 +136,9 @@ function increasePrices(percentage) {
 }
 // console.log(increasePrices(30));
 
-// function getEmployeeCoverage() {
-//   // seu código aqui idOrName
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+//   if (!idOrName)
 // }
 
 module.exports = {
