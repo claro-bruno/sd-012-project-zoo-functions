@@ -78,35 +78,31 @@ const { species, employees, prices, hours } = data;
 // }
 // getAnimalMap();
 
-function getSchedule(dayName) {
-  if (dayName === 'Monday') {
-    return { [dayName]: 'CLOSED' };
-  }
-  if (dayName) {
-    const dia = Object.keys(hours).filter((itemArray) => (itemArray) === dayName);
-    return { [dayName]: `Open from ${hours[dia].open}am until ${(hours[dia].close - 12)}pm` };
-  }
-  return Object.keys(hours).reduce((acc, itemArray) => {
-    const semana = itemArray;
-    acc[semana] = `Open from ${hours[itemArray].open}am until ${(hours[itemArray].close - 12)}pm`;
-    if (itemArray === 'Monday') {
-      acc[semana] = 'CLOSED';
-    }
-    return acc;
-  }, {});
-}
-getSchedule();
-
-// function getOldestFromFirstSpecies(id) {
-//   const funcionario = employees.find((itemArray) => itemArray.id === id).responsibleFor[0];
-//   const animal = species.find((itemArray) => itemArray.id === funcionario).residents;
-//   const idadesArray = animal.map((itemArray) => `${itemArray.age}`);
-//   const maiorIdade = idadesArray.find((maior, itemArray) => !(maior > itemArray)
-//    ? maior : itemArray);
-//   const velho = animal.find((itemArray) => itemArray.age === Number(maiorIdade));
-//   return velho;
-//   // console.log(velho);
+// function getSchedule(dayName) {
+//   if (dayName === 'Monday') {
+//     return { [dayName]: 'CLOSED' };
+//   }
+//   if (dayName) {
+//     const dia = Object.keys(hours).filter((itemArray) => (itemArray) === dayName);
+//     return { [dayName]: `Open from ${hours[dia].open}am until ${(hours[dia].close - 12)}pm` };
+//   }
+//   return Object.keys(hours).reduce((acc, itemArray) => {
+//     const semana = itemArray;
+//     acc[semana] = `Open from ${hours[itemArray].open}am until ${(hours[itemArray].close - 12)}pm`;
+//     if (itemArray === 'Monday') {
+//       acc[semana] = 'CLOSED';
+//     }
+//     return acc;
+//   }, {});
 // }
+
+function getOldestFromFirstSpecies(id) {
+  const funcionario = employees.find((itemArray) => itemArray.id === id).responsibleFor[0];
+  const animal = species.find((itemArray) => itemArray.id === funcionario).residents;
+  const maiorIdade = animal.sort((a, b) => b.age - a.age)[0];
+  return Object.values(maiorIdade);
+// console.log(maiorIdade);
+}
 // getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
 // function increasePrices(percentage) {
 //   const acrescimo = prices.forEach((itemArray) => itemArray * ((percentage / 100) + 1));
@@ -135,7 +131,7 @@ getSchedule();
 
 module.exports = {
   // calculateEntry,
-  getSchedule,
+  // getSchedule,
   // countAnimals,
   // // getAnimalMap,
   // getSpeciesByIds,
@@ -144,7 +140,7 @@ module.exports = {
   // addEmployee,
   // isManager,
   // getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   // // increasePrices,
   // createEmployee,
 }
