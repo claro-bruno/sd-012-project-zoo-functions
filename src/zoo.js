@@ -194,14 +194,14 @@ function increasePrices(percentage) {
   //   Child: Math.round((Child * (1 + (percentage / 100)) * 100)) / 100,
   //   Senior: Math.round((Senior * (1 + (percentage / 100)) * 100)) / 100,
   // };
-  const prices = data.prices;
-  const adultPrice = prices.Adult + (prices.Adult * (percentage / 100));
-  const seniortPrice = prices.Senior + (prices.Senior * (percentage / 100));
-  const childPrice = prices.Child + (prices.Child * (percentage / 100));
-  prices.Adult = Math.round(adultPrice * 100) / 100;
-  prices.Senior = Math.round(seniortPrice * 100) / 100;
-  prices.Child = Math.round(childPrice * 100) / 100;
-  return prices;
+  const personPrices = data.prices;
+  const adultPrice = personPrices.Adult + (personPrices.Adult * (percentage / 100));
+  const seniortPrice = personPrices.Senior + (personPrices.Senior * (percentage / 100));
+  const childPrice = personPrices.Child + (personPrices.Child * (percentage / 100));
+  personPrices.Adult = Math.round(adultPrice * 100) / 100;
+  personPrices.Senior = Math.round(seniortPrice * 100) / 100;
+  personPrices.Child = Math.round(childPrice * 100) / 100;
+  return personPrices;
 }
 
 // 13=========================================================
