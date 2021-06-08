@@ -34,8 +34,7 @@ function getEmployeeByName(employeeName) {
   if (employeeName === undefined || employeeName === null) {
     return {};
   }
-  const answer = employees.find((person) => person.firstName === employeeName || person.lastName === employeeName);
-  return answer;
+  return employees.find((i) => i.firstName === employeeName || i.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -84,9 +83,9 @@ function calculateEntry(entrants) {
     return 0;
   }
   const totalPrice = (Adult = 0, Senior = 0, Child = 0) => {
-    const total  = Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
+    const total = Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
     return total;
-   }
+  };
 
   return totalPrice(entrants.Adult, entrants.Senior, entrants.Child);
 }
@@ -154,8 +153,7 @@ function increasePrices(percentage) {
   // seu código aqui
   const keys = Object.keys(prices);
   const percentage1 = percentage + 100;
-  
-  keys.forEach((price) => prices[price] = parseFloat((prices[price] * percentage1 / 100 + 0.005).toFixed(2)));
+  keys.forEach((p) => prices[p] = parseFloat((prices[p] * percentage1 / 100 + 0.005).toFixed(2)));
 }
 
 function getEmployeeCoverage(idOrName) {
