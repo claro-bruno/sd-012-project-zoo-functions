@@ -67,16 +67,18 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   }
 }
 
-/* function countAnimals(input) {
-  if (!input) return species.forEach((calback) => calback.name && calback.residents.length);
-
-  species.find((specie) => {
-    (specie.name === input); {
-      return specie.name && specie.residents.length;
-    }
-  });
+function countAnimals(input) {
+  if (!input) {
+    const animals = species.reduce((acc, { name, residents }) => {
+      acc[name] = residents.length;
+      return acc;
+    }, {});
+    return animals;
+  }
+  const resut = species.find((specie) => (input === specie.name)); // find pegando o primeiro resultado passado no parametro
+  return resut.residents.length; // .length pu
 }
-countAnimals('lions');/*
+// obtive ajuda do aluno Kevin Oliveira; https://github.com/tryber/sd-012-project-zoo-functions/blob/kevin-oliveira-zoo-functions-project/src/zoo.js
 /*
 function calculateEntry(entrants) {
   // seu código aqui
@@ -105,7 +107,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   //  calculateEntry,
   //  getSchedule,
-  //  countAnimals,
+  countAnimals,
   //  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
