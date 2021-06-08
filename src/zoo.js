@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+// const data = require('./data');
 const { employees, species } = require('./data');
 
 // Algoritmo do colega Juan Rezende
@@ -67,17 +67,17 @@ function getEmployeeCoverage(idOrName) {
 }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
+// calculateEntry,
+// getSchedule,
   countAnimals,
-  getAnimalMap,
+// getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+// getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+// getOldestFromFirstSpecies,
+// increasePrices,
   createEmployee,
 };
