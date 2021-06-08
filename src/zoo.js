@@ -91,16 +91,16 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-// getSchedule,
+  // getSchedule,
   countAnimals,
-// getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-// getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-// getOldestFromFirstSpecies,
-// increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
