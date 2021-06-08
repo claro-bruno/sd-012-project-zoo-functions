@@ -70,10 +70,37 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+const hour = {
+  Tuesday: 'Open from 8am until 6pm',
+  Wednesday: 'Open from 8am until 6pm',
+  Thursday: 'Open from 10am until 8pm',
+  Friday: 'Open from 10am until 8pm',
+  Saturday: 'Open from 8am until 10pm',
+  Sunday: 'Open from 8am until 8pm',
+  Monday: 'CLOSED',
+};
 
+function getSchedule(dayName) {
+  if (!dayName) return hour;
+  const chave = Object.keys(data.hours);
+  const value = chave.find((valor) => valor === dayName);
+  const obj = Object.values(data.hours[value]);
+  if (dayName === 'Monday') {
+    return { [dayName]: 'CLOSED' };
+  }
+  let valor;
+  switch (obj[1]) {
+  case 18:
+    valor = 6;
+    break;
+  case 20:
+    valor = 8;
+    break;
+  default: valor = 10;
+  }
+  return { [value]: `Open from ${obj[0]}am until ${valor}pm` };
+}
+console.log(getSchedule('Tuesday'));
 function getOldestFromFirstSpecies(id) {
   const personal = data.employees.find((funcionario) => funcionario.id === id);
   const [firstsSpecieId] = personal.responsibleFor;
@@ -95,7 +122,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
