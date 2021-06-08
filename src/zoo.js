@@ -86,6 +86,14 @@ function getAnimalMap(options = {}) {
   return locations;
 }
 
+function scheduleMessage(dayName, schedule) {
+  if (schedule[dayName].open !== schedule[dayName].close) {
+    return `Open from ${hoursConverter(schedule[dayName]
+      .open)} until ${hoursConverter(schedule[dayName].close)}`;
+  }
+  return 'CLOSED';
+}
+
 function getSchedule(dayName) {
   const schedule = {};
   const { hours } = data;
