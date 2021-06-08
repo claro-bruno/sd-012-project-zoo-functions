@@ -27,34 +27,29 @@ const getAnimalsOlderThan = (animal, age) => {
 };
 
 const getEmployeeByName = (employeeName) => {
-  // seu código aqui
   if (!employeeName) { // used '!' come from https://pt.stackoverflow.com/questions/108973/qual-a-fun%C3%A7%C3%A3o-do-operador-exclama%C3%A7%C3%A3o
     return {};
   }
   return employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 };
 
-function createEmployee(personalInfo, associatedWith) {
+const createEmployee = (personalInfo, associatedWith) => {
   return { ...personalInfo, ...associatedWith };
 }
 
-function isManager(id) {
-  // seu código aqui
-}
+const isManager = (id) => {return employees.some((employee) => employee.managers.includes(id))};
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
   return employees.push({
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
+    id,
+    firstName,
+    lastName,
     managers: managers || [],
     responsibleFor: responsibleFor || [], // ideia da condição veio de https://github.com/tryber/sd-012-project-zoo-functions/blob/tharcio-sampaio-zoo-functions-project/src/zoo.js
   });
 }
 
 const countAnimals = (specieName) => {
-  // seu código aqui
   const selectSpecies = species.find((specie) => specie.name === specieName);
   const returnQtd = {};
   species.forEach((specie) => { returnQtd[specie.name] = specie.residents.length });
@@ -65,9 +60,7 @@ const countAnimals = (specieName) => {
   return returnQtd;
 };
 
-function calculateEntry(entrants) {
-  // seu código aqui
-
+const calculateEntry = (entrants) => {
   const { Adult: AdultTickets, Child: ChildTickets, Senior: SeniorTickets } = prices;
   if (entrants) {
     const { Adult = 0, Child = 0, Senior = 0 } = entrants;
