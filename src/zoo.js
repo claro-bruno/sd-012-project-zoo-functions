@@ -122,14 +122,17 @@ function increasePrices(percentage) {
   // Altera o objeto prices do arquivo data.js
   // Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais
   const { Adult, Senior, Child } = data.prices;
+  const adult = ((Adult + ((Adult * percentage) / 100)) + 0.005).toFixed(2);
+  const senior = ((Senior + ((Senior * percentage) / 100)) + 0.005).toFixed(2);
+  const child = ((Child + ((Child * percentage) / 100)) + 0.005).toFixed(2);
   data.prices = {
-    Adult: Math.round(Adult * (1 + percentage / 100) * 100) / 100,
-    Senior: Math.round(Senior * (1 + percentage / 100) * 100) / 100,
-    Child: Math.round(Child * (1 + percentage / 100) * 100) / 100,
+    Adult: Number(adult),
+    Senior: Number(senior),
+    Child: Number(child),
   };
   return data.prices;
 }
-// Essa questão estava com um problema de arredondamento que foi resolvido com a ajuda do colega Raphael Soares!
+// Solucionando o problema com o raciocínio inicial!
 
 function getEmployeeCoverage(idOrName) {
   // Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
