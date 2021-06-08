@@ -18,12 +18,14 @@ function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.some((id) => specie.id === id));
 }
 
+// Algoritmo do colega Juan Rezende
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   const animals = species.find((species1) => species1.name === animal);
   return animals.residents.every((resident) => resident.age >= age);
 }
 
+// Algoritmo do colega Juan Rezende
 function getEmployeeByName(employeeName) {
   // seu código aqui
   if (!employeeName) {
@@ -33,6 +35,7 @@ function getEmployeeByName(employeeName) {
   || employee.lastName === employeeName));
 }
 
+// Algoritmo do colega Juan Rezende
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   return {
@@ -41,16 +44,19 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
+// Algoritmo do colega Juan Rezende
 function isManager(id) {
   // seu código aqui
   return employees.some(({ managers }) => managers.includes(id));
 }
 
+// Algoritmo do colega Juan Rezende
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
+// Algoritmo do colega Juan Rezende
 function countAnimals(species2) {
   // seu código aqui
   if (!species2) {
@@ -61,6 +67,7 @@ function countAnimals(species2) {
   return species.find((specie) => specie.name === species2).residents.length;
 }
 
+// Algoritmo do colega Juan Rezende
 function calculateEntry(entrants) {
   // seu código aqui
   if (!entrants || entrants === {}) {
@@ -73,6 +80,7 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
+// Algoritmo do colega Juan Rezende
 function getSchedule(dayName) {
   // seu código aqui
   const schedule = {};
@@ -89,10 +97,15 @@ function getSchedule(dayName) {
   return schedule;
 }
 
-// function getOldestFromFirstSpecies(id) {
-//   // seu código aqui
-// }
+function getOldestFromFirstSpecies(id) {
+  // seu código aqui
+  const person = employees.find((employee) => employee.id === id);
+  const firstSpecie = species.find((specie) => specie.id === person.responsibleFor[0]);
+  const oldest = firstSpecie.residents.sort((a, b) => b.age - a.age);
+  return Object.values(oldest[0]);
+}
 
+// Algoritmo do colega Juan Rezende
 function increasePrices(percentage) {
   // seu código aqui
   const priceKeys = Object.keys(prices);
@@ -116,7 +129,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // getOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
