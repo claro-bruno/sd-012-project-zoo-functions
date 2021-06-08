@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const data = require('./data');
-const { employees, species } = require('./data');
+const { employees, species, prices } = require('./data');
 
 // Algoritmo do colega Juan Rezende
 function getSpeciesByIds(...ids) {
@@ -46,7 +46,7 @@ function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers =[], responsibleFor = []) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
@@ -63,30 +63,34 @@ function countAnimals(species2) {
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (!entrants || entrants === {}) {
+    return 0;
+  }
+  return Object.keys(entrants).reduce(((sum, price) => sum + prices[price] * entrants[price]), 0);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+//   // seu código aqui
+// }
 
-function getSchedule(dayName) {
-  // seu código aqui
-}
+// function getSchedule(dayName) {
+//   // seu código aqui
+// }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function getOldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
-// calculateEntry,
+  calculateEntry,
 // getSchedule,
   countAnimals,
 // getAnimalMap,
