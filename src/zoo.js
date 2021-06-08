@@ -44,45 +44,50 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species2) {
-  // seu código aqui
+  if (!species2) {
+    const animalObj = {};
+    species.forEach((specie) => { animalObj[specie.name] = specie.residents.length; });
+    return animalObj;
+  }
+  return species.find((specie) => specie.name === species2).residents.length;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
-}
+// function calculateEntry(entrants) {
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// }
 
-function getSchedule(dayName) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function getSchedule(dayName) {
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// }
+
+// function getOldestFromFirstSpecies(id) {
+
+// }
+
+// function increasePrices(percentage) {
+
+// }
+
+// function getEmployeeCoverage(idOrName) {
+
+// }
 
 module.exports = {
-  calculateEntry,
-  getSchedule,
+  // calculateEntry,
+  // getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
