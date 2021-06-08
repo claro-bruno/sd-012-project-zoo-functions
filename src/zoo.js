@@ -63,15 +63,54 @@ function calculateEntry(entrants) {
   return total;
 }
 
-/*
-function getAnimalMap(options) {
-  // seu código aqui
+function getAnimalMap(options = {}) {
+  const locations = { NE: [], NW: [], SE: [], SW: [] };
+  if (!options.includeNames) {
+    data.species.forEach((specie) => locations[specie.location].push(specie.name));
+    return locations;
+  }
+
+  data.species.forEach((specie) => {
+    let { residents } = specie;
+    if (options.sex) {
+      residents = specie.residents.filter((resident) => resident.sex === options.sex);
+    }
+    const residentsNames = residents.map((resident) => resident.name);
+    if (options.sorted) residentsNames.sort();
+    locations[specie.location].push({ [specie.name]: residentsNames });
+  });
+
+  return locations;
+}
+
+function hoursConverter(hour) {
+  if (hour > 12) return `${(hour - 12)}pm`;
+  if (hour === 0) return '12pm';
+  return `${hour}am`;
+}
+
+function scheduleMessage(dayName, schedule) {
+  if (schedule[dayName].open !== schedule[dayName].close) {
+    return `Open from ${hoursConverter(schedule[dayName]
+      .open)} until ${hoursConverter(schedule[dayName].close)}`;
+  }
+  return 'CLOSED';
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  const { hours } = data;
+  if (dayName) {
+    schedule[dayName] = scheduleMessage(dayName, hours);
+  } else {
+    Object.keys(hours).forEach((day) => {
+      schedule[day] = scheduleMessage(day, hours);
+    });
+  }
+  return schedule;
 }
 
+/*
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -87,9 +126,9 @@ function getEmployeeCoverage(idOrName) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   /*  getEmployeeCoverage,  */
