@@ -83,8 +83,12 @@ function getOldestFromFirstSpecies() {
   // seu código aqui (id)
 }
 
-function increasePrices() {
-  // seu código aqui (percentage)
+function increasePrices(percentage) {
+  const arrayKeys = Object.keys(data.prices);
+  const converPercent = () => ((percentage / 100) + 1);
+  arrayKeys.forEach((key) => {
+    data.prices[key] = (Math.round(data.prices[key] * converPercent() * 100) / 100);
+  });
 }
 
 function getEmployeeCoverage() {
