@@ -4,7 +4,7 @@
     },
     "extends": "trybe-fundamentals",
     "rules": {
-        "max-line": "off",
+        "max-lines": "off",
         "max-params": "off",
         "linebrak-style": "off"
     }
