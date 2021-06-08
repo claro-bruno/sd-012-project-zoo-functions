@@ -14,7 +14,7 @@ const data = require('./data');
 const speciesArray = data.species;
 const emplys = data.employees;
 const pricesArray = data.prices;
-// const hoursArray = data.hours;
+const dH = data.hours;
 
 function getSpeciesByIds(...ids) {
   return speciesArray.filter((value, i) => value.id === ids[i]);
@@ -73,17 +73,23 @@ function getAnimalMap() {
   // seu código aqui
 }
 
-function getSchedule() {
-  // dayName
-  // let testeDay = 0;
-  // let testeVazio = {};
-  // if (dayName === 'Monday') return {[dayName]:'CLOSED'};
-  // if(dayName === undefined) {
-  //   for (let i = 0; i < Object.keys(hoursArray).length; i += 1) {
-  //    console.log(testeVazio = {[Object.values(hoursArray)[i]] : `Open from ${Object.values(hoursArray)[i].open}am until ${Object.values(hoursArray)[i].close}pm`});
-  //    }
-  // }
-  // return {[dayName]: `Open from ${hoursArray[dayName].open}am until ${hoursArray[dayName].close -12}pm`}
+function getSchedule(dayName) {
+  const monday = { Monday: 'CLOSED' };
+  const undf = {};
+  const arrayK = [];
+  if (dayName === 'Monday') return monday;
+  if (dayName === undefined) {
+    for (let k = 0; k < Object.keys(dH).length; k += 1) {
+      arrayK.push(Object.keys(dH)[k]);
+    }
+    arrayK.forEach((key, i) => {
+      undf[key] = `Open from ${Object.values(dH)[i].open}am until \
+${Object.values(dH)[i].close - 12}pm`;
+    });
+    undf.Monday = monday.Monday;
+    return undf;
+  }
+  return { [dayName]: `Open from ${dH[dayName].open}am until ${dH[dayName].close - 12}pm` };
 }
 
 function getOldestFromFirstSpecies(id) {

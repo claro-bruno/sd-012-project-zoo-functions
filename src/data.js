@@ -332,13 +332,3 @@ module.exports = {
     Child: 20.99,
   },
 };
-// Implemente a função getAnimalMap
-// Implemente a função getSchedule
-// Implemente a função increasePrices
-// Implemente a função getEmployeeCoverage
-// Falta essas de cima
-// const data = require('./data');
-// const speciesArray = data.species;
-// const emplys = data.employees;
-// const pricesArray = data.prices;
-// const hoursArray = data.hours;
