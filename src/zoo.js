@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 const { employees } = require('./data');
-const { prices } = require('./data');
+// const { prices } = require('./data');
 
 // 1=========================================================
 
@@ -181,24 +181,22 @@ function getOldestFromFirstSpecies(id) {
   const findAnimalId = data.species
     .find((animalId) => idEmployee === animalId.id).residents
     .sort((old1, old2) => old2.age - old1.age)[0];
-    const {name, sex, age} = findAnimalId;
-    return Object.values(findAnimalId)
- 
+  return Object.values(findAnimalId);
 }
 console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // 12=========================================================
 
-function increasePrices(percentage) {
-  const prices = data.prices;
-  const adultPrice = prices.Adult + (prices.Adult * (percentage / 100));
-  const seniortPrice = prices.Senior + (prices.Senior * (percentage / 100));
-  const childPrice = prices.Child + (prices.Child * (percentage / 100));
-  prices.Adult = Math.round(adultPrice * 100) / 100;
-  prices.Senior = Math.round(seniortPrice * 100) / 100;
-  prices.Child = Math.round(childPrice * 100) / 100;
-  return prices;
-}
+// function increasePrices(percentage) {
+//   const prices = data.prices;
+//   const adultPrice = prices.Adult + (prices.Adult * (percentage / 100));
+//   const seniortPrice = prices.Senior + (prices.Senior * (percentage / 100));
+//   const childPrice = prices.Child + (prices.Child * (percentage / 100));
+//   prices.Adult = Math.round(adultPrice * 100) / 100;
+//   prices.Senior = Math.round(seniortPrice * 100) / 100;
+//   prices.Child = Math.round(childPrice * 100) / 100;
+//   return prices;
+// }
 
 // console.log(increasePrices(50));
 
@@ -227,6 +225,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  increasePrices,
+  // increasePrices,
   createEmployee,
 };
