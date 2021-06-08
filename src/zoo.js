@@ -137,16 +137,16 @@ function increasePrices(percentage) {
 }
 // console.log(increasePrices(30))
 
-// function getEmployeeCoverage(idOrName) {
-//   const obj = {};
-//   if (idOrName) {
-//     const checkCredentials = employees.find((employee) => employee.id === idOrName 
-//     || employee.firstName === idOrName || employee.lastName === idOrName);
-//   }
-//   employees.forEach((employee) => obj[`${employee.firstName} ${employee.lastName}`]);
-// }
+function getEmployeeCoverage(idOrName) {
+  const obj = {};
+  if (idOrName) {
+    const checkCredentials = employees.find((employee) =>
+    employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
+  }
+  employees.forEach((employee) => obj[`${employee.firstName} ${employee.lastName}`]);
+}
 
-// console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'))
+console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'))
 
 module.exports = {
   calculateEntry,
