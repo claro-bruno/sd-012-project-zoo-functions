@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-
+const { prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -94,9 +94,13 @@ function getSchedule(dayName) {
 // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-// seu código aqui
-// }
+function increasePrices(percentage) {
+  const { Adult, Senior, Child } = prices;
+  prices.Adult = Math.round(Adult * (1 + percentage / 100) * 100) / 100;
+  prices.Senior = Math.round(Senior * (1 + percentage / 100) * 100) / 100;
+  prices.Child = Math.round(Child * (1 + percentage / 100) * 100) / 100;
+  return prices;
+}
 
 // function getEmployeeCoverage(idOrName) {
 // seu código aqui
@@ -114,6 +118,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
