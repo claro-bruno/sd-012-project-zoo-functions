@@ -98,7 +98,7 @@ function getSchedule(dayName) {
 function increasePrices(percentage) {
   Object.keys(prices).forEach((client) => {
     prices[client] = Math.round(prices[client] * (1 + (percentage / 100)) * 100) / 100; // '/100' para que tenha 2 casas decimas.
-    });
+  });
 }
 /* function getEmployeeCoverage(idOrName) {
   // seu código aqui
