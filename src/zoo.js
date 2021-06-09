@@ -98,32 +98,30 @@ function getAnimalMap() {
 }
 
 function getSchedule(dayName) {
-
   const allDates = Object.keys(data.hours);
 
   const allHours = Object.values(data.hours);
-  
-  if (dayName === undefined) {
-    
-  const schedule = {};
 
-  for (index = 0; index < allDates.length; index += 1) {
-    schedule[allDates[index]] = `Open from ${(((allHours[index].open + 11) % 12) + 1)}am until ${(((allHours[index].close + 11) % 12) + 1)}pm`;
-    if (allHours[index].open === allHours[index].close) {
-      schedule[allDates[index]] = 'CLOSED'
-    }
-  }
+  if (dayName === undefined) {
+    const schedule = {};
+
+    allDates.forEach((date) => {
+      const index = allHours[allDates.indexOf(date)];
+      const message = `Open from ${(((index.open + 11) % 12) + 1)}am until ${(((index.close + 11) % 12) + 1)}pm`;
+      schedule[allDates[allDates.indexOf(date)]] = message;
+      return schedule;
+    });
+      
+    schedule[allDates[allDates.length - 1]] = 'CLOSED';
 
     return schedule;
   }
 
   if (typeof (dayName) === 'string') {
-
+//
     const theDay = allDates.find((thatDay) => thatDay === dayName);
 
-    const theHour = allHours.find((thatHour) => {
-      return allHours.indexOf(thatHour) === allDates.indexOf(theDay)
-    });
+    const theHour = allHours.find((thatHour) => allHours.indexOf(thatHour) === allDates.indexOf(theDay));
 
     let schedule = {
       [theDay]: `Open from ${(((theHour.open + 11) % 12) + 1)}am until ${(((theHour.close + 11) % 12) + 1)}pm`,
@@ -136,6 +134,8 @@ function getSchedule(dayName) {
     return schedule;
   }
 }
+
+console.log(getSchedule());
 
 function getOldestFromFirstSpecies() {
   // seu código aqui id
