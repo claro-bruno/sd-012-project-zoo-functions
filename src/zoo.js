@@ -94,13 +94,13 @@ function getSchedule(dayName) {
 function getOldestFromFirstSpecies(id) {
   const employeeId = employees.find((employee) => employee.id === id); // Pega funcionario.
   const responsability = employeeId.responsibleFor; // Pega a responsabilidade do mesmo.
-  const idSpecie = responsibleFor => species.filter((specie) => responsibleFor.includes(specie.id));
-  
+  const idSpecie = (responsibleFor) => species.filter((specie) => responsibleFor.includes(specie.id));
+
   const oldestSpecie = idSpecie(responsability).reduce((acumulator, currentValue) => {
     const { residents } = currentValue;
     acumulator.push(...residents);
     return acumulator;
-  },[]);
+  }, []);
 
   oldestSpecie.sort((a, b) => b.age - a.age); // Organiza o mais velho para o mais novo.
   return Object.values(oldestSpecie[0]);
@@ -113,7 +113,6 @@ function increasePrices(percentage) {
 }
 
 /* function getEmployeeCoverage(idOrName) {
-  
 } */
 
 module.exports = {
