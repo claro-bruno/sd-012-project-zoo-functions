@@ -139,14 +139,15 @@ function getOldestFromFirstSpecies(id) {
     sex: 'any',
     age: 0,
   };
-  const oldestFromFirstSpecies = residentsFromFirstSpecies.forEach((animal) => {
-    if (animal.age > oldest.age ) {
+  residentsFromFirstSpecies.forEach((animal) => {
+    if (animal.age > oldest.age) {
       return oldest = animal;
     }
     return oldest;
-  })
+  });
   const { name, sex, age } = oldest;
-  return [ name, sex, age ];
+  const oldestFromFirstSpecies = [name, sex, age];
+  return oldestFromFirstSpecies;
 }
 
 function increasePrices(percentage) {
