@@ -105,12 +105,13 @@ function getOldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 // console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-function increasePrices() {
-
-  //  seu código aqui
-  // (percentage)
+function increasePrices(percentage) {
+  prices.Adult = Math.round((prices.Adult * (1 + (percentage / 100)) * 100)) / 100;
+  prices.Senior = Math.round((prices.Senior * (1 + (percentage / 100)) * 100)) / 100;
+  prices.Child = Math.round((prices.Child * (1 + (percentage / 100)) * 100)) / 100;
+  return prices;
 }
-
+// console.log(increasePrime(50));
 function getEmployeeCoverage() {
 
   //  seu código aqui
