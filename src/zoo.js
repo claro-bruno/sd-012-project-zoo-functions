@@ -68,9 +68,9 @@ function countAnimals(species) {
 
 function calculateEntry(entrants) {
   if (entrants === undefined) return 0;
-  let {Adult: A} = entrants;
-  let {Child: C} = entrants;
-  let {Senior: S} = entrants;
+  let { Adult: A } = entrants;
+  let { Child: C } = entrants;
+  let { Senior: S } = entrants;
   if (A === undefined) A = 0;
   if (C === undefined) C = 0;
   if (S === undefined) S = 0;
