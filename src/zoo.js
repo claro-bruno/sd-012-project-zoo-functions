@@ -65,18 +65,51 @@ function calculateEntry(entrants) {
   return Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * prices[curr]), 0);
 }
 
-function getAnimalMap(options) {
-  if (!options) {
-    const result = {};
-    species.map((specie) => {
-      if (result[specie.location]) return result[specie.location].push(specie.name);
-      result[specie.location] = [specie.name];
-      return result;
-    });
+const groupAnimalsByLocation = ((arrayAnimals) => {
+  const result = {};
+  arrayAnimals.map((specie) => {
+    if (result[specie.location]) return result[specie.location].push(specie.name);
+    result[specie.location] = [specie.name];
     return result;
+  });
+  return result;
+});
+
+function getResidentsBySpecieName(specieArray, name) {
+  return specieArray.find((specie) => specie.name === name).residents;
+}
+
+const getResidentsName = ((arrayResidents) => {
+  const names = [];
+  arrayResidents.forEach((resident) => {
+    names.push(resident.name);
+  });
+  return names;
+});
+
+const getGroupedAnimalsWithNames = ((groupedAnimals) => {
+  const groupedAnimalsWithName = {};
+  const regions = Object.keys(groupedAnimals);
+  regions.forEach((region) => {
+    groupedAnimalsWithName[region] = [];
+    groupedAnimals[region].forEach((animal) => {
+      const animalObject = {};
+      const residents = getResidentsBySpecieName(species, animal);
+      animalObject[animal] = getResidentsName(residents);
+      groupedAnimalsWithName[region].push(animalObject);
+    });
+  });
+  return groupedAnimalsWithName;
+});
+
+function getAnimalMap(options) {
+  const groupedAnimals = groupAnimalsByLocation(species);
+  if (!options) return groupedAnimals;
+  if (options.includeNames) {
+    return getGroupedAnimalsWithNames(groupedAnimals);
   }
 }
-console.log(getAnimalMap());
+console.log(getAnimalMap({ includeNames: true }));
 
 function formatDaySchedule(day) {
   if (day.open === day.close) return 'CLOSED';
