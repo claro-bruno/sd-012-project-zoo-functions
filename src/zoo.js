@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { employees } = require('./data');
+const { employees, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -73,8 +73,23 @@ function getAnimalMap() {
   // seu código aqui options
 }
 
-function getSchedule() {
-  // seu código aqui dayName
+function getSchedule(dayName) {
+  const hour = Object.keys(hours);
+  const tableOfHours = {};
+  const hoursTable = hour.reduce((accumulator, currentValue) => {
+    if (hours[currentValue].open === hours[currentValue].close) {
+      accumulator[currentValue] = 'CLOSED';
+    } else {
+      accumulator[currentValue] = `Open from ${hours[currentValue]
+        .open}am until ${hours[currentValue].close - 12}pm`;
+    }
+    return accumulator;
+  }, {});
+  if (!dayName) {
+    return hoursTable;
+  }
+  tableOfHours[dayName] = hoursTable[dayName];
+  return tableOfHours;
 }
 
 function getOldestFromFirstSpecies() {
