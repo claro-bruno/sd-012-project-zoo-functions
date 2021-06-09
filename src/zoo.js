@@ -80,27 +80,35 @@ function calculateEntry(entrants = {}) {
 }
 
 function getAnimalMap(options) {
-  return options;
+  const obj = {};
+  if (!options) {
+    species.forEach((specie) => {
+      obj[specie.location] = [];
+    });
+    species.forEach((specie) => {
+      obj[specie.location].push(specie.name);
+    });
+    return obj;
+  }
 }
 
-function getSchedule(dayName = 0) {
+function verifySchedule(day, open, close) {
+  if (!open || !close) {
+    return 'CLOSED';
+  }
+  return `Open from ${open}am until ${close - 12}pm`;
+}
+
+function getSchedule(dayName) {
   const schedule = {};
-  const scheduleDay = {};
-  Object.entries(hours).every(([day, { open, close }]) => {
-    schedule[day] = `Open from ${open}am until ${close - 12}pm`;
-    if (!open || !close) {
-      schedule[day] = 'CLOSED';
-    }
-    if (day === dayName) {
-      scheduleDay[day] = schedule[day];
-      return false;
-    }
-    return true;
-  });
   if (!dayName) {
+    Object.entries(hours).forEach(([day, { open, close }]) => {
+      schedule[day] = verifySchedule(day, open, close);
+    });
     return schedule;
   }
-  return scheduleDay;
+  schedule[dayName] = verifySchedule(dayName, hours[dayName].open, hours[dayName].close);
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
