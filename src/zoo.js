@@ -94,7 +94,26 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap() {
-  // seu código aqui options
+  
+  //options
+
+  let animalMap = [
+    species.filter((specie) => specie.location === 'NE'),
+    species.filter((specie) => specie.location === 'NW'),
+    species.filter((specie) => specie.location === 'SE'),
+    species.filter((specie) => specie.location === 'SW'),
+  ];
+
+  if (options === undefined) {
+    
+    let zoneAndSpecies = {};
+
+    animalMap.map((zone) => {
+      return zone.map((group) => zoneAndSpecies[group.location] = zone.map((animals) => animals.name));
+    });
+    
+    return zoneAndSpecies;
+  }
 }
 
 function getSchedule() {
