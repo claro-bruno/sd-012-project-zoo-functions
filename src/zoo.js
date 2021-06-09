@@ -93,11 +93,11 @@ function calculateEntry(entrants) {
   return totalPrice;
 }
 
-function getAnimalMap() { 
-  //options
+function getAnimalMap() {
+  // options
 }
 
-function getSchedule() {
+function getSchedule(dayName) {
   // seu código aqui dayName
 }
 
