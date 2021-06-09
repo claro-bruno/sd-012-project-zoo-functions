@@ -57,8 +57,22 @@ function calculateEntry(entrants) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return ((prices.Adult * Adult) + (prices.Child * Child) + (prices.Senior * Senior));
 }
-/* function getSchedule(dayName) {
-  // seu código aqui
+/* referencia: Wadson92 turma10-triboB */
+function getSchedule(dayName) {
+  const hours = { // cria um objeto com as informações de saída
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+  if (!dayName) return hours; // sem parametro retorna o objeto hours.
+  return { [dayName]: hours[dayName] }; // retorna o valor referente a chave passada por parametro.
+}
+/* function getAnimalMap (option) {
+
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -82,9 +96,10 @@ module.exports = {
   addEmployee,
   countAnimals,
   calculateEntry,
-  /* getSchedule,
-  getAnimalMap,
-  getEmployeeCoverage,
+  /* getAnimalMap, */
+  getSchedule,
+
+  /* getEmployeeCoverage,
   getOldestFromFirstSpecies,
   increasePrices, */
 };
