@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -73,38 +73,48 @@ function calculateEntry(entrants = { Adult: 0, Senior: 0, Child: 0 }) {
     + (entrants2.Child * prices.Child));
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// function getAnimalMap(options) {
+// seu código aqui
+// }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  if (dayName === undefined) {
+    hours.forEach((day) => {
+      if (day.open === day.close) {
+        schedule[day] = 'CLOSED';
+      } else {
+        schedule[day] = (`Open from ${day.open}am until ${day.close - 12} pm`);
+      }
+    });
+  }
+  return (schedule);
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function getOldestFromFirstSpecies(id) {
+// seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+// seu código aqui
+// }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function getEmployeeCoverage(idOrName) {
+// seu código aqui
+// }
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  getOldestFromFirstSpecies,
-  increasePrices,
+  // getOldestFromFirstSpecies,
+  // increasePrices,
   createEmployee,
 };
