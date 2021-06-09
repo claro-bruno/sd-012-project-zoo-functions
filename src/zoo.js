@@ -98,8 +98,44 @@ function getAnimalMap() {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui dayName
+
+  if (dayName === undefined) {
+
+    const schedule = {
+        'Tuesday': 'Open from 8am until 6pm',
+        'Wednesday': 'Open from 8am until 6pm',
+        'Thursday': 'Open from 10am until 8pm',
+        'Friday': 'Open from 10am until 8pm',
+        'Saturday': 'Open from 8am until 10pm',
+        'Sunday': 'Open from 8am until 8pm',
+        'Monday': 'CLOSED',
+    }
+
+    return schedule;  
+  };
+
+  if (typeof(dayName) === 'string') {
+
+    const weekDays = Object.keys(data.hours);
+
+    const hoursOfEachDay = Object.values(data.hours);
+
+    const day = weekDays.find((day) => day === dayName);
+
+    const hour = hoursOfEachDay.find((hour) => hoursOfEachDay.indexOf(hour) === weekDays.indexOf(day))
+
+    let schedule = {
+      [day]: `Open from ${((hour.open + 11) % 12 + 1)}am until ${((hour.close + 11) % 12 + 1)}pm`
+    }
+
+    if (hour.open === hour.close) {
+      schedule = {[day]: 'CLOSED'}
+    }
+    
+    return schedule; 
+  };
 }
+
 
 function getOldestFromFirstSpecies() {
   // seu código aqui id
