@@ -10,12 +10,15 @@ eslint no-unused-vars: [
 */
 const {
   species,
+  hours,
 } = require('./data');
 const {
   employees,
 } = require('./data');
 // const { data } = require('./data');
-const { prices } = require('./data');
+const {
+  prices,
+} = require('./data');
 
 function getSpeciesByIds(...ids) {
   // return ids.map((idAnimal) => species.find((animals) => idAnimal === animals.id));
@@ -70,7 +73,10 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function countAnimals(input) {
   if (!input) {
-    const animals = species.reduce((acc, { name, residents }) => {
+    const animals = species.reduce((acc, {
+      name,
+      residents,
+    }) => {
       acc[name] = residents.length;
       return acc;
     }, {});
@@ -83,7 +89,9 @@ function countAnimals(input) {
 
 function calculateEntry(entrants = 0) {
   if (Object.keys(entrants).length === 0) return 0;
-  let { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  let {
+    Adult = 0, Child = 0, Senior = 0,
+  } = entrants;
   Adult *= prices.Adult;
   Child *= prices.Child;
   Senior *= prices.Senior;
@@ -95,11 +103,23 @@ function calculateEntry(entrants = 0) {
 function getAnimalMap(options) {
   // seu código aqui
 }
+*/
 
 function getSchedule(dayName) {
-  // seu código aqui
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
+  if (!dayName) {
+    const hour = Object.keys(hours);
+    const cronograma = hour.reduce((acc, crr) => {
+      acc[crr] = `Open from ${hours[crr].open}am until ${hours[crr].close - 12}pm`;
+      return acc;
+    }, {});
+    cronograma.Monday = 'CLOSED';
+    return cronograma;
+  }
+  return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
-
+console.log(getSchedule('Monday'));
+/*
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -114,7 +134,7 @@ function getEmployeeCoverage(idOrName) {
 */
 module.exports = {
   calculateEntry,
-  //  getSchedule,
+  getSchedule,
   countAnimals,
   //  getAnimalMap,
   getSpeciesByIds,
