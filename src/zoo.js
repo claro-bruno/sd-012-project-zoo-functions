@@ -81,7 +81,20 @@ function getOldestFromFirstSpecies(id) {
   });
   return [oldest.name, oldest.sex, oldest.age];
 }
+/* referencia: https://qastack.com.br/programming/7342957/how-do-you-round-to-1-decimal-place-in-javascript */
+function increasePrices(percentage) {
+  const per = percentage * 0.01;
+  const newPriceAdult = Math.round((data.prices.Adult * per + data.prices.Adult) * 100) / 100;
+  const newPriceSenior = Math.round((data.prices.Senior * per + data.prices.Senior) * 100) / 100;
+  const newPriceChild = Math.round((data.prices.Child * per + data.prices.Child) * 100) / 100;
 
+  data.prices = {
+    Adult: newPriceAdult,
+    Senior: newPriceSenior,
+    Child: newPriceChild,
+  };
+  return data.prices;
+}
 /*   const oldest = resident.reduce((acc, current) => {
   if (current.age > acc.age) acc.age = current.age;
   });
@@ -90,10 +103,6 @@ function getOldestFromFirstSpecies(id) {
 } */
 /* function getAnimalMap (option) {
 
-}
-
-function increasePrices(percentage) {
-  // seu código aqui
 }
 
 function getEmployeeCoverage(idOrName) {
@@ -112,8 +121,6 @@ module.exports = {
   /* getAnimalMap, */
   getSchedule,
   getOldestFromFirstSpecies,
-
-  /* getEmployeeCoverage,
-
-  increasePrices, */
+  increasePrices,
+/*   getEmployeeCoverage, */
 };
