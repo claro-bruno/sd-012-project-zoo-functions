@@ -71,9 +71,18 @@ function countAnimals(especie) {
   return contaespecie;
 }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants) {
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const { Adult: qtdadeAdulto = 0, Child: qtdadeCrianca = 0,
+    Senior: qtdadeIdoso = 0 } = entrants;
+  const totalAdultos = data.prices.Adult * qtdadeAdulto;
+  const totalCriancas = data.prices.Child * qtdadeCrianca;
+  const totalIdosos = data.prices.Senior * qtdadeIdoso;
+  const precoFinal = totalAdultos + totalCriancas + totalIdosos;
+  return precoFinal;
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -96,7 +105,7 @@ function countAnimals(especie) {
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
