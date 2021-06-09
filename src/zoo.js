@@ -69,17 +69,18 @@ function countAnimals(species) {
 function calculateEntry(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
-  } else {
-    let Adult = entrants.Adult;
-    if (typeof Adult === 'undefined') Adult = 0;
-    let Child = entrants.Child;
-    if (typeof Child === 'undefined') {
-      Child = 0;
-    }
-    let Senior = entrants.Senior
-    if (typeof Senior === 'undefined') Senior = 0;
-    return Child * prices.Child + Senior * prices.Senior + Adult * prices.Adult;
   }
+  
+  let Adult = entrants.Adult;
+  if (Adult === undefined) Adult = 0;
+  let Child = entrants.Child;
+  if (Child === undefined) {
+      Child = 0;
+  }
+  let Senior = entrants.Senior
+  if (Senior === undefined) Senior = 0;
+  return Child * prices.Child + Senior * prices.Senior + Adult * prices.Adult;
+  
   //console.log(typeof entrants.Child)
 }
 
