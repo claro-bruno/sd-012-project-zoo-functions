@@ -42,7 +42,7 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   return data.employees.push({id: id, firstName: firstName, lastName: lastName, managers: managers, responsibleFor: responsibleFor
-  }
+  });
 }
 //addEmployee(2, 'tarcio', 'moura', ['tau'], [5])
 function countAnimals(species) {
