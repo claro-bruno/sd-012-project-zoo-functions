@@ -105,17 +105,20 @@ function getSchedule(dayName) {
   return { [dayName]: `Open from ${data.hours[dayName].open}am until ${data
     .hours[dayName].close - 12}pm` };
 }
-/* 'Open from ${day.open}pm until ${day.close}pm'  */
-console.log(getSchedule());
 
-function getOldestFromFirstSpecies() {
-  // id Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário,
+function getOldestFromFirstSpecies(id) {
+  // Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário,
   // e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
-  /* const employeeFound = data.employees.find((employee) => employee.id === id);
-  const animalFound = employeeFound.responsibleFor.forEach((especie) => especie.residents
-  data.species.forEach(({ name, residents }) => {
-    result[name] = residents.length;
-  }); */
+  const employeeSearch = data.employees.find((employee) => employee.id === id);
+  const especieSearch = employeeSearch.responsibleFor[0];
+  const animalSearch = data.species.find((specie) => specie.id === especieSearch);
+  let animalOld = animalSearch.residents[0];
+  animalSearch.residents.forEach((animals) => {
+    if (animals.age > animalOld.age) {
+      animalOld = animals;
+    }
+  });
+  return Object.values(animalOld);
 }
 
 function increasePrices() {
