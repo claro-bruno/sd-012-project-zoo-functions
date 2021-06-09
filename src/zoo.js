@@ -71,12 +71,25 @@ function getSchedule(dayName) {
   if (!dayName) return hours; // sem parametro retorna o objeto hours.
   return { [dayName]: hours[dayName] }; // retorna o valor referente a chave passada por parametro.
 }
-/* function getAnimalMap (option) {
-
-}
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstAnimal = employees.find((ids) => ids.id === id).responsibleFor[0];
+  const resident = species.find((specie) => specie.id === firstAnimal);
+  const oldest = resident.residents.reduce((acc, current) => {
+    if (current.age > acc.age) return current;
+    return acc;
+  });
+  return [oldest.name, oldest.sex, oldest.age];
+}
+
+/*   const oldest = resident.reduce((acc, current) => {
+  if (current.age > acc.age) acc.age = current.age;
+  });
+  const {name, sex, age} = oldest;
+  return [name, sex, age];
+} */
+/* function getAnimalMap (option) {
+
 }
 
 function increasePrices(percentage) {
@@ -98,8 +111,9 @@ module.exports = {
   calculateEntry,
   /* getAnimalMap, */
   getSchedule,
+  getOldestFromFirstSpecies,
 
   /* getEmployeeCoverage,
-  getOldestFromFirstSpecies,
+
   increasePrices, */
 };
