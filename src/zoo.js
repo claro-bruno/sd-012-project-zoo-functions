@@ -134,8 +134,18 @@ function getOldestFromFirstSpecies() {
   // seu código aqui id
 }
 
-function increasePrices() {
-  // seu código aqui percentage
+function increasePrices(percentage) {
+  const adultPrice = data.prices.Adult;
+  const seniorPrice = data.prices.Senior;
+  const childPrice = data.prices.Child;
+  
+  const newPrices = {
+    Adult: Math.round((adultPrice + (adultPrice * (0.01 * percentage)))*100)/100,
+    Senior: Math.round((seniorPrice + (seniorPrice * (0.01 * percentage)))*100)/100,
+    Child: Math.round((childPrice + (childPrice * (0.01 * percentage)))*100)/100,
+  }
+  
+  return data.prices = newPrices;
 }
 
 function getEmployeeCoverage() {
