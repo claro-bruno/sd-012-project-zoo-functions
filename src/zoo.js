@@ -96,9 +96,19 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
-// function increasePrices(percentage) {
-//   // seu código aqui
-// }
+function increasePrices(percentage) {
+  const { Adult, Child, Senior } = data.prices;
+  const porcentagem = percentage / 100;
+  const novoPrecoAdulto = Math.round((Adult * (1 + (porcentagem)) * 100)) / 100;
+  const novoPrecoCrianca = Math.round((Child * (1 + (porcentagem)) * 100)) / 100;
+  const novoPrecoIdoso = Math.round((Senior * (1 + (porcentagem)) * 100)) / 100;
+  data.prices = {
+    Adult: novoPrecoAdulto,
+    Child: novoPrecoCrianca,
+    Senior: novoPrecoIdoso,
+  };
+  return data.prices;
+}
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
@@ -116,6 +126,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
