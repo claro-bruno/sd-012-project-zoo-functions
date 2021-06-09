@@ -75,7 +75,7 @@ function getSchedule(dayName) {
     Friday: 'Open from 10am until 8pm',
     Saturday: 'Open from 8am until 10pm',
     Sunday: 'Open from 8am until 8pm',
-    Monday: 'Closed',
+    Monday: 'CLOSED',
   };
   if (!dayName) return infos;
   const dayWeek = Object.entries(infos).find((day) => day[0] === dayName);
