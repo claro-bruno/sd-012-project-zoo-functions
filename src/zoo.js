@@ -47,10 +47,10 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(speciesName) {
   if (speciesName) {
-    return species.find(({ name }) => speciesName === name).residents.lenght;
+    return species.find(({ name }) => speciesName === name).residents.length;
   }
   const speciesScore = species.reduce((accumulator, currentValor) => {
-    accumulator[currentValor.name] = currentValor.residents.lenght;
+    accumulator[currentValor.name] = currentValor.residents.length;
     return accumulator;
   }, {});
   return speciesScore;
