@@ -125,20 +125,30 @@ function getSchedule(dayName) {
   };
 }
 
-/* function getOldestFromFirstSpecies(id) {
-
-} */
-
+function getOldestFromFirstSpecies(id) {
+  const funcionario = employees.find((employee) => employee.id === id);
+  const buscaSpecie = funcionario.responsibleFor[0];
+  const buscaAnimal = species.find((specie) => specie.id === buscaSpecie);
+  let animalOld = buscaAnimal.residents[0];
+  buscaAnimal.residents.forEach((animals) => {
+    if (animals.age > animalOld.age) {
+      animalOld = animals;
+    }
+  });
+  return Object.values(animalOld);
+}
+//  acompanhei reciocineo do eurides e thales na mentoria  link do pull request: https://github.com/tryber/sd-012-project-zoo-functions/pull/88/commits/1cea67f94166e04e18d8cdec573e99c996615c2b
 function increasePrices(percentage) {
   prices.Adult = Math.round((prices.Adult * (1 + (percentage / 100)) * 100)) / 100;
   prices.Senior = Math.round((prices.Senior * (1 + (percentage / 100)) * 100)) / 100;
   prices.Child = Math.round((prices.Child * (1 + (percentage / 100)) * 100)) / 100;
   return prices;
 }
-/*
-function getEmployeeCoverage(idOrName) {
-}
-*/
+
+// function getEmployeeCoverage(idOrName) {
+
+// }
+
 module.exports = {
   calculateEntry,
   getSchedule,
@@ -150,7 +160,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  // etOldestFromFirstSpecies,
+  getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
 };
