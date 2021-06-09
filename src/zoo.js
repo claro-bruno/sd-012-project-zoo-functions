@@ -91,12 +91,31 @@ function getAnimalMap() {
   // seu código aqui  : options
 }
 
-function getSchedule() {
-  // seu código aqui  : dayName
+function getSchedule(dayName) {
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
+  if (!dayName) {
+    const schedule = Object.keys(data.hours);
+    const timetable = schedule.reduce((acc, crr) => {
+      acc[crr] = `Open from ${data.hours[crr].open}am until ${data.hours[crr].close - 12}pm`;
+      return acc;
+    }, {});
+    timetable.Monday = 'CLOSED';
+    return timetable;
+  }
+  return { [dayName]: `Open from ${data.hours[dayName].open}am until ${data
+    .hours[dayName].close - 12}pm` };
 }
+/* 'Open from ${day.open}pm until ${day.close}pm'  */
+console.log(getSchedule());
 
 function getOldestFromFirstSpecies() {
-  // seu código aqui  : id
+  // id Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário,
+  // e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
+  /* const employeeFound = data.employees.find((employee) => employee.id === id);
+  const animalFound = employeeFound.responsibleFor.forEach((especie) => especie.residents
+  data.species.forEach(({ name, residents }) => {
+    result[name] = residents.length;
+  }); */
 }
 
 function increasePrices() {
