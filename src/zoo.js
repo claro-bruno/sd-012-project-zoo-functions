@@ -75,6 +75,7 @@ function calculateEntry(entrants) {
 /* function getAnimalMap(options) {
   // seu código aqui
 } */
+// Os codigos abaixo foram EXTREMAMENTE inspirados no codigo de [Paulo-Michael-Schweigert-Pereira] e [Bruno Yamamoto].
 
 function getSchedule(dayName) {
   const days = Object.keys(data.hours);
@@ -97,11 +98,15 @@ function getOldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
-/* function increasePrices(percentage) {
-  // seu código aqui
+function increasePrices(percentage) {
+  const prices = Object.keys(data.prices);
+  prices.forEach((age) => {
+    data.prices[age] *= (1 + percentage / 100) + 0.0001;
+    data.prices[age] = Number(data.prices[age].toFixed(2));
+  });
 }
 
-function getEmployeeCoverage(idOrName) {
+/* function getEmployeeCoverage(idOrName) {
   // seu código aqui
 } */
 
@@ -117,6 +122,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  /* increasePrices, */
+  increasePrices,
   createEmployee,
 };
