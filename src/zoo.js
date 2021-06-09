@@ -11,68 +11,131 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
-
+function getSpeciesByIds(...ids) {
+  const speciesArray = ids.map((id) => data.species.find((specie) => specie.id === id));
+  return speciesArray;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
-
+  const animals = data.species.find((animalList) => animalList.name === animal);
+  return animals.residents.every((ages) => ages.age > age);
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
-
+  if (!employeeName) return {};
+  const foundEmployee = data.employees.find((employee) => ((employee.firstName === employeeName)
+  || (employee.lastName === employeeName)));
+  return foundEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newEmployee = {};
+  Object.assign(newEmployee, personalInfo, associatedWith);
+  return newEmployee;
 }
-
 
 function isManager(id) {
-  // seu código aqui
-
+  return data.employees.some((employee) => employee.managers.some((manager) => manager === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push(createEmployee({ id, firstName, lastName },
+    { managers, responsibleFor }));
 }
 
 function countAnimals(species) {
-  // seu código aqui
-
+  if (species) {
+    const count = data.species.find((specie) => specie.name === species).residents.length;
+    return count;
+  }
+  const allSpeciesCount = {};
+  data.species.forEach((specie) => {
+    allSpeciesCount[specie.name] = specie.residents.length;
+  });
+  return allSpeciesCount;
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
-
+  if (!entrants || entrants === {}) return 0;
+  const { Adult: adult = 0, Child: child = 0, Senior: senior = 0 } = entrants;
+  const total = ((adult * data.prices.Adult) + (child * data.prices.Child)
+    + (senior * data.prices.Senior));
+  return total;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function getAnimalMap(options = {}) {
+  const locations = { NE: [], NW: [], SE: [], SW: [] };
+  if (!options.includeNames) {
+    data.species.forEach((specie) => locations[specie.location].push(specie.name));
+    return locations;
+  }
+
+  data.species.forEach((specie) => {
+    let { residents } = specie;
+    if (options.sex) {
+      residents = specie.residents.filter((resident) => resident.sex === options.sex);
+    }
+    const residentsNames = residents.map((resident) => resident.name);
+    if (options.sorted) residentsNames.sort();
+    locations[specie.location].push({ [specie.name]: residentsNames });
+  });
+
+  return locations;
 }
 
+function hoursConverter(hour) {
+  if (hour > 12) return `${(hour - 12)}pm`;
+  if (hour === 0) return '12pm';
+  return `${hour}am`;
+}
+
+function scheduleMessage(dayName, schedule) {
+  if (schedule[dayName].open !== schedule[dayName].close) {
+    return `Open from ${hoursConverter(schedule[dayName]
+      .open)} until ${hoursConverter(schedule[dayName].close)}`;
+  }
+  return 'CLOSED';
+}
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  const { hours } = data;
+  if (dayName) {
+    schedule[dayName] = scheduleMessage(dayName, hours);
+  } else {
+    Object.keys(hours).forEach((day) => {
+      schedule[day] = scheduleMessage(day, hours);
+    });
+  }
+  return schedule;
 }
 
-
+/*
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
-
-
-function increasePrices(percentage) {
+	@@ -59,8 +119,25 @@ function increasePrices(percentage) {
   // seu código aqui
 }
-
+*/
+const speciesCoverage = (employee) => employee.responsibleFor.map((specieId) =>
+  getSpeciesByIds(specieId)[0].name);
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName) {
+    const employeeFound = data.employees.find((employee) =>
+      ((employee.id === idOrName) || (employee.firstName === idOrName)
+        || (employee.lastName === idOrName)));
+    return { [`${employeeFound.firstName} ${employeeFound.lastName}`]:
+      speciesCoverage(employeeFound) };
+  }
+
+  const employeesCovarage = {};
+  data.employees.forEach((employee) => {
+    employeesCovarage[`${employee.firstName} ${employee
+      .lastName}`] = speciesCoverage(employee);
+  });
+  return employeesCovarage;
 }
 
 
