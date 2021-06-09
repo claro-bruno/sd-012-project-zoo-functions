@@ -94,8 +94,8 @@ function getSchedule(dayName) {
 function getOldestFromFirstSpecies(id) {
   const employeeId = employees.find((employee) => employee.id === id); // Pega funcionario.
   const responsability = employeeId.responsibleFor; // Pega a responsabilidade do mesmo.
-  const idSpecie = (responsibleFor) => 
-  species.filter((specie) => responsibleFor.includes(specie.id));
+  const idSpecie = (responsibleFor) =>
+    species.filter((specie) => responsibleFor.includes(specie.id));
 
   const oldestSpecie = idSpecie(responsability).reduce((acumulator, currentValue) => {
     const { residents } = currentValue;
