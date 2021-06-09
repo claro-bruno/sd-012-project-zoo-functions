@@ -65,11 +65,16 @@ function calculateEntry(entrants) {
   return Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * prices[curr]), 0);
 }
 
-/*
-function getAnimalMap(options) {
-  // seu código aqui
+/* function getAnimalMap(options) {
+  if (!options) {
+    const result = {};
+    species.map((specie) => {
+      result[specie.location] = specie.name;
+    });
+    return result;
+  }
 }
-*/
+console.log(getAnimalMap()); */
 
 function formatDaySchedule(day) {
   if (day.open === day.close) return 'CLOSED';
@@ -107,7 +112,7 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
+/* function getEmployeeCoverage(idOrName) {
   if (!idOrName) {
     const result = {};
     employees.forEach(({ firstName, lastName, responsibleFor }) => {
@@ -117,7 +122,7 @@ function getEmployeeCoverage(idOrName) {
     return result;
   }
 }
-console.log(getEmployeeCoverage());
+console.log(getEmployeeCoverage()); */
 
 module.exports = {
   calculateEntry,
@@ -126,7 +131,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
