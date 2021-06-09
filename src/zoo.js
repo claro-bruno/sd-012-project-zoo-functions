@@ -56,9 +56,11 @@ function countAnimals(speciesName) {
   return speciesScore;
 }
 
-function calculateEntry(entrants = { adult: 0, senior: 0, child: 0 }) {
-  const { adult = 0, senior = 0, child = 0 } = entrants;
-  return adult * prices.Adult + senior * prices.Senior + child * prices.Child;
+function calculateEntry(entrants) {
+  if (typeof entrants !== 'object' || Object.keys(entrants).length === 0) return 0;
+  return Object.keys(entrants).reduce(
+    (accumulator, currentValor) => accumulator + entrants[currentValor] * prices[currentValor], 0,
+  );
 }
 
 /* function getAnimalMap(options) {
@@ -67,12 +69,12 @@ function calculateEntry(entrants = { adult: 0, senior: 0, child: 0 }) {
 
 function getSchedule(dayName) {
   const infos = {
-    Tuesday: 'Open from 8am until 18pm',
-    Wednesday: 'Open from 8am until 18pm',
-    Thursday: 'Open from 10am until 20pm',
-    Friday: 'Open from 10am until 20pm',
-    Saturday: 'Open from 8am until 22pm',
-    Sunday: 'Open from 8am until 20pm',
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
     Monday: 'Closed',
   };
   if (!dayName) return infos;
