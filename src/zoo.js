@@ -77,20 +77,20 @@ function calculateEntry(entrants) {
   return C * prices.Child + S * prices.Senior + A * prices.Adult;
 }
 function getAnimalMap(options = {}) {
-  const local = {NE: [], NW: [], SE: [], SW: [],}
+  const local = { NE: [], NW: [], SE: [], SW: [] };
   if (!options.includeNames) {
-    species.forEach((itemArray) => local[itemArray.location].push(itemArray.name))
+    data.species.forEach((itemArray) => local[itemArray.location].push(itemArray.name));
     return local;
   }
-  species.forEach((itemArray) => {
+  data.species.forEach((itemArray) => {
     let residente = itemArray.residents;
     if (options.sex) {
-      residente = itemArray.residents.filter((item) => item.sex === options.sex)
+      residente = itemArray.residents.filter((item) => item.sex === options.sex);
     }
-    const residenteN = residente.map((itemArray) => itemArray.name);
-    if (options.sorted) residenteN.sort()
-    local[itemArray.location].push({[itemArray.name]: residenteN})
-  })
+    const residenteN = residente.map((itemArray2) => itemArray2.name);
+    if (options.sorted) residenteN.sort();
+    local[itemArray.location].push({ [itemArray.name]: residenteN });
+  });
   return local;
 }
 // auxiliado com o code-Review do LuctReis, não estava sabendi fundamentar os requesitos;
