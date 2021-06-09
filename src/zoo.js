@@ -111,20 +111,13 @@ function getEmployeeCoverage(idOrName) {
   if (!idOrName) {
     const result = {};
     employees.forEach(({ firstName, lastName, responsibleFor }) => {
-      result[`${firstName} ${lastName}`] = responsibleFor;
+      const fullName = `${firstName} ${lastName}`;
+      result[fullName] = responsibleFor;
     });
     return result;
   }
-  
-  const find = employees.find((employee) => employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
-  
-  console.log(find);
-
 }
-console.log(getEmployeeCoverage('Azevado'));
-
-// return { [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor };
-// || employee.firstName === idOrName || employee.lastName === idOrName
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
