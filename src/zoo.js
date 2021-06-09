@@ -17,16 +17,14 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  return data.species.some((specie) => {
-    return specie.name === animal && specie.residents.every((resident) => resident.age >= age)
-  });
+  const sp = data.species.filter((specie) => specie.name === animal);
+  const older = sp[0].residents.every((resident) => resident.age >= age);
+  return older;
 }
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) return {};
-  return data.employees.find((employee) => {
-    return (employee.firstName === employeeName || employee.lastName === employeeName)
-  });
+  return data.employees.find((e) => (e.firstName === employeeName || e.lastName === employeeName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -50,7 +48,7 @@ function countAnimals(species) {
   const obj = {};
   data.species.forEach((specie) => {
     obj[specie.name] = Object.keys(specie.residents).length;
-  })
+  });
   return obj;
 }
 
@@ -84,9 +82,8 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const filterId = data.species.filter((specie) => {
-    return specie.id === data.employees.find((employee) => employee.id === id).responsibleFor[0];
-  });
+  const findEmployee = data.employees.find((employee) => employee.id === id);
+  const filterId = data.species.filter((specie) => specie.id === findEmployee.responsibleFor[0]);
   return Object.values(filterId[0].residents.sort((a, b) => b.age - a.age)[0]);
 }
 
