@@ -41,9 +41,20 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function countAnimals(species) {
-  return species;
+  
+  if ( species === undefined) {
+    const quant = data.species.reduce((acc, i) => {
+      acc[i.name] = i.residents.length;
+      return acc;
+    }, {})
+    return quant;
+  } else {
+    const q = data.species.filter((i) => i.name === species)
+    return q[0].residents.length;
+  }
+  
 }
-
+//countAnimals()
 function calculateEntry(entrants) {
   return entrants;
 }
