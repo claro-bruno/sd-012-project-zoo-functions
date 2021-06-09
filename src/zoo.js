@@ -120,11 +120,27 @@ function getOldestFromFirstSpecies(id) {
   });
   return Object.values(animalOld);
 }
-
-function increasePrices() {
-  // seu código aqui   : percentage
+/* const data = require('./data'); */
+function increasePrices(percentage) {
+  // seu código aqui   :Se o parâmetro da função recebe o valor 20, o aumento é de 20%
+  // Altera o objeto prices do arquivo data.js
+  // Adult: 49.99,     Senior: 24.99,    Child: 20.99,
+  let priceAdult = data.prices.Adult;
+  priceAdult *= (1 + (percentage / 100));
+  priceAdult = Math.round(priceAdult * 100) / 100;
+  data.prices.Adult = priceAdult;
+  let priceSenior = data.prices.Senior;
+  priceSenior *= (1 + (percentage / 100));
+  priceSenior = Math.round(priceSenior * 100) / 100;
+  data.prices.Senior = priceSenior;
+  let priceChild = data.prices.Child;
+  priceChild *= (1 + (percentage / 100));
+  priceChild = Math.round(priceChild * 100) / 100;
+  data.prices.Child = priceChild;
+  return data.prices;
 }
 
+/* console.log(increasePrices(20)); */
 function getEmployeeCoverage() {
   // seu código aqui    : idOrName
 }
