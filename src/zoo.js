@@ -73,9 +73,14 @@ function countAnimals(species) {
 console.log(countAnimals());
 console.log(countAnimals('lions'));
 
-// function calculateEntry(entrants) {
-// seu código aqui
-// }
+function calculateEntry(entrants = 0) {
+  const { Adult: adultPrice, Child: childPrice, Senior: seniorPrice } = data.prices;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const result = (Adult * adultPrice) + (Child * childPrice) + (Senior * seniorPrice);
+  return result;
+}
+console.log(calculateEntry());
+console.log(calculateEntry({}));
 
 // function getAnimalMap(options) {
 // seu código aqui
@@ -98,7 +103,7 @@ console.log(countAnimals('lions'));
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
