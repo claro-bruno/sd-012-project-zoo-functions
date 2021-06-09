@@ -88,9 +88,23 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
-// }
+function getSchedule(dayName) {
+  if (!dayName) {
+    const cronograma = Object.entries(data.hours);
+    const reduceEntries = (acc, entrie) => {
+      const { open, close } = entrie[1];
+      acc[entrie[0]] = `Open from ${open}am until ${close - 12}pm`;
+      if (entrie[0] === 'Monday') acc[entrie[0]] = 'CLOSED';
+      return acc;
+    };
+    const cronogramaFinal = cronograma.reduce(reduceEntries, {});
+    return cronogramaFinal;
+  }
+  const { open, close } = data.hours[dayName];
+  const cronogramaDia = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
+  if (dayName === 'Monday') cronogramaDia[dayName] = 'CLOSED';
+  return cronogramaDia;
+}
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -116,7 +130,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
