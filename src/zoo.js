@@ -76,13 +76,24 @@ function calculateEntry(entrants) {
   // seu código aqui
 } */
 
-/* function getSchedule(dayName) {
+function getSchedule(dayName) {
   if (!dayName) {
-    const fullSchedule = {...data.hours};
-    return fullSchedule;
+    const array = Object.entries(data.hours);
+    const reduceEntry = (acc, entrie) => {
+      const { open, close } = entrie[1];
+      acc[entrie[0]] = `Open from ${open}am until ${close - 12}pm`;
+      if (entrie[0] === 'Monday') acc[entrie[0]] = 'CLOSED';
+      return acc;
+    };
+    const finalSchedule = array.reduce(reduceEntry, {});
+    return finalSchedule;
   }
+  const { open, close } = data.hours[dayName];
+  const daySchedule = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
+  if (dayName === 'Monday') daySchedule[dayName] = 'CLOSED';
+  return daySchedule;
 }
-console.log(getSchedule()); */
+
 function getOldestFromFirstSpecies(id) {
   const findEmployee = data.employees.find((employee) => employee.id === id);
   const getFirstAnimal = findEmployee.responsibleFor[0];
@@ -95,7 +106,7 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-   const keys = Object.keys(data.prices);
+  const keys = Object.keys(data.prices);
   keys.forEach((key) => {
     data.prices[key] = Math.round(data.prices[key] * (1 + percentage / 100) * 100) / 100;
   });
@@ -107,7 +118,7 @@ function increasePrices(percentage) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
