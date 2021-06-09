@@ -116,7 +116,7 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage, 
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
