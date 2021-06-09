@@ -110,14 +110,24 @@ function getSchedule(dayName) {
   return schedule;
 }
 
-/*
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const specieId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const { residents } = data.species.find((specie) => specie.id === specieId);
+  const highestAge = residents.reduce((highest, resident) =>
+    ((resident.age > highest) ? resident.age : highest), 0);
+  const oldestResident = Object.values(residents.find((resident) =>
+    resident.age === highestAge));
+  return oldestResident;
 }
-	@@ -59,8 +119,25 @@ function increasePrices(percentage) {
-  // seu código aqui
+
+function increasePrices(percentage) {
+const prices = Object.keys(data.prices);
+  prices.forEach((price) => {
+    data.prices[price] = Math.round((data.prices[price]
+      + ((data.prices[price] * percentage) / 100)) * 100) / 100;
+  });
 }
-*/
+
 const speciesCoverage = (employee) => employee.responsibleFor.map((specieId) =>
   getSpeciesByIds(specieId)[0].name);
 
@@ -137,7 +147,6 @@ function getEmployeeCoverage(idOrName) {
   });
   return employeesCovarage;
 }
-
 
 module.exports = {
   calculateEntry,
