@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -100,11 +100,23 @@ function getAnimalMap() {
   // return species.filter(buscar);
 }
 
-function getSchedule() {
-  // seu código aqui
-  // if (typeof dayName === 'undefined') {
-  //   return hours;
-  // }
+function getSchedule(dayName) {
+  // Verificar se dayName tem valor
+  // Desestruturar o hours[dayName](obs: hours[dayName] é o elemento dentro do parametro) e 2 elemento
+  // Tratando o monday que no caso sempre retorna closed
+  // return para cada dayName que vai repetir passando por todo o parametro
+  // Meus sinceros agradecimentos ao Kevin Oliveira e Janderson S.M, que me ajudaram a fazer o código rodar.
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
+  if (!dayName) {
+    const hour = Object.keys(hours);
+    const cronograma = hour.reduce((acc, crr) => {
+      acc[crr] = `Open from ${hours[crr].open}am until ${hours[crr].close - 12}pm`;
+      return acc;
+    }, {});
+    cronograma.Monday = 'CLOSED';
+    return cronograma;
+  }
+  return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
 
 function getOldestFromFirstSpecies(id) {
