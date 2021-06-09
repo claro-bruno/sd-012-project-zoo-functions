@@ -13,13 +13,11 @@ const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 const getSpeciesByIds = (...ids) => {
-  // seu código aqui
   const animalId = species.filter((specie) => ids.includes(specie.id));
   return animalId;
 };
 
 const getAnimalsOlderThan = (animal, age) => {
-  // seu código aqui
   const animalAge = species.find((specie) => specie.name === animal);
   const yearsOld = animalAge.residents.every((resident) => resident.age > age);
 
@@ -48,7 +46,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     firstName,
     lastName,
     managers: managers || [],
-    responsibleFor: responsibleFor || [], // ideia da condição veio de https://github.com/tryber/sd-012-project-zoo-functions/blob/tharcio-sampaio-zoo-functions-project/src/zoo.js
+    responsibleFor: responsibleFor || [], // uso condição veio de https://github.com/tryber/sd-012-project-zoo-functions/blob/tharcio-sampaio-zoo-functions-project/src/zoo.js
   });
 }
 
@@ -95,13 +93,14 @@ function getSchedule(dayName) {
 
 /* function getOldestFromFirstSpecies(id) {
   // seu código aqui
-}
+} */
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach((client) => {
+    prices[client] = Math.round(prices[client] * (1 + (percentage / 100)) * 100) / 100; // '/100' para que tenha 2 casas decimas.
+    });
 }
-
-function getEmployeeCoverage(idOrName) {
+/* function getEmployeeCoverage(idOrName) {
   // seu código aqui
 } */
 
@@ -117,6 +116,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
