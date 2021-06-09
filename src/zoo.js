@@ -112,17 +112,32 @@ function increasePrices(percentage) {
   return prices;
 }
 
-/* function getEmployeeCoverage(idOrName) {
-  if (!idOrName) {
-    const result = {};
-    employees.forEach(({ firstName, lastName, responsibleFor }) => {
-      const fullName = `${firstName} ${lastName}`;
-      result[fullName] = responsibleFor;
-    });
-    return result;
-  }
+const getAnimalsById = ((idArray) => {
+  const result = [];
+  idArray.forEach((id) => {
+    const find = species.find((specie) => specie.id === id);
+    result.push(find.name);
+  });
+  return result;
+});
+
+const formatEmployeeCoverage = ((employeesArray) => {
+  const result = {};
+  employeesArray.forEach(({ firstName, lastName, responsibleFor }) => {
+    const fullName = `${firstName} ${lastName}`;
+    result[fullName] = getAnimalsById(responsibleFor);
+  });
+  return result;
+});
+
+function getEmployeeCoverage(idOrName) {
+  if (!idOrName) return formatEmployeeCoverage(employees);
+
+  const filteredEmployees = employees.filter((employee) => employee.firstName === idOrName
+    || employee.lastName === idOrName
+    || employee.id === idOrName);
+  return formatEmployeeCoverage(filteredEmployees);
 }
-console.log(getEmployeeCoverage()); */
 
 module.exports = {
   calculateEntry,
@@ -131,7 +146,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
