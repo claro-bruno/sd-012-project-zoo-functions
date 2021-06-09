@@ -16,18 +16,14 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  return data.species.some((i) => 
-    i.name === animal && i.residents.every((I) => I.age >= age)
-  );
+  return data.species.some((i) => i.name === animal && i.residents.every((I) => I.age >= age));
 }
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
-  } else {
-    return data.employees.find((i) => 
-      i.firstName === employeeName || i.lastName === employeeName);
-  };
+  }
+  return data.employees.find((i) => i.firstName === employeeName || i.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
