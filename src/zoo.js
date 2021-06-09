@@ -98,36 +98,40 @@ function getAnimalMap() {
 }
 
 function getSchedule(dayName) {
+
+  const allDates = Object.keys(data.hours);
+
+  const allHours = Object.values(data.hours);
+  
   if (dayName === undefined) {
-    const schedule = {
-      Tuesday: 'Open from 8am until 6pm',
-      Wednesday: 'Open from 8am until 6pm',
-      Thursday: 'Open from 10am until 8pm',
-      Friday: 'Open from 10am until 8pm',
-      Saturday: 'Open from 8am until 10pm',
-      Sunday: 'Open from 8am until 8pm',
-      Monday: 'CLOSED',
-    };
+    
+  const schedule = {};
+
+  for (index = 0; index < allDates.length; index += 1) {
+    schedule[allDates[index]] = `Open from ${(((allHours[index].open + 11) % 12) + 1)}am until ${(((allHours[index].close + 11) % 12) + 1)}pm`;
+    if (allHours[index].open === allHours[index].close) {
+      schedule[allDates[index]] = 'CLOSED'
+    }
+  }
 
     return schedule;
   }
 
   if (typeof (dayName) === 'string') {
-    const weekDays = Object.keys(data.hours);
 
-    const hoursOfDay = Object.values(data.hours);
+    const theDay = allDates.find((thatDay) => thatDay === dayName);
 
-    const theDay = weekDays.find((thatDay) => thatDay === dayName);
-
-    const theHour = hoursOfDay.find((thatHour) => hoursOfDay.indexOf(thatHour) === weekDays.indexOf(theDay));
+    const theHour = allHours.find((thatHour) => {
+      return allHours.indexOf(thatHour) === allDates.indexOf(theDay)
+    });
 
     let schedule = {
       [theDay]: `Open from ${(((theHour.open + 11) % 12) + 1)}am until ${(((theHour.close + 11) % 12) + 1)}pm`,
     };
 
     if (theHour.open === theHour.close) {
-      schedule = { [theDay]: 'CLOSED' }
-    };
+      schedule = { [theDay]: 'CLOSED' };
+    }
 
     return schedule;
   }
