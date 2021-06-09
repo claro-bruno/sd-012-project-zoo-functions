@@ -135,22 +135,22 @@ function calculateEntry(entrants) {
 // }
 
 function getSchedule(dayName) {
-   const keys = Object.keys(hours);
-   const newObj = {};
+  const keys = Object.keys(hours);
+  const newObj = {};
 
-   if (dayName === undefined) {
-      keys.forEach((day) => {
-        newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-        newObj.Monday = 'CLOSED';
-      });
-      return newObj;
-   }
-   if (dayName === 'Monday') {
+  if (dayName === undefined) {
+    keys.forEach((day) => {
+      newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
       newObj.Monday = 'CLOSED';
-      return newObj;
-   }
-   newObj[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
-   return newObj;
+    });
+    return newObj;
+  }
+  if (dayName === 'Monday') {
+    newObj.Monday = 'CLOSED';
+    return newObj;
+  }
+  newObj[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  return newObj;
 }
 
 function getOldestFromFirstSpecies(id) {
