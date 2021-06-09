@@ -111,19 +111,23 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  if (!idOrName) {
-    // employees.find((itemArray) => (itemArray.id === idOrName
-    //   || itemArray.firstName === idOrName || itemArray.lastName === idOrName));
+  if (idOrName) {
+    const funcionario = employees.find((itemArray) => (itemArray.id === idOrName
+    || itemArray.firstName === idOrName || itemArray.lastName === idOrName));
+    const fullName = `${funcionario.firstName} ${funcionario.lastName}`;
+    const animal = funcionario.responsibleFor.map((itemArray) =>
+      species.find((especie) => especie.id === itemArray).name);
+    return { [fullName]: animal };
   }
-  console.log(employees.reduce((acc, itemArray) => {
-    const pessoa = `${itemArray.firstName} ${itemArray.lastName}: `;
+  return employees.reduce((acc, itemArray) => {
+    const pessoa = `${itemArray.firstName} ${itemArray.lastName}`;
     const animais = itemArray.responsibleFor;
     const bichos = animais.map((item) => species.find((especie) => especie.id === item).name);
     acc[pessoa] = bichos;
     return acc;
-  }), {});
+  }, {});
 }
-getEmployeeCoverage();
+// console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
