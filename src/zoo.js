@@ -141,7 +141,8 @@ function getOldestFromFirstSpecies(id) {
   };
   residentsFromFirstSpecies.forEach((animal) => {
     if (animal.age > oldest.age) {
-      return oldest = animal;
+      oldest = animal;
+      return oldest;
     }
     return oldest;
   });
