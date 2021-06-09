@@ -27,14 +27,14 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const O = {
+  const Ob = {
     id: personalInfo.id,
     firstName: personalInfo.firstName,
     lastName: personalInfo.lastName,
     managers: associatedWith.managers,
     responsibleFor: associatedWith.responsibleFor,
   };
-  return O;
+  return Ob;
 }
 
 function isManager(id) {
@@ -42,9 +42,15 @@ function isManager(id) {
     i.id === id && (i.managers).length <= 1);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  return (id, firstName, lastName, managers, responsibleFor
-  );
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const Ob = {
+    id: id,
+    firstName: firstName,
+    lastName: lastName,
+    managers: managers,
+    responsibleFor: responsibleFor,
+  }
+  return data.employees.push(Ob);
 }
 
 function countAnimals(species) {
