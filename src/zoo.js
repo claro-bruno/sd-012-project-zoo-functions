@@ -75,41 +75,41 @@ const groupAnimalsByLocation = ((arrayAnimals) => {
   return result;
 });
 
-function getResidentsBySpecieName(specieArray, name) {
-  return specieArray.find((specie) => specie.name === name).residents;
+function filterSpecieBySex(sex, residents) {
+  return residents.filter((resident) => resident.sex === sex);
 }
 
-const getResidentsName = ((arrayResidents) => {
+function getResidentsBySpecieName(specieArray, name, options = {}) {
+  const filteredSpecie = specieArray.find((specie) => specie.name === name).residents;
+  return options.sex ? filterSpecieBySex(options.sex, filteredSpecie) : filteredSpecie;
+}
+
+const getResidentsName = ((arrayResidents, options = {}) => {
   const names = [];
-  arrayResidents.forEach((resident) => {
-    names.push(resident.name);
-  });
-  return names;
+  arrayResidents.forEach((resident) => names.push(resident.name));
+  return options.sorted ? names.sort() : names;
 });
 
-const getGroupedAnimalsWithNames = ((groupedAnimals) => {
+const getGroupedAnimalsWithNames = ((groupedAnimals, options) => {
   const groupedAnimalsWithName = {};
   const regions = Object.keys(groupedAnimals);
   regions.forEach((region) => {
     groupedAnimalsWithName[region] = [];
     groupedAnimals[region].forEach((animal) => {
       const animalObject = {};
-      const residents = getResidentsBySpecieName(species, animal);
-      animalObject[animal] = getResidentsName(residents);
+      const residents = getResidentsBySpecieName(species, animal, options);
+      animalObject[animal] = getResidentsName(residents, options);
       groupedAnimalsWithName[region].push(animalObject);
     });
   });
   return groupedAnimalsWithName;
 });
 
-function getAnimalMap(options) {
+function getAnimalMap(options = {}) {
   const groupedAnimals = groupAnimalsByLocation(species);
-  if (!options) return groupedAnimals;
-  if (options.includeNames) {
-    return getGroupedAnimalsWithNames(groupedAnimals);
-  }
+  if (options.includeNames) return getGroupedAnimalsWithNames(groupedAnimals, options);
+  return groupedAnimals;
 }
-console.log(getAnimalMap({ includeNames: true }));
 
 function formatDaySchedule(day) {
   if (day.open === day.close) return 'CLOSED';

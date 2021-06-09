@@ -38,7 +38,7 @@ describe('Implemente a função getAnimalMap', () => {
 
     assert.deepStrictEqual(actual, expected);
   });
-/* 
+
   it('Com a opção `sorted: true` especificada, retorna nomes de animais ordenados', () => {
     const options = { includeNames: true, sorted: true };
     const actual = zoo.getAnimalMap(options);
@@ -126,5 +126,5 @@ describe('Implemente a função getAnimalMap', () => {
     actual = zoo.getAnimalMap(options)['NE'][0];
     expected = 'lions';
     assert.strictEqual(actual, expected);
-  }); */
+  });
 });
