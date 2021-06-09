@@ -103,39 +103,30 @@ function getSchedule(dayName) {
   const allHours = Object.values(data.hours);
 
   if (dayName === undefined) {
-    const schedule = {};
-
-    allDates.forEach((date) => {
-      const index = allHours[allDates.indexOf(date)];
-      const message = `Open from ${(((index.open + 11) % 12) + 1)}am until ${(((index.close + 11) % 12) + 1)}pm`;
-      schedule[allDates[allDates.indexOf(date)]] = message;
-      return schedule;
-    });
-      
-    schedule[allDates[allDates.length - 1]] = 'CLOSED';
-
-    return schedule;
+    return createSchedule(allDates, allHours);
   }
 
   if (typeof (dayName) === 'string') {
-//
-    const theDay = allDates.find((thatDay) => thatDay === dayName);
+    const rightDay = createSchedule(allDates, allHours);
 
-    const theHour = allHours.find((thatHour) => allHours.indexOf(thatHour) === allDates.indexOf(theDay));
-
-    let schedule = {
-      [theDay]: `Open from ${(((theHour.open + 11) % 12) + 1)}am until ${(((theHour.close + 11) % 12) + 1)}pm`,
-    };
-
-    if (theHour.open === theHour.close) {
-      schedule = { [theDay]: 'CLOSED' };
-    }
-
-    return schedule;
+    return {[dayName]: rightDay[dayName]};
   }
 }
 
-console.log(getSchedule());
+function createSchedule(keys, values) {
+  const schedule = {};
+
+  keys.forEach((date) => {
+    const index = values[keys.indexOf(date)];
+    const message = `Open from ${(((index.open + 11) % 12) + 1)}am until ${(((index.close + 11) % 12) + 1)}pm`;
+    schedule[keys[keys.indexOf(date)]] = message;
+    return schedule;
+  });
+
+  schedule[keys[keys.length - 1]] = 'CLOSED';
+
+  return schedule;
+}
 
 function getOldestFromFirstSpecies() {
   // seu código aqui id
