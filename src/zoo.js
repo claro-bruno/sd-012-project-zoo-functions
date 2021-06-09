@@ -74,7 +74,7 @@ function calculateEntry(entrants) {
   if (A === undefined) A = 0;
   if (C === undefined) C = 0;
   if (S === undefined) S = 0;
-  return C * prices.Child + S * prices.Senior + A * prices.Adult;
+  return C * data.prices.Child + S * data.prices.Senior + A * data.prices.Adult;
 }
 function getAnimalMap(options = {}) {
   const local = { NE: [], NW: [], SE: [], SW: [] };
