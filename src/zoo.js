@@ -91,9 +91,16 @@ function getSchedule(dayName) {
   tableOfHours[dayName] = hoursTable[dayName];
   return tableOfHours;
 }
-
-function getOldestFromFirstSpecies() {
-  // seu código aqui id
+// aqui usei a mesma lógica da função getAnimalsOlderThan
+// para os operadores ternários: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+function getOldestFromFirstSpecies(id) {
+  const findId = employees.find((employee) => employee.id === id).responsibleFor[0]; // primeiro residente
+  const { residents } = data.species.find((specie) => specie.id === findId);
+  console.log(residents);
+  const seniores = residents
+    .reduce((older, resident) => ((resident.age > older) ? resident.age : older), 0); // aqui, operador ternario
+  const seniorGold = Object.values(residents.find((resident) => resident.age === seniores));
+  return seniorGold;
 }
 
 function increasePrices(percentage) {
