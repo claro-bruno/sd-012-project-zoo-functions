@@ -10,25 +10,30 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 function getSpeciesByIds(...ids) {
   return data.species.filter((specie, index) => specie.id === ids[index]); 
 }
 
 function getAnimalsOlderThan(animal, age) {
-  return data.species.some((intemArray) => intemArray.name === animal && intemArray.residents.every((item) => item.age >= age ));
+  return data.species.some((intemArray) => {
+    intemArray.name === animal && intemArray.residents.every((item) => item.age >= age )
+  });
 }
 
 function getEmployeeByName(employeeName) {
-  let objeto = {};
   if (employeeName === undefined) {
-    return objeto;
-  } else {
-      return data.employees.find((intemArray) => intemArray.firstName === employeeName || intemArray.lastName === employeeName);
-    }
+    return {};
+  }
+  else {
+    return data.employees.find((intemArray) => {
+      intemArray.firstName === employeeName || intemArray.lastName === employeeName
+    });
+  }
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return personalInfo, associatedWith;
 }
 
 function isManager(id) {
@@ -36,35 +41,36 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  return data.employees.push({id: id, firstName: firstName, lastName: lastName, managers: managers, responsibleFor: responsibleFor
+  }
 }
-
+//addEmployee(2, 'tarcio', 'moura', ['tau'], [5])
 function countAnimals(species) {
-  // seu código aqui
+  return species;
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  return entrants;
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  return options;
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  return dayName;
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  return id;
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return percentage;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  return idOrName;
 }
 
 module.exports = {
