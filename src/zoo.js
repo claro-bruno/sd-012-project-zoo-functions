@@ -49,7 +49,7 @@ function countAnimals(species) {
     return quant;
   }
   const q = data.species.filter((i) => i.name === species);
-  return q[0].residents.length; 
+  return q[0].residents.length;
 }
 
 function calculateEntry(entrants) {
