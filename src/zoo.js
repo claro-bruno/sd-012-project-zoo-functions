@@ -65,16 +65,18 @@ function calculateEntry(entrants) {
   return Object.keys(entrants).reduce((acc, curr) => acc + (entrants[curr] * prices[curr]), 0);
 }
 
-/* function getAnimalMap(options) {
+function getAnimalMap(options) {
   if (!options) {
     const result = {};
     species.map((specie) => {
-      result[specie.location] = specie.name;
+      if (result[specie.location]) return result[specie.location].push(specie.name);
+      result[specie.location] = [specie.name];
+      return result;
     });
     return result;
   }
 }
-console.log(getAnimalMap()); */
+console.log(getAnimalMap());
 
 function formatDaySchedule(day) {
   if (day.open === day.close) return 'CLOSED';
@@ -101,7 +103,6 @@ function getOldestFromFirstSpecies(id) {
   });
   return Object.values(getOldest);
 }
-// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
   const getPrices = Object.keys(prices);
@@ -143,7 +144,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
