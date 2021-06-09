@@ -67,32 +67,68 @@ function calculateEntry(entrants) {
   return childNumber * childPrice + adultNumber * adultPrice + seniorNumber * seniorPrice;
 }
 
-// function getAnimalMap(directions) {
-// }
-// if (!options) {
-// directions.forEach((place) => {
-//   const locality = data.species.filter(({ location }) => location === place);
-// });
-// }
-// const directions = ['NE', 'NW', 'SE', 'SW'];
+const categoryMap = (regions) => {
+  const animalMap = {};
+  regions.forEach((region) => {
+    const addAnimal = data.species.filter(({ location }) => location === region);
+    animalMap[region] = addAnimal.map(({ name }) => name);
+  });
+  // console.log(animalMap);
+  return animalMap;
+};
+const regions = ['NE', 'NW', 'SE', 'SW'];
+const defaultMap = categoryMap(regions);
 
-// if (element.location === 'NE') {
-//   animalsByLocation.NE.push(element.name);
-// }
-// if (element.location === 'NW') {
-//   animalsByLocation.NW.push(element.name);
-// }
-// if (element.location === 'SE') {
-//   animalsByLocation.SE.push(element.name);
-// }
-// if (element.location === 'SW') {
-//   animalsByLocation.SW.push(element.name);
-// }
-// });
-// return animalsByLocation;
-// }
-// }
-// }
+const sortNames = (obj) => {
+  regions.forEach((region) => {
+    obj[region].forEach((element) =>
+      Object.values(element)[0].sort());
+  });
+  return obj;
+};
+
+const exclusiveBySex = (gender, sorted = false) => {
+  const species = data.species.map(({ residents }) =>
+    residents.filter(({ sex }) =>
+      sex === gender).map(({ name }) => name));
+  const namesBysex = {};
+  data.species.forEach(({ name }, index) => {
+    namesBysex[name] = species[index];
+  });
+  const newObj = {};
+  regions.forEach((region) => {
+    const localNames = data.species.filter(({ location }) =>
+      location === region).map(({ name }) => name);
+    newObj[region] = localNames.map((localName) =>
+      ({ [localName]: namesBysex[localName] }));
+  });
+  if (sorted) { sortNames(newObj); }
+  return newObj;
+};
+
+const nameMap = (sorted = false, sex) => {
+  const namesMap = {};
+  regions.forEach((region) => {
+    const speciesNames = data.species.filter(({ location }) =>
+      location === region).map(({ name }) => name);
+    const residents = data.species.filter(({ location }) => location === region);
+    namesMap[region] = speciesNames.map((speciesName) =>
+      ({ [speciesName]: residents.find(({ name }) =>
+        name === speciesName).residents.map(({ name }) => name) }));
+  });
+  if (sex === 'male') { return exclusiveBySex('male', sorted); }
+  if (sex === 'female') { return exclusiveBySex('female', sorted); }
+  if (sorted) { return sortNames(namesMap); }
+  return namesMap;
+};
+
+function getAnimalMap({ includeNames, sorted, sex } = defaultMap) {
+  if (!includeNames) {
+    return defaultMap;
+  }
+  return nameMap(sorted, sex);
+}
+
 const days = Object.keys(data.hours);
 const time = Object.values(data.hours);
 function getSchedule(dayName) {
@@ -158,7 +194,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
