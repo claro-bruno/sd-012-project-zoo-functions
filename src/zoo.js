@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { prices } = require('./data');
+const { prices, species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -76,10 +76,24 @@ function calculateEntry(entrants) {
   if (S === undefined) S = 0;
   return C * prices.Child + S * prices.Senior + A * prices.Adult;
 }
-function getAnimalMap(options) {
-  return options;
+function getAnimalMap(options = {}) {
+  const local = {NE: [], NW: [], SE: [], SW: [],}
+  if (!options.includeNames) {
+    species.forEach((itemArray) => local[itemArray.location].push(itemArray.name))
+    return local;
+  }
+  species.forEach((itemArray) => {
+    let residente = itemArray.residents;
+    if (options.sex) {
+      residente = itemArray.residents.filter((item) => item.sex === options.sex)
+    }
+    const residenteN = residente.map((itemArray) => itemArray.name);
+    if (options.sorted) residenteN.sort()
+    local[itemArray.location].push({[itemArray.name]: residenteN})
+  })
+  return local;
 }
-
+// auxiliado com o code-Review do LuctReis, não estava sabendi fundamentar os requesitos;
 function getSchedule(dayName) {
   return dayName;
 }
