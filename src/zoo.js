@@ -73,7 +73,7 @@ function calculateEntry(entrants) {
 
 function getAnimalMap() {
 
-  }
+}
 
 function getSchedule(dayName) {
   const schedule = {};
@@ -113,10 +113,10 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage, 
+  getEmployeeCoverage, 
   addEmployee,
   isManager,
   getAnimalsOlderThan,
