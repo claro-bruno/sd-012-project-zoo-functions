@@ -68,15 +68,14 @@ function countAnimals(species) {
 
 function calculateEntry(entrants) {
   if (entrants === undefined) return 0;
-  let Adult = entrants.Adult;
-  if (Adult === undefined) Adult = 0;
-  let Child = entrants.Child;
-  if (Child === undefined) Child = 0;
-  let Senior = entrants.Senior;
-  if (Senior === undefined) Senior = 0;
-  return Child * prices.Child + Senior * prices.Senior + Adult * prices.Adult;
+  let {Adult: A} = entrants;
+  let {Child: C} = entrants;
+  let {Senior: S} = entrants;
+  if (A === undefined) A = 0;
+  if (C === undefined) C = 0;
+  if (S === undefined) S = 0;
+  return C * prices.Child + S * prices.Senior + A * prices.Adult;
 }
-
 function getAnimalMap(options) {
   return options;
 }
