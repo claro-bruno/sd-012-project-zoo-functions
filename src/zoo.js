@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const { species, employees, prices, hours } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -105,33 +105,52 @@ function calculateEntry(entrants) {
 //      return newObj;
 //   }
 //   if (options.includeNames === true) {
-//    NElocate.forEach((item) => {     
+//    NElocate.forEach((item) => {
 //    })
 //   }
 // }
 
+// function getSchedule(dayName) {
+//   const keys = Object.keys(hours);
+//   const newObj = {};
+
+//   keys.forEach((day) => {
+//     if (day === dayName) {
+//       newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+//       if (day === 'Monday') {
+//         newObj[day] = 'CLOSED';
+//       }
+//     }
+//   });
+//   if (dayName === undefined) {
+//     keys.forEach((day) => {
+//       newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+//       if (day === 'Monday') {
+//         newObj[day] = 'CLOSED';
+//       }
+//     });
+//   }
+
+//   return newObj;
+// }
+
 function getSchedule(dayName) {
-  const keys = Object.keys(hours);
-  const newObj = {};
+   const keys = Object.keys(hours);
+   const newObj = {};
 
-  keys.forEach((day) => {
-    if (day === dayName) {
-      newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-      if (day === 'Monday') {
-        newObj[day] = 'CLOSED';
-      }
-    }
-  });
-  if (dayName === undefined) { 
-    keys.forEach((day) => {
-      newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-      if (day === 'Monday') {
-        newObj[day] = 'CLOSED';
-      }
-    });
-  }
-
-  return newObj;
+   if (dayName === undefined) {
+      keys.forEach((day) => {
+        newObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+        newObj.Monday = 'CLOSED';
+      });
+      return newObj;
+   }
+   if (dayName === 'Monday') {
+      newObj.Monday = 'CLOSED';
+      return newObj;
+   }
+   newObj[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+   return newObj;
 }
 
 function getOldestFromFirstSpecies(id) {
