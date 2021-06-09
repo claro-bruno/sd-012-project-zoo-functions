@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 const {
   species,
   employees,
-  // prices,
+  prices,
   // hours,
 } = require('./data');
 // const data = require('./data');
@@ -56,19 +56,31 @@ function countAnimals(speciesName) {
   return speciesScore;
 }
 
-/* function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants = { adult: 0, senior: 0, child: 0 }) {
+  const { adult = 0, senior = 0, child = 0 } = entrants;
+  return adult * prices.Adult + senior * prices.Senior + child * prices.Child;
 }
 
-function getAnimalMap(options) {
+/* function getAnimalMap(options) {
   // seu código aqui
-}
+} */
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const infos = {
+    Tuesday: 'Open from 8am until 18pm',
+    Wednesday: 'Open from 8am until 18pm',
+    Thursday: 'Open from 10am until 20pm',
+    Friday: 'Open from 10am until 20pm',
+    Saturday: 'Open from 8am until 22pm',
+    Sunday: 'Open from 8am until 20pm',
+    Monday: 'Closed',
+  };
+  if (!dayName) return infos;
+  const dayWeek = Object.entries(infos).find((day) => day[0] === dayName);
+  return { [dayWeek[0]]: dayWeek[1] };
 }
 
-function getOldestFromFirstSpecies(id) {
+/* function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
@@ -81,8 +93,8 @@ function getEmployeeCoverage(idOrName) {
 } */
 
 module.exports = {
-  // calculateEntry,
-  // getSchedule,
+  calculateEntry,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
