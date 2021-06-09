@@ -101,8 +101,7 @@ function getAnimalMap() {
 }
 
 function getSchedule(dayName) {
-  // Verificar se dayName tem valor
-  // Desestruturar o hours[dayName](obs: hours[dayName] é o elemento dentro do parametro) e 2 elemento
+  // Verificar se dayName tem valorg
   // Tratando o monday que no caso sempre retorna closed
   // return para cada dayName que vai repetir passando por todo o parametro
   // Meus sinceros agradecimentos ao Kevin Oliveira e Janderson S.M, que me ajudaram a fazer o código rodar.
