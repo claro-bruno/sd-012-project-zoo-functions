@@ -72,13 +72,13 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap() {
-  // seu código aqui (optins)
+
   }
 
 function getSchedule(dayName) {
   const schedule = {};
-  Object.keys(data.hours).forEach((day) => {
-    const { open, close } = data.hours[day];
+  Object.keys(hours).forEach((day) => {
+    const { open, close } = hours[day];
     if (day === 'Monday') {
       schedule[day] = 'CLOSED';
     } else {
@@ -106,17 +106,17 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage() {
-  // seu código aqui (idOrName)
+
 }
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  getEmployeeCoverage,
+  // getEmployeeCoverage, 
   addEmployee,
   isManager,
   getAnimalsOlderThan,
