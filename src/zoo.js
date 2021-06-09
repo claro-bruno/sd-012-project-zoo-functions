@@ -106,7 +106,11 @@ function getAnimalMap(options) {
 */
 
 function getSchedule(dayName) {
-  if (dayName === 'Monday') return { Monday: 'CLOSED' };
+  if (dayName === 'Monday') {
+    return {
+      Monday: 'CLOSED',
+    };
+  }
   if (!dayName) {
     const hour = Object.keys(hours);
     const cronograma = hour.reduce((acc, crr) => {
@@ -116,20 +120,23 @@ function getSchedule(dayName) {
     cronograma.Monday = 'CLOSED';
     return cronograma;
   }
-  return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
+  return {
+    [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`,
+  };
 }
-console.log(getSchedule('Monday'));
-/*
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+
+/* function getOldestFromFirstSpecies(id) {
+
+} */
 
 function increasePrices(percentage) {
-  // seu código aqui
+  prices.Adult = Math.round((prices.Adult * (1 + (percentage / 100)) * 100)) / 100;
+  prices.Senior = Math.round((prices.Senior * (1 + (percentage / 100)) * 100)) / 100;
+  prices.Child = Math.round((prices.Child * (1 + (percentage / 100)) * 100)) / 100;
+  return prices;
 }
-
+/*
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
 }
 */
 module.exports = {
@@ -143,7 +150,7 @@ module.exports = {
   addEmployee,
   isManager,
   getAnimalsOlderThan,
-  //  getOldestFromFirstSpecies,
-  //  increasePrices,
+  // etOldestFromFirstSpecies,
+  increasePrices,
   createEmployee,
 };
