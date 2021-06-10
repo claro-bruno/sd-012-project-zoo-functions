@@ -88,24 +88,6 @@ function calculateEntry(entrants) {
 
 function getAnimalMap() {
 // seu código aqui
-/* const makeS = (sort) => (sort ? undefined : ((a, b) => (a && b)));
-
-const getAnimalMapSort = (sex, sort) => species.reduce((a, e, i, o, loc = e.location,
-  res = e.residents, n = e.name) => (a[loc]
-  ? { ...a, [loc]: [...a[loc], { [n]: [...res.filter(getS(sex)).map(getN).sort(makeS(sort))] }] }
-  : ({ ...a, [loc]: ([{ [n]: [...res.filter(getS(sex)).map(getN).sort(makeS(sort))] }]) })), {});
-
-const getAnimalMapBasic = () => species.reduce((a, e, i, o, loc = e.location) => (a[loc]
-  ? { ...a, [loc]: [...a[loc], e.name] } : ({ ...a, [loc]: [(e.name)] })), {});
-
-const check = (options, key) => (options && options[key] ? options[key] : !1);
-
-const getAnimalMap = (options) => {
-  const sexAnimal = check(options, 'sex');
-  const sort = check(options, 'sorted');
-  if (options && options.includeNames) { return getAnimalMapSort(sexAnimal, sort); }
-  return getAnimalMapBasic();
-} */
 }
 
 function getSchedule(dayName) {
