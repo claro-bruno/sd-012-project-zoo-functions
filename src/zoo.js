@@ -119,7 +119,6 @@ function scheduleMessage(dayName, schedule) {
   }
   return 'CLOSED';
 }
-}
 
 function getSchedule(dayName) {
 // seu código aqui
