@@ -65,12 +65,13 @@ function addEmployee(
 
 function countAnimals(species) {
 // seu código aqui
-   if (!species) {
+  if (!species) {
     return data.species.reduce((acc, { name, residents }) => {
-     acc[name] = residents.length;
-    return acc;
-  }, {});
-}
+      acc[name] = residents.length;
+      return acc;
+    }, {});
+  }
+
 return data.species.find(({ name }) => name === species).residents.length;
 }
 
