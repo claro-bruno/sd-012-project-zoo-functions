@@ -130,13 +130,23 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
 // seu código aqui
-  if (idOrName === undefined) {
-    const listaGeral = {};
-    employees.map((funcionários) =>
-      Object.assign(listaGeral, funcaoObjeto(funcionários.firstName)));
-    return listaGeral;
-  }
-  return funcaoObjeto(idOrName);
+const objectFinal = {};
+if (idOrName) {
+  const employeePick = employees.find((employee) => {
+    const idIsValid = employee.id === idOrName;
+    const firstNameisValid = employee.firstName === idOrName;
+    const lastNameIsValid = employee.lastName === idOrName;
+    return idIsValid || firstNameisValid || lastNameIsValid;
+  });
+  const [fullName, animalList] = printFunction(employeePick);
+  objectFinal[fullName] = animalList;
+  return objectFinal;
+}
+employees.forEach((employee) => {
+  const [fullName, animalList] = printFunction(employee);
+  objectFinal[fullName] = animalList;
+});
+return objectFinal;
 }
 
 module.exports = {
