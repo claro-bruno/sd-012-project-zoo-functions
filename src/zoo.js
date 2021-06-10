@@ -13,23 +13,24 @@ const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(ids) {
- // seu código aqui
- const speciesFound = data.species.filter((specie) => ids.some((id) => specie.id === id));
- return speciesFound;
+  // seu código aqui
+  const speciesFound = data.species.filter((specie) => ids.some((id) => specie.id === id));
+  return speciesFound;
 }
 
 function getAnimalsOlderThan(animal, age) {
- // seu código aqui
- const animals = data.species.find((animalList) => animalList.name === animal);
- return animals.residents.every((ages) => ages.age > age);
+  // seu código aqui
+  const animals = data.species.find((animalList) => animalList.name === animal);
+  return animals.residents.every((ages) => ages.age > age);
 }
 
 function getEmployeeByName(employeeName) {
 // seu código aqui
-if (!employeeName) {
- return {};
-}
-return employees.find(((employee) => employee.firstName === employeeName || employee.lastName === employeeName));
+  if (!employeeName) {
+    return {};
+  }
+return employees.find(((employee) => employee.firstName === employeeName
+|| employee.lastName === employeeName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
