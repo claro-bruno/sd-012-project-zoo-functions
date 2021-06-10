@@ -45,11 +45,23 @@ function isManager(id) {
   return manager;
 }
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 // seu código aqui
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push(createEmployee({ id, firstName, lastName },
-    { managers, responsibleFor }));
+function addEmployee(
+ id,
+ firstName,
+ lastName,
+ managers = [],
+ responsibleFor = [],
+) {
+ data.employees.push({
+   id,
+   firstName,
+   lastName,
+   managers,
+   responsibleFor,
+ });
+}
 }
 
 function countAnimals(species) {
@@ -73,7 +85,7 @@ function calculateEntry(entrants) {
   return Object.keys(entrants).reduce(((sum, price) => sum + prices[price] * entrants[price]), 0);
 }
 
-function getAnimalMap(options) {
+function getAnimalMap() {
 // seu código aqui
 }
 
@@ -117,15 +129,10 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
 // seu código aqui
-  if (!idOrName) {
-    const object = {};
-    employees.forEach((employee) => {
-      Object.assign(object, createObject(employee));
-    });
-    return object;
-  }
-  if (idOrName.length > 25) return findById(idOrName);
-  return findByName(idOrName);
+  const { employees } = data;
+  if (idOrName === undefined) return getCoverageList(employees);
+  const responsible = getResponsibleByIdOrName(employees, idOrName);
+  return { [`${responsible.firstName} ${responsible.lastName}`]: getListOfTennants(responsible) };
 }
 
 module.exports = {
