@@ -111,24 +111,26 @@ function hoursConverter(hour) {
   if (hour === 0) return '12pm';
   return `${hour}am`;
 }
+function scheduleMessage(dayName, schedule) {
+  if (schedule[dayName].open !== schedule[dayName].close) {
+    return `Open from ${hoursConverter(schedule[dayName]
+      .open)} until ${hoursConverter(schedule[dayName].close)}`;
+  }
+  return 'CLOSED';
+}
 
 function getSchedule(dayName) {
-// seu código aqui
-  if (!dayName) {
-    const array = Object.entries(data.hours);
-    const reduceEntry = (acc, entrie) => {
-      const { open, close } = entrie[1];
-      acc[entrie[0]] = `Open from ${open}am until ${close - 12}pm`;
-      if (entrie[0] === 'Monday') acc[entrie[0]] = 'CLOSED';
-      return acc;
-    };
-    const finalSchedule = array.reduce(reduceEntry, {});
-    return finalSchedule;
+  // seu código aqui
+  const schedule = {};
+  const { hours } = data;
+  if (dayName) {
+    schedule[dayName] = scheduleMessage(dayName, hours);
+  } else {
+    Object.keys(hours).forEach((day) => {
+      schedule[day] = scheduleMessage(day, hours);
+    });
   }
-  const { open, close } = data.hours[dayName];
-  const daySchedule = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
-  if (dayName === 'Monday') daySchedule[dayName] = 'CLOSED';
-  return daySchedule;
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
