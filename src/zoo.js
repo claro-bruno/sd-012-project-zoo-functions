@@ -43,7 +43,6 @@ function isManager(id) {
 // seu código aqui
   const manager = data.employees.some((employee) => employee.managers.includes(id));
   return manager;
-
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -71,7 +70,6 @@ function calculateEntry(entrants) {
     return 0;
   }
   return Object.keys(entrants).reduce(((sum, price) => sum + prices[price] * entrants[price]), 0);
-
 }
 
 function getAnimalMap(options) {
@@ -83,11 +81,11 @@ function getSchedule(dayName) {
   if (!dayName) {
     const array = Object.entries(data.hours);
     const reduceEntry = (acc, entrie) => {
-     const { open, close } = entrie[1];
-     acc[entrie[0]] = `Open from ${open}am until ${close - 12}pm`;
-     if (entrie[0] === 'Monday') acc[entrie[0]] = 'CLOSED';
-     return acc;
-   };
+      const { open, close } = entrie[1];
+      acc[entrie[0]] = `Open from ${open}am until ${close - 12}pm`;
+      if (entrie[0] === 'Monday') acc[entrie[0]] = 'CLOSED';
+      return acc;
+    };
     const finalSchedule = array.reduce(reduceEntry, {});
     return finalSchedule;
   }
@@ -102,9 +100,9 @@ function getOldestFromFirstSpecies(id) {
   const specieId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
   const { residents } = data.species.find((specie) => specie.id === specieId);
   const highestAge = residents.reduce((highest, resident) =>
-  ((resident.age > highest) ? resident.age : highest), 0);
+    ((resident.age > highest) ? resident.age : highest), 0);
   const oldestResident = Object.values(residents.find((resident) =>
-  resident.age === highestAge));
+    resident.age === highestAge));
   return oldestResident;
 }
 
@@ -124,10 +122,10 @@ function getEmployeeCoverage(idOrName) {
       Object.assign(object, createObject(employee));
     });
     return object;
-}
+  }
   if (idOrName.length > 25) return findById(idOrName);
   return findByName(idOrName);
-  }
+}
 
 module.exports = {
   calculateEntry,
