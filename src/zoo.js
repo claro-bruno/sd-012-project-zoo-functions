@@ -45,24 +45,24 @@ function isManager(id) {
   return manager;
 }
 
-//function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 // seu código aqui
-  function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-    data.employees.push(createEmployee({ id, firstName, lastName },
-      { managers, responsibleFor }));
-  }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push(createEmployee({ id, firstName, lastName },
+    { managers, responsibleFor }));
+}
 
 function countAnimals(species) {
 // seu código aqui
-if (species) {
-  const count = data.species.find((specie) => specie.name === species).residents.length;
+  if (species) {
+    const count = data.species.find((specie) => specie.name === species).residents.length;
     return count;
-}
-    const allSpeciesCount = {};
-    ata.species.forEach((specie) => {
-      allSpeciesCount[specie.name] = specie.residents.length;
-    });
-    return allSpeciesCount;
+  }
+  const allSpeciesCount = {};
+  ata.species.forEach((specie) => {
+    allSpeciesCount[specie.name] = specie.residents.length;
+  });
+  return allSpeciesCount;
 }
 
 function calculateEntry(entrants) {
