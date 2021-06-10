@@ -88,23 +88,10 @@ function calculateEntry(entrants) {
 
 function getAnimalMap() {
 // seu código aqui
-const locations = { NE: [], NW: [], SE: [], SW: [] };
-  if (!options.includeNames) {
-    data.species.forEach((specie) => locations[specie.location].push(specie.name));
-    return locations;
-  }
-
-  data.species.forEach((specie) => {
-    let { residents } = specie;
-    if (options.sex) {
-      residents = specie.residents.filter((resident) => resident.sex === options.sex);
-    }
-    const residentsNames = residents.map((resident) => resident.name);
-    if (options.sorted) residentsNames.sort();
-    locations[specie.location].push({ [specie.name]: residentsNames });
-  });
-
-  return locations;
+const getSchedule = (dayName, key = Object.keys(hours)) =>
+  ({ ...key.filter((e) => (dayName ? e === dayName : e))
+    .reduce((a, e) => (e === 'Monday' ? ({ ...a, [e]: 'CLOSED' })
+      : ({ ...a, [e]: `Open from ${hours[e].open}am until ${hours[e].close % 12}pm` })), {}) });
 }
 
 function getSchedule(dayName) {
