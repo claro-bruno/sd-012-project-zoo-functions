@@ -112,12 +112,12 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const specieId = employees.find((employee) => (
-    employee.id === id
+  const specieId = employees.find(({ id: employeeId }) => (
+    employeeId === id
   )).responsibleFor[0];
 
-  const olderSpecie = species.find((specie) => (
-    specie.id === specieId
+  const olderSpecie = species.find(({ id: employeeId }) => (
+    employeeId.id === specieId
   )).residents.sort((a, b) => b.age - a.age)[0];
 
   return Object.values(olderSpecie);
