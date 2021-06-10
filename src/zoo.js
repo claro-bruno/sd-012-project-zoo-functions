@@ -88,6 +88,20 @@ function calculateEntry(entrants) {
 
 function getAnimalMap() {
 // seu código aqui
+if (!options || !options.includeNames) return speciesLocations();
+  if (options.includeNames && options.sorted) return includeNamesObjSorted(options.sex);
+  return includeNamesObj(options.sex);
+}
+
+function dayInfo(day) {
+  if (hours[day].open === 0 && hours[day].close === 0) return 'CLOSED';
+  return `Open from ${
+    hours[day].open < 12 ? `${hours[day].open}am` : `${hours[day].open - 12}pm`
+  } until ${
+    hours[day].close < 12
+      ? `${hours[day].close}am`
+      : `${hours[day].close - 12}pm`
+  }`;
 }
 
 function getSchedule(dayName) {
@@ -130,20 +144,6 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
 // seu código aqui
-if (idOrName) {
- const employeeFound = data.employees.find((employee) =>
-   ((employee.id === idOrName) || (employee.firstName === idOrName)
-     || (employee.lastName === idOrName)));
- return { [`${employeeFound.firstName} ${employeeFound.lastName}`]:
-   speciesCoverage(employeeFound) };
-}
-
-const employeesCovarage = {};
-data.employees.forEach((employee) => {
- employeesCovarage[`${employee.firstName} ${employee
-   .lastName}`] = speciesCoverage(employee);
-});
-return employeesCovarage;
 }
 
 module.exports = {
