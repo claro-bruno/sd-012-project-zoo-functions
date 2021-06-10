@@ -29,28 +29,29 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) {
     return {};
   }
-return employees.find(((employee) => employee.firstName === employeeName
+  return employees.find(((employee) => employee.firstName === employeeName
 || employee.lastName === employeeName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
 // seu código aqui
-const newEmployee = { ...personalInfo, ...associatedWith };
-return newEmployee;
+  const newEmployee = { ...personalInfo, ...associatedWith };
+  return newEmployee;
 }
 
 function isManager(id) {
 // seu código aqui
-const manager = data.employees.some((employee) => employee.managers.includes(id));
-return manager;
+  const manager = data.employees.some((employee) => employee.managers.includes(id));
+  return manager;
 
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 // seu código aqui
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-data.employees.push(createEmployee({ id, firstName, lastName }, { managers, responsibleFor }));
-}
+ data.employees.push(createEmployee({ id, firstName, lastName },
+   { managers, responsibleFor }));
+ }
 }
 
 function countAnimals(species) {
