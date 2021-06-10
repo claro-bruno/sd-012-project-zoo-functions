@@ -130,13 +130,14 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
 // seu código aqui
-if (!idOrName) return formatEmployeeCoverage(employees);
-
-  const filteredEmployees = employees.filter((employee) => employee.firstName === idOrName
-    || employee.lastName === idOrName
-    || employee.id === idOrName);
-  return formatEmployeeCoverage(filteredEmployees);
+if (idOrName === undefined) {
+ const listaGeral = {};
+ employees.map((funcionários) =>
+   Object.assign(listaGeral, funcaoObjeto(funcionários.firstName)));
+ return listaGeral;
 }
+return funcaoObjeto(idOrName);
+};
 
 module.exports = {
   calculateEntry,
