@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const data = require('./data');
 const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -80,16 +81,7 @@ function calculateEntry(entrants = {}) {
 }
 
 function getAnimalMap(options) {
-  const obj = {};
-  if (!options) {
-    species.forEach(([location]) => {
-      obj[location] = [];
-    });
-    species.forEach(([name, location]) => {
-      obj[location].push(name);
-    });
-    return obj;
-  }
+  return options;
 }
 
 function verifySchedule(day, open, close) {
@@ -123,16 +115,37 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(olderSpecie);
 }
 
-getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
-
 function increasePrices(percentage) {
   Object.entries(prices).forEach(([people, price]) => {
     prices[people] = Math.round((price * (percentage / 100 + 1)) * 100) / 100;
   });
 }
 
+function employeeIsValid(idOrName) {
+  if (idOrName) {
+    return (
+      employees.filter(({ id, firstName, lastName }) => (
+        id === idOrName || firstName === idOrName || lastName === idOrName
+      ))
+    );
+  }
+  return employees;
+}
+
 function getEmployeeCoverage(idOrName) {
-  return idOrName;
+  const obj = {};
+  const employeeFiltred = employeeIsValid(idOrName);
+
+  employeeFiltred.forEach(({ firstName, lastName, responsibleFor }) => {
+    obj[`${firstName} ${lastName}`] = (
+      responsibleFor.map((animalId) => (
+        species.find(({ id }) => (
+          id === animalId
+        )).name
+      ))
+    );
+  });
+  return obj;
 }
 
 module.exports = {
