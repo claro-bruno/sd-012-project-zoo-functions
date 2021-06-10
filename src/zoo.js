@@ -78,25 +78,53 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  if (!dayName) {
+    const array = Object.entries(data.hours);
+    const reduceEntry = (acc, entrie) => {
+      const { open, close } = entrie[1];
+      acc[entrie[0]] = `Open from ${open}am until ${close - 12}pm`;
+      if (entrie[0] === 'Monday') acc[entrie[0]] = 'CLOSED';
+      return acc;
+    };
+    const finalSchedule = array.reduce(reduceEntry, {});
+    return finalSchedule;
+  }
+  const { open, close } = data.hours[dayName];
+  const daySchedule = { [dayName]: `Open from ${open}am until ${close - 12}pm` };
+  if (dayName === 'Monday') daySchedule[dayName] = 'CLOSED';
+  return daySchedule;
 }
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const specieId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const { residents } = data.species.find((specie) => specie.id === specieId);
+  const highestAge = residents.reduce((highest, resident) =>
+    ((resident.age > highest) ? resident.age : highest), 0);
+  const oldestResident = Object.values(residents.find((resident) =>
+    resident.age === highestAge));
+  return oldestResident;
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  const keys = Object.keys(data.prices);
+  keys.forEach((key) => {
+    data.prices[key] = Math.round(data.prices[key] * (1 + percentage / 100) * 100) / 100;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
-  const nomeDoEmp () => {
-    if(data.employees.id == idOrName || data.employees.firstName == idOrName || data.employees.lastName == idOrName){
-      return data.employees
-    }
-      }
-    
-  }
   // seu código aqui
+  if (!idOrName) {
+    const object = {};
+    employees.forEach((employee) => {
+      Object.assign(object, createObject(employee));
+    });
+    return object;
+  }
+  if (idOrName.length > 25) return findById(idOrName);
+  return findByName(idOrName);
 }
 
 module.exports = {
