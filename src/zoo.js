@@ -130,25 +130,24 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
 // seu código aqui
-const objectFinal = {};
-let employees = data.employees.reduce((acc, { id, firstName, lastName }) => {
- const speciesId = data.employees.find((employee) => employee.id === id).responsibleFor;
- const animals = getSpeciesByIds(...speciesId);
- const residents = animals.reduce((count, curr) => { count.push(curr.name); return count; }, []);
- acc[`${firstName} ${lastName}`] = residents;
+const reduceEmployees = (acc, { firstName, lastName, responsibleFor }) => {
+ const fullName = `${firstName} ${lastName}`;
+ const findAnimalsByIdAndReduce = (accumulator, id) => {
+   const findSpecie = species.find((specie) => specie.id === id);
+   accumulator.push(findSpecie.name);
+   return accumulator;
+ };
+ const animalsResponsibleFor = responsibleFor.reduce(findAnimalsByIdAndReduce, []);
+ acc[fullName] = animalsResponsibleFor;
  return acc;
-}, {});
-const employeesNames = Object.keys(employees);
-let employeeName;
-if (data.employees.some((employee) => employee.id === idOrName)) {
- employeeName = data.employees.find((element) => element.id === idOrName).firstName;
+};
+if (!idOrName) {
+ const employeesListAndAnimals = employees.reduce(reduceEmployees, {});
+ return employeesListAndAnimals;
 }
-employeesNames.forEach((name) => {
- if (name.includes(idOrName) || name.includes(employeeName)) {
-   employees = { [name]: employees[name] };
- }
-});
-return employees;
+const getEmployee = employees.filter(({ firstName, lastName, id }) =>
+ firstName === idOrName || lastName === idOrName || id === idOrName);
+return getEmployee.reduce(reduceEmployees, {});
 }
 
 module.exports = {
