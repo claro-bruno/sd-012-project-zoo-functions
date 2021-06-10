@@ -55,14 +55,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species) {
 // seu código aqui
-  function countAnimals(species2) {
-    if (!species2) {
-      const animalObj = {};
-      species.forEach((specie) => { animalObj[specie.name] = specie.residents.length; });
-      return animalObj;
-    }
-  }
+if (species) {
+  const count = data.species.find((specie) => specie.name === species).residents.length;
+    return count;
 }
+    const allSpeciesCount = {};
+    ata.species.forEach((specie) => {
+      allSpeciesCount[specie.name] = specie.residents.length;
+    });
+    return allSpeciesCount;
 
 function calculateEntry(entrants) {
 // seu código aqui
