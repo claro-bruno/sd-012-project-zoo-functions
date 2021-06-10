@@ -47,33 +47,31 @@ function isManager(id) {
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 // seu código aqui
-  function addEmployee(
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) {
+  data.employees.push({
     id,
     firstName,
     lastName,
-    managers = [],
-    responsibleFor = [],
-  ) {
-    data.employees.push({
-      id,
-      firstName,
-      lastName,
-      managers,
-      responsibleFor,
-    });
-  }
+    managers,
+    responsibleFor,
+  });
+}
 
 function countAnimals(species) {
 // seu código aqui
-  if (species) {
-    const count = data.species.find((specie) => specie.name === species).residents.length;
-    return count;
-  }
-  const allSpeciesCount = {};
-  ata.species.forEach((specie) => {
-    allSpeciesCount[specie.name] = specie.residents.length;
-  });
-  return allSpeciesCount;
+   if (!species) {
+    return data.species.reduce((acc, { name, residents }) => {
+     acc[name] = residents.length;
+    return acc;
+  }, {});
+}
+return data.species.find(({ name }) => name === species).residents.length;
 }
 
 function calculateEntry(entrants) {
