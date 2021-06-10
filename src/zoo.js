@@ -29,17 +29,19 @@ function getEmployeeByName(employeeName) {
   if(!employeeName) {
     return {};
   }
-  return employees.find(((employees) => employeeName.firstName === employeeName || employeeName.lastName === employeeName));
+  return employees.find(((employee) => employee.firstName === employeeName || employee.lastName === employeeName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const newEmployee = { ...personalInfo, ...associatedWith };
+  return newEmployee;
 }
 
 function isManager(id) {
   
-  if (employees.managers.length += 1) {
-    return false;
+  const manager = data.employees.some((employee) => employee.managers.includes(id));
+  return manager;
 
   }
   
