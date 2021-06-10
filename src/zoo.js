@@ -88,20 +88,23 @@ function calculateEntry(entrants) {
 
 function getAnimalMap() {
 // seu código aqui
-if (!options || !options.includeNames) return speciesLocations();
-  if (options.includeNames && options.sorted) return includeNamesObjSorted(options.sex);
-  return includeNamesObj(options.sex);
-}
+const locations = { NE: [], NW: [], SE: [], SW: [] };
+  if (!options.includeNames) {
+    data.species.forEach((specie) => locations[specie.location].push(specie.name));
+    return locations;
+  }
 
-function dayInfo(day) {
-  if (hours[day].open === 0 && hours[day].close === 0) return 'CLOSED';
-  return `Open from ${
-    hours[day].open < 12 ? `${hours[day].open}am` : `${hours[day].open - 12}pm`
-  } until ${
-    hours[day].close < 12
-      ? `${hours[day].close}am`
-      : `${hours[day].close - 12}pm`
-  }`;
+  data.species.forEach((specie) => {
+    let { residents } = specie;
+    if (options.sex) {
+      residents = specie.residents.filter((resident) => resident.sex === options.sex);
+    }
+    const residentsNames = residents.map((resident) => resident.name);
+    if (options.sorted) residentsNames.sort();
+    locations[specie.location].push({ [specie.name]: residentsNames });
+  });
+
+  return locations;
 }
 
 function getSchedule(dayName) {
@@ -142,7 +145,7 @@ function increasePrices(percentage) {
   });
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage() {
 // seu código aqui
 }
 
