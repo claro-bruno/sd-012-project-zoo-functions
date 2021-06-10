@@ -72,15 +72,18 @@ function countAnimals(species) {
     }, {});
   }
 
-return data.species.find(({ name }) => name === species).residents.length;
+  return data.species.find(({ name }) => name === species).residents.length;
 }
 
 function calculateEntry(entrants) {
 // seu código aqui
-  if (!entrants || entrants === {}) {
-    return 0;
-  }
-  return Object.keys(entrants).reduce(((sum, price) => sum + prices[price] * entrants[price]), 0);
+  if (!entrants || entrants === {}) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return (
+    Adult * data.prices.Adult
+    + Child * data.prices.Child
+    + Senior * data.prices.Senior
+  );
 }
 
 function getAnimalMap() {
