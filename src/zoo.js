@@ -95,8 +95,20 @@ function getAnimalMap(options = {}) {
 }
 // auxiliado com o code-Review do LuctReis, não estava sabendi fundamentar os requesitos;
 function getSchedule(dayName) {
-  return dayName;
-}
+  const crono = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED'
+  };
+  if (dayName === undefined) {
+    return crono;
+  }
+  return {[dayName]: crono[dayName]}
+};
 
 function getOldestFromFirstSpecies(id) {
   return id;
