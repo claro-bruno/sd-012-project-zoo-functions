@@ -118,7 +118,7 @@ function getOldestFromFirstSpecies(id) {
 
   const olderSpecie = species.find(({ id: employeeId }) => (
     employeeId.id === specieId
-  )).residents.sort((a, b) => b.age - a.age)[0];
+  )).residents.sort(({ age: aAge }, { age: bAge }) => aAge - bAge)[0];
 
   return Object.values(olderSpecie);
 }
