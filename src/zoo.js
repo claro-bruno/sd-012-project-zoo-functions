@@ -112,14 +112,6 @@ function hoursConverter(hour) {
   return `${hour}am`;
 }
 
-function scheduleMessage(dayName, schedule) {
-  if (schedule[dayName].open !== schedule[dayName].close) {
-    return `Open from ${hoursConverter(schedule[dayName]
-      .open)} until ${hoursConverter(schedule[dayName].close)}`;
-  }
-  return 'CLOSED';
-}
-
 function getSchedule(dayName) {
 // seu código aqui
   if (!dayName) {
