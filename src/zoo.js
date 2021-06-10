@@ -14,8 +14,8 @@ const { species, employees, prices, hours } = require('./data');
 function getSpeciesByIds(...ids) {
   if (!ids.length) return [];
   return (
-    species.filter((specie) => (
-      ids.some((id) => specie.id === id)
+    species.filter(({ id: specieId }) => (
+      ids.some((id) => specieId === id)
     ))
   );
 }
@@ -82,11 +82,11 @@ function calculateEntry(entrants = {}) {
 function getAnimalMap(options) {
   const obj = {};
   if (!options) {
-    species.forEach((specie) => {
-      obj[specie.location] = [];
+    species.forEach(([location]) => {
+      obj[location] = [];
     });
-    species.forEach((specie) => {
-      obj[specie.location].push(specie.name);
+    species.forEach(([name, location]) => {
+      obj[location].push(name);
     });
     return obj;
   }
