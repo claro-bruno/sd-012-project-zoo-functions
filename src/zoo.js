@@ -13,6 +13,8 @@ const data = require('./data');
 
 function getSpeciesByIds(ids) {
   // seu código aqui
+  const speciesFound = data.species.filter((specie) => ids.some((id) => specie.id === id));
+  return speciesFound;
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -28,6 +30,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
+  
+  if (employees.managers.length += 1) {
+    return false;
+
+  }
+  
   // seu código aqui
 }
 
@@ -60,6 +68,13 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
+  const nomeDoEmp () => {
+    if(data.employees.id == idOrName || data.employees.firstName == idOrName || data.employees.lastName == idOrName){
+      return data.employees
+    }
+      }
+    
+  }
   // seu código aqui
 }
 
