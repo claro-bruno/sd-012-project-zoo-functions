@@ -76,12 +76,44 @@ function countAnimals(species) {
 function calculateEntry(entrants) {
   if (!entrants || Object.entries(entrants).length < 1) return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  const totalPrice = (data.prices.Adult * Adult) + (data.prices.Child * Child) + (data.prices.Senior * Senior);
+  const { Adult: adultPrice, Child: childPrice, Senior: seniorPrice } = data.prices;
+  const totalPrice = (adultPrice * Adult) + (childPrice * Child) + (seniorPrice * Senior);
   return totalPrice;
 }
 
+const getNames = ({ sex = false, sorted = false }, specie) => {
+  let arrayName = [];
+  if (sex) {
+    arrayName = specie.residents.filter((resident) => resident.sex === sex)
+      .map((resident) => resident.name);
+  } else {
+    arrayName = specie.residents.map((resident) => resident.name);
+  }
+  if (sorted) {
+    return arrayName.sort();
+  }
+  return arrayName;
+};
+
 function getAnimalMap(options) {
-  // seu código aqui
+  const animalsMap = {};
+  const neAnimalsLocale = data.species.filter((specie) => specie.location === 'NE');
+  const nwAnimalsLocale = data.species.filter((specie) => specie.location === 'NW');
+  const seAnimalsLocale = data.species.filter((specie) => specie.location === 'SE');
+  const swAnimalsLocale = data.species.filter((specie) => specie.location === 'SW');
+  if (!options || !options.includeNames) {
+    return {
+      NE: neAnimalsLocale.map((specie) => specie.name),
+      NW: nwAnimalsLocale.map((specie) => specie.name),
+      SE: seAnimalsLocale.map((specie) => specie.name),
+      SW: swAnimalsLocale.map((specie) => specie.name),
+    };
+  }
+  animalsMap.NE = neAnimalsLocale.map((specie) => ({ [specie.name]: getNames(options, specie) }));
+  animalsMap.NW = nwAnimalsLocale.map((specie) => ({ [specie.name]: getNames(options, specie) }));
+  animalsMap.SE = seAnimalsLocale.map((specie) => ({ [specie.name]: getNames(options, specie) }));
+  animalsMap.SW = swAnimalsLocale.map((specie) => ({ [specie.name]: getNames(options, specie) }));
+  return animalsMap;
 }
 
 function getSchedule(dayName) {
