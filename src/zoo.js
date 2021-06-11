@@ -139,10 +139,20 @@ function getOldestFromFirstSpecies(id) {
 
   // const result = arr.reduce( ( sum, { x } ) => sum > x , 0)
 }
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-// requisito 12
-function increasePrices() {
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
+// requisito 12
+// Consultei o respositório de Luiz Henrique para fazer essa parte.
+// Link: https://github.com/tryber/sd-012-project-zoo-functions/blob/e80143c0e5b8cc99766f39f15cf2f8388e830bcd/src/zoo.js
+function increasePrices(percentage) {
+  const { Adult, Senior, Child } = data.prices;
+  const percent = (percentage / 100) + 1; // incrementa os preços de acordo com a entrada da porcentagem
+  data.prices = {
+    Adult: Math.round((Adult * percent) * 100) / 100,
+    Child: Math.round((Child * percent) * 100) / 100,
+    Senior: Math.round((Senior * percent) * 100) / 100, // arredondando passando pelo objeto desestruturado no data.prices
+  };
+  return data.prices;
 }
 // console.log(increasePrices(20));
 
