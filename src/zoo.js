@@ -49,10 +49,17 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   return data.employees.some((employee) => employee.managers.some((manage) => manage === id));
 }
+const checkEmpty = (array) => {
+  if (array === undefined) {
+    return [];
+  } return array;
+};
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const newEmployee = { id, firstName, lastName };
+  data.employees.push(createEmployee(newEmployee, { managers: checkEmpty(managers),
+    responsibleFor: checkEmpty(responsibleFor) }));
+}
 
 // function countAnimals(species) {
 //   // seu código aqui
@@ -90,7 +97,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
