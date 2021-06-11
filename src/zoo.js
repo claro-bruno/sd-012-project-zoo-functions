@@ -87,9 +87,15 @@ function countAnimals(species) {
 // console.log(countAnimals());
 
 // requisito 8
-function calculateEntry() {
+function calculateEntry(entrants) {
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  const total = (Adult * data.prices.Adult)
+  + (Senior * data.prices.Senior) + (Child * data.prices.Child);
 
-  // // seu código aqui entrants
+  return total;
 }
 
 // requisito 9
@@ -99,11 +105,20 @@ function getAnimalMap() {
 
 // requisiito 10
 function getSchedule() {
-
+//   let hour = data.hours
+//   let schedule = {
+//       Tuesday = 'Open from 8am until 6pm',
+//       Wednesday = 'Open from 8am until 6pm',
+//       Thursday = 'Open from 10am until 8pm',
+//       Friday = 'Open from 10am until 8pm',
+//       Saturday = 'Open from 8am until 10pm',
+//       Sunday = 'Open from 8am until 8pm',
+//       Monday = 'CLOSED'
 }
+
 // seu código aqui dayName
 
-// console.log(getSchedule('Tuesday'));
+// console.log(getSchedule(Tuesday));
 
 // requisito 11
 function getOldestFromFirstSpecies() {
@@ -111,6 +126,8 @@ function getOldestFromFirstSpecies() {
   // const employeesID = data.employees.find((employee) => employee.id === id).responsibleFor[0];
   // const animals = data.species.find((specie) => specie.id === employeesID).residents;
   // const getOldest = animals.reduce;
+
+  // const result = arr.reduce( ( sum, { x } ) => sum + x , 0)
 
 }
 // console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
