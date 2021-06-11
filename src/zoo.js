@@ -122,19 +122,24 @@ function getSchedule(dayName) {
   utilizando-se de desestruturação acessando o valor do objeto. */
 }
 
-console.log(getSchedule('Tuesday'));
+// console.log(getSchedule('Tuesday'));
 
 // requisito 11
-function getOldestFromFirstSpecies() {
+function getOldestFromFirstSpecies(id) {
   // - Passado o id de um funcionário, encontra a primeira espécie de animal
-  // const employeesID = data.employees.find((employee) => employee.id === id).responsibleFor[0];
-  // const animals = data.species.find((specie) => specie.id === employeesID).residents;
-  // const getOldest = animals.reduce;
+  const employeesID = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animals = data.species
+    .find((specie) => specie.id === employeesID).residents
+    .reduce((itemArray, currentValue) => {
+      if (itemArray.age > currentValue.age) { return itemArray; }
+      return currentValue;
+    });
 
-  // const result = arr.reduce( ( sum, { x } ) => sum + x , 0)
+  return [animals.name, animals.sex, animals.age];
 
+  // const result = arr.reduce( ( sum, { x } ) => sum > x , 0)
 }
-// console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 // requisito 12
 function increasePrices() {
 
