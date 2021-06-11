@@ -103,22 +103,25 @@ function getAnimalMap() {
   // seu código aqui options
 }
 
-// requisiito 10
-function getSchedule() {
-//   let hour = data.hours
-//   let schedule = {
-//       Tuesday = 'Open from 8am until 6pm',
-//       Wednesday = 'Open from 8am until 6pm',
-//       Thursday = 'Open from 10am until 8pm',
-//       Friday = 'Open from 10am until 8pm',
-//       Saturday = 'Open from 8am until 10pm',
-//       Sunday = 'Open from 8am until 8pm',
-//       Monday = 'CLOSED'
+// requisito 10
+function getSchedule(dayName) {
+  const schedule = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+  if (dayName === undefined) {
+    return schedule;
+  }
+  return { [dayName]: schedule[dayName] }; // colocando o parametro como dia da semana, ele acessa retornando a string referente ao parametro.
+                                           // utilizando-se de desestruturação acessando o valor do objeto.
 }
 
-// seu código aqui dayName
-
-// console.log(getSchedule(Tuesday));
+console.log(getSchedule('Tuesday'));
 
 // requisito 11
 function getOldestFromFirstSpecies() {
