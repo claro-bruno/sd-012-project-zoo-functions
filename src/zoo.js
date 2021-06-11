@@ -117,8 +117,9 @@ function getSchedule(dayName) {
   if (dayName === undefined) {
     return schedule;
   }
-  return { [dayName]: schedule[dayName] }; // colocando o parametro como dia da semana, ele acessa retornando a string referente ao parametro.
-                                           // utilizando-se de desestruturação acessando o valor do objeto.
+  return { [dayName]: schedule[dayName] };
+  /* colocando o parametro como dia da semana, ele acessa retornando a string referente ao parametro.
+  utilizando-se de desestruturação acessando o valor do objeto. */
 }
 
 console.log(getSchedule('Tuesday'));
