@@ -35,15 +35,15 @@ function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   } if (data.employees.some((employee) => employee.firstName === employeeName) === true) {
-    return findByFirstName
+    return findByFirstName;
   } if (data.employees.some((employee) => employee.lastName === employeeName) === true) {
     return findByLastName;
   }
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -94,5 +94,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
