@@ -10,39 +10,28 @@ eslint no-unused-vars: [
 */
 const { species, employees, hours, prices } = require('./data');
 
-function getSpeciesByIds(...ids) {
-  return species.filter((animal) => ids.includes(animal.id));
-}
+const getSpeciesByIds = (...ids) => species.filter((animal) => ids.includes(animal.id));
 
-function getAnimalsOlderThan(animal, age) {
-  return species.find((specie) => specie.name === animal)
-    .residents.every((element) => element.age >= age);
-}
+const getAnimalsOlderThan = (animal, age) => species.find((specie) => specie.name === animal)
+  .residents.every((element) => element.age >= age);
 
-function getEmployeeByName(employeeName) {
-  return employeeName ? employees.find((empregados) => empregados.firstName.includes(employeeName)
-|| empregados.lastName.includes(employeeName)) : {};
-}
+const getEmployeeByName = (employeeName) =>
+  (employeeName ? employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName) : {});
 
-function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith };
-}
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
-function isManager(id) {
-  return employees.some((empregado) => empregado.managers.includes(id));
-}
+const isManager = (id) => employees.some((empregado) => empregado.managers.includes(id));
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
   employees.push({ id, firstName, lastName, managers, responsibleFor });
-}
+};
 
-function countAnimals(speciess) {
+const countAnimals = (speciess) => {
   const todos = {};
-  species.forEach(({ name, residents }) => {
-    todos[name] = residents.length;
-  });
+  species.forEach(({ name, residents }) => { todos[name] = residents.length; });
   return !speciess ? todos : species.find((animal) => animal.name === speciess).residents.length;
-}
+};
 
 function calculateEntry(entrants = []) {
   let soma = 0;
@@ -121,22 +110,22 @@ function getSchedule(dayname) {
 
 getSchedule();
 
-function getOldestFromFirstSpecies(call) {
+const getOldestFromFirstSpecies = (call) => {
   const animalId = employees.find(({ id }) => id === call).responsibleFor[0];
   return Object.values((species.find(({ id }) => id === animalId).residents.reduce((acc, animals) =>
     (animals.age > acc.age ? animals : acc))));
-}
+};
 
-function increasePrices(percentage) {
+const increasePrices = (percentage) => {
   Object.keys(prices).forEach((key) => {
     prices[key] *= ((percentage / 100) + 1);
     prices[key] = Math.round(prices[key] * 100) / 100;
   });
   return prices;
-}
+};
 
 const responsible = {};
-function getResonsible() {
+const getResonsible = () => {
   employees.forEach((empregado) => {
     responsible[`${empregado.firstName} ${empregado.lastName}`] = empregado.responsibleFor;
   });
@@ -146,9 +135,9 @@ function getResonsible() {
         responsible[key][index] = animal.name;
       }
     })));
-}
+};
 
-function getEmployeeCoverage(idOrName) {
+const getEmployeeCoverage = (idOrName) => {
   getResonsible();
   if (idOrName) {
     let empregado = employees.find((empregados) =>
@@ -158,7 +147,7 @@ function getEmployeeCoverage(idOrName) {
     return { [empregado]: responsible[empregado] };
   }
   return responsible;
-}
+};
 
 module.exports = {
   calculateEntry,
