@@ -21,7 +21,7 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   return employeeName ? employees.find((empregados) => empregados.firstName.includes(employeeName)
-    || empregados.lastName.includes(employeeName)) : {};
+|| empregados.lastName.includes(employeeName)) : {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -48,17 +48,17 @@ function calculateEntry(entrants = []) {
   let soma = 0;
   Object.entries(entrants).forEach((element) => {
     switch (element[0]) {
-      case 'Child':
-        soma += element[1] * 20.99;
-        return;
-      case 'Adult':
-        soma += element[1] * 49.99;
-        return;
-      case 'Senior':
-        soma += element[1] * 24.99;
-        return;
-      default:
-        return soma;
+    case 'Child':
+      soma += element[1] * 20.99;
+      return;
+    case 'Adult':
+      soma += element[1] * 49.99;
+      return;
+    case 'Senior':
+      soma += element[1] * 24.99;
+      return;
+    default:
+      return soma;
     }
   });
   return soma;
@@ -106,7 +106,7 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayname) {
-  const todos = {};
+  const todos = { };
   if (!dayname) {
     Object.keys(hours).forEach((dia) => {
       const { open, close } = hours[dia];
@@ -115,10 +115,8 @@ function getSchedule(dayname) {
     return todos;
   }
   const { open, close } = hours[dayname];
-  return {
-    [dayname]: dayname === 'Monday'
-      ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`
-  };
+  return { [dayname]: dayname === 'Monday'
+    ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm` };
 }
 
 getSchedule();
