@@ -58,10 +58,10 @@ function countAnimals() {
 }
 
 function calculateEntry(entrants) {
-  const { adult = 0, child = 0, senior = 0 } = entrants;
-  const adultPrice = prices.Adult * adult;
-  const childPrice = prices.Child * child;
-  const seniorPrice = prices.Senior * senior;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultPrice = prices.Adult * Adult;
+  const childPrice = prices.Child * Child;
+  const seniorPrice = prices.Senior * Senior;
   return adultPrice + childPrice + seniorPrice;
 }
 
