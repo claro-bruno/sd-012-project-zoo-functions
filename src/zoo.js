@@ -41,6 +41,8 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
+console.log(createEmployee());
+
 function isManager(id) {
   document.getElementById('stephanieId');
   id.some();
