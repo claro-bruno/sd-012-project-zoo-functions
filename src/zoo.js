@@ -114,12 +114,12 @@ function calculateEntry(entrants) {
 function getSchedule(dayName) {
   if (!dayName) {
     const days = Object.keys(hours);
-    return days.reduce((acc, day) => {
+    return days.reduce((result, day) => {
       if (day === 'Monday') {
-        return { ...acc, [day]: 'CLOSED' };
+        return { ...result, [day]: 'CLOSED' };
       }
       const openCloseMsg = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-      return { ...acc, [day]: openCloseMsg };
+      return { ...result, [day]: openCloseMsg };
     }, {});
   }
 
