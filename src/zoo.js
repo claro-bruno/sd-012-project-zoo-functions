@@ -57,7 +57,7 @@ function countAnimals() {
   // species
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(entrants = 0) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   const adultPrice = prices.Adult * Adult;
   const childPrice = prices.Child * Child;
