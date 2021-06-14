@@ -38,7 +38,8 @@ function getEmployeeByName(employeeName) {
 // console.log(getEmployeeByName());
 
 function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith };
+  const newEmployee = { ...personalInfo, ...associatedWith };
+  return newEmployee;
 }
 
 console.log(createEmployee());
@@ -48,7 +49,7 @@ function isManager(id) {
   id.some();
 }
 
-function addEmployee() {
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // id, firstName, lastName, managers, responsibleFor
 }
 
