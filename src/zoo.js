@@ -45,11 +45,11 @@ function createEmployee(personalInfo, associatedWith) {
 console.log(createEmployee());
 
 function isManager(id) {
-  document.getElementById('stephanieId');
-  id.some();
+  const maneger = employees.some((gerente) => gerente.managers);
+  return manager;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee() {
   // id, firstName, lastName, managers, responsibleFor
 }
 
