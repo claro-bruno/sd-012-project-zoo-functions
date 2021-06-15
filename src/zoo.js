@@ -57,7 +57,6 @@ function countAnimals() {
   // species
 }
 
-
 function calculateEntry(entrants = {}) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   const adultPrice = prices.Adult * Adult;
@@ -65,11 +64,6 @@ function calculateEntry(entrants = {}) {
   const seniorPrice = prices.Senior * Senior;
   return adultPrice + childPrice + seniorPrice;
 }
-// qual situacao retorna 0? Retornar objeto vazio;
-// destructuring nos prices
-
-console.log(calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
-
 
 function getAnimalMap() {
   // options
