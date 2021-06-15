@@ -156,10 +156,27 @@ function increasePrices(percentage) {
 }
 // console.log(increasePrices(20));
 
-// requisito 13
-function getEmployeeCoverage() {
-  // seu código aqui idOrName
+function getEmployeeCoverage(idOrName) {
+  let managers = [];
+  if (idOrName === undefined) {
+    managers = data.employees; // - Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
+  } else {
+    const manager = data.employees.find((employee) => (idOrName === employee.id
+      || idOrName === employee.firstName || idOrName === employee.lastName));
+    managers.push(manager);
+  }
+  const responsibleForSpecies = {};
+  managers.forEach((manager) => {
+    const speciesID = manager.responsibleFor.map((animalID) => {
+      const species = data.species.find((animal) => (animal.id === animalID)); // - Com o id de um funcionário, retorna os animais pelos quais o funcionário é responsável
+      return species.name;
+    });
+    responsibleForSpecies[`${manager.firstName} ${manager.lastName}`] = speciesID;// - Com o último nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+    // - Com o primeiro nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+  });
+  return responsibleForSpecies;
 }
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
