@@ -69,7 +69,7 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  return options;
 }
 
 function getSchedule(dayName) {
@@ -100,7 +100,7 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return percentage;
 }
 
 function getEmployeeCoverage() {
