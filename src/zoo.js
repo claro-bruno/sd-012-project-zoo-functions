@@ -19,6 +19,7 @@ function getSpeciesByIds(...ids) {
   if (!ids.length) return [];
   return data.species.filter((specie, index) => specie.id === ids[index]);
 }
+// console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
   const findindSpecie = species.find((specie) => specie.name === animal);
@@ -123,10 +124,37 @@ function increasePrices(percentage) {
 }
 // console.log(increasePrices(30));
 
-// function getEmployeeCoverage(idOrName) {
-//   // seu código aqui
-//   if (!idOrName)
-// }
+// 13
+function getEmployeeByNameOrId(data2) {
+  // seu código aqui
+  if (!data2) return {};
+  const findEmployee = (employee) =>
+    employee.lastName === data2 || employee.firstName === data2 || employee.id === data2;
+  return employees.find(findEmployee);
+}
+// console.log(getEmployeeByNameOrId('Emery'));
+
+function getEmployeeCoverage(idOrName) {
+  const getSpeciesById = (id) => species.find((specie) => specie.id === id);
+  if (!idOrName) {
+    const employeesMap = employees.reduce((obj, employee) => {
+      const obj2 = obj;
+      obj2[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
+        .map((id) => getSpeciesById(id).name);
+      return obj2;
+    }, {});
+    return employeesMap;
+  }
+  const idOfSpecies = getEmployeeByNameOrId(idOrName);
+  const responsible = idOfSpecies.responsibleFor;
+  const responsibleMap = responsible.map((element) => getSpeciesById(element).name);
+  const objEmployee = {
+    [`${idOfSpecies.firstName} ${idOfSpecies.lastName}`]: responsibleMap,
+  };
+
+  return objEmployee;
+}
+// console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
@@ -135,7 +163,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
