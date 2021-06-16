@@ -43,13 +43,21 @@ function isManager(id) {
   return false;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmp = data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  return newEmp;
 }
 
-function countAnimals(species) {
-  // seu código aqui
-}
+function countAnimals(speciesName) {
+  const allAnimals = species.reduce((acc, current) => {
+    acc[current.name] = current.residents.length;
+    return acc;
+  }, {});
+
+  if (!speciesName) {
+    return allAnimals;
+  }
+  return allAnimals[speciesName];
 
 function calculateEntry(entrants) {
   // seu código aqui
