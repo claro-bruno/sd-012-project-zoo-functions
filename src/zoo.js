@@ -13,6 +13,10 @@ const data = require('./data');
 
 const { species } = require('./data');
 
+const { employees } = data;
+
+const { prices } = data;
+
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
   const speciesIds = species.filter((specie) => ids.includes(specie.id));
@@ -24,8 +28,6 @@ function getAnimalsOlderThan(animal, age) {
   const checkAge = getAnimal.residents.every((resident) => resident.age >= age);
   return checkAge;
 }
-
-const { employees } = data;
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
@@ -99,12 +101,36 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(specieId[0]);
 }
 
+// https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
 function increasePrices(percentage) {
-  return percentage;
+  const number = 1 + (percentage / 100);
+  const value = Object.keys(prices);
+  value.forEach((key) => {
+    const priceIncreased = prices[key] * number;
+    const priceRounded = Math.round(priceIncreased * 100) / 100;
+    prices[key] = priceRounded;
+  });
 }
-
-function getEmployeeCoverage() {
-  // seu código aqui idOrName
+// Consultei o Projeto https://github.com/tryber/sd-012-project-zoo-functions/blob/caroline-benichio-zoo-functions-project/src/zoo.js
+function getEmployeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    const duty = data.employees.reduce((acc, curr) => {
+      const animalId = (id) => data.species.find((specie) => specie.id === id).name;
+      const animals = curr.responsibleFor.map(animalId);
+      acc[`${curr.firstName} ${curr.lastName}`] = animals;
+      return acc;
+    }, {});
+    return duty;
+  }
+  const request = data.employees.filter(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  const result = request.reduce((acc, curr) => {
+    const animalId2 = (id) => data.species.find((specie) => specie.id === id).name;
+    const animals2 = curr.responsibleFor.map(animalId2);
+    acc[`${curr.firstName} ${curr.lastName}`] = animals2;
+    return acc;
+  }, {});
+  return result;
 }
 
 module.exports = {
