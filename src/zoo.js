@@ -108,15 +108,88 @@ function calculateEntry(entrants) {
   return sumEntry(entrants);
 }
 
-/*
+function speciesPerRegion() {
+  const northEast = [];
+  const northWest = [];
+  const southEast = [];
+  const southWest = [];
+
+  data.species.filter((specie) => specie.location === 'SW').forEach((element) => {
+    southWest.push(element.name);
+  });
+  data.species.filter((specie) => specie.location === 'SE').forEach((element) => {
+    southEast.push(element.name);
+  });
+  data.species.filter((specie) => specie.location === 'NW').forEach((element) => {
+    northWest.push(element.name);
+  });
+  data.species.filter((specie) => specie.location === 'NE').forEach((element) => {
+    northEast.push(element.name);
+  });
+  return { NE: northEast, NW: northWest, SE: southEast, SW: southWest };
+}
+
+function getAnimalsNames(specie) {
+  const names = [];
+  const mySpecie = data.species.find((group) => group.name === specie);
+
+  mySpecie.residents.forEach((animal) => {
+    names.push(animal.name);
+  });
+
+  return names;
+}
+
+function speciesPerRegionWithNames() {
+  const speciesRegion = speciesPerRegion();
+  const speciesRegionWithNames = {};
+
+  Object.entries(speciesRegion).forEach((part) => {
+    speciesRegionWithNames[part[0]] = [];
+    part[1].forEach((specie) => {
+      const group = {};
+      group[specie] = getAnimalsNames(specie);
+      speciesRegionWithNames[part[0]].push(group);
+    });
+  });
+  return speciesRegionWithNames;
+}
+
+console.log(speciesPerRegionWithNames());
+
 function getAnimalMap(options) {
-  // seu código aqui
+  if (!options) { return speciesPerRegion(); }
+
+  if (options.includeNames === true) { return speciesPerRegionWithNames(); }
+}
+
+function allSchedule() {
+  return {
+    Tuesday: `Open from ${data.hours.Tuesday.open}am until ${data.hours.Tuesday.close - 12}pm`,
+    Wednesday:
+    `Open from ${data.hours.Wednesday.open}am until ${data.hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${data.hours.Thursday.open}am until ${data.hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${data.hours.Friday.open}am until ${data.hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${data.hours.Saturday.open}am until ${data.hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${data.hours.Sunday.open}am until ${data.hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
-}
+  if (!dayName) { return allSchedule(); }
+  const weekDays = Object.keys(data.hours);
 
+  if (weekDays.find((day) => day === dayName)) {
+    const schedule = Object.entries(data.hours).find((day) => day[0] === dayName);
+    const [day, hour] = schedule;
+    const response = {};
+    response[day] = `Open from ${hour.open}am until ${hour.close - 12}pm`;
+    if (hour.close === hour.open) { response[day] = 'CLOSED'; }
+    return response;
+  }
+}
+/*-
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -137,9 +210,9 @@ function getEmployeeCoverage(idOrName) {
 */
 module.exports = {
   calculateEntry,
-  //  getSchedule,
+  getSchedule,
   countAnimals,
-  //  getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   //  getEmployeeCoverage,
