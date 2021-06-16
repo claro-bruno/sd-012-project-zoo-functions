@@ -70,9 +70,74 @@ function calculateEntry(entrants) {
   return Adult * data.prices.Adult + Senior * data.prices.Senior + Child * data.prices.Child;
 }
 
-function getAnimalMap(options) {
-  return options;
-}
+// Consultei o git do colega: https://github.com/tryber/sd-012-project-zoo-functions/pull/33
+const option = () => {
+  const animalsFind = (localization) => species.filter((specie) =>
+    specie.location === localization).map((specie2) => specie2.name);
+  const place = ['NE', 'NW', 'SE', 'SW'];
+  const result = {};
+  const animalType = place.map((localization) => animalsFind(localization));
+  place.forEach((key, index) => {
+    result[key] = animalType[index];
+  });
+  return result;
+};
+
+const animalSex = (localization, index, sex = undefined, sorted = undefined) => {
+  let findAnimalSex;
+  if (sex === undefined) {
+    findAnimalSex = species.filter((specie) => specie.location === localization)
+      .map((specie2) => specie2.residents.map((name) => name.name))[index];
+  } else {
+    findAnimalSex = species.filter((specie) => specie.location === localization)
+      .map((specie2) => (specie2.residents.filter((specie) => specie.sex === sex)
+        .map((name) => name.name)))[index];
+  }
+  let ordemTrueFalse;
+  if (sorted === true) {
+    ordemTrueFalse = findAnimalSex.sort();
+  } else {
+    ordemTrueFalse = findAnimalSex;
+  }
+  return ordemTrueFalse;
+};
+
+const iLocation = (localizations) => species.map((localization) => localization.location)
+  .filter((loc) => loc === localizations);
+
+const animalLocation = (localization, index) => species.filter((specie) =>
+  specie.location === localization).map((specie2) => specie2.name)[index];
+
+const ObjectTypeNames = (localization, index, sex, sorted) => {
+  const object = {
+    [animalLocation(localization, index)]:
+      animalSex(localization, index, sex, sorted),
+  };
+  return object;
+};
+
+const arrayNames = (localization, sex, sorted) => {
+  const array = [];
+  const local = iLocation(localization);
+  for (let i = 0; i < local.length; i += 1) {
+    array.push(ObjectTypeNames(localization, i, sex, sorted));
+  }
+  return array;
+};
+
+const getAnimalMap = (options = undefined) => {
+  if (options === undefined || options.includeNames === undefined) {
+    return option();
+  }
+  const { sex = undefined, sorted = undefined } = options;
+  const cardinal = ['NE', 'NW', 'SE', 'SW'];
+  const object = {};
+  cardinal.forEach((key) => {
+    object[key] = arrayNames(key, sex, sorted);
+  });
+  return object;
+};
+// Fim Requisito 9
 
 function getSchedule(dayName) {
   const time = Object.keys(data.hours);
