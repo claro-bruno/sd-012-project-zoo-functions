@@ -58,30 +58,31 @@ function countAnimals(speciesName) {
     return allAnimals;
   }
   return allAnimals[speciesName];
+}
 
-  function calculateEntry(entrants) {
-    if (entrants === undefined || Object.keys(entrants).length === 0) {
-      return 0;
-    }
-    const { Adult = 0, Senior = 0, Child = 0 } = entrants;
-    return Adult * data.prices.Adult + Senior * data.prices.Senior + Child * data.prices.Child;
+function calculateEntry(entrants) {
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
   }
-  
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  return Adult * data.prices.Adult + Senior * data.prices.Senior + Child * data.prices.Child;
+}
 
 function getAnimalMap(options) {
   // seu código aqui
 }
 
 function getSchedule(dayName) {
-  const weekDays = Object.keys(hours);
-  const timeTable = weekDays.reduce((acc, current) => {
-    const closingTime = (hours[current].close > 12) ? hours[current].close -= 12 : hours[current].close;
-    acc[current] = `Open from ${hours[current].open}am until ${closingTime}pm`;
+  const time = Object.keys(data.hours);
+  const agenda = time.reduce((acc, curr) => {
+    acc[curr] = `Open from ${data.hours[curr].open}am until ${data.hours[curr].close - 12}pm`;
     return acc;
   }, {});
-  timeTable.Monday = 'CLOSED';
-  if (dayName) return { [dayName]: timeTable[dayName] };
-  return timeTable;
+  agenda.Monday = 'CLOSED';
+  if (time.includes(dayName) === true) {
+    return { [dayName]: agenda[dayName] };
+  }
+  return agenda;
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -102,8 +103,8 @@ function increasePrices(percentage) {
   // seu código aqui
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getEmployeeCoverage() {
+  // seu código aqui idOrName
 }
 
 module.exports = {
