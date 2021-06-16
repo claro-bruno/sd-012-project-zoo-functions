@@ -11,9 +11,22 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
+function getSpeciesByIds(...ids) {
   // seu código aqui
+  const returnedSpecies = [];
+
+  if (ids.length === 0) {
+    return returnedSpecies;
+  } if (ids.length === 1) {
+    returnedSpecies.push(data.species.find((specie) => specie.id === ids[0]));
+    return returnedSpecies;
+  } if (ids.length > 1) {
+    return data.species.filter((specie) => ids.some((id) => specie.id === id));
+  }
 }
+
+console.log(getSpeciesByIds('533bebf3-6bbe-41d8-9cdf-46f7d13b62ae',
+  '0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
