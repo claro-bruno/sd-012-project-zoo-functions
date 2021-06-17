@@ -118,21 +118,21 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   if (!dayName) {
+    const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = data.hours;
     return {
-      Tuesday: `Open from ${data.hours.Tuesday.open}am until ${data.hours.Tuesday.close - 12}pm`,
-      Wednesday: `Open from ${data.hours.Wednesday.open}am until ${data.hours.Wednesday.close - 12}pm`,
-      Thursday: `Open from ${data.hours.Thursday.open}am until ${data.hours.Thursday.close - 12}pm`,
-      Friday: `Open from ${data.hours.Friday.open}am until ${data.hours.Friday.close - 12}pm`,
-      Saturday: `Open from ${data.hours.Saturday.open}am until ${data.hours.Saturday.close - 12}pm`,
-      Sunday: `Open from ${data.hours.Sunday.open}am until ${data.hours.Sunday.close - 12}pm`,
-      Monday: 'CLOSED'
+      Tuesday: `Open from ${Tuesday.open}am until ${Tuesday.close - 12}pm`,
+      Wednesday: `Open from ${Wednesday.open}am until ${Wednesday.close - 12}pm`,
+      Thursday: `Open from ${Thursday.open}am until ${Thursday.close - 12}pm`,
+      Friday: `Open from ${Friday.open}am until ${Friday.close - 12}pm`,
+      Saturday: `Open from ${Saturday.open}am until ${Saturday.close - 12}pm`,
+      Sunday: `Open from ${Sunday.open}am until ${Sunday.close - 12}pm`,
+      Monday: 'CLOSED',
     };
   }
-  if (dayName === 'Monday') return { Monday: 'CLOSED'};
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
   const dayReturn = Object.entries(data.hours).find((day) => day[0] === dayName);
-  console.log(dayReturn);
-  return { 
-    [dayReturn[0]]: `Open from ${dayReturn[1].open}am until ${dayReturn[1].close - 12}pm`, 
+  return {
+    [dayReturn[0]]: `Open from ${dayReturn[1].open}am until ${dayReturn[1].close - 12}pm`,
   };
 }
 
@@ -148,11 +148,36 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult: adult, Child: child, Senior: senior } = data.prices;
+  data.prices.Adult = Math.round((adult + adult * (percentage / 100)) * 100) / 100;
+  data.prices.Child = Math.round((child + child * (percentage / 100)) * 100) / 100;
+  data.prices.Senior = Math.round((senior + senior * (percentage / 100)) * 100) / 100;
+}
+
+function findResposibles(employee) {
+  const responsible = employee.responsibleFor.map((respon) => {
+    const animals = data.species.find((specie) => specie.id === respon);
+    return animals.name;
+  });
+  return responsible;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    const employeeAnimals = data.employees.reduce((acc, employee) => {
+      const name = `${employee.firstName} ${employee.lastName}`;
+      const responsible = findResposibles(employee);
+      acc[name] = responsible;
+      return acc;
+    }, {});
+    return employeeAnimals;
+  }
+  const findEmployee = data.employees
+    .find((employ) =>
+      employ.firstName === idOrName || employ.lastName === idOrName || employ.id === idOrName);
+  const employeeName = `${findEmployee.firstName} ${findEmployee.lastName}`;
+  const responsible = findResposibles(findEmployee);
+  return { [employeeName]: responsible };
 }
 
 module.exports = {
