@@ -155,7 +155,7 @@ function speciesPerRegionWithNames() {
   return speciesRegionWithNames;
 }
 
-console.log(speciesPerRegionWithNames());
+// console.log(speciesPerRegionWithNames());
 
 function getAnimalMap(options) {
   if (!options) { return speciesPerRegion(); }
@@ -207,11 +207,55 @@ function increasePrices(percentage) {
   data.prices.Senior += data.prices.Senior * (percentage / 100);
   data.prices.Senior = Math.round(data.prices.Senior * 100) / 100;
 }
-/*
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+
+function findEmployee(idOrName) {
+  let employee = data.employees.find((employe) => employe.id === idOrName);
+  if (!employee) {
+    employee = data.employees.find((employe) => employe.firstName === idOrName);
+  }
+  if (!employee) {
+    employee = data.employees.find((employe) => employe.lastName === idOrName);
+  }
+  return employee;
 }
-*/
+
+function employeeCoverage(idOrName) {
+  const employee = findEmployee(idOrName);
+  const employeeName = `${employee.firstName} ${employee.lastName}`;
+  const speciesNames = [];
+  const coverage = {};
+
+  employee.responsibleFor.forEach((specie) => {
+    speciesNames.push(data.species.find((specieA) => specieA.id === specie).name);
+  });
+
+  coverage[employeeName] = speciesNames;
+
+  return coverage;
+}
+
+function allEmployeeCoverage() {
+  const employeesNames = [];
+  const employeesReponsabilities = [];
+  const coverage = {};
+
+  data.employees.forEach((employee) => {
+    const employeeCover = employeeCoverage(employee.id);
+    employeesNames.push(Object.keys(employeeCover));
+    employeesReponsabilities.push(employeeCover[Object.keys(employeeCover)]);
+  });
+
+  for (let index = 0; index < employeesNames.length; index += 1) {
+    coverage[employeesNames[index]] = employeesReponsabilities[index];
+  }
+  return coverage;
+}
+
+function getEmployeeCoverage(idOrName) {
+  if (!idOrName) { return allEmployeeCoverage(); }
+  return employeeCoverage(idOrName);
+}
+
 module.exports = {
   calculateEntry,
   getSchedule,
@@ -219,7 +263,7 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  //  getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
