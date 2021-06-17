@@ -145,16 +145,16 @@ function getEmployeeCoverage(idOrName) {
     }, {});
     return employeesMap;
   }
-  const idOfSpecies = getEmployeeByNameOrId(idOrName);
-  const responsible = idOfSpecies.responsibleFor;
+  const objEmployee = getEmployeeByNameOrId(idOrName);
+  const responsible = objEmployee.responsibleFor;
   const responsibleMap = responsible.map((element) => getSpeciesById(element).name);
-  const objEmployee = {
-    [`${idOfSpecies.firstName} ${idOfSpecies.lastName}`]: responsibleMap,
+  const objFinal = {
+    [`${objEmployee.firstName} ${objEmployee.lastName}`]: responsibleMap,
   };
 
-  return objEmployee;
+  return objFinal;
 }
-// console.log(getEmployeeCoverage());
+console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
