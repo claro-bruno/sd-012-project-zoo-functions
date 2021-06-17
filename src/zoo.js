@@ -25,15 +25,19 @@ function getSpeciesByIds(...ids) {
   }
 }
 
-console.log(getSpeciesByIds('533bebf3-6bbe-41d8-9cdf-46f7d13b62ae',
-  '0938aa23-f153-4937-9f88-4858b24d6bce'));
-
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  const returnEmpty = {};
+  if (!employeeName) {
+    return returnEmpty;
+  }
+  const returnEmployee = data.employees.find((element) =>
+    element.firstName === employeeName || element.lastName === employeeName);
+  return returnEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
