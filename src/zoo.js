@@ -76,6 +76,7 @@ function calculateEntry(entrants = { Adult: 0, Senior: 0, Child: 0 }) {
 // function getAnimalMap(options) {
 // seu código aqui
 // }
+
 function formatSchedule(open, close) {
   if (open === close) {
     return ('CLOSED');
@@ -104,17 +105,31 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // const { species, employees, prices, hours } = require('./data');
-  // const data = require('./data');
   Object.keys(prices).forEach((key) => {
     data.prices[key] = Math.round(data.prices[key] * (percentage / 100 + 1) * 100) / 100;
   });
   return (data.prices);
 }
-// console.log(increasePrices(50));
-// function getEmployeeCoverage(idOrName) {
-// seu código aqui
-// }
+
+function getEmployeeCoverage(idOrName) {
+  const coverage = {};
+  if (idOrName === undefined) {
+    employees.forEach((employee) => {
+      const speciesList = [];
+      employee.responsibleFor.forEach((animal) => speciesList.push(species.find((specie) =>
+        specie.id === animal).name));
+      coverage[`${employee.firstName} ${employee.lastName}`] = speciesList;
+    });
+  } else {
+    const speciesList = [];
+    const getEmployee = employees.find((employee) => ((employee.id === idOrName)
+      || (employee.firstName === idOrName) || (employee.lastName === idOrName)));
+    getEmployee.responsibleFor.forEach((animal) =>
+      speciesList.push(species.find((specie) => specie.id === animal).name));
+    coverage[`${getEmployee.firstName} ${getEmployee.lastName}`] = speciesList;
+  }
+  return (coverage);
+}
 
 module.exports = {
   calculateEntry,
@@ -123,7 +138,7 @@ module.exports = {
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
