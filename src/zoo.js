@@ -85,8 +85,6 @@ function calculateEntry(entrants) {
   return total;
 }
 
-console.log(calculateEntry({}));
-
 function getAnimalMap(options) {
   // seu código aqui
 }
