@@ -57,7 +57,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species2) {
-  // seu código aqui
   if (!species2) {
     return species.reduce((acc, curr) => {
       const animalName = curr.name;
@@ -71,7 +70,6 @@ function countAnimals(species2) {
 // console.log(countAnimals('lions'));
 
 function calculateEntry(entrants) {
-  // seu código aqui
   if (!entrants || Object.keys(entrants).length === 0) return 0;
   const { Adult: numberOfAdults = 0, Child: numberOfChildren = 0,
     Senior: numberOfSeniors = 0 } = entrants; // dica de threads do slack.
@@ -82,9 +80,76 @@ function calculateEntry(entrants) {
 }
 // calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 });
 
-// function getAnimalMap() {
-//   // seu código aqui options
-// }
+// 9 ----------------------------------------------------------------
+
+// const findingAnimalLocation = species[0].location;
+// const allSpeciesLocations = findingAnimalLocation.filter((specie) => species[specie].location === 'NE');
+
+// filter((location) => species.location === location);
+// console.log(findingAnimalLocation);
+function getAcumulatorRegion() {
+  return species.reduce((acc, curr) => {
+    if (curr.location === 'NE') {
+      acc.NE.push(curr.name);
+      return acc;
+    }
+    if (curr.location === 'NW') {
+      acc.NW.push(curr.name);
+      return acc;
+    }
+    if (curr.location === 'SE') {
+      acc.SE.push(curr.name);
+      return acc;
+    }
+    if (curr.location === 'SW') {
+      acc.SW.push(curr.name);
+      return acc;
+    } return acc;
+  }, { NE: [], NW: [], SE: [], SW: [] });
+}
+
+function filterSex(options, curr) {
+  if (options.sex === 'female') {
+    const animalAndSex = curr[1];
+    const mapeadoAnimalAndSex = animalAndSex.map((animal) => species
+      .find((e) => e.name === animal));
+    const filterSex2 = mapeadoAnimalAndSex.map((element) => element.residents);
+    const females = filterSex2.map((e) => e.filter((elem) => elem.sex === 'female'));
+    return females.reduce((acc, currValue) => {
+      if (currValue.length !== 0) {
+        acc.push(currValue);
+        return acc;
+      }
+      return acc;
+    }, []);
+  }
+  return curr[1]
+    .map((animal) => species
+      .find((e) => e.name === animal).residents
+      .map((resident) => resident.name));
+}
+
+function getIncludesNames(acumulatorAnimals, options) {
+  const arrAcumulatorAnimal = Object.entries(acumulatorAnimals);
+  return arrAcumulatorAnimal.reduce((acc, curr) => {
+    const value = filterSex(options, curr);
+    if (options.sorted) {
+      acc[curr[0]] = curr[1].map((e, index) => ({ [e]: value[index].sort() }));
+      return acc;
+    }
+    acc[curr[0]] = curr[1].map((e, index) => ({ [e]: value[index] }));
+    return acc;
+  }, {});
+}
+
+function getAnimalMap(options) {
+  const acumulatorAnimals = getAcumulatorRegion();
+  if (!options) return acumulatorAnimals;
+  if (options.includeNames) return getIncludesNames(acumulatorAnimals, options);
+}
+getAnimalMap({ includeNames: true, sex: 'female' });
+// getAnimalMap({ includeNames: true });
+// -------------------------------------------------------------------
 
 // MEGA ajuda do Thalles
 function getSchedule(dayName) {
@@ -154,13 +219,13 @@ function getEmployeeCoverage(idOrName) {
 
   return objFinal;
 }
-console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+// console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
