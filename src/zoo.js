@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 const { species, employees, prices, hours } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   let speciesById = [];
@@ -103,10 +103,15 @@ function getOldestFromFirstSpecies(id) {
   return (Object.values(OldestResident));
 }
 
-// function increasePrices(percentage) {
-// seu código aqui
-// }
-
+function increasePrices(percentage) {
+  // const { species, employees, prices, hours } = require('./data');
+  // const data = require('./data');
+  Object.keys(prices).forEach((key) => {
+    data.prices[key] = Math.round(data.prices[key] * (percentage / 100 + 1) * 100) / 100;
+  });
+  return (data.prices);
+}
+// console.log(increasePrices(50));
 // function getEmployeeCoverage(idOrName) {
 // seu código aqui
 // }
@@ -123,6 +128,6 @@ module.exports = {
   isManager,
   getAnimalsOlderThan,
   getOldestFromFirstSpecies,
-  // increasePrices,
+  increasePrices,
   createEmployee,
 };
