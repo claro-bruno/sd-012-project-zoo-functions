@@ -63,10 +63,10 @@ function countAnimals(speciesdata) {
   if (speciesdata === undefined) {
     return contador;
   }
-    return contador[speciesdata];
-    /*  return species.find((animal) => {
-    return animal.name === speciesdata
-    }).residents.length; */
+  return contador[speciesdata];
+  /*  return species.find((animal) => {
+  return animal.name === speciesdata
+  }).residents.length; */
 }
 
 // console.log(countAnimals('lions'));
