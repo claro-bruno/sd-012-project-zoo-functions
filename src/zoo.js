@@ -43,7 +43,7 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmployee;
 }
 
-console.log(createEmployee());
+// console.log(createEmployee());
 
 function isManager(id) {
   const maneger = employees.some((gerente) => gerente.managers.includes(id));
@@ -54,10 +54,25 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals() {
-  // species
+function countAnimals(speciesdata) {
+  const contador = species.reduce((acc, specie) => {
+    acc[specie.name] = specie.residents.length;
+    return acc;
+  }, {});
+  
+  if (speciesdata === undefined) {
+    return contador;
+  } else {
+    return contador[speciesdata];
+   /*  return species.find((animal) => {
+    return animal.name === speciesdata 
+  }).residents.length; */
+  }
 }
 
+console.log(countAnimals('lions'));
+
+// baseado no codigo do Julio Barros
 function calculateEntry(entrants = {}) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   const adultPrice = prices.Adult * Adult;
