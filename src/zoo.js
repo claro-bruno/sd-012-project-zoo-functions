@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /*
 eslint no-unused-vars: [
   "error",
@@ -15,43 +16,34 @@ const data = require('./data');
 
 // dica de usar o index dentro do filter na monitoria.
 function getSpeciesByIds(...ids) {
-  // seu código aqui
   if (!ids.length) return [];
   return data.species.filter((specie, index) => specie.id === ids[index]);
 }
-// console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
   const findindSpecie = species.find((specie) => specie.name === animal);
   return findindSpecie.residents.every((resident) => age < resident.age);
 }
-// console.log(getAnimalsOlderThan('otters', 7));
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
   if (!employeeName) return {};
   const findEmployee = (employee) =>
     employee.lastName === employeeName || employee.firstName === employeeName;
   return employees.find(findEmployee);
 }
-// console.log(getEmployeeByName('Emery'));
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   return { ...personalInfo, ...associatedWith };
 }
 
 // ajuda do colega Luis Fernando
 function isManager(id) {
-  // seu código aqui
   return data.employees.some((employee) =>
     employee.managers.some((value) => value === id));
 }
-// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 // ajuda colega Caio
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // seu código aqui
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newEmployee);
 }
@@ -67,7 +59,6 @@ function countAnimals(species2) {
   const findSpecie = species.find((specie) => specie.name === species2);
   return findSpecie.residents.length;
 }
-// console.log(countAnimals('lions'));
 
 function calculateEntry(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) return 0;
@@ -78,15 +69,9 @@ function calculateEntry(entrants) {
   const seniors = numberOfSeniors * prices.Senior;
   return adults + childs + seniors;
 }
-// calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 });
 
-// 9 ----------------------------------------------------------------
+// 9 Ajuda do monitor Daniel e do colega Kevin
 
-// const findingAnimalLocation = species[0].location;
-// const allSpeciesLocations = findingAnimalLocation.filter((specie) => species[specie].location === 'NE');
-
-// filter((location) => species.location === location);
-// console.log(findingAnimalLocation);
 function getAcumulatorRegion() {
   return species.reduce((acc, curr) => {
     if (curr.location === 'NE') {
@@ -115,13 +100,8 @@ function filterSex(options, curr) {
       .find((e) => e.name === animal));
     const filterSex2 = mapeadoAnimalAndSex.map((element) => element.residents);
     const females = filterSex2.map((e) => e.filter((elem) => elem.sex === 'female'));
-    return females.reduce((acc, currValue) => {
-      if (currValue.length !== 0) {
-        acc.push(currValue);
-        return acc;
-      }
-      return acc;
-    }, []);
+    const females2 = females.map((names) => names.map((name) => name.name));
+    return females2;
   }
   return curr[1]
     .map((animal) => species
@@ -145,15 +125,14 @@ function getIncludesNames(acumulatorAnimals, options) {
 function getAnimalMap(options) {
   const acumulatorAnimals = getAcumulatorRegion();
   if (!options) return acumulatorAnimals;
-  if (options.includeNames) return getIncludesNames(acumulatorAnimals, options);
+  if (options.includeNames) {
+    return getIncludesNames(acumulatorAnimals, options);
+  }
+  return acumulatorAnimals;
 }
-getAnimalMap({ includeNames: true, sex: 'female' });
-// getAnimalMap({ includeNames: true });
-// -------------------------------------------------------------------
 
 // MEGA ajuda do Thalles
 function getSchedule(dayName) {
-  // seu código aqui
   const arraySchedule = Object.entries(hours);
   const objSchedule = arraySchedule.reduce((acc, curr) => {
     const { open, close } = curr[1];
@@ -167,10 +146,8 @@ function getSchedule(dayName) {
   const objDayName = { [dayName]: objSchedule[dayName] };
   return objDayName;
 }
-// console.log(getSchedule('Tuesday'));
 
 function getOldestFromFirstSpecies(id2) {
-  // seu código aqui
   const getEmployee = employees.find((employee) => employee.id === id2);
   const idSpecie = getEmployee.responsibleFor[0];
   const objSpecie = species.find((specie) => specie.id === idSpecie);
@@ -178,7 +155,6 @@ function getOldestFromFirstSpecies(id2) {
   const oldestResident = residentsInOrder[0];
   return Object.values(oldestResident);
 }
-// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
   Object.keys(prices).forEach((element) => {
@@ -187,17 +163,14 @@ function increasePrices(percentage) {
   });
   return prices;
 }
-// console.log(increasePrices(30));
 
 // 13
 function getEmployeeByNameOrId(data2) {
-  // seu código aqui
   if (!data2) return {};
   const findEmployee = (employee) =>
     employee.lastName === data2 || employee.firstName === data2 || employee.id === data2;
   return employees.find(findEmployee);
 }
-// console.log(getEmployeeByNameOrId('Emery'));
 
 function getEmployeeCoverage(idOrName) {
   const getSpeciesById = (id) => species.find((specie) => specie.id === id);
@@ -219,7 +192,6 @@ function getEmployeeCoverage(idOrName) {
 
   return objFinal;
 }
-// console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
