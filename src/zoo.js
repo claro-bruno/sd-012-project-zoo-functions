@@ -59,18 +59,17 @@ function countAnimals(speciesdata) {
     acc[specie.name] = specie.residents.length;
     return acc;
   }, {});
-  
+
   if (speciesdata === undefined) {
     return contador;
-  } else {
-    return contador[speciesdata];
-   /*  return species.find((animal) => {
-    return animal.name === speciesdata 
-  }).residents.length; */
   }
+    return contador[speciesdata];
+    /*  return species.find((animal) => {
+    return animal.name === speciesdata
+    }).residents.length; */
 }
 
-console.log(countAnimals('lions'));
+// console.log(countAnimals('lions'));
 
 // baseado no codigo do Julio Barros
 function calculateEntry(entrants = {}) {
