@@ -72,8 +72,6 @@ function countAnimals(species) {
   return returnNumber;
 }
 
-console.log(countAnimals());
-
 function calculateEntry(entrants) {
   // seu código aqui
 }
