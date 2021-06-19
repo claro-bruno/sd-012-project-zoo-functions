@@ -103,9 +103,40 @@ function calculateEntry(entrants) {
   return price;
 }
 
-// function getAnimalMap(options) {
-// seu código aqui
-// }
+function local(objj, filterAllLocations, options) {
+  const obj = objj;
+  filterAllLocations.forEach((location) => {
+    obj[location] = obj[location].map((especieName) => {
+      const objAnimals = {};
+      let findAnimals = data.species.find((objeto) => objeto.name === especieName).residents;
+      if (options.sex) findAnimals = findAnimals.filter((animal) => animal.sex === options.sex);
+      const mapNames = findAnimals.map((objeto) => objeto.name);
+      if (options.sorted === true) mapNames.sort();
+      objAnimals[especieName] = mapNames;
+      return objAnimals;
+    });
+  });
+}
+
+function Locations(objj, filterAllLocations) {
+  const obj = objj;
+  filterAllLocations.forEach((location) => {
+    const filterLocation = data.species.filter((especie) => especie.location === location);
+    const mapName = filterLocation.map((animal) => `${animal.name}`);
+    obj[location] = mapName;
+  });
+}
+
+function getAnimalMap(options) {
+  const obj = {};
+  const mapAllLocations = data.species.map((especie) => especie.location);
+  const filterAllLocations = mapAllLocations
+    .filter((elemento, index) => mapAllLocations.indexOf(elemento) === index);
+  Locations(obj, filterAllLocations);
+  if (!options || !options.includeNames) return obj;
+  local(obj, filterAllLocations, options);
+  if (options.includeNames === true) return obj;
+}
 
 function getSchedule(dayName) {
   const objSchedule = {};
@@ -159,7 +190,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
