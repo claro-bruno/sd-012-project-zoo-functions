@@ -21,17 +21,16 @@ function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   //  verifica a idade mínima de todos os animais de uma determinada espécie, devo retornar um bool1eano uso o .every?
   // quais propriedades usar? R. 'species.name' e 'species.residents.age'
-  const animalByName = species.filter((name) => name.name === animal);
+  // passo 1: encontrar a especie do animal pelo nome e retornar o objeto (find)
+  // Passo 1.1: Usar o destructuring para extrarir apenas o array que contenhas a idade
+  // Passo 2: Pegar esse array do passo 1.1 e usar o everey nele para verificar a idade mínima de todos os animais daquela especie
 
-  console.log(animalByName.residents);
-  console.log(animalByName);
+  const { residents } = species.find((name) => name.name === animal);
 
-  const verifyMinimalAge = animalByName[0].residents.every((indexAnimal) => indexAnimal.age > age);
-
-  return verifyMinimalAge;
+  return residents.every((indexAnimal) => indexAnimal.age > age);
 }
 
-console.log(getAnimalsOlderThan('lions', 2));
+// console.log(getAnimalsOlderThan('lions', 2));
 
 // function getEmployeeByName(employeeName) {
 //   // seu código aqui
@@ -87,7 +86,7 @@ module.exports = {
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
-  // getAnimalsOlderThan,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
   // createEmployee,
