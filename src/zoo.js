@@ -139,8 +139,6 @@ function getEmployeeCoverage(idOrName) {
   return returnEmployees;
 }
 
-console.log(getEmployeeCoverage());
-
 module.exports = {
   calculateEntry,
   getSchedule,
