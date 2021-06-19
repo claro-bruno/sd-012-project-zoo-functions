@@ -7,23 +7,25 @@
 //   }
 // ]
 
-
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  if(ids.length === 0){ return [] }
+  if (ids.length === 0) { return []; }
   const species = data.species
-    .filter((specie) => ids.includes(specie.id))
-  return species  
+    .filter((specie) => ids.includes(specie.id));
+return species; 
 }
 
 function getAnimalsOlderThan(animal, age) {
+  const findNameAnimal = data.species.find((element) => element.name === animal);
+  const findAgeAnimal = findNameAnimal.residents.every((element2) => element2.age > age);
+ return findAgeAnimal
+} 
 
-
-}
- 
 function getEmployeeByName(employeeName) {
-  
+  if (employeeName === undefined) return {}; 
+  const getEmployee = data.employees.find((element) => element.firstName === employeeName || element.lastName === employeeName);
+  return getEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
