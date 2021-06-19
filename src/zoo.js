@@ -105,9 +105,26 @@ function getSchedule(dayName) {
 
 //console.log(getSchedule('Tuesday'));
 
-function getOldestFromFirstSpecies() {
-  // id
+// Feito com ajuda do David Gonzaga
+function getOldestFromFirstSpecies(id) {
+  const employs = data.employees;  // livro dos funcionarios
+  const employId = employs.find((employ) => employ.id === id)
+  const idsAnimais = employId.responsibleFor;
+  const animais = data.species;  // livro dos animais
+  const novoArray = animais.filter((animal) => idsAnimais.some((id) => id == animal.id));
+  const residentes = novoArray.reduce((acc, residente) => {
+  acc.push(...residente.residents)
+  return acc; 
+  }, [])
+  
+  const ordenar = residentes.sort((a, b) => b.age - a.age)[0]; 
+  return Object.values(ordenar);
+
+  // console.log(ordenar);
+
 }
+
+// console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 function increasePrices() {
   // percentage
