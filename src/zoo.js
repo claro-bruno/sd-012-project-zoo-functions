@@ -89,9 +89,9 @@ function getAnimalMap() {
 function getSchedule(dayName) {
   const horas = Object.entries(hours);
   const cronograma = horas.reduce((acc, date) => {
-  const { open, close } = date[1];
+    const { open, close } = date[1];
     acc[date[0]] = `Open from ${open}am until ${close - 12}pm`;
-    
+
     if (date[0] === 'Monday') {
       acc[date[0]] = 'CLOSED';
     }
@@ -113,21 +113,17 @@ function getOldestFromFirstSpecies(id) {
   const animais = data.species;  // livro dos animais
   const novoArray = animais.filter((animal) => idsAnimais.some((id) => id == animal.id));
   const residentes = novoArray.reduce((acc, residente) => {
-  acc.push(...residente.residents)
-  return acc; 
-  }, [])
-  
-  const ordenar = residentes.sort((a, b) => b.age - a.age)[0]; 
+  acc.push(...residente.residents);
+    return acc;
+  }, []);
+  const ordenar = residentes.sort((a, b) => b.age - a.age)[0];
   return Object.values(ordenar);
-
-  // console.log(ordenar);
-
 }
 
 // console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
-function increasePrices() {
-  // percentage
+function increasePrices(percentage) {
+  
 }
 
 function getEmployeeCoverage() {
