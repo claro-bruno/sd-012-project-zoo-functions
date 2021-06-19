@@ -30,34 +30,9 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-  // em cada parâmetro virá um objeto
-  // Devo usar o destructiring para juntar esses objetos?
   const mergeParams = { ...personalInfo, ...associatedWith };
   return mergeParams;
 }
-
-const obj1 = {
-  name: 'Edu',
-  age: 28,
-};
-
-const obj2 = {
-  job: 'student',
-  skills: [
-    'html',
-    'css',
-    'javaScript',
-  ],
-  country: {
-    Brasil: {
-      state: 'Roraima',
-      city: 'Boa Vista',
-    },
-  },
-};
-
-console.log(createEmployee(obj1, obj2));
 
 // function isManager(id) {
 //   // seu código aqui
