@@ -89,7 +89,7 @@ function getAnimalMap() {
 function getSchedule(dayName) {
   const horas = Object.entries(hours);
   const cronograma = horas.reduce((acc, date) => {
-  const {open, close} = date[1]; 
+  const { open, close } = date[1];
     acc[date[0]] = `Open from ${open}am until ${close - 12}pm`;
     
     if (date[0] === 'Monday') {
@@ -99,11 +99,11 @@ function getSchedule(dayName) {
   }, {});
   if (!dayName) {
     return cronograma;
-  } 
-  return { [dayName]: cronograma[dayName]};
+  }
+  return { [dayName]: cronograma[dayName] };
 }
 
-console.log(getSchedule('Tuesday'));
+//console.log(getSchedule('Tuesday'));
 
 function getOldestFromFirstSpecies() {
   // id
