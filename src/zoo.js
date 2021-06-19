@@ -23,20 +23,11 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
-  // buscar pessoas (find ou filter?)
-  // qual objetos vou usar? R. employees, employees.firstName, employees.firstName, lastName
-
-  // // retorna o objeto então (find
-  // return employeeName.map((name) => {
-  return employees
+  const findEmployeeByName = employees
     .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
-  // });
-}
 
-console.log(getEmployeeByName());
-console.log(getEmployeeByName('Nigel'));
-console.log(getEmployeeByName('Bethea'));
+  return !employeeName ? {} : findEmployeeByName;
+}
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
@@ -84,7 +75,7 @@ module.exports = {
   // countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
-  // getEmployeeByName,
+  getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
   // isManager,
