@@ -109,7 +109,8 @@ function getOldestFromFirstSpecies(id) {
   const employId = employs.find((employ) => employ.id === id);
   const idsAnimais = employId.responsibleFor;
   const animais = data.species;
-  const novoArray = animais.filter((animal) => idsAnimais.some((id) => id === animal.id));
+  const novoArray = animais.filter((animal) =>
+    idsAnimais.some((animalId) => animalId === animal.id));
   const residentes = novoArray.reduce((acc, residente) => {
     acc.push(...residente.residents);
     return acc;
@@ -124,7 +125,10 @@ function increasePrices(percentage) {
   const preco = data.prices;
   const chaves = Object.keys(preco);
   const multiplicar = 1 + percentage / 100;
-  return chaves.forEach((chave) => preco[chave] = Math.round(preco[chave] * multiplicar * 100) / 100);
+
+  return chaves.forEach((chave) => {
+    preco[chave] = Math.round(preco[chave] * multiplicar * 100) / 100;
+  });
 }
 
 // console.log(increasePrices(30));
