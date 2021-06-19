@@ -121,10 +121,19 @@ function getOldestFromFirstSpecies(id) {
 }
 
 // console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
-
+// Feito com a ajuda da aluna Renata Nunes
 function increasePrices(percentage) {
+  const preco = data.prices;
+  const chaves = Object.keys(preco);
+  const multiplicar = 1 + percentage / 100;
+  return chaves.forEach((chave) => 
+   preco[chave] = Math.round(preco[chave] * multiplicar * 100) / 100);
+   
+  //console.log(preco);
   
 }
+
+// console.log(increasePrices(30));
 
 function getEmployeeCoverage() {
   // idOrName
