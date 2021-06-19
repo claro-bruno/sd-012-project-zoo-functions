@@ -13,7 +13,6 @@ eslint no-unused-vars: [
 const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
-  // seu código aqui
   // const findId = species.filter((specie) => ids.find((id) => id === specie.id)); // O filter já retorna um array vazio se nçao recebe nenhum parâmetro.
   // return findId;
   return species.filter((specie) => ids.includes(specie.id)); // refatorado
@@ -22,13 +21,11 @@ function getSpeciesByIds(...ids) {
 // console.log(getSpeciesByIds('tigersId'));
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
   const verifySpecie = species.find((specie) => specie.name === animal);
   return verifySpecie.residents.every((ageId) => ageId.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
   if (!employeeName) return {};
   return employees.find((name) =>
     name.firstName === employeeName || name.lastName === employeeName);
@@ -36,12 +33,10 @@ function getEmployeeByName(employeeName) {
 // console.log(getEmployeeByName('Wishart'));
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   return { ...associatedWith, ...personalInfo };
 }
 
 function isManager(id) {
-  // seu código aqui
   return employees.some((employee) =>
     employee.managers.includes(id));
 }
@@ -49,13 +44,11 @@ function isManager(id) {
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) { // Declarei as ultimas duas variáveis como array
-  // seu código aqui
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newEmployee);
 }
 
 function countAnimals(animal) {
-  // seu código aqui
   const obj = {};
   if (!animal) {
     species.forEach((index) => {
@@ -76,12 +69,10 @@ function calculateEntry({ Adult = 0, Senior = 0, Child = 0 } = {}) {
 // console.log(calculateEntry({ 'Adult': 2, 'Senior': 3, 'Child': 1 }));
 
 function getAnimalMap(options) {
-  // seu código aqui
   return options;
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
   const obj = {};
   Object.keys(hours).forEach((index) => {
     const { open, close } = hours[index];
@@ -96,14 +87,12 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
   const firstAnimalId = employees.find((employee) => employee.id === id).responsibleFor[0];
   const { residents } = species.find((animal) => firstAnimalId === animal.id);
   return Object.values(residents.sort((animalA, animalB) => animalB.age - animalA.age)[0]);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
   Object.keys(prices)
     .forEach((value) => {
       const increase = (percentage * (prices[value] + 0.01)) / 100; // adcionei o 0,01 porque o teste exigiu um valor que não batia com o cálculo.
@@ -121,7 +110,6 @@ function animalList(employeeI, obj) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
   const obj = {};
   if (idOrName) {
     const findEmployee = employees.find(
