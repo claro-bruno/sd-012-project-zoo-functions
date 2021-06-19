@@ -9,11 +9,12 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+const { species } = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
-  
+// lógica da função getSpeciesByIds desenvolvida com a ajuda do Luiz Henrrique (https://github.com/lzzhenrique) e Bruno Yamamoto (https://github.com/BSY-Development) através de call.
+
+function getSpeciesByIds(...ids) {
+  return ids.map((item) => species.find((specie) => specie.id === item));
 }
 
 function getAnimalsOlderThan(animal, age) {
