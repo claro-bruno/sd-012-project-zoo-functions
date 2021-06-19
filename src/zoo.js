@@ -34,9 +34,24 @@ function createEmployee(personalInfo, associatedWith) {
   return mergeParams;
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  // seu código aqui
+  // recebe um id retorna true se for manage ou false se não for
+  // busca a pessoa pelo id 'employees.id'
+  // trazer a key manager
+  // verificar se pelo menos uma pessoa (objeto) com a key manager contem o id que passei como parametro.
+  return employees.some((index) => index.managers.includes(id));
+  // managers é um array
+  // buscar dentro do array managers em cada posição se tem algum com o mesmo id
+  // quais objetos usar?
+  // busca o cargo dessa pessoa
+}
+
+const nigel = 'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1';
+const burlId = '0e7b460e-acf4-4e17-bcb3-ee472265db83';
+
+console.log(isManager(burlId));
+console.log(isManager(nigel));
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -79,7 +94,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
