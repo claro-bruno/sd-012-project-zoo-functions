@@ -103,17 +103,15 @@ function getSchedule(dayName) {
   return { [dayName]: cronograma[dayName] };
 }
 
-//console.log(getSchedule('Tuesday'));
-
 // Feito com ajuda do David Gonzaga
 function getOldestFromFirstSpecies(id) {
-  const employs = data.employees;  // livro dos funcionarios
-  const employId = employs.find((employ) => employ.id === id)
+  const employs = data.employees;
+  const employId = employs.find((employ) => employ.id === id);
   const idsAnimais = employId.responsibleFor;
-  const animais = data.species;  // livro dos animais
-  const novoArray = animais.filter((animal) => idsAnimais.some((id) => id == animal.id));
+  const animais = data.species;
+  const novoArray = animais.filter((animal) => idsAnimais.some((id) => id === animal.id));
   const residentes = novoArray.reduce((acc, residente) => {
-  acc.push(...residente.residents);
+    acc.push(...residente.residents);
     return acc;
   }, []);
   const ordenar = residentes.sort((a, b) => b.age - a.age)[0];
@@ -126,11 +124,7 @@ function increasePrices(percentage) {
   const preco = data.prices;
   const chaves = Object.keys(preco);
   const multiplicar = 1 + percentage / 100;
-  return chaves.forEach((chave) => 
-   preco[chave] = Math.round(preco[chave] * multiplicar * 100) / 100);
-   
-  //console.log(preco);
-  
+  return chaves.forEach((chave) => preco[chave] = Math.round(preco[chave] * multiplicar * 100) / 100);
 }
 
 // console.log(increasePrices(30));
