@@ -73,10 +73,72 @@ function calculateEntry(entrants = 0) {
   });
   return total;
 }
+// Requisito 9:
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+function nameByLocation() { // atende à condição if (!options) return nameByLocation();
+  const localNe = species.reduce((acc, { location }) => {
+    const nameArr = species.reduce((acc1, current) => {
+      if (current.location === location) {
+        acc1.push(current.name);
+        // acc1 = [...acc1, current.name];
+      }
+      return acc1;
+    }, []);
+    acc[location] = nameArr;
+    return acc;
+  }, {});
+  return localNe;
+}
+
+function callSpeciesNames(kindSpecie) {
+  const findSpecie = species
+    .find((specie) => specie.name === kindSpecie).residents;
+  const arrIndividName = findSpecie
+    .reduce((acc, current) => {
+      acc.push(current.name);
+      return acc;
+    }, []);
+  return arrIndividName;
+}
+console.log('callSpeciesNames:', callSpeciesNames('giraffes'));
+
+function toTurnInObject(kindSpecie) {
+  const objForEachAnimal = {
+    [kindSpecie]: callSpeciesNames(kindSpecie),
+  };
+  return objForEachAnimal;
+}
+console.log('toTurnInObject:', toTurnInObject('giraffes'));
+
+function callObjectSpecies() {
+  const lionsArr = toTurnInObject('lions');
+  const giraffesArr = toTurnInObject('giraffes');
+  const tigersArr = toTurnInObject('tigers');
+  const bearsArr = toTurnInObject('bears');
+  const elephantsArr = toTurnInObject('elephants');
+  const penguinsArr = toTurnInObject('penguins');
+  const ottersArr = toTurnInObject('otters');
+  const frogsArr = toTurnInObject('frogs');
+  const snakesArr = toTurnInObject('snakes');
+  return giraffesArr;
+}
+console.log('callObjectSpecies:', callObjectSpecies());
+
+function includesNames() {
+  const namValues = Object.keys(nameByLocation());
+  const reducByNam = namValues.reduce((acc, current) => {
+    acc[current] = [];
+    return acc;
+  }, {});
+  return reducByNam;
+}
+console.log('includesNames:', includesNames());
+
+function getAnimalMap(options) {
+  if (!options) return nameByLocation();
+  includesNames();
+}
+console.log(getAnimalMap());
 
 function getSchedule(dayName) {
   /** Consultei o repositório de Caio Takeshi para resolver esta parte:
@@ -151,7 +213,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
