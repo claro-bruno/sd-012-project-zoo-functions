@@ -133,8 +133,24 @@ function increasePrices(percentage) {
 
 // console.log(increasePrices(30));
 
-function getEmployeeCoverage() {
-  // idOrName
+function getEmployeeCoverage(idOrName) {
+  const objeto = {};
+  data.employees.forEach((funcionario) => {
+    const fullName = `${funcionario.firstName} ${funcionario.lastName}`;
+    const arrayNomes = funcionario.responsibleFor.map((id) => {
+      const findAnimal = data.species.find((animal) => animal.id === id);
+      return findAnimal.name;
+    });
+    objeto[fullName] = arrayNomes;
+  });
+  if (!idOrName) return objeto;
+
+  const findEmploys = data.employees.find((employ) =>
+    idOrName === employ.firstName || idOrName === employ.lastName || idOrName === employ.id);
+  const fullName = `${findEmploys.firstName} ${findEmploys.lastName}`;
+  const objetoDois = {};
+  objetoDois[fullName] = objeto[fullName];
+  return objetoDois;
 }
 
 module.exports = {
