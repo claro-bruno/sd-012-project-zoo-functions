@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -54,6 +54,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
+// Feito com ajuda do aluno Thalles
 function countAnimals(speciesdata) {
   const contador = species.reduce((acc, specie) => {
     acc[specie.name] = specie.residents.length;
@@ -66,7 +67,7 @@ function countAnimals(speciesdata) {
   return contador[speciesdata];
   /*  return species.find((animal) => {
   return animal.name === speciesdata
-  }).residents.length; */
+    }).residents.length; */
 }
 
 // console.log(countAnimals('lions'));
@@ -84,9 +85,25 @@ function getAnimalMap() {
   // options
 }
 
-function getSchedule() {
-  // dayName
+// feito com a ajuda do aluno Thalles
+function getSchedule(dayName) {
+  const horas = Object.entries(hours);
+  const cronograma = horas.reduce((acc, date) => {
+  const {open, close} = date[1]; 
+    acc[date[0]] = `Open from ${open}am until ${close - 12}pm`;
+    
+    if (date[0] === 'Monday') {
+      acc[date[0]] = 'CLOSED';
+    }
+    return acc;
+  }, {});
+  if (!dayName) {
+    return cronograma;
+  } 
+  return { [dayName]: cronograma[dayName]};
 }
+
+console.log(getSchedule('Tuesday'));
 
 function getOldestFromFirstSpecies() {
   // id
