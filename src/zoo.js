@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species } = require('./data');
+const { species, employees } = require('./data');
 
 // lógica da função getSpeciesByIds desenvolvida com a ajuda do Luiz Henrrique (https://github.com/lzzhenrique) e Bruno Yamamoto (https://github.com/BSY-Development) através de call.
 
@@ -22,9 +22,21 @@ function getAnimalsOlderThan(animal, age) {
   return residents.every((indexAnimal) => indexAnimal.age > age);
 }
 
-// function getEmployeeByName(employeeName) {
-//   // seu código aqui
-// }
+function getEmployeeByName(employeeName) {
+  // seu código aqui
+  // buscar pessoas (find ou filter?)
+  // qual objetos vou usar? R. employees, employees.firstName, employees.firstName, lastName
+
+  // // retorna o objeto então (find
+  // return employeeName.map((name) => {
+  return employees
+    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  // });
+}
+
+console.log(getEmployeeByName());
+console.log(getEmployeeByName('Nigel'));
+console.log(getEmployeeByName('Bethea'));
 
 // function createEmployee(personalInfo, associatedWith) {
 //   // seu código aqui
