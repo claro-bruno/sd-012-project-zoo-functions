@@ -11,13 +11,17 @@
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return ids.map((pegarId) => data.species.find((currentAnimalId) => currentAnimalId.id === pegarId));
+  if(ids.length === 0){ return [] }
+  const species = data.species
+    .filter((specie) => ids.includes(specie.id))
+  return species  
 }
 
 function getAnimalsOlderThan(animal, age) {
-  
-}
 
+
+}
+ 
 function getEmployeeByName(employeeName) {
   
 }
