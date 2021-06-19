@@ -17,9 +17,21 @@ function getSpeciesByIds(...ids) {
   return ids.map((item) => species.find((specie) => specie.id === item));
 }
 
-// function getAnimalsOlderThan(animal, age) {
-//   // seu código aqui
-// }
+function getAnimalsOlderThan(animal, age) {
+  // seu código aqui
+  //  verifica a idade mínima de todos os animais de uma determinada espécie, devo retornar um bool1eano uso o .every?
+  // quais propriedades usar? R. 'species.name' e 'species.residents.age'
+  const animalByName = species.filter((name) => name.name === animal);
+
+  console.log(animalByName.residents);
+  console.log(animalByName);
+
+  const verifyMinimalAge = animalByName[0].residents.every((indexAnimal) => indexAnimal.age > age);
+
+  return verifyMinimalAge;
+}
+
+console.log(getAnimalsOlderThan('lions', 2));
 
 // function getEmployeeByName(employeeName) {
 //   // seu código aqui
