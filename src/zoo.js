@@ -11,9 +11,8 @@ eslint no-unused-vars: [
 
 const { species, employees } = require('./data');
 
-// lógica da função getSpeciesByIds desenvolvida com a ajuda do Luiz Henrrique (https://github.com/lzzhenrique) e Bruno Yamamoto (https://github.com/BSY-Development) através de call.
-
 function getSpeciesByIds(...ids) {
+  // lógica da função getSpeciesByIds desenvolvida com a ajuda do Luiz Henrrique (https://github.com/lzzhenrique) e Bruno Yamamoto (https://github.com/BSY-Development) através de call.
   return ids.map((item) => species.find((specie) => specie.id === item));
 }
 
@@ -23,6 +22,7 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
+  // ideia do operador ternário para a função getEmployeeByName desenvolvida com a ajuda do David Gonzaga (https://github.com/Gonzagadavid) através de call.
   const findEmployeeByName = employees
     .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 
