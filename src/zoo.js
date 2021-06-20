@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // lógica da função getSpeciesByIds desenvolvida com a ajuda do Luiz Henrrique (https://github.com/lzzhenrique) e Bruno Yamamoto (https://github.com/BSY-Development) através de call.
@@ -65,16 +65,27 @@ function countAnimals(specie) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
-  //  Retorna 0 se nenhum argumento for passado
-  // Retorna 0 se um objeto vazio for passado
   if (!entrants || Object.keys(entrants).length === 0) {
     return 0;
   }
+  // multiplicar a quantidade de 'adult' pelo preço que está em 'species.price.adult'
+  // destructuring adult de entrants
+  const { Adult, Child, Senior } = entrants;
+
+  // acessar species.price
+  // retirar o valor de 'adult' e multiplicar pela quantidade
+  const { Adult: priceAdult, Child: priceChild, Senior:priceSenior } = prices;
+  // criar uma func para multiplicar a quantidade de entrants pelo preço
+  const totalPrice = () => {
+
+  };
+
+  return Adult;
 }
 
-console.log(calculateEntry());
-console.log(calculateEntry({}));
+// console.log(calculateEntry());
+// console.log(calculateEntry({}));
+console.log(calculateEntry({ Adult: 2, Child: 3, Senior: 1 }));
 
 // function getAnimalMap(options) {
 //   // seu código aqui
