@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const { species, employees, hours } = require('./data');
 let { prices } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
