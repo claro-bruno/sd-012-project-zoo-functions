@@ -33,8 +33,6 @@ function getAnimalsOlderThan(animal, age) {
   return everyAnimal;
 }
 
-console.log(getAnimalsOlderThan());
-
 function getEmployeeByName(employeeName) {
   // seu código aqui
   const returnEmpty = {};
@@ -158,7 +156,7 @@ module.exports = {
   getEmployeeCoverage,
   addEmployee,
   isManager,
-  // getAnimalsOlderThan,
+  getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   increasePrices,
   createEmployee,
