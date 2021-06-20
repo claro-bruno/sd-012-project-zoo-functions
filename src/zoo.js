@@ -65,6 +65,7 @@ function countAnimals(specie) {
 }
 
 function calculateEntry(entrants) {
+  // lógica da função calculateEntry desenvolvida com a ajuda do Bruno Augusto (https://github.com/claro-bruno) e Thalles Carneiro (https://github.com/thalles-carneiro)  através de call.
   if (!entrants || Object.keys(entrants).length === 0) {
     return 0;
   }
@@ -80,6 +81,7 @@ function calculateEntry(entrants) {
 
 // function getSchedule(dayName) {
 //   // seu código aqui
+
 // }
 
 // function getOldestFromFirstSpecies(id) {
