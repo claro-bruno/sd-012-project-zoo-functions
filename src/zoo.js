@@ -74,10 +74,6 @@ function calculateEntry(entrants) {
   return totalPrice;
 }
 
-// console.log(calculateEntry());
-// console.log(calculateEntry({}));
-// console.log(calculateEntry({ Adult: 2, Child: 3, Senior: 1 }));
-
 // function getAnimalMap(options) {
 //   // seu código aqui
 // }
