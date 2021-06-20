@@ -53,7 +53,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function countAnimals(specie) {
   // ideia do foreach para a função countAnimals desenvolvida com a ajuda do Bruno Augusto (https://github.com/claro-bruno) através de call.
   if (!specie) {
-    // fazer um 'foreach' para cada 'species'. Buscar o 'name' e o '.lengrh' do array 'residents'
     const objSpecies = {};
     species.forEach((name) => {
       objSpecies[name.name] = name.residents.length;
@@ -65,9 +64,9 @@ function countAnimals(specie) {
   return qtdSpecies;
 }
 
-// function calculateEntry(entrants) {
-//   // seu código aqui
-// }
+function calculateEntry(entrants) {
+  // seu código aqui
+}
 
 // function getAnimalMap(options) {
 //   // seu código aqui
@@ -90,7 +89,7 @@ function countAnimals(specie) {
 // }
 
 module.exports = {
-  // calculateEntry,
+  calculateEntry,
   // getSchedule,
   countAnimals,
   // getAnimalMap,
