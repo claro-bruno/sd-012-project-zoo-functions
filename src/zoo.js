@@ -68,24 +68,15 @@ function calculateEntry(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) {
     return 0;
   }
-  // multiplicar a quantidade de 'adult' pelo preço que está em 'species.price.adult'
-  // destructuring adult de entrants
-  const { Adult, Child, Senior } = entrants;
-
-  // acessar species.price
-  // retirar o valor de 'adult' e multiplicar pela quantidade
-  const { Adult: priceAdult, Child: priceChild, Senior:priceSenior } = prices;
-  // criar uma func para multiplicar a quantidade de entrants pelo preço
-  const totalPrice = () => {
-
-  };
-
-  return Adult;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const { Adult: priceAdult, Child: priceChild, Senior: priceSenior } = prices;
+  const totalPrice = (Adult * priceAdult) + (Child * priceChild) + (Senior * priceSenior);
+  return totalPrice;
 }
 
 // console.log(calculateEntry());
 // console.log(calculateEntry({}));
-console.log(calculateEntry({ Adult: 2, Child: 3, Senior: 1 }));
+// console.log(calculateEntry({ Adult: 2, Child: 3, Senior: 1 }));
 
 // function getAnimalMap(options) {
 //   // seu código aqui
