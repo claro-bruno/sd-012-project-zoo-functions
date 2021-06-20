@@ -133,19 +133,20 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-  const obj = {}
-    data.employees.forEach(({firstName, lastName, responsibleFor}) => {
-      obj[`${firstName} ${lastName}`] = responsibleFor.map((id) => data.species.find((animal) => animal.id === id).name);
-    })
-    if (!idOrName) { 
-      return obj;
-    }
-    const findId =  data.employees.find(({id, firstName, lastName}) => id === idOrName 
-    || firstName === idOrName
-    || lastName === idOrName).firstName
-    const key = Object.keys(obj).find( ob => ob.includes(findId))
-    const value = Object.values(obj).find( objV => objV == obj[key])
-    return {[key]: value}
+  const obj = {};
+  data.employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    obj[`${firstName} ${lastName}`] = responsibleFor.map((id) =>
+      data.species.find((animal) => animal.id === id).name);
+  });
+  if (!idOrName) {
+    return obj;
+  }
+  const findId = data.employees.find(({ id, firstName, lastName }) => id === idOrName
+  || firstName === idOrName
+  || lastName === idOrName).firstName;
+  const key = Object.keys(obj).find((ob) => ob.includes(findId));
+  const value = Object.values(obj).find((objV) => objV === obj[key]);
+  return { [key]: value };
 }
 
 module.exports = {
@@ -163,4 +164,3 @@ module.exports = {
   increasePrices,
   getEmployeeCoverage,
 };
-    
