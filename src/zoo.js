@@ -37,9 +37,18 @@ function createEmployee(personalInfo, associatedWith) {
 const isManager = (id) => employees.some((index) => index.managers.includes(id));
 // função isManager desenvolvida com a ajuda do David Gonzaga (https://github.com/Gonzagadavid) e Caroline Banichio (https://github.com/carolbenichio) através de call.
 
-// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-//   // seu código aqui
-// }
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // ideia do default parameter para a função addEmployee desenvolvida com a ajuda do Eric kreis https://github.com/eric-kreis através de call.
+  const params = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(params);
+  return employees;
+}
 
 // function countAnimals(species) {
 //   // seu código aqui
@@ -77,7 +86,7 @@ module.exports = {
   getSpeciesByIds,
   getEmployeeByName,
   // getEmployeeCoverage,
-  // addEmployee,
+  addEmployee,
   isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
