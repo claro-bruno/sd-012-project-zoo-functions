@@ -183,8 +183,26 @@ function increasePrices(percentage) {
   ) / 100;
 }
 
-// function getEmployeeCoverage(idOrName) {
-// }
+function getEmployeeCoverage(idOrName) {
+  const objCovarage = {};
+  const mapNames = data.employees.map((covarage) => `${covarage.firstName} ${covarage.lastName}`);
+  const mapResponsibleFor = data
+    .employees.map((covarage) => covarage.responsibleFor.map((animal) => data
+      .species.find((especie) => especie.id === animal).name));
+  mapNames.forEach((name, index) => {
+    objCovarage[`${name}`] = mapResponsibleFor[index];
+  });
+  if (idOrName === undefined) return objCovarage;
+  const obj = {};
+  const findIdOrName = data
+    .employees.find((employee) => employee
+      .id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
+  if (findIdOrName && idOrName) {
+    obj[`${findIdOrName.firstName} ${findIdOrName
+      .lastName}`] = objCovarage[`${findIdOrName.firstName} ${findIdOrName.lastName}`];
+    return obj;
+  }
+}
 
 module.exports = {
   calculateEntry,
@@ -193,7 +211,7 @@ module.exports = {
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
-  // getEmployeeCoverage,
+  getEmployeeCoverage,
   addEmployee,
   isManager,
   getAnimalsOlderThan,
