@@ -66,7 +66,15 @@ function countAnimals(specie) {
 
 function calculateEntry(entrants) {
   // seu código aqui
+  //  Retorna 0 se nenhum argumento for passado
+  // Retorna 0 se um objeto vazio for passado
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
 }
+
+console.log(calculateEntry());
+console.log(calculateEntry({}));
 
 // function getAnimalMap(options) {
 //   // seu código aqui
