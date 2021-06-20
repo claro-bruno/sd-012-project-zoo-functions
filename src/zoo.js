@@ -51,27 +51,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(specie) {
-  // if (!specie) {
-  //   return {};
-  // }
-  // dados usado 'species.name' e 'species.popularity'
-  // procurar o animal pelo nome passado como parêmetro e retornar somente a quantidade do animal passado como parâmetro
+  // ideia do foreach para a função countAnimals desenvolvida com a ajuda do Bruno Augusto (https://github.com/claro-bruno) através de call.
+  if (!specie) {
+    // fazer um 'foreach' para cada 'species'. Buscar o 'name' e o '.lengrh' do array 'residents'
+    const objSpecies = {};
+    species.forEach((name) => {
+      objSpecies[name.name] = name.residents.length;
+    });
+    return objSpecies;
+  }
   const foundSpecies = species.find((animal) => animal.name === specie);
   const qtdSpecies = foundSpecies.residents.length;
-  // retornar um  objeto com todos os animais como keys e suas quantidades como values
-  // retornar um objeto
-  // const allQtdAnimals = {};
-  // buscar todos os animais
-  // const allQtdAnimals = species.map((animal) => animal.name);
-  // buscar todas as quantidades
-  // const allQtdAnimals = species.map((animal) => animal.popularity);
-  // colocar os dois em uma const
-  // retornar essa const
   return qtdSpecies;
 }
-
-// console.log(countAnimals('lions'));
-console.log(countAnimals('tigers'));
 
 // function calculateEntry(entrants) {
 //   // seu código aqui
