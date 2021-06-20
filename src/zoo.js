@@ -112,17 +112,10 @@ function getSchedule(dayName) {
 
 function increasePrices(percentage) {
   // seu código aqui
-  const { Adult, Senior, Child } = prices;
-  const percent = percentage / 100;
-  const increaseAdult = Math.round((Adult * (1 + percent)) * 100) / 100;
-  const increaseSenior = Math.round((Senior * (1 + percent)) * 100) / 100;
-  const increaseChild = Math.round((Child * (1 + percent)) * 100) / 100;
-  prices = {
-    Adult: increaseAdult,
-    Senior: increaseSenior,
-    Child: increaseChild,
-  };
-  return prices;
+  const percent = 1 + (percentage / 100);
+  prices.Adult = Math.round((prices.Adult * percent) * 100) / 100;
+  prices.Senior = Math.round((prices.Senior * percent) * 100) / 100;
+  prices.Child = Math.round((prices.Child * percent) * 100) / 100;
 }
 
 function getAnimalById(...animalId) {
