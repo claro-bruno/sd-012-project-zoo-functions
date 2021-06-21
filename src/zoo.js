@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // lógica da função getSpeciesByIds desenvolvida com a ajuda do Luiz Henrrique (https://github.com/lzzhenrique) e Bruno Yamamoto (https://github.com/BSY-Development) através de call.
@@ -79,10 +79,23 @@ function calculateEntry(entrants) {
 //   // seu código aqui
 // }
 
-// function getSchedule(dayName) {
-//   // seu código aqui
+function getSchedule(dayName) {
+  // lógica dos horarios disponíveis da função getSchedule desenvolvida com a ajuda do Bruno Augusto (https://github.com/claro-bruno) através de call.
+  // acessar o objeto com os horários
+  // criar objeto
+  const obj1 = {};
 
-// }
+  const newObj = Object.keys(hours);
+  // console.log(newObj);
+  newObj.forEach((day) => {
+    const { open, close } = hours[day];
+    obj1[day] = day === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+    console.log(obj1);
+  });
+
+  return obj1;
+}
+console.log(getSchedule());
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -98,7 +111,7 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
