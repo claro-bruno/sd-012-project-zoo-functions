@@ -54,8 +54,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(employee);
 }
 
-function countAnimals(/* species */) {
-  // seu código aqui
+// Referencia Requisito 7: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
+function countAnimals(species) {
+  if (!species) {
+    return data.species.reduce((acc, item) => ({
+      ...acc,
+      [item.name]: item.residents.length,
+    }), {});
+  }
+  const animal = data.species.find((animalCount) =>
+    animalCount.name === species);
+  return animal.residents.length;
 }
 
 function calculateEntry(/* entrants */) {
