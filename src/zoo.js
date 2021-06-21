@@ -32,9 +32,9 @@ function getEmployeeByName(employeeName) {
   const selectedEmployee = data.employees.find((employee) => employeeName === employee.firstName || employeeName === employee.lastName);
   return selectedEmployee;
 }
-
+//Referencia para o requisito 4: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+ return {...personalInfo, ...associatedWith}
 }
 
 function isManager(id) {
