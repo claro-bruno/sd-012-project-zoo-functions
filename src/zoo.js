@@ -97,20 +97,13 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // dados:'employees.id', 'employees.responsibleFor[0]', 'species.residents' (residents é um array), preciso ver qual dos residents tem o age maior (sort?)
   const firtSpecieByEmployee = employees.find((employee) => employee.id === id).responsibleFor[0];
-
   const allResidentsBySpecies = species
     .find((specie) => specie.id === firtSpecieByEmployee).residents;
-
   const oldestAnimal = allResidentsBySpecies
     .sort((a, b) => a.age - b.age)[allResidentsBySpecies.length - 1];
-  // retorna um array com nome, sexo e idade do animal mais velho (find?)
-
   return Object.values(oldestAnimal);
 }
-
-// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 // function increasePrices(percentage) {
 //   // seu código aqui
