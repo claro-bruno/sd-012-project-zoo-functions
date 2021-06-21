@@ -29,19 +29,19 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) {
     return {};
   }
-  const selectedEmployee = data.employees.find((employee) => employeeName === employee.firstName || employeeName === employee.lastName);
+  const selectedEmployee = data.employees.find((employee) =>
+    employeeName === employee.firstName || employeeName === employee.lastName);
   return selectedEmployee;
 }
-//Referencia para o requisito 4: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+// Referencia para o requisito 4: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 function createEmployee(personalInfo, associatedWith) {
-  return {...personalInfo, ...associatedWith}
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
   const managerId = data.employees.some((manager) => manager.managers.includes(id));
   return managerId;
 }
-
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const employee = {
@@ -54,31 +54,31 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(employee);
 }
 
-function countAnimals(species) {
+function countAnimals(/* species */) {
   // seu código aqui
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(/* entrants */) {
   // seu código aqui
 }
 
-function getAnimalMap(options) {
+function getAnimalMap(/* options */) {
   // seu código aqui
 }
 
-function getSchedule(dayName) {
+function getSchedule(/* dayName */) {
   // seu código aqui
 }
 
-function getOldestFromFirstSpecies(id) {
+function getOldestFromFirstSpecies(/* id */) {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
+function increasePrices(/* percentage */) {
   // seu código aqui
 }
 
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage(/* idOrName */) {
   // seu código aqui
 }
 
