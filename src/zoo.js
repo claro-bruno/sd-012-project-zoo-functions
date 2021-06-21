@@ -34,11 +34,12 @@ function getEmployeeByName(employeeName) {
 }
 //Referencia para o requisito 4: (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 function createEmployee(personalInfo, associatedWith) {
- return {...personalInfo, ...associatedWith}
+  return {...personalInfo, ...associatedWith}
 }
 
 function isManager(id) {
-  // seu código aqui
+  const managerId = data.employees.some((manager) => manager.managers.includes(id));
+  return managerId;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
