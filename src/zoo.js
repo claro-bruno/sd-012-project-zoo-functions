@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+// Referencia para o requisito 1, (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) {
     return [];
@@ -20,7 +21,8 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const animals = data.animals.find((selected) => selected.name === animal);
+  return animals.residents.every((idd) => idd.age > age);
 }
 
 function getEmployeeByName(employeeName) {
