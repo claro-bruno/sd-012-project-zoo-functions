@@ -67,7 +67,7 @@ function getAnimalMap(/* options */) {
 }
 
 function getSchedule(dayName) {
-    const weekSchedule = {
+  const weekSchedule = {
     Tuesday: 'Open from 8am until 6pm',
     Wednesday: 'Open from 8am until 6pm',
     Thursday: 'Open from 10am until 8pm',
