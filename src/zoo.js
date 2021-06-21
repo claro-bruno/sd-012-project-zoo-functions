@@ -7,13 +7,13 @@ eslint no-unused-vars: [
     "varsIgnorePattern": "data"
   }
 ]
-*/ 
+*/
 
 const data = require('./data');
 
 // Referencia para o requisito 1, (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
 function getSpeciesByIds(...ids) {
-  if (ids.length === 0) {
+  if (!ids) {
     return [];
   }
   const speciesIds = data.species.filter((specie) => ids.includes(specie.id));
@@ -26,7 +26,11 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) {
+    return {};
+  }
+  const selectedEmployee = data.employees.find((employee) => employeeName === employee.firstName || employeeName === employee.lastName);
+  return selectedEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
