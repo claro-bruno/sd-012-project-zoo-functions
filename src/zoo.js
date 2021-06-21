@@ -80,22 +80,22 @@ function calculateEntry(entrants) {
 // }
 
 function getSchedule(dayName) {
-  // lógica dos horarios disponíveis da função getSchedule desenvolvida com a ajuda do Bruno Augusto (https://github.com/claro-bruno) através de call.
-  // acessar o objeto com os horários
-  // criar objeto
+  // lógica dos horarios disponíveis da função getSchedule desenvolvida com a ajuda do Bruno Augusto (https://github.com/claro-bruno) e ideia do bracket notation desenvolvida com a ajuda do David Gonzaga (https://github.com/Gonzagadavid) através de call.
   const obj1 = {};
-
   const newObj = Object.keys(hours);
-  // console.log(newObj);
   newObj.forEach((day) => {
     const { open, close } = hours[day];
     obj1[day] = day === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
-    console.log(obj1);
   });
+  if (!dayName) {
+    return obj1;
+  }
+  const obj2 = {
+    [dayName]: obj1[dayName],
+  };
 
-  return obj1;
+  return obj2;
 }
-console.log(getSchedule());
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
