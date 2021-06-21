@@ -106,28 +106,17 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // dados: 'prices'
   const obj = {};
-  // retorna objeto
   const convertToPercent = percentage / 100;
-  // const percent = Math.round((priceEntries[0] + (priceEntries[0] * convertToPercent)) * 100) / 100;
   const keysPrice = Object.keys(prices);
   keysPrice.forEach((key) => {
     const percent = Math.round((prices[key] + (prices[key] * convertToPercent)) * 100) / 100;
     obj[key] = percent;
   });
-  // const convertToPercent = percentage / 100;
-  // const percent = Math.round((priceEntries[0] + (priceEntries[0] * convertToPercent)) * 100) / 100;
-  // console.log(prices);
   console.log(obj);
   Object.assign(prices, obj);
-
   return prices;
 }
-
-// console.log(increasePrices());
-// console.log(increasePrices(50));
-// console.log(increasePrices(30));
 
 // function getEmployeeCoverage(idOrName) {
 //   // seu código aqui
