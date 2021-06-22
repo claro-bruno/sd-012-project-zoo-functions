@@ -15,10 +15,12 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   return data.species.filter((specie, index) => specie.id === ids[index]);
 }
+// console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'))
 
 function getAnimalsOlderThan(animal, age) {
   return data.species.some((i) => i.name === animal && i.residents.every((I) => I.age >= age));
 }
+// console.log(getAnimalsOlderThan('penguins', 10))
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
@@ -26,6 +28,7 @@ function getEmployeeByName(employeeName) {
   }
   return data.employees.find((i) => i.firstName === employeeName || i.lastName === employeeName);
 }
+// console.log(getEmployeeByName('Emery'))
 
 function createEmployee(personalInfo, associatedWith) {
   const Ob = {
@@ -42,6 +45,7 @@ function isManager(id) {
   return data.employees.some((i) =>
     i.id === id && (i.managers).length <= 1);
 }
+// console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'))
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const Ob = {
@@ -51,9 +55,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     managers,
     responsibleFor,
   };
-  return data.employees.push(Ob);
+  //return data.employees.push(Ob);
+  return Ob;
 }
-
+// console.log(addEmployee())
+// Fonte de como utilizar reduce = https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
 function countAnimals(species) {
   if (species === undefined) {
     const quant = data.species.reduce((acc, i) => {
@@ -65,6 +71,7 @@ function countAnimals(species) {
   const q = data.species.filter((i) => i.name === species);
   return q[0].residents.length;
 }
+// console.log(countAnimals())
 
 function calculateEntry(entrants) {
   if (entrants === undefined) return 0;
@@ -77,23 +84,28 @@ function calculateEntry(entrants) {
   return C * data.prices.Child + S * data.prices.Senior + A * data.prices.Adult;
 }
 function getAnimalMap(options = {}) {
-  const local = { NE: [], NW: [], SE: [], SW: [] };
+  /* const local = { NE: [], NW: [], SE: [], SW: [] };
   if (!options.includeNames) {
     data.species.forEach((itemArray) => local[itemArray.location].push(itemArray.name));
     return local;
   }
   data.species.forEach((itemArray) => {
     let residente = itemArray.residents;
+    // sex especificada retorna animais macho/fêmea
     if (options.sex) {
       residente = itemArray.residents.filter((item) => item.sex === options.sex);
     }
     const residenteN = residente.map((itemArray2) => itemArray2.name);
+    // sorted especificada retorna animais ordenados
     if (options.sorted) residenteN.sort();
+    // dando o push para retornar os nomes dos animais
     local[itemArray.location].push({ [itemArray.name]: residenteN });
   });
-  return local;
+  return local; */
 }
-// auxiliado com o code-Review do LuctReis, não estava sabendi fundamentar os requesitos;
+/* const options = { sex: 'female', includeNames: true };
+console.log(getAnimalMap(options)) */
+// auxiliado com o code-Review do LuctReis, não estava sabendo fundamentar os requesitos;
 function getSchedule(dayName) {
   const crono = {
     Tuesday: 'Open from 8am until 6pm',
