@@ -55,15 +55,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return data.employees.push(Ob);
 }
 
-function countAnimals(species) {
-  if (species === undefined) {
-    const quant = data.species.reduce((acc, i) => {
+function countAnimals(Species) {
+  if (Species === undefined) {
+    const quant = species.reduce((acc, i) => {
       acc[i.name] = i.residents.length;
       return acc;
     }, {});
     return quant;
   }
-  const q = data.species.filter((i) => i.name === species);
+  const q = species.filter((i) => i.name === Species);
   return q[0].residents.length;
 }
 
