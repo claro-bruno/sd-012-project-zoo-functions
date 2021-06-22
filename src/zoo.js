@@ -95,8 +95,13 @@ function getSchedule(dayName) {
   return { [dayName]: weekSchedule[dayName] };
 }
 
-function getOldestFromFirstSpecies(/* id */) {
-  // seu código aqui
+// Consultei o repositorio (https://github.com/tryber/sd-010-a-project-zoo-functions/pull/132) para o requisito 11.
+function getOldestFromFirstSpecies(id) {
+  const animalID = data.employees.find((person) => person.id === id).responsibleFor[0];
+  const animal = data.species.find((actualAnimal) => actualAnimal.id === animalID);
+  const olderAnimal = animal.residents.reduce((acc, actualValue) =>
+    (acc.age < actualValue.age ? actualValue : acc));
+  return Object.values(olderAnimal);
 }
 
 function increasePrices(percentage) {
