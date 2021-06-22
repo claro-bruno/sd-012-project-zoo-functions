@@ -118,37 +118,20 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function animalIdToAnimalName() {
-  const nameAndId = {};
-  species.map((e) => {
-    nameAndId[e.name] = e.id;
-    return nameAndId;
-  });
-  return nameAndId;
-}
-
-const idAnimals = Object.values(animalIdToAnimalName());
-const nameAnimals = Object.keys(animalIdToAnimalName());
-
-console.log(animalIdToAnimalName());
-console.log(idAnimals);
-console.log(nameAnimals);
-
 function getEmployeeCoverage(idOrName) {
-  // dados:employees.id, employees.firstName, employees.lastName, employees.responsibleFor
-  // retorna objeto
   const employeeList = {};
   const dataEmployees = Object.values(employees);
   dataEmployees.map((indexValue) => {
-    const nameEmployee = `${indexValue.firstName} ${indexValue.lastName}`;
-    employeeList[nameEmployee] = 'oi';
-    // converter id do animal em name
-    const nameAnimalById = indexValue.responsibleFor;
-
-    // return nameAnimalById;
+    const fullNameEmployee = `${indexValue.firstName} ${indexValue.lastName}`;
+    const arrAnimal = indexValue.responsibleFor;
+    const nameAnimal = arrAnimal.map((e) => {
+      const animal = species.find((index) => index.id === e);
+      return animal.name;
+    });
+    employeeList[fullNameEmployee] = nameAnimal;
+    return employeeList;
   });
-
-  // return employeeList;
+  return employeeList;
 }
 
 console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
