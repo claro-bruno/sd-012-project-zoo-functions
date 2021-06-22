@@ -8,9 +8,9 @@ eslint no-unused-vars: [
   }
 ]
 */
+const data = require('./data');
 
-const { species, employees, prices } = require('./data');
-// const data = require('./data');
+const { species, employees, prices } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
@@ -49,16 +49,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(novoColaborador);
 }
 
-// function countAnimals(species) {
-//   if (species === undefined) {
-//   const contaAnimais = species.reduce((accumulator, curreValeu) => { accumulator[curreValeu.name] = curreValeu.residents.length;
-//  return accumulator;
-//   }, {});
-//   return contaAnimais;
-//   const especies = species.find((especie) => especie.name === species);
-//   return especies.residents.length;
-// }
-
+function countAnimals(specie) {
+  if (specie === undefined) {
+    const contaAnimais = species.reduce((accumulator, curreValeu) => {
+      accumulator[curreValeu.name] = curreValeu.residents.length;
+      return accumulator;
+    }, {});
+    return contaAnimais;
+  }
+  const especies = species.find((especie) => especie.name === specie);
+  return especies.residents.length;
+}
+console.log(countAnimals('lions'));
 function calculateEntry(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === undefined) { return 0; }
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
@@ -66,11 +68,13 @@ function calculateEntry(entrants) {
 }
 
 // function getAnimalMap(options) {
-//   // seu código aqui
+// const localização = ['NE', 'NW', 'SE', 'SW'];
+
 // }
 
 // function getSchedule(dayName) {
-//   // seu código aqui
+//  const diasDaSemana = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+//  diasDaSemana.forEach((dia) => )
 // }
 
 // function getOldestFromFirstSpecies(id) {
@@ -88,7 +92,7 @@ function calculateEntry(entrants) {
 module.exports = {
   calculateEntry,
   // getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
