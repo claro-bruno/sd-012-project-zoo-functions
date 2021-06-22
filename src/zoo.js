@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { prices, species } = require('./data');
+const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -78,7 +79,7 @@ function calculateEntry(entrants) {
 }
 function getAnimalMap(options = {}) {
   const local = { NE: [], NW: [], SE: [], SW: [] };
-  if (!options.includeNames) {
+  /* if (!options.includeNames) {
     data.species.forEach((itemArray) => local[itemArray.location].push(itemArray.name));
     return local;
   }
@@ -90,7 +91,7 @@ function getAnimalMap(options = {}) {
     const residenteN = residente.map((itemArray2) => itemArray2.name);
     if (options.sorted) residenteN.sort();
     local[itemArray.location].push({ [itemArray.name]: residenteN });
-  });
+  }); */
   return local;
 }
 // auxiliado com o code-Review do LuctReis, não estava sabendi fundamentar os requesitos;
@@ -111,7 +112,11 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  return id;
+  const animal = data.employees.find((item) => item.id === id).responsibleFor[0];
+  const residents = data.species.find ((item) => item.id === animal).residents;
+  residents.sort((item1, item2) => item2.age - item1.age)
+  const { name, sex, age } = residents[0]
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
