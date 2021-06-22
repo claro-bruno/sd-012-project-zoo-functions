@@ -135,7 +135,7 @@ const nweFunc = () => {
 };
 
 function getEmployeeCoverage(idOrName) {
-  // lógica da função getEmployeeCoverage desenvolvida com a ajuda do Bruno Augusto (https://github.com/claro-bruno) Diogo Sant'Anna (https://github.com/) através de call.
+  // lógica da função getEmployeeCoverage desenvolvida com a ajuda do Bruno Augusto (https://github.com/claro-bruno) Diogo Sant'Anna (https://github.com/dihsantanna) através de call.
   if (!idOrName) {
     return nweFunc();
   }
