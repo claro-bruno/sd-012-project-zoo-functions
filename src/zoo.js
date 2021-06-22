@@ -118,7 +118,7 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
+const nweFunc = () => {
   const employeeList = {};
   const dataEmployees = Object.values(employees);
   dataEmployees.map((indexValue) => {
@@ -132,9 +132,24 @@ function getEmployeeCoverage(idOrName) {
     return employeeList;
   });
   return employeeList;
-}
+};
 
-console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+function getEmployeeCoverage(idOrName) {
+  // lógica da função getEmployeeCoverage desenvolvida com a ajuda do Bruno Augusto (https://github.com/claro-bruno) Diogo Sant'Anna (https://github.com/) através de call.
+  if (!idOrName) {
+    return nweFunc();
+  }
+  const findById = employees
+    .find((e) => (e.id === idOrName)
+      || (e.firstName === idOrName)
+      || (e.lastName === idOrName));
+
+  const fullName = `${findById.firstName} ${findById.lastName}`;
+
+  const newObj = { [fullName]: nweFunc()[fullName] };
+
+  return newObj;
+}
 
 module.exports = {
   calculateEntry,
