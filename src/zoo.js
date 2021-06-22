@@ -77,9 +77,9 @@ function getSchedule(dayName) {
   const result = {};
   if (!dayName) {
     const diasDaSemana = Object.keys(data.hours);
-    diasDaSemana.forEach((dia) => {
-      const { open, close } = data.hours[dia];
-      result[dia] = dia === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+    diasDaSemana.forEach((dias) => {
+      const { open, close } = data.hours[dias];
+      result[dias] = dias === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
     });
     return result;
   }
