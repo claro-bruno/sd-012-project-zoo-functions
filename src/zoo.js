@@ -123,12 +123,13 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   const animal = employees.find((item) => item.id === id).responsibleFor[0];
-  const residents = species.find((item) => item.id === animal).residents;
-  residents.sort((item1, item2) => item2.age - item1.age);
+  const residentes = species.find((item) => item.id === animal).residents;
+  residentes.sort((item1, item2) => item2.age - item1.age);
   const { name, sex, age } = residents[0];
+  /* console.log(residents) */
   return [name, sex, age];
 }
-
+// getOldestFromFirstSpecies();
 function increasePrices(percentage) {
   // const { Adult, Child, Senior } = data.prices;
   const mult = percentage / 100 + 1;
