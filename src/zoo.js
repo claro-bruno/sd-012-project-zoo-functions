@@ -9,7 +9,8 @@ eslint no-unused-vars: [
 ]
 */
 
-// const { prices, species } = require('./data');
+const { prices, species } = require('./data');
+const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -55,20 +56,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     managers,
     responsibleFor,
   };
-  //return data.employees.push(Ob);
-  return Ob;
+  return data.employees.push(Ob);
 }
-// console.log(addEmployee())
-// Fonte de como utilizar reduce = https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
-function countAnimals(species) {
-  if (species === undefined) {
-    const quant = data.species.reduce((acc, i) => {
+
+function countAnimals(Species) {
+  if (Species === undefined) {
+    const quant = species.reduce((acc, i) => {
       acc[i.name] = i.residents.length;
       return acc;
     }, {});
     return quant;
   }
-  const q = data.species.filter((i) => i.name === species);
+  const q = species.filter((i) => i.name === Species);
   return q[0].residents.length;
 }
 // console.log(countAnimals())
@@ -84,7 +83,7 @@ function calculateEntry(entrants) {
   return C * data.prices.Child + S * data.prices.Senior + A * data.prices.Adult;
 }
 function getAnimalMap(options = {}) {
-  /* const local = { NE: [], NW: [], SE: [], SW: [] };
+  const local = { NE: [], NW: [], SE: [], SW: [] };
   if (!options.includeNames) {
     data.species.forEach((itemArray) => local[itemArray.location].push(itemArray.name));
     return local;
@@ -101,7 +100,7 @@ function getAnimalMap(options = {}) {
     // dando o push para retornar os nomes dos animais
     local[itemArray.location].push({ [itemArray.name]: residenteN });
   });
-  return local; */
+  return local;
 }
 /* const options = { sex: 'female', includeNames: true };
 console.log(getAnimalMap(options)) */
@@ -123,11 +122,24 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  return id;
+  const animal = employees.find((item) => item.id === id).responsibleFor[0];
+  const residents = species.find((item) => item.id === animal).residents;
+  residents.sort((item1, item2) => item2.age - item1.age);
+  const { name, sex, age } = residents[0];
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
-  return percentage;
+  // const { Adult, Child, Senior } = data.prices;
+  const mult = percentage / 100 + 1;
+  const adultV = prices.Adult * mult;
+  const childV = prices.Child * mult;
+  const seniorV = prices.Senior * mult;
+
+  prices.Adult = Math.round(adultV * 100) / 100;
+  prices.Child = Math.round(childV * 100) / 100;
+  prices.Senior = Math.round(seniorV * 100) / 100;
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
