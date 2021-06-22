@@ -120,7 +120,16 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  return percentage;
+  // const { Adult, Child, Senior } = data.prices;
+  const mult = percentage / 100 + 1;
+  const adultV = data.prices.Adult * mult;
+  const childV = data.prices.Child * mult;
+  const seniorV = data.prices.Senior * mult;
+
+  data.prices.Adult = Math.round(adultV * 100) / 100;
+  data.prices.Child = Math.round(childV * 100) / 100;
+  data.prices.Senior = Math.round(seniorV * 100) / 100;
+  return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
