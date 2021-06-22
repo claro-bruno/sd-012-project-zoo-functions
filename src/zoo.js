@@ -90,9 +90,12 @@ function getSchedule(dayName) {
 // console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const especieDoColaborador = employees.find((pessoa) => pessoa.id === id).responsibleFor[0];
+  const animais = species.find((tipo) => tipo.id === especieDoColaborador).residents;
+  animais.sort((a, b) => b.age - a.age);
+  return Object.values(animais[0]);
 }
-
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 // function increasePrices(percentage) {
 //   // seu código aqui
 // }
