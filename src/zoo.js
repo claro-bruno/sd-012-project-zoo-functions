@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-// const { prices, species } = require('./data');
+const { prices, species } = require('./data');
 const { employees } = require('./data');
 const data = require('./data');
 
@@ -112,28 +112,27 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const animal = data.employees.find((item) => item.id === id).responsibleFor[0];
-  const residents = data.species.find ((item) => item.id === animal).residents;
-  residents.sort((item1, item2) => item2.age - item1.age)
-  const { name, sex, age } = residents[0]
+  const animal = employees.find((item) => item.id === id).responsibleFor[0];
+  const residents = species.find((item) => item.id === animal).residents;
+  residents.sort((item1, item2) => item2.age - item1.age);
+  const { name, sex, age } = residents[0];
   return [name, sex, age];
 }
 
 function increasePrices(percentage) {
   // const { Adult, Child, Senior } = data.prices;
   const mult = percentage / 100 + 1;
-  const adultV = data.prices.Adult * mult;
-  const childV = data.prices.Child * mult;
-  const seniorV = data.prices.Senior * mult;
+  const adultV = prices.Adult * mult;
+  const childV = prices.Child * mult;
+  const seniorV = prices.Senior * mult;
 
-  data.prices.Adult = Math.round(adultV * 100) / 100;
-  data.prices.Child = Math.round(childV * 100) / 100;
-  data.prices.Senior = Math.round(seniorV * 100) / 100;
-  return data.prices;
+  prices.Adult = Math.round(adultV * 100) / 100;
+  prices.Child = Math.round(childV * 100) / 100;
+  prices.Senior = Math.round(seniorV * 100) / 100;
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
-  
   return idOrName;
 }
 
