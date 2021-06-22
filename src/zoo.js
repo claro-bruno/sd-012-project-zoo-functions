@@ -98,7 +98,7 @@ function getSchedule(dayName) {
 // Consultei o repositorio (https://github.com/tryber/sd-010-a-project-zoo-functions/pull/132) para o requisito 11.
 function getOldestFromFirstSpecies(id) {
   const animalID = data.employees.find((person) => person.id === id).responsibleFor[0];
-  const animal = data.species.find((actualAnimal) => actualAnimal.id === animalID);
+  const animal = data.animals.find((actualAnimal) => actualAnimal.id === animalID);
   const olderAnimal = animal.residents.reduce((acc, actualValue) =>
     (acc.age < actualValue.age ? actualValue : acc));
   return Object.values(olderAnimal);
@@ -111,8 +111,26 @@ function increasePrices(percentage) {
   data.prices.Senior = (Math.ceil(Senior * (percentage + 100))) / 100;
 }
 
-function getEmployeeCoverage(/* idOrName */) {
-  // seu código aqui
+// Consultei o repositorio : https://github.com/tryber/sd-012-project-zoo-functions/pull/164/files para o requisito 12.
+function getEmployeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    const duty = data.employees.reduce((acc, curr) => {
+      const animalId = (id) => data.species.find((specie) => specie.id === id).name;
+      const animals = curr.responsibleFor.map(animalId);
+      acc[`${curr.firstName} ${curr.lastName}`] = animals;
+      return acc;
+    }, {});
+    return duty;
+  }
+  const request = data.employees.filter(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  const result = request.reduce((acc, curr) => {
+    const animalId2 = (id) => data.species.find((specie) => specie.id === id).name;
+    const animals2 = curr.responsibleFor.map(animalId2);
+    acc[`${curr.firstName} ${curr.lastName}`] = animals2;
+    return acc;
+  }, {});
+  return result;
 }
 
 module.exports = {
