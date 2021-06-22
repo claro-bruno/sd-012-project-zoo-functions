@@ -38,9 +38,11 @@ function createEmployee(personalInfo, associatedWith) {
   return novoColaborador;
 }
 
-// function isManager(id) {
-//   // seu código aqui
-// }
+function isManager(id) {
+  const gerente = employees.some((cargo) => cargo.managers.includes(id));
+  return gerente;
+}
+// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 
 // function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 //   // seu código aqui
@@ -83,7 +85,7 @@ module.exports = {
   getEmployeeByName,
   // getEmployeeCoverage,
   // addEmployee,
-  // isManager,
+  isManager,
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
