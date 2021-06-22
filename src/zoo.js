@@ -79,7 +79,7 @@ function calculateEntry(entrants) {
 }
 function getAnimalMap(options = {}) {
   const local = { NE: [], NW: [], SE: [], SW: [] };
-  /* if (!options.includeNames) {
+  if (!options.includeNames) {
     data.species.forEach((itemArray) => local[itemArray.location].push(itemArray.name));
     return local;
   }
@@ -91,7 +91,7 @@ function getAnimalMap(options = {}) {
     const residenteN = residente.map((itemArray2) => itemArray2.name);
     if (options.sorted) residenteN.sort();
     local[itemArray.location].push({ [itemArray.name]: residenteN });
-  }); */
+  });
   return local;
 }
 // auxiliado com o code-Review do LuctReis, não estava sabendi fundamentar os requesitos;
@@ -133,6 +133,7 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
+  
   return idOrName;
 }
 
