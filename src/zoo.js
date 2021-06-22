@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 const data = require('./data');
 
-const { species, employees, prices } = data;
+const { species, employees, prices, hours } = data;
 
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
@@ -48,7 +48,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   const novoColaborador = { id, firstName, lastName, managers, responsibleFor };
   return employees.push(novoColaborador);
 }
-
+// feito com suporte do colega Bruno Augusto
 function countAnimals(specie) {
   if (specie === undefined) {
     const contaAnimais = species.reduce((accumulator, curreValeu) => {
@@ -60,7 +60,7 @@ function countAnimals(specie) {
   const especies = species.find((especie) => especie.name === specie);
   return especies.residents.length;
 }
-console.log(countAnimals('lions'));
+// console.log(countAnimals('lions'));
 function calculateEntry(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === undefined) { return 0; }
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
@@ -72,10 +72,22 @@ function calculateEntry(entrants) {
 
 // }
 
-// function getSchedule(dayName) {
-//  const diasDaSemana = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-//  diasDaSemana.forEach((dia) => )
-// }
+// feito com suporte do colega Bruno Augusto
+function getSchedule(dayName) {
+  const result = {};
+  if (!dayName) {
+    const diasDaSemana = Object.keys(data.hours);
+    diasDaSemana.forEach((dia) => {
+      const { open, close } = data.hours[dia];
+      result[dia] = dia === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+    });
+    return result;
+  }
+  const { open, close } = data.hours[dayName];
+  result[dayName] = dayName === 'Monday' ? 'CLOSED' : `Open from ${open}am until ${close - 12}pm`;
+  return result;
+}
+// console.log(getSchedule());
 
 // function getOldestFromFirstSpecies(id) {
 //   // seu código aqui
@@ -91,7 +103,7 @@ function calculateEntry(entrants) {
 
 module.exports = {
   calculateEntry,
-  // getSchedule,
+  getSchedule,
   countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
