@@ -24,7 +24,7 @@ function getAnimalsOlderThan(animal, age) {
   const idadeAnimal = especie.every((idade) => idade.age >= age);
   return idadeAnimal;
 }
-console.log(getAnimalsOlderThan('otters'));
+// console.log(getAnimalsOlderThan('otters'));
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) return {};
@@ -33,9 +33,10 @@ function getEmployeeByName(employeeName) {
   return pessoaColaboradora;
 }
 
-// function createEmployee(personalInfo, associatedWith) {
-//   // seu código aqui
-// }
+function createEmployee(personalInfo, associatedWith) {
+  const novoColaborador = { ...personalInfo, ...associatedWith };
+  return novoColaborador;
+}
 
 // function isManager(id) {
 //   // seu código aqui
@@ -86,5 +87,5 @@ module.exports = {
   getAnimalsOlderThan,
   // getOldestFromFirstSpecies,
   // increasePrices,
-  // createEmployee,
+  createEmployee,
 };
