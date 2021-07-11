@@ -36,7 +36,7 @@ function getEmployeeByName(employeeName) {
 
   return employees.find((n) => n.firstName === employeeName || n.lastName === employeeName);
 }
-console.log(getEmployeeByName('Nigel'));
+// console.log(getEmployeeByName('Nigel'));
 // RETURN COM VÁRIAS OPÇÕES----------------------------
 // return algo || algo || algo
 
@@ -56,8 +56,8 @@ function createEmployee(personalInfo, associatedWith) {
   };
   return newEmployee;
 }
+// console.log(createEmployee({id:'1', firstName:'jose', lastName:'arruda'}, {managers: ['Jhon', 'Mary'], responsibleFor: ['lion', 'Penguins']}));
 
-// console.log(createEmployee(info1, info2));
 // 5=========================================================
 
 function isManager(id) {
