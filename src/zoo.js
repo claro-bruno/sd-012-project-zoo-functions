@@ -24,8 +24,8 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   return data.species
-    .find((animalName) => animalName.name === animal)
-    .residents.every((specie) => specie.age > age);
+    .find((animalName) => animalName.name === animal).residents
+    .every((specie) => specie.age > age);
 }
 // console.log(getAnimalsOlderThan('otters', 7));
 
@@ -36,7 +36,7 @@ function getEmployeeByName(employeeName) {
 
   return employees.find((n) => n.firstName === employeeName || n.lastName === employeeName);
 }
-// console.log(getEmployeeByName());
+console.log(getEmployeeByName('Nigel'));
 // RETURN COM VÁRIAS OPÇÕES----------------------------
 // return algo || algo || algo
 
