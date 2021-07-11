@@ -62,7 +62,8 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const employee = employees
-    .some((isEmployee) => isEmployee.managers.find((idManager) => idManager === id));
+    .some((isEmployee) => isEmployee.managers
+      .find((idManager) => idManager === id));
   // .some((isEmployee) => isEmployee.managers.length === 0 || isEmployee.managers.find((idManager) => idManager === id))// CEO
   return employee;
 }
