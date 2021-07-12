@@ -81,9 +81,74 @@ function calculateEntry({ Adult = 0, Senior = 0, Child = 0 } = { Adult: 0, Senio
   return value.reduce((acc, valor) => acc + valor);
 }
 
-// function getAnimalMap(options) {
-//   // seu código aqui
-// }
+const animalLocation = () => {
+  // Sem parâmetros, retorna animais categorizados por localização
+  const coordenades = ['NE', 'NW', 'SE', 'SW'];
+  const result = {};
+  coordenades.map((coordenade) => {
+    result[coordenade] = data.species
+      .filter((specie) => specie.location === coordenade)
+      .map((bixo) => bixo.name);
+    return 0;
+  });
+  return result;
+};
+
+const includeNames = () => {
+  // retorna nomes de animais
+  const location = ['NE', 'NW', 'SE', 'SW'];
+  const result = {};
+  location.forEach((coordenade) => {
+    result[coordenade] = data.species
+      .filter((specie) => specie.location === coordenade)
+      .map((item) => ({ [item.name]: item.residents.map((bixo) => bixo.name) }));
+  });
+  return result;
+};
+
+const sorted = () => {
+  // etorna nomes de animais ordenados
+  const location = ['NE', 'NW', 'SE', 'SW'];
+  const result = {};
+  location.forEach((coordenade) => {
+    result[coordenade] = data.species
+      .filter((specie) => specie.location === coordenade)
+      .map((item) => ({ [item.name]: item.residents.map((bixo) => bixo.name).sort() }));
+  });
+  return result;
+};
+
+const gender = (sex) => {
+  // retorna somente nomes de animais macho/fêmea
+  const location = ['NE', 'NW', 'SE', 'SW'];
+  const result = {};
+  location.forEach((coordenade) => {
+    result[coordenade] = data.species
+      .filter((specie) => specie.location === coordenade)
+      .map((item) => ({ [item.name]: item.residents.filter((gender) => gender.sex === sex)
+      .map((bixo) => bixo.name) }));
+  });
+  return result;
+};
+
+function getAnimalMap(options) {
+  // seu código aqui
+  if (!options) {
+    return animalLocation();
+  }
+
+  if (options.includeNames) {
+    if (options.sorted) {
+      return sorted();
+    }
+    if (options.sex) {
+      return gender(options.sex) ;
+    }
+    return includeNames();
+  }
+}
+
+console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -158,7 +223,7 @@ module.exports = {
   addEmployee,
   countAnimals,
   calculateEntry,
-  // getAnimalMap,
+  getAnimalMap,
   getSchedule,
   getOldestFromFirstSpecies,
   increasePrices,
