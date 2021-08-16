@@ -125,8 +125,8 @@ const gender = (sex) => {
   location.forEach((coordenade) => {
     result[coordenade] = data.species
       .filter((specie) => specie.location === coordenade)
-      .map((item) => ({ [item.name]: item.residents.filter((gender) => gender.sex === sex)
-      .map((bixo) => bixo.name) }));
+      .map((item) => ({ [item.name]: item.residents.filter((sexo) => sexo.sex === sex)
+        .map((bixo) => bixo.name) }));
   });
   return result;
 };
@@ -142,7 +142,7 @@ function getAnimalMap(options) {
       return sorted();
     }
     if (options.sex) {
-      return gender(options.sex) ;
+      return gender(options.sex);
     }
     return includeNames();
   }
